@@ -1,0 +1,36 @@
+🔬 Iniciando extracción profunda de variables para: 'Vélez'...
+✅ Equipo identificado: Vélez Sarsfield (ID: 21)
+⏳ Buscando el último partido finalizado...
+⚽ Analizando evento: Vélez Sarsfield at Instituto (Córdoba) (ID: 762783)
+
+=================================================================
+📊 MATRIZ DE VARIABLES PURAS EN ESPN PARA VÉLEZ SARSFIELD
+=================================================================
+➤ Fouls                | Código JSON: 'foulsCommitted  ' = 16
+➤ Yellow Cards         | Código JSON: 'yellowCards     ' = 5
+➤ Red Cards            | Código JSON: 'redCards        ' = 0
+➤ Offsides             | Código JSON: 'offsides        ' = 2
+➤ Corner Kicks         | Código JSON: 'wonCorners      ' = 2
+➤ Saves                | Código JSON: 'saves           ' = 5
+➤ Possession           | Código JSON: 'possessionPct   ' = 53
+➤ SHOTS                | Código JSON: 'totalShots      ' = 7
+➤ ON GOAL              | Código JSON: 'shotsOnTarget   ' = 3
+➤ On Target %          | Código JSON: 'shotPct         ' = 0.4
+➤ Penalty Goals        | Código JSON: 'penaltyKickGoals' = 0
+➤ Penalty Kicks Taken  | Código JSON: 'penaltyKickShots' = 0
+➤ Accurate Passes      | Código JSON: 'accuratePasses  ' = 281
+➤ Passes               | Código JSON: 'totalPasses     ' = 375
+➤ Pass Completion %    | Código JSON: 'passPct         ' = 0.7
+➤ Accurate Crosses     | Código JSON: 'accurateCrosses ' = 3
+➤ Crosses              | Código JSON: 'totalCrosses    ' = 11
+➤ Cross %              | Código JSON: 'crossPct        ' = 0.3
+➤ Long Balls           | Código JSON: 'totalLongBalls  ' = 44
+➤ Accurate Long Balls  | Código JSON: 'accurateLongBalls' = 20
+➤ Long Balls %         | Código JSON: 'longballPct     ' = 0.5
+➤ Blocked Shots        | Código JSON: 'blockedShots    ' = 1
+➤ Effective Tackles    | Código JSON: 'effectiveTackles' = 5
+➤ Tackles              | Código JSON: 'totalTackles    ' = 8
+➤ Tackle %             | Código JSON: 'tacklePct       ' = 0.6
+➤ Interceptions        | Código JSON: 'interceptions   ' = 14
+➤ Effective Clearances | Código JSON: 'effectiveClearance' = 27
+➤ Clearances           | Código JSON: 'totalClearance  ' = 27

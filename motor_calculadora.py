@@ -153,7 +153,7 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2):
         ev = (prob * cuota) - 1
         
         # Umbral de EV base, dinámico basado en la probabilidad
-        umbral_ev_base = (0.015 * (0.5 / prob)) if prob > 0 else 999
+        umbral_ev_base = (0.03 * (0.5 / prob)) if prob > 0 else 999
         
         # Aplicar un umbral más estricto si la apuesta no es la favorita del modelo
         # Esto hace que el sistema prefiera al favorito, pero no descarta un underdog con mucho valor.
@@ -161,7 +161,7 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2):
         umbral_ev_ajustado = umbral_ev_base * factor_penalizacion
         
         # Criterios de apuesta
-        if ev > umbral_ev_ajustado and cuota <= 5.5:
+        if ev > umbral_ev_ajustado and cuota <= 5.0:
             if ev > max_ev:
                 max_ev = ev
                 best_pick = (f"[APOSTAR] {pick}", ev, cuota)
@@ -181,8 +181,8 @@ def evaluar_mercado_ou(po, pu, co, cu, p1, px, p2):
 
     # Regla: Si el modelo no tiene una convicción mínima en el mercado de goles, no se apuesta.
     margen_predictivo_ou = abs(po - pu)
-    if margen_predictivo_ou < 0.15: # Requiere una diferencia de al menos 15% entre Over y Under
-        return "[PASAR] Margen Predictivo O/U Insuficiente (<15%)", -100, 0
+    if margen_predictivo_ou < 0.05: # Requiere una diferencia de al menos 15% entre Over y Under
+        return "[PASAR] Margen Predictivo O/U Insuficiente (<5%)", -100, 0
 
     probs = {"OVER 2.5": po, "UNDER 2.5": pu}
     cuotas = {"OVER 2.5": co, "UNDER 2.5": cu}

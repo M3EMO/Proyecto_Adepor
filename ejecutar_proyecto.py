@@ -30,7 +30,7 @@ MOTORES_DIARIOS = [
     # --- FASE 4: REDUNDANCIA Y PROYECCIÓN VISUAL ---
     {"archivo": "motor_backtest.py", "desc": "8. Liquidador de Último Minuto (Doble Barrido)", "critico": False},
     {"archivo": "motor_liquidador.py", "desc": "8.5. Liquidador de Apuestas (Barrido Final)", "critico": False},
-    {"archivo": "motor_sincronizador.py", "desc": "9. Sincronizador de Alta Velocidad (Google Sheets)", "critico": True}
+    {"archivo": "motor_sincronizador.py", "desc": "9. Sincronizador de Alta Velocidad", "critico": True}
 ]
 
 def log_terminal(mensaje, nivel="INFO"):

@@ -181,7 +181,7 @@ def main():
                estado, goles_l, goles_v, incertidumbre, auditoria
         FROM partidos_backtest
         WHERE estado IN ('Calculado', 'Liquidado')
-        ORDER BY fecha ASC, id_partido ASC
+        ORDER BY id_partido ASC
     """)
     datos = cursor.fetchall()
     conn.close()

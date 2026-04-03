@@ -58,19 +58,23 @@ def obtener_datos_api(liga_odds, key_index=0):
     except:
         return None, key_index
 
-def extraer_cuotas_sharp(bookmakers):
+def extraer_cuotas_sharp(bookmakers, local_api, visita_api):
     c1, cx, c2 = 0.0, 0.0, 0.0
     co, cu = 0.0, 0.0
-    
+
     for b in bookmakers:
-        if b['key'] in ['pinnacle', 'bet365']: 
+        if b['key'] in ['pinnacle', 'bet365']:
             for m in b.get('markets', []):
                 if m['key'] == 'h2h':
                     for out in m['outcomes']:
-                        if out['name'] == 'Draw': cx = out['price']
-                        elif c1 == 0: c1 = out['price'] 
-                        else: c2 = out['price']
-            if c1 > 0: break 
+                        nombre = out['name']
+                        if nombre == 'Draw':
+                            cx = out['price']
+                        elif nombre == local_api:
+                            c1 = out['price']
+                        elif nombre == visita_api:
+                            c2 = out['price']
+            if c1 > 0: break
 
     for b in bookmakers:
         for m in b.get('markets', []):
@@ -126,7 +130,7 @@ def main():
                 vis_odds_oficial = gestor_nombres.obtener_nombre_estandar(vis_odds, modo_interactivo=MODO_INTERACTIVO)
 
                 if loc_espn == loc_odds_oficial and vis_espn == vis_odds_oficial:
-                    c1, cx, c2, co, cu = extraer_cuotas_sharp(evento.get("bookmakers", []))
+                    c1, cx, c2, co, cu = extraer_cuotas_sharp(evento.get("bookmakers", []), loc_odds, vis_odds)
                     
                     if c1 > 0 or co > 0:
                         cursor.execute("""

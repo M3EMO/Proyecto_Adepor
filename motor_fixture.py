@@ -103,7 +103,16 @@ def main():
             for evento in eventos_del_dia:
                     try:
                         fecha_utc_str = evento['date']
-                        fecha_utc_obj = datetime.strptime(fecha_utc_str, "%Y-%m-%dT%H:%MZ")
+                        fecha_utc_obj = None
+                        for fmt in ("%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%MZ"):
+                            try:
+                                fecha_utc_obj = datetime.strptime(fecha_utc_str, fmt)
+                                break
+                            except ValueError:
+                                continue
+                        if fecha_utc_obj is None:
+                            print(f"[ALERTA] Formato de fecha no reconocido: {fecha_utc_str}")
+                            continue
                         
                         # FIX: El ID se genera con la fecha UTC para garantizar unicidad y evitar duplicados por zona horaria.
                         fecha_iso_real = fecha_utc_obj.strftime("%Y-%m-%d")

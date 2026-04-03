@@ -2,6 +2,7 @@ import sqlite3
 import math
 import unicodedata
 import difflib
+import re
 from datetime import datetime
 from collections import defaultdict
 
@@ -84,9 +85,12 @@ def detectar_drawdown(cursor, umbral=DRAWDOWN_THRESHOLD):
 # ==========================================================================
 
 def normalizar_extremo(texto):
+    # Identica a gestor_nombres.limpiar_texto: elimina todo lo que no sea letra o numero.
+    # Esto garantiza que la clave de busqueda en historial_equipos coincida exactamente
+    # con la clave generada por motor_data al guardar (ej: "belgrano(cordoba)" -> "belgranocordoba").
     if not texto: return ""
-    crudo = ''.join(c for c in unicodedata.normalize('NFD', str(texto).lower().strip()) if unicodedata.category(c) != 'Mn')
-    return crudo.replace(" ", "").replace("-", "").replace("_", "").replace("'", "")
+    sin_tildes = ''.join(c for c in unicodedata.normalize('NFD', str(texto).lower().strip()) if unicodedata.category(c) != 'Mn')
+    return re.sub(r'[^a-z0-9]', '', sin_tildes)
 
 def safe_float(val):
     try: return float(val)

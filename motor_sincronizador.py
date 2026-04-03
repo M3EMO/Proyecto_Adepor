@@ -381,6 +381,9 @@ def main():
     ws2.cell(row_r + 3, 1, f"Bankroll base: ${BANKROLL:,.2f}").font = Font(name='Arial', italic=True, size=9, color='888888')
 
     # --- Guardar ---
+    # Forzar recalculo completo al abrir en Excel.
+    # Sin esto, openpyxl escribe las formulas pero Excel las muestra vacias hasta Ctrl+Alt+F9.
+    wb.calculation.fullCalcOnLoad = True
     wb.save(EXCEL_FILE)
     print(f"[EXITO] Excel generado: {os.path.abspath(EXCEL_FILE)}")
     print(f"[INFO] {len(datos)} partidos escritos. {len(stats_liga)} ligas resumidas.")

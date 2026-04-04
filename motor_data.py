@@ -170,6 +170,7 @@ def main():
     # --- FASE DE ANÁLISIS: AGRUPAR LIGAS POR NECESIDAD DE ESCANEO ---
     print("[ANALISIS] Agrupando ligas por profundidad de escaneo requerida...")
     UMBRAL_PARTIDOS_MINIMOS = 20
+    UMBRAL_RECIEN_ASCENDIDO = 10  # Equipos con <= este total se excluyen del calculo de modo
     PROFUNDIDAD_INICIAL = 210
     PROFUNDIDAD_PROFUNDA = 140
     PROFUNDIDAD_MANTENIMIENTO = 7
@@ -188,17 +189,32 @@ def main():
             print(f"   [GRUPO INICIAL] Liga '{pais}' necesita historial base ({dias_a_escanear} días).")
             grupos_de_escaneo[dias_a_escanear].append((codigo_liga, pais))
         else:
-            equipos_con_pocos_datos = [v for v in equipos_de_la_liga.values() if (v.get('p_home', 0) + v.get('p_away', 0)) < UMBRAL_PARTIDOS_MINIMOS]
-            porcentaje_pocos_datos = len(equipos_con_pocos_datos) / len(equipos_de_la_liga)
+            # Excluir equipos recien ascendidos del calculo: si tienen muy pocos partidos
+            # es porque no habia datos ESPN de la division anterior. No deben arrastrar
+            # a toda la liga al modo profundo cuando el resto ya esta consolidado.
+            equipos_establecidos = {k: v for k, v in equipos_de_la_liga.items()
+                                    if (v.get('p_home', 0) + v.get('p_away', 0)) > UMBRAL_RECIEN_ASCENDIDO}
+            recien_ascendidos = len(equipos_de_la_liga) - len(equipos_establecidos)
 
-            if porcentaje_pocos_datos > 0.15:
+            if not equipos_establecidos:
                 dias_a_escanear = PROFUNDIDAD_PROFUNDA
-                print(f"   [GRUPO PROFUNDO] Liga '{pais}' necesita re-calibración ({dias_a_escanear} días) por tener {porcentaje_pocos_datos:.0%} de equipos con pocos datos.")
+                print(f"   [GRUPO PROFUNDO] Liga '{pais}' sin equipos establecidos ({dias_a_escanear} días).")
                 grupos_de_escaneo[dias_a_escanear].append((codigo_liga, pais))
             else:
-                dias_a_escanear = PROFUNDIDAD_MANTENIMIENTO
-                print(f"   [GRUPO MANTENIMIENTO] Liga '{pais}' está consolidada ({dias_a_escanear} días).")
-                grupos_de_escaneo[dias_a_escanear].append((codigo_liga, pais))
+                equipos_con_pocos_datos = [v for v in equipos_establecidos.values()
+                                           if (v.get('p_home', 0) + v.get('p_away', 0)) < UMBRAL_PARTIDOS_MINIMOS]
+                porcentaje_pocos_datos = len(equipos_con_pocos_datos) / len(equipos_establecidos)
+
+                if porcentaje_pocos_datos > 0.15:
+                    dias_a_escanear = PROFUNDIDAD_PROFUNDA
+                    print(f"   [GRUPO PROFUNDO] Liga '{pais}' necesita re-calibración ({dias_a_escanear} días) "
+                          f"({porcentaje_pocos_datos:.0%} establecidos con pocos datos, {recien_ascendidos} ascendidos excluidos).")
+                    grupos_de_escaneo[dias_a_escanear].append((codigo_liga, pais))
+                else:
+                    dias_a_escanear = PROFUNDIDAD_MANTENIMIENTO
+                    print(f"   [GRUPO MANTENIMIENTO] Liga '{pais}' está consolidada ({dias_a_escanear} días)"
+                          f"{f', {recien_ascendidos} ascendidos excluidos del calculo' if recien_ascendidos else ''}.")
+                    grupos_de_escaneo[dias_a_escanear].append((codigo_liga, pais))
 
     # --- FASE DE EJECUCIÓN: PROCESAR CADA GRUPO DE ESCANEO ---
     for dias_a_escanear, ligas_en_grupo in grupos_de_escaneo.items():

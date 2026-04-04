@@ -93,7 +93,12 @@ def main():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     
-    cursor.execute("SELECT id_partido, local, visita, pais FROM partidos_backtest WHERE estado != 'Liquidado'")
+    # Solo partidos sin resultado: goles_l IS NULL descarta partidos ya jugados pero
+    # no liquidados aun, evitando consultas inutiles a la API por partidos pasados.
+    cursor.execute("""
+        SELECT id_partido, local, visita, pais FROM partidos_backtest
+        WHERE estado != 'Liquidado' AND goles_l IS NULL AND goles_v IS NULL
+    """)
     partidos = cursor.fetchall()
     
     if not partidos:
@@ -129,7 +134,8 @@ def main():
                 loc_odds_oficial = gestor_nombres.obtener_nombre_estandar(loc_odds, modo_interactivo=MODO_INTERACTIVO)
                 vis_odds_oficial = gestor_nombres.obtener_nombre_estandar(vis_odds, modo_interactivo=MODO_INTERACTIVO)
 
-                if loc_espn == loc_odds_oficial and vis_espn == vis_odds_oficial:
+                if (gestor_nombres.limpiar_texto(loc_espn) == gestor_nombres.limpiar_texto(loc_odds_oficial)
+                        and gestor_nombres.limpiar_texto(vis_espn) == gestor_nombres.limpiar_texto(vis_odds_oficial)):
                     c1, cx, c2, co, cu = extraer_cuotas_sharp(evento.get("bookmakers", []), loc_odds, vis_odds)
                     
                     if c1 > 0 or co > 0:

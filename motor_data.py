@@ -126,6 +126,47 @@ def main():
     equipos_actualizados = set()
     equipos_nuevos_sesion = set()
 
+    def actualizar_estado(eq_oficial, pais, xg_f, xg_c, is_home, promedio_liga, equipos_nuevos):
+        """Aplica EMA y Regresión Bayesiana para actualizar el poderío del equipo."""
+        eq_norm = gestor_nombres.limpiar_texto(eq_oficial)
+        if eq_norm not in estado_equipos:
+            equipos_nuevos.add(eq_oficial)
+            estado_equipos[eq_norm] = {
+                "nombre": eq_oficial, "liga": pais,
+                "fav_home": 1.4, "con_home": 1.4, "p_home": 0,
+                "fav_away": 1.4, "con_away": 1.4, "p_away": 0,
+                "var_fh": 0.1, "var_ch": 0.1, "var_fa": 0.1, "var_ca": 0.1
+            }
+        if is_home:
+            viejo_fav = estado_equipos[eq_norm]["fav_home"]
+            viejo_con = estado_equipos[eq_norm]["con_home"]
+            error_fav = xg_f - viejo_fav
+            error_con = xg_c - viejo_con
+            vieja_var_fav = estado_equipos[eq_norm]["var_fh"]
+            vieja_var_con = estado_equipos[eq_norm]["var_ch"]
+            estado_equipos[eq_norm]["var_fh"] = (error_fav**2 * ALFA_EMA) + (vieja_var_fav * (1 - ALFA_EMA))
+            estado_equipos[eq_norm]["var_ch"] = (error_con**2 * ALFA_EMA) + (vieja_var_con * (1 - ALFA_EMA))
+            nuevo_ema_fav = (xg_f * ALFA_EMA) + (viejo_fav * (1 - ALFA_EMA))
+            nuevo_ema_con = (xg_c * ALFA_EMA) + (viejo_con * (1 - ALFA_EMA))
+            estado_equipos[eq_norm]["fav_home"] = round((0.70 * nuevo_ema_fav) + (0.30 * promedio_liga), 3)
+            estado_equipos[eq_norm]["con_home"] = round((0.70 * nuevo_ema_con) + (0.30 * promedio_liga), 3)
+            estado_equipos[eq_norm]["p_home"] += 1
+        else:
+            viejo_fav = estado_equipos[eq_norm]["fav_away"]
+            viejo_con = estado_equipos[eq_norm]["con_away"]
+            error_fav = xg_f - viejo_fav
+            error_con = xg_c - viejo_con
+            vieja_var_fav = estado_equipos[eq_norm]["var_fa"]
+            vieja_var_con = estado_equipos[eq_norm]["var_ca"]
+            estado_equipos[eq_norm]["var_fa"] = (error_fav**2 * ALFA_EMA) + (vieja_var_fav * (1 - ALFA_EMA))
+            estado_equipos[eq_norm]["var_ca"] = (error_con**2 * ALFA_EMA) + (vieja_var_con * (1 - ALFA_EMA))
+            nuevo_ema_fav = (xg_f * ALFA_EMA) + (viejo_fav * (1 - ALFA_EMA))
+            nuevo_ema_con = (xg_c * ALFA_EMA) + (viejo_con * (1 - ALFA_EMA))
+            estado_equipos[eq_norm]["fav_away"] = round((0.70 * nuevo_ema_fav) + (0.30 * promedio_liga), 3)
+            estado_equipos[eq_norm]["con_away"] = round((0.70 * nuevo_ema_con) + (0.30 * promedio_liga), 3)
+            estado_equipos[eq_norm]["p_away"] += 1
+        equipos_actualizados.add(eq_norm)
+
     # --- FASE DE ANÁLISIS: AGRUPAR LIGAS POR NECESIDAD DE ESCANEO ---
     print("[ANALISIS] Agrupando ligas por profundidad de escaneo requerida...")
     UMBRAL_PARTIDOS_MINIMOS = 20
@@ -217,70 +258,11 @@ def main():
                             xg_loc = ajustar_xg_por_estado_juego(xg_loc_crudo, goles_loc, goles_vis)
                             xg_vis = ajustar_xg_por_estado_juego(xg_vis_crudo, goles_vis, goles_loc)
                         
-                            def actualizar_estado(eq_oficial, pais, xg_f, xg_c, is_home, promedio_liga, equipos_nuevos):
-                                """Aplica EMA y Regresión Bayesiana para actualizar el poderío del equipo."""
-                                eq_norm = gestor_nombres.limpiar_texto(eq_oficial)
-                                if eq_norm not in estado_equipos:
-                                    equipos_nuevos.add(eq_oficial)
-                                    estado_equipos[eq_norm] = {
-                                        "nombre": eq_oficial, "liga": pais, 
-                                        "fav_home": 1.4, "con_home": 1.4, "p_home": 0,
-                                        "fav_away": 1.4, "con_away": 1.4, "p_away": 0,
-                                        "var_fh": 0.1, "var_ch": 0.1, "var_fa": 0.1, "var_ca": 0.1
-                                    }
-
-                                if is_home:
-                                    viejo_fav = estado_equipos[eq_norm]["fav_home"]
-                                    viejo_con = estado_equipos[eq_norm]["con_home"]
-                                    error_fav = xg_f - viejo_fav
-                                    error_con = xg_c - viejo_con
-                                    vieja_var_fav = estado_equipos[eq_norm]["var_fh"]
-                                    vieja_var_con = estado_equipos[eq_norm]["var_ch"]
-                                    nueva_var_fav = (error_fav**2 * ALFA_EMA) + (vieja_var_fav * (1 - ALFA_EMA))
-                                    nueva_var_con = (error_con**2 * ALFA_EMA) + (vieja_var_con * (1 - ALFA_EMA))
-                                    estado_equipos[eq_norm]["var_fh"] = nueva_var_fav
-                                    estado_equipos[eq_norm]["var_ch"] = nueva_var_con
-
-                                    nuevo_ema_fav = (xg_f * ALFA_EMA) + (viejo_fav * (1 - ALFA_EMA))
-                                    nuevo_ema_con = (xg_c * ALFA_EMA) + (viejo_con * (1 - ALFA_EMA))
-                                
-                                    ema_bayesiano_fav = (0.70 * nuevo_ema_fav) + (0.30 * promedio_liga)
-                                    ema_bayesiano_con = (0.70 * nuevo_ema_con) + (0.30 * promedio_liga)
-
-                                    partidos_jugados = estado_equipos[eq_norm]["p_home"] + 1
-                                    estado_equipos[eq_norm]["fav_home"] = round(ema_bayesiano_fav, 3)
-                                    estado_equipos[eq_norm]["con_home"] = round(ema_bayesiano_con, 3)
-                                    estado_equipos[eq_norm]["p_home"] = partidos_jugados
-                                else: # is_away
-                                    viejo_fav = estado_equipos[eq_norm]["fav_away"]
-                                    viejo_con = estado_equipos[eq_norm]["con_away"]
-                                    error_fav = xg_f - viejo_fav
-                                    error_con = xg_c - viejo_con
-                                    vieja_var_fav = estado_equipos[eq_norm]["var_fa"]
-                                    vieja_var_con = estado_equipos[eq_norm]["var_ca"]
-                                    nueva_var_fav = (error_fav**2 * ALFA_EMA) + (vieja_var_fav * (1 - ALFA_EMA))
-                                    nueva_var_con = (error_con**2 * ALFA_EMA) + (vieja_var_con * (1 - ALFA_EMA))
-                                    estado_equipos[eq_norm]["var_fa"] = nueva_var_fav
-                                    estado_equipos[eq_norm]["var_ca"] = nueva_var_con
-
-                                    nuevo_ema_fav = (xg_f * ALFA_EMA) + (viejo_fav * (1 - ALFA_EMA))
-                                    nuevo_ema_con = (xg_c * ALFA_EMA) + (viejo_con * (1 - ALFA_EMA))
-
-                                    ema_bayesiano_fav = (0.70 * nuevo_ema_fav) + (0.30 * promedio_liga)
-                                    ema_bayesiano_con = (0.70 * nuevo_ema_con) + (0.30 * promedio_liga)
-
-                                    partidos_jugados = estado_equipos[eq_norm]["p_away"] + 1
-                                    estado_equipos[eq_norm]["fav_away"] = round(ema_bayesiano_fav, 3)
-                                    estado_equipos[eq_norm]["con_away"] = round(ema_bayesiano_con, 3)
-                                    estado_equipos[eq_norm]["p_away"] = partidos_jugados
-                            
-                                equipos_actualizados.add(eq_norm)
-
                             promedio_goles_liga = (estado_ligas[pais]["goles"] / estado_ligas[pais]["total"]) if estado_ligas[pais]["total"] > 0 else 1.4
 
                             actualizar_estado(loc_oficial, pais, xg_loc, xg_vis, is_home=True, promedio_liga=promedio_goles_liga, equipos_nuevos=equipos_nuevos_sesion)
                             actualizar_estado(vis_oficial, pais, xg_vis, xg_loc, is_home=False, promedio_liga=promedio_goles_liga, equipos_nuevos=equipos_nuevos_sesion)
-                        
+
                             nuevos_partidos_procesados.append((id_unico,))
                             partidos_procesados_sesion += 1
 
@@ -303,8 +285,13 @@ def main():
                                 esquinas_por_gol_liga = stats_liga_actual["corners"] / stats_liga_actual["goles"]
                                 ajuste = ESQUINAS_POR_GOL_GLOBAL / esquinas_por_gol_liga
                                 stats_liga_actual['coef_c'] = round(0.02 * ajuste, 4)
-                        except Exception: continue
-                except requests.exceptions.RequestException: pass 
+                        except Exception as e:
+                            loc_desc = evento.get('competitions', [{}])[0].get('competitors', [{}])[0].get('team', {}).get('displayName', '?')
+                            vis_desc = evento.get('competitions', [{}])[0].get('competitors', [{}])[-1].get('team', {}).get('displayName', '?') if len(evento.get('competitions', [{}])[0].get('competitors', [])) > 1 else '?'
+                            print(f"   [ERROR] {pais} {fecha_api} | {loc_desc} vs {vis_desc} | {type(e).__name__}: {e}")
+                            continue
+                except requests.exceptions.RequestException as e:
+                    print(f"   [RED] Fallo de red en {pais} {fecha_api}: {e}")
 
     if equipos_actualizados:
         for eq_norm in equipos_actualizados:

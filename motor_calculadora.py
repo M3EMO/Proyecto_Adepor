@@ -29,10 +29,10 @@ FRACCION_KELLY = 0.50  # Medio Kelly (Thorp 2006, Ziemba 2005)
 UMBRAL_EV_BASE = 0.03          # Manifiesto II.E (era 0.015 en V3.0)
 TECHO_CUOTA_1X2 = 5.0          # Manifiesto II.E (era 5.5 en V3.0)
 TECHO_CUOTA_OU = 6.0           # Manifiesto II.E
-DIVERGENCIA_MAX_1X2 = 0.2      # Manifiesto II.E (no existia en V3.0)
-DIVERGENCIA_MAX_OU = 0.55      # Manifiesto II.E
+DIVERGENCIA_MAX_1X2 = 0.15      # Manifiesto II.E (no existia en V3.0)
+DIVERGENCIA_MAX_OU = 0.05      # Manifiesto II.E
 MARGEN_PREDICTIVO_1X2 = 0.05   # Manifiesto (minimo 5% de separacion)
-MARGEN_PREDICTIVO_OU = 0.15    # Manifiesto (minimo 15% de separacion)
+MARGEN_PREDICTIVO_OU = 0.05    # Manifiesto (minimo 5% de separacion)
 
 # --- Constantes de Modelo ---
 RHO_FALLBACK = -0.03  # NOTA: Manifiesto dice -0.09. Pendiente calibracion con backtest.

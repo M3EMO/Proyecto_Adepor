@@ -7,14 +7,24 @@ from datetime import datetime
 from collections import defaultdict
 
 # ==========================================
-# MOTOR CALCULADORA V4.0 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
+# MOTOR CALCULADORA V4.3 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
+# Cambios respecto a V4.2:
+#   - Regimen Desacuerdo Modelo-Mercado (Camino 2B):
+#     Cuando modelo y mercado difieren sobre el favorito, prob >= 40%,
+#     div entre 0.15 y 0.30: hit rate 80-100% en backtest de 92 partidos.
+#     Umbral critico: prob < 40% en desacuerdo da hit=33% (ruido, excluido).
+# Cambios respecto a V4.1:
+#   - Regimen Alta Conviccion (Camino 3): cuando modelo favorito y mercado errado
+#     Condicion: EV >= 1.0 + prob >= FLOOR_PROB + cuota <= TECHO_ALTA_CONV (8.0)
+#     Razon: div alta + EV extremo = mercado equivocado, no info oculta
+# Cambios respecto a V4.0:
+#   - Floor 33% + EV escalado (Opcion 1 activa) [backtest 25 apuestas]
+#   - Shadow mode Opcion 4: floor 33% sin EV escalado + fallback
 # Cambios respecto a V3.0:
 #   - Umbral EV: 0.03 * (0.5 / prob) [Manifiesto II.E]
-#   - Divergencia restaurada: max 0.2 para 1X2, 0.55 para O/U [Manifiesto II.E]
+#   - Divergencia restaurada: max 0.15 para 1X2 [Manifiesto II.E]
 #   - Techo cuota 1X2: 5.0 [Manifiesto II.E]
 #   - Medio Kelly: fraccion 0.50 [Thorp 2006]
-#   - Poisson: range(10) -> 0 a 9 goles [Manifiesto II.C]
-#   - Shadow mode: incertidumbre y altitud (calcula y almacena, no decide)
 # ==========================================
 
 DB_NAME = 'fondo_quant.db'
@@ -38,6 +48,25 @@ MARGEN_PREDICTIVO_OU = 0.05    # Manifiesto (minimo 5% de separacion)
 # Backtest de 25 apuestas: floor 33% + EV escalado => 14 bets, 71% hit, +124% yield
 # vs sistema sin filtros: 25 bets, 52% hit, +72% yield
 FLOOR_PROB_MIN = 0.33          # Probabilidad minima para apostar cualquier outcome
+
+# --- Regimen Alta Conviccion (V4.2) ---
+# Cuando el modelo ve al equipo como favorito (prob >= FLOOR) pero el mercado
+# lo pone como gran underdog (cuota > TECHO normal), la divergencia sube mucho.
+# Con EV >= 1.0, no es "info oculta" — es desacuerdo genuino modelo vs mercado.
+# Techo relajado a 8.0 para evitar cuotas absurdas pero capturar los casos reales.
+CONVICCION_EV_MIN = 1.0        # EV > 100%: retorno esperado enorme
+TECHO_CUOTA_ALTA_CONV = 8.0   # Techo relajado para este regimen
+
+# --- Regimen Desacuerdo Modelo-Mercado (V4.3) ---
+# Backtest 92 partidos: cuando modelo y mercado discrepan sobre el favorito
+# y prob_modelo >= 40%:
+#   div 15-25% -> hit 80%  (5 casos)
+#   div 25-35% -> hit 100% (6 casos, mayoria cubiertos por Alta Conviccion)
+# Con prob 33-40% el desacuerdo NO ayuda (hit 33%, ruido). Umbral duro en 40%.
+# Zona operativa: div entre DIVERGENCIA_MAX_1X2 (0.15) y DIVERGENCIA_DESACUERDO_MAX (0.30)
+# Los casos con div > 0.30 y EV >= 1.0 ya los cubre Alta Conviccion.
+DESACUERDO_PROB_MIN = 0.40     # Umbral critico: por debajo el desacuerdo es ruido
+DIVERGENCIA_DESACUERDO_MAX = 0.30  # Techo de divergencia para este regimen
 
 def min_ev_escalado(prob):
     """EV minimo requerido segun nivel de confianza del modelo (Opcion 1)."""
@@ -179,6 +208,28 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2):
     if c_ev <= TECHO_CUOTA_1X2 and m_ev >= umb_ev and div_ev <= DIVERGENCIA_MAX_1X2:
         return f"[APOSTAR] {ev_key}", m_ev, c_ev
 
+    # --- CAMINO 2B: Regimen Desacuerdo Modelo-Mercado ---
+    # El modelo favorece X pero el mercado favorece Y (distinto outcome).
+    # Con prob_modelo >= 40% y divergencia moderada (0.15-0.30), el modelo
+    # gana al mercado con 80-100% de hit rate en backtest (92 partidos).
+    # Con prob 33-40% el desacuerdo NO es señal confiable (hit=33%): no aplica.
+    fav_mkt_key = min(cuotas, key=cuotas.get)  # favorito del mercado = cuota minima
+    if (fav_key != fav_mkt_key
+            and p_fav >= DESACUERDO_PROB_MIN
+            and DIVERGENCIA_MAX_1X2 < div_fav <= DIVERGENCIA_DESACUERDO_MAX
+            and ev_fav >= min_ev_escalado(p_fav)
+            and c_fav <= TECHO_CUOTA_ALTA_CONV):
+        return f"[APOSTAR] {fav_key}", ev_fav, c_fav
+
+    # --- CAMINO 3: Regimen Alta Conviccion ---
+    # Modelo dice favorito (prob >= FLOOR) pero mercado lo pone como gran underdog
+    # (cuota > TECHO normal => divergencia alta). Con EV >= 1.0 no es info oculta,
+    # es el mercado equivocado. Se permite hasta TECHO_CUOTA_ALTA_CONV = 8.0.
+    if (p_fav >= FLOOR_PROB_MIN
+            and ev_fav >= CONVICCION_EV_MIN
+            and c_fav <= TECHO_CUOTA_ALTA_CONV):
+        return f"[APOSTAR] {fav_key}", ev_fav, c_fav
+
     # --- DIAGNOSTICO ---
     if c_fav > TECHO_CUOTA_1X2: return "[PASAR] Techo Cuota", ev_fav, c_fav
     if ev_fav < umb_fav: return "[PASAR] Riesgo/Beneficio", ev_fav, c_fav
@@ -274,7 +325,8 @@ def ajustar_stakes_por_covarianza(lista_apuestas):
 
 def main():
     print("[SISTEMA] Iniciando Motor Calculadora V4.0 (Dixon-Coles + Riesgo Calibrado)...")
-    print(f"[CONFIG] Umbral EV: {UMBRAL_EV_BASE} | Techo 1X2: {TECHO_CUOTA_1X2} | Kelly: {FRACCION_KELLY} | Poisson: 0-{RANGO_POISSON-1}")
+    print(f"[CONFIG] Umbral EV: {UMBRAL_EV_BASE} | Techo 1X2: {TECHO_CUOTA_1X2} (AltaConv/Desac: {TECHO_CUOTA_ALTA_CONV}) | Kelly: {FRACCION_KELLY} | Poisson: 0-{RANGO_POISSON-1}")
+    print(f"[CONFIG] Floor prob: {FLOOR_PROB_MIN} | Div normal: {DIVERGENCIA_MAX_1X2} | Desacuerdo: prob>={DESACUERDO_PROB_MIN} div<={DIVERGENCIA_DESACUERDO_MAX} | AltaConv EV>={CONVICCION_EV_MIN}")
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()

@@ -34,6 +34,18 @@ DIVERGENCIA_MAX_OU = 0.05      # Manifiesto II.E
 MARGEN_PREDICTIVO_1X2 = 0.05   # Manifiesto (minimo 5% de separacion)
 MARGEN_PREDICTIVO_OU = 0.05    # Manifiesto (minimo 5% de separacion)
 
+# --- Filtros Opcion 1 (estrategia activa desde V4.1) ---
+# Backtest de 25 apuestas: floor 33% + EV escalado => 14 bets, 71% hit, +124% yield
+# vs sistema sin filtros: 25 bets, 52% hit, +72% yield
+FLOOR_PROB_MIN = 0.33          # Probabilidad minima para apostar cualquier outcome
+
+def min_ev_escalado(prob):
+    """EV minimo requerido segun nivel de confianza del modelo (Opcion 1)."""
+    if prob >= 0.50: return 0.03   # alta confianza: umbral base
+    if prob >= 0.40: return 0.08   # media: doble umbral
+    if prob >= FLOOR_PROB_MIN: return 0.12  # baja-media: triple umbral
+    return 999.0                   # < 33%: rechazar siempre
+
 # --- Constantes de Modelo ---
 RHO_FALLBACK = -0.03  # NOTA: Manifiesto dice -0.09. Pendiente calibracion con backtest.
 RANGO_POISSON = 10    # 0 a 9 goles (era 8 en V3.0, Manifiesto dice 0-9)
@@ -207,6 +219,23 @@ def evaluar_mercado_ou(po, pu, co, cu, p1, px, p2):
 # SIZING (Kelly Fraccional)
 # ==========================================================================
 
+def mejor_outcome_fallback(p1, px, p2, c1, cx, c2):
+    """
+    Opcion 4 (shadow): si el outcome elegido tiene prob < FLOOR_PROB_MIN,
+    buscar el mejor outcome alternativo con prob >= FLOOR_PROB_MIN, ordenado por EV.
+    Retorna (nombre, prob, cuota, ev) o None si no hay ninguno valido.
+    """
+    candidatos = [('LOCAL', p1, c1), ('EMPATE', px, cx), ('VISITA', p2, c2)]
+    validos = []
+    for nombre, prob, cuota in candidatos:
+        if prob >= FLOOR_PROB_MIN and cuota and cuota > 1:
+            ev_val = (prob * cuota) - 1
+            if ev_val > 0:
+                validos.append((nombre, prob, cuota, ev_val))
+    if not validos:
+        return None
+    return max(validos, key=lambda x: x[3])  # mayor EV
+
 def calcular_stake_independiente(pick, ev, cuota, bankroll, max_kelly_pct):
     """
     Medio Kelly: k_fraccion = kelly_full * 0.50, capado a max_kelly_pct.
@@ -251,7 +280,8 @@ def main():
     cursor = conn.cursor()
 
     # --- Columnas shadow (crear si no existen) ---
-    for col in ['incertidumbre REAL', 'shadow_xg_local REAL', 'shadow_xg_visita REAL']:
+    for col in ['incertidumbre REAL', 'shadow_xg_local REAL', 'shadow_xg_visita REAL',
+                'apuesta_shadow_1x2 TEXT', 'stake_shadow_1x2 REAL']:
         try: cursor.execute(f"ALTER TABLE partidos_backtest ADD COLUMN {col}")
         except sqlite3.OperationalError: pass
 
@@ -369,11 +399,48 @@ def main():
         c1_v, cx_v, c2_v = safe_float(c1), safe_float(cx), safe_float(c2)
         co_v, cu_v = safe_float(co), safe_float(cu)
 
-        pick_1x2, ev_1x2, cu_1x2 = evaluar_mercado_1x2(p1, px, p2, c1_v, cx_v, c2_v)
+        # Evaluacion raw (sin filtros adicionales)
+        pick_1x2_raw, ev_1x2, cu_1x2 = evaluar_mercado_1x2(p1, px, p2, c1_v, cx_v, c2_v)
+
+        # Extraer prob del outcome elegido en raw
+        prob_raw_1x2 = 0.0
+        if "[APOSTAR]" in pick_1x2_raw:
+            if   "LOCAL"  in pick_1x2_raw: prob_raw_1x2 = p1
+            elif "EMPATE" in pick_1x2_raw: prob_raw_1x2 = px
+            else:                          prob_raw_1x2 = p2
+
+        # --- OPCION 1 (ACTIVA): floor 33% + EV escalado ---
+        pick_1x2 = pick_1x2_raw
+        if "[APOSTAR]" in pick_1x2_raw:
+            if prob_raw_1x2 < FLOOR_PROB_MIN:
+                pick_1x2 = f"[PASAR] Floor Prob ({prob_raw_1x2:.0%}<{FLOOR_PROB_MIN:.0%})"
+            elif ev_1x2 < min_ev_escalado(prob_raw_1x2):
+                pick_1x2 = f"[PASAR] EV Insuf ({ev_1x2:.3f}<{min_ev_escalado(prob_raw_1x2):.3f})"
+
+        # --- OPCION 4 (SHADOW): floor 33%, EV libre para originales, fallback si prob baja ---
+        pick_shadow_1x2 = pick_1x2_raw  # hereda el raw (EV libre)
+        if "[APOSTAR]" in pick_1x2_raw and prob_raw_1x2 < FLOOR_PROB_MIN:
+            # prob demasiado baja: intentar fallback al mejor outcome con prob >= 33%
+            fb = mejor_outcome_fallback(p1, px, p2, c1_v, cx_v, c2_v)
+            if fb:
+                nombre_fb, prob_fb, cuota_fb, ev_fb = fb
+                pick_shadow_1x2 = f"[APOSTAR] {nombre_fb}"
+                cu_1x2_shadow   = cuota_fb
+                ev_1x2_shadow   = ev_fb
+            else:
+                pick_shadow_1x2 = "[PASAR] Sin Fallback Opcion4"
+                cu_1x2_shadow   = 0.0
+                ev_1x2_shadow   = 0.0
+        else:
+            cu_1x2_shadow = cu_1x2
+            ev_1x2_shadow = ev_1x2
+
         pick_ou, ev_ou, cu_ou = evaluar_mercado_ou(po, pu, co_v, cu_v, p1, px, p2)
 
         stk_1x2 = calcular_stake_independiente(pick_1x2, ev_1x2, cu_1x2, BANKROLL, MAX_KELLY_PCT)
-        stk_ou = calcular_stake_independiente(pick_ou, ev_ou, cu_ou, BANKROLL, MAX_KELLY_PCT)
+        stk_ou  = calcular_stake_independiente(pick_ou,  ev_ou,  cu_ou,  BANKROLL, MAX_KELLY_PCT)
+        stk_shadow_1x2 = calcular_stake_independiente(
+            pick_shadow_1x2, ev_1x2_shadow, cu_1x2_shadow, BANKROLL, MAX_KELLY_PCT)
 
         # Overlap: si hay apuesta en ambos mercados, priorizar la de mayor EV
         if stk_1x2 > 0 and stk_ou > 0:
@@ -389,6 +456,7 @@ def main():
             'p1': p1, 'px': px, 'p2': p2, 'po': po, 'pu': pu,
             'pick_1x2': pick_1x2, 'ev_1x2': ev_1x2, 'cu_1x2': cu_1x2, 'stk_1x2': stk_1x2,
             'pick_ou': pick_ou, 'ev_ou': ev_ou, 'cu_ou': cu_ou, 'stk_ou': stk_ou,
+            'pick_shadow_1x2': pick_shadow_1x2, 'stk_shadow_1x2': stk_shadow_1x2,
             'incertidumbre': round(incertidumbre, 4),
             'shadow_xg_l': round(sh_xg_l, 3), 'shadow_xg_v': round(sh_xg_v, 3)
         })
@@ -406,6 +474,7 @@ def main():
             UPDATE partidos_backtest
             SET prob_1=?, prob_x=?, prob_2=?, prob_o25=?, prob_u25=?,
                 apuesta_1x2=?, apuesta_ou=?, stake_1x2=?, stake_ou=?,
+                apuesta_shadow_1x2=?, stake_shadow_1x2=?,
                 incertidumbre=?, shadow_xg_local=?, shadow_xg_visita=?,
                 estado='Calculado'
             WHERE id_partido=?
@@ -413,6 +482,7 @@ def main():
             p['p1'], p['px'], p['p2'], p['po'], p['pu'],
             p['pick_1x2'], p['pick_ou'],
             round(p['stk_1x2'], 2), round(p['stk_ou'], 2),
+            p['pick_shadow_1x2'], round(p['stk_shadow_1x2'], 2),
             p['incertidumbre'], p['shadow_xg_l'], p['shadow_xg_v'],
             p['id_partido']
         ))
@@ -421,9 +491,16 @@ def main():
     conn.commit()
     conn.close()
 
+    # Estadisticas de filtrado Opcion 1 vs Opcion 4
+    n_op1  = sum(1 for p in partidos_a_actualizar if "[APOSTAR]" in p['pick_1x2'])
+    n_op4  = sum(1 for p in partidos_a_actualizar if "[APOSTAR]" in p['pick_shadow_1x2'])
+    n_diff = sum(1 for p in partidos_a_actualizar
+                 if "[APOSTAR]" in p['pick_shadow_1x2'] and "[APOSTAR]" not in p['pick_1x2'])
     print(f"\n[EXITO] {calculados} partidos calculados.")
-    print(f"[SHADOW] Partidos con altitud activa: {shadow_log_alt} | Con incertidumbre alta (>0.15): {shadow_log_incert}")
-    print("[SISTEMA] Motor Calculadora V4.0 ha finalizado su ejecucion.")
+    print(f"[OP1-ACTIVA]  Apuestas generadas: {n_op1} (floor {FLOOR_PROB_MIN:.0%} + EV escalado)")
+    print(f"[OP4-SHADOW]  Apuestas shadow:    {n_op4} ({n_diff} adicionales vs Op1, guardadas para auditoria)")
+    print(f"[SHADOW] Altitud activa: {shadow_log_alt} | Incertidumbre alta (>0.15): {shadow_log_incert}")
+    print("[SISTEMA] Motor Calculadora V4.1 ha finalizado su ejecucion.")
 
 if __name__ == "__main__":
     main()

@@ -210,7 +210,8 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
          p1, px, p2, po, pu,
          ap1x2, apou, stk1x2, stkou,
          c1, cx, c2, co, cu,
-         estado, gl, gv, incert, auditoria) = row
+         estado, gl, gv, incert, auditoria,
+         _ap_shadow, _stk_shadow) = row
 
         if gl is None or gv is None:
             continue
@@ -517,6 +518,192 @@ def crear_hoja_dashboard(wb, metricas, bankroll):
 # FUNCION PRINCIPAL
 # ==========================================================================
 
+def crear_hoja_sombra(wb, datos, bankroll):
+    """
+    Pestaña de auditoria comparativa entre Opcion 1 (activa) y Opcion 4 (shadow).
+    Opcion 1: floor 33% + EV escalado — apuesta activa
+    Opcion 4: floor 33% sin EV escalado + fallback si prob baja — guardada para comparar
+    """
+    ws = wb.create_sheet("Sombra")
+
+    FONT_TITLE = Font(name='Arial', bold=True, color='FFFFFF', size=11)
+    FONT_HDR   = Font(name='Arial', bold=True, color='FFFFFF', size=10)
+    FONT_D     = Font(name='Arial', size=10)
+    FONT_SUB   = Font(name='Arial', italic=True, size=9, color='595959')
+    FILL_T1    = _fill('1F4E79')
+    FILL_T4    = _fill('375623')
+    FILL_HDR1  = _fill('2E75B6')
+    FILL_HDR4  = _fill('548235')
+    BORDER     = Border(
+        left=Side(style='thin', color='D9D9D9'), right=Side(style='thin', color='D9D9D9'),
+        top=Side(style='thin', color='D9D9D9'),  bottom=Side(style='thin', color='D9D9D9')
+    )
+
+    # Anchos
+    for ci, w in enumerate([14,30,12,16,12,12,14,14,14,12,16,12,12,14,14], 1):
+        ws.column_dimensions[get_column_letter(ci)].width = w
+
+    # ---- Titulo ----
+    ws.merge_cells('A1:O1')
+    c = ws.cell(1, 1, "AUDITORIA COMPARATIVA: OPCION 1 (ACTIVA) vs OPCION 4 (SHADOW)")
+    c.font = FONT_TITLE; c.fill = _fill('1F4E79')
+    c.alignment = Alignment(horizontal='center', vertical='center')
+    ws.row_dimensions[1].height = 24
+
+    ws.merge_cells('A2:O2')
+    c = ws.cell(2, 1,
+        "Op1 = Floor 33% + EV escalado (apuesta real)  |  "
+        "Op4 = Floor 33% sin EV escalado + fallback (shadow, solo para auditoria)")
+    c.font = FONT_SUB; c.fill = _fill('D6E4F0')
+    c.alignment = Alignment(horizontal='center', vertical='center')
+    ws.row_dimensions[2].height = 14
+
+    # ---- Headers ----
+    hdrs_op1 = ['Fecha', 'Partido', 'Liga',
+                'Apuesta Op1', 'Stake Op1', 'Resultado Op1', 'P/L Op1']
+    hdrs_op4 = ['Apuesta Op4', 'Stake Op4', 'Resultado Op4', 'P/L Op4',
+                'Diferencia', 'Op1 Gana?', 'Op4 Gana?']
+
+    for ci, h in enumerate(hdrs_op1, 1):
+        c = ws.cell(3, ci, h)
+        c.font = FONT_HDR; c.fill = FILL_HDR1
+        c.alignment = Alignment(horizontal='center', vertical='center')
+        c.border = BORDER
+
+    for ci, h in enumerate(hdrs_op4, len(hdrs_op1) + 1):
+        c = ws.cell(3, ci, h)
+        c.font = FONT_HDR; c.fill = FILL_HDR4
+        c.alignment = Alignment(horizontal='center', vertical='center')
+        c.border = BORDER
+
+    ws.row_dimensions[3].height = 18
+    ws.freeze_panes = 'A4'
+
+    # ---- Datos ----
+    row = 4
+    stats = {'op1': {'n':0,'g':0,'pl':0.0,'vol':0.0},
+             'op4': {'n':0,'g':0,'pl':0.0,'vol':0.0}}
+
+    for rd in datos:
+        (id_p, fecha, local, visita, pais,
+         p1, px, p2, po, pu,
+         ap1x2, apou, stk1x2, stkou,
+         c1, cx, c2, co, cu,
+         estado, gl, gv, incert, auditoria,
+         ap_shadow, stk_shadow) = rd
+
+        # Solo filas con al menos una apuesta activa o shadow
+        tiene_op1    = stk1x2 and stk1x2 > 0 and ap1x2 and "[APOSTAR]" in str(ap1x2)
+        tiene_op4    = stk_shadow and stk_shadow > 0 and ap_shadow and "[APOSTAR]" in str(ap_shadow)
+        if not tiene_op1 and not tiene_op4:
+            continue
+
+        # Parsear fecha para display
+        try:
+            fecha_disp = datetime.strptime(fecha, "%d/%m/%Y %H:%M").strftime("%d/%m/%Y")
+        except Exception:
+            fecha_disp = (fecha or "")[:10]
+
+        partido_str = f"{local} vs {visita}"
+
+        # --- Op1 ---
+        res_op1 = _resultado_1x2(ap1x2, gl, gv) if tiene_op1 else 0
+        if tiene_op1 and res_op1 != 0:
+            cuota_op1 = _cuota_1x2(ap1x2, c1, cx, c2) or 0
+            pl_op1 = stk1x2 * (cuota_op1 - 1) if res_op1 == 1 else -stk1x2
+            stats['op1']['n'] += 1; stats['op1']['vol'] += stk1x2
+            if res_op1 == 1: stats['op1']['g'] += 1
+            stats['op1']['pl'] += pl_op1
+            res_op1_str = "GANADA" if res_op1 == 1 else "PERDIDA"
+        else:
+            pl_op1 = None; res_op1_str = "PENDIENTE" if gl is None else "-"
+
+        # --- Op4 ---
+        res_op4 = _resultado_1x2(ap_shadow, gl, gv) if tiene_op4 else 0
+        if tiene_op4 and res_op4 != 0:
+            cuota_op4 = _cuota_1x2(ap_shadow, c1, cx, c2) or 0
+            pl_op4 = stk_shadow * (cuota_op4 - 1) if res_op4 == 1 else -stk_shadow
+            stats['op4']['n'] += 1; stats['op4']['vol'] += stk_shadow
+            if res_op4 == 1: stats['op4']['g'] += 1
+            stats['op4']['pl'] += pl_op4
+            res_op4_str = "GANADA" if res_op4 == 1 else "PERDIDA"
+        else:
+            pl_op4 = None; res_op4_str = "PENDIENTE" if gl is None else "-"
+
+        # Diferencia de P/L (solo si ambas liquidadas)
+        pl_diff = round(pl_op1 - pl_op4, 2) if (pl_op1 is not None and pl_op4 is not None) else None
+
+        # Colorear fila: verde Op1 mejor, rojo Op4 mejor, neutro igual/pendiente
+        if pl_diff is not None:
+            row_fill = _fill('C6EFCE') if pl_diff >= 0 else _fill('FFC7CE')
+        else:
+            row_fill = _fill('FFFFFF') if row % 2 == 0 else _fill('F5F5F5')
+
+        vals = [
+            fecha_disp, partido_str, pais,
+            str(ap1x2 or "-"), stk1x2 if tiene_op1 else "-",
+            res_op1_str, pl_op1,
+            str(ap_shadow or "-"), stk_shadow if tiene_op4 else "-",
+            res_op4_str, pl_op4,
+            pl_diff,
+            "SI" if res_op1 == 1 else ("NO" if res_op1 == -1 else "-"),
+            "SI" if res_op4 == 1 else ("NO" if res_op4 == -1 else "-"),
+        ]
+
+        ws.row_dimensions[row].height = 16
+        for ci, val in enumerate(vals, 1):
+            cell = ws.cell(row, ci, val)
+            cell.font = FONT_D; cell.fill = row_fill; cell.border = BORDER
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            if ci in (5, 7, 9, 11, 12) and isinstance(val, float):
+                cell.number_format = '#,##0.00'
+        row += 1
+
+    # ---- Resumen al pie ----
+    row += 1
+    ws.merge_cells(f'A{row}:G{row}')
+    c = ws.cell(row, 1, "RESUMEN DE RENDIMIENTO")
+    c.font = FONT_HDR; c.fill = FILL_HDR1
+    c.alignment = Alignment(horizontal='center', vertical='center')
+    ws.merge_cells(f'H{row}:O{row}')
+    c = ws.cell(row, 8, "RESUMEN DE RENDIMIENTO")
+    c.font = FONT_HDR; c.fill = FILL_HDR4
+    c.alignment = Alignment(horizontal='center', vertical='center')
+    row += 1
+
+    def _kpi_row(label, v1, v4, fmt='num'):
+        ws.cell(row, 1, label).font = Font(name='Arial', bold=True, size=10)
+        for ci, val in [(4, v1), (11, v4)]:
+            cell = ws.cell(row, ci, val)
+            cell.font = FONT_D
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            if fmt == 'cur': cell.number_format = '#,##0.00'
+            elif fmt == 'pct': cell.number_format = '0.00%'
+
+    for s_key, col_offset, lbl in [('op1', 4, 'Op1'), ('op4', 11, 'Op4')]:
+        s = stats[s_key]
+        ws.row_dimensions[row].height = 16
+
+    o1, o4 = stats['op1'], stats['op4']
+    n1, n4 = o1['n'], o4['n']
+    _kpi_row("N apuestas liquidadas", n1, n4); row +=1
+    _kpi_row("Ganadas", o1['g'], o4['g']); row +=1
+    _kpi_row("Hit rate",
+             o1['g']/n1 if n1 else 0, o4['g']/n4 if n4 else 0, 'pct'); row +=1
+    _kpi_row("Volumen", o1['vol'], o4['vol'], 'cur'); row +=1
+    _kpi_row("P/L neto", o1['pl'], o4['pl'], 'cur'); row +=1
+    _kpi_row("Yield",
+             o1['pl']/o1['vol'] if o1['vol'] else 0,
+             o4['pl']/o4['vol'] if o4['vol'] else 0, 'pct'); row +=1
+
+    ws.merge_cells(f'A{row+1}:O{row+1}')
+    c = ws.cell(row+1, 1,
+        "Verde = Op1 gano mas en ese partido  |  Rojo = Op4 gano mas  |  "
+        "Esta tabla se actualiza sola con cada ejecucion del pipeline")
+    c.font = FONT_SUB
+    c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
+
+
 def main():
     print("[SISTEMA] Iniciando Motor Sincronizador V9.2 (Excel Local)...")
 
@@ -554,7 +741,8 @@ def main():
                prob_1, prob_x, prob_2, prob_o25, prob_u25,
                apuesta_1x2, apuesta_ou, stake_1x2, stake_ou,
                cuota_1, cuota_x, cuota_2, cuota_o25, cuota_u25,
-               estado, goles_l, goles_v, incertidumbre, auditoria
+               estado, goles_l, goles_v, incertidumbre, auditoria,
+               apuesta_shadow_1x2, stake_shadow_1x2
         FROM partidos_backtest
         WHERE estado IN ('Calculado', 'Liquidado')
         ORDER BY id_partido ASC
@@ -593,7 +781,8 @@ def main():
          p1, px, p2, po, pu,
          ap1x2, apou, stk1x2, stkou,
          c1, cx, c2, co, cu,
-         estado, gl, gv, incert, auditoria) = row_data
+         estado, gl, gv, incert, auditoria,
+         ap_shadow, stk_shadow) = row_data
 
         # Escribir como objeto date real para que Excel ordene correctamente
         try:
@@ -722,6 +911,7 @@ def main():
     # ==========================================================================
     metricas = calcular_metricas_dashboard(datos, FRACCION_KELLY)
     crear_hoja_dashboard(wb, metricas, BANKROLL)
+    crear_hoja_sombra(wb, datos, BANKROLL)
 
     ws2 = wb.create_sheet("Resumen")
     res_headers = ['Liga','Apuestas','Ganadas','Perdidas','% Acierto','P/L Neto','Yield','Volumen']

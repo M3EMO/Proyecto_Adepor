@@ -64,7 +64,41 @@ B. MEMORIA ESTOCÁSTICA Y FILTRO DE VARIANZA (motor_data.py)
   REGLA: Al agregar una nueva liga, asignarle ALFA_EMA_POR_LIGA antes de su primer ciclo.
   Las ligas de Sudamérica/Medio Oriente tienden a 0.18-0.22. Europa Central/Norte: 0.12-0.15.
 
-C. MATRIZ PREDICTIVA Y DIXON-COLES (motor_calculadora.py)
+C. CORRECCIÓN DE VENTAJA LOCAL — xG_VISITA (Fix A, V4.6)
+Aplicada en motor_calculadora.py ANTES de alimentar la matriz Poisson.
+
+PROBLEMA: El modelo EMA sobreestima sistemáticamente el xG visitante en todas las ligas
+(bias global +0.491 en backtest de 32 partidos). Los equipos visitantes generan más tiros
+sin convertir por mayor presión defensiva y menor posesión, pero esto se captura como
+xG en los stats de ESPN sin ajuste de contexto.
+
+CORRECCIÓN DELTA-DEPENDIENTE:
+  base   = CORR_VISITA_POR_LIGA[liga]   (por liga, ver tabla)
+  delta  = max(0, xG_local - xG_visita) (dominancia del local en xG)
+  escala = max(0, 1 - delta / 1.0)      (1.0 si equilibrio; 0.0 si delta >= 1.0)
+  correccion = base * escala
+  xG_visita_final = max(0.10, xG_visita - correccion)
+
+TABLA CORR_VISITA_POR_LIGA (50% del sesgo observado — conservador con N=32):
+  Brasil      → 0.25  (bias observado +0.494)
+  Turquia     → 0.30  (bias observado +0.631)
+  Argentina   → 0.20  (bias observado +0.398)
+  Noruega     → 0.20  (sin datos propios, referencia global)
+  Inglaterra  → 0.20  (sin datos propios, referencia global)
+  [Fallback]  → 0.20
+
+COMPORTAMIENTO (Brasil, base=0.25):
+  delta=0.0 (equilibrio)   → resta 0.25 a xG_visita
+  delta=0.5 (local +0.5)   → resta 0.125
+  delta=1.0 (local domina) → resta 0.00 (modelo ya diferencia)
+
+EFECTO CASCADA: al corregir xG_visita, los xG_totales [2.5-2.8) bajan a <2.5,
+lo que junto con Fix B elimina las apuestas OVER en zona de trampa UNDER.
+
+REGLA: Al agregar una nueva liga, calibrar CORR_VISITA_POR_LIGA con bias observado
+en al menos 20 partidos. Usar 50% del bias como corrección inicial conservadora.
+
+C3. MATRIZ PREDICTIVA Y DIXON-COLES (motor_calculadora.py)
 - Fuerza Ofensiva/Defensiva: Se calcula cruzando el xG_Bayes del Local contra el xGA_Bayes de la Visita.
 - Compresión de Goles (Gamma): Se aplica a la expectativa final para ligas defensivas. Argentina/Brasil = 0.82 a 0.90.
 - Distribución de Poisson: Se calcula la matriz de 0 a 9 goles.
@@ -219,10 +253,14 @@ D2. MERCADO O/U 2.5 — FILTROS
   - TECHO_CUOTA_OU = 6.0
   - DIVERGENCIA_MAX_OU = 0.05
   - MARGEN_PREDICTIVO_OU = 0.05
-  - MARGEN_XG_OU = 0.25  (V4.3: bajado de 0.40)
-    Lógica: apostar OVER solo si xG_total > 2.75; UNDER solo si xG_total < 2.25.
-    Se filtra el partido si abs(xG_local + xG_visita - 2.5) < 0.25 (señal demasiado débil).
-    Backtest: reducción de MARGEN 0.40->0.25 libera 17 apuestas O/U adicionales con ~75% hit.
+  - MARGEN xG ASIMETRICO (Fix B, V4.6):
+      MARGEN_XG_OU_OVER  = 0.30  → OVER solo si xG_total > 2.80
+      MARGEN_XG_OU_UNDER = 0.25  → UNDER solo si xG_total < 2.25
+    Lógica: la zona [2.5, 2.8) es una trampa de UNDER. Backtest 32 partidos:
+      xG [2.5-2.8) → goles_prom=0.60, UNDER=100%. El modelo predice OVER pero
+      la realidad es UNDER severo. Causa: xG_visita inflado (Fix A) empuja xG_total
+      artificialmente hacia ese rango. El margen OVER más estricto bloquea esa zona.
+    Zona de decision: xG < 2.25 → UNDER | xG > 2.80 → OVER | [2.25-2.80] → PASAR.
 
 E. GESTIÓN DE RIESGO
   - FRACCION_KELLY = 0.50  (Medio Kelly, Thorp 2006)

@@ -7,7 +7,13 @@ from datetime import datetime
 from collections import defaultdict
 
 # ==========================================
-# MOTOR CALCULADORA V4.5 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
+# MOTOR CALCULADORA V4.6 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
+# Cambios respecto a V4.5:
+#   - Fix A: Corrección de ventaja local delta-dependiente (xG_visita sobreestimado +0.49 global).
+#     corregir_ventaja_local(): resta CORR_BASE_LIGA * max(0, 1 - delta/1.0) a xg_visita.
+#     delta=0 (equilibrio) -> correccion completa. delta>=1.0 (local domina) -> sin correccion.
+#   - Fix B: Margen xG O/U asimetrico. OVER requiere xG>2.80 (era 2.75).
+#     Backtest: xG [2.5-2.8) -> goles_prom=0.60, UNDER=100%. Zona bloqueada para OVER.
 # Cambios respecto a V4.4:
 #   - Fix #5: Corrección de sesgo de compresión de calibración.
 #     Bucket 40-50%: frecuencia real = 53.4% vs modelo = 45% promedio => +8.4pp sesgo.
@@ -94,13 +100,33 @@ DIVERGENCIA_DESACUERDO_MAX = 0.30  # Techo de divergencia para este regimen
 # Ningun camino puede seleccionar EMPATE como pick final.
 APUESTA_EMPATE_PERMITIDA = False
 
-# --- Filtro xG Margen O/U (V4.3) ---
-# El modelo dice OVER cuando xg_total > 2.5, pero con 2.6 esperados la señal
-# es demasiado débil. Se requiere que el total esperado se aleje del umbral
-# en al menos MARGEN_XG_OU goles. Equivale a: apostar OVER solo si modelo
-# espera >2.9 goles, UNDER solo si espera <2.1. Auto-ajusta por equipo, sin
-# necesidad de calibración por liga.
-MARGEN_XG_OU = 0.25  # V4.3: bajado de 0.40 a 0.25 — backtest 17 nuevas bets O/U, ~75% hit
+# --- Filtro xG Margen O/U — ASIMETRICO (Fix B, V4.6) ---
+# Backtest 32 partidos: xG en [2.5-2.8) -> goles_prom=0.60, UNDER=100%.
+# El modelo dice "levemente OVER" pero la realidad es dramaticamente UNDER.
+# Causa: xG_visita inflado empuja el total hacia 2.5-2.8 en juegos que son UNDER reales.
+# Fix B: margen OVER mas estricto (0.30) que UNDER (0.25).
+# OVER solo si xG > 2.80 | UNDER solo si xG < 2.25 | Zona [2.25-2.80] = PASAR.
+MARGEN_XG_OU_OVER  = 0.30  # Fix B (V4.6): era 0.25 simetrico; zona [2.5-2.8) = trampa UNDER
+MARGEN_XG_OU_UNDER = 0.25  # sin cambio — UNDER con xG < 2.25 sigue siendo valido
+MARGEN_XG_OU = MARGEN_XG_OU_UNDER  # alias de compatibilidad (no usar en logica nueva)
+
+# --- Fix A (V4.6): Corrección de ventaja local (xG_visita sobreestimado) ---
+# Backtest 32 partidos: xG_visita bias = +0.491 global (Brasil +0.494, Turquia +0.631, Argentina +0.398).
+# El modelo EMA no captura el efecto real de jugar de visitante: menos posesion,
+# mayor presion defensiva, mayor tendencia a acumular tiros sin convertir.
+# La correccion es DELTA-DEPENDIENTE: cuando el local ya domina (delta_xG >= 1.0),
+# el modelo lo refleja y no se necesita ajuste. Cuando estan equilibrados (delta=0),
+# se aplica la correccion completa.
+# Conservador: 50% del sesgo observado para evitar sobreajuste con N=32.
+CORR_VISITA_POR_LIGA = {
+    "Brasil":     0.25,   # bias observado +0.494 -> corr 50% = 0.25
+    "Turquia":    0.30,   # bias observado +0.631 -> corr 50% = 0.30 (aprox)
+    "Argentina":  0.20,   # bias observado +0.398 -> corr 50% = 0.20
+    "Noruega":    0.20,   # sin datos propios, usar referencia global
+    "Inglaterra": 0.20,   # sin datos propios, usar referencia global
+}
+CORR_VISITA_FALLBACK   = 0.20   # fallback para ligas sin calibracion propia
+CORR_VISITA_ESCALA_DELTA = 1.0  # delta en xG a partir del cual la correccion llega a 0
 
 def min_ev_escalado(prob):
     """EV minimo requerido segun nivel de confianza del modelo (Opcion 1)."""
@@ -145,6 +171,32 @@ def corregir_calibracion(p1, px, p2):
     if total <= 0:
         return p1, px, p2
     return round(p1_cal / total, 6), round(px / total, 6), round(p2_cal / total, 6)
+
+
+def corregir_ventaja_local(xg_local, xg_visita, liga=None):
+    """
+    Fix A (V4.6): corrige el sesgo sistematico de sobreestimacion de xG visitante.
+
+    El modelo EMA no diferencia entre rendir como local y como visitante: toma el
+    promedio historico de xG visitante del equipo, pero en la realidad los equipos
+    visitantes generan mas tiros sin convertir (mayor presion defensiva rival,
+    menos posesion, efectos psicologicos). Esto infla xG_visita en DB.
+
+    La correccion es delta-dependiente:
+      - Partidos equilibrados (delta_xG = 0): correccion completa = CORR_BASE_LIGA
+      - Local dominante (delta_xG = ESCALA): correccion = 0 (modelo ya lo refleja)
+      - Lineal entre ambos extremos
+
+    Ejemplo (Brasil, CORR_BASE=0.25, ESCALA=1.0):
+      delta=0.0 -> resta 0.25 a xg_visita
+      delta=0.5 -> resta 0.125
+      delta=1.0 -> resta 0.00 (sin cambio)
+    """
+    base   = CORR_VISITA_POR_LIGA.get(liga, CORR_VISITA_FALLBACK)
+    delta  = max(0.0, xg_local - xg_visita)
+    escala = max(0.0, 1.0 - delta / CORR_VISITA_ESCALA_DELTA)
+    correccion = base * escala
+    return xg_local, max(0.10, xg_visita - correccion)
 
 # --- Constantes de Modelo ---
 RHO_FALLBACK = -0.09  # Fix #2 (V4.4): corregido de -0.03 a -0.09 segun Manifiesto II.C.
@@ -327,11 +379,14 @@ def evaluar_mercado_ou(po, pu, co, cu, p1, px, p2, xg_local=None, xg_visita=None
     if not all(isinstance(c, (int, float)) and c > 0 for c in [co, cu]):
         return "[PASAR] Sin Cuotas", -100, 0
 
-    # Filtro xG: conviccion minima basada en goles esperados
+    # Filtro xG: margen asimetrico OVER/UNDER (Fix B, V4.6)
+    # xG [2.5-2.80) = trampa UNDER (backtest: goles_prom=0.60, UNDER=100%)
+    # OVER solo si xG > 2.80 | UNDER solo si xG < 2.25
     if xg_local is not None and xg_visita is not None:
         xg_total = xg_local + xg_visita
-        if abs(xg_total - 2.5) < MARGEN_XG_OU:
-            return f"[PASAR] xG Margen Insuf ({xg_total:.2f}, delta={abs(xg_total-2.5):.2f}<{MARGEN_XG_OU})", -100, 0
+        margen = MARGEN_XG_OU_OVER if xg_total >= 2.5 else MARGEN_XG_OU_UNDER
+        if abs(xg_total - 2.5) < margen:
+            return f"[PASAR] xG Margen Insuf ({xg_total:.2f}, delta={abs(xg_total-2.5):.2f}<{margen:.2f})", -100, 0
 
     if abs(po - pu) < MARGEN_PREDICTIVO_OU:
         return "[PASAR] Margen Predictivo O/U Insuficiente (<15%)", -100, 0
@@ -487,6 +542,9 @@ def main():
         # xG base (Poisson puro, sin factores contextuales)
         xg_local = (ema_l['fav_home'] + ema_v['con_away']) / 2.0
         xg_visita = (ema_v['fav_away'] + ema_l['con_home']) / 2.0
+
+        # Fix A (V4.6): correccion de ventaja local — xG_visita delta-dependiente
+        xg_local, xg_visita = corregir_ventaja_local(xg_local, xg_visita, pais)
 
         # --- SHADOW: Incertidumbre ---
         incertidumbre = math.sqrt(

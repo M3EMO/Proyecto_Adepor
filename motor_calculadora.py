@@ -9,11 +9,12 @@ from collections import defaultdict
 # ==========================================
 # MOTOR CALCULADORA V4.6 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
 # Cambios respecto a V4.5:
-#   - Fix A: Corrección de ventaja local delta-dependiente (xG_visita sobreestimado +0.49 global).
-#     corregir_ventaja_local(): resta CORR_BASE_LIGA * max(0, 1 - delta/1.0) a xg_visita.
-#     delta=0 (equilibrio) -> correccion completa. delta>=1.0 (local domina) -> sin correccion.
 #   - Fix B: Margen xG O/U asimetrico. OVER requiere xG>2.80 (era 2.75).
 #     Backtest: xG [2.5-2.8) -> goles_prom=0.60, UNDER=100%. Zona bloqueada para OVER.
+#   - Fix A REVERTIDO: corregir_ventaja_local() fue implementado pero revertido.
+#     Razon: bajar xG_visita en calculadora cambia p1/p2 y flipa picks VISITA->LOCAL
+#     correctos (yield -35.9pp en backtest de 32 partidos). El sesgo de xG_visita
+#     debe corregirse en motor_data.py (EMA), no en la capa de prediccion.
 # Cambios respecto a V4.4:
 #   - Fix #5: Corrección de sesgo de compresión de calibración.
 #     Bucket 40-50%: frecuencia real = 53.4% vs modelo = 45% promedio => +8.4pp sesgo.
@@ -542,9 +543,9 @@ def main():
         # xG base (Poisson puro, sin factores contextuales)
         xg_local = (ema_l['fav_home'] + ema_v['con_away']) / 2.0
         xg_visita = (ema_v['fav_away'] + ema_l['con_home']) / 2.0
-
-        # Fix A (V4.6): correccion de ventaja local — xG_visita delta-dependiente
-        xg_local, xg_visita = corregir_ventaja_local(xg_local, xg_visita, pais)
+        # FIX A REVERTIDO: la corrección de xG_visita debe hacerse en motor_data.py
+        # (en el EMA), no aquí. Aplicarla en predicción flipa picks VISITA→LOCAL
+        # correctos (Vasco vs Botafogo, Tigre vs Independiente). Ver análisis V4.6.
 
         # --- SHADOW: Incertidumbre ---
         incertidumbre = math.sqrt(

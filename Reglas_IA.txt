@@ -64,39 +64,23 @@ B. MEMORIA ESTOCÁSTICA Y FILTRO DE VARIANZA (motor_data.py)
   REGLA: Al agregar una nueva liga, asignarle ALFA_EMA_POR_LIGA antes de su primer ciclo.
   Las ligas de Sudamérica/Medio Oriente tienden a 0.18-0.22. Europa Central/Norte: 0.12-0.15.
 
-C. CORRECCIÓN DE VENTAJA LOCAL — xG_VISITA (Fix A, V4.6)
-Aplicada en motor_calculadora.py ANTES de alimentar la matriz Poisson.
+C. FIX A — REVERTIDO (lección aprendida V4.6)
+INTENTO: corregir xG_visita sobreestimado (+0.491 global) en motor_calculadora.py
+restando una corrección delta-dependiente antes de entrar a Poisson.
 
-PROBLEMA: El modelo EMA sobreestima sistemáticamente el xG visitante en todas las ligas
-(bias global +0.491 en backtest de 32 partidos). Los equipos visitantes generan más tiros
-sin convertir por mayor presión defensiva y menor posesión, pero esto se captura como
-xG en los stats de ESPN sin ajuste de contexto.
+RESULTADO: yield -35.9pp en backtest de 32 partidos. Causas:
+  1. Bajar xG_visita sube p1 y baja p2 → flipa picks VISITA→LOCAL donde el
+     modelo originalmente (y correctamente) elegía VISITA.
+  2. En Argentina el xG_local está sobreestimado +0.577 (más que el visita).
+     Corregir solo visita empeora el ratio LOCAL/VISITA en una liga con 36% VISITA real.
+  3. Destruye el Camino 2 (value hunting) y Camino 2B (desacuerdo) en los casos
+     donde el visitante grande juega fuera y el mercado lo favorece correctamente.
 
-CORRECCIÓN DELTA-DEPENDIENTE:
-  base   = CORR_VISITA_POR_LIGA[liga]   (por liga, ver tabla)
-  delta  = max(0, xG_local - xG_visita) (dominancia del local en xG)
-  escala = max(0, 1 - delta / 1.0)      (1.0 si equilibrio; 0.0 si delta >= 1.0)
-  correccion = base * escala
-  xG_visita_final = max(0.10, xG_visita - correccion)
-
-TABLA CORR_VISITA_POR_LIGA (50% del sesgo observado — conservador con N=32):
-  Brasil      → 0.25  (bias observado +0.494)
-  Turquia     → 0.30  (bias observado +0.631)
-  Argentina   → 0.20  (bias observado +0.398)
-  Noruega     → 0.20  (sin datos propios, referencia global)
-  Inglaterra  → 0.20  (sin datos propios, referencia global)
-  [Fallback]  → 0.20
-
-COMPORTAMIENTO (Brasil, base=0.25):
-  delta=0.0 (equilibrio)   → resta 0.25 a xG_visita
-  delta=0.5 (local +0.5)   → resta 0.125
-  delta=1.0 (local domina) → resta 0.00 (modelo ya diferencia)
-
-EFECTO CASCADA: al corregir xG_visita, los xG_totales [2.5-2.8) bajan a <2.5,
-lo que junto con Fix B elimina las apuestas OVER en zona de trampa UNDER.
-
-REGLA: Al agregar una nueva liga, calibrar CORR_VISITA_POR_LIGA con bias observado
-en al menos 20 partidos. Usar 50% del bias como corrección inicial conservadora.
+CONCLUSIÓN: el sesgo de xG_visita debe corregirse en motor_data.py al construir
+el EMA (separar distribuciones home/away de xG), no en la capa de predicción.
+El código corregir_ventaja_local() permanece en el archivo como referencia pero
+NO se aplica. Se puede activar con CORR_VISITA_ACTIVA=True cuando se tenga
+N>=100 por liga y se valide que no rompe los caminos de apuesta.
 
 C3. MATRIZ PREDICTIVA Y DIXON-COLES (motor_calculadora.py)
 - Fuerza Ofensiva/Defensiva: Se calcula cruzando el xG_Bayes del Local contra el xGA_Bayes de la Visita.

@@ -68,6 +68,20 @@ TECHO_CUOTA_ALTA_CONV = 8.0   # Techo relajado para este regimen
 DESACUERDO_PROB_MIN = 0.40     # Umbral critico: por debajo el desacuerdo es ruido
 DIVERGENCIA_DESACUERDO_MAX = 0.30  # Techo de divergencia para este regimen
 
+# --- Bloqueo de Empates (V4.3) ---
+# Backtest 92 partidos: frecuencia real empates=17.9%, modelo asigna 25.7% (+7.9% sesgo).
+# El mercado sobreestima aun mas (30.1%). Apostar empate sistematicamente destruye EV.
+# Ningun camino puede seleccionar EMPATE como pick final.
+APUESTA_EMPATE_PERMITIDA = False
+
+# --- Filtro xG Margen O/U (V4.3) ---
+# El modelo dice OVER cuando xg_total > 2.5, pero con 2.6 esperados la señal
+# es demasiado débil. Se requiere que el total esperado se aleje del umbral
+# en al menos MARGEN_XG_OU goles. Equivale a: apostar OVER solo si modelo
+# espera >2.9 goles, UNDER solo si espera <2.1. Auto-ajusta por equipo, sin
+# necesidad de calibración por liga.
+MARGEN_XG_OU = 0.4
+
 def min_ev_escalado(prob):
     """EV minimo requerido segun nivel de confianza del modelo (Opcion 1)."""
     if prob >= 0.50: return 0.03   # alta confianza: umbral base
@@ -185,8 +199,11 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2):
     if (probs_ord[2] - probs_ord[1]) < MARGEN_PREDICTIVO_1X2:
         return "[PASAR] Margen Predictivo Insuficiente (<5%)", -100, 0
 
-    probs = {"LOCAL": p1, "EMPATE": px, "VISITA": p2}
-    cuotas = {"LOCAL": c1, "EMPATE": cx, "VISITA": c2}
+    probs  = {"LOCAL": p1, "VISITA": p2}
+    cuotas = {"LOCAL": c1, "VISITA": c2}
+    if APUESTA_EMPATE_PERMITIDA:
+        probs["EMPATE"]  = px
+        cuotas["EMPATE"] = cx
 
     # --- CAMINO 1: Evaluar al favorito del modelo ---
     fav_key = max(probs, key=probs.get)
@@ -236,13 +253,21 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2):
     if div_fav > DIVERGENCIA_MAX_1X2: return "[PASAR] Info Oculta", ev_fav, c_fav
     return "[PASAR] Sin Valor", ev_fav, c_fav
 
-def evaluar_mercado_ou(po, pu, co, cu, p1, px, p2):
+def evaluar_mercado_ou(po, pu, co, cu, p1, px, p2, xg_local=None, xg_visita=None):
     """
     Evalua mercado O/U 2.5 (Manifiesto II.E - Francotirador):
     SOLO evalua la opcion matematicamente favorita. Prohibido cazar valor.
+    Filtro xG: el total esperado debe alejarse del umbral 2.5 en al menos
+    MARGEN_XG_OU (0.4) goles. Evita apostar cuando la señal es marginal.
     """
     if not all(isinstance(c, (int, float)) and c > 0 for c in [co, cu]):
         return "[PASAR] Sin Cuotas", -100, 0
+
+    # Filtro xG: conviccion minima basada en goles esperados
+    if xg_local is not None and xg_visita is not None:
+        xg_total = xg_local + xg_visita
+        if abs(xg_total - 2.5) < MARGEN_XG_OU:
+            return f"[PASAR] xG Margen Insuf ({xg_total:.2f}, delta={abs(xg_total-2.5):.2f}<{MARGEN_XG_OU})", -100, 0
 
     if abs(po - pu) < MARGEN_PREDICTIVO_OU:
         return "[PASAR] Margen Predictivo O/U Insuficiente (<15%)", -100, 0
@@ -333,7 +358,8 @@ def main():
 
     # --- Columnas shadow (crear si no existen) ---
     for col in ['incertidumbre REAL', 'shadow_xg_local REAL', 'shadow_xg_visita REAL',
-                'apuesta_shadow_1x2 TEXT', 'stake_shadow_1x2 REAL']:
+                'apuesta_shadow_1x2 TEXT', 'stake_shadow_1x2 REAL',
+                'xg_local REAL', 'xg_visita REAL']:
         try: cursor.execute(f"ALTER TABLE partidos_backtest ADD COLUMN {col}")
         except sqlite3.OperationalError: pass
 
@@ -487,7 +513,7 @@ def main():
             cu_1x2_shadow = cu_1x2
             ev_1x2_shadow = ev_1x2
 
-        pick_ou, ev_ou, cu_ou = evaluar_mercado_ou(po, pu, co_v, cu_v, p1, px, p2)
+        pick_ou, ev_ou, cu_ou = evaluar_mercado_ou(po, pu, co_v, cu_v, p1, px, p2, xg_local, xg_visita)
 
         stk_1x2 = calcular_stake_independiente(pick_1x2, ev_1x2, cu_1x2, BANKROLL, MAX_KELLY_PCT)
         stk_ou  = calcular_stake_independiente(pick_ou,  ev_ou,  cu_ou,  BANKROLL, MAX_KELLY_PCT)
@@ -510,6 +536,7 @@ def main():
             'pick_ou': pick_ou, 'ev_ou': ev_ou, 'cu_ou': cu_ou, 'stk_ou': stk_ou,
             'pick_shadow_1x2': pick_shadow_1x2, 'stk_shadow_1x2': stk_shadow_1x2,
             'incertidumbre': round(incertidumbre, 4),
+            'xg_local': round(xg_local, 3), 'xg_visita': round(xg_visita, 3),
             'shadow_xg_l': round(sh_xg_l, 3), 'shadow_xg_v': round(sh_xg_v, 3)
         })
 
@@ -527,7 +554,8 @@ def main():
             SET prob_1=?, prob_x=?, prob_2=?, prob_o25=?, prob_u25=?,
                 apuesta_1x2=?, apuesta_ou=?, stake_1x2=?, stake_ou=?,
                 apuesta_shadow_1x2=?, stake_shadow_1x2=?,
-                incertidumbre=?, shadow_xg_local=?, shadow_xg_visita=?,
+                incertidumbre=?, xg_local=?, xg_visita=?,
+                shadow_xg_local=?, shadow_xg_visita=?,
                 estado='Calculado'
             WHERE id_partido=?
         """, (
@@ -535,7 +563,8 @@ def main():
             p['pick_1x2'], p['pick_ou'],
             round(p['stk_1x2'], 2), round(p['stk_ou'], 2),
             p['pick_shadow_1x2'], round(p['stk_shadow_1x2'], 2),
-            p['incertidumbre'], p['shadow_xg_l'], p['shadow_xg_v'],
+            p['incertidumbre'], p['xg_local'], p['xg_visita'],
+            p['shadow_xg_l'], p['shadow_xg_v'],
             p['id_partido']
         ))
         calculados += 1

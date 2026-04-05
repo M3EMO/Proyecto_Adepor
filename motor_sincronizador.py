@@ -501,7 +501,7 @@ def crear_hoja_dashboard(wb, metricas, bankroll):
           (bs_g, bs_g, NA), ('d4','d4',''),
           (_semaforo(bs_g, -0.02, 0.02, mayor_es_mejor=False), FILL_NEUTRO, FILL_NEUTRO))
 
-    # Nota
+    # Nota leyenda semáforo
     ws.merge_cells(f'A{row[0]+1}:D{row[0]+1}')
     c = ws.cell(row[0]+1, 1,
         "Yield >5%=verde | 0-5%=amarillo | <0%=rojo    "
@@ -510,6 +510,46 @@ def crear_hoja_dashboard(wb, metricas, bankroll):
         "BS Global negativo = modelo supera al mercado")
     c.font = Font(name='Arial', italic=True, size=8, color='595959')
     c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
+    row[0] += 3
+
+    # ---- ESTRATEGIA ACTIVA ----
+    ws.merge_cells(f'A{row[0]}:D{row[0]}')
+    c = ws.cell(row[0], 1, "  ESTRATEGIA ACTIVA  (Motor Calculadora V4.3)")
+    c.font = FONT_SEC; c.fill = _fill('375623')
+    c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
+    c.border = BORDER_DB
+    ws.row_dimensions[row[0]].height = 14
+    row[0] += 1
+
+    FILL_CFG = _fill('EBF3EB')
+    FONT_CFG_K = Font(name='Arial', bold=True, size=9)
+    FONT_CFG_V = Font(name='Arial', size=9)
+
+    def _cfg(param, valor, nota=''):
+        r = row[0]
+        bg = FILL_CFG if r % 2 == 0 else _fill('FFFFFF')
+        ws.row_dimensions[r].height = 15
+        ws.merge_cells(f'A{r}:B{r}')
+        ck = ws.cell(r, 1, param)
+        ck.font = FONT_CFG_K; ck.fill = bg; ck.border = BORDER_DB
+        ck.alignment = Alignment(horizontal='left', vertical='center', indent=2)
+        ws.merge_cells(f'C{r}:D{r}')
+        cv = ws.cell(r, 3, valor)
+        cv.font = FONT_CFG_V; cv.fill = _fill('C6EFCE') if nota == 'activo' else bg
+        cv.border = BORDER_DB
+        cv.alignment = Alignment(horizontal='left', vertical='center', indent=1)
+        row[0] += 1
+
+    _cfg("Floor prob mínima",         "33%  — ningún outcome por debajo de este piso")
+    _cfg("EV mínimo escalado",         "prob≥50%→3%  |  prob 40-50%→8%  |  prob 33-40%→12%")
+    _cfg("Bloqueo empates",            "ACTIVO — sobreestimación sistémica +7.9% vs real", 'activo')
+    _cfg("Camino 2B — Desacuerdo",     "modelo≠mercado + prob≥40% + div 15-30% + EV escalado")
+    _cfg("Camino 3 — Alta Convicción", "prob≥33% + EV≥100% + cuota≤8.0")
+    _cfg("xG Margen O/U",             "apostar O/U solo si |xG_total − 2.5| ≥ 0.4 goles")
+    _cfg("Margen predictivo 1X2",      "diferencia entre 1º y 2º prob del modelo ≥ 3%")
+    _cfg("Divergencia normal",         "prob_modelo − prob_implícita_mercado ≤ 15%")
+    _cfg("Techo cuota normal",         "≤ 5.0  (relajado a 8.0 en Caminos 2B y 3)")
+    _cfg("Kelly fraccionado",          f"{m['fraccion_kelly']:.0%} del Kelly óptimo (Thorp 2006)")
 
     ws.freeze_panes = 'A4'
 
@@ -562,8 +602,8 @@ def crear_hoja_sombra(wb, datos, bankroll):
 
     ws.merge_cells('A2:N2')
     c = ws.cell(2, 1,
-        "Op1 = Floor 33% + EV escalado (apuesta real)   |   "
-        "Op4 = Floor 33% sin EV escalado + fallback si prob baja (shadow, solo auditoria)")
+        "Op1 = Floor 33% + EV escalado + Caminos 2B/3 + Bloqueo empates + xG Margen O/U  (apuesta real)   |   "
+        "Op4 = Floor 33% sin EV escalado + fallback prob baja (shadow, solo auditoria)")
     c.font = FONT_SUB; c.fill = _fill('D6E4F0')
     c.alignment = Alignment(horizontal='center', vertical='center')
     ws.row_dimensions[2].height = 14
@@ -776,15 +816,15 @@ def crear_hoja_sombra(wb, datos, bankroll):
     data_row += 1
     ws.merge_cells(f'A{data_row}:N{data_row}')
     c = ws.cell(data_row, 1,
-        "Verde = celda ganadora en ese KPI / partido   |   "
-        "Rojo = celda perdedora   |   "
-        "Amarillo en Resultado = pendiente de liquidar")
+        "Verde = celda ganadora en ese KPI / partido   |   Rojo = celda perdedora   |   "
+        "Amarillo en Resultado = pendiente de liquidar   |   "
+        "Op1 activa desde V4.3: empates bloqueados + xG Margen O/U + Camino 2B (desacuerdo) + Camino 3 (alta conv.)")
     c.font = FONT_SUB
     c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
 
 
 def main():
-    print("[SISTEMA] Iniciando Motor Sincronizador V9.2 (Excel Local)...")
+    print("[SISTEMA] Iniciando Motor Sincronizador V9.3 (Excel Local)...")
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -1027,6 +1067,20 @@ def main():
 
     for i, w in enumerate([14,10,10,10,10,14,10,14],1):
         ws2.column_dimensions[get_column_letter(i)].width = w
+
+    # Conditional formatting en Resumen
+    rng_yield = f'G2:G{row_r}'     # col 7 = Yield
+    rng_pl    = f'F2:F{row_r}'     # col 6 = P/L Neto
+    rng_acie  = f'E2:E{row_r}'     # col 5 = % Acierto
+    ws2.conditional_formatting.add(rng_yield, FormulaRule(formula=['G2>0.05'],  fill=FILL_VERDE,    stopIfTrue=True))
+    ws2.conditional_formatting.add(rng_yield, FormulaRule(formula=['G2>=0'],    fill=FILL_AMARILLO, stopIfTrue=True))
+    ws2.conditional_formatting.add(rng_yield, FormulaRule(formula=['G2<0'],     fill=FILL_ROJO,     stopIfTrue=True))
+    ws2.conditional_formatting.add(rng_pl,    FormulaRule(formula=['F2>0'],     fill=FILL_VERDE,    stopIfTrue=True))
+    ws2.conditional_formatting.add(rng_pl,    FormulaRule(formula=['F2<0'],     fill=FILL_ROJO,     stopIfTrue=True))
+    ws2.conditional_formatting.add(rng_acie,  FormulaRule(formula=['E2>=0.6'],  fill=FILL_VERDE,    stopIfTrue=True))
+    ws2.conditional_formatting.add(rng_acie,  FormulaRule(formula=['E2>=0.5'],  fill=FILL_AMARILLO, stopIfTrue=True))
+    ws2.conditional_formatting.add(rng_acie,  FormulaRule(formula=['E2<0.5'],   fill=FILL_ROJO,     stopIfTrue=True))
+
     ws2.freeze_panes = 'A2'
     ws2.cell(row_r+2,1,f"Generado: {datetime.now().strftime('%d/%m/%Y %H:%M')}").font=\
         Font(name='Arial',italic=True,size=9,color='888888')

@@ -41,7 +41,7 @@ TECHO_CUOTA_1X2 = 5.0          # Manifiesto II.E (era 5.5 en V3.0)
 TECHO_CUOTA_OU = 6.0           # Manifiesto II.E
 DIVERGENCIA_MAX_1X2 = 0.15      # Manifiesto II.E (no existia en V3.0)
 DIVERGENCIA_MAX_OU = 0.05      # Manifiesto II.E
-MARGEN_PREDICTIVO_1X2 = 0.05   # Manifiesto (minimo 5% de separacion)
+MARGEN_PREDICTIVO_1X2 = 0.03   # V4.3: bajado de 0.05 a 0.03 — backtest 8 nuevas bets, 62.5% hit
 MARGEN_PREDICTIVO_OU = 0.05    # Manifiesto (minimo 5% de separacion)
 
 # --- Filtros Opcion 1 (estrategia activa desde V4.1) ---
@@ -80,7 +80,7 @@ APUESTA_EMPATE_PERMITIDA = False
 # en al menos MARGEN_XG_OU goles. Equivale a: apostar OVER solo si modelo
 # espera >2.9 goles, UNDER solo si espera <2.1. Auto-ajusta por equipo, sin
 # necesidad de calibración por liga.
-MARGEN_XG_OU = 0.4
+MARGEN_XG_OU = 0.25  # V4.3: bajado de 0.40 a 0.25 — backtest 17 nuevas bets O/U, ~75% hit
 
 def min_ev_escalado(prob):
     """EV minimo requerido segun nivel de confianza del modelo (Opcion 1)."""

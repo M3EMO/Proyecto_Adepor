@@ -118,7 +118,7 @@ def main():
                         fecha_iso_real = fecha_utc_obj.strftime("%Y-%m-%d")
                         
                         fecha_local_obj = fecha_utc_obj - timedelta(hours=3)
-                        fecha_db_real = fecha_local_obj.strftime("%d/%m/%Y %H:%M")
+                        fecha_db_real = fecha_local_obj.strftime("%Y-%m-%d %H:%M")  # ISO: ordena correctamente como texto
                         
                         competidores = evento['competitions'][0]['competitors']
                         loc_crudo = next(c['team']['displayName'] for c in competidores if c['homeAway'] == 'home')
@@ -139,14 +139,19 @@ def main():
                         partidos_existentes = cursor.fetchall()
                         es_duplicado_temporal = False
                         for (fecha_existente_str,) in partidos_existentes:
-                            try:
-                                fecha_existente_obj = datetime.strptime(fecha_existente_str, "%d/%m/%Y %H:%M")
-                                if abs((fecha_local_obj - fecha_existente_obj).days) <= 3:
-                                    es_duplicado_temporal = True
-                                    print(f"[VALIDACION] Insercion bloqueada. Posible 'Time-Shift Bug' para {loc_oficial} vs {vis_oficial}.")
+                            fecha_existente_obj = None
+                            for fmt in ("%Y-%m-%d %H:%M", "%d/%m/%Y %H:%M", "%Y-%m-%d", "%d/%m/%Y"):
+                                try:
+                                    fecha_existente_obj = datetime.strptime(fecha_existente_str.strip(), fmt)
                                     break
-                            except ValueError:
+                                except ValueError:
+                                    continue
+                            if fecha_existente_obj is None:
                                 continue
+                            if abs((fecha_local_obj - fecha_existente_obj).days) <= 3:
+                                es_duplicado_temporal = True
+                                print(f"[VALIDACION] Insercion bloqueada. Posible 'Time-Shift Bug' para {loc_oficial} vs {vis_oficial}.")
+                                break
 
                         if es_duplicado_temporal:
                             partidos_omitidos += 1

@@ -258,3 +258,29 @@ F. PARÁMETROS PENDIENTES DE CALIBRACIÓN
   Fix #5: [IMPLEMENTADO V4.5] Corrección de calibración bucket 40-50%.
            Modelo: ~45% promedio -> Real: 53.4% -> Corrección: +0.042 (conservador).
            Ver sección II.C y función corregir_calibracion() en motor_calculadora.py.
+
+G. MULTIPLICADOR DE STAKE POR DOMINANCIA xG (Hallazgo C, V4.7)
+  La dominancia xG (delta = |xG_local - xG_visita|) es una señal de certeza
+  INDEPENDIENTE del EV y la divergencia de cuotas. Cuando el modelo ve una
+  ventaja de xG clara, el favorito convierte esa ventaja con alta frecuencia.
+
+  BACKTEST (32 partidos):
+    delta [0.0-0.2): n=16  fav_gana=62%  sorpresa=19%  — señal débil, sin bonus
+    delta [0.2-0.3): n=6   fav_gana=50%  sorpresa=0%   — sin sorpresas pero empates
+    delta [0.3-0.5): n=8   fav_gana=63%  sorpresa=0%   — sin sorpresas, x1.15
+    delta [0.5+   ): n=5   fav_gana=100% sorpresa=0%   — perfecto, x1.30
+
+  IMPLEMENTACIÓN:
+    multiplicador_delta_stake(delta_xg):
+      delta >= 0.50 → x1.30  (DELTA_STAKE_MULT_ALTO)
+      delta >= 0.30 → x1.15  (DELTA_STAKE_MULT_MED)
+      delta  < 0.30 → x1.00  (sin cambio)
+
+  REGLAS DE SEGURIDAD:
+    - Solo aplica a apuestas que ya pasaron TODOS los filtros (EV, Floor, Div, Techo).
+      No abre apuestas con EV negativo bajo ninguna circunstancia.
+    - El cap MAX_KELLY_PCT se aplica DESPUÉS del multiplicador. El stake escalado
+      nunca supera el límite absoluto de riesgo del sistema.
+    - DELTA_STAKE_ACTIVO = False desactiva sin tocar lógica.
+
+  PRÓXIMA REVISIÓN: recalibrar multiplicadores cuando N >= 50 por bucket.

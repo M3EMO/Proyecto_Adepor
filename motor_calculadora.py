@@ -7,7 +7,13 @@ from datetime import datetime
 from collections import defaultdict
 
 # ==========================================
-# MOTOR CALCULADORA V4.6 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
+# MOTOR CALCULADORA V4.7 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
+# Cambios respecto a V4.6:
+#   - Hallazgo C: multiplicador de stake por dominancia xG.
+#     delta >= 0.50: x1.30 (100% hit en backtest, n=5).
+#     delta [0.30-0.50): x1.15 (0% sorpresas en backtest, n=8).
+#     NO abre apuestas nuevas; solo escala stakes de apuestas ya aprobadas.
+#     Cap MAX_KELLY_PCT se aplica después — límite absoluto de riesgo intacto.
 # Cambios respecto a V4.5:
 #   - Fix B: Margen xG O/U asimetrico. OVER requiere xG>2.80 (era 2.75).
 #     Backtest: xG [2.5-2.8) -> goles_prom=0.60, UNDER=100%. Zona bloqueada para OVER.
@@ -146,6 +152,45 @@ CALIBRACION_ACTIVA        = True
 CALIBRACION_BUCKET_MIN    = 0.40   # bucket donde se observó el sesgo
 CALIBRACION_BUCKET_MAX    = 0.50   # (exclusive: 0.50+ asumido bien calibrado)
 CALIBRACION_CORRECCION    = 0.042  # +50% del sesgo observado (+8.4pp / 2)
+
+# --- Hallazgo C (V4.7): Multiplicador de stake por dominancia xG ---
+# Backtest 32 partidos: cuando delta_xG (|xG_local - xG_visita|) >= 0.5,
+# el favorito del modelo ganó el 100% de los partidos (5/5).
+# En rango [0.2-0.5): 57% hit pero 0% sorpresas con delta > 0.3 (fav nunca pierde,
+# solo empata). En [0.0-0.2): 62% hit, 19% sorpresas — señal débil.
+# MECANISMO: no abre apuestas nuevas (EV negativo sigue siendo PASAR), sino que
+# multiplica el stake Kelly en apuestas que ya pasaron todos los filtros.
+# Conservador: N=5 en bucket alto — multiplicador máximo 1.30 (no 2x).
+# DELTA_STAKE_ACTIVO = False desactiva sin tocar lógica.
+DELTA_STAKE_ACTIVO    = True
+DELTA_STAKE_UMBRAL    = 0.50   # a partir de aquí: 100% hit en backtest
+DELTA_STAKE_MULT_ALTO = 1.30   # delta >= 0.50: x1.30 del stake Kelly
+DELTA_STAKE_MULT_MED  = 1.15   # delta [0.30-0.50): x1.15 (0% sorpresas pero empates)
+DELTA_STAKE_UMBRAL_MED= 0.30   # umbral del bucket medio
+
+def multiplicador_delta_stake(delta_xg):
+    """
+    Hallazgo C (V4.7): escala el stake Kelly segun la dominancia xG del partido.
+
+    La dominancia xG es una señal INDEPENDIENTE del EV y la divergencia de cuotas.
+    Cuando el modelo ve una diferencia clara de expectativa de goles, el partido
+    tiene menos incertidumbre estructural — el favorito convierte esa ventaja
+    con mucha más frecuencia de lo que el modelo de probabilidades captura.
+
+    NO abre apuestas nuevas. Solo multiplica el stake de apuestas que ya
+    pasaron todos los filtros (el EV negativo sigue siendo PASAR siempre).
+
+    El cap de Kelly (MAX_KELLY_PCT) se aplica DESPUÉS del multiplicador,
+    garantizando que nunca se supere el límite de riesgo absoluto.
+    """
+    if not DELTA_STAKE_ACTIVO:
+        return 1.0
+    if delta_xg >= DELTA_STAKE_UMBRAL:
+        return DELTA_STAKE_MULT_ALTO   # 100% hit en backtest (n=5)
+    if delta_xg >= DELTA_STAKE_UMBRAL_MED:
+        return DELTA_STAKE_MULT_MED    # 0% sorpresas pero con empates (n=8)
+    return 1.0
+
 
 def corregir_calibracion(p1, px, p2):
     """
@@ -645,6 +690,18 @@ def main():
         stk_ou  = calcular_stake_independiente(pick_ou,  ev_ou,  cu_ou,  BANKROLL, MAX_KELLY_PCT)
         stk_shadow_1x2 = calcular_stake_independiente(
             pick_shadow_1x2, ev_1x2_shadow, cu_1x2_shadow, BANKROLL, MAX_KELLY_PCT)
+
+        # Hallazgo C (V4.7): multiplicador de stake por dominancia xG
+        # Solo escala apuestas que ya pasaron todos los filtros. El cap MAX_KELLY_PCT
+        # garantiza que no se supere el límite absoluto de riesgo.
+        delta_xg = abs(xg_local - xg_visita)
+        mult_delta = multiplicador_delta_stake(delta_xg)
+        if mult_delta > 1.0:
+            if stk_1x2 > 0:
+                stk_1x2 = min(round(stk_1x2 * mult_delta, 2), BANKROLL * MAX_KELLY_PCT)
+                print(f"   [DELTA-xG] {local} vs {visita} | delta={delta_xg:.2f} mult=x{mult_delta} -> stk_1x2={stk_1x2:.2f}")
+            if stk_ou > 0:
+                stk_ou  = min(round(stk_ou  * mult_delta, 2), BANKROLL * MAX_KELLY_PCT)
 
         # Overlap: si hay apuesta en ambos mercados, priorizar la de mayor EV
         if stk_1x2 > 0 and stk_ou > 0:

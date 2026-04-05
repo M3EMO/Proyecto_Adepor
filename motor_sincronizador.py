@@ -658,10 +658,13 @@ def crear_hoja_sombra(wb, datos, bankroll):
         if not tiene_op1 and not tiene_op4:
             continue
 
-        try:
-            fecha_disp = datetime.strptime(fecha, "%d/%m/%Y %H:%M").strftime("%d/%m/%Y")
-        except Exception:
-            fecha_disp = (fecha or "")[:10]
+        fecha_disp = (fecha or "")[:10]
+        for _fmt in ("%Y-%m-%d %H:%M", "%d/%m/%Y %H:%M", "%Y-%m-%d", "%d/%m/%Y"):
+            try:
+                fecha_disp = datetime.strptime((fecha or "").strip(), _fmt).strftime("%d/%m/%Y")
+                break
+            except ValueError:
+                continue
 
         # --- Op1 resultado ---
         res_op1 = _resultado_1x2(ap1x2, gl, gv) if tiene_op1 else 0
@@ -904,13 +907,13 @@ def main():
          ap_shadow, stk_shadow) = row_data
 
         # Escribir como objeto date real para que Excel ordene correctamente
-        try:
-            fecha_val = datetime.strptime(fecha, "%d/%m/%Y").date()
-        except Exception:
+        fecha_val = fecha or ""
+        for _fmt in ("%Y-%m-%d %H:%M", "%d/%m/%Y %H:%M", "%Y-%m-%d", "%d/%m/%Y"):
             try:
-                fecha_val = datetime.strptime(fecha.split(" ")[0], "%Y-%m-%d").date()
-            except Exception:
-                fecha_val = fecha or ""
+                fecha_val = datetime.strptime((fecha or "").strip(), _fmt).date()
+                break
+            except ValueError:
+                continue
         cell_fecha = ws.cell(r, COL['fecha'], fecha_val)
         cell_fecha.font = FONT_DATA
         if isinstance(fecha_val, date_type):

@@ -10,7 +10,26 @@ from datetime import datetime, timedelta
 # ==========================================
 
 DB_NAME = 'fondo_quant.db'
-ALFA_EMA = 0.15 # Constante LAMBDA según Regla II.B
+ALFA_EMA  = 0.15  # Fallback global si la liga no tiene ALFA propio
+N0_ANCLA  = 5    # Fix #1 (V4.4): ancla Bayesiana N-dependiente. N=0 -> 100% liga; N=5 -> 50/50; N=20 -> 80/20.
+
+# Fix #3 (V4.4): ALFA por liga según volatilidad observada en backtest.
+# Razonamiento:
+#   - ALFA alto  => el modelo olvida rápido, reacciona a tendencias recientes  (ligas volátiles)
+#   - ALFA bajo  => el modelo es más conservador, confía en la media histórica  (ligas estables)
+# Valores derivados de varianza xG observada en backtest de 92 partidos:
+#   Brasil  -> xG inflados, alta dispersión entre equipos          -> ALFA 0.20
+#   Turquia -> resultados impredecibles, alta varianza de marcador -> ALFA 0.20
+#   Noruega -> liga corta/estacional, equipos con pocos datos      -> ALFA 0.18
+#   Argentina-> volatilidad media, liga competitiva                -> ALFA 0.15 (base)
+#   Inglaterra-> mercado eficiente, equipos estables               -> ALFA 0.12
+ALFA_EMA_POR_LIGA = {
+    "Brasil":     0.20,
+    "Turquia":    0.20,
+    "Noruega":    0.18,
+    "Argentina":  0.15,
+    "Inglaterra": 0.12,
+}
 
 LIGAS_ESPN = {
     "arg.1": "Argentina", "eng.1": "Inglaterra", 
@@ -128,6 +147,7 @@ def main():
 
     def actualizar_estado(eq_oficial, pais, xg_f, xg_c, is_home, promedio_liga, equipos_nuevos):
         """Aplica EMA y Regresión Bayesiana para actualizar el poderío del equipo."""
+        alfa = ALFA_EMA_POR_LIGA.get(pais, ALFA_EMA)  # Fix #3 (V4.4): ALFA específico por liga
         eq_norm = gestor_nombres.limpiar_texto(eq_oficial)
         if eq_norm not in estado_equipos:
             equipos_nuevos.add(eq_oficial)
@@ -144,12 +164,15 @@ def main():
             error_con = xg_c - viejo_con
             vieja_var_fav = estado_equipos[eq_norm]["var_fh"]
             vieja_var_con = estado_equipos[eq_norm]["var_ch"]
-            estado_equipos[eq_norm]["var_fh"] = (error_fav**2 * ALFA_EMA) + (vieja_var_fav * (1 - ALFA_EMA))
-            estado_equipos[eq_norm]["var_ch"] = (error_con**2 * ALFA_EMA) + (vieja_var_con * (1 - ALFA_EMA))
-            nuevo_ema_fav = (xg_f * ALFA_EMA) + (viejo_fav * (1 - ALFA_EMA))
-            nuevo_ema_con = (xg_c * ALFA_EMA) + (viejo_con * (1 - ALFA_EMA))
-            estado_equipos[eq_norm]["fav_home"] = round((0.70 * nuevo_ema_fav) + (0.30 * promedio_liga), 3)
-            estado_equipos[eq_norm]["con_home"] = round((0.70 * nuevo_ema_con) + (0.30 * promedio_liga), 3)
+            estado_equipos[eq_norm]["var_fh"] = (error_fav**2 * alfa) + (vieja_var_fav * (1 - alfa))
+            estado_equipos[eq_norm]["var_ch"] = (error_con**2 * alfa) + (vieja_var_con * (1 - alfa))
+            nuevo_ema_fav = (xg_f * alfa) + (viejo_fav * (1 - alfa))
+            nuevo_ema_con = (xg_c * alfa) + (viejo_con * (1 - alfa))
+            N_home  = estado_equipos[eq_norm]["p_home"]
+            w_liga  = N0_ANCLA / (N0_ANCLA + N_home) if (N0_ANCLA + N_home) > 0 else 1.0
+            w_ema   = 1.0 - w_liga
+            estado_equipos[eq_norm]["fav_home"] = round((w_ema * nuevo_ema_fav) + (w_liga * promedio_liga), 3)
+            estado_equipos[eq_norm]["con_home"] = round((w_ema * nuevo_ema_con) + (w_liga * promedio_liga), 3)
             estado_equipos[eq_norm]["p_home"] += 1
         else:
             viejo_fav = estado_equipos[eq_norm]["fav_away"]
@@ -158,12 +181,15 @@ def main():
             error_con = xg_c - viejo_con
             vieja_var_fav = estado_equipos[eq_norm]["var_fa"]
             vieja_var_con = estado_equipos[eq_norm]["var_ca"]
-            estado_equipos[eq_norm]["var_fa"] = (error_fav**2 * ALFA_EMA) + (vieja_var_fav * (1 - ALFA_EMA))
-            estado_equipos[eq_norm]["var_ca"] = (error_con**2 * ALFA_EMA) + (vieja_var_con * (1 - ALFA_EMA))
-            nuevo_ema_fav = (xg_f * ALFA_EMA) + (viejo_fav * (1 - ALFA_EMA))
-            nuevo_ema_con = (xg_c * ALFA_EMA) + (viejo_con * (1 - ALFA_EMA))
-            estado_equipos[eq_norm]["fav_away"] = round((0.70 * nuevo_ema_fav) + (0.30 * promedio_liga), 3)
-            estado_equipos[eq_norm]["con_away"] = round((0.70 * nuevo_ema_con) + (0.30 * promedio_liga), 3)
+            estado_equipos[eq_norm]["var_fa"] = (error_fav**2 * alfa) + (vieja_var_fav * (1 - alfa))
+            estado_equipos[eq_norm]["var_ca"] = (error_con**2 * alfa) + (vieja_var_con * (1 - alfa))
+            nuevo_ema_fav = (xg_f * alfa) + (viejo_fav * (1 - alfa))
+            nuevo_ema_con = (xg_c * alfa) + (viejo_con * (1 - alfa))
+            N_away  = estado_equipos[eq_norm]["p_away"]
+            w_liga  = N0_ANCLA / (N0_ANCLA + N_away) if (N0_ANCLA + N_away) > 0 else 1.0
+            w_ema   = 1.0 - w_liga
+            estado_equipos[eq_norm]["fav_away"] = round((w_ema * nuevo_ema_fav) + (w_liga * promedio_liga), 3)
+            estado_equipos[eq_norm]["con_away"] = round((w_ema * nuevo_ema_con) + (w_liga * promedio_liga), 3)
             estado_equipos[eq_norm]["p_away"] += 1
         equipos_actualizados.add(eq_norm)
 

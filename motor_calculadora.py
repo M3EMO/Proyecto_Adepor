@@ -7,8 +7,13 @@ from datetime import datetime
 from collections import defaultdict
 
 # ==========================================
-# MOTOR CALCULADORA V4.3 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
-# Cambios respecto a V4.2:
+# MOTOR CALCULADORA V4.5 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
+# Cambios respecto a V4.4:
+#   - Fix #5: Corrección de sesgo de compresión de calibración.
+#     Bucket 40-50%: frecuencia real = 53.4% vs modelo = 45% promedio => +8.4pp sesgo.
+#     Corrección conservadora: +0.042 (50% del sesgo; el otro 50% es margen N=92).
+#     Solo se corrige LOCAL/VISITA en ese bucket. Se renormaliza p1+px+p2=1.
+# Cambios respecto a V4.3:
 #   - Regimen Desacuerdo Modelo-Mercado (Camino 2B):
 #     Cuando modelo y mercado difieren sobre el favorito, prob >= 40%,
 #     div entre 0.15 y 0.30: hit rate 80-100% en backtest de 92 partidos.
@@ -39,8 +44,23 @@ FRACCION_KELLY = 0.50  # Medio Kelly (Thorp 2006, Ziemba 2005)
 UMBRAL_EV_BASE = 0.03          # Manifiesto II.E (era 0.015 en V3.0)
 TECHO_CUOTA_1X2 = 5.0          # Manifiesto II.E (era 5.5 en V3.0)
 TECHO_CUOTA_OU = 6.0           # Manifiesto II.E
-DIVERGENCIA_MAX_1X2 = 0.15      # Manifiesto II.E (no existia en V3.0)
+DIVERGENCIA_MAX_1X2 = 0.15      # Manifiesto II.E — fallback global
 DIVERGENCIA_MAX_OU = 0.05      # Manifiesto II.E
+
+# Fix #4 (V4.4): Divergencia 1X2 diferenciada por eficiencia de mercado por liga.
+# Razonamiento:
+#   - Mercado eficiente (Inglaterra): cuotas muy calibradas; divergencia > 10% casi siempre
+#     indica que el modelo está equivocado, no el mercado. Tolerancia baja.
+#   - Mercado poco eficiente (Noruega, Turquía): bookmakers tienen menos información;
+#     nuestro modelo puede explotar desviaciones mayores. Tolerancia alta.
+# Valores derivados de eficiencia de mercado relativa en fútbol europeo/sudamericano:
+DIVERGENCIA_MAX_POR_LIGA = {
+    "Inglaterra": 0.10,   # Premier League: el mercado más eficiente del mundo
+    "Argentina":  0.15,   # Cobertura alta, mercado calibrado (BASE)
+    "Brasil":     0.18,   # Menos cobertura que PL, algo de ineficiencia explotable
+    "Noruega":    0.20,   # Liga pequeña, bookmakers con menos datos
+    "Turquia":    0.20,   # Alta volatilidad + menor eficiencia de mercado
+}
 MARGEN_PREDICTIVO_1X2 = 0.03   # V4.3: bajado de 0.05 a 0.03 — backtest 8 nuevas bets, 62.5% hit
 MARGEN_PREDICTIVO_OU = 0.05    # Manifiesto (minimo 5% de separacion)
 
@@ -89,8 +109,45 @@ def min_ev_escalado(prob):
     if prob >= FLOOR_PROB_MIN: return 0.12  # baja-media: triple umbral
     return 999.0                   # < 33%: rechazar siempre
 
+# --- Calibración de compresión (Fix #5, V4.5) ---
+# Backtest 92 partidos: cuando el modelo asigna 40-50% a LOCAL o VISITA,
+# la frecuencia real de ese outcome es 53.4% (+8.4pp de sesgo).
+# Causa: Dixon-Coles comprime probabilidades hacia 0.5 con xG moderados.
+# Corrección conservadora: 50% del sesgo (0.042) para evitar sobreajuste con N=92.
+# CALIBRACION_ACTIVA = False desactiva la corrección sin tocar el código.
+CALIBRACION_ACTIVA        = True
+CALIBRACION_BUCKET_MIN    = 0.40   # bucket donde se observó el sesgo
+CALIBRACION_BUCKET_MAX    = 0.50   # (exclusive: 0.50+ asumido bien calibrado)
+CALIBRACION_CORRECCION    = 0.042  # +50% del sesgo observado (+8.4pp / 2)
+
+def corregir_calibracion(p1, px, p2):
+    """
+    Fix #5 (V4.5): corrige el sesgo de compresión del modelo Poisson-Dixon-Coles.
+    Si LOCAL o VISITA caen en el bucket [40%, 50%), les suma CALIBRACION_CORRECCION
+    y renormaliza el vector de probabilidades para que sumen 1.
+    El empate nunca se corrige (ya está bloqueado y su sesgo es distinto).
+    """
+    if not CALIBRACION_ACTIVA:
+        return p1, px, p2
+
+    p1_cal, p2_cal = p1, p2
+    if CALIBRACION_BUCKET_MIN <= p1 < CALIBRACION_BUCKET_MAX:
+        p1_cal = p1 + CALIBRACION_CORRECCION
+    if CALIBRACION_BUCKET_MIN <= p2 < CALIBRACION_BUCKET_MAX:
+        p2_cal = p2 + CALIBRACION_CORRECCION
+
+    # Sin cambio: nada estaba en el bucket
+    if p1_cal == p1 and p2_cal == p2:
+        return p1, px, p2
+
+    # Renormalizar manteniendo px proporcional al delta
+    total = p1_cal + px + p2_cal
+    if total <= 0:
+        return p1, px, p2
+    return round(p1_cal / total, 6), round(px / total, 6), round(p2_cal / total, 6)
+
 # --- Constantes de Modelo ---
-RHO_FALLBACK = -0.03  # NOTA: Manifiesto dice -0.09. Pendiente calibracion con backtest.
+RHO_FALLBACK = -0.09  # Fix #2 (V4.4): corregido de -0.03 a -0.09 segun Manifiesto II.C.
 RANGO_POISSON = 10    # 0 a 9 goles (era 8 en V3.0, Manifiesto dice 0-9)
 
 # --- Altitud: Modificadores del Manifiesto II.G (solo para shadow) ---
@@ -186,12 +243,18 @@ def calcular_shadow_altitud(xg_local, xg_visita, loc_norm, altitudes):
 # CAPA DE DECISION (Evaluadores de Mercado)
 # ==========================================================================
 
-def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2):
+def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None):
     """
-    Evalua mercado 1X2 con dos caminos (Manifiesto II.E):
-    1. Favorito del modelo: umbral estandar, divergencia <= 0.2
+    Evalua mercado 1X2 con cuatro caminos (Manifiesto II.E + V4.3/V4.4):
+    1. Favorito del modelo: umbral estandar, divergencia <= div_max (por liga)
     2. Value Hunting: busca maximo EV si favorito no cumple, misma divergencia
+    2B. Desacuerdo Modelo-Mercado: prob >= 40%, div entre div_max y 0.30
+    3. Alta Conviccion: EV >= 1.0, cuota <= 8.0 (mercado claramente equivocado)
+    Fix #4 (V4.4): div_max es especifico por liga segun eficiencia de mercado.
     """
+    # Resolver divergencia maxima segun eficiencia de mercado de la liga
+    div_max = DIVERGENCIA_MAX_POR_LIGA.get(liga, DIVERGENCIA_MAX_1X2) if liga else DIVERGENCIA_MAX_1X2
+
     if not all(isinstance(c, (int, float)) and c > 0 for c in [c1, cx, c2]):
         return "[PASAR] Sin Cuotas", -100, 0
 
@@ -212,7 +275,7 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2):
     umb_fav = (UMBRAL_EV_BASE * (0.5 / p_fav)) if p_fav > 0 else 999
     div_fav = p_fav - (1 / c_fav)  # Positiva = modelo ve mas prob que el mercado
 
-    if c_fav <= TECHO_CUOTA_1X2 and ev_fav >= umb_fav and div_fav <= DIVERGENCIA_MAX_1X2:
+    if c_fav <= TECHO_CUOTA_1X2 and ev_fav >= umb_fav and div_fav <= div_max:
         return f"[APOSTAR] {fav_key}", ev_fav, c_fav
 
     # --- CAMINO 2: Value Hunting (underdog con maximo EV) ---
@@ -222,18 +285,19 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2):
     umb_ev = (UMBRAL_EV_BASE * (0.5 / p_ev)) if p_ev > 0 else 999
     div_ev = p_ev - (1 / c_ev)
 
-    if c_ev <= TECHO_CUOTA_1X2 and m_ev >= umb_ev and div_ev <= DIVERGENCIA_MAX_1X2:
+    if c_ev <= TECHO_CUOTA_1X2 and m_ev >= umb_ev and div_ev <= div_max:
         return f"[APOSTAR] {ev_key}", m_ev, c_ev
 
     # --- CAMINO 2B: Regimen Desacuerdo Modelo-Mercado ---
     # El modelo favorece X pero el mercado favorece Y (distinto outcome).
-    # Con prob_modelo >= 40% y divergencia moderada (0.15-0.30), el modelo
+    # Con prob_modelo >= 40% y divergencia moderada (div_max a 0.30), el modelo
     # gana al mercado con 80-100% de hit rate en backtest (92 partidos).
     # Con prob 33-40% el desacuerdo NO es señal confiable (hit=33%): no aplica.
+    # NOTA: el umbral inferior del desacuerdo es div_max (por liga), no fijo 0.15.
     fav_mkt_key = min(cuotas, key=cuotas.get)  # favorito del mercado = cuota minima
     if (fav_key != fav_mkt_key
             and p_fav >= DESACUERDO_PROB_MIN
-            and DIVERGENCIA_MAX_1X2 < div_fav <= DIVERGENCIA_DESACUERDO_MAX
+            and div_max < div_fav <= DIVERGENCIA_DESACUERDO_MAX
             and ev_fav >= min_ev_escalado(p_fav)
             and c_fav <= TECHO_CUOTA_ALTA_CONV):
         return f"[APOSTAR] {fav_key}", ev_fav, c_fav
@@ -250,7 +314,7 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2):
     # --- DIAGNOSTICO ---
     if c_fav > TECHO_CUOTA_1X2: return "[PASAR] Techo Cuota", ev_fav, c_fav
     if ev_fav < umb_fav: return "[PASAR] Riesgo/Beneficio", ev_fav, c_fav
-    if div_fav > DIVERGENCIA_MAX_1X2: return "[PASAR] Info Oculta", ev_fav, c_fav
+    if div_fav > div_max: return "[PASAR] Info Oculta", ev_fav, c_fav
     return "[PASAR] Sin Valor", ev_fav, c_fav
 
 def evaluar_mercado_ou(po, pu, co, cu, p1, px, p2, xg_local=None, xg_visita=None):
@@ -464,6 +528,9 @@ def main():
         so = po + pu
         if so > 0: po, pu = po/so, pu/so
 
+        # Fix #5 (V4.5): corrección de sesgo de compresión de calibración
+        p1, px, p2 = corregir_calibracion(p1, px, p2)
+
         # --- SHADOW: Log de incertidumbre ---
         prob_max = max(p1, px, p2)
         umb_activo = (UMBRAL_EV_BASE * (0.5 / prob_max)) if prob_max > 0 else 999
@@ -477,8 +544,8 @@ def main():
         c1_v, cx_v, c2_v = safe_float(c1), safe_float(cx), safe_float(c2)
         co_v, cu_v = safe_float(co), safe_float(cu)
 
-        # Evaluacion raw (sin filtros adicionales)
-        pick_1x2_raw, ev_1x2, cu_1x2 = evaluar_mercado_1x2(p1, px, p2, c1_v, cx_v, c2_v)
+        # Evaluacion raw (sin filtros adicionales) — Fix #4: pasa pais para div_max por liga
+        pick_1x2_raw, ev_1x2, cu_1x2 = evaluar_mercado_1x2(p1, px, p2, c1_v, cx_v, c2_v, liga=pais)
 
         # Extraer prob del outcome elegido en raw
         prob_raw_1x2 = 0.0

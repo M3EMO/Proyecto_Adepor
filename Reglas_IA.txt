@@ -27,15 +27,56 @@ Fórmula Híbrida Final: (Componente Estadístico * 0.70) + (Goles Reales * 0.30
 Ajuste por 'Score Effects': El xG crudo se ajusta según el resultado del partido para normalizar el comportamiento de los equipos (un equipo que va ganando tiende a ser más conservador).
 
 B. MEMORIA ESTOCÁSTICA Y FILTRO DE VARIANZA (motor_data.py)
-- EMA (Media Móvil Exponencial): Se aplica al xG_Crudo_Total con constante LAMBDA = 0.15.
-- Regresión Bayesiana (Ancla a la media): Se aplica un anclaje fijo a la media de la liga para estabilizar las estimaciones.
-- xG_Bayesiano = (0.70 * xG_EMA) + (0.30 * Promedio_Liga)
+- EMA (Media Móvil Exponencial): Se aplica al xG_Crudo_Total. La constante ALFA es específica
+  por liga (Fix #3, V4.4) — ver tabla ALFA_EMA_POR_LIGA abajo. Fallback global: ALFA = 0.15.
+- Regresión Bayesiana N-dependiente (Fix #1, V4.4): El ancla a la media de la liga se aplica con peso
+  inversamente proporcional al historial disponible del equipo. Equipos nuevos quedan muy anclados;
+  equipos con historial largo confían más en su propio EMA.
+
+  CONSTANTE: N0_ANCLA = 5 (partidos equivalentes de pseudo-historial a priori)
+  FÓRMULA:
+    w_liga = N0_ANCLA / (N0_ANCLA + N)    <- donde N = partidos jugados en esa condición (home/away)
+    w_ema  = 1 - w_liga
+    xG_Bayesiano = (w_ema * xG_EMA) + (w_liga * Promedio_Liga)
+
+  COMPORTAMIENTO:
+    N=0  (equipo nuevo)     -> w_liga=100%, w_ema=0%   — anclado completamente a la media de liga
+    N=5  (5 partidos)       -> w_liga=50%,  w_ema=50%  — equilibrio prior/evidencia
+    N=20 (temporada media)  -> w_liga=20%,  w_ema=80%  — EMA domina
+    N=50 (equipo consolidado)-> w_liga=9%,  w_ema=91%  — casi sin ancla
+
+  NOTA: La formulación anterior (fija 0.70/0.30) era un caso especial de N=11.67, aplicada
+  uniformemente a todos los equipos. Esto sobreestimaba la certeza en equipos nuevos y
+  subancalaba equipos veteranos. El nuevo esquema es matemáticamente correcto (Bayes jerárquico).
+
+- ALFA POR LIGA (Fix #3, V4.4):
+  Ligas de alta volatilidad usan ALFA mayor (reaccionan más rápido a tendencias recientes).
+  Ligas estables usan ALFA menor (confían más en la media histórica de largo plazo).
+
+  TABLA ALFA_EMA_POR_LIGA:
+    Brasil      -> 0.20  (xG inflados, alta dispersión entre equipos)
+    Turquia     -> 0.20  (alta varianza de marcador, resultados impredecibles)
+    Noruega     -> 0.18  (liga estacional corta, equipos con historial reducido)
+    Argentina   -> 0.15  (volatilidad media, BASE)
+    Inglaterra  -> 0.12  (mercado eficiente, equipos con gran historial estable)
+    [Fallback]  -> 0.15  (cualquier liga nueva sin ALFA asignado)
+
+  REGLA: Al agregar una nueva liga, asignarle ALFA_EMA_POR_LIGA antes de su primer ciclo.
+  Las ligas de Sudamérica/Medio Oriente tienden a 0.18-0.22. Europa Central/Norte: 0.12-0.15.
 
 C. MATRIZ PREDICTIVA Y DIXON-COLES (motor_calculadora.py)
 - Fuerza Ofensiva/Defensiva: Se calcula cruzando el xG_Bayes del Local contra el xGA_Bayes de la Visita.
 - Compresión de Goles (Gamma): Se aplica a la expectativa final para ligas defensivas. Argentina/Brasil = 0.82 a 0.90.
 - Distribución de Poisson: Se calcula la matriz de 0 a 9 goles.
 - Ajuste Bivariado (Rho): Se aplica factor Rho = -0.09 (o dependiente de la liga).
+  FIX #2 (V4.4): RHO_FALLBACK corregido de -0.03 a -0.09. El valor -0.03 era un bug histórico;
+  -0.09 es el valor del Manifiesto y corresponde a la correlación negativa observada en bajos marcadores
+  (0-0, 1-0, 0-1, 1-1) según Dixon & Coles (1997).
+- Corrección de Calibración (Fix #5, V4.5): Tras la normalización de Poisson, se aplica
+  corregir_calibracion(p1, px, p2) antes de la capa de decisión.
+  Regla: si LOCAL o VISITA tienen prob en [40%, 50%), se les suma +0.042 y se renormaliza.
+  El EMPATE nunca se corrige (sesgo distinto, ya bloqueado por APUESTA_EMPATE_PERMITIDA=False).
+  Flag CALIBRACION_ACTIVA = True/False para activar/desactivar sin tocar la lógica.
 
 D. MATRIZ DE COLISIÓN TÁCTICA (Piedra-Papel-Tijera)
 Ofensivo (OFE), Equilibrio (EQU), Defensivo (DEF). 
@@ -46,9 +87,13 @@ Ofensivo (OFE), Equilibrio (EQU), Defensivo (DEF).
 E. GESTIÓN DE RIESGO ASIMÉTRICA (ESTÁNDAR DE ORO)
 - EV (Valor Esperado) = (Probabilidad * Cuota) - 1.
 - Umbral Dinámico Base = 0.03 * (0.5 / Probabilidad).
-- REGLA MERCADO 1X2 (Value Hunting): El sistema evalúa al favorito. Si no cumple, tiene permitido buscar la opción con el máximo EV (underdog) para explotar sesgos públicos. Techo Cuota: 5.0. Divergencia: 0.2.
-- REGLA MERCADO O/U 2.5 (Francotirador): El sistema SOLO evalúa a la opción matemáticamente favorita (tendencia del partido). Prohibido "cazar valor" contra la probabilidad en mercados binarios. Techo Cuota: 6.0. Divergencia: 0.55.
-- Sizing: Fracción de Kelly capada estrictamente a un máximo del 5% del bankroll.
+- REGLA MERCADO 1X2 (Cuatro Caminos, V4.3/V4.4): Ver Sección IV.C para especificación completa.
+  Divergencia máxima es ESPECÍFICA POR LIGA según eficiencia de mercado (Fix #4, V4.4) — ver Sección IV.D.
+- REGLA MERCADO O/U 2.5 (Francotirador): El sistema SOLO evalúa a la opción matemáticamente favorita
+  (tendencia del partido). Prohibido "cazar valor" contra la probabilidad en mercados binarios.
+  Techo Cuota: 6.0. Divergencia: 0.05.
+- Sizing: Fracción de Kelly capada a un máximo del 2.5% del bankroll (modo normal)
+  o 1.0% (modo drawdown tras 5 pérdidas consecutivas).
 
 F. Variable de Fatiga y Calendario (Rest Days):
 La Calculadora debe ejecutar una regresión temporal (query O(1)) a la base de datos partidos_backtest para determinar la fecha del partido inmediatamente anterior de cada equipo.
@@ -100,5 +145,94 @@ Para medir la predictibilidad de un equipo, el sistema debe calcular la varianza
 III. MÁXIMAS DEL FONDO
 ==========================================
 MÁXIMA I: PRESERVACIÓN DEL CAPITAL. Supervivencia > Beneficio.
-MÁXIMA II: EL DATO MANDA. No se asumen datos faltantes. 
+MÁXIMA II: EL DATO MANDA. No se asumen datos faltantes.
 MÁXIMA III: EFICIENCIA DE RED. Se prohíbe el uso de gspread celda por celda.
+
+==========================================
+IV. ESTRATEGIA DE APUESTA V4.3 / V4.4 (CALIBRADA CON BACKTEST 92 PARTIDOS)
+==========================================
+Todos los parámetros siguientes están en motor_calculadora.py. Cambiar requiere autorización
+explícita con evidencia empírica de backtest.
+
+A. FILTROS GLOBALES
+- FLOOR_PROB_MIN = 0.33      — Probabilidad mínima absoluta para cualquier apuesta.
+- APUESTA_EMPATE_PERMITIDA = False — Bloqueo total de picks EMPATE.
+  Razón: modelo sobreestima empates +7.9% (25.7% modelo vs 17.9% real en backtest de 92 partidos).
+- MARGEN_PREDICTIVO_1X2 = 0.03 — La prob del favorito debe superar a la segunda opción en ≥3%.
+  (V4.3: bajado de 0.05; backtest muestra 8 apuestas adicionales con 62.5% hit.)
+
+B. EV ESCALADO POR CONFIANZA (función min_ev_escalado)
+  prob >= 50%  ->  EV mínimo 3%
+  prob 40-50%  ->  EV mínimo 8%
+  prob 33-40%  ->  EV mínimo 12%
+  prob < 33%   ->  RECHAZAR (999)
+
+C. MERCADO 1X2 — CUATRO CAMINOS DE APUESTA
+  Camino 1 (Normal):
+    Favorito del modelo: prob >= FLOOR, EV >= escalado, div <= 0.15, cuota <= 5.0
+
+  Camino 2 (Value Hunting):
+    Opción con mayor EV (puede ser underdog): mismos filtros que Camino 1.
+
+  Camino 2B (Desacuerdo Modelo-Mercado):
+    Cuando modelo y mercado NO coinciden en el favorito:
+      prob_modelo >= 0.40  (umbral duro: con prob 33-40% el desacuerdo es ruido, hit=33%)
+      div entre 0.15 y 0.30  (zona operativa del desacuerdo)
+      EV >= min_ev_escalado(prob)
+      cuota <= 8.0
+    Backtest: div 15-25% -> hit 80% (5 casos); div 25-35% -> hit 100% (6 casos).
+    Patrón más explotable: VISITA->LOCAL (mercado pone al visitante favorito, modelo ve local).
+
+  Camino 3 (Alta Convicción):
+    Cuando el EV es extremo (mercado claramente equivocado):
+      prob >= 0.33
+      EV >= 1.0  (retorno esperado > 100%)
+      cuota <= 8.0
+    Backtest: 6 casos históricos bloqueados por techo cuota. Todos eran LOCAL con cuota 5.63-6.52.
+    Con EV >= 1.0, la alta divergencia NO es "info oculta" — es desacuerdo genuino.
+
+D. DIVERGENCIA MÁXIMA POR LIGA (Fix #4, V4.4)
+  La divergencia es la diferencia entre la prob del modelo y la prob implícita de la cuota.
+  Mercados eficientes calibran mejor sus cuotas; nuestro modelo debería confiar más en ellos.
+  Mercados ineficientes ofrecen más oportunidades cuando hay divergencia alta.
+
+  La función evaluar_mercado_1x2 acepta `liga` y resuelve:
+    div_max = DIVERGENCIA_MAX_POR_LIGA.get(liga, DIVERGENCIA_MAX_1X2)
+
+  TABLA DIVERGENCIA_MAX_POR_LIGA:
+    Inglaterra  -> 0.10  (Premier League: mercado más eficiente del mundo)
+    Argentina   -> 0.15  (cobertura alta, mercado calibrado — BASE)
+    Brasil      -> 0.18  (algo de ineficiencia explotable)
+    Noruega     -> 0.20  (liga pequeña, menor cobertura de bookmakers)
+    Turquia     -> 0.20  (alta volatilidad + menor eficiencia de mercado)
+    [Fallback]  -> 0.15  (cualquier liga nueva sin valor asignado)
+
+  IMPACTO EN CAMINO 2B (Desacuerdo): el umbral inferior del rango de desacuerdo
+  también se mueve con div_max. Ej.: en Inglaterra, Camino 2B aplica cuando
+  div entre 0.10 y 0.30 (vs 0.15-0.30 en Argentina).
+  IMPACTO EN CAMINO 3 (Alta Convicción): NO usa div_max. Solo requiere EV >= 1.0.
+
+  REGLA: Al agregar una nueva liga, asignar su valor en DIVERGENCIA_MAX_POR_LIGA.
+  Referencia general: ligas top-5 europeas ~0.10-0.12; ligas secundarias ~0.15-0.20.
+
+D2. MERCADO O/U 2.5 — FILTROS
+  - TECHO_CUOTA_OU = 6.0
+  - DIVERGENCIA_MAX_OU = 0.05
+  - MARGEN_PREDICTIVO_OU = 0.05
+  - MARGEN_XG_OU = 0.25  (V4.3: bajado de 0.40)
+    Lógica: apostar OVER solo si xG_total > 2.75; UNDER solo si xG_total < 2.25.
+    Se filtra el partido si abs(xG_local + xG_visita - 2.5) < 0.25 (señal demasiado débil).
+    Backtest: reducción de MARGEN 0.40->0.25 libera 17 apuestas O/U adicionales con ~75% hit.
+
+E. GESTIÓN DE RIESGO
+  - FRACCION_KELLY = 0.50  (Medio Kelly, Thorp 2006)
+  - MAX_KELLY_PCT_NORMAL = 2.5% del bankroll
+  - MAX_KELLY_PCT_DRAWDOWN = 1.0% del bankroll
+  - DRAWDOWN_THRESHOLD = 5 pérdidas consecutivas activan modo defensivo
+
+F. PARÁMETROS PENDIENTES DE CALIBRACIÓN
+  Fix #3: [IMPLEMENTADO V4.4] ALFA_EMA por liga — ver tabla en sección II.B.
+  Fix #4: [IMPLEMENTADO V4.4] DIVERGENCIA_MAX_POR_LIGA — ver tabla en Sección IV.D.
+  Fix #5: [IMPLEMENTADO V4.5] Corrección de calibración bucket 40-50%.
+           Modelo: ~45% promedio -> Real: 53.4% -> Corrección: +0.042 (conservador).
+           Ver sección II.C y función corregir_calibracion() en motor_calculadora.py.

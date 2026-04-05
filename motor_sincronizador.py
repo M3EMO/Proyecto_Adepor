@@ -1,20 +1,17 @@
 import sqlite3
 import os
 import math
-from datetime import datetime
+from datetime import datetime, date as date_type
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.formatting.rule import FormulaRule
 from openpyxl.utils import get_column_letter
 
 # ==========================================
-# MOTOR SINCRONIZADOR V9.1 (EXCEL LOCAL)
-# Migrado de Google Sheets a Excel (.xlsx).
-# Responsabilidad: Generar el archivo Excel de backtest con formulas vivas
-# a partir de la base de datos SQLite (fuente de verdad).
+# MOTOR SINCRONIZADOR V9.2 (EXCEL LOCAL)
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
+DB_NAME    = 'fondo_quant.db'
 EXCEL_FILE = 'Backtest_Modelo.xlsx'
 
 # --- Mapa de columnas (1-indexed para openpyxl) ---
@@ -24,8 +21,9 @@ COL = {
     'liga': 11, 'p1': 12, 'px': 13, 'p2': 14, 'po': 15, 'pu': 16,
     'gl': 17, 'gv': 18,
     'ap1x2': 19, 'apou': 20, 'stk1x2': 21, 'stkou': 22,
-    'acierto': 23, 'pl': 24, 'equity': 25, 'brier': 26,
-    'incert': 27, 'auditoria': 28
+    'acierto': 23, 'pl': 24, 'equity': 25,
+    'brier': 26, 'brier_casa': 27,        # BS sistema y BS casa lado a lado
+    'incert': 28, 'auditoria': 29
 }
 HEADERS = {
     1: 'Fecha', 2: 'ID Partido', 3: 'Partido', 4: 'Local', 5: 'Visita',
@@ -33,43 +31,40 @@ HEADERS = {
     11: 'Liga', 12: 'Prob 1', 13: 'Prob X', 14: 'Prob 2', 15: 'Prob +2.5', 16: 'Prob -2.5',
     17: 'Goles L', 18: 'Goles V',
     19: 'Apuesta 1X2', 20: 'Apuesta O/U 2.5', 21: 'Stake 1X2', 22: 'Stake O/U 2.5',
-    23: 'Acierto', 24: 'P/L Neto', 25: 'Equity Curve', 26: 'Brier Score',
-    27: 'Incertidumbre', 28: 'Auditoria'
+    23: 'Acierto', 24: 'P/L Neto', 25: 'Equity Curve',
+    26: 'BS Sistema', 27: 'BS Casa',
+    28: 'Incertidumbre', 29: 'Auditoria'
 }
 MAX_COL = max(COL.values())
-
-# Letras de columna (precalculadas para formulas)
 CL = {k: get_column_letter(v) for k, v in COL.items()}
 
-
 # ==========================================================================
-# HELPER: crea PatternFill con fgColor+bgColor identicos
-# (necesario para que Excel renderice correctamente en CF/dxf)
+# HELPER FILLS (fgColor + bgColor para que Excel CF renderice correctamente)
 # ==========================================================================
 def _fill(hex_color):
     return PatternFill(patternType='solid', fgColor=hex_color, bgColor=hex_color)
 
-
 # --- Estilos generales ---
-FONT_HEADER  = Font(name='Arial', bold=True, color='FFFFFF', size=10)
-FONT_DATA    = Font(name='Arial', size=10)
-FILL_HEADER  = _fill('1F4E79')
-FILL_GANADA  = _fill('C6EFCE')
-FILL_PERDIDA = _fill('FFC7CE')
-FILL_PASAR   = _fill('FFEB9C')
-FILL_APOSTAR = _fill('BDD7EE')
-ALIGN_CENTER = Alignment(horizontal='center', vertical='center')
-ALIGN_LEFT   = Alignment(horizontal='left',   vertical='center')
-BORDER_THIN  = Border(
-    left=Side(style='thin', color='D9D9D9'), right=Side(style='thin', color='D9D9D9'),
-    top=Side(style='thin', color='D9D9D9'),  bottom=Side(style='thin', color='D9D9D9')
+FONT_HEADER     = Font(name='Arial', bold=True, color='FFFFFF', size=10)
+FONT_DATA       = Font(name='Arial', size=10)
+FILL_HEADER     = _fill('1F4E79')
+FILL_GANADA     = _fill('C6EFCE')
+FILL_PERDIDA    = _fill('FFC7CE')
+FILL_PASAR      = _fill('FFEB9C')
+FILL_APOSTAR    = _fill('BDD7EE')
+FILL_PREDICCION = _fill('9DC3E6')
+ALIGN_CENTER    = Alignment(horizontal='center', vertical='center')
+ALIGN_LEFT      = Alignment(horizontal='left',   vertical='center')
+BORDER_THIN     = Border(
+    left=Side(style='thin',   color='D9D9D9'), right=Side(style='thin',  color='D9D9D9'),
+    top=Side(style='thin',    color='D9D9D9'), bottom=Side(style='thin', color='D9D9D9')
 )
 
-# --- Colores de semaforo (dashboard) ---
-FILL_VERDE   = _fill('C6EFCE')
-FILL_AMARILLO= _fill('FFEB9C')
-FILL_ROJO    = _fill('FFC7CE')
-FILL_NEUTRO  = _fill('F2F2F2')
+# --- Colores semaforo dashboard ---
+FILL_VERDE    = _fill('C6EFCE')
+FILL_AMARILLO = _fill('FFEB9C')
+FILL_ROJO     = _fill('FFC7CE')
+FILL_NEUTRO   = _fill('F2F2F2')
 
 # --- Colores por pais (fila A:R en Backtest) ---
 PAISES_CF = [
@@ -87,7 +82,8 @@ COL_WIDTHS = {
     'liga': 12, 'p1': 9, 'px': 9, 'p2': 9, 'po': 9, 'pu': 9,
     'gl': 8, 'gv': 8,
     'ap1x2': 28, 'apou': 28, 'stk1x2': 13, 'stkou': 13,
-    'acierto': 22, 'pl': 13, 'equity': 15, 'brier': 12,
+    'acierto': 22, 'pl': 13, 'equity': 15,
+    'brier': 12, 'brier_casa': 12,
     'incert': 13, 'auditoria': 11
 }
 
@@ -97,52 +93,40 @@ COL_WIDTHS = {
 # ==========================================================================
 
 def f_apuesta_1x2(r, ap_text):
-    """Formula de auto-liquidacion para Apuesta 1X2."""
     ap = str(ap_text or "")
     if "[APOSTAR]" not in ap:
         return ap
-    g = f'{CL["gl"]}{r}'
-    v = f'{CL["gv"]}{r}'
+    g = f'{CL["gl"]}{r}'; v = f'{CL["gv"]}{r}'
     vacio = f'OR({g}="",{v}="")'
-    if "LOCAL" in ap:
-        return f'=IF({vacio},"[APOSTAR] LOCAL",IF({g}>{v},"[GANADA] LOCAL","[PERDIDA] LOCAL"))'
-    if "EMPATE" in ap:
-        return f'=IF({vacio},"[APOSTAR] EMPATE",IF({g}={v},"[GANADA] EMPATE","[PERDIDA] EMPATE"))'
-    if "VISITA" in ap:
-        return f'=IF({vacio},"[APOSTAR] VISITA",IF({g}<{v},"[GANADA] VISITA","[PERDIDA] VISITA"))'
+    if "LOCAL"  in ap: return f'=IF({vacio},"[APOSTAR] LOCAL",IF({g}>{v},"[GANADA] LOCAL","[PERDIDA] LOCAL"))'
+    if "EMPATE" in ap: return f'=IF({vacio},"[APOSTAR] EMPATE",IF({g}={v},"[GANADA] EMPATE","[PERDIDA] EMPATE"))'
+    if "VISITA" in ap: return f'=IF({vacio},"[APOSTAR] VISITA",IF({g}<{v},"[GANADA] VISITA","[PERDIDA] VISITA"))'
     return ap
 
 def f_apuesta_ou(r, ap_text):
-    """Formula de auto-liquidacion para Apuesta O/U."""
     ap = str(ap_text or "")
     if "[APOSTAR]" not in ap:
         return ap
-    g = f'{CL["gl"]}{r}'
-    v = f'{CL["gv"]}{r}'
-    vacio = f'OR({g}="",{v}="")'
-    total = f'({g}+{v})'
-    if "OVER" in ap:
-        return f'=IF({vacio},"[APOSTAR] OVER 2.5",IF({total}>2.5,"[GANADA] OVER 2.5","[PERDIDA] OVER 2.5"))'
-    if "UNDER" in ap:
-        return f'=IF({vacio},"[APOSTAR] UNDER 2.5",IF({total}<2.5,"[GANADA] UNDER 2.5","[PERDIDA] UNDER 2.5"))'
+    g = f'{CL["gl"]}{r}'; v = f'{CL["gv"]}{r}'
+    vacio = f'OR({g}="",{v}="")'; total = f'({g}+{v})'
+    if "OVER"  in ap: return f'=IF({vacio},"[APOSTAR] OVER 2.5",IF({total}>2.5,"[GANADA] OVER 2.5","[PERDIDA] OVER 2.5"))'
+    if "UNDER" in ap: return f'=IF({vacio},"[APOSTAR] UNDER 2.5",IF({total}<2.5,"[GANADA] UNDER 2.5","[PERDIDA] UNDER 2.5"))'
     return ap
 
 def f_acierto(r):
-    """Formula: Compara prediccion del modelo (prob mas alta) vs resultado real."""
     p1, px, p2 = f'{CL["p1"]}{r}', f'{CL["px"]}{r}', f'{CL["p2"]}{r}'
     gl, gv = f'{CL["gl"]}{r}', f'{CL["gv"]}{r}'
-    mx = f'MAX({p1},{px},{p2})'
-    md = f'MEDIAN({p1},{px},{p2})'
-    pred  = f'IF({p1}={mx},"LOCAL",IF({px}={mx},"EMPATE","VISITA"))'
-    res_l = f'IF({p1}={mx},IF({gl}>{gv},"[ACIERTO]","[FALLO]"),IF({px}={mx},IF({gl}={gv},"[ACIERTO]","[FALLO]"),IF({gl}<{gv},"[ACIERTO]","[FALLO]")))'
-    return f'=IF({p1}="","",IF(({mx}-{md})>0.05,IF(OR({gl}="",{gv}=""),"[PREDICCION] "&{pred},{res_l}),"[PASAR] Margen Insuf"))'
+    mx   = f'MAX({p1},{px},{p2})'
+    md   = f'MEDIAN({p1},{px},{p2})'
+    pred = f'IF({p1}={mx},"LOCAL",IF({px}={mx},"EMPATE","VISITA"))'
+    res  = f'IF({p1}={mx},IF({gl}>{gv},"[ACIERTO]","[FALLO]"),IF({px}={mx},IF({gl}={gv},"[ACIERTO]","[FALLO]"),IF({gl}<{gv},"[ACIERTO]","[FALLO]")))'
+    return f'=IF({p1}="","",IF(({mx}-{md})>0.05,IF(OR({gl}="",{gv}=""),"[PREDICCION] "&{pred},{res}),"[PASAR] Margen Insuf"))'
 
 def f_pl_neto(r):
-    """Formula: P/L combinado de 1X2 + O/U."""
     s1, a1 = f'{CL["stk1x2"]}{r}', f'{CL["ap1x2"]}{r}'
     c1, cx, c2 = f'{CL["c1"]}{r}', f'{CL["cx"]}{r}', f'{CL["c2"]}{r}'
-    so, ao  = f'{CL["stkou"]}{r}', f'{CL["apou"]}{r}'
-    co, cu  = f'{CL["co"]}{r}', f'{CL["cu"]}{r}'
+    so, ao = f'{CL["stkou"]}{r}', f'{CL["apou"]}{r}'
+    co, cu = f'{CL["co"]}{r}', f'{CL["cu"]}{r}'
     pl1 = (f'IFERROR(IF({s1}=0,0,IF(ISNUMBER(SEARCH("[GANADA]",{a1})),'
            f'{s1}*(IF(ISNUMBER(SEARCH("LOCAL",{a1})),{c1},IF(ISNUMBER(SEARCH("EMPATE",{a1})),{cx},{c2}))-1),'
            f'IF(ISNUMBER(SEARCH("[PERDIDA]",{a1})),-{s1},0))),0)')
@@ -152,19 +136,28 @@ def f_pl_neto(r):
     return f'={pl1}+{plo}'
 
 def f_equity(r, bankroll):
-    """Formula: Curva de equity acumulada."""
     pl = f'{CL["pl"]}{r}'
-    eq_prev = f'{CL["equity"]}{r-1}'
-    if r == 2:
-        return f'={bankroll}+{pl}'
-    return f'={eq_prev}+{pl}'
+    if r == 2: return f'={bankroll}+{pl}'
+    return f'={CL["equity"]}{r-1}+{pl}'
 
 def f_brier(r):
-    """Formula: Brier Score para mercado 1X2. Menor = mejor calibracion."""
+    """BS Sistema: probs del modelo Dixon-Coles vs resultado real. Rango 0-2."""
     p1, px, p2 = f'{CL["p1"]}{r}', f'{CL["px"]}{r}', f'{CL["p2"]}{r}'
     gl, gv = f'{CL["gl"]}{r}', f'{CL["gv"]}{r}'
     return (f'=IF(OR({gl}="",{gv}=""),"",'
             f'({p1}-IF({gl}>{gv},1,0))^2+({px}-IF({gl}={gv},1,0))^2+({p2}-IF({gl}<{gv},1,0))^2)')
+
+def f_brier_casa(r):
+    """BS Casa: probs implicitas del mercado (cuotas normalizadas) vs resultado real. Rango 0-2."""
+    c1, cx, c2 = f'{CL["c1"]}{r}', f'{CL["cx"]}{r}', f'{CL["c2"]}{r}'
+    gl, gv = f'{CL["gl"]}{r}', f'{CL["gv"]}{r}'
+    chk = f'OR({gl}="",{gv}="",{c1}="",{c1}=0,{cx}="",{cx}=0,{c2}="",{c2}=0)'
+    den = f'(1/{c1}+1/{cx}+1/{c2})'
+    p1n = f'(1/{c1}/{den})'
+    pxn = f'(1/{cx}/{den})'
+    p2n = f'(1/{c2}/{den})'
+    o1 = f'IF({gl}>{gv},1,0)'; ox = f'IF({gl}={gv},1,0)'; o2 = f'IF({gl}<{gv},1,0)'
+    return f'=IF({chk},"",({p1n}-{o1})^2+({pxn}-{ox})^2+({p2n}-{o2})^2)'
 
 
 # ==========================================================================
@@ -173,17 +166,17 @@ def f_brier(r):
 
 def _resultado_1x2(ap_text, gl, gv):
     ap = str(ap_text or "")
-    if "[GANADA]" in ap:  return  1
+    if "[GANADA]"  in ap: return  1
     if "[PERDIDA]" in ap: return -1
     if "[APOSTAR]" in ap and gl is not None and gv is not None:
-        if "LOCAL"  in ap: return  1 if gl > gv else -1
-        if "EMPATE" in ap: return  1 if gl == gv else -1
-        if "VISITA" in ap: return  1 if gl < gv else -1
+        if "LOCAL"  in ap: return  1 if gl > gv  else -1
+        if "EMPATE" in ap: return  1 if gl == gv  else -1
+        if "VISITA" in ap: return  1 if gl < gv  else -1
     return 0
 
 def _resultado_ou(ap_text, gl, gv):
     ap = str(ap_text or "")
-    if "[GANADA]" in ap:  return  1
+    if "[GANADA]"  in ap: return  1
     if "[PERDIDA]" in ap: return -1
     if "[APOSTAR]" in ap and gl is not None and gv is not None:
         total = gl + gv
@@ -208,6 +201,10 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
     bets_1x2, bets_ou = [], []
     bs_sis_list, bs_casa_list = [], []
 
+    # Contadores para % Acierto P (columna Acierto del backtest: prediccion del modelo)
+    pred_aciertos = 0
+    pred_fallos   = 0
+
     for row in datos:
         (id_p, fecha, local, visita, pais,
          p1, px, p2, po, pu,
@@ -218,20 +215,35 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
         if gl is None or gv is None:
             continue
 
+        # --- Replica logica de f_acierto para contar [ACIERTO]/[FALLO] ---
+        if p1 and px and p2:
+            mx = max(p1, px, p2)
+            vals = sorted([p1, px, p2])
+            md = vals[1]
+            if (mx - md) > 0.05:
+                if p1 == mx:   pred = 'LOCAL'
+                elif px == mx: pred = 'EMPATE'
+                else:          pred = 'VISITA'
+                real = 'LOCAL' if gl > gv else ('EMPATE' if gl == gv else 'VISITA')
+                if pred == real: pred_aciertos += 1
+                else:            pred_fallos   += 1
+
+        # --- Apuestas ---
         if stk1x2 and stk1x2 > 0 and ap1x2:
             res = _resultado_1x2(ap1x2, gl, gv)
             if res != 0:
                 cuota = _cuota_1x2(ap1x2, c1, cx, c2) or 0
-                pl_val = stk1x2 * (cuota - 1) if res == 1 else -stk1x2
-                bets_1x2.append({'res': res, 'stk': stk1x2, 'pl': pl_val})
+                bets_1x2.append({'res': res, 'stk': stk1x2,
+                                  'pl': stk1x2*(cuota-1) if res==1 else -stk1x2})
 
         if stkou and stkou > 0 and apou:
             res = _resultado_ou(apou, gl, gv)
             if res != 0:
                 cuota = _cuota_ou(apou, co, cu) or 0
-                pl_val = stkou * (cuota - 1) if res == 1 else -stkou
-                bets_ou.append({'res': res, 'stk': stkou, 'pl': pl_val})
+                bets_ou.append({'res': res, 'stk': stkou,
+                                'pl': stkou*(cuota-1) if res==1 else -stkou})
 
+        # --- Brier Score ---
         if p1 and px and p2:
             o1 = 1 if gl > gv else 0
             ox = 1 if gl == gv else 0
@@ -243,29 +255,32 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
                 p1m, pxm, p2m = r1/tot, rx/tot, r2/tot
                 bs_casa_list.append((p1m-o1)**2 + (pxm-ox)**2 + (p2m-o2)**2)
 
+    # % Acierto P: precision del modelo sobre todos los partidos con resultado
+    pred_total = pred_aciertos + pred_fallos
+    acierto_partidos = pred_aciertos / pred_total if pred_total > 0 else 0.0
+
     def _grupo(bets):
         n = len(bets)
         if n == 0:
-            return {'n':0,'pl':0.0,'vol':0.0,'yield':0.0,
-                    'acierto_p':0.0,'acierto_dol':0.0,'t':0.0,'p':1.0}
-        pl  = sum(b['pl']  for b in bets)
-        vol = sum(b['stk'] for b in bets)
+            return {'n':0,'pl':0.0,'vol':0.0,'yield':0.0,'acierto_bets':0.0,'t':0.0,'p':1.0}
+        pl      = sum(b['pl']  for b in bets)
+        vol     = sum(b['stk'] for b in bets)
         ganadas = sum(1 for b in bets if b['res'] == 1)
         yld = pl / vol if vol > 0 else 0.0
-        acierto_dol = (vol + pl) / vol if vol > 0 else 0.0
+        # % Acierto $: apuestas ganadoras / total apuestas
+        acierto_bets = ganadas / n
         if n >= 2:
-            ys   = [b['pl']/b['stk'] for b in bets]
+            ys     = [b['pl']/b['stk'] for b in bets]
             mean_y = sum(ys)/n
-            var  = sum((y-mean_y)**2 for y in ys)/(n-1)
-            std  = math.sqrt(var) if var > 0 else 0.0
-            t    = (mean_y / (std/math.sqrt(n))) if std > 0 else 0.0
-            p_v  = math.erfc(abs(t)/math.sqrt(2))
+            var    = sum((y-mean_y)**2 for y in ys)/(n-1)
+            std    = math.sqrt(var) if var > 0 else 0.0
+            t      = (mean_y/(std/math.sqrt(n))) if std > 0 else 0.0
+            p_v    = math.erfc(abs(t)/math.sqrt(2))
         else:
             t, p_v = 0.0, 1.0
         return {'n':n,'pl':pl,'vol':vol,'yield':yld,
-                'acierto_p': ganadas/n,
-                'acierto_dol': acierto_dol,
-                't': round(t, 4), 'p': round(p_v, 4)}
+                'acierto_bets': acierto_bets,
+                't': round(t,4), 'p': round(p_v,4)}
 
     m_all = _grupo(bets_1x2 + bets_ou)
     m_1x2 = _grupo(bets_1x2)
@@ -276,6 +291,9 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
 
     return {
         'total': m_all, '1x2': m_1x2, 'ou': m_ou,
+        'acierto_partidos': acierto_partidos,   # col Acierto del backtest
+        'pred_aciertos': pred_aciertos,
+        'pred_total':    pred_total,
         'bs_sis':  bs_sis,
         'bs_casa': bs_casa,
         'bs_glob': bs_sis - bs_casa,
@@ -284,14 +302,9 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
 
 
 # ==========================================================================
-# SEMAFORO: devuelve fill segun umbrales
+# SEMAFORO
 # ==========================================================================
 def _semaforo(valor, bueno, malo, mayor_es_mejor=True):
-    """
-    mayor_es_mejor=True  → valor >= bueno: verde | malo..bueno: amarillo | < malo: rojo
-    mayor_es_mejor=False → valor <= bueno: verde | bueno..malo: amarillo | > malo: rojo
-    Devuelve None si valor es '—' o None.
-    """
     if valor is None or valor == '—':
         return FILL_NEUTRO
     try:
@@ -315,99 +328,81 @@ def _semaforo(valor, bueno, malo, mayor_es_mejor=True):
 def crear_hoja_dashboard(wb, metricas, bankroll):
     ws = wb.create_sheet("Dashboard", 0)
 
-    FONT_TITLE  = Font(name='Arial', bold=True, color='FFFFFF', size=13)
-    FONT_SEC    = Font(name='Arial', bold=True, color='FFFFFF', size=9)
-    FONT_KPI    = Font(name='Arial', bold=True, size=10)
-    FONT_VAL    = Font(name='Arial', size=10)
-    FONT_SUB    = Font(name='Arial', italic=True, size=9, color='595959')
-    FILL_TITLE  = _fill('1F4E79')
-    FILL_SEC    = _fill('4472C4')
-    FILL_HDR_COL= _fill('2E75B6')
-    BORDER_DB   = Border(
-        left=Side(style='thin', color='9DC3E6'),
-        right=Side(style='thin', color='9DC3E6'),
-        top=Side(style='thin', color='9DC3E6'),
-        bottom=Side(style='thin', color='9DC3E6')
+    FONT_TITLE = Font(name='Arial', bold=True, color='FFFFFF', size=13)
+    FONT_SEC   = Font(name='Arial', bold=True, color='FFFFFF', size=9)
+    FONT_KPI   = Font(name='Arial', bold=True, size=10)
+    FONT_VAL   = Font(name='Arial', size=10)
+    FONT_SUB   = Font(name='Arial', italic=True, size=9, color='595959')
+    FILL_TITLE_D  = _fill('1F4E79')
+    FILL_SEC_D    = _fill('4472C4')
+    FILL_HDR_COL  = _fill('2E75B6')
+    BORDER_DB = Border(
+        left=Side(style='thin', color='9DC3E6'), right=Side(style='thin', color='9DC3E6'),
+        top=Side(style='thin',  color='9DC3E6'), bottom=Side(style='thin',color='9DC3E6')
     )
 
-    ws.column_dimensions['A'].width = 32
+    ws.column_dimensions['A'].width = 34
     ws.column_dimensions['B'].width = 20
     ws.column_dimensions['C'].width = 20
     ws.column_dimensions['D'].width = 20
 
-    # ---- Titulo ----
+    # Titulo
     ws.merge_cells('A1:D1')
-    c = ws.cell(1, 1, "DASHBOARD DE RENDIMIENTO")
-    c.font = FONT_TITLE; c.fill = FILL_TITLE
-    c.alignment = Alignment(horizontal='center', vertical='center')
+    c = ws.cell(1,1,"DASHBOARD DE RENDIMIENTO")
+    c.font=FONT_TITLE; c.fill=FILL_TITLE_D
+    c.alignment=Alignment(horizontal='center',vertical='center')
     ws.row_dimensions[1].height = 30
 
     ws.merge_cells('A2:D2')
-    c = ws.cell(2, 1, f"Generado: {datetime.now().strftime('%d/%m/%Y %H:%M')}   |   Bankroll: ${bankroll:,.2f}")
-    c.font = FONT_SUB; c.fill = _fill('D6E4F0')
-    c.alignment = Alignment(horizontal='center', vertical='center')
-    ws.row_dimensions[2].height = 15
+    c = ws.cell(2,1,f"Generado: {datetime.now().strftime('%d/%m/%Y %H:%M')}   |   Bankroll: ${bankroll:,.2f}")
+    c.font=FONT_SUB; c.fill=_fill('D6E4F0')
+    c.alignment=Alignment(horizontal='center',vertical='center')
+    ws.row_dimensions[2].height=15
 
-    # ---- Cabecera de columnas ----
-    for ci, h in enumerate(['Metrica', 'Total', '1X2', 'O/U'], 1):
-        c = ws.cell(3, ci, h)
-        c.font = Font(name='Arial', bold=True, color='FFFFFF', size=10)
-        c.fill = FILL_HDR_COL
-        c.alignment = Alignment(horizontal='center', vertical='center')
-        c.border = BORDER_DB
-    ws.row_dimensions[3].height = 20
+    for ci, h in enumerate(['Metrica','Total','1X2','O/U'],1):
+        c = ws.cell(3,ci,h)
+        c.font=Font(name='Arial',bold=True,color='FFFFFF',size=10)
+        c.fill=FILL_HDR_COL; c.alignment=Alignment(horizontal='center',vertical='center')
+        c.border=BORDER_DB
+    ws.row_dimensions[3].height=20
 
     m = metricas
     t_all, t_1x2, t_ou = m['total'], m['1x2'], m['ou']
-    row = 4
+    row = [4]  # mutable para closures
 
-    # ---- Helpers internos ----
     def _sep(titulo):
-        nonlocal row
-        ws.merge_cells(f'A{row}:D{row}')
-        c = ws.cell(row, 1, titulo)
-        c.font = FONT_SEC; c.fill = FILL_SEC
-        c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
-        c.border = BORDER_DB
-        ws.row_dimensions[row].height = 14
-        row += 1
+        ws.merge_cells(f'A{row[0]}:D{row[0]}')
+        c = ws.cell(row[0],1,titulo)
+        c.font=FONT_SEC; c.fill=FILL_SEC_D
+        c.alignment=Alignment(horizontal='left',vertical='center',indent=1)
+        c.border=BORDER_DB
+        ws.row_dimensions[row[0]].height=14
+        row[0]+=1
 
     def _fila(metrica, vals, fmts, fills):
-        """
-        vals  = (total, 1x2, ou)   — puede ser '—' para N/A
-        fmts  = (fmt_total, fmt_1x2, fmt_ou)
-        fills = (fill_total, fill_1x2, fill_ou)  — PatternFill o None
-        """
-        nonlocal row
-        is_alt = (row % 2 == 0)
-        bg_base = _fill('EBF3FB') if is_alt else _fill('FFFFFF')
-        ws.row_dimensions[row].height = 18
-
-        c = ws.cell(row, 1, metrica)
-        c.font = FONT_KPI; c.fill = bg_base; c.border = BORDER_DB
-        c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
-
-        for ci, (val, fmt, fill) in enumerate(zip(vals, fmts, fills), 2):
-            cell = ws.cell(row, ci, val)
-            cell.font = FONT_VAL
-            cell.alignment = Alignment(horizontal='center', vertical='center')
-            cell.border = BORDER_DB
-            cell.fill = fill if fill else bg_base
-            if fmt == 'pct':   cell.number_format = '0.00%'
-            elif fmt == 'cur': cell.number_format = '#,##0.00'
-            elif fmt == 'd4':  cell.number_format = '0.0000'
-            elif fmt == 'd2':  cell.number_format = '0.00'
-            elif fmt == 'int': cell.number_format = '0'
-        row += 1
+        r = row[0]
+        bg = _fill('EBF3FB') if r%2==0 else _fill('FFFFFF')
+        ws.row_dimensions[r].height=18
+        c=ws.cell(r,1,metrica); c.font=FONT_KPI; c.fill=bg; c.border=BORDER_DB
+        c.alignment=Alignment(horizontal='left',vertical='center',indent=1)
+        for ci,(val,fmt,fill) in enumerate(zip(vals,fmts,fills),2):
+            cell=ws.cell(r,ci,val); cell.font=FONT_VAL; cell.border=BORDER_DB
+            cell.alignment=Alignment(horizontal='center',vertical='center')
+            cell.fill = fill if fill else bg
+            if   fmt=='pct': cell.number_format='0.00%'
+            elif fmt=='cur': cell.number_format='#,##0.00'
+            elif fmt=='d4':  cell.number_format='0.0000'
+            elif fmt=='d2':  cell.number_format='0.00'
+            elif fmt=='int': cell.number_format='0'
+        row[0]+=1
 
     NA = '—'
-    n_all = t_all['n']
 
-    # ==== BLOQUE 1: Financiero ====
+    # ---- FINANCIERO ----
     _sep("  RESULTADOS FINANCIEROS")
 
     _fila("Ganancia neta",
-          (t_all['pl'],   t_1x2['pl'],   t_ou['pl']),
+          (t_all['pl'],    t_1x2['pl'],    t_ou['pl']),
           ('cur','cur','cur'),
           (_semaforo(t_all['pl'],  0, 0),
            _semaforo(t_1x2['pl'], 0, 0),
@@ -415,7 +410,7 @@ def crear_hoja_dashboard(wb, metricas, bankroll):
 
     # Yield: >5% bueno, 0-5% aceptable, <0% malo
     _fila("Yield",
-          (t_all['yield'],  t_1x2['yield'],  t_ou['yield']),
+          (t_all['yield'],   t_1x2['yield'],   t_ou['yield']),
           ('pct','pct','pct'),
           (_semaforo(t_all['yield'],  0.05, 0),
            _semaforo(t_1x2['yield'], 0.05, 0),
@@ -424,44 +419,48 @@ def crear_hoja_dashboard(wb, metricas, bankroll):
     _fila("Volumen apostado",
           (t_all['vol'],   t_1x2['vol'],   t_ou['vol']),
           ('cur','cur','cur'),
-          (FILL_NEUTRO, FILL_NEUTRO, FILL_NEUTRO))
+          (FILL_NEUTRO,FILL_NEUTRO,FILL_NEUTRO))
 
     _fila("N apuestas liquidadas",
           (t_all['n'],  t_1x2['n'],  t_ou['n']),
           ('int','int','int'),
-          (FILL_NEUTRO, FILL_NEUTRO, FILL_NEUTRO))
+          (FILL_NEUTRO,FILL_NEUTRO,FILL_NEUTRO))
 
-    # ==== BLOQUE 2: Acierto ====
+    # ---- ACIERTO ----
     _sep("  TASA DE ACIERTO")
 
-    _fila("% Acierto P  (hit rate por conteo)",
-          (t_all['acierto_p'],  t_1x2['acierto_p'],  t_ou['acierto_p']),
-          ('pct','pct','pct'),
-          (_semaforo(t_all['acierto_p'],  0.55, 0.45),
-           _semaforo(t_1x2['acierto_p'], 0.55, 0.45),
-           _semaforo(t_ou['acierto_p'],  0.55, 0.45)))
+    # % Acierto P: [ACIERTO] / ([ACIERTO]+[FALLO]) de la columna Acierto del backtest
+    # Solo aplica a 1X2 (la columna Acierto evalua las probs 1/X/2)
+    ap = m['acierto_partidos']
+    pt = m['pred_total']
+    _fila(f"% Acierto P  (col. Acierto, {m['pred_aciertos']}/{pt} partidos)",
+          (ap, ap, '—'),
+          ('pct','pct',''),
+          (_semaforo(ap, 0.55, 0.45),
+           _semaforo(ap, 0.55, 0.45),
+           FILL_NEUTRO))
 
-    _fila("% Acierto $  (ROI, capital recuperado)",
-          (t_all['acierto_dol'],  t_1x2['acierto_dol'],  t_ou['acierto_dol']),
+    # % Acierto $: apuestas ganadoras / total apuestas colocadas
+    _fila("% Acierto $  (apuestas ganadoras / total apostado)",
+          (t_all['acierto_bets'],  t_1x2['acierto_bets'],  t_ou['acierto_bets']),
           ('pct','pct','pct'),
-          (_semaforo(t_all['acierto_dol'],  1.03, 0.97),
-           _semaforo(t_1x2['acierto_dol'], 1.03, 0.97),
-           _semaforo(t_ou['acierto_dol'],  1.03, 0.97)))
+          (_semaforo(t_all['acierto_bets'],  0.55, 0.45),
+           _semaforo(t_1x2['acierto_bets'], 0.55, 0.45),
+           _semaforo(t_ou['acierto_bets'],  0.55, 0.45)))
 
-    won_all  = round(t_all['acierto_p']  * t_all['n'])
-    won_1x2  = round(t_1x2['acierto_p'] * t_1x2['n'])
-    won_ou   = round(t_ou['acierto_p']  * t_ou['n'])
-    acp_all  = won_all  / t_all['n']  if t_all['n']  > 0 else 0
-    acp_1x2  = won_1x2  / t_1x2['n'] if t_1x2['n'] > 0 else 0
-    acp_ou   = won_ou   / t_ou['n']  if t_ou['n']  > 0 else 0
-    _fila("% Acierto all  (ganadas / total)",
-          (acp_all, acp_1x2, acp_ou),
+    # % Acierto all = promedio entre % Acierto P (sistema) y % Acierto $ (apuestas)
+    ap_sistema = m['acierto_partidos']
+    all_total = (ap_sistema + t_all['acierto_bets']) / 2
+    all_1x2   = (ap_sistema + t_1x2['acierto_bets']) / 2
+    all_ou    = t_ou['acierto_bets']   # O/U no tiene columna sistema, usamos solo bets
+    _fila("% Acierto all  (promedio sistema + apuestas)",
+          (all_total, all_1x2, all_ou),
           ('pct','pct','pct'),
-          (_semaforo(acp_all, 0.55, 0.45),
-           _semaforo(acp_1x2, 0.55, 0.45),
-           _semaforo(acp_ou,  0.55, 0.45)))
+          (_semaforo(all_total, 0.55, 0.45),
+           _semaforo(all_1x2,   0.55, 0.45),
+           _semaforo(all_ou,    0.55, 0.45)))
 
-    # ==== BLOQUE 3: Estadistica ====
+    # ---- ESTADISTICA ----
     _sep("  ESTADISTICA INFERENCIAL")
 
     _fila("T-score",
@@ -480,43 +479,34 @@ def crear_hoja_dashboard(wb, metricas, bankroll):
 
     fk = m['fraccion_kelly']
     _fila("Fraccion Kelly",
-          (fk, fk, NA),
-          ('pct','pct',''),
+          (fk, fk, NA), ('pct','pct',''),
           (FILL_NEUTRO, FILL_NEUTRO, FILL_NEUTRO))
 
-    # ==== BLOQUE 4: Calibracion ====
-    _sep("  CALIBRACION DEL MODELO  (Brier Score — menor es mejor)")
+    # ---- CALIBRACION (BS rango 0-2, aleatorio puro ≈ 0.667) ----
+    _sep("  CALIBRACION DEL MODELO  (Brier Score — rango 0 a 2, aleatorio ≈ 0.667, menor es mejor)")
 
-    bs_s  = m['bs_sis']
-    bs_c  = m['bs_casa']
-    bs_g  = m['bs_glob']
+    bs_s = m['bs_sis']; bs_c = m['bs_casa']; bs_g = m['bs_glob']
 
-    # BS rango 0-2 (3 resultados posibles). Aleatorio puro ≈ 0.667
-    # Verde: < 0.50 (mejor que azar), Amarillo: 0.50-0.65, Rojo: >= 0.65
-    _fila("Brier Score sistema  (Dixon-Coles)",
+    # BS por partido (promedio): verde <0.50, amarillo 0.50-0.65, rojo >0.65
+    _fila("BS Sistema  (promedio por partido, Dixon-Coles)",
           (bs_s, bs_s, NA), ('d4','d4',''),
           (_semaforo(bs_s, 0.50, 0.65, mayor_es_mejor=False), FILL_NEUTRO, FILL_NEUTRO))
 
-    _fila("Promedio BS  (media por partido)",
-          (bs_s, bs_s, NA), ('d4','d4',''),
-          (_semaforo(bs_s, 0.50, 0.65, mayor_es_mejor=False), FILL_NEUTRO, FILL_NEUTRO))
-
-    # BS casa: referencia neutra, pero coloreamos igual para comparar
-    _fila("BS casa  (Pinnacle / bet365 referencia)",
+    _fila("BS Casa  (promedio por partido, cuotas mercado)",
           (bs_c, bs_c, NA), ('d4','d4',''),
           (_semaforo(bs_c, 0.50, 0.65, mayor_es_mejor=False), FILL_NEUTRO, FILL_NEUTRO))
 
-    # BS global: diferencia sistema - casa. Negativo = nuestro modelo es mejor
-    _fila("BS global  (sistema - casa, negativo = mejor)",
+    _fila("BS Global  (Sistema - Casa, negativo = modelo supera mercado)",
           (bs_g, bs_g, NA), ('d4','d4',''),
           (_semaforo(bs_g, -0.02, 0.02, mayor_es_mejor=False), FILL_NEUTRO, FILL_NEUTRO))
 
-    # ---- Nota al pie ----
-    ws.merge_cells(f'A{row+1}:D{row+1}')
-    c = ws.cell(row+1, 1,
-        "Umbrales — Yield: >5%=verde / 0-5%=amarillo / <0%=rojo  |  "
-        "BS (rango 0-2, aleatorio≈0.667): <0.50=verde / 0.50-0.65=amarillo / >0.65=rojo  |  "
-        "P-Value: <0.05=verde / 0.05-0.10=amarillo / >0.10=rojo  |  BS global neg. = modelo supera mercado")
+    # Nota
+    ws.merge_cells(f'A{row[0]+1}:D{row[0]+1}')
+    c = ws.cell(row[0]+1, 1,
+        "Yield >5%=verde | 0-5%=amarillo | <0%=rojo    "
+        "BS <0.50=verde | 0.50-0.65=amarillo | >0.65=rojo    "
+        "P-Value <0.05=verde | 0.05-0.10=amarillo | >0.10=rojo    "
+        "BS Global negativo = modelo supera al mercado")
     c.font = Font(name='Arial', italic=True, size=8, color='595959')
     c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
 
@@ -528,12 +518,11 @@ def crear_hoja_dashboard(wb, metricas, bankroll):
 # ==========================================================================
 
 def main():
-    print("[SISTEMA] Iniciando Motor Sincronizador V9.1 (Excel Local)...")
+    print("[SISTEMA] Iniciando Motor Sincronizador V9.2 (Excel Local)...")
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 
-    # --- Resurrection: partidos Liquidados sin goles vuelven a Calculado ---
     cursor.execute("""
         SELECT id_partido FROM partidos_backtest
         WHERE estado = 'Liquidado' AND (goles_l IS NULL OR goles_v IS NULL)
@@ -545,16 +534,14 @@ def main():
             [(i,) for i in resurrecciones]
         )
         conn.commit()
-        print(f"[INFO] {len(resurrecciones)} partidos resucitados (Liquidado sin goles -> Calculado).")
+        print(f"[INFO] {len(resurrecciones)} partidos resucitados.")
 
-    # --- Bankroll ---
     try:
         cursor.execute("SELECT valor FROM configuracion WHERE clave = 'bankroll'")
         BANKROLL = float(cursor.fetchone()[0])
     except (TypeError, IndexError):
         BANKROLL = 100000.00
 
-    # --- Fraccion Kelly ---
     try:
         cursor.execute("SELECT valor FROM configuracion WHERE clave = 'fraccion_kelly'")
         row_fk = cursor.fetchone()
@@ -562,7 +549,6 @@ def main():
     except Exception:
         FRACCION_KELLY = 0.50
 
-    # --- Datos principales ---
     cursor.execute("""
         SELECT id_partido, fecha, local, visita, pais,
                prob_1, prob_x, prob_2, prob_o25, prob_u25,
@@ -582,31 +568,25 @@ def main():
 
     print(f"[INFO] {len(datos)} partidos a sincronizar. Bankroll: ${BANKROLL:,.2f}")
 
-    # --- Crear workbook ---
     wb = Workbook()
     ws = wb.active
     ws.title = "Backtest"
 
-    # --- Headers ---
     for col_idx, header_text in HEADERS.items():
         cell = ws.cell(row=1, column=col_idx, value=header_text)
-        cell.font = FONT_HEADER
-        cell.fill = FILL_HEADER
-        cell.alignment = ALIGN_CENTER
-        cell.border = BORDER_THIN
+        cell.font = FONT_HEADER; cell.fill = FILL_HEADER
+        cell.alignment = ALIGN_CENTER; cell.border = BORDER_THIN
 
-    # --- Anchos de columna ---
     for key, width in COL_WIDTHS.items():
         ws.column_dimensions[CL[key]].width = width
 
-    # --- Freeze y autofiltro ---
     ws.freeze_panes = 'A2'
     ws.auto_filter.ref = f'A1:{get_column_letter(MAX_COL)}1'
 
-    # --- Estadisticas por liga (para hoja Resumen) ---
     stats_liga = {}
+    ALIGN_LEFT_COLS = {COL['partido'], COL['local'], COL['visita'],
+                       COL['ap1x2'], COL['apou'], COL['acierto'], COL['id']}
 
-    # --- Escribir datos ---
     for idx, row_data in enumerate(datos):
         r = idx + 2
         (id_p, fecha, local, visita, pais,
@@ -615,12 +595,23 @@ def main():
          c1, cx, c2, co, cu,
          estado, gl, gv, incert, auditoria) = row_data
 
-        ws.cell(r, COL['fecha'],   (fecha.split(" ")[0] if fecha else "")).font = FONT_DATA
-        ws.cell(r, COL['id'],      id_p).font = FONT_DATA
+        # Escribir como objeto date real para que Excel ordene correctamente
+        try:
+            fecha_val = datetime.strptime(fecha, "%d/%m/%Y").date()
+        except Exception:
+            try:
+                fecha_val = datetime.strptime(fecha.split(" ")[0], "%Y-%m-%d").date()
+            except Exception:
+                fecha_val = fecha or ""
+        cell_fecha = ws.cell(r, COL['fecha'], fecha_val)
+        cell_fecha.font = FONT_DATA
+        if isinstance(fecha_val, date_type):
+            cell_fecha.number_format = 'DD/MM/YYYY'
+        ws.cell(r, COL['id'],      id_p).font             = FONT_DATA
         ws.cell(r, COL['partido'], f"{local} vs {visita}").font = FONT_DATA
-        ws.cell(r, COL['local'],   local).font = FONT_DATA
-        ws.cell(r, COL['visita'],  visita).font = FONT_DATA
-        ws.cell(r, COL['liga'],    pais or "").font = FONT_DATA
+        ws.cell(r, COL['local'],   local).font             = FONT_DATA
+        ws.cell(r, COL['visita'],  visita).font            = FONT_DATA
+        ws.cell(r, COL['liga'],    pais or "").font        = FONT_DATA
 
         for key, val in [('c1',c1),('cx',cx),('c2',c2),('co',co),('cu',cu)]:
             cell = ws.cell(r, COL[key], val if val and val > 0 else None)
@@ -644,50 +635,57 @@ def main():
         ws.cell(r, COL['auditoria'], auditoria or "").font = FONT_DATA
 
         ws.cell(r, COL['ap1x2'],  f_apuesta_1x2(r, ap1x2)).font = FONT_DATA
-        ws.cell(r, COL['apou'],   f_apuesta_ou(r,  apou)).font  = FONT_DATA
+        ws.cell(r, COL['apou'],   f_apuesta_ou(r, apou)).font   = FONT_DATA
         ws.cell(r, COL['acierto'],f_acierto(r)).font             = FONT_DATA
-        ws.cell(r, COL['pl'],     f_pl_neto(r)).font             = FONT_DATA
-        ws.cell(r, COL['pl']).number_format = '#,##0.00'
-        ws.cell(r, COL['equity'], f_equity(r, BANKROLL)).font    = FONT_DATA
-        ws.cell(r, COL['equity']).number_format = '#,##0.00'
-        ws.cell(r, COL['brier'],  f_brier(r)).font               = FONT_DATA
-        ws.cell(r, COL['brier']).number_format = '0.0000'
+
+        cell = ws.cell(r, COL['pl'], f_pl_neto(r))
+        cell.font = FONT_DATA; cell.number_format = '#,##0.00'
+        cell = ws.cell(r, COL['equity'], f_equity(r, BANKROLL))
+        cell.font = FONT_DATA; cell.number_format = '#,##0.00'
+
+        cell = ws.cell(r, COL['brier'], f_brier(r))
+        cell.font = FONT_DATA; cell.number_format = '0.0000'
+        cell = ws.cell(r, COL['brier_casa'], f_brier_casa(r))
+        cell.font = FONT_DATA; cell.number_format = '0.0000'
 
         for c in range(1, MAX_COL + 1):
-            ws.cell(r, c).border = BORDER_THIN
-            ws.cell(r, c).alignment = (
-                ALIGN_LEFT if c in [COL['partido'], COL['local'], COL['visita'],
-                                    COL['ap1x2'], COL['apou'], COL['acierto'], COL['id']]
-                else ALIGN_CENTER
-            )
+            ws.cell(r, c).border    = BORDER_THIN
+            ws.cell(r, c).alignment = ALIGN_LEFT if c in ALIGN_LEFT_COLS else ALIGN_CENTER
 
         if pais:
             if pais not in stats_liga:
                 stats_liga[pais] = {'apuestas':0,'ganadas':0,'perdidas':0,'vol':0.0,'pl':0.0}
             s = stats_liga[pais]
-            for ap, stk, cuotas_dict in [
-                (str(ap1x2 or ""), stk1x2 or 0, {'LOCAL':c1,'EMPATE':cx,'VISITA':c2}),
-                (str(apou  or ""), stkou  or 0, {'OVER':co,'UNDER':cu})
-            ]:
-                if stk > 0 and ("[GANADA]" in ap or "[PERDIDA]" in ap):
-                    s['apuestas'] += 1
-                    s['vol'] += stk
-                    if "[GANADA]" in ap:
+            # Usamos las mismas funciones que el dashboard para que los numeros coincidan.
+            # Esto resuelve que partidos con goles pero aun con "[APOSTAR]" en el DB se cuenten.
+            if stk1x2 and stk1x2 > 0 and ap1x2:
+                res = _resultado_1x2(ap1x2, gl, gv)
+                if res != 0:
+                    s['apuestas'] += 1; s['vol'] += stk1x2
+                    if res == 1:
                         s['ganadas'] += 1
-                        for k, v in cuotas_dict.items():
-                            if k in ap and v and v > 0:
-                                s['pl'] += stk * (v - 1)
+                        cuota = _cuota_1x2(ap1x2, c1, cx, c2)
+                        if cuota and cuota > 0: s['pl'] += stk1x2 * (cuota - 1)
                     else:
-                        s['perdidas'] += 1
-                        s['pl'] -= stk
+                        s['perdidas'] += 1; s['pl'] -= stk1x2
+            if stkou and stkou > 0 and apou:
+                res = _resultado_ou(apou, gl, gv)
+                if res != 0:
+                    s['apuestas'] += 1; s['vol'] += stkou
+                    if res == 1:
+                        s['ganadas'] += 1
+                        cuota = _cuota_ou(apou, co, cu)
+                        if cuota and cuota > 0: s['pl'] += stkou * (cuota - 1)
+                    else:
+                        s['perdidas'] += 1; s['pl'] -= stkou
 
     max_row = len(datos) + 1
 
     # ==========================================================================
-    # CONDITIONAL FORMATTING — regenerado en cada ejecucion (no se pierde)
+    # CONDITIONAL FORMATTING
     # ==========================================================================
 
-    # 1. Coloreado de filas por pais (A:R)
+    # 1. Filas por pais (A:R)
     rango_fila = f'A2:R{max_row}'
     for pais_cf, fill_cf in PAISES_CF:
         ws.conditional_formatting.add(rango_fila, FormulaRule(
@@ -695,30 +693,29 @@ def main():
 
     # 2. Columna S — Apuesta 1X2
     rango_s = f'{CL["ap1x2"]}2:{CL["ap1x2"]}{max_row}'
-    ws.conditional_formatting.add(rango_s, FormulaRule(
-        formula=[f'ISNUMBER(SEARCH("[GANADA]",{CL["ap1x2"]}2))'],  fill=FILL_GANADA,  stopIfTrue=True))
-    ws.conditional_formatting.add(rango_s, FormulaRule(
-        formula=[f'ISNUMBER(SEARCH("[PERDIDA]",{CL["ap1x2"]}2))'], fill=FILL_PERDIDA, stopIfTrue=True))
-    ws.conditional_formatting.add(rango_s, FormulaRule(
-        formula=[f'ISNUMBER(SEARCH("[PASAR]",{CL["ap1x2"]}2))'],   fill=FILL_PASAR,   stopIfTrue=True))
-    ws.conditional_formatting.add(rango_s, FormulaRule(
-        formula=[f'ISNUMBER(SEARCH("[APOSTAR]",{CL["ap1x2"]}2))'], fill=FILL_APOSTAR, stopIfTrue=True))
+    ws.conditional_formatting.add(rango_s, FormulaRule(formula=[f'ISNUMBER(SEARCH("[GANADA]",{CL["ap1x2"]}2))'],  fill=FILL_GANADA,     stopIfTrue=True))
+    ws.conditional_formatting.add(rango_s, FormulaRule(formula=[f'ISNUMBER(SEARCH("[PERDIDA]",{CL["ap1x2"]}2))'], fill=FILL_PERDIDA,    stopIfTrue=True))
+    ws.conditional_formatting.add(rango_s, FormulaRule(formula=[f'ISNUMBER(SEARCH("[PASAR]",{CL["ap1x2"]}2))'],   fill=FILL_PASAR,      stopIfTrue=True))
+    ws.conditional_formatting.add(rango_s, FormulaRule(formula=[f'ISNUMBER(SEARCH("[APOSTAR]",{CL["ap1x2"]}2))'], fill=FILL_APOSTAR,    stopIfTrue=True))
 
     # 3. Columna T — Apuesta O/U
     rango_t = f'{CL["apou"]}2:{CL["apou"]}{max_row}'
-    ws.conditional_formatting.add(rango_t, FormulaRule(
-        formula=[f'ISNUMBER(SEARCH("[GANADA]",{CL["apou"]}2))'],  fill=FILL_GANADA,  stopIfTrue=True))
-    ws.conditional_formatting.add(rango_t, FormulaRule(
-        formula=[f'ISNUMBER(SEARCH("[PERDIDA]",{CL["apou"]}2))'], fill=FILL_PERDIDA, stopIfTrue=True))
-    ws.conditional_formatting.add(rango_t, FormulaRule(
-        formula=[f'ISNUMBER(SEARCH("[PASAR]",{CL["apou"]}2))'],   fill=FILL_PASAR,   stopIfTrue=True))
-    ws.conditional_formatting.add(rango_t, FormulaRule(
-        formula=[f'ISNUMBER(SEARCH("[APOSTAR]",{CL["apou"]}2))'], fill=FILL_APOSTAR, stopIfTrue=True))
+    ws.conditional_formatting.add(rango_t, FormulaRule(formula=[f'ISNUMBER(SEARCH("[GANADA]",{CL["apou"]}2))'],  fill=FILL_GANADA,     stopIfTrue=True))
+    ws.conditional_formatting.add(rango_t, FormulaRule(formula=[f'ISNUMBER(SEARCH("[PERDIDA]",{CL["apou"]}2))'], fill=FILL_PERDIDA,    stopIfTrue=True))
+    ws.conditional_formatting.add(rango_t, FormulaRule(formula=[f'ISNUMBER(SEARCH("[PASAR]",{CL["apou"]}2))'],   fill=FILL_PASAR,      stopIfTrue=True))
+    ws.conditional_formatting.add(rango_t, FormulaRule(formula=[f'ISNUMBER(SEARCH("[APOSTAR]",{CL["apou"]}2))'], fill=FILL_APOSTAR,    stopIfTrue=True))
 
-    # 4. Columna W — Acierto ([PASAR] = amarillo)
+    # 4. Columna X — P/L Neto (verde positivo, rojo negativo)
+    rango_pl = f'{CL["pl"]}2:{CL["pl"]}{max_row}'
+    ws.conditional_formatting.add(rango_pl, FormulaRule(formula=[f'{CL["pl"]}2>0'],  fill=FILL_GANADA,  stopIfTrue=True))
+    ws.conditional_formatting.add(rango_pl, FormulaRule(formula=[f'{CL["pl"]}2<0'],  fill=FILL_PERDIDA, stopIfTrue=True))
+
+    # 5. Columna W — Acierto
     rango_w = f'{CL["acierto"]}2:{CL["acierto"]}{max_row}'
-    ws.conditional_formatting.add(rango_w, FormulaRule(
-        formula=[f'ISNUMBER(SEARCH("[PASAR]",{CL["acierto"]}2))'], fill=FILL_PASAR, stopIfTrue=True))
+    ws.conditional_formatting.add(rango_w, FormulaRule(formula=[f'ISNUMBER(SEARCH("[ACIERTO]",{CL["acierto"]}2))'],   fill=FILL_GANADA,     stopIfTrue=True))
+    ws.conditional_formatting.add(rango_w, FormulaRule(formula=[f'ISNUMBER(SEARCH("[FALLO]",{CL["acierto"]}2))'],     fill=FILL_PERDIDA,    stopIfTrue=True))
+    ws.conditional_formatting.add(rango_w, FormulaRule(formula=[f'ISNUMBER(SEARCH("[PREDICCION]",{CL["acierto"]}2))'],fill=FILL_PREDICCION, stopIfTrue=True))
+    ws.conditional_formatting.add(rango_w, FormulaRule(formula=[f'ISNUMBER(SEARCH("[PASAR]",{CL["acierto"]}2))'],     fill=FILL_PASAR,      stopIfTrue=True))
 
     # ==========================================================================
     # DASHBOARD + RESUMEN
@@ -726,58 +723,52 @@ def main():
     metricas = calcular_metricas_dashboard(datos, FRACCION_KELLY)
     crear_hoja_dashboard(wb, metricas, BANKROLL)
 
-    # --- Hoja de Resumen ---
     ws2 = wb.create_sheet("Resumen")
     res_headers = ['Liga','Apuestas','Ganadas','Perdidas','% Acierto','P/L Neto','Yield','Volumen']
     for i, h in enumerate(res_headers, 1):
         cell = ws2.cell(1, i, h)
-        cell.font = FONT_HEADER; cell.fill = FILL_HEADER; cell.alignment = ALIGN_CENTER
+        cell.font=FONT_HEADER; cell.fill=FILL_HEADER; cell.alignment=ALIGN_CENTER
 
     row_r = 2
     total_ap, total_g, total_p, total_vol, total_pl = 0, 0, 0, 0.0, 0.0
     for liga, s in sorted(stats_liga.items()):
-        pct = (s['ganadas'] / s['apuestas'] * 100) if s['apuestas'] > 0 else 0
-        yld = (s['pl'] / s['vol'] * 100)           if s['vol']      > 0 else 0
-        ws2.cell(row_r, 1, liga).font           = FONT_DATA
-        ws2.cell(row_r, 2, s['apuestas']).font  = FONT_DATA
-        ws2.cell(row_r, 3, s['ganadas']).font   = FONT_DATA
-        ws2.cell(row_r, 4, s['perdidas']).font  = FONT_DATA
-        c = ws2.cell(row_r, 5, pct/100); c.font = FONT_DATA; c.number_format = '0.0%'
-        c = ws2.cell(row_r, 6, round(s['pl'],2)); c.font = FONT_DATA; c.number_format = '#,##0.00'
-        c = ws2.cell(row_r, 7, yld/100); c.font = FONT_DATA; c.number_format = '0.0%'
-        c = ws2.cell(row_r, 8, round(s['vol'],2)); c.font = FONT_DATA; c.number_format = '#,##0.00'
-        total_ap += s['apuestas']; total_g += s['ganadas']
-        total_p  += s['perdidas']; total_vol += s['vol']; total_pl += s['pl']
-        row_r += 1
+        pct = (s['ganadas']/s['apuestas']*100) if s['apuestas'] > 0 else 0
+        yld = (s['pl']/s['vol']*100)           if s['vol']      > 0 else 0
+        ws2.cell(row_r,1,liga).font           = FONT_DATA
+        ws2.cell(row_r,2,s['apuestas']).font  = FONT_DATA
+        ws2.cell(row_r,3,s['ganadas']).font   = FONT_DATA
+        ws2.cell(row_r,4,s['perdidas']).font  = FONT_DATA
+        c=ws2.cell(row_r,5,pct/100);  c.font=FONT_DATA; c.number_format='0.0%'
+        c=ws2.cell(row_r,6,round(s['pl'],2)); c.font=FONT_DATA; c.number_format='#,##0.00'
+        c=ws2.cell(row_r,7,yld/100);  c.font=FONT_DATA; c.number_format='0.0%'
+        c=ws2.cell(row_r,8,round(s['vol'],2));c.font=FONT_DATA; c.number_format='#,##0.00'
+        total_ap+=s['apuestas']; total_g+=s['ganadas']
+        total_p +=s['perdidas']; total_vol+=s['vol']; total_pl+=s['pl']
+        row_r+=1
 
     FONT_BOLD = Font(name='Arial', bold=True, size=10)
-    ws2.cell(row_r, 1, "TOTAL").font = FONT_BOLD
-    ws2.cell(row_r, 2, total_ap).font = FONT_BOLD
-    ws2.cell(row_r, 3, total_g).font  = FONT_BOLD
-    ws2.cell(row_r, 4, total_p).font  = FONT_BOLD
-    c = ws2.cell(row_r, 5, (total_g/total_ap) if total_ap > 0 else 0)
-    c.font = FONT_BOLD; c.number_format = '0.0%'
-    c = ws2.cell(row_r, 6, round(total_pl, 2))
-    c.font = FONT_BOLD; c.number_format = '#,##0.00'
-    c = ws2.cell(row_r, 7, (total_pl/total_vol) if total_vol > 0 else 0)
-    c.font = FONT_BOLD; c.number_format = '0.0%'
-    c = ws2.cell(row_r, 8, round(total_vol, 2))
-    c.font = FONT_BOLD; c.number_format = '#,##0.00'
+    ws2.cell(row_r,1,"TOTAL").font = FONT_BOLD
+    ws2.cell(row_r,2,total_ap).font= FONT_BOLD
+    ws2.cell(row_r,3,total_g).font = FONT_BOLD
+    ws2.cell(row_r,4,total_p).font = FONT_BOLD
+    c=ws2.cell(row_r,5,(total_g/total_ap) if total_ap>0 else 0); c.font=FONT_BOLD; c.number_format='0.0%'
+    c=ws2.cell(row_r,6,round(total_pl,2));  c.font=FONT_BOLD; c.number_format='#,##0.00'
+    c=ws2.cell(row_r,7,(total_pl/total_vol) if total_vol>0 else 0); c.font=FONT_BOLD; c.number_format='0.0%'
+    c=ws2.cell(row_r,8,round(total_vol,2)); c.font=FONT_BOLD; c.number_format='#,##0.00'
 
-    for i, w in enumerate([14,10,10,10,10,14,10,14], 1):
+    for i, w in enumerate([14,10,10,10,10,14,10,14],1):
         ws2.column_dimensions[get_column_letter(i)].width = w
     ws2.freeze_panes = 'A2'
-    ws2.cell(row_r+2, 1, f"Generado: {datetime.now().strftime('%d/%m/%Y %H:%M')}").font = \
-        Font(name='Arial', italic=True, size=9, color='888888')
-    ws2.cell(row_r+3, 1, f"Bankroll base: ${BANKROLL:,.2f}").font = \
-        Font(name='Arial', italic=True, size=9, color='888888')
+    ws2.cell(row_r+2,1,f"Generado: {datetime.now().strftime('%d/%m/%Y %H:%M')}").font=\
+        Font(name='Arial',italic=True,size=9,color='888888')
+    ws2.cell(row_r+3,1,f"Bankroll base: ${BANKROLL:,.2f}").font=\
+        Font(name='Arial',italic=True,size=9,color='888888')
 
-    # --- Guardar ---
     wb.calculation.fullCalcOnLoad = True
     wb.save(EXCEL_FILE)
     print(f"[EXITO] Excel generado: {os.path.abspath(EXCEL_FILE)}")
     print(f"[INFO] {len(datos)} partidos escritos. {len(stats_liga)} ligas resumidas.")
-    print("[SISTEMA] Motor Sincronizador V9.1 ha finalizado su ejecucion.")
+    print("[SISTEMA] Motor Sincronizador V9.2 ha finalizado su ejecucion.")
 
 if __name__ == "__main__":
     main()

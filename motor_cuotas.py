@@ -62,6 +62,7 @@ def extraer_cuotas_sharp(bookmakers, local_api, visita_api):
     c1, cx, c2 = 0.0, 0.0, 0.0
     co, cu = 0.0, 0.0
 
+    # --- 1X2: preferir Pinnacle, luego bet365 ---
     for b in bookmakers:
         if b['key'] in ['pinnacle', 'bet365']:
             for m in b.get('markets', []):
@@ -74,16 +75,32 @@ def extraer_cuotas_sharp(bookmakers, local_api, visita_api):
                             c1 = out['price']
                         elif nombre == visita_api:
                             c2 = out['price']
-            if c1 > 0: break
+            if c1 > 0:
+                break
 
+    # --- O/U 2.5: recorrer TODOS los bookmakers hasta encontrar ambos lados ---
+    # Usamos comparacion con tolerancia para evitar problemas de float (2.5 vs 2.500001)
+    puntos_disponibles = set()
     for b in bookmakers:
         for m in b.get('markets', []):
             if m['key'] == 'totals':
                 for out in m['outcomes']:
-                    if out.get('point') == 2.5:
-                        if out['name'] == 'Over': co = out['price']
-                        if out['name'] == 'Under': cu = out['price']
-        if co > 0 and cu > 0: break 
+                    punto = out.get('point')
+                    try:
+                        punto_f = float(punto)
+                    except (TypeError, ValueError):
+                        continue
+                    puntos_disponibles.add(punto_f)
+                    if abs(punto_f - 2.5) < 0.01:
+                        if out['name'] == 'Over'  and co == 0.0: co = out['price']
+                        if out['name'] == 'Under' and cu == 0.0: cu = out['price']
+        if co > 0 and cu > 0:
+            break
+
+    # Log si no se encontro 2.5 pero hay otras lineas disponibles
+    if (co == 0 or cu == 0) and puntos_disponibles:
+        lineas = sorted(puntos_disponibles)
+        print(f"         [INFO O/U] Linea 2.5 no disponible. Lineas en mercado: {lineas}")
 
     return c1, cx, c2, co, cu
 
@@ -122,40 +139,73 @@ def main():
         
         if not datos_api: continue
 
+        # Pre-construir índice normalizado de eventos de la API para matching rápido
+        eventos_index = []
+        for evento in datos_api:
+            loc_raw = evento.get("home_team", "")
+            vis_raw = evento.get("away_team", "")
+            loc_std = gestor_nombres.obtener_nombre_estandar(loc_raw, modo_interactivo=MODO_INTERACTIVO)
+            vis_std = gestor_nombres.obtener_nombre_estandar(vis_raw, modo_interactivo=MODO_INTERACTIVO)
+            eventos_index.append({
+                'evento':   evento,
+                'loc_raw':  loc_raw,
+                'vis_raw':  vis_raw,
+                'loc_norm': gestor_nombres.limpiar_texto(loc_std),
+                'vis_norm': gestor_nombres.limpiar_texto(vis_std),
+            })
+
         for p in lista_partidos:
             id_p, loc_espn, vis_espn, _ = p
+            loc_norm = gestor_nombres.limpiar_texto(loc_espn)
+            vis_norm = gestor_nombres.limpiar_texto(vis_espn)
             encontrado = False
-            
-            for evento in datos_api:
-                loc_odds = evento.get("home_team", "")
-                vis_odds = evento.get("away_team", "")
-                
-                # Resolver nombres de la API de cuotas a nuestro estándar
-                loc_odds_oficial = gestor_nombres.obtener_nombre_estandar(loc_odds, modo_interactivo=MODO_INTERACTIVO)
-                vis_odds_oficial = gestor_nombres.obtener_nombre_estandar(vis_odds, modo_interactivo=MODO_INTERACTIVO)
 
-                if (gestor_nombres.limpiar_texto(loc_espn) == gestor_nombres.limpiar_texto(loc_odds_oficial)
-                        and gestor_nombres.limpiar_texto(vis_espn) == gestor_nombres.limpiar_texto(vis_odds_oficial)):
-                    c1, cx, c2, co, cu = extraer_cuotas_sharp(evento.get("bookmakers", []), loc_odds, vis_odds)
-                    
-                    if c1 > 0 or co > 0:
-                        cursor.execute("""
-                            UPDATE partidos_backtest SET 
-                            cuota_1 = CASE WHEN ? > 0 THEN ? ELSE cuota_1 END,
-                            cuota_x = CASE WHEN ? > 0 THEN ? ELSE cuota_x END,
-                            cuota_2 = CASE WHEN ? > 0 THEN ? ELSE cuota_2 END,
-                            cuota_o25 = CASE WHEN ? > 0 THEN ? ELSE cuota_o25 END,
-                            cuota_u25 = CASE WHEN ? > 0 THEN ? ELSE cuota_u25 END
-                            WHERE id_partido=?
-                        """, (c1, c1, cx, cx, c2, c2, co, co, cu, cu, id_p))
-                        
-                        cuotas_actualizadas += 1
-                        print(f"      [MATCH] Cuotas capturadas: {loc_espn} vs {vis_espn}")
-                        encontrado = True
+            # --- Paso 1: match exacto normalizado ---
+            match_evento = None
+            for ei in eventos_index:
+                if ei['loc_norm'] == loc_norm and ei['vis_norm'] == vis_norm:
+                    match_evento = ei
                     break
-            
-            if not encontrado:
-                print(f"      [ALERTA] No se hallaron cuotas en mercado para: {loc_espn} vs {vis_espn}")
+
+            # --- Paso 2: fallback fuzzy si el exacto falla ---
+            if match_evento is None:
+                mejor_score = 0.0
+                for ei in eventos_index:
+                    score_loc = difflib.SequenceMatcher(None, loc_norm, ei['loc_norm']).ratio()
+                    score_vis = difflib.SequenceMatcher(None, vis_norm, ei['vis_norm']).ratio()
+                    score = (score_loc + score_vis) / 2
+                    if score > mejor_score:
+                        mejor_score = score
+                        mejor_ei = ei
+                if mejor_score >= 0.75:
+                    match_evento = mejor_ei
+                    print(f"      [FUZZY {mejor_score:.0%}] {loc_espn} vs {vis_espn} → {mejor_ei['loc_raw']} vs {mejor_ei['vis_raw']}")
+
+            if match_evento is not None:
+                evento = match_evento['evento']
+                c1, cx, c2, co, cu = extraer_cuotas_sharp(
+                    evento.get("bookmakers", []),
+                    match_evento['loc_raw'],
+                    match_evento['vis_raw']
+                )
+                if c1 > 0 or co > 0:
+                    cursor.execute("""
+                        UPDATE partidos_backtest SET
+                        cuota_1   = CASE WHEN ? > 0 THEN ? ELSE cuota_1   END,
+                        cuota_x   = CASE WHEN ? > 0 THEN ? ELSE cuota_x   END,
+                        cuota_2   = CASE WHEN ? > 0 THEN ? ELSE cuota_2   END,
+                        cuota_o25 = CASE WHEN ? > 0 THEN ? ELSE cuota_o25 END,
+                        cuota_u25 = CASE WHEN ? > 0 THEN ? ELSE cuota_u25 END
+                        WHERE id_partido=?
+                    """, (c1, c1, cx, cx, c2, c2, co, co, cu, cu, id_p))
+                    cuotas_actualizadas += 1
+                    print(f"      [MATCH] Cuotas capturadas: {loc_espn} vs {vis_espn} | 1={c1} X={cx} 2={c2} O={co} U={cu}")
+                    encontrado = True
+                else:
+                    print(f"      [ALERTA] Partido encontrado pero sin cuotas sharp: {loc_espn} vs {vis_espn}")
+
+            if not encontrado and match_evento is None:
+                print(f"      [ALERTA] Sin match en mercado para: {loc_espn} vs {vis_espn}")
 
     conn.commit()
     conn.close()

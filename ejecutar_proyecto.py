@@ -11,26 +11,27 @@ from datetime import datetime
 
 MOTORES_DIARIOS = [
     # --- FASE 0: MANTENIMIENTO Y OPTIMIZACIÓN ---
-    {"archivo": "motor_purga.py", "desc": "0. Optimizador de Memoria (Purga de Obsoletos)", "critico": False},
+    {"archivo": "motor_purga.py",        "desc": "0. Optimizador de Memoria (Purga de Obsoletos)",          "critico": False, "interactivo": False},
 
     # --- FASE 1: LIQUIDACIÓN Y RECALIBRACIÓN (PASADO) ---
-    {"archivo": "motor_backtest.py", "desc": "1. Liquidador de Goles (Cierre de Resultados)", "critico": True},
-    {"archivo": "motor_liquidador.py", "desc": "1.5. Liquidador de Apuestas (Auditoría de Resultados)", "critico": True},
-    {"archivo": "motor_arbitro.py", "desc": "2. El Inquisidor (Auditoría Arbitral y Tarjetas)", "critico": False},
-    {"archivo": "motor_data.py", "desc": "3. Regresión Bayesiana (Actualización de Poderío)", "critico": True},
-    
+    {"archivo": "motor_backtest.py",     "desc": "1. Liquidador de Goles (Cierre de Resultados)",           "critico": True,  "interactivo": False},
+    {"archivo": "motor_liquidador.py",   "desc": "1.5. Liquidador de Apuestas (Auditoría de Resultados)",   "critico": True,  "interactivo": False},
+    {"archivo": "motor_arbitro.py",      "desc": "2. El Inquisidor (Auditoría Arbitral y Tarjetas)",        "critico": False, "interactivo": False},
+    {"archivo": "motor_data.py",         "desc": "3. Regresión Bayesiana (Actualización de Poderío)",       "critico": True,  "interactivo": False},
+
     # --- FASE 2: CONSTRUCCIÓN DEL HORIZONTE (FUTURO) ---
-    {"archivo": "motor_fixture.py", "desc": "4. El Arquitecto (Proyección de Calendario)", "critico": True},
-    {"archivo": "motor_tactico.py", "desc": "5. El Analista (Formaciones y Vida de DTs)", "critico": False},
-    {"archivo": "motor_cuotas.py", "desc": "6. El Oráculo (Extracción de Precios y CLV)", "critico": True},
-    
+    # interactivo=True: motor_fixture puede pedir al usuario que nombre equipos nuevos
+    {"archivo": "motor_fixture.py",      "desc": "4. El Arquitecto (Proyección de Calendario)",             "critico": True,  "interactivo": True},
+    {"archivo": "motor_tactico.py",      "desc": "5. El Analista (Formaciones y Vida de DTs)",              "critico": False, "interactivo": False},
+    {"archivo": "motor_cuotas.py",       "desc": "6. El Oráculo (Extracción de Precios y CLV)",             "critico": True,  "interactivo": False},
+
     # --- FASE 3: TOMA DE DECISIONES ---
-    {"archivo": "motor_calculadora.py", "desc": "7. Cerebro Cuantitativo (Poisson, EV y Kelly)", "critico": True},
-    
+    {"archivo": "motor_calculadora.py",  "desc": "7. Cerebro Cuantitativo (Poisson, EV y Kelly)",           "critico": True,  "interactivo": False},
+
     # --- FASE 4: REDUNDANCIA Y PROYECCIÓN VISUAL ---
-    {"archivo": "motor_backtest.py", "desc": "8. Liquidador de Último Minuto (Doble Barrido)", "critico": False},
-    {"archivo": "motor_liquidador.py", "desc": "8.5. Liquidador de Apuestas (Barrido Final)", "critico": False},
-    {"archivo": "motor_sincronizador.py", "desc": "9. Sincronizador de Alta Velocidad", "critico": True}
+    {"archivo": "motor_backtest.py",     "desc": "8. Liquidador de Último Minuto (Doble Barrido)",          "critico": False, "interactivo": False},
+    {"archivo": "motor_liquidador.py",   "desc": "8.5. Liquidador de Apuestas (Barrido Final)",             "critico": False, "interactivo": False},
+    {"archivo": "motor_sincronizador.py","desc": "9. Sincronizador de Alta Velocidad",                      "critico": True,  "interactivo": False},
 ]
 
 def log_terminal(mensaje, nivel="INFO"):
@@ -45,58 +46,62 @@ def log_terminal(mensaje, nivel="INFO"):
     color = colores.get(nivel, colores["END"])
     print(f"{color}[{hora}] {nivel} - {mensaje}{colores['END']}")
 
-def ejecutar_motor(script_name, descripcion):
-    print(f"\n➤ INICIANDO: {descripcion}")
+def ejecutar_motor(script_name, descripcion, interactivo=False):
+    print(f"\n> INICIANDO: {descripcion}")
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
+    inicio = time.time()
+
     try:
-        # Forzamos codificación UTF-8 para evitar errores con tildes o caracteres de equipos
-        env = os.environ.copy()
-        env["PYTHONIOENCODING"] = "utf-8"
-        
-        inicio = time.time()
-        # Usamos Popen para capturar la salida en tiempo real. El flag -u es crucial.
-        proceso = subprocess.Popen(
-            [sys.executable, '-u', script_name],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            encoding='utf-8',
-            errors='replace',
-            env=env
-        )
+        if interactivo:
+            # Modo interactivo: stdout/stderr/stdin van directo a la terminal.
+            # El usuario puede responder preguntas (nombres de equipos nuevos, etc.)
+            proceso = subprocess.run(
+                [sys.executable, '-u', script_name],
+                env=env
+            )
+            fin = time.time()
+            if proceso.returncode != 0:
+                raise subprocess.CalledProcessError(proceso.returncode, script_name)
+        else:
+            # Modo normal: capturamos stdout en tiempo real y mostramos cada linea.
+            proceso = subprocess.Popen(
+                [sys.executable, '-u', script_name],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                encoding='utf-8',
+                errors='replace',
+                env=env
+            )
+            full_stdout = ""
+            while True:
+                linea = proceso.stdout.readline()
+                if not linea and proceso.poll() is not None:
+                    break
+                if linea:
+                    full_stdout += linea
+                    print(f"   | {linea.rstrip()}")
 
-        # Leemos y mostramos la salida de progreso línea por línea
-        full_stdout = ""
-        while True:
-            linea_stdout = proceso.stdout.readline()
-            if not linea_stdout and proceso.poll() is not None:
-                break
-            if linea_stdout:
-                full_stdout += linea_stdout
-                linea_strip = linea_stdout.strip()
-                if (linea_strip.startswith("[SISTEMA]") or
-                    linea_strip.startswith("[PROCESO]") or
-                    linea_strip.startswith("[INFO]") or
-                    linea_strip.startswith("[ALERTA]") or
-                    linea_strip.startswith("[EXITO]") or
-                    linea_strip.startswith("[ERROR]")):
-                    print(f"   ↳ {linea_strip}")
-        
-        # Esperamos a que termine y capturamos cualquier salida restante (especialmente errores)
-        stdout_resto, stderr = proceso.communicate()
-        full_stdout += stdout_resto
+            stdout_resto, stderr = proceso.communicate()
+            full_stdout += stdout_resto
+            fin = time.time()
 
-        fin = time.time()
-        
-        if proceso.returncode != 0:
-            raise subprocess.CalledProcessError(proceso.returncode, proceso.args, output=full_stdout, stderr=stderr)
+            if proceso.returncode != 0:
+                raise subprocess.CalledProcessError(
+                    proceso.returncode, proceso.args,
+                    output=full_stdout, stderr=stderr
+                )
 
-        log_terminal(f"COMPLETADO en {round(fin - inicio, 2)}s", "EXITO")
+        log_terminal(f"COMPLETADO en {round(time.time() - inicio, 2)}s", "EXITO")
         return True
-        
+
     except subprocess.CalledProcessError as e:
-        log_terminal(f"FALLO CRÍTICO en {script_name}", "ERROR")
+        log_terminal(f"FALLO CRITICO en {script_name}", "ERROR")
+        stderr_txt = getattr(e, 'stderr', None)
+        stdout_txt = getattr(e, 'output', None)
         print("\n--- TRAZA DE ERROR DEL MOTOR ---")
-        print(e.stderr if e.stderr else e.stdout)
+        print(stderr_txt if stderr_txt else stdout_txt or "(sin salida)")
         print("--------------------------------\n")
         return False
     except FileNotFoundError:
@@ -137,7 +142,7 @@ def main():
     inicio_total = time.time()
 
     for motor in MOTORES_DIARIOS:
-        exito = ejecutar_motor(motor["archivo"], motor["desc"])
+        exito = ejecutar_motor(motor["archivo"], motor["desc"], motor.get("interactivo", False))
         
         if not exito:
             if motor["critico"]:

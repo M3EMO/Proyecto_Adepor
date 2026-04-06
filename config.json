@@ -1,0 +1,11 @@
+{
+    "_comentario": "Claves de API para The-Odds-API. El sistema las rota automaticamente cuando una se agota (HTTP 401/429).",
+    "api_keys_odds": [
+        "4cae986ac10670871e798390fdcb867c",
+        "ac8262657731e6a0d8f3456697969fd0",
+        "d5c54a43b0edf957f2455b161121dc68",
+        "9dca75c9208891d279c764cad910111a",
+        "f66391a91a19e99bce4666178474bd18",
+        "f0a158af49776d3bc01a9bc983db8ff9"
+    ]
+}

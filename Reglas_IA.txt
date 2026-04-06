@@ -284,3 +284,63 @@ G. MULTIPLICADOR DE STAKE POR DOMINANCIA xG (Hallazgo C, V4.7)
     - DELTA_STAKE_ACTIVO = False desactiva sin tocar lógica.
 
   PRÓXIMA REVISIÓN: recalibrar multiplicadores cuando N >= 50 por bucket.
+
+H. PRIOR DINÁMICO DE VENTAJA LOCAL POR LIGA (Hallazgo G, V4.8)
+  El modelo Dixon-Coles no integra el prior histórico de ventaja local de ESTA liga.
+  Si en Brasil el LOCAL ha ganado históricamente el 52% de los partidos pero el modelo
+  predice solo 44% promedio → hay un sesgo sistemático de -8pp que debemos corregir.
+
+  MECANISMO:
+    1. Se consultan los partidos 'Liquidado' por liga al inicio de cada ejecución.
+    2. Si N_liquidados_por_liga >= N_MIN_HALLAZGO_G (50), se activa el prior para esa liga.
+    3. Se calcula freq_real_local = victorias_local / total_liquidados_liga.
+    4. Si freq_real > p1_modelo (LOCAL subestimado), se aplica un boost conservador:
+         boost = (freq_real - p1) * 0.50    ← 50% del gap (igual criterio que Fix #5)
+         p1_nuevo = p1 + boost  (cap: máximo 0.95)
+         px y p2 se reducen proporcionalmente y se renormaliza a suma=1.
+
+  ESTADO ACTUAL (2026-04): INACTIVO para todas las ligas (ninguna tiene N >= 50 liquidados).
+  El código está implementado y listo. Se activará automáticamente cuando el N se alcance.
+
+  PARÁMETROS:
+    N_MIN_HALLAZGO_G = 50  (umbral de activación por liga)
+    BOOST_G_FRACCION = 0.50  (conservador: 50% del gap)
+    HALLAZGO_G_ACTIVO = True/False  (kill switch global)
+
+  APLICACIÓN EN PIPELINE:
+    p1, px, p2 = aplicar_hallazgo_g(p1, px, p2, pais, hallazgo_g_data)   ← ANTES de Fix #5
+    p1, px, p2 = corregir_calibracion(p1, px, p2)                         ← DESPUÉS
+
+  REGLA: nunca mover el orden (Hallazgo G antes de Fix #5).
+
+I. CLAVES API Y CONFIGURACIÓN EXTERNA (V4.8)
+  Las claves de The-Odds-API se almacenan en config.json (misma carpeta que los motores).
+  NO están hardcodeadas en ningún archivo Python. Formato:
+    { "api_keys_odds": ["clave1", "clave2", ...] }
+  Los tres archivos que las consumen (motor_fixture, motor_cuotas, motor_backtest)
+  las cargan en tiempo de ejecución con un bloque try/except. Si config.json no existe,
+  se imprime una advertencia y el failover se desactiva (funciona con ESPN solamente).
+
+J. RECONSTRUCCIÓN EMA (--rebuild, V4.1 de motor_data.py)
+  Para recalibrar el modelo desde cero (cambio de fórmula xG, ajuste de ALFA, etc.):
+    python motor_data.py --rebuild
+  El proceso:
+    1. Pide confirmación manual (escribir "CONFIRMAR").
+    2. Borra ema_procesados, historial_equipos y ligas_stats.
+    3. Re-procesa desde PROFUNDIDAD_INICIAL (210 días) para todas las ligas.
+  ADVERTENCIA: operación destructiva e irreversible. No ejecutar en producción sin backup.
+
+K. SHADOW — GRUPO DE CONTROL (V4.8)
+  El campo apuesta_shadow_1x2 / stake_shadow_1x2 ya no es "Opcion 4".
+  Nuevo propósito: Opcion 1 SIN Fix #5 (calibración) NI Hallazgo G NI Hallazgo C.
+  Sirve como grupo de control para validar a largo plazo que esos tres componentes
+  agregan valor real sobre el sistema base.
+  Metodología de validación:
+    - Cada partido tiene tanto un resultado Op1 como un resultado Shadow.
+    - Después de 200+ partidos liquidados, comparar yield acumulado Op1 vs Shadow.
+    - Si yield(Op1) > yield(Shadow) consistentemente → los tres fixes funcionan.
+    - Si no hay diferencia → revisar si el costo de complejidad justifica mantenerlos.
+  Cómo leer la divergencia en el log:
+    [DIVERGENCIA] Op1 exclusivo: N1 | Shadow exclusivo: N2 | Coincidentes: N3
+    N2 > 0 significa que Shadow abre apuestas que Op1 rechazó (generalmente
+    por Fix #5 o Hallazgo G que subieron/bajaron la prob lo suficiente para cruzar un umbral).

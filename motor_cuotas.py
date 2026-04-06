@@ -15,14 +15,15 @@ DB_NAME = 'fondo_quant.db'
 MODO_INTERACTIVO = os.getenv('PROYECTO_MODO_INTERACTIVO') == '1'
 DICCIONARIO_FILE = 'diccionario_equipos.json'
 
-API_KEYS = [
-    "4cae986ac10670871e798390fdcb867c",  
-    "ac8262657731e6a0d8f3456697969fd0",        
-    "d5c54a43b0edf957f2455b161121dc68",
-    "9dca75c9208891d279c764cad910111a",
-    "f66391a91a19e99bce4666178474bd18",
-    "f0a158af49776d3bc01a9bc983db8ff9"
-]
+# Las claves se cargan desde config.json para no exponerlas en el código fuente.
+_CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
+try:
+    with open(_CONFIG_FILE, 'r', encoding='utf-8') as _f:
+        _config = json.load(_f)
+    API_KEYS = _config['api_keys_odds']
+except (FileNotFoundError, KeyError) as _e:
+    print(f"[ADVERTENCIA] No se pudo cargar config.json ({_e}). Motor de cuotas sin claves API.")
+    API_KEYS = []
 
 MAPA_LIGAS_ODDS = {
     "Argentina": "soccer_argentina_primera_division",

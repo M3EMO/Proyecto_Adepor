@@ -7,7 +7,15 @@ from datetime import datetime
 from collections import defaultdict
 
 # ==========================================
-# MOTOR CALCULADORA V4.7 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
+# MOTOR CALCULADORA V4.8 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
+# Cambios respecto a V4.7:
+#   - Hallazgo G: prior dinámico de ventaja local por liga.
+#     Se activa SOLO cuando N_liquidados_por_liga >= N_MIN_HALLAZGO_G (50).
+#     Aplica un boost conservador (50% de la diferencia observada) a p1 (LOCAL).
+#     Mientras N < 50: completamente inactivo, sin efecto en las decisiones.
+#   - Shadow redefinido: Opcion 1 SIN Fix #5 (calibración) NI Hallazgo C (delta stake).
+#     Sirve como grupo de control para validar que esos dos fixes agregan valor real
+#     a largo plazo. Si Op1 > Shadow acumulado -> los fixes están funcionando.
 # Cambios respecto a V4.6:
 #   - Hallazgo C: multiplicador de stake por dominancia xG.
 #     delta >= 0.50: x1.30 (100% hit en backtest, n=5).
@@ -168,6 +176,18 @@ DELTA_STAKE_MULT_ALTO = 1.30   # delta >= 0.50: x1.30 del stake Kelly
 DELTA_STAKE_MULT_MED  = 1.15   # delta [0.30-0.50): x1.15 (0% sorpresas pero empates)
 DELTA_STAKE_UMBRAL_MED= 0.30   # umbral del bucket medio
 
+# --- Hallazgo G (V4.8): Prior dinámico de ventaja local por liga ---
+# Problema: el modelo Dixon-Coles ignora el prior histórico de ventaja de local
+# de ESTA liga. Si en Brasil el LOCAL gana el 52% de los partidos pero el modelo
+# predice solo 44% promedio, hay un sesgo sistemático explotable.
+# Solución: cuando acumulamos N_MIN liquidados por liga, calculamos la frecuencia
+# real de victorias locales y aplicamos un boost conservador (50% del gap) a p1.
+# Conservador: 50% del sesgo observado para evitar sobreajuste (igual que Fix #5).
+# INACTIVO hasta N >= N_MIN. Seguro: nunca actúa con datos insuficientes.
+N_MIN_HALLAZGO_G  = 50     # mínimo de partidos liquidados para activar por liga
+BOOST_G_FRACCION  = 0.50   # conservador: 50% del gap observado (mismo criterio que Fix #5)
+HALLAZGO_G_ACTIVO = True   # False = desactivar sin tocar lógica
+
 def multiplicador_delta_stake(delta_xg):
     """
     Hallazgo C (V4.7): escala el stake Kelly segun la dominancia xG del partido.
@@ -190,6 +210,45 @@ def multiplicador_delta_stake(delta_xg):
     if delta_xg >= DELTA_STAKE_UMBRAL_MED:
         return DELTA_STAKE_MULT_MED    # 0% sorpresas pero con empates (n=8)
     return 1.0
+
+
+def aplicar_hallazgo_g(p1, px, p2, pais, hallazgo_g_data):
+    """
+    Hallazgo G (V4.8): ajusta p1 (LOCAL) según la frecuencia real de victorias locales
+    observada en partidos liquidados de esa liga.
+
+    Solo se activa cuando N_liquidados >= N_MIN_HALLAZGO_G.
+    El boost es conservador: 50% del gap entre frecuencia real y probabilidad del modelo.
+    Se renormaliza el vector para que p1 + px + p2 = 1.
+
+    Ejemplo (Brasil, freq_real=0.52, p1_modelo=0.44):
+      gap = 0.52 - 0.44 = 0.08
+      boost = 0.08 * 0.50 = 0.04
+      p1_nuevo = 0.44 + 0.04 = 0.48 -> renormalizar -> px y p2 se achican proporcionalmente.
+    """
+    if not HALLAZGO_G_ACTIVO or pais not in hallazgo_g_data:
+        return p1, px, p2
+
+    freq_real = hallazgo_g_data[pais]['freq_local']
+    gap = freq_real - p1
+
+    # Solo aplicar si el modelo subestima LOCAL (gap positivo) y la diferencia es >1pp
+    if gap < 0.01:
+        return p1, px, p2
+
+    boost = gap * BOOST_G_FRACCION
+    p1_nuevo = min(p1 + boost, 0.95)  # cap: nunca por encima de 95%
+    delta = p1_nuevo - p1
+
+    # Reducir px y p2 proporcionalmente al peso relativo de cada uno
+    peso_px = px / (px + p2) if (px + p2) > 0 else 0.5
+    peso_p2 = 1.0 - peso_px
+    px_nuevo = max(0.01, px - delta * peso_px)
+    p2_nuevo = max(0.01, p2 - delta * peso_p2)
+
+    # Renormalizar para garantizar suma exacta = 1
+    total = p1_nuevo + px_nuevo + p2_nuevo
+    return round(p1_nuevo / total, 6), round(px_nuevo / total, 6), round(p2_nuevo / total, 6)
 
 
 def corregir_calibracion(p1, px, p2):
@@ -559,6 +618,30 @@ def main():
     cursor.execute("SELECT equipo_norm, altitud FROM equipos_altitud")
     altitudes = {r[0]: r[1] for r in cursor.fetchall()}
 
+    # --- HALLAZGO G: cargar frecuencias reales de victoria local por liga ---
+    hallazgo_g_data = {}
+    if HALLAZGO_G_ACTIVO:
+        cursor.execute("""
+            SELECT pais,
+                   COUNT(*) as n,
+                   AVG(CASE WHEN goles_l > goles_v THEN 1.0 ELSE 0.0 END) as freq_local
+            FROM partidos_backtest
+            WHERE estado = 'Liquidado'
+              AND goles_l IS NOT NULL AND goles_v IS NOT NULL
+            GROUP BY pais
+        """)
+        print("[HALLAZGO-G] Estado del prior de ventaja local por liga:")
+        for pais_g, n_g, freq_local_g in cursor.fetchall():
+            if n_g >= N_MIN_HALLAZGO_G:
+                hallazgo_g_data[pais_g] = {'n': n_g, 'freq_local': freq_local_g}
+                print(f"   [{pais_g}] N={n_g} >= {N_MIN_HALLAZGO_G} -> ACTIVO | freq_local_real={freq_local_g:.3f}")
+            else:
+                print(f"   [{pais_g}] N={n_g} < {N_MIN_HALLAZGO_G} -> INACTIVO (faltan {N_MIN_HALLAZGO_G - n_g} partidos)")
+        if not hallazgo_g_data:
+            print(f"   [HALLAZGO-G] Ninguna liga tiene N>={N_MIN_HALLAZGO_G} liquidados. Prior inactivo para todas.")
+    else:
+        print("[HALLAZGO-G] Desactivado globalmente (HALLAZGO_G_ACTIVO=False).")
+
     cursor.execute("""
         SELECT p.id_partido, p.local, p.visita, p.pais, p.fecha,
                p.cuota_1, p.cuota_x, p.cuota_2, p.cuota_o25, p.cuota_u25
@@ -632,6 +715,18 @@ def main():
         so = po + pu
         if so > 0: po, pu = po/so, pu/so
 
+        # Guardar probabilidades RAW (sin Fix #5 ni Hallazgo G) para el Shadow
+        p1_raw, px_raw, p2_raw = p1, px, p2
+
+        # Hallazgo G (V4.8): boost de ventaja local observada en esta liga (solo si N >= 50)
+        p1, px, p2 = aplicar_hallazgo_g(p1, px, p2, pais, hallazgo_g_data)
+        if pais in hallazgo_g_data:
+            g_info = hallazgo_g_data[pais]
+            boost_aplicado = round(p1 - p1_raw, 4)
+            if abs(boost_aplicado) > 0.0005:
+                print(f"   [HALLAZGO-G] {local} vs {visita} ({pais}) | "
+                      f"freq_real={g_info['freq_local']:.3f} p1: {p1_raw:.3f}->{p1:.3f} (boost={boost_aplicado:+.4f})")
+
         # Fix #5 (V4.5): corrección de sesgo de compresión de calibración
         p1, px, p2 = corregir_calibracion(p1, px, p2)
 
@@ -666,23 +761,30 @@ def main():
             elif ev_1x2 < min_ev_escalado(prob_raw_1x2):
                 pick_1x2 = f"[PASAR] EV Insuf ({ev_1x2:.3f}<{min_ev_escalado(prob_raw_1x2):.3f})"
 
-        # --- OPCION 4 (SHADOW): floor 33%, EV libre para originales, fallback si prob baja ---
-        pick_shadow_1x2 = pick_1x2_raw  # hereda el raw (EV libre)
-        if "[APOSTAR]" in pick_1x2_raw and prob_raw_1x2 < FLOOR_PROB_MIN:
-            # prob demasiado baja: intentar fallback al mejor outcome con prob >= 33%
-            fb = mejor_outcome_fallback(p1, px, p2, c1_v, cx_v, c2_v)
-            if fb:
-                nombre_fb, prob_fb, cuota_fb, ev_fb = fb
-                pick_shadow_1x2 = f"[APOSTAR] {nombre_fb}"
-                cu_1x2_shadow   = cuota_fb
-                ev_1x2_shadow   = ev_fb
-            else:
-                pick_shadow_1x2 = "[PASAR] Sin Fallback Opcion4"
-                cu_1x2_shadow   = 0.0
-                ev_1x2_shadow   = 0.0
-        else:
-            cu_1x2_shadow = cu_1x2
-            ev_1x2_shadow = ev_1x2
+        # --- SHADOW (V4.8): Grupo de control — Opcion 1 SIN Fix #5 NI Hallazgo G NI Hallazgo C ---
+        # Proposito: validar a largo plazo que Fix #5 (calibracion) + Hallazgo G (prior local)
+        # + Hallazgo C (delta stake) agregan valor real sobre el sistema base.
+        # Si en 200+ partidos acumulados Op1 > Shadow en yield -> los fixes funcionan.
+        # Metodologia: usa p1_raw/px_raw/p2_raw (antes de Hallazgo G y Fix #5),
+        # aplica los mismos filtros de Opcion 1 (floor 33% + EV escalado),
+        # pero SIN multiplicador de stake por delta xG.
+        pick_shadow_raw, ev_shadow_raw, cu_shadow_raw = evaluar_mercado_1x2(
+            p1_raw, px_raw, p2_raw, c1_v, cx_v, c2_v, liga=pais)
+        prob_shadow_raw = 0.0
+        if "[APOSTAR]" in pick_shadow_raw:
+            if   "LOCAL"  in pick_shadow_raw: prob_shadow_raw = p1_raw
+            elif "EMPATE" in pick_shadow_raw: prob_shadow_raw = px_raw
+            else:                             prob_shadow_raw = p2_raw
+
+        pick_shadow_1x2 = pick_shadow_raw
+        if "[APOSTAR]" in pick_shadow_raw:
+            if prob_shadow_raw < FLOOR_PROB_MIN:
+                pick_shadow_1x2 = f"[PASAR] Shadow-Floor ({prob_shadow_raw:.0%}<{FLOOR_PROB_MIN:.0%})"
+            elif ev_shadow_raw < min_ev_escalado(prob_shadow_raw):
+                pick_shadow_1x2 = f"[PASAR] Shadow-EV ({ev_shadow_raw:.3f}<{min_ev_escalado(prob_shadow_raw):.3f})"
+
+        cu_1x2_shadow = cu_shadow_raw if "[APOSTAR]" in pick_shadow_1x2 else 0.0
+        ev_1x2_shadow = ev_shadow_raw if "[APOSTAR]" in pick_shadow_1x2 else 0.0
 
         pick_ou, ev_ou, cu_ou = evaluar_mercado_ou(po, pu, co_v, cu_v, p1, px, p2, xg_local, xg_visita)
 
@@ -755,16 +857,21 @@ def main():
     conn.commit()
     conn.close()
 
-    # Estadisticas de filtrado Opcion 1 vs Opcion 4
-    n_op1  = sum(1 for p in partidos_a_actualizar if "[APOSTAR]" in p['pick_1x2'])
-    n_op4  = sum(1 for p in partidos_a_actualizar if "[APOSTAR]" in p['pick_shadow_1x2'])
-    n_diff = sum(1 for p in partidos_a_actualizar
-                 if "[APOSTAR]" in p['pick_shadow_1x2'] and "[APOSTAR]" not in p['pick_1x2'])
+    # Estadisticas de filtrado Op1 vs Shadow (grupo de control)
+    n_op1         = sum(1 for p in partidos_a_actualizar if "[APOSTAR]" in p['pick_1x2'])
+    n_op4         = sum(1 for p in partidos_a_actualizar if "[APOSTAR]" in p['pick_shadow_1x2'])
+    n_solo_shadow = sum(1 for p in partidos_a_actualizar
+                        if "[APOSTAR]" in p['pick_shadow_1x2'] and "[APOSTAR]" not in p['pick_1x2'])
+    n_solo_op1    = sum(1 for p in partidos_a_actualizar
+                        if "[APOSTAR]" in p['pick_1x2'] and "[APOSTAR]" not in p['pick_shadow_1x2'])
     print(f"\n[EXITO] {calculados} partidos calculados.")
-    print(f"[OP1-ACTIVA]  Apuestas generadas: {n_op1} (floor {FLOOR_PROB_MIN:.0%} + EV escalado)")
-    print(f"[OP4-SHADOW]  Apuestas shadow:    {n_op4} ({n_diff} adicionales vs Op1, guardadas para auditoria)")
+    print(f"[OP1-ACTIVA]  Apuestas generadas: {n_op1} (Hallazgo G + Fix #5 + Hallazgo C + EV escalado)")
+    print(f"[SHADOW]      Apuestas control:   {n_op4} (sin Hallazgo G, sin Fix #5, sin Hallazgo C)")
+    print(f"[DIVERGENCIA] Op1 exclusivo: {n_solo_op1} | Shadow exclusivo: {n_solo_shadow} | Coincidentes: {n_op1 - n_solo_op1}")
     print(f"[SHADOW] Altitud activa: {shadow_log_alt} | Incertidumbre alta (>0.15): {shadow_log_incert}")
-    print("[SISTEMA] Motor Calculadora V4.1 ha finalizado su ejecucion.")
+    g_activas = len(hallazgo_g_data)
+    print(f"[HALLAZGO-G]  Ligas con prior activo: {g_activas}/{len(DIVERGENCIA_MAX_POR_LIGA)}")
+    print("[SISTEMA] Motor Calculadora V4.8 ha finalizado su ejecucion.")
 
 if __name__ == "__main__":
     main()

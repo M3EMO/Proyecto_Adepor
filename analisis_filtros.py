@@ -1,300 +1,177 @@
-"""
-Audita cada filtro activo y simula el hit rate de lo que está bloqueando.
-El objetivo es encontrar filtros demasiado restrictivos sin evidencia.
-"""
-import sqlite3, math
-
-UMBRAL_EV_BASE = 0.03
-TECHO_CUOTA_1X2 = 5.0
-DIVERGENCIA_MAX_1X2 = 0.15
-MARGEN_PREDICTIVO_1X2 = 0.05
-FLOOR_PROB_MIN = 0.33
-DESACUERDO_PROB_MIN = 0.40
-DIVERGENCIA_DESACUERDO_MAX = 0.30
-TECHO_CUOTA_ALTA_CONV = 8.0
-CONVICCION_EV_MIN = 1.0
-MARGEN_XG_OU = 0.4
-DIVERGENCIA_MAX_OU = 0.05
-MARGEN_PREDICTIVO_OU = 0.05
-
-def min_ev_escalado(prob):
-    if prob >= 0.50: return 0.03
-    if prob >= 0.40: return 0.08
-    if prob >= 0.33: return 0.12
-    return 999.0
+import sqlite3, math, re
 
 conn = sqlite3.connect('fondo_quant.db')
 c = conn.cursor()
 c.execute("""
-    SELECT id_partido, pais, local, visita,
-           prob_1, prob_x, prob_2, prob_o25, prob_u25,
-           cuota_1, cuota_x, cuota_2, cuota_o25, cuota_u25,
-           goles_l, goles_v, apuesta_1x2, apuesta_ou,
-           xg_local, xg_visita
+    SELECT id_partido, local, visita, pais, fecha,
+           prob_1, prob_x, prob_2,
+           cuota_1, cuota_x, cuota_2,
+           apuesta_1x2, stake_1x2,
+           goles_l, goles_v
     FROM partidos_backtest
-    WHERE goles_l IS NOT NULL AND prob_1 IS NOT NULL AND cuota_1 > 1
-    ORDER BY id_partido ASC
+    WHERE estado = 'Liquidado'
+      AND goles_l IS NOT NULL AND goles_v IS NOT NULL
+    ORDER BY fecha
 """)
 rows = c.fetchall()
 conn.close()
 
-print(f"Partidos liquidados: {len(rows)}\n")
+BANKROLL       = 100000.0
+MAX_KELLY_PCT  = 0.025
+FRACCION_KELLY = 0.50
+FLOOR_MIN      = 0.33
+EV_BASE        = 0.03
+TECHO          = 5.0
 
-# ============================================================
-# Clasificar cada partido por el motivo real de bloqueo 1X2
-# ============================================================
+def sf(v):
+    try: return float(v) if v else 0.0
+    except: return 0.0
 
-motivos = {
-    'APOSTAR':            {'n': 0, 'hits': 0, 'evs': []},
-    'Floor Prob (<33%)':  {'n': 0, 'hits': 0, 'evs': []},
-    'EV Insuf Escalado':  {'n': 0, 'hits': 0, 'evs': []},
-    'Margen Predictivo':  {'n': 0, 'hits': 0, 'evs': []},
-    'Techo Cuota':        {'n': 0, 'hits': 0, 'evs': []},
-    'Info Oculta (div)':  {'n': 0, 'hits': 0, 'evs': []},
-    'Riesgo/Beneficio':   {'n': 0, 'hits': 0, 'evs': []},
-    'Sin Valor':          {'n': 0, 'hits': 0, 'evs': []},
-    'Sin Cuotas':         {'n': 0, 'hits': 0, 'evs': []},
-    'Cubierto C2B/C3':    {'n': 0, 'hits': 0, 'evs': []},
-}
+def min_ev_esc(prob):
+    if prob >= 0.50: return 0.03
+    if prob >= 0.40: return 0.08
+    if prob >= FLOOR_MIN: return 0.12
+    return 999.0
 
-for r in rows:
-    id_p, pais, local, visita, p1, px, p2, po, pu, c1, cx, c2, co, cu, gl, gv, ap1, apou, xgl, xgv = r
-    if not all([p1, px, p2, c1, cx, c2]) or not all(v > 1 for v in [c1, cx, c2]):
-        motivos['Sin Cuotas']['n'] += 1
-        continue
+def kelly_stake(prob, cuota):
+    ev = prob * cuota - 1
+    if ev <= 0 or cuota <= 1: return 0.0
+    kelly = (prob * cuota - 1) / (cuota - 1)
+    return round(BANKROLL * min(kelly * FRACCION_KELLY, MAX_KELLY_PCT), 2)
 
-    # Excluir EMPATE como candidato (igual que V4.3)
-    probs  = {'LOCAL': p1, 'VISITA': p2}
-    cuotas = {'LOCAL': c1, 'VISITA': c2}
+def gano_bet(pick, gl, gv):
+    if 'LOCAL'  in pick: return gl > gv
+    if 'VISITA' in pick: return gv > gl
+    return None
 
-    probs_all = [p1, px, p2]
-    probs_ord = sorted(probs_all)
-    margen_pred_ok = (probs_ord[2] - probs_ord[1]) >= MARGEN_PREDICTIVO_1X2
+bets_reales      = []
+pasar_rv         = []
+pasar_floor      = []
+pasar_ev_esc     = []
+pasar_margen     = []
+pasar_sin_cuotas = []
 
-    fav_key  = max(probs, key=probs.get)
-    p_fav    = probs[fav_key]
-    c_fav    = cuotas[fav_key]
-    ev_fav   = (p_fav * c_fav) - 1
-    div_fav  = p_fav - (1.0 / c_fav)
-    umb_fav  = UMBRAL_EV_BASE * (0.5 / p_fav) if p_fav > 0 else 999
+for row in rows:
+    (id_p, local, visita, pais, fecha,
+     p1, px, p2, c1, cx, c2,
+     apuesta, stake, gl, gv) = row
+    p1,px,p2 = sf(p1),sf(px),sf(p2)
+    c1,cx,c2 = sf(c1),sf(cx),sf(c2)
+    gl,gv = int(gl),int(gv)
+    stake = sf(stake)
+    apuesta = str(apuesta)
+    info = dict(local=local,visita=visita,pais=pais,fecha=fecha,
+                p1=p1,px=px,p2=p2,c1=c1,cx=cx,c2=c2,gl=gl,gv=gv)
+    if '[GANADA]' in apuesta or '[PERDIDA]' in apuesta:
+        ganada = '[GANADA]' in apuesta
+        pick = 'LOCAL' if 'LOCAL' in apuesta else 'VISITA'
+        cuota = c1 if pick=='LOCAL' else c2
+        bets_reales.append({**info,'pick':pick,'ganada':ganada,'stake':stake,'cuota':cuota})
+    elif '[PASAR] Riesgo/Beneficio' in apuesta:
+        pasar_rv.append(info)
+    elif '[PASAR] Floor Prob' in apuesta:
+        pasar_floor.append(info)
+    elif '[PASAR] EV Insuf' in apuesta:
+        m = re.search(r'EV Insuf \(([0-9.]+)<', apuesta)
+        ev_val = float(m.group(1)) if m else 0.0
+        pasar_ev_esc.append({**info,'ev_registrado':ev_val,'apuesta':apuesta})
+    elif '[PASAR] Margen Predictivo' in apuesta:
+        pasar_margen.append(info)
+    elif '[PASAR] Sin Cuotas' in apuesta:
+        pasar_sin_cuotas.append(info)
 
-    fav_mkt  = min(cuotas, key=cuotas.get)
-    desacuer = fav_key != fav_mkt
+def implied_pick(info):
+    p1,p2,c1,c2 = info['p1'],info['p2'],info['c1'],info['c2']
+    if p1<=0 or p2<=0 or c1<=0 or c2<=0: return None,None,None
+    if p1>=p2: return 'LOCAL',p1,c1
+    else: return 'VISITA',p2,c2
 
-    outcome  = {'LOCAL': gl > gv, 'VISITA': gl < gv}[fav_key]
+n_act  = len(bets_reales)
+g_act  = sum(1 for b in bets_reales if b['ganada'])
+st_act = sum(b['stake'] for b in bets_reales)
+pnl_act = sum(b['stake']*(b['cuota']-1) if b['ganada'] else -b['stake'] for b in bets_reales)
 
-    # Determinar motivo real de bloqueo (en orden de prioridad de los caminos)
-    if not margen_pred_ok:
-        motivo = 'Margen Predictivo'
-    elif p_fav < FLOOR_PROB_MIN:
-        motivo = 'Floor Prob (<33%)'
-    elif c_fav <= TECHO_CUOTA_1X2 and ev_fav >= umb_fav and div_fav <= DIVERGENCIA_MAX_1X2:
-        motivo = 'APOSTAR'  # Camino 1
-    elif desacuer and p_fav >= DESACUERDO_PROB_MIN and DIVERGENCIA_MAX_1X2 < div_fav <= DIVERGENCIA_DESACUERDO_MAX and ev_fav >= min_ev_escalado(p_fav) and c_fav <= TECHO_CUOTA_ALTA_CONV:
-        motivo = 'APOSTAR'  # Camino 2B
-    elif p_fav >= FLOOR_PROB_MIN and ev_fav >= CONVICCION_EV_MIN and c_fav <= TECHO_CUOTA_ALTA_CONV:
-        motivo = 'APOSTAR'  # Camino 3
-    elif ev_fav < min_ev_escalado(p_fav):
-        motivo = 'EV Insuf Escalado'
-    elif c_fav > TECHO_CUOTA_ALTA_CONV:
-        motivo = 'Techo Cuota'
-    elif div_fav > DIVERGENCIA_DESACUERDO_MAX:
-        motivo = 'Info Oculta (div)'
+print('='*78)
+print('ANALISIS DE FILTROS - BACKTEST LIQUIDADOS')
+print('='*78)
+print('\n[BASELINE] SISTEMA ACTUAL')
+print(f'  Apuestas: {n_act}  |  Ganadoras: {g_act}  |  Hit: {g_act/n_act*100:.1f}%')
+print(f'  Stake total: EUR {st_act:,.0f}  |  P&L: EUR {pnl_act:+,.0f}  |  Yield: {pnl_act/st_act*100:+.1f}%')
+
+def analizar_grupo(grupo, etiqueta, descripcion):
+    print(f'\n{etiqueta}  ({len(grupo)} casos)')
+    print(f'  Descripcion: {descripcion}')
+    det = []
+    for info_raw in grupo:
+        if 'ev_registrado' in info_raw:
+            info = {k:v for k,v in info_raw.items() if k not in ('ev_registrado','apuesta')}
+            ev_reg = info_raw.get('ev_registrado',0)
+        else:
+            info = info_raw
+            ev_reg = None
+        pick,prob,cuota = implied_pick(info)
+        if pick is None: continue
+        ev = prob*cuota-1
+        umb_base = EV_BASE*(0.5/prob) if prob>0 else 999
+        umb_esc  = min_ev_esc(prob)
+        stk = kelly_stake(prob,cuota)
+        g = gano_bet(pick,info['gl'],info['gv'])
+        if g is None: continue
+        det.append(dict(pick=pick,prob=round(prob,3),cuota=cuota,ev=round(ev,4),
+                        umb_base=round(umb_base,4),umb_esc=round(umb_esc,3),
+                        stake=stk,gano=g,info=info,ev_reg=ev_reg))
+        icon = 'V' if g else 'X'
+        ev_show = ev_reg if ev_reg is not None else ev
+        print(f'  [{icon}] {info["fecha"][:10]} | {info["pais"]:10} | '
+              f'{info["local"][:16]:16} vs {info["visita"][:14]:14} | '
+              f'{pick:6} p={prob:.2f} c={cuota:.2f} EV={ev_show:+.3f} stk=EUR{stk:.0f}')
+    # Separar casos con stake posible (EV>0 -> Kelly>0) de casos con EV<0 (no apostables)
+    det_apostables = [d for d in det if d['stake'] > 0]
+    det_neg_ev     = [d for d in det if d['stake'] <= 0]
+    if det_neg_ev:
+        print(f'  *** {len(det_neg_ev)} casos con EV<0: aunque se quite el filtro, Kelly=0 (no apostables)')
+        print(f'      Esto ocurre cuando el mercado esta MAS seguro que el modelo: cuota muy baja vs prob modelo.')
+    if det_apostables:
+        nD=len(det_apostables); gD=sum(1 for d in det_apostables if d['gano'])
+        sD=sum(d['stake'] for d in det_apostables)
+        pD=sum(d['stake']*(d['cuota']-1) if d['gano'] else -d['stake'] for d in det_apostables)
+        print(f'  -> Casos con EV>0 que si podrian abrirse: N={nD}  Hit={gD/nD*100:.0f}%  '
+              f'Yield={pD/sD*100:+.1f}%  P&L=EUR{pD:+,.0f}')
     else:
-        motivo = 'Sin Valor'
+        print(f'  -> Ninguno con EV positivo: eliminar este filtro no abrirîa ninguna apuesta adicional.')
+    return det_apostables  # solo devolver los apostables para el resumen
 
-    motivos[motivo]['n'] += 1
-    motivos[motivo]['hits'] += int(outcome)
-    motivos[motivo]['evs'].append(ev_fav)
+det_rv    = analizar_grupo(pasar_rv,    '[A] Riesgo/Beneficio', 'EV positivo pero bajo el umbral minimo EV*0.5/p')
+det_floor = analizar_grupo(pasar_floor, '[B] Floor Prob <33%',  'Modelo tiene pick pero prob entre 30-33%')
+det_evesc = analizar_grupo(pasar_ev_esc,'[C] EV Insuf (escalado)','Paso EV basico pero no el umbral escalado por confianza')
 
-print("=" * 70)
-print("1. MOTIVOS DE BLOQUEO 1X2 y hit rate real del favorito del modelo")
-print("=" * 70)
-print(f"  {'Motivo':<25} {'N':>4}  {'Hit Real':>9}  {'EV avg':>8}  {'Accion'}")
-print(f"  {'-'*65}")
-for motivo, v in sorted(motivos.items(), key=lambda x: -x[1]['n']):
-    n = v['n']
-    if n == 0: continue
-    hit = v['hits'] / n
-    avg_ev = sum(v['evs']) / len(v['evs']) if v['evs'] else 0
-    # Señal de alerta: hit alto pero bloqueado
-    alerta = ''
-    if motivo != 'APOSTAR' and hit >= 0.55: alerta = '  <<< HIT ALTO'
-    if motivo != 'APOSTAR' and hit >= 0.65: alerta = '  <<< OPORTUNIDAD'
-    print(f"  {motivo:<25} {n:>4}  {hit:>9.1%}  {avg_ev:>8.3f}{alerta}")
+print()
+print('='*78)
+print('TABLA RESUMEN: BASELINE vs CADA FILTRO ELIMINADO')
+print('='*78)
+print(f'  {"ESCENARIO":46s} | {"N":>4} | {"HIT%":>5} | {"YIELD%":>7} | {"P&L EUR":>9}')
+print('  '+'-'*75)
 
-# ============================================================
-# 2. EV Insuf Escalado: desglose por rango de prob
-# ============================================================
-print("\n" + "=" * 70)
-print("2. EV INSUF ESCALADO: desglose por rango de prob y umbral requerido")
-print("=" * 70)
+def fila(label, extras):
+    nE=len(extras); gE=sum(1 for d in extras if d['gano'])
+    stE=sum(d['stake'] for d in extras)
+    pE=sum(d['stake']*(d['cuota']-1) if d['gano'] else -d['stake'] for d in extras)
+    nT=n_act+nE; gT=g_act+gE; stT=st_act+stE; pT=pnl_act+pE
+    hit=gT/nT*100 if nT else 0
+    yld=pT/stT*100 if stT else 0
+    delta=pT-pnl_act
+    d_str=f'({delta:+.0f})'
+    print(f'  {label:46s} | {nT:>4} | {hit:>4.1f}% | {yld:>+6.1f}% | {pT:>+9.0f} {d_str}')
 
-ev_insuf = []
-for r in rows:
-    id_p, pais, local, visita, p1, px, p2, po, pu, c1, cx, c2, co, cu, gl, gv, ap1, apou, xgl, xgv = r
-    if not all([p1, px, p2, c1, cx, c2]) or not all(v > 1 for v in [c1, cx, c2]): continue
-    probs  = {'LOCAL': p1, 'VISITA': p2}
-    cuotas = {'LOCAL': c1, 'VISITA': c2}
-    probs_all = sorted([p1, px, p2])
-    if (probs_all[2] - probs_all[1]) < MARGEN_PREDICTIVO_1X2: continue
-    fav_key = max(probs, key=probs.get)
-    p_fav = probs[fav_key]; c_fav = cuotas[fav_key]
-    ev_fav = (p_fav * c_fav) - 1
-    div_fav = p_fav - (1.0 / c_fav)
-    fav_mkt = min(cuotas, key=cuotas.get)
-    desacuer = fav_key != fav_mkt
-
-    if p_fav < FLOOR_PROB_MIN: continue
-    if c_fav <= TECHO_CUOTA_1X2 and ev_fav >= (UMBRAL_EV_BASE*(0.5/p_fav)) and div_fav <= DIVERGENCIA_MAX_1X2: continue
-    if desacuer and p_fav >= DESACUERDO_PROB_MIN and DIVERGENCIA_MAX_1X2 < div_fav <= DIVERGENCIA_DESACUERDO_MAX and ev_fav >= min_ev_escalado(p_fav) and c_fav <= TECHO_CUOTA_ALTA_CONV: continue
-    if p_fav >= FLOOR_PROB_MIN and ev_fav >= CONVICCION_EV_MIN and c_fav <= TECHO_CUOTA_ALTA_CONV: continue
-
-    ev_min = min_ev_escalado(p_fav)
-    if ev_fav < ev_min:
-        outcome = {'LOCAL': gl > gv, 'VISITA': gl < gv}[fav_key]
-        ev_insuf.append({'pais': pais, 'prob': p_fav, 'cuota': c_fav, 'ev': ev_fav,
-                         'ev_min': ev_min, 'div': div_fav, 'hit': outcome, 'desacuer': desacuer})
-
-rangos_ev = {'33-40%': [], '40-50%': [], '50-65%': []}
-for caso in ev_insuf:
-    p = caso['prob']
-    rk = '33-40%' if p < 0.40 else ('40-50%' if p < 0.50 else '50-65%')
-    rangos_ev[rk].append(caso)
-
-for rk, casos in rangos_ev.items():
-    if not casos: continue
-    hits = sum(1 for c in casos if c['hit'])
-    avg_ev = sum(c['ev'] for c in casos) / len(casos)
-    avg_ev_min = sum(c['ev_min'] for c in casos) / len(casos)
-    avg_c = sum(c['cuota'] for c in casos) / len(casos)
-    print(f"  prob {rk}: n={len(casos)}  hit={hits/len(casos):.1%}  avg_EV={avg_ev:.3f}  umbral_req={avg_ev_min:.3f}  cuota={avg_c:.2f}")
-
-# ============================================================
-# 3. Margen predictivo: ¿qué se bloquea?
-# ============================================================
-print("\n" + "=" * 70)
-print("3. MARGEN PREDICTIVO: hit rate de lo que bloquea")
-print("=" * 70)
-
-margen_casos = []
-for r in rows:
-    id_p, pais, local, visita, p1, px, p2, po, pu, c1, cx, c2, co, cu, gl, gv, ap1, apou, xgl, xgv = r
-    if not all([p1, px, p2]): continue
-    probs_all = sorted([p1, px, p2])
-    margen = probs_all[2] - probs_all[1]
-    if margen >= MARGEN_PREDICTIVO_1X2: continue
-    # Si no hubiera filtro, el modelo apostaría al favorito
-    probs = {'LOCAL': p1, 'VISITA': p2}
-    cuotas = {'LOCAL': c1, 'VISITA': c2} if c1 and c2 and c1>1 and c2>1 else None
-    if not cuotas: continue
-    fav_key = max(probs, key=probs.get)
-    p_fav = probs[fav_key]; c_fav = cuotas[fav_key]
-    ev = (p_fav * c_fav) - 1
-    outcome = {'LOCAL': gl > gv, 'VISITA': gl < gv}[fav_key]
-    margen_casos.append({'margen': margen, 'prob': p_fav, 'ev': ev, 'hit': outcome, 'pais': pais})
-
-if margen_casos:
-    hits = sum(1 for c in margen_casos if c['hit'])
-    avg_margen = sum(c['margen'] for c in margen_casos) / len(margen_casos)
-    avg_prob = sum(c['prob'] for c in margen_casos) / len(margen_casos)
-    print(f"  Bloqueados por margen pred: {len(margen_casos)}  hit={hits/len(margen_casos):.1%}  avg_margen={avg_margen:.3f}  avg_prob={avg_prob:.1%}")
-    # Por sub-rangos de margen
-    for umbral in [0.01, 0.02, 0.03, 0.04, 0.05]:
-        sub = [c for c in margen_casos if c['margen'] >= umbral]
-        if sub:
-            h = sum(1 for c in sub if c['hit'])
-            print(f"    margen >= {umbral:.2f}: n={len(sub)}  hit={h/len(sub):.1%}")
-
-# ============================================================
-# 4. O/U: qué bloquea el filtro xG y el de divergencia
-# ============================================================
-print("\n" + "=" * 70)
-print("4. O/U: filtros activos y hit rate de lo que bloquean")
-print("=" * 70)
-
-ou_motivos = {'APOSTAR': [], 'xG Margen': [], 'Margen Pred': [], 'Div Alta': [], 'Sin Valor': []}
-
-for r in rows:
-    id_p, pais, local, visita, p1, px, p2, po, pu, c1, cx, c2, co, cu, gl, gv, ap1, apou, xgl, xgv = r
-    if not (po and pu and co and cu and co > 1 and cu > 1): continue
-    es_over = (gl + gv) > 2
-    fav_ou = 'OVER' if po > pu else 'UNDER'
-    hit = (fav_ou == 'OVER' and es_over) or (fav_ou == 'UNDER' and not es_over)
-    p_fav = max(po, pu); c_fav = co if po > pu else cu
-    ev = (p_fav * c_fav) - 1
-    div = p_fav - (1.0 / c_fav)
-    xg_total = (xgl + xgv) if (xgl and xgv) else None
-
-    if xg_total and abs(xg_total - 2.5) < MARGEN_XG_OU:
-        ou_motivos['xG Margen'].append({'hit': hit, 'xgt': xg_total, 'ev': ev, 'pais': pais})
-    elif abs(po - pu) < MARGEN_PREDICTIVO_OU:
-        ou_motivos['Margen Pred'].append({'hit': hit, 'ev': ev, 'pais': pais})
-    elif ev > (UMBRAL_EV_BASE * (0.5 / p_fav)) and c_fav <= 6.0 and div <= DIVERGENCIA_MAX_OU:
-        ou_motivos['APOSTAR'].append({'hit': hit, 'ev': ev, 'pais': pais})
-    elif div > DIVERGENCIA_MAX_OU:
-        ou_motivos['Div Alta'].append({'hit': hit, 'div': div, 'ev': ev, 'pais': pais})
-    else:
-        ou_motivos['Sin Valor'].append({'hit': hit, 'ev': ev, 'pais': pais})
-
-for motivo, casos in ou_motivos.items():
-    if not casos: continue
-    hits = sum(1 for c in casos if c['hit'])
-    avg_ev = sum(c['ev'] for c in casos) / len(casos)
-    alerta = '  <<< OPORTUNIDAD' if motivo != 'APOSTAR' and hits/len(casos) >= 0.60 else ''
-    print(f"  {motivo:<15}: n={len(casos):3d}  hit={hits/len(casos):.1%}  avg_EV={avg_ev:.3f}{alerta}")
-
-# Desglose del filtro xG por delta
-xg_casos = ou_motivos['xG Margen']
-if xg_casos:
-    print(f"\n  Desglose xG Margen por delta al umbral 2.5:")
-    for delta_min, delta_max in [(0.0, 0.1), (0.1, 0.2), (0.2, 0.3), (0.3, 0.4)]:
-        sub = [c for c in xg_casos if 'xgt' in c and delta_min <= abs(c['xgt'] - 2.5) < delta_max]
-        if sub:
-            h = sum(1 for c in sub if c['hit'])
-            print(f"    delta {delta_min:.1f}-{delta_max:.1f}: n={len(sub)}  hit={h/len(sub):.1%}")
-
-# ============================================================
-# 5. RESUMEN: cuantas apuestas adicionales habilitaria cada cambio
-# ============================================================
-print("\n" + "=" * 70)
-print("5. RESUMEN: apuestas adicionales posibles y costo/beneficio")
-print("=" * 70)
-
-opciones = []
-
-# EV escalado 40-50%: umbral 8% -> probar con 5%
-sub = [c for c in ev_insuf if 0.40 <= c['prob'] < 0.50 and c['ev'] >= 0.05]
-if sub:
-    h = sum(1 for c in sub if c['hit'])
-    opciones.append(('Bajar EV min 40-50% a 5%', len(sub), h/len(sub), 'Riesgo bajo'))
-
-# EV escalado 33-40%: umbral 12% -> probar con 8%
-sub2 = [c for c in ev_insuf if 0.33 <= c['prob'] < 0.40 and c['ev'] >= 0.08]
-if sub2:
-    h2 = sum(1 for c in sub2 if c['hit'])
-    opciones.append(('Bajar EV min 33-40% a 8%', len(sub2), h2/len(sub2), 'Riesgo medio'))
-
-# Margen predictivo: bajar de 5% a 2%
-sub3 = [c for c in margen_casos if c['margen'] >= 0.02]
-if sub3:
-    h3 = sum(1 for c in sub3 if c['hit'])
-    opciones.append(('Bajar margen pred a 2%', len(sub3), h3/len(sub3), 'Riesgo bajo'))
-
-# xG OU: bajar margen de 0.4 a 0.25
-sub4 = [c for c in ou_motivos['xG Margen'] if 'xgt' in c and abs(c['xgt'] - 2.5) >= 0.25]
-if sub4:
-    h4 = sum(1 for c in sub4 if c['hit'])
-    opciones.append(('Bajar xG margen O/U a 0.25', len(sub4), h4/len(sub4), 'Riesgo bajo'))
-
-# Div O/U alta: relajar a 0.10
-sub5 = [c for c in ou_motivos['Div Alta'] if c.get('div', 999) <= 0.10]
-if sub5:
-    h5 = sum(1 for c in sub5 if c['hit'])
-    opciones.append(('Relajar div O/U a 0.10', len(sub5), h5/len(sub5), 'Riesgo medio'))
-
-print(f"  {'Opcion':<35} {'Bets+':>6}  {'Hit':>7}  {'Riesgo'}")
-print(f"  {'-'*65}")
-for nombre, n, hit, riesgo in sorted(opciones, key=lambda x: -x[2]):
-    alerta = ' ***' if hit >= 0.60 else ''
-    print(f"  {nombre:<35} {n:>6}  {hit:>7.1%}  {riesgo}{alerta}")
+fila(f'ACTUAL  ({n_act} apuestas)',                       [])
+print('  '+'-'*75)
+fila(f'Sin Riesgo/Beneficio   (+{len(det_rv)} nuevas)',    det_rv)
+fila(f'Sin Floor Prob         (+{len(det_floor)} nuevas)', det_floor)
+fila(f'Sin EV Insuf escalado  (+{len(det_evesc)} nuevas)', det_evesc)
+print('  '+'-'*75)
+all_ex = det_rv+det_floor+det_evesc
+fila(f'Sin TODOS los filtros  (+{len(all_ex)} nuevas)',    all_ex)
+print()
+print(f'  [INFO] {len(pasar_margen)} PASAR Margen Predictivo: modelo sin conviccion entre probs, no evaluable')
+print(f'  [INFO] {len(pasar_sin_cuotas)} PASAR Sin Cuotas: sin datos de odds en ese momento, no evaluable')
+print(f'  [INFO] Techo Cuota (>5.0): 0 casos en el backtest actual')

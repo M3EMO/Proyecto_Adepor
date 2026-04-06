@@ -2,10 +2,12 @@ import sqlite3
 import requests
 import gestor_nombres
 import math
+import sys
+from collections import defaultdict
 from datetime import datetime, timedelta
 
 # ==========================================
-# MOTOR DATA V9.0 (REGRESIÓN BAYESIANA INTEGRADA)
+# MOTOR DATA V9.1 (REGRESIÓN BAYESIANA INTEGRADA + --rebuild)
 # Responsabilidad: Ajuste de xG, cálculo de EMA y anclaje a la media.
 # ==========================================
 
@@ -100,8 +102,28 @@ def ajustar_xg_por_estado_juego(xg_crudo, goles_a_favor, goles_en_contra):
         return xg_crudo
 
 def main():
-    print("[SISTEMA] Iniciando Motor Data V9.0 (Regresión Bayesiana Integrada)...")
-    
+    # --- FLAG --rebuild ---
+    # Uso: py motor_data.py --rebuild
+    # Efecto: borra el historial EMA (ema_procesados, historial_equipos, ligas_stats)
+    # y re-procesa desde PROFUNDIDAD_INICIAL. Util cuando se cambia el modelo de xG
+    # o la logica EMA y se quiere recalibrar desde cero.
+    # ADVERTENCIA: operacion destructiva e irreversible. Requiere confirmacion manual.
+    modo_rebuild = '--rebuild' in sys.argv
+    if modo_rebuild:
+        print("[REBUILD] *** MODO RECONSTRUCCION SOLICITADO ***")
+        print("[REBUILD] Se borrarán TODAS las tablas EMA:")
+        print("          - ema_procesados  (historial de partidos procesados)")
+        print("          - historial_equipos (EMA de todos los equipos)")
+        print("          - ligas_stats       (estadísticas de liga: RHO, coef_corner, etc.)")
+        print("[REBUILD] El sistema re-procesará desde PROFUNDIDAD_INICIAL (210 dias).")
+        confirmacion = input("[REBUILD] Escribe CONFIRMAR para continuar, o cualquier otra cosa para cancelar: ").strip()
+        if confirmacion != "CONFIRMAR":
+            print("[REBUILD] Cancelado. No se ha modificado ningún dato.")
+            return
+        print("[REBUILD] Confirmado. Iniciando limpieza...")
+
+    print("[SISTEMA] Iniciando Motor Data V9.1 (Regresión Bayesiana Integrada)...")
+
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     
@@ -129,6 +151,15 @@ def main():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS ema_procesados (id_partido TEXT PRIMARY KEY)
     """)
+
+    # Ejecucion del REBUILD: borrar datos EMA para forzar re-procesamiento completo
+    if modo_rebuild:
+        cursor.execute("DELETE FROM ema_procesados")
+        cursor.execute("DELETE FROM historial_equipos")
+        cursor.execute("DELETE FROM ligas_stats")
+        conn.commit()
+        n_proc = cursor.rowcount  # rowcount del ultimo DELETE
+        print(f"[REBUILD] Tablas vaciadas. El sistema reclasificara todas las ligas a PROFUNDIDAD_INICIAL.")
 
     cursor.execute("SELECT equipo_norm, equipo_real, liga, ema_xg_favor_home, ema_xg_contra_home, partidos_home, ema_xg_favor_away, ema_xg_contra_away, partidos_away, ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away FROM historial_equipos")
     estado_equipos = {row[0]: {"nombre": row[1], "liga": row[2], "fav_home": row[3], "con_home": row[4], "p_home": row[5], "fav_away": row[6], "con_away": row[7], "p_away": row[8], "var_fh": row[9] or 0.1, "var_ch": row[10] or 0.1, "var_fa": row[11] or 0.1, "var_ca": row[12] or 0.1} for row in cursor.fetchall()}
@@ -195,20 +226,29 @@ def main():
 
     # --- FASE DE ANÁLISIS: AGRUPAR LIGAS POR NECESIDAD DE ESCANEO ---
     print("[ANALISIS] Agrupando ligas por profundidad de escaneo requerida...")
-    UMBRAL_PARTIDOS_MINIMOS = 20
-    UMBRAL_RECIEN_ASCENDIDO = 10  # Equipos con <= este total se excluyen del calculo de modo
-    PROFUNDIDAD_INICIAL = 210
-    PROFUNDIDAD_PROFUNDA = 140
-    PROFUNDIDAD_MANTENIMIENTO = 7
+    UMBRAL_PARTIDOS_MINIMOS = 15   # V9.1: bajado de 20. Con 15 partidos el EMA ya es fiable
+                                   # (w_ema=75% con N=15 y N0=5). Evita que Brasil quede en
+                                   # PROFUNDA por equipos con 17-18 partidos bien calibrados.
+    UMBRAL_RECIEN_ASCENDIDO = 10   # Equipos con <= este total se excluyen del cálculo de modo
+    PROFUNDIDAD_INICIAL     = 365  # Primera vez que aparece la liga en DB
+    PROFUNDIDAD_PROFUNDA    = 140  # Liga con muchos equipos por bajo umbral
+    PROFUNDIDAD_MANTENIMIENTO = 7  # Liga consolidada: solo nuevos datos
 
-    grupos_de_escaneo = {
-        PROFUNDIDAD_INICIAL: [],
-        PROFUNDIDAD_PROFUNDA: [],
-        PROFUNDIDAD_MANTENIMIENTO: []
+    # Profundidad PROFUNDA por liga para ligas estacionales.
+    # Noruega (Eliteserien): temporada Abril-Noviembre. Al comenzar el año siguiente,
+    # la temporada anterior tiene >210 días de antigüedad y escapa al radar.
+    # 365 días garantiza que el escaneo profundo capture el año completo anterior.
+    PROFUNDIDAD_PROFUNDA_POR_LIGA = {
+        "Noruega": 365,
     }
+
+    # grupos_de_escaneo: clave = dias, valor = [(codigo_liga, pais)]
+    # Usamos defaultdict para soportar profundidades variables por liga (ej. Noruega=365)
+    grupos_de_escaneo = defaultdict(list)
 
     for codigo_liga, pais in LIGAS_ESPN.items():
         equipos_de_la_liga = {k: v for k, v in estado_equipos.items() if v.get('liga') == pais}
+        prof_profunda_liga = PROFUNDIDAD_PROFUNDA_POR_LIGA.get(pais, PROFUNDIDAD_PROFUNDA)
 
         if not equipos_de_la_liga:
             dias_a_escanear = PROFUNDIDAD_INICIAL
@@ -223,7 +263,7 @@ def main():
             recien_ascendidos = len(equipos_de_la_liga) - len(equipos_establecidos)
 
             if not equipos_establecidos:
-                dias_a_escanear = PROFUNDIDAD_PROFUNDA
+                dias_a_escanear = prof_profunda_liga
                 print(f"   [GRUPO PROFUNDO] Liga '{pais}' sin equipos establecidos ({dias_a_escanear} días).")
                 grupos_de_escaneo[dias_a_escanear].append((codigo_liga, pais))
             else:
@@ -232,7 +272,7 @@ def main():
                 porcentaje_pocos_datos = len(equipos_con_pocos_datos) / len(equipos_establecidos)
 
                 if porcentaje_pocos_datos > 0.15:
-                    dias_a_escanear = PROFUNDIDAD_PROFUNDA
+                    dias_a_escanear = prof_profunda_liga
                     print(f"   [GRUPO PROFUNDO] Liga '{pais}' necesita re-calibración ({dias_a_escanear} días) "
                           f"({porcentaje_pocos_datos:.0%} establecidos con pocos datos, {recien_ascendidos} ascendidos excluidos).")
                     grupos_de_escaneo[dias_a_escanear].append((codigo_liga, pais))

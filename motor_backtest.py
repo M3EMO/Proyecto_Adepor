@@ -1,10 +1,12 @@
 import sqlite3
 import requests
 import gestor_nombres
+import json
+import os
 from datetime import datetime, timedelta
 
 # ==========================================
-# MOTOR BACKTEST V7.0 (RESILIENTE CON FAILOVER)
+# MOTOR BACKTEST V7.1 (RESILIENTE CON FAILOVER)
 # Responsabilidad: Liquidación de resultados con conmutación a API secundaria.
 # ==========================================
 
@@ -16,11 +18,15 @@ MAPA_LIGAS_ESPN = {
 }
 
 # --- CONFIGURACIÓN DE FAILOVER ---
-API_KEYS_ODDS = [
-    "4cae986ac10670871e798390fdcb867c", "ac8262657731e6a0d8f3456697969fd0",
-    "d5c54a43b0edf957f2455b161121dc68", "9dca75c9208891d279c764cad910111a",
-    "f66391a91a19e99bce4666178474bd18", "f0a158af49776d3bc01a9bc983db8ff9"
-]
+# Las claves se cargan desde config.json para no exponerlas en el código fuente.
+_CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
+try:
+    with open(_CONFIG_FILE, 'r', encoding='utf-8') as _f:
+        _config = json.load(_f)
+    API_KEYS_ODDS = _config['api_keys_odds']
+except (FileNotFoundError, KeyError) as _e:
+    print(f"[ADVERTENCIA] No se pudo cargar config.json ({_e}). API de respaldo desactivada.")
+    API_KEYS_ODDS = []
 KEY_INDEX = 0
 
 MAPA_LIGAS_ODDS = {

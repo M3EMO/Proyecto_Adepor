@@ -1,6 +1,5 @@
 import sqlite3
 import requests
-import unicodedata
 import json
 import os
 import difflib

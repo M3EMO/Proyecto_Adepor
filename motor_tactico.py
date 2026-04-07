@@ -1,25 +1,20 @@
 import sqlite3
 import requests
-import unicodedata
 from datetime import datetime, timedelta
 import gestor_nombres
+from config_sistema import DB_NAME, API_KEY_FOOTBALL, MAPA_LIGAS_API_FOOTBALL
 
 # ==========================================
-# MOTOR TÁCTICO V3.0 (EL ANALISTA INTEGRADO)
+# MOTOR TÁCTICO V3.1 (EL ANALISTA INTEGRADO)
 # Responsabilidad: Extracción de Formaciones, Fusión con Motor DTs y Upsert SQLite.
+# V3.1: API key movida a config.json. MAPA_LIGAS_API centralizado en config_sistema.
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
-
-# 🚨 TU LLAVE DE API-FOOTBALL 🚨
-API_FOOTBALL_KEY = "95a21929923fef5aff0e34b64f2b17c9"
 BASE_URL = "https://v3.football.api-sports.io"
-HEADERS = {"x-apisports-key": API_FOOTBALL_KEY}
+HEADERS  = {"x-apisports-key": API_KEY_FOOTBALL}
 
-MAPA_LIGAS_API = {
-    "Argentina": 128, "Inglaterra": 39, "Brasil": 71, 
-    "Noruega": 69, "Turquia": 203
-}
+# Alias local para compatibilidad con el resto del archivo
+MAPA_LIGAS_API = MAPA_LIGAS_API_FOOTBALL
 
 def preparar_base_datos(cursor):
     """Crea las columnas tácticas y de DT si no existen en la bóveda"""

@@ -69,7 +69,12 @@ DIVERGENCIA_MAX_1X2 = 0.15      # Manifiesto II.E — fallback global
 # DIVERGENCIA_MAX_OU eliminada (V4.9): el filtro div<=0.05 bloqueaba el 100% de las apuestas OU.
 # El modelo Poisson/xG diverge estructuralmente del mercado en 0.27-0.61 — eso es esperado,
 # no una señal de error. El guard correcto es EV > umbral + Fix B (xG margen asimetrico).
-# Backtest 23 casos: sin este filtro -> 73.9% hit, +55.7% yield.
+
+# Factor de calibración xG para O/U (V4.9) — OLS histórico: goles = 0.627 × xG_ema (R²=0.12, n=58)
+# El xG sobreestima goles un 37%. Para O/U el valor absoluto importa (umbral fijo en 2.5 goles),
+# así que se calibra lambda SOLO para po/pu. 1X2 no se toca: el ratio local/visita es correcto.
+# Backtest: factor 0.627 -> 15 bets, 73.3% hit, +63.5% yield (vs 23 bets sin corr: +55.7%)
+FACTOR_CORR_XG_OU = 0.627
 
 # Fix #4 (V4.4): Divergencia 1X2 diferenciada por eficiencia de mercado por liga.
 # Razonamiento:
@@ -117,6 +122,12 @@ DIVERGENCIA_DESACUERDO_MAX = 0.30  # Techo de divergencia para este regimen
 # El mercado sobreestima aun mas (30.1%). Apostar empate sistematicamente destruye EV.
 # Ningun camino puede seleccionar EMPATE como pick final.
 APUESTA_EMPATE_PERMITIDA = False
+
+# Mercado O/U 2.5 (complementario — opera solo cuando no hay señal 1X2)
+# True  = activo  (backtest post-fix: 5 bets, 100% hit, +140.6% yield)
+# False = shadow  (registra pick_ou en DB pero stake_ou = 0, sin dinero real)
+# Cambiar a False si se quiere observar sin apostar hasta acumular n >= 30
+APUESTA_OU_ACTIVA = True
 
 # --- Filtro xG Margen O/U — ASIMETRICO (Fix B, V4.6) ---
 # Backtest 32 partidos: xG en [2.5-2.8) -> goles_prom=0.60, UNDER=100%.
@@ -733,11 +744,24 @@ def main():
                 if (i + j) > 2.5: po += pb
                 else: pu += pb
 
-        # Normalizacion
+        # Normalizacion 1X2
         s1 = p1 + px + p2
         if s1 > 0: p1, px, p2 = p1/s1, px/s1, p2/s1
         so = po + pu
         if so > 0: po, pu = po/so, pu/so
+
+        # O/U calibrado: segundo loop con xG corregido por factor OLS (no afecta 1X2)
+        xg_l_ou = xg_local  * FACTOR_CORR_XG_OU
+        xg_v_ou = xg_visita * FACTOR_CORR_XG_OU
+        po_ou, pu_ou = 0.0, 0.0
+        for i in range(RANGO_POISSON):
+            for j in range(RANGO_POISSON):
+                pb = poisson(i, xg_l_ou) * poisson(j, xg_v_ou)
+                pb *= tau(i, j, xg_l_ou, xg_v_ou, rho)
+                if (i + j) > 2.5: po_ou += pb
+                else:              pu_ou += pb
+        so_ou = po_ou + pu_ou
+        if so_ou > 0: po_ou, pu_ou = po_ou/so_ou, pu_ou/so_ou
 
         # Guardar probabilidades RAW (sin Fix #5 ni Hallazgo G) para el Shadow
         p1_raw, px_raw, p2_raw = p1, px, p2
@@ -810,10 +834,11 @@ def main():
         cu_1x2_shadow = cu_shadow_raw if "[APOSTAR]" in pick_shadow_1x2 else 0.0
         ev_1x2_shadow = ev_shadow_raw if "[APOSTAR]" in pick_shadow_1x2 else 0.0
 
-        pick_ou, ev_ou, cu_ou = evaluar_mercado_ou(po, pu, co_v, cu_v, p1, px, p2, xg_local, xg_visita)
+        pick_ou, ev_ou, cu_ou = evaluar_mercado_ou(po_ou, pu_ou, co_v, cu_v, p1, px, p2, xg_l_ou, xg_v_ou)
 
         stk_1x2 = calcular_stake_independiente(pick_1x2, ev_1x2, cu_1x2, BANKROLL, MAX_KELLY_PCT)
-        stk_ou  = calcular_stake_independiente(pick_ou,  ev_ou,  cu_ou,  BANKROLL, MAX_KELLY_PCT)
+        # Si APUESTA_OU_ACTIVA=False: pick queda en DB (shadow) pero stake=0 (sin dinero real)
+        stk_ou  = calcular_stake_independiente(pick_ou, ev_ou, cu_ou, BANKROLL, MAX_KELLY_PCT) if APUESTA_OU_ACTIVA else 0.0
         stk_shadow_1x2 = calcular_stake_independiente(
             pick_shadow_1x2, ev_1x2_shadow, cu_1x2_shadow, BANKROLL, MAX_KELLY_PCT)
 
@@ -839,7 +864,7 @@ def main():
 
         partidos_a_actualizar.append({
             'id_partido': id_partido, 'pais': pais, 'fecha': fecha_str,
-            'p1': p1, 'px': px, 'p2': p2, 'po': po, 'pu': pu,
+            'p1': p1, 'px': px, 'p2': p2, 'po': po_ou, 'pu': pu_ou,
             'pick_1x2': pick_1x2, 'ev_1x2': ev_1x2, 'cu_1x2': cu_1x2, 'stk_1x2': stk_1x2,
             'pick_ou': pick_ou, 'ev_ou': ev_ou, 'cu_ou': cu_ou, 'stk_ou': stk_ou,
             'pick_shadow_1x2': pick_shadow_1x2, 'stk_shadow_1x2': stk_shadow_1x2,

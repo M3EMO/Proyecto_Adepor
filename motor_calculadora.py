@@ -829,14 +829,13 @@ def main():
             if stk_ou > 0:
                 stk_ou  = min(round(stk_ou  * mult_delta, 2), BANKROLL * MAX_KELLY_PCT)
 
-        # Overlap: si hay apuesta en ambos mercados, priorizar la de mayor EV
+        # Overlap: 1X2 siempre tiene prioridad sobre O/U (V4.9)
+        # Razon: backtest muestra 1X2 yield=165% vs O/U yield=55% cuando compiten.
+        # O/U opera como mercado COMPLEMENTARIO — solo cuando no hay señal 1X2.
+        # Backtest O/U "solo sin 1X2": 10 bets, 80% hit, +77.6% yield.
         if stk_1x2 > 0 and stk_ou > 0:
-            if ev_1x2 >= ev_ou:
-                stk_ou = 0.0
-                pick_ou = "[PASAR] Overlap Riesgo (1X2 Priorizado)"
-            else:
-                stk_1x2 = 0.0
-                pick_1x2 = "[PASAR] Overlap Riesgo (O/U Priorizado)"
+            stk_ou = 0.0
+            pick_ou = "[PASAR] Overlap 1X2 Prioritario"
 
         partidos_a_actualizar.append({
             'id_partido': id_partido, 'pais': pais, 'fecha': fecha_str,

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -rn \"from utilidades\\\\|import utilidades\" \"C:/Users/map12/Desktop/Proyecto_Adepor/\"*.py)",
+      "Bash(\".venv/Scripts/python.exe\" auditor/auditor_obsoletos.py)"
+    ]
+  }
+}

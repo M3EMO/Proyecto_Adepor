@@ -1,0 +1,204 @@
+{
+  "estados": {
+    "Calculado": 117,
+    "Liquidado": 58
+  },
+  "liquidados_por_liga": {
+    "Argentina": {
+      "n": 15,
+      "total_stake": 7500.0,
+      "con_apuesta": 15
+    },
+    "Brasil": {
+      "n": 22,
+      "total_stake": 15023.39,
+      "con_apuesta": 22
+    },
+    "Noruega": {
+      "n": 8,
+      "total_stake": 4838.95,
+      "con_apuesta": 8
+    },
+    "Turquia": {
+      "n": 13,
+      "total_stake": 11830.14,
+      "con_apuesta": 13
+    }
+  },
+  "rho_por_liga": {
+    "Argentina": {
+      "rho": -0.074,
+      "n_partidos": 332
+    },
+    "Noruega": {
+      "rho": -0.104,
+      "n_partidos": 253
+    },
+    "Inglaterra": {
+      "rho": -0.03,
+      "n_partidos": 279
+    },
+    "Brasil": {
+      "rho": -0.03,
+      "n_partidos": 268
+    },
+    "Turquia": {
+      "rho": -0.0522,
+      "n_partidos": 222
+    }
+  },
+  "ema_por_liga": {
+    "Argentina": {
+      "avg_fav_h": 1.8196,
+      "avg_con_h": 1.7429,
+      "avg_fav_a": 1.7467,
+      "avg_con_a": 1.8236,
+      "n_equipos": 32
+    },
+    "Brasil": {
+      "avg_fav_h": 2.3517,
+      "avg_con_h": 2.2618,
+      "avg_fav_a": 2.2408,
+      "avg_con_a": 2.3713,
+      "n_equipos": 24
+    },
+    "Inglaterra": {
+      "avg_fav_h": 2.4817,
+      "avg_con_h": 2.4607,
+      "avg_fav_a": 2.4623,
+      "avg_con_a": 2.4777,
+      "n_equipos": 20
+    },
+    "Noruega": {
+      "avg_fav_h": 2.6522,
+      "avg_con_h": 2.6232,
+      "avg_fav_a": 2.7174,
+      "avg_con_a": 2.7656,
+      "n_equipos": 19
+    },
+    "Turquia": {
+      "avg_fav_h": 2.3128,
+      "avg_con_h": 2.1386,
+      "avg_fav_a": 2.1448,
+      "avg_con_a": 2.3119,
+      "n_equipos": 18
+    }
+  },
+  "ultimas_apuestas": [
+    {
+      "fecha": "2026-04-09 14:00",
+      "pais": "Turquia",
+      "partido": "Caykur Rizespor vs Samsunspor",
+      "apuesta_1x2": "[GANADA] LOCAL",
+      "stake_1x2": 2500.0,
+      "goles": "4-1",
+      "apuesta_ou": "[PASAR] Sin Valor",
+      "stake_ou": 0.0
+    },
+    {
+      "fecha": "2026-04-08 14:00",
+      "pais": "Turquia",
+      "partido": "Goztepe vs Galatasaray",
+      "apuesta_1x2": "[PASAR] Margen Predictivo Insuficiente (<5%)",
+      "stake_1x2": 0.0,
+      "goles": "1-3",
+      "apuesta_ou": "[PASAR] Sin Valor",
+      "stake_ou": 0.0
+    },
+    {
+      "fecha": "2026-04-07 14:00",
+      "pais": "Noruega",
+      "partido": "Aalesund vs Fredrikstad",
+      "apuesta_1x2": "[PASAR] Margen Predictivo Insuficiente (<5%)",
+      "stake_1x2": 0.0,
+      "goles": "2-3",
+      "apuesta_ou": "[PASAR] Sin Valor",
+      "stake_ou": 0.0
+    },
+    {
+      "fecha": "2026-04-07 14:00",
+      "pais": "Noruega",
+      "partido": "Kfum Oslo vs Sandefjord",
+      "apuesta_1x2": "[GANADA] VISITA",
+      "stake_1x2": 2500.0,
+      "goles": "1-2",
+      "apuesta_ou": "[PASAR] Sin Valor",
+      "stake_ou": 0.0
+    },
+    {
+      "fecha": "2026-04-06 21:15",
+      "pais": "Argentina",
+      "partido": "Instituto (córdoba) vs Defensa y Justicia",
+      "apuesta_1x2": "[PASAR] Margen Predictivo Insuficiente (<5%)",
+      "stake_1x2": 0.0,
+      "goles": "2-0",
+      "apuesta_ou": "[PASAR] Sin Cuotas",
+      "stake_ou": 0.0
+    },
+    {
+      "fecha": "2026-04-06 19:00",
+      "pais": "Argentina",
+      "partido": "Argentinos Juniors vs Banfield",
+      "apuesta_1x2": "[PASAR] Riesgo/Beneficio",
+      "stake_1x2": 0.0,
+      "goles": "3-2",
+      "apuesta_ou": "[PASAR] Sin Cuotas",
+      "stake_ou": 0.0
+    },
+    {
+      "fecha": "2026-04-06 14:15",
+      "pais": "Noruega",
+      "partido": "Tromso vs Rosenborg",
+      "apuesta_1x2": "[PASAR] Riesgo/Beneficio",
+      "stake_1x2": 0.0,
+      "goles": "2-0",
+      "apuesta_ou": "[PASAR] Sin Cuotas",
+      "stake_ou": 0.0
+    },
+    {
+      "fecha": "2026-04-06 14:00",
+      "pais": "Turquia",
+      "partido": "Kocaelispor vs Istanbul Basaksehir",
+      "apuesta_1x2": "[PERDIDA] VISITA",
+      "stake_1x2": 2500.0,
+      "goles": "0-0",
+      "apuesta_ou": "[PASAR] Sin Cuotas",
+      "stake_ou": 0.0
+    },
+    {
+      "fecha": "2026-04-06 12:00",
+      "pais": "Noruega",
+      "partido": "Hamkam vs Sk Brann",
+      "apuesta_1x2": "[GANADA] VISITA",
+      "stake_1x2": 2338.95,
+      "goles": "1-5",
+      "apuesta_ou": "[PASAR] Sin Cuotas",
+      "stake_ou": 0.0
+    },
+    {
+      "fecha": "2026-04-06 12:00",
+      "pais": "Noruega",
+      "partido": "Kristiansund bk vs Bodo/glimt",
+      "apuesta_1x2": "[PASAR] Riesgo/Beneficio",
+      "stake_1x2": 0.0,
+      "goles": "0-3",
+      "apuesta_ou": "[PASAR] Sin Cuotas",
+      "stake_ou": 0.0
+    }
+  ],
+  "totales": {
+    "total_liquidados": 58,
+    "total_stake_apostado": 39192.48,
+    "total_equipos_con_ema": 113,
+    "total_partidos_ema": 175
+  },
+  "integridad": {
+    "ema_procesados": 1354,
+    "estados_validos": true
+  },
+  "_meta": {
+    "timestamp": "20260409_223520",
+    "db_backup": "snapshots\\fondo_quant_20260409_223520.db",
+    "db_size_kb": 356.0
+  }
+}

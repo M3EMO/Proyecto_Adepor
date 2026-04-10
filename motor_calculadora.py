@@ -66,7 +66,10 @@ UMBRAL_EV_BASE = 0.03          # Manifiesto II.E (era 0.015 en V3.0)
 TECHO_CUOTA_1X2 = 5.0          # Manifiesto II.E (era 5.5 en V3.0)
 TECHO_CUOTA_OU = 6.0           # Manifiesto II.E
 DIVERGENCIA_MAX_1X2 = 0.15      # Manifiesto II.E — fallback global
-DIVERGENCIA_MAX_OU = 0.05      # Manifiesto II.E
+# DIVERGENCIA_MAX_OU eliminada (V4.9): el filtro div<=0.05 bloqueaba el 100% de las apuestas OU.
+# El modelo Poisson/xG diverge estructuralmente del mercado en 0.27-0.61 — eso es esperado,
+# no una señal de error. El guard correcto es EV > umbral + Fix B (xG margen asimetrico).
+# Backtest 23 casos: sin este filtro -> 73.9% hit, +55.7% yield.
 
 # Fix #4 (V4.4): Divergencia 1X2 diferenciada por eficiencia de mercado por liga.
 # Razonamiento:
@@ -382,6 +385,33 @@ def poisson(k, lmbda):
     except (ValueError, OverflowError): return 0.0
 
 
+def tau(i, j, lam, mu, rho):
+    """
+    Factor de corrección Dixon-Coles para marcadores bajos (i+j <= 1).
+    Ajusta la correlación entre goles del local (i) y visitante (j)
+    que el modelo Poisson independiente ignora.
+
+    Parámetros:
+        i   — goles del local
+        j   — goles del visitante
+        lam — lambda esperada del local (xG local)
+        mu  — lambda esperada del visitante (xG visitante)
+        rho — coeficiente de correlación de la liga (negativo, ∈ [-0.30, -0.03])
+
+    Retorna un multiplicador ≥ 0 que se aplica sobre p(i)*p(j).
+    Para i+j > 1 devuelve 1.0 (sin corrección).
+    """
+    if i == 0 and j == 0:
+        return max(0.0, 1.0 - lam * mu * rho)
+    elif i == 0 and j == 1:
+        return max(0.0, 1.0 + lam * rho)
+    elif i == 1 and j == 0:
+        return max(0.0, 1.0 + mu * rho)
+    elif i == 1 and j == 1:
+        return max(0.0, 1.0 - rho)
+    return 1.0
+
+
 # ==========================================================================
 # SHADOW MODE: ALTITUD (Calcula xG modificado, no lo usa en decision)
 # ==========================================================================
@@ -507,9 +537,8 @@ def evaluar_mercado_ou(po, pu, co, cu, p1, px, p2, xg_local=None, xg_visita=None
 
     ev = (p_fav * c_fav) - 1
     umbral = (UMBRAL_EV_BASE * (0.5 / p_fav)) if p_fav > 0 else 999
-    div = p_fav - (1 / c_fav)
 
-    if ev > umbral and c_fav <= TECHO_CUOTA_OU and div <= DIVERGENCIA_MAX_OU:
+    if ev > umbral and c_fav <= TECHO_CUOTA_OU:
         return f"[APOSTAR] {pick}", ev, c_fav
 
     return "[PASAR] Sin Valor", ev, c_fav
@@ -696,12 +725,7 @@ def main():
         for i in range(RANGO_POISSON):
             for j in range(RANGO_POISSON):
                 pb = poisson(i, xg_local) * poisson(j, xg_visita)
-                # Ajuste Dixon-Coles (correlacion en marcadores bajos)
-                if i == 0 and j == 0: pb *= (1 - xg_local * xg_visita * rho)
-                elif i == 0 and j == 1: pb *= (1 + xg_local * rho)
-                elif i == 1 and j == 0: pb *= (1 + xg_visita * rho)
-                elif i == 1 and j == 1: pb *= (1 - rho)
-                pb = max(0.0, pb)
+                pb *= tau(i, j, xg_local, xg_visita, rho)  # Ajuste Dixon-Coles
 
                 if i > j: p1 += pb
                 elif i == j: px += pb

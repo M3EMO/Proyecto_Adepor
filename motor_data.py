@@ -46,6 +46,24 @@ def safe_float(val):
     try: return float(val)
     except: return 0.0
 
+def extraer_stats_raw(estadisticas):
+    """
+    Extrae tiros al arco, tiros totales y corners desde la lista de estadísticas ESPN.
+    Devuelve (sot, total_shots, corners) como enteros.
+    Separado de calcular_xg_hibrido para permitir calibración OLS futura sin acoplar lógica.
+    """
+    sot, corners, total_shots = 0, 0, 0
+    for stat in (estadisticas or []):
+        nombre = stat.get('name', '')
+        valor = safe_float(stat.get('displayValue', 0))
+        if nombre == 'shotsOnTarget':
+            sot = int(valor)
+        elif nombre == 'cornerKicks':
+            corners = int(valor)
+        elif nombre == 'shots':
+            total_shots = int(valor)
+    return sot, total_shots, corners
+
 def calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga=0.03):
     """
     Calcula los Goles Esperados (xG) a partir de estadísticas a nivel de partido.
@@ -151,6 +169,15 @@ def main():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS ema_procesados (id_partido TEXT PRIMARY KEY)
     """)
+
+    # Migración: columnas de estadísticas brutas en partidos_backtest para calibración OLS futura de xG
+    # Estas columnas permiten calibrar los coeficientes de calcular_xg_hibrido por regresión directa
+    for col_def in ['sot_l INTEGER', 'shots_l INTEGER', 'corners_l INTEGER',
+                    'sot_v INTEGER', 'shots_v INTEGER', 'corners_v INTEGER']:
+        try:
+            cursor.execute(f"ALTER TABLE partidos_backtest ADD COLUMN {col_def}")
+        except sqlite3.OperationalError:
+            pass  # La columna ya existe — operación idempotente
 
     # Ejecucion del REBUILD: borrar datos EMA para forzar re-procesamiento completo
     if modo_rebuild:
@@ -356,6 +383,14 @@ def main():
                             corners_loc = next((safe_int(s.get('displayValue')) for s in stats_loc if s.get('name') == 'cornerKicks'), 0)
                             corners_vis = next((safe_int(s.get('displayValue')) for s in stats_vis if s.get('name') == 'cornerKicks'), 0)
                             estado_ligas[pais]["corners"] += corners_loc + corners_vis
+
+                            # Persistir estadísticas brutas para calibración OLS futura de xG
+                            sot_loc, shots_loc, _ = extraer_stats_raw(stats_loc)
+                            sot_vis, shots_vis, _ = extraer_stats_raw(stats_vis)
+                            cursor.execute(
+                                "UPDATE partidos_backtest SET sot_l=?, shots_l=?, corners_l=?, sot_v=?, shots_v=?, corners_v=? WHERE id_partido=?",
+                                (sot_loc, shots_loc, corners_loc, sot_vis, shots_vis, corners_vis, id_unico)
+                            )
 
                             stats_liga_actual = estado_ligas[pais]
                             if stats_liga_actual["total"] > 20:

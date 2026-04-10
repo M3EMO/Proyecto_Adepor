@@ -25,26 +25,42 @@ def preparar_base_datos(cursor):
     try: cursor.execute("ALTER TABLE equipos_stats ADD COLUMN dt_nombre TEXT DEFAULT 'Desconocido'")
     except: pass
 
+def _get_current_season(pais):
+    """
+    Calcula la temporada activa según el país y la fecha actual.
+    - Ligas europeas y Turquía: temporada dividida (jul-jun) → año de inicio
+    - Argentina, Brasil: temporada de año calendario → año actual
+    - Noruega: temporada de año calendario → año actual
+    """
+    year  = datetime.now().year
+    month = datetime.now().month
+    ligas_temporada_dividida = {"Inglaterra", "Turquia"}
+    if pais in ligas_temporada_dividida:
+        return year - 1 if month < 7 else year
+    return year  # Argentina, Brasil, Noruega → año calendario
+
+
 def procesar_tactica():
-    print("📋 Iniciando Motor Táctico V3.0 (Extracción de Formaciones y Control de DTs)...")
+    print("📋 Iniciando Motor Táctico V3.1 (Extracción de Formaciones y Control de DTs)...")
     conn = sqlite3.connect(DB_NAME, isolation_level=None)
     cursor = conn.cursor()
     cursor.execute('PRAGMA journal_mode=WAL;')
-    
+
     preparar_base_datos(cursor)
 
     # 1. Buscar partidos de HOY y AYER que no tengan formación cargada
+    # FIX: usar DATE() para comparación agnóstica al formato (DB guarda YYYY-MM-DD HH:MM)
     hoy = datetime.now()
-    fechas_str = [(hoy - timedelta(days=1)).strftime("%d/%m/%Y"), hoy.strftime("%d/%m/%Y")]
-    
-    placeholders = ','.join(['?'] * len(fechas_str))
-    query = f"""
-        SELECT id_partido, pais, local, visita, fecha 
-        FROM partidos_backtest 
-        WHERE substr(fecha, 1, 10) IN ({placeholders}) 
+    fecha_hoy  = hoy.strftime("%Y-%m-%d")
+    fecha_ayer = (hoy - timedelta(days=1)).strftime("%Y-%m-%d")
+
+    query = """
+        SELECT id_partido, pais, local, visita, fecha
+        FROM partidos_backtest
+        WHERE DATE(fecha) IN (?, ?)
         AND (formacion_l = '' OR formacion_l IS NULL)
     """
-    cursor.execute(query, fechas_str)
+    cursor.execute(query, (fecha_ayer, fecha_hoy))
     partidos_huerfanos = cursor.fetchall()
 
     if not partidos_huerfanos:
@@ -60,18 +76,21 @@ def procesar_tactica():
     actualizados = 0
 
     # 3. Consultas a la API-Football (Agrupadas por fecha y liga para ahorrar cuota)
-    fechas_api = [(hoy - timedelta(days=1)).strftime("%Y-%m-%d"), hoy.strftime("%Y-%m-%d")]
-    
+    fechas_api = [fecha_ayer, fecha_hoy]
+
     for fecha_api in fechas_api:
         for pais, lig_id in MAPA_LIGAS_API.items():
             # ¿Tenemos algún partido de este país en estas fechas sin formación?
-            huerfanos_liga = [p for p in partidos_huerfanos if p[1] == pais and p[4][:10] == datetime.strptime(fecha_api, "%Y-%m-%d").strftime("%d/%m/%Y")]
+            # FIX: comparar contra fecha_api directamente (ambas en YYYY-MM-DD)
+            huerfanos_liga = [p for p in partidos_huerfanos if p[1] == pais and p[4][:10] == fecha_api]
             if not huerfanos_liga: continue
 
-            print(f"   🔎 Buscando alineaciones en {pais} ({fecha_api})...")
-            
+            # FIX: temporada dinámica en vez de season=2024 hardcodeado
+            season = _get_current_season(pais)
+            print(f"   🔎 Buscando alineaciones en {pais} ({fecha_api}, season={season})...")
+
             # Traer el calendario del día
-            url_fixtures = f"{BASE_URL}/fixtures?league={lig_id}&season=2024&date={fecha_api}"
+            url_fixtures = f"{BASE_URL}/fixtures?league={lig_id}&season={season}&date={fecha_api}"
             try:
                 res_fix = requests.get(url_fixtures, headers=HEADERS, timeout=10).json()
                 

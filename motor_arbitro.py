@@ -3,19 +3,18 @@ import requests
 from datetime import datetime
 import gestor_nombres
 from collections import defaultdict
+from config_sistema import LIGAS_ESPN, DB_NAME
 
 # ==========================================
-# MOTOR ÁRBITRO V6.0 (AUDITORÍA CENTRALIZADA Y ROBUSTA)
+# MOTOR ÁRBITRO V6.1 (AUDITORÍA CENTRALIZADA Y ROBUSTA)
 # Responsabilidad: Extracción de Árbitro, Cálculo EMA y Auditoría con Gestor de Nombres.
+# V6.1: LIGAS_ESPN y DB_NAME desde config_sistema.
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
-LAMBDA_EMA = 0.15 
+LAMBDA_EMA = 0.15
 
-MAPA_LIGAS_ESPN = {
-    "Argentina": "arg.1", "Brasil": "bra.1", "Inglaterra": "eng.1", 
-    "Noruega": "nor.1", "Turquia": "tur.1"
-}
+# MAPA_LIGAS_ESPN: inverso de LIGAS_ESPN (pais -> codigo ESPN) — derivado en runtime
+MAPA_LIGAS_ESPN = {pais: codigo for codigo, pais in LIGAS_ESPN.items()}
 
 def calcular_ema(valor_nuevo, ema_anterior):
     if ema_anterior == 0.0: return float(valor_nuevo)

@@ -111,10 +111,13 @@ E. GESTIÓN DE RIESGO ASIMÉTRICA (ESTÁNDAR DE ORO)
 - REGLA MERCADO O/U 2.5 (Complementario, V4.9): Opera SOLO cuando no hay apuesta 1X2 activa.
   1X2 siempre tiene prioridad — backtest: 1X2 yield=165% vs O/U yield=55% en overlap.
   Techo Cuota: 6.0. DIVERGENCIA_MAX_OU eliminada (V4.9).
-  CALIBRACION xG para O/U: segundo loop Poisson con FACTOR_CORR_XG_OU=0.627 (OLS n=58).
-  Corrige sobreestimacion del 37% en lambdas. 1X2 no se toca.
-  Fix B: OVER solo si xG_total > 2.80 | UNDER solo si xG_total < 2.25 | zona [2.25-2.80] = PASAR.
-  Backtest calibrado (n=15): 73.3% hit, +63.5% yield vs sin calibrar (n=23): 73.9%, +55.7%.
+  CALIBRACION xG para O/U: segundo loop Poisson con factor POR LIGA (V4.9):
+    Noruega=0.524 | Brasil=0.603 | Argentina=0.642 | Turquia=0.648 | fallback=0.627
+  Cada liga tiene distinto sesgo de sobreestimacion xG. 1X2 no se toca.
+  Fix B: OVER solo si xG_cal > 2.80 | UNDER solo si xG_cal < 2.25 | zona [2.25-2.80] = PASAR.
+  Backtest factor por liga (n=7): 100% hit, +126.1% yield.
+  Argentina casi siempre cae en zona Fix B (xG_cal ~2.3) — cuota sin valor estructural.
+  Al agregar liga nueva: calcular AVG(goles/xG) sobre n>=15 liquidados y agregar a FACTOR_CORR_XG_OU_POR_LIGA.
 - Sizing: Fracción de Kelly capada a un máximo del 2.5% del bankroll (modo normal)
   o 1.0% (modo drawdown tras 5 pérdidas consecutivas).
 

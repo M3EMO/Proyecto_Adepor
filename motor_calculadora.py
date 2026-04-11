@@ -5,6 +5,7 @@ import difflib
 import re
 from datetime import datetime
 from collections import defaultdict
+from config_sistema import DB_NAME
 
 # ==========================================
 # MOTOR CALCULADORA V4.8 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
@@ -53,7 +54,7 @@ from collections import defaultdict
 #   - Medio Kelly: fraccion 0.50 [Thorp 2006]
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
+# DB_NAME importado desde config_sistema
 
 # --- Constantes de Riesgo ---
 MAX_KELLY_PCT_NORMAL = 0.025
@@ -70,11 +71,20 @@ DIVERGENCIA_MAX_1X2 = 0.15      # Manifiesto II.E — fallback global
 # El modelo Poisson/xG diverge estructuralmente del mercado en 0.27-0.61 — eso es esperado,
 # no una señal de error. El guard correcto es EV > umbral + Fix B (xG margen asimetrico).
 
-# Factor de calibración xG para O/U (V4.9) — OLS histórico: goles = 0.627 × xG_ema (R²=0.12, n=58)
-# El xG sobreestima goles un 37%. Para O/U el valor absoluto importa (umbral fijo en 2.5 goles),
-# así que se calibra lambda SOLO para po/pu. 1X2 no se toca: el ratio local/visita es correcto.
-# Backtest: factor 0.627 -> 15 bets, 73.3% hit, +63.5% yield (vs 23 bets sin corr: +55.7%)
-FACTOR_CORR_XG_OU = 0.627
+# Factor de calibración xG para O/U (V4.9) — OLS histórico: goles = factor × xG_ema
+# El xG sobreestima goles en diferente magnitud por liga. Para O/U el valor absoluto
+# importa (umbral fijo en 2.5), así que se calibra lambda POR LIGA.
+# 1X2 no se toca: el ratio local/visita sigue siendo correcto con xG inflado.
+# Derivado de: AVG(goles_real / xG_ema) por liga sobre liquidados históricos.
+# Backtest factor por liga: n=7, 100% hit, +126.1% yield (vs global 0.627: n=5, +140.6%)
+FACTOR_CORR_XG_OU_POR_LIGA = {
+    "Noruega":    0.524,   # Liga más sobreestimada — reducir más agresivamente
+    "Brasil":     0.603,   # Sobreestimación moderada-alta
+    "Argentina":  0.642,   # Sobreestimación moderada (pero Fix B bloquea la mayoría)
+    "Turquia":    0.648,   # Sobreestimación moderada
+    "Inglaterra": 0.627,   # Sin muestra suficiente — usar promedio global
+}
+FACTOR_CORR_XG_OU = 0.627  # Fallback global para ligas nuevas
 
 # Fix #4 (V4.4): Divergencia 1X2 diferenciada por eficiencia de mercado por liga.
 # Razonamiento:
@@ -750,9 +760,10 @@ def main():
         so = po + pu
         if so > 0: po, pu = po/so, pu/so
 
-        # O/U calibrado: segundo loop con xG corregido por factor OLS (no afecta 1X2)
-        xg_l_ou = xg_local  * FACTOR_CORR_XG_OU
-        xg_v_ou = xg_visita * FACTOR_CORR_XG_OU
+        # O/U calibrado: segundo loop con xG corregido por factor por liga (no afecta 1X2)
+        factor_ou = FACTOR_CORR_XG_OU_POR_LIGA.get(pais, FACTOR_CORR_XG_OU)
+        xg_l_ou = xg_local  * factor_ou
+        xg_v_ou = xg_visita * factor_ou
         po_ou, pu_ou = 0.0, 0.0
         for i in range(RANGO_POISSON):
             for j in range(RANGO_POISSON):

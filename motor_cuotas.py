@@ -4,33 +4,20 @@ import json
 import os
 import difflib
 import gestor_nombres
+from config_sistema import MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 
 # ==========================================
-# MOTOR CUOTAS V9.1 (RADAR SHARP + SUB-STRING MATCH)
+# MOTOR CUOTAS V9.2 (RADAR SHARP + JERARQUIA PINNACLE O/U + CONFIG CENTRALIZADA)
 # Responsabilidad: Auto-Matching relajado, Linea 2.5 Estricta y Jerarquia Pinnacle.
+# V9.2: O/U ahora prioriza Pinnacle igual que 1X2. MAPA_LIGAS_ODDS importado
+#       desde config_sistema — agregar ligas en un solo lugar.
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
 MODO_INTERACTIVO = os.getenv('PROYECTO_MODO_INTERACTIVO') == '1'
 DICCIONARIO_FILE = 'diccionario_equipos.json'
 
-# Las claves se cargan desde config.json para no exponerlas en el código fuente.
-_CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
-try:
-    with open(_CONFIG_FILE, 'r', encoding='utf-8') as _f:
-        _config = json.load(_f)
-    API_KEYS = _config['api_keys_odds']
-except (FileNotFoundError, KeyError) as _e:
-    print(f"[ADVERTENCIA] No se pudo cargar config.json ({_e}). Motor de cuotas sin claves API.")
-    API_KEYS = []
-
-MAPA_LIGAS_ODDS = {
-    "Argentina": "soccer_argentina_primera_division",
-    "Inglaterra": "soccer_epl",
-    "Brasil": "soccer_brazil_campeonato",
-    "Noruega": "soccer_norway_eliteserien",
-    "Turquia": "soccer_turkey_super_league"
-}
+# API Keys desde config_sistema (que las lee de config.json)
+API_KEYS = API_KEYS_ODDS
 
 def cargar_diccionario():
     if os.path.exists(DICCIONARIO_FILE):
@@ -78,10 +65,17 @@ def extraer_cuotas_sharp(bookmakers, local_api, visita_api):
             if c1 > 0:
                 break
 
-    # --- O/U 2.5: recorrer TODOS los bookmakers hasta encontrar ambos lados ---
-    # Usamos comparacion con tolerancia para evitar problemas de float (2.5 vs 2.500001)
+    # --- O/U 2.5: jerarquia Pinnacle -> bet365 -> resto (igual que 1X2) ---
+    # Primero intentar fuentes sharp; si no tienen 2.5, caer al resto.
     puntos_disponibles = set()
-    for b in bookmakers:
+    fuente_ou = None
+    ORDEN_OU = ['pinnacle', 'bet365', '1xbet', 'betfair_ex_eu', 'draftkings']
+    bookmakers_ordenados = sorted(
+        bookmakers,
+        key=lambda b: ORDEN_OU.index(b['key']) if b['key'] in ORDEN_OU else len(ORDEN_OU)
+    )
+    for b in bookmakers_ordenados:
+        co_tmp, cu_tmp = 0.0, 0.0
         for m in b.get('markets', []):
             if m['key'] == 'totals':
                 for out in m['outcomes']:
@@ -92,13 +86,17 @@ def extraer_cuotas_sharp(bookmakers, local_api, visita_api):
                         continue
                     puntos_disponibles.add(punto_f)
                     if abs(punto_f - 2.5) < 0.01:
-                        if out['name'] == 'Over'  and co == 0.0: co = out['price']
-                        if out['name'] == 'Under' and cu == 0.0: cu = out['price']
-        if co > 0 and cu > 0:
-            break
+                        if out['name'] == 'Over':  co_tmp = out['price']
+                        if out['name'] == 'Under': cu_tmp = out['price']
+        if co_tmp > 0 and cu_tmp > 0:
+            co, cu = co_tmp, cu_tmp
+            fuente_ou = b['key']
+            break  # tenemos ambos lados de una fuente sharp — listo
 
-    # Log si no se encontro 2.5 pero hay otras lineas disponibles
-    if (co == 0 or cu == 0) and puntos_disponibles:
+    if fuente_ou:
+        if fuente_ou not in ('pinnacle', 'bet365'):
+            print(f"         [AVISO O/U] Fuente blanda: {fuente_ou} (Pinnacle/bet365 no tenian 2.5)")
+    elif puntos_disponibles:
         lineas = sorted(puntos_disponibles)
         print(f"         [INFO O/U] Linea 2.5 no disponible. Lineas en mercado: {lineas}")
 

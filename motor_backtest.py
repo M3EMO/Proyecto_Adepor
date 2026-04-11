@@ -1,39 +1,18 @@
 import sqlite3
 import requests
 import gestor_nombres
-import json
-import os
 from datetime import datetime, timedelta
+from config_sistema import LIGAS_ESPN, MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 
 # ==========================================
-# MOTOR BACKTEST V7.1 (RESILIENTE CON FAILOVER)
+# MOTOR BACKTEST V7.2 (RESILIENTE CON FAILOVER)
 # Responsabilidad: Liquidación de resultados con conmutación a API secundaria.
+# V7.2: LIGAS_ESPN, MAPA_LIGAS_ODDS, DB_NAME y API_KEYS_ODDS desde config_sistema.
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
-
-MAPA_LIGAS_ESPN = {
-    "Argentina": "arg.1", "Inglaterra": "eng.1",
-    "Brasil": "bra.1", "Turquia": "tur.1", "Noruega": "nor.1"
-}
-
-# --- CONFIGURACIÓN DE FAILOVER ---
-# Las claves se cargan desde config.json para no exponerlas en el código fuente.
-_CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
-try:
-    with open(_CONFIG_FILE, 'r', encoding='utf-8') as _f:
-        _config = json.load(_f)
-    API_KEYS_ODDS = _config['api_keys_odds']
-except (FileNotFoundError, KeyError) as _e:
-    print(f"[ADVERTENCIA] No se pudo cargar config.json ({_e}). API de respaldo desactivada.")
-    API_KEYS_ODDS = []
+# MAPA_LIGAS_ESPN: inverso de LIGAS_ESPN (pais -> codigo ESPN) — derivado en runtime
+MAPA_LIGAS_ESPN = {pais: codigo for codigo, pais in LIGAS_ESPN.items()}
 KEY_INDEX = 0
-
-MAPA_LIGAS_ODDS = {
-    "Argentina": "soccer_argentina_primera_division", "Inglaterra": "soccer_epl",
-    "Brasil": "soccer_brazil_campeonato", "Noruega": "soccer_norway_eliteserien",
-    "Turquia": "soccer_turkey_super_league"
-}
 
 def safe_int(val):
     try: return int(val)

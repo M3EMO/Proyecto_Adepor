@@ -2,38 +2,15 @@ import sqlite3
 import requests
 from datetime import datetime, timedelta
 import gestor_nombres
-import os
-import json
+from config_sistema import LIGAS_ESPN, MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 
 # ==========================================
-# MOTOR FIXTURE V6.9 (ESCUDO DE VALIDACIÓN PRE-INSERCIÓN)
+# MOTOR FIXTURE V7.0 (ESCUDO DE VALIDACIÓN PRE-INSERCIÓN)
 # Responsabilidad: Prevención de 'Boundary Overlap' y 'Time-Shift Bugs'.
+# V7.0: LIGAS_ESPN, MAPA_LIGAS_ODDS, DB_NAME y API_KEYS_ODDS desde config_sistema.
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
-
-LIGAS_ESPN = {
-    "arg.1": "Argentina", "eng.1": "Inglaterra",
-    "bra.1": "Brasil", "nor.1": "Noruega", "tur.1": "Turquia"
-}
-
-# --- CONFIGURACIÓN DE FAILOVER ---
-# Las claves se cargan desde config.json para no exponerlas en el código fuente.
-_CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
-try:
-    with open(_CONFIG_FILE, 'r', encoding='utf-8') as _f:
-        _config = json.load(_f)
-    API_KEYS_ODDS = _config['api_keys_odds']
-except (FileNotFoundError, KeyError) as _e:
-    print(f"[ADVERTENCIA] No se pudo cargar config.json ({_e}). API de respaldo desactivada.")
-    API_KEYS_ODDS = []
 KEY_INDEX = 0
-
-MAPA_LIGAS_ODDS = {
-    "Argentina": "soccer_argentina_primera_division", "Inglaterra": "soccer_epl",
-    "Brasil": "soccer_brazil_campeonato", "Noruega": "soccer_norway_eliteserien",
-    "Turquia": "soccer_turkey_super_league"
-}
 
 def normalizar_evento_api_secundaria(evento_api):
     """Convierte un evento de The-Odds-API al formato que espera el sistema."""

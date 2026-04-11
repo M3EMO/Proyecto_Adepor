@@ -5,13 +5,14 @@ import math
 import sys
 from collections import defaultdict
 from datetime import datetime, timedelta
+from config_sistema import LIGAS_ESPN, DB_NAME
 
 # ==========================================
-# MOTOR DATA V9.1 (REGRESIÓN BAYESIANA INTEGRADA + --rebuild)
+# MOTOR DATA V9.2 (REGRESIÓN BAYESIANA INTEGRADA + --rebuild)
 # Responsabilidad: Ajuste de xG, cálculo de EMA y anclaje a la media.
+# V9.2: LIGAS_ESPN y DB_NAME importados desde config_sistema.
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
 ALFA_EMA  = 0.15  # Fallback global si la liga no tiene ALFA propio
 N0_ANCLA  = 5    # Fix #1 (V4.4): ancla Bayesiana N-dependiente. N=0 -> 100% liga; N=5 -> 50/50; N=20 -> 80/20.
 
@@ -33,10 +34,7 @@ ALFA_EMA_POR_LIGA = {
     "Inglaterra": 0.12,
 }
 
-LIGAS_ESPN = {
-    "arg.1": "Argentina", "eng.1": "Inglaterra", 
-    "bra.1": "Brasil", "nor.1": "Noruega", "tur.1": "Turquia"
-}
+# LIGAS_ESPN importado desde config_sistema — no definir aqui
 
 def safe_int(val):
     try: return int(val)

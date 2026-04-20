@@ -149,6 +149,18 @@ TECHO_CUOTA_ALTA_CONV = get_param('techo_cuota_alta_conv', default=8.0)   # Tech
 DESACUERDO_PROB_MIN = get_param('desacuerdo_prob_min', default=0.40)     # Umbral critico: por debajo el desacuerdo es ruido
 DIVERGENCIA_DESACUERDO_MAX = get_param('divergencia_desacuerdo_max', default=0.30)  # Techo de divergencia para este regimen
 
+# --- Regimen Consenso con el Mercado — CAMINO 4 (V4.7 fase3 / 2026-04-20) ---
+# Hallazgo: bucket PASAR "Riesgo/Beneficio" liquidado (n=27) tenia 88.9% hit y +36.6%
+# yield apostando al favorito del modelo. Caracteristica clave: fav_modelo == fav_mercado
+# (ambos coinciden) pero cuota baja (c_fav 1.12-1.83) => EV negativo => se rechazaba.
+# El mercado ES el favorito (prob implicita 55-89%) y tenia razon. Cortando cuotas muy
+# bajas (<1.40) el yield sube a +46.3% con 90.5% hit (n=21).
+# Por tanto: cuando modelo y mercado acuerdan fuertemente, el filtro EV sobra.
+# Floor elevado (0.45) para evitar el bucket FLOOR destructor (47.8% hit yield -0.2%).
+CONSENSO_PROB_MIN = get_param('consenso_prob_min', default=0.45)         # Prob modelo minima
+CONSENSO_CUOTA_MIN = get_param('consenso_cuota_min', default=1.40)       # Cuota minima (descarta 1.12-1.39: breakeven 71-83%)
+CONSENSO_CUOTA_MAX = get_param('consenso_cuota_max', default=2.00)       # Cuota maxima: mas arriba C1/C2/C2B/C3 ya cubren
+
 # --- Bloqueo de Empates (V4.3) ---
 # Backtest 92 partidos: frecuencia real empates=17.9%, modelo asigna 25.7% (+7.9% sesgo).
 # El mercado sobreestima aun mas (30.1%). Apostar empate sistematicamente destruye EV.
@@ -525,6 +537,19 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None):
             and c_fav <= TECHO_CUOTA_ALTA_CONV):
         return f"[APOSTAR] {fav_key}", ev_fav, c_fav
 
+    # --- CAMINO 4: Consenso con el Mercado (V4.7, 2026-04-20) ---
+    # Cuando el favorito del modelo coincide con el favorito del mercado y ambos
+    # estan de acuerdo fuertemente (prob >= 0.45, cuota 1.40-2.00), ignorar EV.
+    # Hallazgo fase3: bucket PASAR Riesgo/Beneficio n=27 => hit 88.9% yield +36.6%.
+    # Filtrado c >= 1.40: n=21 hit 90.5% yield +46.3%.
+    # Requisito: fav_modelo == fav_mercado (sin desacuerdo).
+    fav_mkt_key_c4 = min(cuotas, key=cuotas.get)
+    if (fav_key == fav_mkt_key_c4
+            and p_fav >= CONSENSO_PROB_MIN
+            and CONSENSO_CUOTA_MIN <= c_fav <= CONSENSO_CUOTA_MAX
+            and div_fav <= div_max):
+        return f"[APOSTAR] {fav_key}", ev_fav, c_fav
+
     # --- CAMINO 2: Value Hunting (underdog con maximo EV) — BAJA PRIORIDAD ---
     # F2b (usuario 2026-04-18): Camino 2 se evalua ULTIMO. Si C1/C2B/C3 ya
     # dispararon pick, C2 no corre. Ademas, SE RECHAZA cuando:
@@ -658,6 +683,7 @@ def main():
     print("[SISTEMA] Iniciando Motor Calculadora V4.0 (Dixon-Coles + Riesgo Calibrado)...")
     print(f"[CONFIG] Umbral EV: {UMBRAL_EV_BASE} | Techo 1X2: {TECHO_CUOTA_1X2} (AltaConv/Desac: {TECHO_CUOTA_ALTA_CONV}) | Kelly: {FRACCION_KELLY} | Poisson: 0-{RANGO_POISSON-1}")
     print(f"[CONFIG] Floor prob: {FLOOR_PROB_MIN} | Div normal: {DIVERGENCIA_MAX_1X2} | Desacuerdo: prob>={DESACUERDO_PROB_MIN} div<={DIVERGENCIA_DESACUERDO_MAX} | AltaConv EV>={CONVICCION_EV_MIN}")
+    print(f"[CONFIG] Consenso C4: prob>={CONSENSO_PROB_MIN} cuota {CONSENSO_CUOTA_MIN}-{CONSENSO_CUOTA_MAX}")
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()

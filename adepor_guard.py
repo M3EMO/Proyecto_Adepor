@@ -11,11 +11,11 @@
 #
 # Filosofía:
 #   Antes de cualquier cambio estructural (refactor, calibración, nuevo motor):
-#     1. Correr "snapshot"  → guarda el estado actual como baseline
-#     2. Correr "shadow"    → crea fondo_quant_shadow.db para probar en paralelo
+#     1. Correr "snapshot"  -> guarda el estado actual como baseline
+#     2. Correr "shadow"    -> crea fondo_quant_shadow.db para probar en paralelo
 #     3. Hacer los cambios sobre la shadow DB
-#     4. Correr "compare"   → verifica que el estado de producción no se rompió
-#     5. Si todo OK → los cambios se integran a la DB principal
+#     4. Correr "compare"   -> verifica que el estado de producción no se rompió
+#     5. Si todo OK -> los cambios se integran a la DB principal
 # ============================================================
 
 import sqlite3
@@ -204,10 +204,10 @@ def cmd_compare(snapshot_path=None):
         a = actual["estados"].get(estado, 0)
         delta = a - b
         signo = f"+{delta}" if delta >= 0 else str(delta)
-        marca = " ⚠️" if abs(delta) > 50 else ""
-        print(f"  {estado:15s}: {b:4d} → {a:4d}  ({signo}){marca}")
+        marca = " [!]" if abs(delta) > 50 else ""
+        print(f"  {estado:15s}: {b:4d} -> {a:4d}  ({signo}){marca}")
         if delta != 0:
-            cambios.append(f"{estado}: {b}→{a}")
+            cambios.append(f"{estado}: {b}->{a}")
 
     # --- Comparar rho ---
     print("\nRHO POR LIGA:")
@@ -216,8 +216,8 @@ def cmd_compare(snapshot_path=None):
     for liga in sorted(set(list(b_rho.keys()) + list(a_rho.keys()))):
         b_val = b_rho.get(liga, {}).get("rho", "—")
         a_val = a_rho.get(liga, {}).get("rho", "—")
-        marca = " ← CAMBIÓ" if b_val != a_val else ""
-        print(f"  {liga:15s}: {str(b_val):8s} → {str(a_val):8s}{marca}")
+        marca = " <- CAMBIÓ" if b_val != a_val else ""
+        print(f"  {liga:15s}: {str(b_val):8s} -> {str(a_val):8s}{marca}")
 
     # --- Comparar EMA promedio ---
     print("\nEMA PROMEDIO FAV HOME POR LIGA:")
@@ -228,10 +228,10 @@ def cmd_compare(snapshot_path=None):
         a_val = a_ema.get(liga, {}).get("avg_fav_h", "—")
         try:
             diff = abs(float(a_val) - float(b_val))
-            marca = " ⚠️ DRIFT > 0.05" if diff > 0.05 else ""
+            marca = " [!] DRIFT > 0.05" if diff > 0.05 else ""
         except Exception:
             diff, marca = 0, ""
-        print(f"  {liga:15s}: {str(b_val):8s} → {str(a_val):8s}{marca}")
+        print(f"  {liga:15s}: {str(b_val):8s} -> {str(a_val):8s}{marca}")
 
     # --- Resumen ---
     print("\n" + "="*50)

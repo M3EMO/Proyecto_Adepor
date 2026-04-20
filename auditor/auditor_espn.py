@@ -16,7 +16,7 @@ MAPA_LIGAS = {
 }
 
 def auditar_nombres_espn():
-    print("🔬 Iniciando auditoría de taxonomía interactiva (ESPN vs Diccionario Local)...")
+    print("[AUDIT] Iniciando auditoría de taxonomía interactiva (ESPN vs Diccionario Local)...")
     print("   Este script intentará resolver nombres de equipos de ESPN que no estén en tu diccionario.")
     print("   Se te pedirá confirmación o que ingreses el nombre oficial.\n")
     
@@ -30,7 +30,7 @@ def auditar_nombres_espn():
             equipos_api = res_teams.get('sports', [{}])[0].get('leagues', [{}])[0].get('teams', [])
             
             if not equipos_api:
-                print(f"   ❌ No se encontraron equipos en la API de ESPN para la liga '{pais}'.")
+                print(f"   [X] No se encontraron equipos en la API de ESPN para la liga '{pais}'.")
                 continue
 
             nombres_api = {t['team']['name'] for t in equipos_api}
@@ -40,13 +40,13 @@ def auditar_nombres_espn():
             for nombre_api in sorted(list(nombres_api)):
                 gestor_nombres.obtener_nombre_estandar(nombre_api, modo_interactivo=True)
             
-            print(f"   ✅ Auditoría para '{pais}' completada.")
+            print(f"   [OK] Auditoría para '{pais}' completada.")
             print("-" * (20 + len(pais)) + "\n")
 
         except requests.exceptions.RequestException as e:
-            print(f"   ❌ Error de red al consultar la liga de {pais}: {e}")
+            print(f"   [X] Error de red al consultar la liga de {pais}: {e}")
         except (KeyError, IndexError):
-            print(f"   ❌ Error: La respuesta de la API para {pais} no tiene el formato esperado.")
+            print(f"   [X] Error: La respuesta de la API para {pais} no tiene el formato esperado.")
 
 if __name__ == "__main__":
     auditar_nombres_espn()

@@ -29,7 +29,7 @@ def extraer_equipos_propios():
                 for row in reader:
                     if 'Equipo' in row: equipos.add(row['Equipo'].strip())
         except Exception as e:
-            print(f"⚠️ Error leyendo {CSV_DATA}: {e}")
+            print(f"[!] Error leyendo {CSV_DATA}: {e}")
 
     # 2. Escanear SQLite (Partidos Históricos)
     if os.path.exists(DB_NAME):
@@ -49,15 +49,15 @@ def extraer_equipos_propios():
     return sorted(list(equipos))
 
 def main():
-    print("🔬 Iniciando Auditoría de Higiene Interna (Buscando inconsistencias en tu DATA)...")
+    print("[AUDIT] Iniciando Auditoría de Higiene Interna (Buscando inconsistencias en tu DATA)...")
     
     equipos = extraer_equipos_propios()
     if not equipos:
-        print("❌ No se encontraron equipos en tu base de datos o CSV.")
+        print("[X] No se encontraron equipos en tu base de datos o CSV.")
         return
         
-    print(f"   ✓ Se detectaron {len(equipos)} nombres únicos de equipos en tu sistema.")
-    print("\n⚔️ Ejecutando análisis de colisión lingüística...\n")
+    print(f"   [v] Se detectaron {len(equipos)} nombres únicos de equipos en tu sistema.")
+    print("\n[ATQ] Ejecutando análisis de colisión lingüística...\n")
     
     alertas = 0
     # Comparamos cada equipo contra todos los demás
@@ -74,15 +74,15 @@ def main():
             if any(fp in n1 and fp in n2 for fp in falsos_positivos) and similitud < 0.95:
                 continue
                 
-            print(f"   🚨 POSIBLE DUPLICADO (Similitud {round(similitud*100)}%):")
-            print(f"      👉 '{eq1}'  vs  '{eq2}'")
+            print(f"   [ALERTA] POSIBLE DUPLICADO (Similitud {round(similitud*100)}%):")
+            print(f"      -> '{eq1}'  vs  '{eq2}'")
             alertas += 1
 
     if alertas == 0:
-        print("✅ Tu base de datos está impecable. No hay equipos duplicados ni mal escritos.")
+        print("[OK] Tu base de datos está impecable. No hay equipos duplicados ni mal escritos.")
     else:
-        print(f"\n⚠️ Se encontraron {alertas} posibles conflictos internos.")
-        print("💡 Acción requerida: Elige un único nombre oficial para estos equipos, búscalo en tu Excel (Pestaña DATA o Backtest) y unifícalos.")
+        print(f"\n[!] Se encontraron {alertas} posibles conflictos internos.")
+        print("[TIP] Acción requerida: Elige un único nombre oficial para estos equipos, búscalo en tu Excel (Pestaña DATA o Backtest) y unifícalos.")
 
 if __name__ == "__main__":
     main()

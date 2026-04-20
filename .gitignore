@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+
+# DB y archivos binarios de datos (hay snapshots en snapshots/ pero tampoco van a git)
+*.db
+*.db-shm
+*.db-wal
+*.xlsx
+~$*.xlsx
+
+# Backups y snapshots
+snapshots/
+*.prod_backup
+
+# Credenciales (NUNCA trackear)
+credentials.json
+token.json
+config.json
+.env
+.env.local
+
+# Archivos temporales de APIs
+temp_*.json
+
+# Claude Code settings locales
+.claude/settings.local.json
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo

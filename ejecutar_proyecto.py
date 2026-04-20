@@ -1,8 +1,17 @@
 import subprocess
 import time
-import sys 
+import sys
 import os
 from datetime import datetime
+
+# Forzar UTF-8 en stdout/stderr del orquestador. Sin esto, Windows default cp1252
+# rompe con cualquier caracter no latino-1 (turco 'ş', emojis, flechas Unicode, etc.)
+# leido del subprocess al re-imprimir cada linea capturada (linea ~84).
+try:
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+except Exception:
+    pass
 
 # ==========================================
 # ORQUESTADOR CUANTITATIVO V7.0 (MODOS DE EJECUCIÓN INTEGRADOS)
@@ -136,7 +145,7 @@ def main():
             sys.exit(0)
     
     print("="*70)
-    print(f"⚙️ PIPELINE CUANTITATIVO V7.0 INICIADO - {datetime.now().strftime('%d/%m/%Y')}")
+    print(f"[*] PIPELINE CUANTITATIVO V7.0 INICIADO - {datetime.now().strftime('%d/%m/%Y')}")
     print("="*70)
     
     inicio_total = time.time()

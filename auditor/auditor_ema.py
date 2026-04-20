@@ -10,7 +10,7 @@ import difflib
 DB_NAME = 'fondo_quant.db'
 
 def main():
-    print("🔬 INICIANDO AUDITORÍA DEL MODELO BAYESIANO (EMA)...\n")
+    print("[AUDIT] INICIANDO AUDITORÍA DEL MODELO BAYESIANO (EMA)...\n")
 
     try:
         conn = sqlite3.connect(DB_NAME)
@@ -33,9 +33,9 @@ def main():
         equipos_fantasma = [eq for eq in todos_los_equipos_jugados if eq not in equipos_con_ema]
 
         if not equipos_fantasma:
-            print("   ✅ ¡Excelente! Todos los equipos que han jugado tienen su memoria EMA correspondiente.\n")
+            print("   [OK] ¡Excelente! Todos los equipos que han jugado tienen su memoria EMA correspondiente.\n")
         else:
-            print(f"   🚨 ¡ALERTA! Se encontraron {len(equipos_fantasma)} equipos sin memoria EMA. Esto suele ser un problema de diccionario ('gestor_nombres').")
+            print(f"   [ALERTA] ¡ALERTA! Se encontraron {len(equipos_fantasma)} equipos sin memoria EMA. Esto suele ser un problema de diccionario ('gestor_nombres').")
             for fantasma in equipos_fantasma:
                 # Intentar encontrar una sugerencia para el usuario
                 sugerencia = difflib.get_close_matches(fantasma, equipos_con_ema, n=1, cutoff=0.7)
@@ -59,7 +59,7 @@ def main():
         # --- FASE 3: RANKINGS DE PODERÍO ---
         print("3. Rankings de Poder (Top 10):")
 
-        print("   ⚔️ TOP ATAQUES (Mayor xG Esperado a Favor - Home):")
+        print("   [ATQ] TOP ATAQUES (Mayor xG Esperado a Favor - Home):")
         query_ataque = """
             SELECT equipo_real AS Equipo, liga AS Liga,
                    ema_xg_favor_home AS xG_Favor_H, (partidos_home + partidos_away) AS Partidos
@@ -71,7 +71,7 @@ def main():
         print(df_ataque.to_string(index=False))
         print("\n" + "-"*80 + "\n")
 
-        print("   🛡️ TOP DEFENSAS (Menor xG Esperado en Contra - Home):")
+        print("   [DEF] TOP DEFENSAS (Menor xG Esperado en Contra - Home):")
         query_defensa = """
             SELECT equipo_real AS Equipo, liga AS Liga,
                    ema_xg_contra_home AS xG_Contra_H, (partidos_home + partidos_away) AS Partidos
@@ -87,7 +87,7 @@ def main():
         conn.close()
 
     except sqlite3.OperationalError as e:
-        print(f"⚠️ Error: La base de datos o sus tablas no existen. Ejecuta 'motor_data.py' primero. ({e})")
+        print(f"[!] Error: La base de datos o sus tablas no existen. Ejecuta 'motor_data.py' primero. ({e})")
 
 if __name__ == "__main__":
     main()

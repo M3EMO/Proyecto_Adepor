@@ -1,5 +1,6 @@
 import sqlite3
 import requests
+import concurrent.futures
 from src.comun import gestor_nombres
 import math
 import sys
@@ -11,6 +12,29 @@ from src.comun.constantes_espn import ESTADOS_ESPN_FINALIZADO
 from src.comun.tipos import safe_int, safe_float
 from src.comun.tiempo import fecha_a_espn
 from src.comun.config_motor import get_param
+
+
+def _fetch_espn_json(session, url, pais, fecha_api):
+    """Thread-safe fetch de ESPN scoreboard. Retorna dict JSON o None.
+    Usado en ThreadPoolExecutor para paralelizar requests dentro de cada fecha.
+    """
+    try:
+        resp = session.get(url, timeout=(3, 8))
+        if resp.status_code != 200:
+            return None
+        return resp.json()
+    except requests.exceptions.ReadTimeout:
+        # Retry una vez
+        try:
+            resp = session.get(url, timeout=(3, 8))
+            if resp.status_code != 200:
+                return None
+            return resp.json()
+        except Exception:
+            print(f"      [SKIP] {pais} {fecha_api} colgado 2 veces, saltado.")
+            return None
+    except Exception:
+        return None
 
 # ==========================================
 # MOTOR DATA V9.2 (REGRESIÓN BAYESIANA INTEGRADA + --rebuild)
@@ -77,17 +101,22 @@ def extraer_stats_raw(estadisticas):
             total_shots = int(valor)
     return sot, total_shots, corners
 
-def calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga=0.03):
+def calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga=0.03, pais=None):
     """
     Calcula los Goles Esperados (xG) a partir de estadísticas a nivel de partido.
-    Este modelo descompone los tiros en 'en el arco' y 'fuera/bloqueado' para una
-    valoración más precisa, y se basa en coeficientes derivados de la literatura
-    pública de análisis de fútbol.
+
+    P4 fase3 (2026-04-20): coeficientes calibrados via OLS por liga.
+      beta_sot: por liga (desde config_motor_valores, scope=<pais>).
+                Ligas con N>=30 tienen β específico. Resto fallback global=0.352.
+                Valores del manifiesto anterior (0.30 global) eran sub-óptimos.
+      beta_shots_off: global 0.010 (era 0.040). OLS midió -0.008: reducido a 0.010 conservador.
+                      Shots_off no correlaciona con goles en la muestra.
+      coef_corner_liga: se mantiene como viene del caller (ligas_stats.coef_corner_calculado).
     """
     goles_reales = safe_float(goles_reales)
     if not estadisticas:
         return goles_reales
-        
+
     sot, corners, total_shots = 0, 0, 0
     for stat in estadisticas:
         nombre = stat.get('name', '')
@@ -100,10 +129,15 @@ def calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga=0.03):
             total_shots = valor
 
     shots_off_target_or_blocked = max(0, total_shots - sot)
-    xg_calc = (sot * 0.30) + (shots_off_target_or_blocked * 0.04) + (corners * coef_corner_liga)
+
+    # Coeficientes P4 recalibrados
+    beta_sot = get_param('beta_sot', scope=pais, default=0.352)
+    beta_shots_off = get_param('beta_shots_off', default=0.010)
+
+    xg_calc = (sot * beta_sot) + (shots_off_target_or_blocked * beta_shots_off) + (corners * coef_corner_liga)
     if xg_calc == 0 and goles_reales > 0:
         return goles_reales
-        
+
     xg_final = (xg_calc * 0.70) + (goles_reales * 0.30)
     return round(xg_final, 3)
 
@@ -329,37 +363,41 @@ def main():
                     grupos_de_escaneo[dias_a_escanear].append((codigo_liga, pais))
 
     # --- FASE DE EJECUCIÓN: PROCESAR CADA GRUPO DE ESCANEO ---
-    for dias_a_escanear, ligas_en_grupo in grupos_de_escaneo.items():
-        if not ligas_en_grupo:
-            continue
+    # OPTIMIZACION (fase3, 2026-04-20): Session HTTP + ThreadPoolExecutor(max_workers=6)
+    # Reutiliza conexion TCP/TLS (gana ~30-50%) + paralela ligas dentro de cada fecha (gana ~5x).
+    # Ganancia total esperada: ~6-8x vs loop secuencial con requests.get() individual.
+    session = requests.Session()
+    session.headers.update({'User-Agent': 'adepor/1.0', 'Accept': 'application/json'})
 
-        nombres_ligas = [pais for _, pais in ligas_en_grupo]
-        print(f"\n[PROCESO] Iniciando escaneo de {dias_a_escanear} días para el grupo: {nombres_ligas}.")
-        
-        # --- BUCLE DE DÍAS ---
-        for i in range(dias_a_escanear, -1, -1):
-            fecha_obj = hoy - timedelta(days=i)
-            fecha_api = fecha_a_espn(fecha_obj)
-            
-            # --- BUCLE DE LIGAS (DENTRO DEL GRUPO) ---
-            for codigo_liga, pais in ligas_en_grupo:
-                print(f"   [PROCESO] Escaneando {pais} para la fecha {fecha_api}...")
-                url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{codigo_liga}/scoreboard?dates={fecha_api}"
-                try:
-                    # Fase3 fix rebuild cuelgue: tuple (connect=3, read=8) + retry 1 vez si ReadTimeout.
-                    # Antes: timeout=5 simple — se colgo 2 dias esperando read. Endurecido 2026-04-20.
-                    try:
-                        resp = requests.get(url, timeout=(3, 8))
-                    except requests.exceptions.ReadTimeout:
-                        print(f"      [WARN] ReadTimeout {pais} {fecha_api}, retry 1 vez...")
-                        try:
-                            resp = requests.get(url, timeout=(3, 8))
-                        except requests.exceptions.ReadTimeout:
-                            print(f"      [SKIP] {pais} {fecha_api} colgado 2 veces, saltado.")
-                            continue
-                    if resp.status_code != 200: continue
-                
-                    for evento in resp.json().get('events', []):
+    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
+        for dias_a_escanear, ligas_en_grupo in grupos_de_escaneo.items():
+            if not ligas_en_grupo:
+                continue
+
+            nombres_ligas = [pais for _, pais in ligas_en_grupo]
+            print(f"\n[PROCESO] Iniciando escaneo de {dias_a_escanear} días para el grupo: {nombres_ligas}.")
+
+            # --- BUCLE DE DÍAS ---
+            for i in range(dias_a_escanear, -1, -1):
+                fecha_obj = hoy - timedelta(days=i)
+                fecha_api = fecha_a_espn(fecha_obj)
+
+                # FASE 1: Lanzar requests de las 12 ligas en paralelo (pool=6)
+                futures = {}
+                for codigo_liga, pais in ligas_en_grupo:
+                    url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{codigo_liga}/scoreboard?dates={fecha_api}"
+                    fut = executor.submit(_fetch_espn_json, session, url, pais, fecha_api)
+                    futures[fut] = (codigo_liga, pais)
+
+                # FASE 2: Procesar respuestas SECUENCIAL en main thread (DB-safe)
+                for fut in concurrent.futures.as_completed(futures):
+                    codigo_liga, pais = futures[fut]
+                    data = fut.result()
+                    if data is None:
+                        continue
+                    print(f"   [PROCESO] {pais} para la fecha {fecha_api} ({len(data.get('events', []))} eventos)")
+
+                    for evento in data.get('events', []):
                         try:
                             tipo_estado = evento.get('status', {}).get('type', {})
                             if not tipo_estado.get('completed', False) and tipo_estado.get('name', '') not in ESTADOS_ESPN_FINALIZADO: continue
@@ -390,8 +428,9 @@ def main():
                             stats_loc = loc.get('statistics', [])
                             stats_vis = vis.get('statistics', [])
 
-                            xg_loc_crudo = calcular_xg_hibrido(stats_loc, goles_loc, coef_corner_actual)
-                            xg_vis_crudo = calcular_xg_hibrido(stats_vis, goles_vis, coef_corner_actual)
+                            # P4 fase3: pasar pais para que lea beta_sot por liga
+                            xg_loc_crudo = calcular_xg_hibrido(stats_loc, goles_loc, coef_corner_actual, pais=pais)
+                            xg_vis_crudo = calcular_xg_hibrido(stats_vis, goles_vis, coef_corner_actual, pais=pais)
 
                             xg_loc = ajustar_xg_por_estado_juego(xg_loc_crudo, goles_loc, goles_vis)
                             xg_vis = ajustar_xg_por_estado_juego(xg_vis_crudo, goles_vis, goles_loc)
@@ -436,8 +475,6 @@ def main():
                             vis_desc = evento.get('competitions', [{}])[0].get('competitors', [{}])[-1].get('team', {}).get('displayName', '?') if len(evento.get('competitions', [{}])[0].get('competitors', [])) > 1 else '?'
                             print(f"   [ERROR] {pais} {fecha_api} | {loc_desc} vs {vis_desc} | {type(e).__name__}: {e}")
                             continue
-                except requests.exceptions.RequestException as e:
-                    print(f"   [RED] Fallo de red en {pais} {fecha_api}: {e}")
 
     if equipos_actualizados:
         for eq_norm in equipos_actualizados:

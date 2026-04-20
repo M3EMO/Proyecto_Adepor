@@ -757,6 +757,16 @@ def main():
         # (en el EMA), no aquí. Aplicarla en predicción flipa picks VISITA->LOCAL
         # correctos (Vasco vs Botafogo, Tigre vs Independiente). Ver análisis V4.6.
 
+        # --- P5D fase3 (2026-04-20): GAMMA DE DISPLAY (no entra al Poisson) ---
+        # Opcion D elegida: el xG crudo sigue entrando a Dixon-Coles para preservar
+        # capacidad predictiva (probs con "filo"). Pero el xG que se PERSISTE en DB
+        # y se muestra al usuario se comprime por gamma empirica (goles_real/xG_modelo).
+        # Asi el usuario ve xG realistas sin deteriorar el Brier ni el volumen de picks.
+        gamma_display = get_param('gamma_1x2', scope=pais, default=0.59)
+        xg_local_display = xg_local * gamma_display
+        xg_visita_display = xg_visita * gamma_display
+        # xg_local y xg_visita siguen crudos para el Poisson (abajo)
+
         # --- SHADOW: Incertidumbre ---
         incertidumbre = math.sqrt(
             (ema_l['var_fh'] + ema_v['var_ca'] + ema_v['var_fa'] + ema_l['var_ch']) / 4
@@ -880,11 +890,17 @@ def main():
 
         pick_ou, ev_ou, cu_ou = evaluar_mercado_ou(po_ou, pu_ou, co_v, cu_v, p1, px, p2, xg_l_ou, xg_v_ou)
 
-        stk_1x2 = calcular_stake_independiente(pick_1x2, ev_1x2, cu_1x2, BANKROLL, MAX_KELLY_PCT)
+        # PRETEST MODE (fase3 decision usuario 2026-04-20):
+        # apuestas_live por liga. Si False: picks se calculan y persisten (para medir hit%)
+        # pero stake=0 (sin plata real). Se activa a True automaticamente cuando
+        # scripts/evaluar_pretest.py detecta hit >= 55% con N >= 20 en la liga.
+        _live_val = get_param('apuestas_live', scope=pais, default='FALSE')
+        _live = str(_live_val).upper() in ('TRUE', '1', 'T') if not isinstance(_live_val, bool) else _live_val
+        stk_1x2 = calcular_stake_independiente(pick_1x2, ev_1x2, cu_1x2, BANKROLL, MAX_KELLY_PCT) if _live else 0.0
         # Si APUESTA_OU_ACTIVA=False: pick queda en DB (shadow) pero stake=0 (sin dinero real)
-        stk_ou  = calcular_stake_independiente(pick_ou, ev_ou, cu_ou, BANKROLL, MAX_KELLY_PCT) if APUESTA_OU_ACTIVA else 0.0
+        stk_ou  = calcular_stake_independiente(pick_ou, ev_ou, cu_ou, BANKROLL, MAX_KELLY_PCT) if (APUESTA_OU_ACTIVA and _live) else 0.0
         stk_shadow_1x2 = calcular_stake_independiente(
-            pick_shadow_1x2, ev_1x2_shadow, cu_1x2_shadow, BANKROLL, MAX_KELLY_PCT)
+            pick_shadow_1x2, ev_1x2_shadow, cu_1x2_shadow, BANKROLL, MAX_KELLY_PCT) if _live else 0.0
 
         # Hallazgo C (V4.7): multiplicador de stake por dominancia xG
         # Solo escala apuestas que ya pasaron todos los filtros. El cap MAX_KELLY_PCT
@@ -913,7 +929,7 @@ def main():
             'pick_ou': pick_ou, 'ev_ou': ev_ou, 'cu_ou': cu_ou, 'stk_ou': stk_ou,
             'pick_shadow_1x2': pick_shadow_1x2, 'stk_shadow_1x2': stk_shadow_1x2,
             'incertidumbre': round(incertidumbre, 4),
-            'xg_local': round(xg_local, 3), 'xg_visita': round(xg_visita, 3),
+            'xg_local': round(xg_local_display, 3), 'xg_visita': round(xg_visita_display, 3),  # P5D: gamma applied
             'shadow_xg_l': round(sh_xg_l, 3), 'shadow_xg_v': round(sh_xg_v, 3)
         })
 

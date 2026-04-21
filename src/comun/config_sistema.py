@@ -28,6 +28,7 @@ LIGAS_ESPN = {
     "ecu.1": "Ecuador",
     "col.1": "Colombia",
     "ven.1": "Venezuela",
+    "esp.1": "Espana",   # LaLiga (piloto europeo incorporado 2026-04-21)
 }
 
 # --- Mapeo nombre interno -> sport key de The-Odds-API ---
@@ -44,6 +45,7 @@ MAPA_LIGAS_ODDS = {
     "Ecuador":   None,                          # Sin cobertura en The-Odds-API (2026-04)
     "Colombia":  None,                          # Sin cobertura en The-Odds-API (2026-04)
     "Venezuela": None,                          # Sin cobertura en The-Odds-API (2026-04)
+    "Espana":    "soccer_spain_la_liga",         # LaLiga — cobertura activa con Pinnacle/Bet365
 }
 
 # --- Mapeo nombre interno -> ID de liga en API-Football ---
@@ -60,6 +62,7 @@ MAPA_LIGAS_API_FOOTBALL = {
     "Ecuador":   242,   # Liga Pro Ecuador
     "Colombia":  239,   # Primera A Colombia
     "Venezuela": 299,   # Primera Division Venezuela
+    "Espana":    140,   # LaLiga (Primera Division Espana)
 }
 
 # --- Estados del ciclo de vida de un partido ---

@@ -94,6 +94,12 @@ FACTOR_CORR_XG_OU_POR_LIGA = {
     "Ecuador":   0.627,   # Sin datos propios; fallback global
     "Colombia":  0.627,   # Sin datos propios; fallback global
     "Venezuela": 0.627,   # Sin datos propios; fallback global
+    # Piloto europeo 2026-04-21:
+    #   Espana (LaLiga) -> liga mas defensiva que EPL/Bundesliga (muchos 1-0/2-1,
+    #   goles totales tipicamente ~2.5 vs Bundesliga ~3.0). xG tiende a sobreestimar
+    #   un poco mas en ligas defensivas. Sin backtest propio -> fallback global 0.627;
+    #   se recalibrara cuando N_liquidados_Espana >= 30.
+    "Espana":    0.627,   # Sin datos propios; fallback global (recalibrar con N>=30)
 }
 FACTOR_CORR_XG_OU = get_param('factor_corr_xg_ou', default=0.627)  # Fallback global para ligas nuevas
 
@@ -121,6 +127,12 @@ DIVERGENCIA_MAX_POR_LIGA = {
     "Ecuador":   0.20,   # Mercado poco eficiente, baja cobertura bookmakers
     "Colombia":  0.18,   # Mercado algo mas liquido que Bolivia/Venezuela (=Brasil)
     "Venezuela": 0.20,   # Mercado muy ineficiente; alta volatilidad
+    # Piloto europeo 2026-04-21:
+    #   Espana (LaLiga) -> mercado top-tier europeo, eficiencia altisima,
+    #   cobertura Pinnacle/Bet365 plena. Perfil equivalente a Premier League.
+    #   Divergencia > 10% vs mercado casi siempre indica que el modelo esta
+    #   equivocado, no una oportunidad real.
+    "Espana":    0.10,   # Perfil Premier League: mercado muy eficiente, tolerancia baja
 }
 MARGEN_PREDICTIVO_1X2 = get_param('margen_predictivo_1x2', default=0.03)   # V4.3: bajado de 0.05 a 0.03 — backtest 8 nuevas bets, 62.5% hit (F9 scope=liga via get_param en evaluar_mercado_1x2)
 MARGEN_PREDICTIVO_OU = get_param('margen_predictivo_ou', default=0.05)    # Manifiesto (minimo 5% de separacion)

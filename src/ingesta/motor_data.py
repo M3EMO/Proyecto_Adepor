@@ -77,6 +77,11 @@ ALFA_EMA_POR_LIGA = {
     "Ecuador":   0.18,   # Resultados variables; perfil Noruega
     "Colombia":  0.15,   # Liga competitiva, similar a Argentina
     "Venezuela": 0.20,   # Alta impredictibilidad, baja cobertura; perfil Brasil/Turquia
+    # Piloto europeo 2026-04-21:
+    #   Espana (LaLiga) -> mercado muy eficiente (top-5 UEFA), equipos estables,
+    #                      cobertura total de datos. Perfil equivalente a Inglaterra:
+    #                      ALFA bajo para que el modelo confie en la media historica.
+    "Espana":    0.12,   # Perfil Premier League: mercado eficiente + plantillas estables
 }
 
 # LIGAS_ESPN importado desde config_sistema — no definir aqui

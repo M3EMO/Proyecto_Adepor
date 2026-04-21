@@ -25,6 +25,7 @@ MOTORES_DIARIOS = [
     # --- FASE 1: LIQUIDACIÓN Y RECALIBRACIÓN (PASADO) ---
     {"archivo": "motor_backtest.py",     "desc": "1. Liquidador de Goles (Cierre de Resultados)",           "critico": True,  "interactivo": False},
     {"archivo": "motor_liquidador.py",   "desc": "1.5. Liquidador de Apuestas (Auditoría de Resultados)",   "critico": True,  "interactivo": False},
+    {"archivo": "scripts/evaluar_pretest.py", "desc": "1.6. Pretest Monitor (auto-flip LIVE/PRETEST por liga)", "critico": False, "interactivo": False},
     {"archivo": "motor_arbitro.py",      "desc": "2. El Inquisidor (Auditoría Arbitral y Tarjetas)",        "critico": False, "interactivo": False},
     {"archivo": "motor_data.py",         "desc": "3. Regresión Bayesiana (Actualización de Poderío)",       "critico": True,  "interactivo": False},
 

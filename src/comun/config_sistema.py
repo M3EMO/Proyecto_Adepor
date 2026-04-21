@@ -81,7 +81,14 @@ try:
         _cfg = json.load(_f)
     API_KEYS_ODDS    = _cfg.get('api_keys_odds', [])
     API_KEY_FOOTBALL = _cfg.get('api_key_football', '')
+    # Soporte multi-key para API-Football (fase 3.3.2): si config.json tiene la
+    # lista api_keys_football, se rotan cuando la actual se agota (429 o quota llena).
+    # Fallback a lista con solo la key legacy para compatibilidad.
+    API_KEYS_FOOTBALL = _cfg.get('api_keys_football', [])
+    if not API_KEYS_FOOTBALL and API_KEY_FOOTBALL:
+        API_KEYS_FOOTBALL = [API_KEY_FOOTBALL]
 except (FileNotFoundError, json.JSONDecodeError) as _e:
     print(f"[ADVERTENCIA config_sistema] No se pudo leer config.json: {_e}")
-    API_KEYS_ODDS    = []
-    API_KEY_FOOTBALL = ''
+    API_KEYS_ODDS     = []
+    API_KEY_FOOTBALL  = ''
+    API_KEYS_FOOTBALL = []

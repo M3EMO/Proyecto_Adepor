@@ -8,5 +8,9 @@
         "f66391a91a19e99bce4666178474bd18",
         "f0a158af49776d3bc01a9bc983db8ff9"
     ],
-    "api_key_football": "95a21929923fef5aff0e34b64f2b17c9"
+    "api_key_football": "95a21929923fef5aff0e34b64f2b17c9",
+    "_comentario_football_multi": "Para multi-key: agrega aqui todas las keys. El motor las rota cuando una se agota. api_key_football queda como fallback legacy.",
+    "api_keys_football": [
+        "95a21929923fef5aff0e34b64f2b17c9"
+    ]
 }

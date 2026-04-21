@@ -22,12 +22,32 @@ from datetime import datetime, timedelta, timezone
 
 from src.comun import gestor_nombres
 from src.comun.config_sistema import (
-    DB_NAME, API_KEY_FOOTBALL, MAPA_LIGAS_API_FOOTBALL
+    DB_NAME, API_KEY_FOOTBALL, API_KEYS_FOOTBALL, MAPA_LIGAS_API_FOOTBALL
 )
 
 
 BASE_URL = "https://v3.football.api-sports.io"
-HEADERS = {"x-apisports-key": API_KEY_FOOTBALL}
+
+# Soporte multi-key (fase 3.3.2): rotamos si una key se agota.
+# api_keys_football en config.json es la lista; fallback a key unica legacy.
+_KEYS = list(API_KEYS_FOOTBALL) if API_KEYS_FOOTBALL else ([API_KEY_FOOTBALL] if API_KEY_FOOTBALL else [])
+_KEY_IDX = 0
+
+
+def _headers():
+    if not _KEYS:
+        return {}
+    return {"x-apisports-key": _KEYS[_KEY_IDX]}
+
+
+def _rotar_key(motivo=""):
+    """Avanza al siguiente key. Devuelve True si quedan keys, False si se agotaron todas."""
+    global _KEY_IDX
+    if _KEY_IDX + 1 >= len(_KEYS):
+        return False
+    _KEY_IDX += 1
+    print(f"      [ROTACION] Key agotada ({motivo}). Cambiando a key {_KEY_IDX + 1}/{len(_KEYS)}.")
+    return True
 
 # Ligas a cubrir: las que tradicionalmente quedan sin cuotas via The Odds API.
 # Conservador: 6 sudamericanas + Chile (cobertura parcial en Odds API).
@@ -52,15 +72,32 @@ FUZZY_UMBRAL = 0.75
 
 
 def _get(url, max_retries=2):
-    """GET con retry basico. Devuelve None si falla."""
+    """GET con retry y rotacion multi-key. Devuelve None si todas las keys fallan."""
     for intento in range(max_retries + 1):
         try:
-            r = requests.get(url, headers=HEADERS, timeout=(3, 8))
+            r = requests.get(url, headers=_headers(), timeout=(3, 8))
             if r.status_code == 200:
-                return r.json()
+                data = r.json()
+                # La API devuelve 200 incluso cuando la quota esta agotada; el
+                # error viene en el body. Ej: {"errors": {"requests": "You have
+                # reached the request limit for the day."}}
+                errs = data.get("errors") if isinstance(data, dict) else None
+                if isinstance(errs, dict) and ("requests" in errs or "plan" in errs):
+                    if "requests" in errs:
+                        if not _rotar_key("quota diaria agotada"):
+                            return None
+                        continue
+                return data
             if r.status_code == 429:
-                # Rate limit: esperar un poco y reintentar
+                # Rate limit: rotar key si hay, si no esperar y reintentar
+                if _rotar_key("429 rate limit"):
+                    continue
                 time.sleep(1.5)
+                continue
+            if r.status_code in (401, 403):
+                # Key invalida o bloqueada
+                if not _rotar_key(f"status {r.status_code}"):
+                    return None
                 continue
             return None
         except requests.exceptions.RequestException:
@@ -71,7 +108,7 @@ def _get(url, max_retries=2):
 
 
 def _status():
-    """Devuelve requests consumidos/limite hoy."""
+    """Devuelve requests consumidos/limite hoy (de la key activa)."""
     data = _get(f"{BASE_URL}/status")
     if not data or not data.get("response"):
         return None, None
@@ -187,11 +224,16 @@ def _matchear_fixture(local_espn, visita_espn, eventos_index):
 def main():
     print("[SISTEMA] Iniciando Motor Cuotas API-Football (capa sudamericana).")
 
+    if not _KEYS:
+        print("   [ERROR] No hay API key configurada (api_key_football / api_keys_football en config.json).")
+        return
+
+    print(f"   Keys disponibles: {len(_KEYS)} | activa: 1/{len(_KEYS)}")
     current, limit = _status()
     if current is not None:
-        print(f"   Quota API-Football: {current}/{limit} requests hoy")
-        if limit and current >= limit - 5:
-            print("   [WARN] Cerca del limite diario, abortando para no bloquear la cuenta.")
+        print(f"   Quota key activa: {current}/{limit} requests hoy")
+        if limit and current >= limit - 5 and not _rotar_key("quota cerca del limite en key inicial"):
+            print("   [WARN] Todas las keys cerca del limite diario, abortando.")
             return
 
     conn = sqlite3.connect(DB_NAME)

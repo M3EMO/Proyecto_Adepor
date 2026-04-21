@@ -78,15 +78,22 @@ def _get(url, max_retries=2):
             r = requests.get(url, headers=_headers(), timeout=(3, 8))
             if r.status_code == 200:
                 data = r.json()
-                # La API devuelve 200 incluso cuando la quota esta agotada; el
-                # error viene en el body. Ej: {"errors": {"requests": "You have
-                # reached the request limit for the day."}}
+                # La API devuelve 200 incluso cuando la key esta rota; el error
+                # viene en el body. Casos detectados:
+                #   {"errors": {"requests": "...limit for the day..."}} -> quota agotada
+                #   {"errors": {"access": "Your account is suspended..."}} -> suspendida
+                #   {"errors": {"token": "..."}} -> key invalida
                 errs = data.get("errors") if isinstance(data, dict) else None
-                if isinstance(errs, dict) and ("requests" in errs or "plan" in errs):
+                if isinstance(errs, dict) and ("requests" in errs or "access" in errs or "token" in errs):
                     if "requests" in errs:
-                        if not _rotar_key("quota diaria agotada"):
-                            return None
-                        continue
+                        motivo = "quota diaria agotada"
+                    elif "access" in errs:
+                        motivo = f"cuenta suspendida ({errs['access'][:60]})"
+                    else:
+                        motivo = f"token invalido ({errs.get('token','')[:60]})"
+                    if not _rotar_key(motivo):
+                        return None
+                    continue
                 return data
             if r.status_code == 429:
                 # Rate limit: rotar key si hay, si no esperar y reintentar

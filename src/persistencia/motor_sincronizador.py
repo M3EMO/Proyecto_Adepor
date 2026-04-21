@@ -430,17 +430,26 @@ def crear_hoja_dashboard(wb, metricas, bankroll):
            _semaforo(t_1x2['acierto_bets'], 0.55, 0.45),
            _semaforo(t_ou['acierto_bets'],  0.55, 0.45)))
 
-    # % Acierto all = promedio entre % Acierto P (sistema) y % Acierto $ (apuestas)
+    # % Acierto all = promedio entre % Acierto P (sistema) y % Acierto $ (apuestas).
+    # En PRETEST MODE (stake=0 => sin apuestas reales), el promedio es enganoso
+    # porque mezcla el buen acierto del sistema con 0% financiero por diseno.
+    # Se muestra "N/A (pretest)" hasta que al menos una apuesta se haya movido.
     ap_sistema = m['acierto_partidos']
-    all_total = (ap_sistema + t_all['acierto_bets']) / 2
-    all_1x2   = (ap_sistema + t_1x2['acierto_bets']) / 2
-    all_ou    = t_ou['acierto_bets']   # O/U no tiene columna sistema, usamos solo bets
-    _fila("% Acierto all  (promedio sistema + apuestas)",
+    pretest_total = (t_all['n'] == 0)
+    pretest_1x2   = (t_1x2['n'] == 0)
+    pretest_ou    = (t_ou['n']  == 0)
+    NA_PRE = 'N/A (pretest)'
+    all_total = NA_PRE if pretest_total else (ap_sistema + t_all['acierto_bets']) / 2
+    all_1x2   = NA_PRE if pretest_1x2   else (ap_sistema + t_1x2['acierto_bets']) / 2
+    all_ou    = NA_PRE if pretest_ou    else t_ou['acierto_bets']
+    _fila("% Acierto all  (promedio sistema + apuestas; N/A hasta que corra dinero)",
           (all_total, all_1x2, all_ou),
-          ('pct','pct','pct'),
-          (_semaforo(all_total, 0.55, 0.45),
-           _semaforo(all_1x2,   0.55, 0.45),
-           _semaforo(all_ou,    0.55, 0.45)))
+          ('' if pretest_total else 'pct',
+           '' if pretest_1x2   else 'pct',
+           '' if pretest_ou    else 'pct'),
+          (FILL_NEUTRO if pretest_total else _semaforo(all_total, 0.55, 0.45),
+           FILL_NEUTRO if pretest_1x2   else _semaforo(all_1x2,   0.55, 0.45),
+           FILL_NEUTRO if pretest_ou    else _semaforo(all_ou,    0.55, 0.45)))
 
     # ---- ESTADISTICA ----
     _sep("  ESTADISTICA INFERENCIAL")

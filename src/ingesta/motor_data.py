@@ -82,6 +82,16 @@ ALFA_EMA_POR_LIGA = {
     #                      cobertura total de datos. Perfil equivalente a Inglaterra:
     #                      ALFA bajo para que el modelo confie en la media historica.
     "Espana":    0.12,   # Perfil Premier League: mercado eficiente + plantillas estables
+    # Big 5 europeo completado 2026-04-21:
+    #   Italia (Serie A)      -> liga defensiva, equipos estables, mercado eficiente top-5 UEFA.
+    #                            Perfil Inglaterra/Espana: ALFA bajo (0.12) — confiar en media.
+    #   Alemania (Bundesliga) -> liga ofensiva (~3.0-3.2 goles/partido), mercado eficiente pero
+    #                            con varianza mayor por goles altos. Ligeramente mas reactivo: 0.13.
+    #   Francia (Ligue 1)     -> mercado algo menos eficiente (dominio historico PSG -> dispersion
+    #                            de niveles), equipos mas variables. Mas reactivo al cambio: 0.14.
+    "Italia":    0.12,   # Perfil Premier League: liga defensiva, mercado eficiente
+    "Alemania":  0.13,   # Ofensiva con varianza alta -> levemente mas reactivo que EPL
+    "Francia":   0.14,   # Dispersion de niveles (PSG) -> ALFA intermedio
 }
 
 # LIGAS_ESPN importado desde config_sistema — no definir aqui

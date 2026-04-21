@@ -85,11 +85,27 @@ FILL_NEUTRO   = fill('F2F2F2')
 
 # ==========================================================================
 # COLORES POR PAIS (Conditional Formatting fila A:R en Backtest)
+# Paleta pastel diferenciable. Evitar repetir tonos entre paises vecinos.
+# Argentina/Uruguay comparten familia "celeste" pero con intensidad distinta
+# para diferenciarlos (Argentina mas azul, Uruguay mas verde agua).
 # ==========================================================================
 PAISES_CF = [
-    ("Argentina",  fill('DEEAF1')),
-    ("Brasil",     fill('E2EFDA')),
-    ("Noruega",    fill('FFF2CC')),
-    ("Turquia",    fill('EAE0F0')),
-    ("Inglaterra", fill('FCE4D6')),
+    # --- Sudamericanas ---
+    ("Argentina",  fill('DEEAF1')),   # celeste claro
+    ("Brasil",     fill('E2EFDA')),   # verde lima claro
+    ("Bolivia",    fill('F3E5F5')),   # lavanda
+    ("Chile",      fill('F5CBA7')),   # salmon claro
+    ("Colombia",   fill('FCF3CF')),   # amarillo crema (bandera)
+    ("Ecuador",    fill('FAD7A0')),   # durazno (bandera)
+    ("Peru",       fill('F9E79F')),   # mostaza suave (bandera)
+    ("Uruguay",    fill('A9DFBF')),   # verde agua (bandera celeste distinta a ARG)
+    ("Venezuela",  fill('F5B7B1')),   # rosa coral (bandera)
+    # --- Europeas ---
+    ("Noruega",    fill('FFF2CC')),   # amarillo pastel
+    ("Turquia",    fill('EAE0F0')),   # violeta claro
+    ("Inglaterra", fill('FCE4D6')),   # naranja durazno
+    ("Espana",     fill('F8CECC')),   # rosa coral (bandera roja)
+    ("Italia",     fill('D5E8D4')),   # verde menta (bandera)
+    ("Alemania",   fill('FFF4E6')),   # beige dorado (bandera amarilla/negra)
+    ("Francia",    fill('DAE8FC')),   # azul periwinkle (bandera azul)
 ]

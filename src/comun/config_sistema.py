@@ -29,6 +29,10 @@ LIGAS_ESPN = {
     "col.1": "Colombia",
     "ven.1": "Venezuela",
     "esp.1": "Espana",   # LaLiga (piloto europeo incorporado 2026-04-21)
+    # Big 5 europeo — completado 2026-04-21 (Italia/Alemania/Francia):
+    "ita.1": "Italia",    # Serie A
+    "ger.1": "Alemania",  # Bundesliga
+    "fra.1": "Francia",   # Ligue 1
 }
 
 # --- Mapeo nombre interno -> sport key de The-Odds-API ---
@@ -46,6 +50,10 @@ MAPA_LIGAS_ODDS = {
     "Colombia":  None,                          # Sin cobertura en The-Odds-API (2026-04)
     "Venezuela": None,                          # Sin cobertura en The-Odds-API (2026-04)
     "Espana":    "soccer_spain_la_liga",         # LaLiga — cobertura activa con Pinnacle/Bet365
+    # Big 5 europeo — completado 2026-04-21: cobertura plena en The-Odds-API
+    "Italia":    "soccer_italy_serie_a",         # Serie A — verified active 2026-04-21
+    "Alemania":  "soccer_germany_bundesliga",    # Bundesliga — verified active 2026-04-21
+    "Francia":   "soccer_france_ligue_one",      # Ligue 1 — verified active 2026-04-21
 }
 
 # --- Mapeo nombre interno -> ID de liga en API-Football ---
@@ -63,6 +71,10 @@ MAPA_LIGAS_API_FOOTBALL = {
     "Colombia":  239,   # Primera A Colombia
     "Venezuela": 299,   # Primera Division Venezuela
     "Espana":    140,   # LaLiga (Primera Division Espana)
+    # Big 5 europeo — completado 2026-04-21 (IDs verificados con API-Football 2026-04-21):
+    "Italia":    135,   # Serie A (Italy) — temporada actual 2025/26
+    "Alemania":  78,    # Bundesliga (Germany) — temporada actual 2025/26
+    "Francia":   61,    # Ligue 1 (France) — temporada actual 2025/26
 }
 
 # --- Estados del ciclo de vida de un partido ---

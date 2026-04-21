@@ -100,6 +100,13 @@ FACTOR_CORR_XG_OU_POR_LIGA = {
     #   un poco mas en ligas defensivas. Sin backtest propio -> fallback global 0.627;
     #   se recalibrara cuando N_liquidados_Espana >= 30.
     "Espana":    0.627,   # Sin datos propios; fallback global (recalibrar con N>=30)
+    # Big 5 europeo completado 2026-04-21: sin backtest propio -> fallback global 0.627.
+    # Se recalibrara cuando N_liquidados por liga >= 30 con AVG(goles_real / xG_ema).
+    # Nota perfil: Italia tiende a sobreestimar mas (liga defensiva ~2.5 gol/partido),
+    # Alemania menos (liga ofensiva ~3.0), Francia intermedia. Pero sin muestra no se ajusta.
+    "Italia":    0.627,   # Sin datos propios; fallback global (recalibrar con N>=30)
+    "Alemania":  0.627,   # Sin datos propios; fallback global (recalibrar con N>=30)
+    "Francia":   0.627,   # Sin datos propios; fallback global (recalibrar con N>=30)
 }
 FACTOR_CORR_XG_OU = get_param('factor_corr_xg_ou', default=0.627)  # Fallback global para ligas nuevas
 
@@ -133,6 +140,14 @@ DIVERGENCIA_MAX_POR_LIGA = {
     #   Divergencia > 10% vs mercado casi siempre indica que el modelo esta
     #   equivocado, no una oportunidad real.
     "Espana":    0.10,   # Perfil Premier League: mercado muy eficiente, tolerancia baja
+    # Big 5 europeo completado 2026-04-21:
+    #   Italia y Alemania -> mercados top-tier UEFA, cobertura plena Pinnacle/Bet365,
+    #                         bookmakers altamente calibrados. Perfil Inglaterra/Espana: 0.10.
+    #   Francia -> mercado eficiente pero con dispersion historica (dominio PSG) que genera
+    #               mayor varianza en equipos medios. Tolerancia algo mas alta: 0.12.
+    "Italia":    0.10,   # Perfil Premier League: mercado muy eficiente, tolerancia baja
+    "Alemania":  0.10,   # Perfil Premier League: mercado muy eficiente, tolerancia baja
+    "Francia":   0.12,   # Mercado eficiente pero con mas dispersion; tolerancia intermedia
 }
 MARGEN_PREDICTIVO_1X2 = get_param('margen_predictivo_1x2', default=0.03)   # V4.3: bajado de 0.05 a 0.03 — backtest 8 nuevas bets, 62.5% hit (F9 scope=liga via get_param en evaluar_mercado_1x2)
 MARGEN_PREDICTIVO_OU = get_param('margen_predictivo_ou', default=0.05)    # Manifiesto (minimo 5% de separacion)

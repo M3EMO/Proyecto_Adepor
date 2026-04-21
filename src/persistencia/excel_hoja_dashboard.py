@@ -18,8 +18,13 @@ from src.persistencia.excel_estilos import fill, FILL_NEUTRO
 from src.persistencia.excel_metricas import semaforo
 
 
-def crear_hoja_dashboard(wb, metricas, bankroll):
-    """Crea la hoja Dashboard como primera pestana del workbook."""
+def crear_hoja_dashboard(wb, metricas, bankroll, apuestas_live_por_liga=None):
+    """Crea la hoja Dashboard como primera pestana del workbook.
+
+    apuestas_live_por_liga: dict pais -> bool (True = LIVE, False = pretest).
+    Si None, se omite la columna 'estado' de la tabla por liga.
+    """
+    apuestas_live_por_liga = apuestas_live_por_liga or {}
     ws = wb.create_sheet("Dashboard", 0)
 
     FONT_TITLE = Font(name='Arial', bold=True, color='FFFFFF', size=13)
@@ -219,6 +224,68 @@ def crear_hoja_dashboard(wb, metricas, bankroll):
     c.font = Font(name='Arial', italic=True, size=8, color='595959')
     c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
     row[0] += 3
+
+    # ==========================================================================
+    # PERFORMANCE POR LIGA (N, hit%, yield, apostado, estado LIVE/pretest)
+    # ==========================================================================
+    por_liga = m.get('por_liga', {}) or {}
+    if por_liga:
+        ws.merge_cells(f'A{row[0]}:D{row[0]}')
+        c = ws.cell(row[0], 1, "  PERFORMANCE POR LIGA  (apuestas liquidadas con stake real)")
+        c.font = FONT_SEC; c.fill = fill('7F6000')
+        c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
+        c.border = BORDER_DB
+        ws.row_dimensions[row[0]].height = 14
+        row[0] += 1
+
+        # Sub-header
+        hdrs = ['Liga', 'N', 'Hit%', 'Yield%  /  Apostado  /  Estado']
+        for ci, h in enumerate(hdrs, 1):
+            c = ws.cell(row[0], ci, h)
+            c.font = Font(name='Arial', bold=True, color='FFFFFF', size=9)
+            c.fill = fill('7F6000')
+            c.alignment = Alignment(horizontal='center', vertical='center')
+            c.border = BORDER_DB
+        ws.row_dimensions[row[0]].height = 14
+        row[0] += 1
+
+        for liga, s in sorted(por_liga.items()):
+            r = row[0]
+            bg = fill('FFF9E6') if r % 2 == 0 else fill('FFFFFF')
+            ws.row_dimensions[r].height = 16
+            hit = s['g'] / s['n'] if s['n'] > 0 else 0
+            yld = s['pl'] / s['vol'] if s['vol'] > 0 else 0
+            live = apuestas_live_por_liga.get(liga, False)
+            estado = 'LIVE' if live else 'pretest'
+            estado_fill = fill('C6EFCE') if live else fill('FFE699')
+
+            # col A: liga
+            c = ws.cell(r, 1, liga); c.font = FONT_KPI; c.fill = bg; c.border = BORDER_DB
+            c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
+            # col B: N
+            c = ws.cell(r, 2, s['n']); c.font = FONT_VAL; c.fill = bg; c.border = BORDER_DB
+            c.alignment = Alignment(horizontal='center', vertical='center')
+            c.number_format = '0'
+            # col C: hit
+            c = ws.cell(r, 3, hit); c.font = FONT_VAL; c.border = BORDER_DB
+            c.fill = semaforo(hit, 0.55, 0.45) if s['n'] > 0 else FILL_NEUTRO
+            c.alignment = Alignment(horizontal='center', vertical='center')
+            c.number_format = '0.0%'
+            # col D: compuesto yield + apostado + estado
+            info = f"{100*yld:+.1f}%  |  ${s['vol']:,.0f}  |  {estado}"
+            c = ws.cell(r, 4, info); c.font = FONT_VAL; c.border = BORDER_DB
+            c.fill = estado_fill if estado == 'LIVE' else (semaforo(yld, 0.05, 0) if s['n'] > 0 else bg)
+            c.alignment = Alignment(horizontal='center', vertical='center')
+            row[0] += 1
+
+        # Leyenda
+        ws.merge_cells(f'A{row[0]}:D{row[0]}')
+        c = ws.cell(row[0], 1,
+                    "LIVE = stake real activo (pretest gate superado). "
+                    "pretest = picks generados pero stake=0 hasta N>=15 + hit>=55% + p<=0.30.")
+        c.font = Font(name='Arial', italic=True, size=8, color='595959')
+        c.alignment = Alignment(horizontal='left', vertical='center', indent=1)
+        row[0] += 2
 
     # ==========================================================================
     # ESTRATEGIA ACTIVA (texto estatico con filtros)

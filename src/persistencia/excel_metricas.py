@@ -57,6 +57,10 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
     bs_sis_list, bs_casa_list = [], []
     pred_aciertos = 0
     pred_fallos = 0
+    # por_liga: stats de picks liquidados (incluyendo pretest con stake=0).
+    # n/g/p se cuentan desde el texto [GANADA]/[PERDIDA] del pick 1X2.
+    # vol/pl solo incluyen apuestas con stake>0 (dinero real movido).
+    por_liga = {}
 
     for row in datos:
         (id_p, fecha, local, visita, pais,
@@ -83,24 +87,38 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
                 else:
                     pred_fallos += 1
 
-        # --- Apuestas liquidadas con stake real ---
+        # --- por_liga: cuenta TODAS las apuestas con [GANADA]/[PERDIDA] (pretest + live) ---
+        if pais and ap1x2:
+            if '[GANADA]' in ap1x2 or '[PERDIDA]' in ap1x2:
+                if pais not in por_liga:
+                    por_liga[pais] = {'n': 0, 'g': 0, 'p': 0, 'vol': 0.0, 'pl': 0.0}
+                por_liga[pais]['n'] += 1
+                if '[GANADA]' in ap1x2:
+                    por_liga[pais]['g'] += 1
+                else:
+                    por_liga[pais]['p'] += 1
+                # vol/pl solo si hubo dinero real
+                if stk1x2 and stk1x2 > 0:
+                    res = determinar_resultado_entero(ap1x2, gl, gv)
+                    if res != 0:
+                        cuota = cuota_1x2(ap1x2, c1, cx, c2) or 0
+                        por_liga[pais]['vol'] += stk1x2
+                        por_liga[pais]['pl'] += stk1x2 * (cuota - 1) if res == 1 else -stk1x2
+
+        # --- Apuestas liquidadas con stake real (para metricas financieras total/1x2/ou) ---
         if stk1x2 and stk1x2 > 0 and ap1x2:
             res = determinar_resultado_entero(ap1x2, gl, gv)
             if res != 0:
                 cuota = cuota_1x2(ap1x2, c1, cx, c2) or 0
-                bets_1x2.append({
-                    'res': res, 'stk': stk1x2,
-                    'pl': stk1x2 * (cuota - 1) if res == 1 else -stk1x2,
-                })
+                pl_r = stk1x2 * (cuota - 1) if res == 1 else -stk1x2
+                bets_1x2.append({'res': res, 'stk': stk1x2, 'pl': pl_r})
 
         if stkou and stkou > 0 and apou:
             res = determinar_resultado_entero(apou, gl, gv)
             if res != 0:
                 cuota = cuota_ou(apou, co, cu) or 0
-                bets_ou.append({
-                    'res': res, 'stk': stkou,
-                    'pl': stkou * (cuota - 1) if res == 1 else -stkou,
-                })
+                pl_r = stkou * (cuota - 1) if res == 1 else -stkou
+                bets_ou.append({'res': res, 'stk': stkou, 'pl': pl_r})
 
         # --- Brier Score por partido ---
         if p1 and px and p2:
@@ -131,6 +149,7 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
         'bs_casa': bs_casa,
         'bs_glob': bs_sis - bs_casa,
         'fraccion_kelly': fraccion_kelly,
+        'por_liga': por_liga,
     }
 
 

@@ -63,6 +63,21 @@ def _leer_configuracion(cursor):
     return bankroll, fraccion_kelly
 
 
+def _cargar_apuestas_live(cursor):
+    """Lee apuestas_live por liga desde config_motor_valores.
+    Devuelve dict pais -> bool (True=LIVE, False=pretest)."""
+    try:
+        rows = cursor.execute(
+            "SELECT scope, valor_texto FROM config_motor_valores WHERE clave='apuestas_live'"
+        ).fetchall()
+    except Exception:
+        return {}
+    out = {}
+    for scope, val in rows:
+        out[scope] = str(val).upper() in ('TRUE', '1', 'T', 'YES')
+    return out
+
+
 def _cargar_partidos(cursor):
     """Lee partidos en estado Calculado o Liquidado, ordenados por id_partido."""
     cursor.execute("""
@@ -89,6 +104,7 @@ def main():
     conn.commit()
 
     bankroll, fraccion_kelly = _leer_configuracion(cursor)
+    apuestas_live = _cargar_apuestas_live(cursor)
 
     datos = _cargar_partidos(cursor)
     conn.close()
@@ -107,7 +123,7 @@ def main():
 
     # 2) Dashboard (como primera pestana)
     metricas = calcular_metricas_dashboard(datos, fraccion_kelly)
-    crear_hoja_dashboard(wb, metricas, bankroll)
+    crear_hoja_dashboard(wb, metricas, bankroll, apuestas_live)
 
     # 3) Sombra (auditoria Op1 vs Op4)
     crear_hoja_sombra(wb, datos, bankroll)

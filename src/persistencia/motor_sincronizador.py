@@ -20,6 +20,7 @@ from openpyxl import Workbook
 
 from src.persistencia.excel_hoja_backtest import poblar_backtest, crear_hoja_resumen
 from src.persistencia.excel_hoja_dashboard import crear_hoja_dashboard
+from src.persistencia.excel_hoja_resimulacion import crear_hoja_resimulacion
 from src.persistencia.excel_hoja_sombra import crear_hoja_sombra
 from src.persistencia.excel_metricas import calcular_metricas_dashboard
 
@@ -134,6 +135,12 @@ def main():
 
     # 4) Resumen por liga
     crear_hoja_resumen(wb, stats_liga, bankroll)
+
+    # 5) Si Hubiera (resimulacion in-sample con reglas actuales)
+    try:
+        crear_hoja_resimulacion(wb, datos)
+    except Exception as e:
+        print(f"[AVISO] No se pudo generar la hoja 'Si Hubiera': {e}")
 
     # Guardado
     wb.calculation.fullCalcOnLoad = True

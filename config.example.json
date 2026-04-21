@@ -1,0 +1,13 @@
+{
+    "_comentario": "Template de claves API. Copia este archivo a config.json (NO trackeado en git) y completa con tus claves reales. api_keys_odds soporta multiples keys rotativas de the-odds-api.com. api_keys_football soporta multiples cuentas de api-sports.io/football para ampliar la cuota diaria (100 req/dia por cuenta free tier).",
+    "api_keys_odds": [
+        "REEMPLAZAR_POR_KEY_1_DE_THE_ODDS_API",
+        "REEMPLAZAR_POR_KEY_2_DE_THE_ODDS_API"
+    ],
+    "api_key_football": "REEMPLAZAR_POR_KEY_LEGACY_DE_API_FOOTBALL",
+    "_comentario_football_multi": "Para multi-key: agrega aqui todas las keys. El motor las rota cuando una se agota. api_key_football queda como fallback legacy.",
+    "api_keys_football": [
+        "REEMPLAZAR_POR_KEY_1_DE_API_FOOTBALL",
+        "REEMPLAZAR_POR_KEY_2_DE_API_FOOTBALL"
+    ]
+}

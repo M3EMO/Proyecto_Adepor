@@ -150,14 +150,16 @@ DESACUERDO_PROB_MIN = get_param('desacuerdo_prob_min', default=0.40)     # Umbra
 DIVERGENCIA_DESACUERDO_MAX = get_param('divergencia_desacuerdo_max', default=0.30)  # Techo de divergencia para este regimen
 
 # --- Regimen Consenso con el Mercado — CAMINO 4 (V4.7 fase3 / 2026-04-20) ---
-# Hallazgo: bucket PASAR "Riesgo/Beneficio" liquidado (n=27) tenia 88.9% hit y +36.6%
-# yield apostando al favorito del modelo. Caracteristica clave: fav_modelo == fav_mercado
-# (ambos coinciden) pero cuota baja (c_fav 1.12-1.83) => EV negativo => se rechazaba.
-# El mercado ES el favorito (prob implicita 55-89%) y tenia razon. Cortando cuotas muy
-# bajas (<1.40) el yield sube a +46.3% con 90.5% hit (n=21).
-# Por tanto: cuando modelo y mercado acuerdan fuertemente, el filtro EV sobra.
-# Floor elevado (0.45) para evitar el bucket FLOOR destructor (47.8% hit yield -0.2%).
-CONSENSO_PROB_MIN = get_param('consenso_prob_min', default=0.45)         # Prob modelo minima
+# Hallazgo fase3: bucket PASAR "Riesgo/Beneficio" (n=27) tenia 88.9% hit y +36.6%
+# yield. Clave: fav_modelo == fav_mercado pero cuota baja => EV negativo => rechazo.
+# Cuando modelo y mercado acuerdan, el filtro EV sobra.
+#
+# Actualizacion fase 3.3.4 (2026-04-21): tras train/test split 60/40 cronologico
+# sobre 223 partidos liquidados, threshold test -20%/+20% sobre cada filtro:
+#   C4 prob 0.45 -> 0.36 fue GANADOR NETO: +3 picks, hit +3.2pp, yield +5.1pp en TEST.
+# Interpretacion: cuando mercado y modelo coinciden en favorito con prob 36-44%
+# y cuota 1.80-2.50, el edge es solido. Floor 0.45 dejaba ~60 picks/año en la mesa.
+CONSENSO_PROB_MIN = get_param('consenso_prob_min', default=0.36)         # Prob modelo minima (era 0.45 hasta fase 3.3.4)
 CONSENSO_CUOTA_MIN = get_param('consenso_cuota_min', default=1.40)       # Cuota minima (descarta 1.12-1.39: breakeven 71-83%)
 CONSENSO_CUOTA_MAX = get_param('consenso_cuota_max', default=2.00)       # Cuota maxima: mas arriba C1/C2/C2B/C3 ya cubren
 

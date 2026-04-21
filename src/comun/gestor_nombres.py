@@ -91,7 +91,15 @@ def obtener_nombre_estandar(nombre_crudo, modo_interactivo=True):
             return valor_oficial
 
     # --- FASE 3: LÓGICA DIFUSA AUTOMÁTICA (FUZZY MATCHING) ---
-    AUTO_LEARN_CUTOFF = 0.80
+    # AUTO_LEARN_CUTOFF subido de 0.80 a 0.92 (fase 4.1, 2026-04-21) tras
+    # descubrir falsos matches cross-liga durante el onboarding Big 5:
+    #   "barcelona" (FC Barcelona ESP) -> "Barcelona SC" (Ecuador) — WRONG
+    #   "juventus"  (Juventus ITA)     -> "Juventud" (Uruguay)     — WRONG
+    #   "lens"      (RC Lens FRA)      -> "Leones" (Ecuador)       — WRONG
+    # Con 0.92, el fuzzy solo auto-acepta nombres casi identicos ("Tottenham
+    # Hotspurs"/"Tottenham Hotspur"). Equipos realmente distintos caen a la
+    # Fase 4 (intervencion manual, si modo_interactivo) o devuelve crudo.
+    AUTO_LEARN_CUTOFF = 0.92
     matches = difflib.get_close_matches(nombre_limpio, [limpiar_texto(v) for v in valores_oficiales_unicos], n=1, cutoff=AUTO_LEARN_CUTOFF)
 
     if matches:

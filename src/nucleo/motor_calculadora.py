@@ -159,8 +159,8 @@ DIVERGENCIA_DESACUERDO_MAX = get_param('divergencia_desacuerdo_max', default=0.3
 #   C4 prob 0.45 -> 0.36 fue GANADOR NETO: +3 picks, hit +3.2pp, yield +5.1pp en TEST.
 # Interpretacion: cuando mercado y modelo coinciden en favorito con prob 36-44%
 # y cuota 1.80-2.50, el edge es solido. Floor 0.45 dejaba ~60 picks/año en la mesa.
-CONSENSO_PROB_MIN = get_param('consenso_prob_min', default=0.36)         # Prob modelo minima (era 0.45 hasta fase 3.3.4)
-CONSENSO_CUOTA_MIN = get_param('consenso_cuota_min', default=1.40)       # Cuota minima (descarta 1.12-1.39: breakeven 71-83%)
+CONSENSO_PROB_MIN = get_param('consenso_prob_min', default=0.36)         # Prob modelo minima (fase 3.3.4: 0.45->0.36)
+CONSENSO_CUOTA_MIN = get_param('consenso_cuota_min', default=1.12)       # Cuota minima (fase 3.3.5: 1.40->1.12 COMBO +5 picks)
 CONSENSO_CUOTA_MAX = get_param('consenso_cuota_max', default=2.00)       # Cuota maxima: mas arriba C1/C2/C2B/C3 ya cubren
 
 # --- Bloqueo de Empates (V4.3) ---

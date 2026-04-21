@@ -46,12 +46,16 @@ def _resucitar_liquidados_sin_goles(cursor):
 
 
 def _leer_configuracion(cursor):
-    """Lee bankroll y fraccion_kelly de la tabla configuracion con defaults seguros."""
+    """Lee bankroll operativo (dinamico o fijo) y fraccion_kelly de configuracion."""
     try:
-        cursor.execute("SELECT valor FROM configuracion WHERE clave = 'bankroll'")
-        bankroll = float(cursor.fetchone()[0])
-    except (TypeError, IndexError):
-        bankroll = 100000.00
+        from src.nucleo.motor_calculadora import obtener_bankroll_operativo
+        bankroll = obtener_bankroll_operativo(cursor)
+    except Exception:
+        try:
+            cursor.execute("SELECT valor FROM configuracion WHERE clave = 'bankroll'")
+            bankroll = float(cursor.fetchone()[0])
+        except (TypeError, IndexError):
+            bankroll = 100000.00
 
     try:
         cursor.execute("SELECT valor FROM configuracion WHERE clave = 'fraccion_kelly'")

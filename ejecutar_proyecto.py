@@ -253,6 +253,30 @@ def cmd_status():
             ).fetchone()
             print(f"  {clave:<25s} = {r[0] if r else '(default)'}")
 
+        # Bankroll operativo (base + P/L acumulado si modo=dinamico, clampeado)
+        print()
+        print("--- BANKROLL ---")
+        try:
+            sys.path.insert(0, '.')
+            from src.nucleo.motor_calculadora import obtener_bankroll_operativo
+            base  = cur.execute("SELECT valor FROM configuracion WHERE clave='bankroll'").fetchone()
+            modo  = cur.execute("SELECT valor FROM configuracion WHERE clave='bankroll_modo'").fetchone()
+            corte = cur.execute("SELECT valor FROM configuracion WHERE clave='bankroll_fecha_corte'").fetchone()
+            piso  = cur.execute("SELECT valor FROM configuracion WHERE clave='bankroll_piso'").fetchone()
+            techo = cur.execute("SELECT valor FROM configuracion WHERE clave='bankroll_techo'").fetchone()
+            bk_op = obtener_bankroll_operativo(cur)
+            base_f = float(base[0]) if base else 0
+            print(f"  base                = ${base_f:>12,.2f}")
+            print(f"  modo                = {modo[0] if modo else 'fijo'}")
+            if modo and str(modo[0]).lower() == 'dinamico':
+                print(f"  fecha corte         = {corte[0] if corte else 'n/a'}")
+                print(f"  piso / techo        = ${float(piso[0]):,.0f} / ${float(techo[0]):,.0f}")
+                pl = bk_op - base_f
+                print(f"  P/L acumulado       = ${pl:>+12,.2f}")
+            print(f"  OPERATIVO           = ${bk_op:>12,.2f}")
+        except Exception as e:
+            print(f"  (error leyendo bankroll: {e})")
+
         con.close()
     except Exception as e:
         log_terminal(f"Error leyendo DB: {e}", "ERROR")

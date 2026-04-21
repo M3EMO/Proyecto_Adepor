@@ -242,16 +242,17 @@ def main():
     cuotas_actualizadas = 0
     sin_match = 0
 
-    # Un request /fixtures por dia (cubre todas las ligas objetivo)
-    for dia, lista_partidos in por_fecha.items():
-        print(f"   [ESCANEO] Fecha {dia} — {len(lista_partidos)} partidos nuestros (ligas objetivo)")
+    # --- POOL GLOBAL DE FIXTURES (resuelve time-shift UTC vs local) ---
+    # API-Football indexa fixtures por UTC. Partidos nocturnos locales (ej Bolivia 21h)
+    # caen al dia UTC siguiente. Solucion: fetch de las 3 fechas de ventana y
+    # agrupar todo por liga_id SIN filtrar por dia. Matching agregado.
+    por_liga_id = {}
+    fetched_days = set()
+    for dia in sorted(ventana):
         fixtures_raw = _buscar_fixtures_dia(dia)
+        fetched_days.add(dia)
         if not fixtures_raw:
-            print(f"      [INFO] API-Football sin fixtures para {dia}")
             continue
-
-        # Indexar fixtures API solo de las ligas objetivo
-        por_liga_id = {}
         for fx in fixtures_raw:
             lid = fx["league"]["id"]
             if lid not in ligas_ids:
@@ -260,35 +261,40 @@ def main():
             vis_api = fx["teams"]["away"]["name"]
             loc_std = gestor_nombres.obtener_nombre_estandar(loc_api, modo_interactivo=False)
             vis_std = gestor_nombres.obtener_nombre_estandar(vis_api, modo_interactivo=False)
+            fx_id = fx["fixture"]["id"]
+            # Evitar duplicados si la API retorna el mismo fixture en 2 dias distintos
+            if any(e["fixture_id"] == fx_id for e in por_liga_id.get(lid, [])):
+                continue
             por_liga_id.setdefault(lid, []).append({
-                "fixture_id": fx["fixture"]["id"],
+                "fixture_id": fx_id,
+                "fx_date": fx["fixture"]["date"],
                 "loc_raw": loc_api,
                 "vis_raw": vis_api,
                 "loc_norm": gestor_nombres.limpiar_texto(loc_std),
                 "vis_norm": gestor_nombres.limpiar_texto(vis_std),
             })
 
-        if not por_liga_id:
-            print(f"      [INFO] Ninguna liga objetivo con fixtures en {dia}")
-            continue
+    print(f"   [POOL] {sum(len(v) for v in por_liga_id.values())} fixtures de {len(por_liga_id)} ligas objetivo en ventana {sorted(fetched_days)}")
 
+    # Iterar partidos DB (ya filtrados por ventana) y matchear contra pool
+    for dia, lista_partidos in por_fecha.items():
         for id_p, loc_espn, vis_espn, pais in lista_partidos:
             liga_id = MAPA_LIGAS_API_FOOTBALL.get(pais)
             eventos_liga = por_liga_id.get(liga_id, [])
             if not eventos_liga:
-                print(f"      [SIN LIGA] {pais} {loc_espn} vs {vis_espn} — API no tiene fixtures de {pais} ese dia")
+                print(f"   [SIN LIGA] {pais} {dia} {loc_espn} vs {vis_espn} — pool vacio para liga {liga_id}")
                 sin_match += 1
                 continue
 
             match, score = _matchear_fixture(loc_espn, vis_espn, eventos_liga)
             if match is None:
-                print(f"      [SIN MATCH] {pais} {loc_espn} vs {vis_espn} (mejor score={score:.0%})")
+                print(f"   [SIN MATCH] {pais} {dia} {loc_espn} vs {vis_espn} (mejor score={score:.0%})")
                 sin_match += 1
                 continue
 
             c1, cx, c2, co, cu = _obtener_odds_fixture(match["fixture_id"])
             if c1 <= 0 and co <= 0:
-                print(f"      [SIN ODDS] fx={match['fixture_id']} {pais} {loc_espn} vs {vis_espn}")
+                print(f"   [SIN ODDS] fx={match['fixture_id']} {pais} {loc_espn} vs {vis_espn}")
                 continue
 
             cur.execute("""
@@ -303,7 +309,7 @@ def main():
             cuotas_actualizadas += 1
 
             tag = f"[MATCH {score:.0%}]" if score < 1.0 else "[MATCH]"
-            print(f"      {tag} {pais} {loc_espn} vs {vis_espn} | 1={c1} X={cx} 2={c2} O={co} U={cu}")
+            print(f"   {tag} {pais} {dia} {loc_espn} vs {vis_espn} | 1={c1} X={cx} 2={c2} O={co} U={cu}")
 
     conn.commit()
     conn.close()

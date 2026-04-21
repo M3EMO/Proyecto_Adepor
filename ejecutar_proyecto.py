@@ -33,6 +33,7 @@ MOTORES_DIARIOS = [
     {"archivo": "motor_fixture.py",      "desc": "4. El Arquitecto (Proyección de Calendario)",             "critico": True,  "interactivo": True},
     {"archivo": "motor_tactico.py",      "desc": "5. El Analista (Formaciones y Vida de DTs)",              "critico": False, "interactivo": False},
     {"archivo": "motor_cuotas.py",       "desc": "6. El Oráculo (Extracción de Precios y CLV)",             "critico": True,  "interactivo": False},
+    {"archivo": "motor_cuotas_apifootball.py", "desc": "6.5. Oráculo Sudamericano (API-Football)",          "critico": False, "interactivo": False},
 
     # --- FASE 3: TOMA DE DECISIONES ---
     {"archivo": "motor_calculadora.py",  "desc": "7. Cerebro Cuantitativo (Poisson, EV y Kelly)",           "critico": True,  "interactivo": False},

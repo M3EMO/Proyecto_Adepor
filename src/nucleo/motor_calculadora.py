@@ -1010,8 +1010,17 @@ def main():
         _live_val = get_param('apuestas_live', scope=pais, default='FALSE')
         _live = str(_live_val).upper() in ('TRUE', '1', 'T') if not isinstance(_live_val, bool) else _live_val
         stk_1x2 = calcular_stake_independiente(pick_1x2, ev_1x2, cu_1x2, BANKROLL, MAX_KELLY_PCT) if _live else 0.0
-        # Si APUESTA_OU_ACTIVA=False: pick queda en DB (shadow) pero stake=0 (sin dinero real)
-        stk_ou  = calcular_stake_independiente(pick_ou, ev_ou, cu_ou, BANKROLL, MAX_KELLY_PCT) if (APUESTA_OU_ACTIVA and _live) else 0.0
+        # O/U: flag scoped por liga (fallback al global APUESTA_OU_ACTIVA). Permite activar
+        # O/U solo en ligas con hit historico >=55% + N minimo + p-valor aceptable.
+        _ou_val_liga = get_param('apuesta_ou_live', scope=pais, default=None)
+        if _ou_val_liga is None:
+            _ou_activo_liga = APUESTA_OU_ACTIVA
+        else:
+            _ou_activo_liga = str(_ou_val_liga).upper() in ('TRUE', '1', 'T') if not isinstance(_ou_val_liga, bool) else _ou_val_liga
+        # O/U DESACOPLADO de apuestas_live 1X2: una liga puede estar en pretest 1X2
+        # pero activa en O/U (pretest_OU criterio independiente hit>=55% + N minimo).
+        # Si O/U no activo (flag liga/global): pick queda en DB (shadow) pero stake=0.
+        stk_ou  = calcular_stake_independiente(pick_ou, ev_ou, cu_ou, BANKROLL, MAX_KELLY_PCT) if _ou_activo_liga else 0.0
         stk_shadow_1x2 = calcular_stake_independiente(
             pick_shadow_1x2, ev_1x2_shadow, cu_1x2_shadow, BANKROLL, MAX_KELLY_PCT) if _live else 0.0
 

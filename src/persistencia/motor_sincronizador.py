@@ -136,9 +136,15 @@ def main():
     # 4) Resumen por liga
     crear_hoja_resumen(wb, stats_liga, bankroll)
 
-    # 5) Si Hubiera (resimulacion in-sample con reglas actuales)
+    # 5) Si Hubiera (resimulacion in-sample con reglas actuales + compounding)
+    # Usa bankroll BASE (no dinamico) para tener un punto de partida estable.
     try:
-        crear_hoja_resimulacion(wb, datos)
+        cursor2 = sqlite3.connect(DB_NAME).cursor()
+        row_bk = cursor2.execute(
+            "SELECT valor FROM configuracion WHERE clave='bankroll'").fetchone()
+        bankroll_base = float(row_bk[0]) if row_bk else bankroll
+        cursor2.connection.close()
+        crear_hoja_resimulacion(wb, datos, bankroll_base)
     except Exception as e:
         print(f"[AVISO] No se pudo generar la hoja 'Si Hubiera': {e}")
 

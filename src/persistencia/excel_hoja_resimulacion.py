@@ -21,6 +21,7 @@ from datetime import datetime
 from openpyxl.styles import Font, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
+from src.comun.config_motor import get_param
 from src.comun.reglas_actuales import evaluar_actual
 from src.persistencia.excel_estilos import fill
 
@@ -36,7 +37,19 @@ def _fecha_disp(fecha_raw):
     return str(fecha_raw)[:10]
 
 
-def crear_hoja_resimulacion(wb, datos):
+def _stake_kelly(prob, cuota, bankroll, fraccion_kelly, max_kelly_pct):
+    """Replica motor_calculadora.calcular_stake_independiente con prob directo.
+    Medio Kelly capado a max_kelly_pct."""
+    if cuota <= 1 or prob <= 0:
+        return 0.0
+    kelly_full = (prob * cuota - 1) / (cuota - 1)
+    if kelly_full <= 0:
+        return 0.0
+    fraccion = min(kelly_full * fraccion_kelly, max_kelly_pct)
+    return round(bankroll * max(0, fraccion), 2)
+
+
+def crear_hoja_resimulacion(wb, datos, bankroll):
     """Crea la hoja 'Si Hubiera' con resimulacion in-sample.
 
     datos: lista de filas tal como las devuelve _cargar_partidos del sincronizador.
@@ -75,9 +88,15 @@ def crear_hoja_resimulacion(wb, datos):
     for ci, w in enumerate(widths, 1):
         ws.column_dimensions[get_column_letter(ci)].width = w
 
+    # --- Parametros Kelly (leidos de configuracion) ---
+    fraccion_kelly  = float(get_param('fraccion_kelly',      default=0.50) or 0.50)
+    max_kelly_pct   = float(get_param('max_kelly_pct_normal', default=0.025) or 0.025)
+
     # --- Titulo ---
     ws.merge_cells('A1:K1')
-    c = ws.cell(1, 1, "RESIMULACION — Si siempre hubiera apostado con las reglas actuales (Fase 3.3.5)")
+    c = ws.cell(1, 1,
+                f"RESIMULACION — Si siempre hubiera apostado con las reglas actuales (Fase 3.3.5) "
+                f"| Bankroll base ${bankroll:,.0f} | Medio Kelly {fraccion_kelly:.0%} cap {max_kelly_pct:.1%}")
     c.font = FONT_TITLE; c.fill = FILL_TITULO
     c.alignment = Alignment(horizontal='center', vertical='center')
     ws.row_dimensions[1].height = 24
@@ -93,10 +112,13 @@ def crear_hoja_resimulacion(wb, datos):
 
     # --- Procesamiento ---
     real_por_liga = defaultdict(lambda: {'n': 0, 'g': 0})
-    sim_por_liga  = defaultdict(lambda: {'n': 0, 'g': 0, 'ret': 0.0,
+    sim_por_liga  = defaultdict(lambda: {'n': 0, 'g': 0,
+                                         'stake_tot': 0.0, 'pl_tot': 0.0,
                                          'caminos': defaultdict(lambda: [0, 0])})
-    picks_simulados = []  # tuplas para la tabla detallada
+    picks_simulados = []
 
+    # Fase 1: recolectar picks simulados + acumular REAL por liga
+    candidatos = []  # picks que pasaron reglas (sin stake/pl aun, orden natural)
     for rd in datos:
         estado = rd[19]
         gl, gv = rd[20], rd[21]
@@ -106,6 +128,7 @@ def crear_hoja_resimulacion(wb, datos):
         p1, px, p2 = rd[5], rd[6], rd[7]
         c1, cx, c2 = rd[14], rd[15], rd[16]
         ap_real    = str(rd[10] or '')
+        fecha      = rd[1]
 
         if not all(isinstance(x, (int, float)) and x > 0 for x in [p1, px, p2, c1, cx, c2]):
             continue
@@ -120,31 +143,50 @@ def crear_hoja_resimulacion(wb, datos):
         pick, cuota, camino = evaluar_actual(p1, px, p2, c1, cx, c2, pais)
         if pick is None:
             continue
+        prob_pick = {'LOCAL': p1, 'EMPATE': px, 'VISITA': p2}[pick]
         gana = ((pick == 'LOCAL'  and gl >  gv) or
                 (pick == 'EMPATE' and gl == gv) or
                 (pick == 'VISITA' and gl <  gv))
-        pl_unit = (cuota - 1) if gana else -1.0
-        sim_por_liga[pais]['n'] += 1
-        sim_por_liga[pais]['ret'] += pl_unit
-        sim_por_liga[pais]['caminos'][camino][0] += 1
-        if gana:
-            sim_por_liga[pais]['g'] += 1
-            sim_por_liga[pais]['caminos'][camino][1] += 1
-        picks_simulados.append({
-            'fecha': rd[1], 'local': rd[2], 'visita': rd[3], 'pais': pais,
+        candidatos.append({
+            'fecha': fecha, 'local': rd[2], 'visita': rd[3], 'pais': pais,
             'pick': pick, 'cuota': cuota, 'camino': camino,
-            'gl': gl, 'gv': gv, 'gana': gana, 'pl_unit': pl_unit,
+            'gl': gl, 'gv': gv, 'gana': gana, 'prob': prob_pick,
         })
+
+    # Fase 2: ordenar cronologicamente y aplicar COMPOUNDING
+    # bankroll_running arranca en bankroll base y se actualiza con cada P/L
+    candidatos.sort(key=lambda x: str(x['fecha'] or ''))
+    bankroll_running = float(bankroll)
+    for p in candidatos:
+        stake = _stake_kelly(p['prob'], p['cuota'], bankroll_running,
+                             fraccion_kelly, max_kelly_pct)
+        pl = round(stake * (p['cuota'] - 1), 2) if p['gana'] else round(-stake, 2)
+        bankroll_running = round(bankroll_running + pl, 2)
+        p['stake']  = stake
+        p['pl']     = pl
+        p['equity'] = bankroll_running
+
+        pa = p['pais']
+        sim_por_liga[pa]['n'] += 1
+        sim_por_liga[pa]['stake_tot'] += stake
+        sim_por_liga[pa]['pl_tot'] += pl
+        sim_por_liga[pa]['caminos'][p['camino']][0] += 1
+        if p['gana']:
+            sim_por_liga[pa]['g'] += 1
+            sim_por_liga[pa]['caminos'][p['camino']][1] += 1
+        picks_simulados.append(p)
 
     # --- Totales globales ---
     total_r   = sum(v['n'] for v in real_por_liga.values())
     total_r_g = sum(v['g'] for v in real_por_liga.values())
     total_s   = sum(v['n'] for v in sim_por_liga.values())
     total_s_g = sum(v['g'] for v in sim_por_liga.values())
-    total_s_r = sum(v['ret'] for v in sim_por_liga.values())
+    total_s_stake = sum(v['stake_tot'] for v in sim_por_liga.values())
+    total_s_pl    = sum(v['pl_tot']    for v in sim_por_liga.values())
     hit_r = total_r_g / total_r if total_r else 0
     hit_s = total_s_g / total_s if total_s else 0
-    yld_s = total_s_r / total_s if total_s else 0
+    yld_s = total_s_pl / total_s_stake if total_s_stake else 0
+    roi_bankroll = total_s_pl / bankroll if bankroll else 0
 
     # --- KPI globales (fila 4-5 headers, 6 datos) ---
     row = 4
@@ -214,9 +256,12 @@ def crear_hoja_resimulacion(wb, datos):
 
     _kpi_row("N picks",        total_r,   total_s,  fmt='int'); row += 1
     _kpi_row("Ganados",        total_r_g, total_s_g, fmt='int'); row += 1
-    _kpi_row("Hit rate",       hit_r,     hit_s,    fmt='pct'); row += 1
-    _kpi_row("Yield",          0,         yld_s,    fmt='pct'); row += 1
-    _kpi_row("P/L (unidades)", 0,         total_s_r, fmt='cur'); row += 1
+    _kpi_row("Hit rate",               hit_r, hit_s,           fmt='pct'); row += 1
+    _kpi_row("Volumen apostado ($)",   0,     total_s_stake,   fmt='cur'); row += 1
+    _kpi_row("Yield (P/L / volumen)",  0,     yld_s,           fmt='pct'); row += 1
+    _kpi_row("P/L neto ($)",           0,     total_s_pl,      fmt='cur'); row += 1
+    _kpi_row("ROI sobre bankroll",     0,     roi_bankroll,    fmt='pct'); row += 1
+    _kpi_row("Equity final ($)",       bankroll, bankroll + total_s_pl, fmt='cur'); row += 1
     row += 1
 
     # --- Tabla por liga ---
@@ -228,9 +273,10 @@ def crear_hoja_resimulacion(wb, datos):
     row += 1
 
     hdrs = ['Liga', 'N real', 'Hit% real', 'N sim', 'G sim', 'Hit% sim',
-            'Yield sim', 'dN', 'dHit', 'dYield']
-    fills_ = ([fill('4472C4')] + [FILL_HDR_REAL]*2 + [FILL_HDR_SIM]*4
-              + [FILL_HDR_DLT]*3)
+            'Volumen $', 'P/L $', 'Yield sim', 'dN', 'dHit']
+    fills_ = ([fill('4472C4')] + [FILL_HDR_REAL]*2 + [FILL_HDR_SIM]*5
+              + [FILL_HDR_DLT]*2)
+    # Expandir a 11 cols para acomodar volumen + P/L
     for ci, (h, f) in enumerate(zip(hdrs, fills_), 1):
         c = ws.cell(row, ci, h)
         c.font = FONT_HDR; c.fill = f; c.border = BORDER
@@ -241,20 +287,19 @@ def crear_hoja_resimulacion(wb, datos):
     ligas_todas = sorted(set(list(real_por_liga.keys()) + list(sim_por_liga.keys())))
     for liga in ligas_todas:
         r_ = real_por_liga.get(liga, {'n': 0, 'g': 0})
-        s_ = sim_por_liga.get(liga,  {'n': 0, 'g': 0, 'ret': 0.0})
+        s_ = sim_por_liga.get(liga, {'n': 0, 'g': 0, 'stake_tot': 0.0, 'pl_tot': 0.0})
         hit_rl = r_['g'] / r_['n'] if r_['n'] else 0
         hit_sl = s_['g'] / s_['n'] if s_['n'] else 0
-        yld_sl = s_['ret'] / s_['n'] if s_['n'] else 0
-        dN    = s_['n'] - r_['n']
-        dHit  = hit_sl - hit_rl if (r_['n'] and s_['n']) else 0
-        dYld  = yld_sl  # yield REAL no existe (stakes histo=0) → delta = yield_sim
+        yld_sl = s_['pl_tot'] / s_['stake_tot'] if s_['stake_tot'] else 0
+        dN     = s_['n'] - r_['n']
+        dHit   = hit_sl - hit_rl if (r_['n'] and s_['n']) else 0
 
         bg = FILL_BLANCO if row % 2 == 0 else FILL_NEUTRO
         vals = [
             (liga, None),                 (r_['n'], '0'),              (hit_rl, '0.0%'),
             (s_['n'], '0'),               (s_['g'], '0'),              (hit_sl, '0.0%'),
+            (s_['stake_tot'], '#,##0.00'),(s_['pl_tot'], '+#,##0.00;-#,##0.00'),
             (yld_sl, '+0.0%;-0.0%;0.0%'), (dN, '+0;-0;0'),             (dHit, '+0.0%;-0.0%;0.0%'),
-            (dYld, '+0.0%;-0.0%;0.0%'),
         ]
         for ci, (v, fmt) in enumerate(vals, 1):
             c = ws.cell(row, ci, v)
@@ -262,7 +307,9 @@ def crear_hoja_resimulacion(wb, datos):
             c.alignment = Alignment(horizontal='center' if ci > 1 else 'left',
                                     vertical='center')
             if fmt: c.number_format = fmt
-            if ci == 7 and isinstance(v, (int, float)):
+            if ci == 8 and isinstance(v, (int, float)):  # P/L
+                c.fill = FILL_GANADA if v > 0 else (FILL_PERDIDA if v < 0 else bg)
+            if ci == 9 and isinstance(v, (int, float)):  # Yield
                 c.fill = FILL_GANADA if v > 0 else (FILL_PERDIDA if v < 0 else bg)
         ws.row_dimensions[row].height = 15
         row += 1
@@ -320,22 +367,18 @@ def crear_hoja_resimulacion(wb, datos):
     row += 1
 
     det_hdrs = ['Fecha', 'Partido', 'Liga', 'Pick', 'Cuota', 'Camino',
-                'Goles', 'Resultado', 'P/L', 'Equity sim', '']
-    for ci, h in enumerate(det_hdrs[:10], 1):
+                'Goles', 'Resultado', 'Stake $', 'P/L $', 'Equity $']
+    for ci, h in enumerate(det_hdrs, 1):
         c = ws.cell(row, ci, h)
         c.font = FONT_HDR; c.fill = FILL_HDR_SIM; c.border = BORDER
         c.alignment = Alignment(horizontal='center', vertical='center')
     ws.row_dimensions[row].height = 16
-    ws.freeze_panes = ws.cell(row + 1, 1)
     row += 1
 
-    picks_simulados.sort(key=lambda x: str(x['fecha']))
-    equity = 0.0
-    for p in picks_simulados:
-        equity += p['pl_unit']
+    for p in picks_simulados:  # ya vienen en orden cronologico
         bg = FILL_BLANCO if row % 2 == 0 else FILL_NEUTRO
         res_fill = FILL_GANADA if p['gana'] else FILL_PERDIDA
-        pl_fill  = FILL_GANADA if p['pl_unit'] > 0 else FILL_PERDIDA
+        pl_fill  = FILL_GANADA if p['pl'] > 0 else FILL_PERDIDA
 
         vals = [
             (_fecha_disp(p['fecha']), None, bg),
@@ -346,8 +389,9 @@ def crear_hoja_resimulacion(wb, datos):
             (p['camino'], None, bg),
             (f"{p['gl']}-{p['gv']}", None, bg),
             ('GANADA' if p['gana'] else 'PERDIDA', None, res_fill),
-            (round(p['pl_unit'], 3), '+0.000;-0.000', pl_fill),
-            (round(equity, 2), '+#,##0.00;-#,##0.00', bg),
+            (p['stake'],  '#,##0.00', bg),
+            (p['pl'],     '+#,##0.00;-#,##0.00', pl_fill),
+            (p['equity'], '#,##0.00', bg),
         ]
         for ci, (v, fmt, cfill) in enumerate(vals, 1):
             c = ws.cell(row, ci, v)
@@ -362,8 +406,9 @@ def crear_hoja_resimulacion(wb, datos):
     row += 1
     ws.merge_cells(f'A{row}:K{row}')
     c = ws.cell(row, 1,
-                "P/L en 'unidades' (stake=1 por pick). Para traducir a pesos, multiplicar por el stake "
-                "medio historico. El Yield aqui es P/L/N en unidades, equivalente a %.")
+                f"Stakes calculados con Medio Kelly ({fraccion_kelly:.0%}) capado a {max_kelly_pct:.1%} del bankroll, "
+                f"CON compounding: cada pick se apuesta sobre bankroll_running = bankroll_base + P/L acumulado al momento del pick. "
+                f"Equity arranca en ${bankroll:,.0f}. No se aplica ajuste de covarianza (multiples picks/dia).")
     c.font = FONT_SUB
     c.alignment = Alignment(horizontal='left', vertical='center', indent=1, wrap_text=True)
-    ws.row_dimensions[row].height = 24
+    ws.row_dimensions[row].height = 32

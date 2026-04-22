@@ -202,6 +202,11 @@ APUESTA_EMPATE_PERMITIDA = get_param('apuesta_empate_permitida', default=False)
 # Cambiar a False si se quiere observar sin apostar hasta acumular n >= 30
 APUESTA_OU_ACTIVA = get_param('apuesta_ou_live', default=True)
 
+# Umbral para el log SHADOW de incertidumbre. Los valores reales de incertidumbre
+# estan en el rango [0.6, 2.8] (post V9.1), entonces el 0.15 original disparaba
+# para TODOS los picks. 1.40 marca el ~20% superior (p75 aprox). Configurable.
+INCERTIDUMBRE_UMBRAL_SHADOW = float(get_param('incertidumbre_umbral_shadow', default=1.40) or 1.40)
+
 # --- Filtro xG Margen O/U — ASIMETRICO (Fix B, V4.6) ---
 # Backtest 32 partidos: xG en [2.5-2.8) -> goles_prom=0.60, UNDER=100%.
 # El modelo dice "levemente OVER" pero la realidad es dramaticamente UNDER.
@@ -946,10 +951,12 @@ def main():
         p1, px, p2 = corregir_calibracion(p1, px, p2)
 
         # --- SHADOW: Log de incertidumbre ---
+        # Umbral re-calibrado 2026-04-22: antes 0.15 (disparaba siempre), ahora 1.40
+        # que captura el ~20% superior de la distribucion actual. Configurable en DB.
         prob_max = max(p1, px, p2)
         umb_activo = (UMBRAL_EV_BASE * (0.5 / prob_max)) if prob_max > 0 else 999
         umb_con_incert = umb_activo * (1 + incertidumbre)
-        if incertidumbre > 0.15:
+        if incertidumbre > INCERTIDUMBRE_UMBRAL_SHADOW:
             shadow_log_incert += 1
             print(f"   [SHADOW-INC] {local} vs {visita} | Incert: {incertidumbre:.3f} | "
                   f"Umbral activo: {umb_activo:.4f} | Umbral+incert: {umb_con_incert:.4f}")

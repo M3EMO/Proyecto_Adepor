@@ -21,7 +21,7 @@ COL = {
     'ap1x2': 19, 'apou': 20, 'stk1x2': 21, 'stkou': 22,
     'acierto': 23, 'pl': 24, 'equity': 25,
     'brier': 26, 'brier_casa': 27,
-    'incert': 28, 'auditoria': 29,
+    'incert': 28, 'incert_pct': 29, 'auditoria': 30,
 }
 
 HEADERS = {
@@ -32,7 +32,7 @@ HEADERS = {
     19: 'Apuesta 1X2', 20: 'Apuesta O/U 2.5', 21: 'Stake 1X2', 22: 'Stake O/U 2.5',
     23: 'Acierto', 24: 'P/L Neto', 25: 'Equity Curve',
     26: 'BS Sistema', 27: 'BS Casa',
-    28: 'Incertidumbre', 29: 'Auditoria',
+    28: 'Incertidumbre', 29: 'Incert %', 30: 'Auditoria',
 }
 
 MAX_COL = max(COL.values())
@@ -46,7 +46,7 @@ COL_WIDTHS = {
     'ap1x2': 28, 'apou': 28, 'stk1x2': 13, 'stkou': 13,
     'acierto': 22, 'pl': 13, 'equity': 15,
     'brier': 12, 'brier_casa': 12,
-    'incert': 13, 'auditoria': 11,
+    'incert': 13, 'incert_pct': 10, 'auditoria': 11,
 }
 
 

@@ -103,6 +103,13 @@ def poblar_backtest(wb, datos, bankroll):
             cell.font = FONT_DATA
             cell.number_format = '0.000'
 
+            # Incert normalizada a [0, 1] con cap en 2.0, mostrada como %
+            # 0% = muy predecible, 100% = maximamente impredecible
+            incert_pct = min(float(incert) / 2.0, 1.0)
+            cell = ws.cell(r, COL['incert_pct'], incert_pct)
+            cell.font = FONT_DATA
+            cell.number_format = '0%'
+
         ws.cell(r, COL['auditoria'], auditoria or "").font = FONT_DATA
 
         # Formulas

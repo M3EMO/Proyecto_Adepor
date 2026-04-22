@@ -9,10 +9,19 @@ Camino 2  : max-EV si no hubo C1
 Camino 2B : desacuerdo prob vs mercado (favorito distinto)
 Camino 3  : convergencia absoluta (EV >= 1.0)
 Camino 4  : consenso prob_min=0.36, cuota 1.12-2.00, favorito coincide con mercado
+
+Mercado O/U 2.5 evaluado aparte con evaluar_actual_ou.
 """
 from src.comun.config_motor import get_param
 
 LIGAS_SESGO = ('Brasil', 'Inglaterra', 'Noruega', 'Turquia')
+
+# Parametros O/U (espejo de motor_calculadora.py)
+MARGEN_XG_OU_OVER  = 0.30  # Fix B V4.6: OVER requiere xG > 2.80 (asimetrico)
+MARGEN_XG_OU_UNDER = 0.25  # UNDER requiere xG < 2.25
+MARGEN_PREDICTIVO_OU = 0.05
+UMBRAL_EV_BASE = 0.03
+TECHO_CUOTA_OU = 6.0
 
 
 def min_ev_escalado(p, umbral=0.03):
@@ -81,3 +90,44 @@ def evaluar_actual(p1, px, p2, c1, cx, c2, liga):
     if c_e <= techo and m_e >= umb_e and div_e <= div_max:
         return ev_k, c_e, 'C2'
     return None, None, 'PASAR'
+
+
+def evaluar_actual_ou(po, pu, co, cu, xg_local=None, xg_visita=None):
+    """Evalua mercado O/U 2.5 con la misma logica que motor_calculadora.
+
+    Args:
+        po, pu: prob OVER / UNDER 2.5
+        co, cu: cuota OVER / UNDER 2.5
+        xg_local, xg_visita: opcionales. Si se pasan, aplica filtro de margen
+            xG asimetrico (OVER >= 2.80 o UNDER <= 2.25).
+
+    Returns:
+        (pick, cuota, 'OU') donde pick in {'OVER 2.5', 'UNDER 2.5'} o
+        (None, None, razon_pasar) si no hay pick.
+    """
+    if not all(isinstance(c, (int, float)) and c > 0 for c in [co, cu]):
+        return None, None, 'sin_cuotas'
+
+    if xg_local is not None and xg_visita is not None:
+        xg_total = xg_local + xg_visita
+        margen = MARGEN_XG_OU_OVER if xg_total >= 2.5 else MARGEN_XG_OU_UNDER
+        if abs(xg_total - 2.5) < margen:
+            return None, None, 'xg_margen'
+
+    if abs(po - pu) < MARGEN_PREDICTIVO_OU:
+        return None, None, 'margen_predictivo'
+
+    probs  = {'OVER 2.5': po, 'UNDER 2.5': pu}
+    cuotas = {'OVER 2.5': co, 'UNDER 2.5': cu}
+    pick = max(probs, key=probs.get)
+    p_fav, c_fav = probs[pick], cuotas[pick]
+
+    if c_fav <= 1.0:
+        return None, None, 'cuota_invalida'
+
+    ev = p_fav * c_fav - 1
+    umbral = UMBRAL_EV_BASE * (0.5 / p_fav) if p_fav > 0 else 999
+
+    if ev > umbral and c_fav <= TECHO_CUOTA_OU:
+        return pick, c_fav, 'OU'
+    return None, None, 'sin_valor'

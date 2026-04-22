@@ -108,7 +108,7 @@ def crear_hoja_sombra(wb, datos, bankroll):
          ap1x2, apou, stk1x2, stkou,
          c1, cx, c2, co, cu,
          estado, gl, gv, incert, auditoria,
-         ap_shadow, stk_shadow) = rd
+         ap_shadow, stk_shadow, *_extra) = rd
 
         tiene_op1 = bool(stk1x2 and stk1x2 > 0 and ap1x2 and "[APOSTAR]" in str(ap1x2))
         tiene_op4 = bool(stk_shadow and stk_shadow > 0 and ap_shadow and "[APOSTAR]" in str(ap_shadow))

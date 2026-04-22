@@ -68,7 +68,7 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
          ap1x2, apou, stk1x2, stkou,
          c1, cx, c2, co, cu,
          estado, gl, gv, incert, auditoria,
-         _ap_shadow, _stk_shadow) = row
+         _ap_shadow, _stk_shadow, *_extra) = row
 
         if gl is None or gv is None:
             continue

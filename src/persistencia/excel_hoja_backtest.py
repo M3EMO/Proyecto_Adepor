@@ -59,7 +59,7 @@ def poblar_backtest(wb, datos, bankroll):
          ap1x2, apou, stk1x2, stkou,
          c1, cx, c2, co, cu,
          estado, gl, gv, incert, auditoria,
-         _ap_shadow, _stk_shadow) = row_data
+         _ap_shadow, _stk_shadow, *_extra) = row_data
 
         # Fecha como date real (Excel ordena bien)
         fecha_val = fecha or ""

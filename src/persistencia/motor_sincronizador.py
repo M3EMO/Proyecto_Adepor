@@ -84,14 +84,17 @@ def _cargar_apuestas_live(cursor):
 
 
 def _cargar_partidos(cursor):
-    """Lee partidos en estado Calculado o Liquidado, ordenados por id_partido."""
+    """Lee partidos en estado Calculado o Liquidado, ordenados por id_partido.
+    Cols 26/27 son xg_local/xg_visita (al final para no romper otras hojas
+    que consumen los datos por indice posicional)."""
     cursor.execute("""
         SELECT id_partido, fecha, local, visita, pais,
                prob_1, prob_x, prob_2, prob_o25, prob_u25,
                apuesta_1x2, apuesta_ou, stake_1x2, stake_ou,
                cuota_1, cuota_x, cuota_2, cuota_o25, cuota_u25,
                estado, goles_l, goles_v, incertidumbre, auditoria,
-               apuesta_shadow_1x2, stake_shadow_1x2
+               apuesta_shadow_1x2, stake_shadow_1x2,
+               xg_local, xg_visita
         FROM partidos_backtest
         WHERE estado IN ('Calculado', 'Liquidado')
         ORDER BY id_partido ASC

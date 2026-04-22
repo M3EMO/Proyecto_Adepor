@@ -22,7 +22,7 @@ from openpyxl.styles import Font, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
 from src.comun.config_motor import get_param
-from src.comun.reglas_actuales import evaluar_actual
+from src.comun.reglas_actuales import evaluar_actual, evaluar_actual_ou
 from src.persistencia.excel_estilos import fill
 
 
@@ -126,32 +126,57 @@ def crear_hoja_resimulacion(wb, datos, bankroll):
             continue
         pais  = rd[4]
         p1, px, p2 = rd[5], rd[6], rd[7]
+        po, pu     = rd[8], rd[9]
         c1, cx, c2 = rd[14], rd[15], rd[16]
+        co, cu     = rd[17], rd[18]
         ap_real    = str(rd[10] or '')
+        ap_ou_real = str(rd[11] or '')
         fecha      = rd[1]
+        # xg (cols 26/27) agregados al final de _cargar_partidos; pueden faltar en datos viejos
+        xg_local  = rd[26] if len(rd) > 26 else None
+        xg_visita = rd[27] if len(rd) > 27 else None
 
-        if not all(isinstance(x, (int, float)) and x > 0 for x in [p1, px, p2, c1, cx, c2]):
-            continue
+        tiene_1x2 = all(isinstance(x, (int, float)) and x > 0 for x in [p1, px, p2, c1, cx, c2])
+        tiene_ou  = all(isinstance(x, (int, float)) and x > 0 for x in [po, pu, co, cu])
 
-        # REAL
-        if '[GANADA]' in ap_real or '[PERDIDA]' in ap_real:
+        # REAL 1X2
+        if tiene_1x2 and ('[GANADA]' in ap_real or '[PERDIDA]' in ap_real):
             real_por_liga[pais]['n'] += 1
             if '[GANADA]' in ap_real:
                 real_por_liga[pais]['g'] += 1
+        # REAL O/U
+        if '[GANADA]' in ap_ou_real or '[PERDIDA]' in ap_ou_real:
+            real_por_liga[pais]['n'] += 1
+            if '[GANADA]' in ap_ou_real:
+                real_por_liga[pais]['g'] += 1
 
-        # SIMULADO (reglas actuales)
-        pick, cuota, camino = evaluar_actual(p1, px, p2, c1, cx, c2, pais)
-        if pick is None:
-            continue
-        prob_pick = {'LOCAL': p1, 'EMPATE': px, 'VISITA': p2}[pick]
-        gana = ((pick == 'LOCAL'  and gl >  gv) or
-                (pick == 'EMPATE' and gl == gv) or
-                (pick == 'VISITA' and gl <  gv))
-        candidatos.append({
-            'fecha': fecha, 'local': rd[2], 'visita': rd[3], 'pais': pais,
-            'pick': pick, 'cuota': cuota, 'camino': camino,
-            'gl': gl, 'gv': gv, 'gana': gana, 'prob': prob_pick,
-        })
+        # SIMULADO 1X2
+        if tiene_1x2:
+            pick, cuota, camino = evaluar_actual(p1, px, p2, c1, cx, c2, pais)
+            if pick is not None:
+                prob_pick = {'LOCAL': p1, 'EMPATE': px, 'VISITA': p2}[pick]
+                gana = ((pick == 'LOCAL'  and gl >  gv) or
+                        (pick == 'EMPATE' and gl == gv) or
+                        (pick == 'VISITA' and gl <  gv))
+                candidatos.append({
+                    'fecha': fecha, 'local': rd[2], 'visita': rd[3], 'pais': pais,
+                    'pick': pick, 'cuota': cuota, 'camino': camino, 'mercado': '1X2',
+                    'gl': gl, 'gv': gv, 'gana': gana, 'prob': prob_pick,
+                })
+
+        # SIMULADO O/U 2.5
+        if tiene_ou:
+            pick_ou, cuota_ou, _ = evaluar_actual_ou(po, pu, co, cu, xg_local, xg_visita)
+            if pick_ou is not None:
+                prob_ou = po if pick_ou == 'OVER 2.5' else pu
+                total_goles = gl + gv
+                gana_ou = ((pick_ou == 'OVER 2.5'  and total_goles > 2.5) or
+                           (pick_ou == 'UNDER 2.5' and total_goles < 2.5))
+                candidatos.append({
+                    'fecha': fecha, 'local': rd[2], 'visita': rd[3], 'pais': pais,
+                    'pick': pick_ou, 'cuota': cuota_ou, 'camino': 'OU', 'mercado': 'O/U',
+                    'gl': gl, 'gv': gv, 'gana': gana_ou, 'prob': prob_ou,
+                })
 
     # Fase 2: ordenar cronologicamente y aplicar COMPOUNDING
     # bankroll_running arranca en bankroll base y se actualiza con cada P/L
@@ -323,7 +348,7 @@ def crear_hoja_resimulacion(wb, datos, bankroll):
     ws.row_dimensions[row].height = 16
     row += 1
 
-    cam_hdrs = ['Liga', 'C1', 'C2', 'C2B', 'C3', 'C4', 'Total']
+    cam_hdrs = ['Liga', 'C1', 'C2', 'C2B', 'C3', 'C4', 'OU', 'Total']
     for ci, h in enumerate(cam_hdrs, 1):
         c = ws.cell(row, ci, h)
         c.font = FONT_HDR; c.fill = FILL_HDR_CAM; c.border = BORDER
@@ -339,7 +364,8 @@ def crear_hoja_resimulacion(wb, datos, bankroll):
         c2b = cams.get('C2B', [0, 0])
         c3 = cams.get('C3', [0, 0])
         c4 = cams.get('C4', [0, 0])
-        total = c1[0] + c2[0] + c2b[0] + c3[0] + c4[0]
+        ou = cams.get('OU', [0, 0])
+        total = c1[0] + c2[0] + c2b[0] + c3[0] + c4[0] + ou[0]
         if total == 0:
             continue
         bg = FILL_BLANCO if row % 2 == 0 else FILL_NEUTRO
@@ -348,7 +374,7 @@ def crear_hoja_resimulacion(wb, datos, bankroll):
             return f'{x[0]}/{x[1]}' if x[0] else '-'
 
         vals = [liga, _fmt_cam(c1), _fmt_cam(c2), _fmt_cam(c2b),
-                _fmt_cam(c3), _fmt_cam(c4), total]
+                _fmt_cam(c3), _fmt_cam(c4), _fmt_cam(ou), total]
         for ci, v in enumerate(vals, 1):
             c = ws.cell(row, ci, v)
             c.font = FONT_D; c.fill = bg; c.border = BORDER

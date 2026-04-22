@@ -1,0 +1,21 @@
+# Pipeline diario (default, sin args)
+py ejecutar_proyecto.py
+
+# Info read-only (no toca DB)
+py ejecutar_proyecto.py --help       # Lista comandos + cascada + analisis
+py ejecutar_proyecto.py --status     # Snapshot completo del sistema
+py ejecutar_proyecto.py --summary    # Resumen última corrida
+
+# Analisis puntuales
+py ejecutar_proyecto.py --analisis                  # Lista opciones
+py ejecutar_proyecto.py --analisis volumen          # Train/test
+py ejecutar_proyecto.py --analisis determinismo     # Temperature scaling
+py ejecutar_proyecto.py --analisis ablation         # Ablation global
+py ejecutar_proyecto.py --analisis ablation-liga    # Ablation por liga
+py ejecutar_proyecto.py --analisis pretest          # evaluar_pretest dry-run
+
+# Mantenimiento (sigue igual, backward-compat)
+py ejecutar_proyecto.py --rebuild
+py ejecutar_proyecto.py --unlock
+py ejecutar_proyecto.py --purge-history
+py ejecutar_proyecto.py --audit-names

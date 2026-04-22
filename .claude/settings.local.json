@@ -1,8 +1,24 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -rn \"from utilidades\\\\|import utilidades\" \"C:/Users/map12/Desktop/Proyecto_Adepor/\"*.py)",
-      "Bash(\".venv/Scripts/python.exe\" auditor/auditor_obsoletos.py)"
+      "Edit",
+      "Write",
+      "Bash(*)",
+      "Read",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "TodoWrite",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(del /f /s /q *)",
+      "Bash(format *)",
+      "Bash(DROP TABLE*)",
+      "Bash(git push --force*)"
     ]
   }
 }

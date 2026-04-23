@@ -81,7 +81,7 @@ def auditar_partidos():
                 vis_api = ev['competitions'][0]['competitors'][1]['team']['displayName']
 
                 # Usar el gestor de nombres para un emparejamiento robusto
-                partido_db = next((p for p in partidos_del_dia if gestor_nombres.son_equivalentes(p[3], loc_api, diccionario_nombres) and gestor_nombres.son_equivalentes(p[4], vis_api, diccionario_nombres)), None)
+                partido_db = next((p for p in partidos_del_dia if gestor_nombres.son_equivalentes(p[3], loc_api, diccionario_nombres, liga=pais) and gestor_nombres.son_equivalentes(p[4], vis_api, diccionario_nombres, liga=pais)), None)
                 if not partido_db: continue
 
                 id_db, _, _, loc_db, vis_db = partido_db

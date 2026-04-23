@@ -308,8 +308,9 @@ def main():
                 continue
             loc_api = fx["teams"]["home"]["name"]
             vis_api = fx["teams"]["away"]["name"]
-            loc_std = gestor_nombres.obtener_nombre_estandar(loc_api, modo_interactivo=False)
-            vis_std = gestor_nombres.obtener_nombre_estandar(vis_api, modo_interactivo=False)
+            pais_fx = ligas_ids.get(lid)
+            loc_std = gestor_nombres.obtener_nombre_estandar(loc_api, liga=pais_fx, modo_interactivo=False)
+            vis_std = gestor_nombres.obtener_nombre_estandar(vis_api, liga=pais_fx, modo_interactivo=False)
             fx_id = fx["fixture"]["id"]
             # Evitar duplicados si la API retorna el mismo fixture en 2 dias distintos
             if any(e["fixture_id"] == fx_id for e in por_liga_id.get(lid, [])):

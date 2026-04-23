@@ -75,8 +75,8 @@ def main():
                         loc_api = next(c for c in competidores if c['homeAway'] == 'home')
                         vis_api = next(c for c in competidores if c['homeAway'] == 'away')
                         
-                        loc_oficial = gestor_nombres.obtener_nombre_estandar(loc_api['team']['displayName'], modo_interactivo=False)
-                        vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_api['team']['displayName'], modo_interactivo=False)
+                        loc_oficial = gestor_nombres.obtener_nombre_estandar(loc_api['team']['displayName'], liga=pais, modo_interactivo=False)
+                        vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_api['team']['displayName'], liga=pais, modo_interactivo=False)
                         
                         for p in list(pendientes_restantes):
                             id_partido, loc_db, vis_db, _ = p

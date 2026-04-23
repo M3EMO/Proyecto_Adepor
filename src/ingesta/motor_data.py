@@ -425,8 +425,8 @@ def main():
                             loc_crudo = loc['team']['displayName']
                             vis_crudo = vis['team']['displayName']
                         
-                            loc_oficial = gestor_nombres.obtener_nombre_estandar(loc_crudo, modo_interactivo=False)
-                            vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_crudo, modo_interactivo=False)
+                            loc_oficial = gestor_nombres.obtener_nombre_estandar(loc_crudo, liga=pais, modo_interactivo=False)
+                            vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_crudo, liga=pais, modo_interactivo=False)
                         
                             fecha_iso = fecha_obj.strftime('%Y-%m-%d')
                             id_unico = f"{fecha_iso}{gestor_nombres.limpiar_texto(loc_oficial)}{gestor_nombres.limpiar_texto(vis_oficial)}"

@@ -100,7 +100,7 @@ def procesar_tactica():
                     vis_api = ev["teams"]["away"]["name"]
                     
                     # Cruzar con nuestros huérfanos
-                    partido_db = next((p for p in huerfanos_liga if gestor_nombres.son_equivalentes(p[2], loc_api, diccionario_nombres) and gestor_nombres.son_equivalentes(p[3], vis_api, diccionario_nombres)), None)
+                    partido_db = next((p for p in huerfanos_liga if gestor_nombres.son_equivalentes(p[2], loc_api, diccionario_nombres, liga=pais) and gestor_nombres.son_equivalentes(p[3], vis_api, diccionario_nombres, liga=pais)), None)
                     
                     if partido_db:
                         # Extraer Alineaciones
@@ -119,8 +119,8 @@ def procesar_tactica():
 
                         id_p = partido_db[0]
                         
-                        loc_canonico = gestor_nombres.obtener_nombre_estandar(loc_api, modo_interactivo=False)
-                        vis_canonico = gestor_nombres.obtener_nombre_estandar(vis_api, modo_interactivo=False)
+                        loc_canonico = gestor_nombres.obtener_nombre_estandar(loc_api, liga=pais, modo_interactivo=False)
+                        vis_canonico = gestor_nombres.obtener_nombre_estandar(vis_api, liga=pais, modo_interactivo=False)
                         # A. Actualizar Táctica del Partido
                         cursor.execute("UPDATE partidos_backtest SET formacion_l=?, formacion_v=? WHERE id_partido=?", (form_l, form_v, id_p))
                         

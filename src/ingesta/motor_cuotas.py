@@ -134,16 +134,20 @@ def main():
     for liga_odds, lista_partidos in partidos_por_liga.items():
         print(f"   [ESCANEO] Buscando mercado para la liga: {liga_odds}...")
         datos_api, key_actual = obtener_datos_api(liga_odds, key_actual)
-        
+
         if not datos_api: continue
+
+        # Pais canonico de esta liga_odds (para scope por liga en gestor_nombres).
+        # lista_partidos no esta vacia aca: cada row tiene pais en p[3].
+        pais_liga = lista_partidos[0][3] if lista_partidos else None
 
         # Pre-construir índice normalizado de eventos de la API para matching rápido
         eventos_index = []
         for evento in datos_api:
             loc_raw = evento.get("home_team", "")
             vis_raw = evento.get("away_team", "")
-            loc_std = gestor_nombres.obtener_nombre_estandar(loc_raw, modo_interactivo=MODO_INTERACTIVO)
-            vis_std = gestor_nombres.obtener_nombre_estandar(vis_raw, modo_interactivo=MODO_INTERACTIVO)
+            loc_std = gestor_nombres.obtener_nombre_estandar(loc_raw, liga=pais_liga, modo_interactivo=MODO_INTERACTIVO)
+            vis_std = gestor_nombres.obtener_nombre_estandar(vis_raw, liga=pais_liga, modo_interactivo=MODO_INTERACTIVO)
             eventos_index.append({
                 'evento':   evento,
                 'loc_raw':  loc_raw,

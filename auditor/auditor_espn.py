@@ -38,7 +38,7 @@ def auditar_nombres_espn():
             # El cruce: Para cada nombre de la API, el gestor lo resolverá.
             # Si es desconocido, activará el modo interactivo.
             for nombre_api in sorted(list(nombres_api)):
-                gestor_nombres.obtener_nombre_estandar(nombre_api, modo_interactivo=True)
+                gestor_nombres.obtener_nombre_estandar(nombre_api, liga=pais, modo_interactivo=True)
             
             print(f"   [OK] Auditoría para '{pais}' completada.")
             print("-" * (20 + len(pais)) + "\n")

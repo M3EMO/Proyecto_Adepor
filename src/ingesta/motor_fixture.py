@@ -98,8 +98,8 @@ def main():
                         loc_crudo = next(c['team']['displayName'] for c in competidores if c['homeAway'] == 'home')
                         vis_crudo = next(c['team']['displayName'] for c in competidores if c['homeAway'] == 'away')
                         
-                        loc_oficial = gestor_nombres.obtener_nombre_estandar(loc_crudo, modo_interactivo=True)
-                        vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_crudo, modo_interactivo=True)
+                        loc_oficial = gestor_nombres.obtener_nombre_estandar(loc_crudo, liga=pais, modo_interactivo=True)
+                        vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_crudo, liga=pais, modo_interactivo=True)
                         
                         # FIX CRITICO: Limpieza forzada de espacios para el ID
                         loc_id = gestor_nombres.limpiar_texto(loc_oficial)

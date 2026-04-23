@@ -503,13 +503,18 @@ def normalizar_extremo(texto):
     return re.sub(r'[^a-z0-9]', '', sin_tildes)
 
 
-def obtener_ema(equipo_norm, historial_ema):
+def obtener_ema(equipo_norm, liga, historial_ema):
+    """Devuelve EMA para (equipo_norm, liga). Fuzzy match scoped a la liga.
+    historial_ema es dict con key tupla (equipo_norm, liga)."""
     default = {'fav_home': 1.4, 'con_home': 1.4, 'fav_away': 1.4, 'con_away': 1.4,
                'var_fh': 0.1, 'var_ch': 0.1, 'var_fa': 0.1, 'var_ca': 0.1}
-    data = historial_ema.get(equipo_norm)
+    data = historial_ema.get((equipo_norm, liga))
     if not data:
-        matches = difflib.get_close_matches(equipo_norm, historial_ema.keys(), n=1, cutoff=0.7)
-        data = historial_ema.get(matches[0]) if matches else None
+        # Fuzzy solo entre equipos de la misma liga (evita colisiones cross-liga)
+        claves_liga = [k[0] for k in historial_ema.keys() if k[1] == liga]
+        matches = difflib.get_close_matches(equipo_norm, claves_liga, n=1, cutoff=0.7)
+        if matches:
+            data = historial_ema.get((matches[0], liga))
     if not data:
         return default
     return {k: (data.get(k) or default[k]) for k in default}
@@ -803,13 +808,14 @@ def main():
     print(f"[INFO] Bankroll operativo: ${BANKROLL:,.2f} (modo={_modo})")
 
     # --- FASE 1: CARGA DE DATOS ---
+    # Key compuesta (equipo_norm, liga): el mismo equipo_norm puede existir en varias ligas.
     cursor.execute("""
-        SELECT equipo_norm, ema_xg_favor_home, ema_xg_contra_home, ema_xg_favor_away, ema_xg_contra_away,
+        SELECT equipo_norm, liga, ema_xg_favor_home, ema_xg_contra_home, ema_xg_favor_away, ema_xg_contra_away,
                ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away
         FROM historial_equipos
     """)
-    historial_ema = {r[0]: {'fav_home': r[1], 'con_home': r[2], 'fav_away': r[3], 'con_away': r[4],
-                            'var_fh': r[5], 'var_ch': r[6], 'var_fa': r[7], 'var_ca': r[8]} for r in cursor.fetchall()}
+    historial_ema = {(r[0], r[1]): {'fav_home': r[2], 'con_home': r[3], 'fav_away': r[4], 'con_away': r[5],
+                                    'var_fh': r[6], 'var_ch': r[7], 'var_fa': r[8], 'var_ca': r[9]} for r in cursor.fetchall()}
 
     cursor.execute("SELECT liga, rho_calculado FROM ligas_stats")
     rho_por_liga = {r[0]: r[1] for r in cursor.fetchall()}
@@ -865,8 +871,8 @@ def main():
         loc_norm = normalizar_extremo(local)
         vis_norm = normalizar_extremo(visita)
 
-        ema_l = obtener_ema(loc_norm, historial_ema)
-        ema_v = obtener_ema(vis_norm, historial_ema)
+        ema_l = obtener_ema(loc_norm, pais, historial_ema)
+        ema_v = obtener_ema(vis_norm, pais, historial_ema)
 
         # xG base (Poisson puro, sin factores contextuales)
         xg_local = (ema_l['fav_home'] + ema_v['con_away']) / 2.0

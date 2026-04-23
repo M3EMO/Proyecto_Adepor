@@ -214,12 +214,13 @@ def main():
     
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS historial_equipos (
-            equipo_norm TEXT PRIMARY KEY, equipo_real TEXT, liga TEXT, ultima_actualizacion TEXT,
+            equipo_norm TEXT NOT NULL, equipo_real TEXT, liga TEXT NOT NULL, ultima_actualizacion TEXT,
             ema_xg_favor_home REAL DEFAULT 1.4, ema_xg_contra_home REAL DEFAULT 1.4,
             ema_xg_favor_away REAL DEFAULT 1.4, ema_xg_contra_away REAL DEFAULT 1.4,
             partidos_home INTEGER DEFAULT 0, partidos_away INTEGER DEFAULT 0,
             ema_var_favor_home REAL DEFAULT 0.1, ema_var_contra_home REAL DEFAULT 0.1,
-            ema_var_favor_away REAL DEFAULT 0.1, ema_var_contra_away REAL DEFAULT 0.1
+            ema_var_favor_away REAL DEFAULT 0.1, ema_var_contra_away REAL DEFAULT 0.1,
+            PRIMARY KEY (equipo_norm, liga)
         )
     """)
     cursor.execute("""
@@ -256,7 +257,8 @@ def main():
         print(f"[REBUILD] Tablas vaciadas. El sistema reclasificara todas las ligas a PROFUNDIDAD_INICIAL.")
 
     cursor.execute("SELECT equipo_norm, equipo_real, liga, ema_xg_favor_home, ema_xg_contra_home, partidos_home, ema_xg_favor_away, ema_xg_contra_away, partidos_away, ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away FROM historial_equipos")
-    estado_equipos = {row[0]: {"nombre": row[1], "liga": row[2], "fav_home": row[3], "con_home": row[4], "p_home": row[5], "fav_away": row[6], "con_away": row[7], "p_away": row[8], "var_fh": row[9] or 0.1, "var_ch": row[10] or 0.1, "var_fa": row[11] or 0.1, "var_ca": row[12] or 0.1} for row in cursor.fetchall()}
+    # Key: (equipo_norm, liga) — permite que el mismo equipo_norm coexista en varias ligas (Everton Chile/Inglaterra, etc.).
+    estado_equipos = {(row[0], row[2]): {"nombre": row[1], "liga": row[2], "fav_home": row[3], "con_home": row[4], "p_home": row[5], "fav_away": row[6], "con_away": row[7], "p_away": row[8], "var_fh": row[9] or 0.1, "var_ch": row[10] or 0.1, "var_fa": row[11] or 0.1, "var_ca": row[12] or 0.1} for row in cursor.fetchall()}
     
     cursor.execute("SELECT liga, total_partidos, empates, rho_calculado, total_goles, total_corners, coef_corner_calculado FROM ligas_stats")
     estado_ligas = {row[0]: {"total": row[1], "empates": row[2], "rho": row[3], "goles": row[4], "corners": row[5], "coef_c": row[6]} for row in cursor.fetchall()}
@@ -271,52 +273,54 @@ def main():
     equipos_nuevos_sesion = set()
 
     def actualizar_estado(eq_oficial, pais, xg_f, xg_c, is_home, promedio_liga, equipos_nuevos):
-        """Aplica EMA y Regresión Bayesiana para actualizar el poderío del equipo."""
+        """Aplica EMA y Regresión Bayesiana para actualizar el poderío del equipo.
+        Clave compuesta (eq_norm, pais): el mismo equipo_norm puede existir en distintas ligas."""
         alfa = get_param('alfa_ema', scope=pais, default=ALFA_EMA_POR_LIGA.get(pais, ALFA_EMA))  # Fix #3 (V4.4): ALFA específico por liga
         eq_norm = gestor_nombres.limpiar_texto(eq_oficial)
-        if eq_norm not in estado_equipos:
+        key = (eq_norm, pais)
+        if key not in estado_equipos:
             equipos_nuevos.add(eq_oficial)
-            estado_equipos[eq_norm] = {
+            estado_equipos[key] = {
                 "nombre": eq_oficial, "liga": pais,
                 "fav_home": 1.4, "con_home": 1.4, "p_home": 0,
                 "fav_away": 1.4, "con_away": 1.4, "p_away": 0,
                 "var_fh": 0.1, "var_ch": 0.1, "var_fa": 0.1, "var_ca": 0.1
             }
         if is_home:
-            viejo_fav = estado_equipos[eq_norm]["fav_home"]
-            viejo_con = estado_equipos[eq_norm]["con_home"]
+            viejo_fav = estado_equipos[key]["fav_home"]
+            viejo_con = estado_equipos[key]["con_home"]
             error_fav = xg_f - viejo_fav
             error_con = xg_c - viejo_con
-            vieja_var_fav = estado_equipos[eq_norm]["var_fh"]
-            vieja_var_con = estado_equipos[eq_norm]["var_ch"]
-            estado_equipos[eq_norm]["var_fh"] = (error_fav**2 * alfa) + (vieja_var_fav * (1 - alfa))
-            estado_equipos[eq_norm]["var_ch"] = (error_con**2 * alfa) + (vieja_var_con * (1 - alfa))
+            vieja_var_fav = estado_equipos[key]["var_fh"]
+            vieja_var_con = estado_equipos[key]["var_ch"]
+            estado_equipos[key]["var_fh"] = (error_fav**2 * alfa) + (vieja_var_fav * (1 - alfa))
+            estado_equipos[key]["var_ch"] = (error_con**2 * alfa) + (vieja_var_con * (1 - alfa))
             nuevo_ema_fav = (xg_f * alfa) + (viejo_fav * (1 - alfa))
             nuevo_ema_con = (xg_c * alfa) + (viejo_con * (1 - alfa))
-            N_home  = estado_equipos[eq_norm]["p_home"]
+            N_home  = estado_equipos[key]["p_home"]
             w_liga  = N0_ANCLA / (N0_ANCLA + N_home) if (N0_ANCLA + N_home) > 0 else 1.0
             w_ema   = 1.0 - w_liga
-            estado_equipos[eq_norm]["fav_home"] = round((w_ema * nuevo_ema_fav) + (w_liga * promedio_liga), 3)
-            estado_equipos[eq_norm]["con_home"] = round((w_ema * nuevo_ema_con) + (w_liga * promedio_liga), 3)
-            estado_equipos[eq_norm]["p_home"] += 1
+            estado_equipos[key]["fav_home"] = round((w_ema * nuevo_ema_fav) + (w_liga * promedio_liga), 3)
+            estado_equipos[key]["con_home"] = round((w_ema * nuevo_ema_con) + (w_liga * promedio_liga), 3)
+            estado_equipos[key]["p_home"] += 1
         else:
-            viejo_fav = estado_equipos[eq_norm]["fav_away"]
-            viejo_con = estado_equipos[eq_norm]["con_away"]
+            viejo_fav = estado_equipos[key]["fav_away"]
+            viejo_con = estado_equipos[key]["con_away"]
             error_fav = xg_f - viejo_fav
             error_con = xg_c - viejo_con
-            vieja_var_fav = estado_equipos[eq_norm]["var_fa"]
-            vieja_var_con = estado_equipos[eq_norm]["var_ca"]
-            estado_equipos[eq_norm]["var_fa"] = (error_fav**2 * alfa) + (vieja_var_fav * (1 - alfa))
-            estado_equipos[eq_norm]["var_ca"] = (error_con**2 * alfa) + (vieja_var_con * (1 - alfa))
+            vieja_var_fav = estado_equipos[key]["var_fa"]
+            vieja_var_con = estado_equipos[key]["var_ca"]
+            estado_equipos[key]["var_fa"] = (error_fav**2 * alfa) + (vieja_var_fav * (1 - alfa))
+            estado_equipos[key]["var_ca"] = (error_con**2 * alfa) + (vieja_var_con * (1 - alfa))
             nuevo_ema_fav = (xg_f * alfa) + (viejo_fav * (1 - alfa))
             nuevo_ema_con = (xg_c * alfa) + (viejo_con * (1 - alfa))
-            N_away  = estado_equipos[eq_norm]["p_away"]
+            N_away  = estado_equipos[key]["p_away"]
             w_liga  = N0_ANCLA / (N0_ANCLA + N_away) if (N0_ANCLA + N_away) > 0 else 1.0
             w_ema   = 1.0 - w_liga
-            estado_equipos[eq_norm]["fav_away"] = round((w_ema * nuevo_ema_fav) + (w_liga * promedio_liga), 3)
-            estado_equipos[eq_norm]["con_away"] = round((w_ema * nuevo_ema_con) + (w_liga * promedio_liga), 3)
-            estado_equipos[eq_norm]["p_away"] += 1
-        equipos_actualizados.add(eq_norm)
+            estado_equipos[key]["fav_away"] = round((w_ema * nuevo_ema_fav) + (w_liga * promedio_liga), 3)
+            estado_equipos[key]["con_away"] = round((w_ema * nuevo_ema_con) + (w_liga * promedio_liga), 3)
+            estado_equipos[key]["p_away"] += 1
+        equipos_actualizados.add(key)
 
     # --- FASE DE ANÁLISIS: AGRUPAR LIGAS POR NECESIDAD DE ESCANEO ---
     print("[ANALISIS] Agrupando ligas por profundidad de escaneo requerida...")
@@ -341,7 +345,7 @@ def main():
     grupos_de_escaneo = defaultdict(list)
 
     for codigo_liga, pais in LIGAS_ESPN.items():
-        equipos_de_la_liga = {k: v for k, v in estado_equipos.items() if v.get('liga') == pais}
+        equipos_de_la_liga = {k: v for k, v in estado_equipos.items() if k[1] == pais}
         prof_profunda_liga = PROFUNDIDAD_PROFUNDA_POR_LIGA.get(pais, PROFUNDIDAD_PROFUNDA)
 
         if not equipos_de_la_liga:
@@ -492,16 +496,17 @@ def main():
                             continue
 
     if equipos_actualizados:
-        for eq_norm in equipos_actualizados:
-            dt = estado_equipos[eq_norm]
+        for key in equipos_actualizados:
+            eq_norm, liga_key = key
+            dt = estado_equipos[key]
             cursor.execute("""
                 INSERT INTO historial_equipos (equipo_norm, equipo_real, liga, ultima_actualizacion,
                                              ema_xg_favor_home, ema_xg_contra_home, partidos_home,
                                              ema_xg_favor_away, ema_xg_contra_away, partidos_away,
                                              ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT(equipo_norm) DO UPDATE SET
-                    equipo_real=excluded.equipo_real, liga=excluded.liga, ultima_actualizacion=excluded.ultima_actualizacion,
+                ON CONFLICT(equipo_norm, liga) DO UPDATE SET
+                    equipo_real=excluded.equipo_real, ultima_actualizacion=excluded.ultima_actualizacion,
                     ema_xg_favor_home=excluded.ema_xg_favor_home,
                     ema_xg_contra_home=excluded.ema_xg_contra_home,
                     partidos_home=excluded.partidos_home,

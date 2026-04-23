@@ -70,8 +70,9 @@ def procesar_tactica():
 
     diccionario_nombres = gestor_nombres.cargar_diccionario()
     # 2. Diccionario de memoria de DTs actuales
-    cursor.execute("SELECT nombre, dt_nombre, partidos_dt FROM equipos_stats")
-    memoria_dts = {row[0]: {"dt": row[1], "pj": row[2]} for row in cursor.fetchall()}
+    # Key compuesta (nombre, liga): equipos_stats permite mismo nombre en distintas ligas.
+    cursor.execute("SELECT nombre, liga, dt_nombre, partidos_dt FROM equipos_stats")
+    memoria_dts = {(row[0], row[1]): {"dt": row[2], "pj": row[3]} for row in cursor.fetchall()}
 
     actualizados = 0
 
@@ -126,20 +127,21 @@ def procesar_tactica():
                         
                         # B. Gestión Autónoma de DTs (Reemplazo del motor_dts.py)
                         for eq, coach_nuevo in [(loc_canonico, coach_l), (vis_canonico, coach_v)]:
-                            if eq in memoria_dts:
-                                dt_viejo = memoria_dts[eq]["dt"]
-                                pj_viejo = memoria_dts[eq]["pj"]
-                                
+                            key_eq = (eq, pais)
+                            if key_eq in memoria_dts:
+                                dt_viejo = memoria_dts[key_eq]["dt"]
+                                pj_viejo = memoria_dts[key_eq]["pj"]
+
                                 if dt_viejo != coach_nuevo and dt_viejo != "Desconocido":
                                     print(f"   [ALERTA] SHOCK: Cambio de DT en {eq.title()} ({dt_viejo} -> {coach_nuevo}). Estabilidad reiniciada a 1.")
-                                    cursor.execute("UPDATE equipos_stats SET dt_nombre=?, partidos_dt=1 WHERE nombre=?", (coach_nuevo, eq))
+                                    cursor.execute("UPDATE equipos_stats SET dt_nombre=?, partidos_dt=1 WHERE nombre=? AND liga=?", (coach_nuevo, eq, pais))
                                 else:
                                     # Mismo DT, suma 1 partido de vida
-                                    cursor.execute("UPDATE equipos_stats SET dt_nombre=?, partidos_dt=? WHERE nombre=?", (coach_nuevo, pj_viejo + 1, eq))
+                                    cursor.execute("UPDATE equipos_stats SET dt_nombre=?, partidos_dt=? WHERE nombre=? AND liga=?", (coach_nuevo, pj_viejo + 1, eq, pais))
                             else:
-                                # Equipo nuevo
+                                # Equipo nuevo en esta liga
                                 cursor.execute("INSERT INTO equipos_stats (nombre, liga, partidos_dt, dt_nombre) VALUES (?, ?, 1, ?)", (eq, pais, coach_nuevo))
-                                memoria_dts[eq] = {"dt": coach_nuevo, "pj": 1}
+                                memoria_dts[key_eq] = {"dt": coach_nuevo, "pj": 1}
 
                         actualizados += 1
                         print(f"   [DEF] Táctica inyectada: {loc_canonico} ({form_l}) vs {vis_canonico} ({form_v})")

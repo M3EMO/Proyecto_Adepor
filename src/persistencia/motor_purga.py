@@ -22,9 +22,11 @@ def main():
 
         print(f"[INFO] Límite de inactividad establecido en: {cutoff_date_str}")
 
-        # Encontrar equipos obsoletos en la tabla principal de historial
+        # Encontrar equipos obsoletos en la tabla principal de historial.
+        # Key de purga compuesta (equipo_norm, liga): el mismo equipo_norm puede existir
+        # en varias ligas y solo queremos purgar la entrada inactiva especifica.
         cursor.execute("""
-            SELECT equipo_norm, equipo_real, ultima_actualizacion
+            SELECT equipo_norm, equipo_real, liga, ultima_actualizacion
             FROM historial_equipos
             WHERE ultima_actualizacion < ?
         """, (cutoff_date_str,))
@@ -34,13 +36,13 @@ def main():
             print("[EXITO] No se encontraron equipos obsoletos. La base de datos está optimizada.")
             return
 
-        print(f"[ALERTA] Se purgarán {len(equipos_a_purgar)} equipos por inactividad (+{INACTIVITY_MONTHS} meses):")
-        ids_a_purgar = [(eq[0],) for eq in equipos_a_purgar]
-        for _, eq_real, fecha in equipos_a_purgar:
-            print(f"  - {eq_real} (Última vez visto: {fecha})")
+        print(f"[ALERTA] Se purgarán {len(equipos_a_purgar)} registros por inactividad (+{INACTIVITY_MONTHS} meses):")
+        ids_a_purgar = [(eq[0], eq[2]) for eq in equipos_a_purgar]
+        for _, eq_real, liga, fecha in equipos_a_purgar:
+            print(f"  - {eq_real} ({liga}) (Última vez visto: {fecha})")
 
-        # Ejecutar la purga en las tablas relevantes
-        cursor.executemany("DELETE FROM historial_equipos WHERE equipo_norm = ?", ids_a_purgar)
+        # Ejecutar la purga: delete por (equipo_norm, liga)
+        cursor.executemany("DELETE FROM historial_equipos WHERE equipo_norm = ? AND liga = ?", ids_a_purgar)
         print(f"[PURGA] {cursor.rowcount} registros eliminados de 'historial_equipos'.")
 
         conn.commit()

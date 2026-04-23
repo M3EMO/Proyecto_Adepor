@@ -96,12 +96,13 @@ def main():
     try:
         conn = sqlite3.connect(DB_NAME)
         cursor = conn.cursor()
-        cursor.execute("SELECT equipo_norm, ema_xg_favor_home, ema_xg_contra_home, ema_xg_favor_away, ema_xg_contra_away FROM historial_equipos")
+        # Key compuesta (equipo_norm, liga): historial_equipos admite mismo equipo_norm en varias ligas.
+        cursor.execute("SELECT equipo_norm, liga, ema_xg_favor_home, ema_xg_contra_home, ema_xg_favor_away, ema_xg_contra_away FROM historial_equipos")
         historial_ema = {}
         for row in cursor.fetchall():
-            historial_ema[row[0]] = {
-                'fav_h': row[1] or 1.4, 'con_h': row[2] or 1.4,
-                'fav_a': row[3] or 1.4, 'con_a': row[4] or 1.4
+            historial_ema[(row[0], row[1])] = {
+                'fav_h': row[2] or 1.4, 'con_h': row[3] or 1.4,
+                'fav_a': row[4] or 1.4, 'con_a': row[5] or 1.4
             }
         conn.close()
         print(f"[PROCESO] Memoria cargada: {len(historial_ema)} equipos identificados.")

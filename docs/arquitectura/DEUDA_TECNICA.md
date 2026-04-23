@@ -191,7 +191,23 @@ Decisión final: del Lead, cuando autorice la fase de schema migration.
 4. Borrar `motor_*.py` shims de raíz (ver punto B en `PLAN_MODULAR.md`) cuando los `.bat`
    y `ejecutar_proyecto.py` apunten a invocación con `python -m src.<modulo>.motor_X`.
 
-**Estado actual del shim**: ACTIVO. Comentario marcador: `# SHIM DE RETROCOMPATIBILIDAD`.
+**Estado actual del shim**: PARCIALMENTE RETIRADO. Comentario marcador: `# SHIM DE RETROCOMPATIBILIDAD`.
+
+### Progreso de retiro (sesión 2026-04-23, bajo riesgo)
+
+Retirados 3/17 shims — utilidades de bajo blast-radius:
+
+| Shim borrado de raíz | Canónico | Callers migrados |
+|---|---|---|
+| `motor_cuotas_apifootball.py` | `src/ingesta/motor_cuotas_apifootball.py` | `ejecutar_proyecto.py:55` → `-m src.ingesta.motor_cuotas_apifootball` |
+| `reset_tablas_derivadas.py` | `src/persistencia/reset_tablas_derivadas.py` | `ejecutar_proyecto.py:492, 505` → `-m src.persistencia.reset_tablas_derivadas` |
+| `desbloquear_matriz.py` | `src/nucleo/desbloquear_matriz.py` | `ejecutar_proyecto.py:493, 499` → `-m src.nucleo.desbloquear_matriz` |
+
+Motor de invocación: `ejecutar_motor(script_name)` soporta `script_name.split()` nativo, por lo que pasar `"-m pkg.modulo"` construye `[sys.executable, '-u', '-m', 'pkg.modulo']` sin cambios al helper.
+
+Smoke test post-retiro: `py ejecutar_proyecto.py --status` OK · import de los 3 módulos canónicos OK · subprocess con `-m` OK.
+
+Pendientes del §D8 (no retirados en esta sesión): `motor_calculadora, motor_sincronizador, motor_fixture, motor_cuotas, motor_data, motor_tactico, motor_arbitro, motor_backtest, motor_liquidador, motor_purga, importador_gold, config_sistema, gestor_nombres, calibrar_rho` (14 shims). Los que tienen callers externos en `auditor/` o `archivo/` requieren migrar esos imports antes.
 
 ---
 

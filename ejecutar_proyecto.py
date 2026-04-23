@@ -52,7 +52,7 @@ MOTORES_DIARIOS = [
     {"archivo": "motor_fixture.py",          "desc": "4. El Arquitecto (Proyeccion de Calendario)",            "critico": True,  "interactivo": True},
     {"archivo": "motor_tactico.py",          "desc": "5. El Analista (Formaciones y Vida de DTs)",             "critico": False, "interactivo": False},
     {"archivo": "motor_cuotas.py",           "desc": "6. El Oraculo (Extraccion de Precios y CLV)",            "critico": True,  "interactivo": False},
-    {"archivo": "motor_cuotas_apifootball.py", "desc": "6.5. Oraculo Sudamericano (API-Football)",             "critico": False, "interactivo": False},
+    {"archivo": "-m src.ingesta.motor_cuotas_apifootball", "desc": "6.5. Oraculo Sudamericano (API-Football)",     "critico": False, "interactivo": False},
 
     # --- FASE 3: DECISIONES ---
     {"archivo": "motor_calculadora.py",      "desc": "7. Cerebro Cuantitativo (Poisson, EV y Kelly)",          "critico": True,  "interactivo": False},
@@ -489,20 +489,20 @@ def main():
     if comando == '--rebuild':
         log_terminal("MODO RECONSTRUCCION MAESTRA DESDE CSV", "ALERTA")
         ejecutar_motor('importador_gold.py',       '1/3: Reconstruccion desde Gold Standard')
-        ejecutar_motor('reset_tablas_derivadas.py','2/3: Purga de Tablas Derivadas')
-        ejecutar_motor('desbloquear_matriz.py',    '3/3: Desbloqueo de Matriz de Partidos')
+        ejecutar_motor('-m src.persistencia.reset_tablas_derivadas', '2/3: Purga de Tablas Derivadas')
+        ejecutar_motor('-m src.nucleo.desbloquear_matriz',          '3/3: Desbloqueo de Matriz de Partidos')
         log_terminal("Fase de reconstruccion finalizada. Iniciando pipeline principal.", "EXITO")
         cmd_pipeline_diario()
         return
     if comando == '--unlock':
         log_terminal("MODO DESBLOQUEO DE MATRIZ", "ALERTA")
-        ejecutar_motor('desbloquear_matriz.py', 'Desbloqueo de Matriz de Partidos')
+        ejecutar_motor('-m src.nucleo.desbloquear_matriz', 'Desbloqueo de Matriz de Partidos')
         log_terminal("Matriz desbloqueada. Iniciando pipeline principal.", "EXITO")
         cmd_pipeline_diario()
         return
     if comando == '--purge-history':
         log_terminal("MODO PURGA DE HISTORIAL", "ALERTA")
-        ejecutar_motor('reset_tablas_derivadas.py', 'Purga de Tablas Derivadas')
+        ejecutar_motor('-m src.persistencia.reset_tablas_derivadas', 'Purga de Tablas Derivadas')
         log_terminal("Tablas derivadas purgadas. Iniciando pipeline principal.", "EXITO")
         cmd_pipeline_diario()
         return

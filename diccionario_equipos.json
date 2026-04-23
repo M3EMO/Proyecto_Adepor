@@ -38,10 +38,7 @@
       "Atlético Madrid": "Espana",
       "Atlético Nacional": "Colombia",
       "Atlético Tucumán": "Argentina",
-      "Atlético-mg": [
-        "Brasil",
-        "Peru"
-      ],
+      "Atlético-mg": "Brasil",
       "Aucas": "Ecuador",
       "Audax Italiano": "Chile",
       "Aurora": "Bolivia",
@@ -99,10 +96,7 @@
       "Defensor Sporting": "Uruguay",
       "Delfín": "Ecuador",
       "Deportes Concepcion": "Chile",
-      "Deportes Limache": [
-        "Chile",
-        "Colombia"
-      ],
+      "Deportes Limache": "Chile",
       "Deportivo Cali": "Colombia",
       "Deportivo Cuenca": "Ecuador",
       "Deportivo Garcilaso": "Peru",
@@ -111,10 +105,7 @@
       "Deportivo Moquegua": "Peru",
       "Deportivo Pasto": "Colombia",
       "Deportivo Rayo Zuliano": "Venezuela",
-      "Deportivo Riestra": [
-        "Argentina",
-        "Colombia"
-      ],
+      "Deportivo Riestra": "Argentina",
       "Deportivo Táchira": "Venezuela",
       "Eintracht Frankfurt": "Alemania",
       "Elche": "Espana",
@@ -166,10 +157,7 @@
       "Independiente Petrolero": "Bolivia",
       "Independiente Rivadavia": "Argentina",
       "Independiente Santa Fe": "Colombia",
-      "Independiente del Valle": [
-        "Colombia",
-        "Ecuador"
-      ],
+      "Independiente del Valle": "Ecuador",
       "Instituto (córdoba)": "Argentina",
       "Inter": "Italia",
       "Internacional": "Brasil",
@@ -298,10 +286,7 @@
       "UTC": "Peru",
       "Udinese": "Italia",
       "Union (santa Fe)": "Argentina",
-      "Universidad Católica (Quito)": [
-        "Chile",
-        "Ecuador"
-      ],
+      "Universidad Católica (Quito)": "Ecuador",
       "Universidad Central": "Venezuela",
       "Universidad de Chile": "Chile",
       "Universidad de Concepción": "Chile",

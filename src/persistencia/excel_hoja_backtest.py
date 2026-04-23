@@ -14,7 +14,8 @@ from openpyxl.styles import Font, Alignment
 from openpyxl.utils import get_column_letter
 
 from src.comun.resolucion import determinar_resultado_entero
-from src.comun.calibracion_beta import obtener_coefs_beta, calibrar_probs
+from src.comun.calibracion_beta import obtener_coefs_beta
+from src.comun.calibracion_piecewise import obtener_mapas_piecewise, calibrar_probs_pw
 from src.persistencia.excel_estilos import (
     COL, CL, HEADERS, MAX_COL, COL_WIDTHS,
     FONT_HEADER, FONT_DATA, FILL_HEADER,
@@ -53,8 +54,10 @@ def poblar_backtest(wb, datos, bankroll):
         COL['ap1x2'], COL['apou'], COL['acierto'], COL['id'],
     }
 
-    # Coefs beta para BS calibrado (display-only)
+    # Calibracion display-only: piecewise con fallback beta (display-only).
+    # Motor de picks NO usa estas probs, solo la columna BS Calibrado del Excel.
     coefs_beta = obtener_coefs_beta()
+    mapas_pw = obtener_mapas_piecewise()
 
     for idx, row_data in enumerate(datos):
         r = idx + 2
@@ -133,12 +136,12 @@ def poblar_backtest(wb, datos, bankroll):
         cell.font = FONT_DATA
         cell.number_format = '0.0000'
 
-        # BS calibrado: aplica beta-scaling a las probs y calcula valor numerico
-        # (no formula) porque los coefs estan en Python, no en el workbook.
+        # BS calibrado: piecewise (fallback beta si bucket vacio). Valor
+        # numerico (no formula) porque los mapas viven en Python/DB.
         if (isinstance(p1, (int, float)) and isinstance(px, (int, float)) and
                 isinstance(p2, (int, float)) and p1 > 0 and
                 gl is not None and gv is not None):
-            q1, qx, q2 = calibrar_probs(p1, px, p2, coefs=coefs_beta)
+            q1, qx, q2 = calibrar_probs_pw(p1, px, p2, mapas=mapas_pw, coefs_beta=coefs_beta)
             y1 = 1 if gl > gv else 0
             yx = 1 if gl == gv else 0
             y2 = 1 if gl < gv else 0

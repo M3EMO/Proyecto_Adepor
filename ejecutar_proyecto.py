@@ -508,7 +508,7 @@ def main():
         return
     if comando == '--audit-names':
         log_terminal("MODO AUDITORIA INTERACTIVA DE NOMBRES", "ALERTA")
-        ejecutar_motor('auditor_espn.py', 'Auditoria Interactiva de Nombres (ESPN vs. Diccionario)')
+        ejecutar_motor('auditor/auditor_espn.py', 'Auditoria Interactiva de Nombres (ESPN vs. Diccionario)')
         log_terminal("Auditoria finalizada.", "EXITO")
         return
 

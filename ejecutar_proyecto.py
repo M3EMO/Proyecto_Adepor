@@ -206,21 +206,73 @@ def cmd_status():
 
         print()
         print("--- APUESTAS ---")
-        total_apostar = cur.execute(
+        # Dos capas de metricas, porque el pipeline corre pretest (stake=0 para
+        # recolectar hit rate antes de flipear a LIVE) + apuestas reales (stake>0):
+        #   REALES   = stake_1x2>0 o stake_ou>0 (solo ligas en LIVE).
+        #   PICKS    = apuesta LIKE '[APOSTAR]%' (incluye pretest).
+        # Liquidadas = estado='Liquidado' + apuesta evaluada GANADA|PERDIDA.
+        reales_vivas_1x2 = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE stake_1x2>0 AND estado!='Liquidado'"
+        ).fetchone()[0]
+        reales_vivas_ou = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE stake_ou>0 AND estado!='Liquidado'"
+        ).fetchone()[0]
+        reales_liq_1x2 = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE stake_1x2>0 AND estado='Liquidado' "
+            "AND (apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%')"
+        ).fetchone()[0]
+        reales_liq_ou = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE stake_ou>0 AND estado='Liquidado' "
+            "AND (apuesta_ou LIKE '[GANADA]%' OR apuesta_ou LIKE '[PERDIDA]%')"
+        ).fetchone()[0]
+        reales_g_1x2 = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE stake_1x2>0 AND apuesta_1x2 LIKE '[GANADA]%'"
+        ).fetchone()[0]
+        reales_g_ou = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE stake_ou>0 AND apuesta_ou LIKE '[GANADA]%'"
+        ).fetchone()[0]
+        picks_vivos_1x2 = cur.execute(
             "SELECT COUNT(*) FROM partidos_backtest WHERE apuesta_1x2 LIKE '[APOSTAR]%'"
         ).fetchone()[0]
-        total_liq = cur.execute(
-            "SELECT COUNT(*) FROM partidos_backtest WHERE estado='Liquidado' AND "
-            "(apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%')"
+        picks_vivos_ou = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE apuesta_ou LIKE '[APOSTAR]%'"
         ).fetchone()[0]
-        total_g = cur.execute(
+        picks_eval_1x2 = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE estado='Liquidado' "
+            "AND (apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%')"
+        ).fetchone()[0]
+        picks_eval_ou = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE estado='Liquidado' "
+            "AND (apuesta_ou LIKE '[GANADA]%' OR apuesta_ou LIKE '[PERDIDA]%')"
+        ).fetchone()[0]
+        picks_g_1x2 = cur.execute(
             "SELECT COUNT(*) FROM partidos_backtest WHERE apuesta_1x2 LIKE '[GANADA]%'"
         ).fetchone()[0]
-        hit = 100 * total_g / total_liq if total_liq else 0
-        print(f"  [APOSTAR] vivas:    {total_apostar}")
-        print(f"  Liquidadas:         {total_liq}")
-        print(f"  Ganadas:            {total_g}")
-        print(f"  Hit rate global:    {hit:.1f}%")
+        picks_g_ou = cur.execute(
+            "SELECT COUNT(*) FROM partidos_backtest WHERE apuesta_ou LIKE '[GANADA]%'"
+        ).fetchone()[0]
+
+        reales_vivas = reales_vivas_1x2 + reales_vivas_ou
+        reales_liq = reales_liq_1x2 + reales_liq_ou
+        reales_g = reales_g_1x2 + reales_g_ou
+        hit_real = 100 * reales_g / reales_liq if reales_liq else None
+
+        picks_vivos = picks_vivos_1x2 + picks_vivos_ou
+        picks_eval = picks_eval_1x2 + picks_eval_ou
+        picks_g = picks_g_1x2 + picks_g_ou
+        hit_pick = 100 * picks_g / picks_eval if picks_eval else 0
+
+        print(f"  REALES (stake>0):")
+        print(f"    Vivas:            {reales_vivas:>4d}   (1X2:{reales_vivas_1x2}  O/U:{reales_vivas_ou})")
+        print(f"    Liquidadas:       {reales_liq:>4d}   (1X2:{reales_liq_1x2}  O/U:{reales_liq_ou})")
+        if hit_real is not None:
+            print(f"    Hit real:        {hit_real:>4.1f}%   (ganadas {reales_g})")
+        else:
+            print(f"    Hit real:         N/A   (sin liquidaciones con stake>0 aun)")
+        print(f"  PICKS (incluye pretest stake=0):")
+        print(f"    Vivos:            {picks_vivos:>4d}   (1X2:{picks_vivos_1x2}  O/U:{picks_vivos_ou})")
+        print(f"    Evaluados:        {picks_eval:>4d}   (1X2:{picks_eval_1x2}  O/U:{picks_eval_ou})")
+        print(f"    Hit pretest:     {hit_pick:>4.1f}%   (ganados {picks_g})")
 
         print()
         print("--- PRETEST POR LIGA ---")

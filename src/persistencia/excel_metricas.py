@@ -11,6 +11,8 @@ Extraido del motor_sincronizador.py monolitico (V9.2) en fase 4 (2026-04-21).
 import math
 
 from src.comun.resolucion import determinar_resultado_entero
+from src.comun.calibracion_beta import obtener_coefs_beta
+from src.comun.calibracion_piecewise import obtener_mapas_piecewise, calibrar_probs_pw
 from src.persistencia.excel_estilos import (
     FILL_VERDE, FILL_AMARILLO, FILL_ROJO, FILL_NEUTRO,
 )
@@ -54,9 +56,13 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
       - fraccion_kelly: echo del parametro.
     """
     bets_1x2, bets_ou = [], []
-    bs_sis_list, bs_casa_list = [], []
+    bs_sis_list, bs_casa_list, bs_cal_list = [], [], []
     pred_aciertos = 0
     pred_fallos = 0
+
+    # Calibradores display-only (piecewise + fallback beta)
+    _coefs_beta = obtener_coefs_beta()
+    _mapas_pw = obtener_mapas_piecewise()
     # por_liga: stats de picks liquidados (incluyendo pretest con stake=0).
     # n/g/p se cuentan desde el texto [GANADA]/[PERDIDA] del pick 1X2.
     # vol/pl solo incluyen apuestas con stake>0 (dinero real movido).
@@ -126,6 +132,9 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
             ox = 1 if gl == gv else 0
             o2 = 1 if gl < gv else 0
             bs_sis_list.append((p1 - o1) ** 2 + (px - ox) ** 2 + (p2 - o2) ** 2)
+            # Brier calibrado (piecewise + fallback beta, display-only)
+            q1, qx, q2 = calibrar_probs_pw(p1, px, p2, mapas=_mapas_pw, coefs_beta=_coefs_beta)
+            bs_cal_list.append((q1 - o1) ** 2 + (qx - ox) ** 2 + (q2 - o2) ** 2)
             if c1 and c1 > 0 and cx and cx > 0 and c2 and c2 > 0:
                 r1, rx, r2 = 1 / c1, 1 / cx, 1 / c2
                 tot = r1 + rx + r2
@@ -137,6 +146,7 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
 
     bs_sis = sum(bs_sis_list) / len(bs_sis_list) if bs_sis_list else 0.0
     bs_casa = sum(bs_casa_list) / len(bs_casa_list) if bs_casa_list else 0.0
+    bs_cal = sum(bs_cal_list) / len(bs_cal_list) if bs_cal_list else 0.0
 
     return {
         'total': _grupo(bets_1x2 + bets_ou),
@@ -146,8 +156,10 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
         'pred_aciertos':    pred_aciertos,
         'pred_total':       pred_total,
         'bs_sis':  bs_sis,
+        'bs_cal':  bs_cal,
         'bs_casa': bs_casa,
-        'bs_glob': bs_sis - bs_casa,
+        'bs_glob':     bs_sis - bs_casa,
+        'bs_glob_cal': bs_cal - bs_casa,
         'fraccion_kelly': fraccion_kelly,
         'por_liga': por_liga,
     }

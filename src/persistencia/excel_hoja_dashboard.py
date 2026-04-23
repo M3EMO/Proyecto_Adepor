@@ -201,8 +201,11 @@ def crear_hoja_dashboard(wb, metricas, bankroll, apuestas_live_por_liga=None):
     _sep("  CALIBRACION DEL MODELO  (Brier Score — rango 0 a 2, aleatorio ≈ 0.667, menor es mejor)")
 
     bs_s = m['bs_sis']; bs_c = m['bs_casa']; bs_g = m['bs_glob']
+    bs_cal = m.get('bs_cal', 0.0)
+    bs_g_cal = m.get('bs_glob_cal', bs_cal - bs_c)
 
-    _fila("BS Sistema  (promedio por partido, Dixon-Coles)",
+    # KPI PRIMARIO — BS Sistema (probs crudas que usa el motor para decidir picks)
+    _fila("BS Sistema  (KPI real — probs crudas que deciden los picks)",
           (bs_s, bs_s, NA), ('d4', 'd4', ''),
           (semaforo(bs_s, 0.50, 0.65, mayor_es_mejor=False), FILL_NEUTRO, FILL_NEUTRO))
 
@@ -213,6 +216,15 @@ def crear_hoja_dashboard(wb, metricas, bankroll, apuestas_live_por_liga=None):
     _fila("BS Global  (Sistema - Casa, negativo = modelo supera mercado)",
           (bs_g, bs_g, NA), ('d4', 'd4', ''),
           (semaforo(bs_g, -0.02, 0.02, mayor_es_mejor=False), FILL_NEUTRO, FILL_NEUTRO))
+
+    # KPI SECUNDARIO — BS Calibrado (display-only, NO toca las probs del motor)
+    _fila("BS Calibrado (teorico · piecewise display-only · no afecta picks)",
+          (bs_cal, bs_cal, NA), ('d4', 'd4', ''),
+          (semaforo(bs_cal, 0.50, 0.65, mayor_es_mejor=False), FILL_NEUTRO, FILL_NEUTRO))
+
+    _fila("BS Global Calibrado (Calibrado - Casa, teorico)",
+          (bs_g_cal, bs_g_cal, NA), ('d4', 'd4', ''),
+          (semaforo(bs_g_cal, -0.02, 0.02, mayor_es_mejor=False), FILL_NEUTRO, FILL_NEUTRO))
 
     # Leyenda
     ws.merge_cells(f'A{row[0] + 1}:D{row[0] + 1}')

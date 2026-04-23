@@ -115,10 +115,7 @@
       "Estudiantes de Rio Cuarto": "Argentina",
       "Estudiantes de Río Cuarto": "Argentina",
       "Estudiantes de la Plata": "Argentina",
-      "Everton": [
-        "Chile",
-        "Inglaterra"
-      ],
+      "Everton": "Inglaterra",
       "Eyupspor": "Turquia",
       "FC Augsburg": "Alemania",
       "FC Cajamarca": "Peru",
@@ -187,10 +184,7 @@
       "Liga de Quito": "Ecuador",
       "Lille": "Francia",
       "Lillestrom": "Noruega",
-      "Liverpool": [
-        "Inglaterra",
-        "Uruguay"
-      ],
+      "Liverpool": "Inglaterra",
       "Llaneros": "Colombia",
       "Lorient": "Francia",
       "Los Chankas": "Peru",
@@ -310,7 +304,9 @@
       "Wolverhampton Wanderers": "Inglaterra",
       "Zamora": "Venezuela",
       "Águilas Doradas": "Colombia",
-      "Ñublense": "Chile"
+      "Ñublense": "Chile",
+      "Everton (Chile)": "Chile",
+      "Liverpool (Uruguay)": "Uruguay"
     },
     "ligas_por_copa": {
       "Libertadores": [
@@ -493,7 +489,7 @@
     "deportesconcepcion": "Deportes Concepcion",
     "deporteslimache": "Deportes Limache",
     "deportestolima": "Deportes Limache",
-    "everton": "Everton",
+    "everton": "Everton (Chile)",
     "evertoncd": "Everton",
     "huachipato": "Huachipato",
     "laserena": "La Serena",
@@ -505,7 +501,8 @@
     "universidadcatolicachi": "Universidad Católica (Quito)",
     "universidadcatolicaquito": "Universidad Católica (Quito)",
     "universidaddechile": "Universidad de Chile",
-    "universidaddeconcepcion": "Universidad de Concepción"
+    "universidaddeconcepcion": "Universidad de Concepción",
+    "evertonchile": "Everton (Chile)"
   },
   "Colombia": {
     "aguilasdoradas": "Águilas Doradas",
@@ -741,13 +738,14 @@
     "elnacional": "Nacional",
     "juventud": "Juventud",
     "juventude": "Juventud",
-    "liverpool": "Liverpool",
+    "liverpool": "Liverpool (Uruguay)",
     "montevideocitytorque": "Montevideo City Torque",
     "montevideowanderers": "Montevideo Wanderers",
     "nacional": "Nacional",
     "penarol": "Peñarol",
     "progreso": "Progreso",
-    "racingmontevideo": "Racing (Montevideo)"
+    "racingmontevideo": "Racing (Montevideo)",
+    "liverpooluruguay": "Liverpool (Uruguay)"
   },
   "Venezuela": {
     "academiaanzoategui": "Academia Anzoátegui",

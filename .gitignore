@@ -29,6 +29,12 @@ config.json
 # Archivos temporales de APIs
 temp_*.json
 
+# Log operativo local del pipeline (generado en cada corrida)
+log_diario.txt
+
+# Backups del diccionario / JSON (pre-migracion)
+*.bak
+
 # Claude Code settings locales
 .claude/settings.local.json
 

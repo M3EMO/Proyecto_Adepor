@@ -20,6 +20,7 @@ from openpyxl import Workbook
 
 from src.persistencia.excel_hoja_backtest import poblar_backtest, crear_hoja_resumen
 from src.persistencia.excel_hoja_dashboard import crear_hoja_dashboard
+from src.persistencia.excel_hoja_live import crear_hoja_live
 from src.persistencia.excel_hoja_resimulacion import crear_hoja_resimulacion
 from src.persistencia.excel_hoja_sombra import crear_hoja_sombra
 from src.persistencia.excel_metricas import calcular_metricas_dashboard
@@ -151,8 +152,16 @@ def main():
     except Exception as e:
         print(f"[AVISO] No se pudo generar la hoja 'Si Hubiera': {e}")
 
+    # 6) LIVE (solo apuestas futuras con stake>0, dividido por liga). Se inserta
+    # como PRIMERA pestana del workbook para que sea la vista por defecto.
+    try:
+        crear_hoja_live(wb, datos, apuestas_live)
+    except Exception as e:
+        print(f"[AVISO] No se pudo generar la hoja 'LIVE': {e}")
+
     # Guardado
     wb.calculation.fullCalcOnLoad = True
+    wb.active = 0  # pestana LIVE visible al abrir
     wb.save(EXCEL_FILE)
     print(f"[EXITO] Excel generado: {os.path.abspath(EXCEL_FILE)}")
     print(f"[INFO] {len(datos)} partidos escritos. {len(stats_liga)} ligas resumidas.")

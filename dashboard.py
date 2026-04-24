@@ -13,6 +13,7 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
+import altair as alt
 import pandas as pd
 import streamlit as st
 
@@ -165,6 +166,38 @@ def cargar_datos():
         ORDER BY fecha DESC
     """, con)
 
+    # P/L por apuesta liquidada (en unidades: stake=1, porque el pretest tiene stake=0)
+    # Formula: ganada -> (cuota - 1), perdida -> -1. Para ambos mercados 1X2 y O/U.
+    pl_events = pd.read_sql_query("""
+        SELECT fecha, pais,
+               CASE
+                   WHEN apuesta_1x2 LIKE '[GANADA]%' THEN
+                       CASE WHEN apuesta_1x2 LIKE '% LOCAL'  THEN cuota_1 - 1
+                            WHEN apuesta_1x2 LIKE '% VISITA' THEN cuota_2 - 1
+                            WHEN apuesta_1x2 LIKE '% EMPATE' THEN cuota_x - 1
+                       END
+                   WHEN apuesta_1x2 LIKE '[PERDIDA]%' THEN -1.0
+                   ELSE 0 END AS pl_1x2,
+               CASE
+                   WHEN apuesta_ou LIKE '[GANADA]%' THEN
+                       CASE WHEN apuesta_ou LIKE '% OVER%' THEN cuota_o25 - 1
+                            ELSE cuota_u25 - 1 END
+                   WHEN apuesta_ou LIKE '[PERDIDA]%' THEN -1.0
+                   ELSE 0 END AS pl_ou
+        FROM partidos_backtest
+        WHERE estado='Liquidado'
+          AND (apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%'
+            OR apuesta_ou  LIKE '[GANADA]%' OR apuesta_ou  LIKE '[PERDIDA]%')
+        ORDER BY fecha ASC
+    """, con)
+    if not pl_events.empty:
+        pl_events["pl_1x2"] = pl_events["pl_1x2"].fillna(0)
+        pl_events["pl_ou"] = pl_events["pl_ou"].fillna(0)
+        pl_events["pl"] = pl_events["pl_1x2"] + pl_events["pl_ou"]
+        pl_events["fecha"] = pd.to_datetime(pl_events["fecha"])
+        pl_events = pl_events.sort_values("fecha").reset_index(drop=True)
+        pl_events["pl_acum"] = pl_events["pl"].cumsum()
+
     con.close()
 
     # Enriquecer ligas con LIVE tags
@@ -176,7 +209,7 @@ def cargar_datos():
         return " · ".join(tags) if tags else "pretest"
     ligas["estado"] = ligas.apply(_tag_live, axis=1)
 
-    return ligas, vivas, historial
+    return ligas, vivas, historial, pl_events
 
 
 def _color_hit(val):
@@ -212,10 +245,141 @@ st.title("🎯 Adepor — Picks del Día")
 st.caption(f"Última actualización: {datetime.now().strftime('%d/%m/%Y %H:%M')}")
 
 try:
-    ligas, vivas, historial = cargar_datos()
+    ligas, vivas, historial, pl_events = cargar_datos()
 except Exception as e:
     st.error(f"Error cargando DB: {e}")
     st.stop()
+
+# ====================== GRAFICOS ======================
+st.header("📈 Métricas y gráficos")
+
+if pl_events.empty:
+    st.info("Todavía no hay apuestas liquidadas para graficar.")
+else:
+    # KPIs arriba (métricas de unidades)
+    total_apuestas = len(pl_events)
+    pl_total = float(pl_events["pl_acum"].iloc[-1])
+    roi_pct = 100.0 * pl_total / total_apuestas if total_apuestas else 0.0
+    ganadas_total = int(((pl_events["pl_1x2"] > 0) | (pl_events["pl_ou"] > 0)).sum())
+    hit_global = 100.0 * ganadas_total / total_apuestas if total_apuestas else 0.0
+
+    k1, k2, k3, k4 = st.columns(4)
+    k1.metric("P/L acumulado", f"{pl_total:+.2f} u",
+              help="Suma de (cuota-1) por ganada y -1 por perdida. Stake unitario.")
+    k2.metric("ROI por apuesta", f"{roi_pct:+.2f}%",
+              help="P/L total dividido el número de apuestas.")
+    k3.metric("Hit rate global", f"{hit_global:.1f}%",
+              help="Apuestas ganadas (1X2 u O/U) sobre total de apuestas evaluadas.")
+    k4.metric("Apuestas evaluadas", f"{total_apuestas}")
+
+    st.divider()
+
+    # Timeline P/L acumulado (línea con área)
+    st.subheader("🕒 Timeline P/L acumulado (unidades)")
+    pl_plot = pl_events[["fecha", "pl_acum", "pl"]].copy()
+    pl_plot["resultado"] = pl_plot["pl"].apply(
+        lambda x: "ganada" if x > 0 else ("perdida" if x < 0 else "neutra")
+    )
+
+    base = alt.Chart(pl_plot).encode(
+        x=alt.X("fecha:T", title="Fecha"),
+        y=alt.Y("pl_acum:Q", title="P/L acumulado (u)"),
+    )
+    area = base.mark_area(
+        color="#1db954", opacity=0.18, interpolate="monotone"
+    )
+    line = base.mark_line(color="#1db954", strokeWidth=2.5, interpolate="monotone")
+    puntos = alt.Chart(pl_plot).mark_circle(size=70).encode(
+        x="fecha:T",
+        y="pl_acum:Q",
+        color=alt.Color(
+            "resultado:N",
+            scale=alt.Scale(
+                domain=["ganada", "perdida", "neutra"],
+                range=["#1db954", "#e74c3c", "#888"],
+            ),
+            legend=alt.Legend(title="Apuesta"),
+        ),
+        tooltip=[
+            alt.Tooltip("fecha:T", title="Fecha"),
+            alt.Tooltip("pl:Q", title="P/L apuesta (u)", format="+.2f"),
+            alt.Tooltip("pl_acum:Q", title="P/L acumulado (u)", format="+.2f"),
+        ],
+    )
+    regla_zero = alt.Chart(pd.DataFrame({"y": [0]})).mark_rule(color="#666", strokeDash=[4, 4]).encode(y="y:Q")
+
+    st.altair_chart((area + line + regla_zero + puntos).properties(height=320),
+                    use_container_width=True)
+
+    # Fila con 2 columnas: P/L por liga + Hit rate por liga
+    c_izq, c_der = st.columns(2)
+
+    with c_izq:
+        st.subheader("💰 P/L por liga (unidades)")
+        pl_por_liga = pl_events.groupby("pais", as_index=False)["pl"].sum()
+        pl_por_liga = pl_por_liga.sort_values("pl", ascending=False)
+        pl_por_liga["Liga"] = pl_por_liga["pais"].apply(lambda p: f"{_flag(p)} {p}")
+        chart_pl_liga = alt.Chart(pl_por_liga).mark_bar().encode(
+            x=alt.X("pl:Q", title="P/L acumulado (u)"),
+            y=alt.Y("Liga:N", sort="-x", title=""),
+            color=alt.condition(
+                "datum.pl >= 0", alt.value("#1db954"), alt.value("#e74c3c")
+            ),
+            tooltip=[alt.Tooltip("Liga:N"), alt.Tooltip("pl:Q", title="P/L (u)", format="+.2f")],
+        ).properties(height=max(220, 28 * len(pl_por_liga)))
+        st.altair_chart(chart_pl_liga, use_container_width=True)
+
+    with c_der:
+        st.subheader("🎯 Hit rate por liga")
+        if ligas.empty:
+            st.info("Sin datos.")
+        else:
+            ligas_bar = ligas[["pais", "hit_pretest", "n_eval"]].copy()
+            ligas_bar["Liga"] = ligas_bar["pais"].apply(lambda p: f"{_flag(p)} {p}")
+            ligas_bar = ligas_bar.sort_values("hit_pretest", ascending=False)
+            chart_hit = alt.Chart(ligas_bar).mark_bar().encode(
+                x=alt.X("hit_pretest:Q", title="Hit %", scale=alt.Scale(domain=[0, 100])),
+                y=alt.Y("Liga:N", sort="-x", title=""),
+                color=alt.Color(
+                    "hit_pretest:Q",
+                    scale=alt.Scale(
+                        domain=[0, 50, 60, 100],
+                        range=["#e74c3c", "#e74c3c", "#d4a017", "#1db954"],
+                    ),
+                    legend=None,
+                ),
+                tooltip=[
+                    alt.Tooltip("Liga:N"),
+                    alt.Tooltip("hit_pretest:Q", title="Hit %", format=".1f"),
+                    alt.Tooltip("n_eval:Q", title="N evaluados"),
+                ],
+            ).properties(height=max(220, 28 * len(ligas_bar)))
+            # Línea de referencia 55% (umbral pretest -> LIVE)
+            linea_55 = alt.Chart(pd.DataFrame({"x": [55]})).mark_rule(
+                color="#666", strokeDash=[4, 4]
+            ).encode(x="x:Q")
+            st.altair_chart(chart_hit + linea_55, use_container_width=True)
+
+    # Distribución EV% de apuestas vivas
+    if not vivas.empty:
+        st.subheader("📊 Distribución EV % — apuestas vivas")
+        ev_hist = alt.Chart(vivas).mark_bar().encode(
+            x=alt.X("ev_pct:Q", bin=alt.Bin(step=2), title="EV %"),
+            y=alt.Y("count():Q", title="Cantidad de picks"),
+            color=alt.Color(
+                "ev_pct:Q",
+                scale=alt.Scale(
+                    domain=[0, 3, 8, 15, 30],
+                    range=["#e74c3c", "#d4a017", "#1db954", "#0a5c2a", "#0a5c2a"],
+                ),
+                legend=None,
+            ),
+            tooltip=[alt.Tooltip("ev_pct:Q", title="EV %", format=".1f"),
+                     alt.Tooltip("count():Q", title="Picks")],
+        ).properties(height=240)
+        st.altair_chart(ev_hist, use_container_width=True)
+
+st.divider()
 
 # ====================== HIT RATE POR LIGA ======================
 st.header("📊 Hit rate por liga")

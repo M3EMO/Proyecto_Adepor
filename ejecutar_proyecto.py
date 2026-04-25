@@ -459,6 +459,117 @@ def cmd_analisis(nombre=None):
 
 
 # ==========================================================================
+# SUBCOMANDO: --aporte / --aportes-list
+# ==========================================================================
+def cmd_aporte():
+    """Registra un aporte (positivo) o retiro (negativo) de capital.
+
+    Uso:
+        py ejecutar_proyecto.py --aporte <monto> [--fecha YYYY-MM-DD] [--desc "..."]
+
+    Ejemplos:
+        py ejecutar_proyecto.py --aporte 100000 --desc "Capital adicional Mateo"
+        py ejecutar_proyecto.py --aporte -25000 --fecha 2026-04-30 --desc "Retiro mensual"
+    """
+    args = sys.argv[2:]
+    if not args:
+        log_terminal("Uso: --aporte <monto> [--fecha YYYY-MM-DD] [--desc \"...\"]", "ERROR")
+        sys.exit(1)
+    try:
+        monto = float(args[0])
+    except (ValueError, IndexError):
+        log_terminal("Monto invalido. Debe ser un numero (positivo aporte / negativo retiro).", "ERROR")
+        sys.exit(1)
+
+    fecha = datetime.now().strftime('%Y-%m-%d')
+    desc = ""
+    i = 1
+    while i < len(args):
+        if args[i] == '--fecha' and i + 1 < len(args):
+            fecha = args[i + 1].strip()
+            i += 2
+        elif args[i] == '--desc' and i + 1 < len(args):
+            desc = args[i + 1].strip()
+            i += 2
+        else:
+            log_terminal(f"Argumento desconocido: {args[i]}", "ERROR")
+            sys.exit(1)
+
+    # Validacion fecha
+    try:
+        datetime.strptime(fecha, '%Y-%m-%d')
+    except ValueError:
+        log_terminal(f"Fecha invalida '{fecha}'. Formato YYYY-MM-DD.", "ERROR")
+        sys.exit(1)
+
+    import sqlite3
+    conn = sqlite3.connect('fondo_quant.db')
+    cur = conn.cursor()
+    # Asegurar que la tabla exista
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS aportes_capital (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            fecha TEXT NOT NULL,
+            monto REAL NOT NULL,
+            descripcion TEXT,
+            fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cur.execute(
+        "INSERT INTO aportes_capital (fecha, monto, descripcion) VALUES (?, ?, ?)",
+        (fecha, monto, desc),
+    )
+    conn.commit()
+
+    # Mostrar bankroll resultante
+    try:
+        from src.nucleo.motor_calculadora import obtener_bankroll_operativo
+        nuevo_bk = obtener_bankroll_operativo(cur)
+    except Exception:
+        nuevo_bk = None
+    conn.close()
+
+    signo = "APORTE" if monto >= 0 else "RETIRO"
+    log_terminal(
+        f"{signo} registrado: ${abs(monto):,.2f} en {fecha}" + (f" — {desc}" if desc else ""),
+        "EXITO",
+    )
+    if nuevo_bk is not None:
+        log_terminal(f"Bankroll operativo actual: ${nuevo_bk:,.2f}", "INFO")
+
+
+def cmd_aportes_list():
+    """Lista los aportes/retiros registrados."""
+    import sqlite3
+    conn = sqlite3.connect('fondo_quant.db')
+    cur = conn.cursor()
+    try:
+        rows = cur.execute(
+            "SELECT id, fecha, monto, descripcion FROM aportes_capital ORDER BY fecha ASC, id ASC"
+        ).fetchall()
+    except sqlite3.OperationalError:
+        log_terminal("Tabla aportes_capital no existe. Crear con: py scripts/crear_tabla_aportes_capital.py", "ALERTA")
+        conn.close()
+        return
+
+    _imprimir_banner("APORTES DE CAPITAL")
+    if not rows:
+        print("  (sin movimientos registrados)")
+        conn.close()
+        return
+
+    total = 0.0
+    print(f"  {'ID':<5}{'Fecha':<12}{'Monto':>14}  Descripcion")
+    print("  " + "-" * 70)
+    for rid, fecha, monto, desc in rows:
+        total += monto
+        print(f"  {rid:<5}{fecha:<12}{monto:>14,.2f}  {desc or ''}")
+    print("  " + "-" * 70)
+    print(f"  {'TOTAL':<5}{'':<12}{total:>14,.2f}")
+    conn.close()
+
+
+# ==========================================================================
 # SUBCOMANDO: --help
 # ==========================================================================
 def cmd_help():
@@ -562,6 +673,13 @@ def main():
         log_terminal("MODO AUDITORIA INTERACTIVA DE NOMBRES", "ALERTA")
         ejecutar_motor('auditor/auditor_espn.py', 'Auditoria Interactiva de Nombres (ESPN vs. Diccionario)')
         log_terminal("Auditoria finalizada.", "EXITO")
+        return
+
+    if comando == '--aporte':
+        cmd_aporte()
+        return
+    if comando == '--aportes-list':
+        cmd_aportes_list()
         return
 
     # Comando desconocido

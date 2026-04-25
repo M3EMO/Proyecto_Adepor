@@ -435,8 +435,14 @@ def obtener_bankroll_operativo(cursor):
     """Devuelve el bankroll a usar por Kelly.
 
     Modo 'fijo'    -> configuracion.bankroll
-    Modo 'dinamico'-> bankroll + SUM(P/L liquidado desde bankroll_fecha_corte),
+    Modo 'dinamico'-> bankroll_base
+                    + SUM(aportes_capital con fecha >= bankroll_fecha_corte)
+                    + SUM(P/L liquidado desde bankroll_fecha_corte),
                       clampeado a [bankroll_piso, bankroll_techo].
+
+    Los aportes_capital son inyecciones/retiros manuales (positivo=aporte,
+    negativo=retiro). Permiten subir el bankroll sin reescribir stakes ya
+    liquidados (los registros viejos en partidos_backtest quedan intactos).
     """
     def _get(clave, default):
         cursor.execute("SELECT valor FROM configuracion WHERE clave = ?", (clave,))
@@ -458,6 +464,17 @@ def obtener_bankroll_operativo(cursor):
         techo = float(_get('bankroll_techo', 1000000.0))
     except (TypeError, ValueError):
         piso, techo = 100000.0, 1000000.0
+
+    # Aportes de capital desde fecha_corte (tabla puede no existir si no se migro)
+    aportes = 0.0
+    try:
+        cursor.execute(
+            "SELECT COALESCE(SUM(monto), 0) FROM aportes_capital WHERE fecha >= ?",
+            (fecha_corte,)
+        )
+        aportes = float(cursor.fetchone()[0] or 0)
+    except sqlite3.OperationalError:
+        pass  # tabla no existe; ignorar (compat pre-migracion)
 
     cursor.execute("""
         SELECT apuesta_1x2, apuesta_ou, stake_1x2, stake_ou,
@@ -486,7 +503,7 @@ def obtener_bankroll_operativo(cursor):
             elif apou.startswith('[PERDIDA]'):
                 pnl -= stou
 
-    bankroll = bankroll_base + pnl
+    bankroll = bankroll_base + aportes + pnl
     return max(piso, min(techo, bankroll))
 
 

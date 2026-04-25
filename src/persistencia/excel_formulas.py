@@ -69,12 +69,18 @@ def f_pl_neto(r):
     return f'={pl1}+{plo}'
 
 
-def f_equity(r, bankroll):
-    """Equity curve acumulada. r=2 arranca en bankroll, r>=3 suma al anterior."""
+def f_equity(r, bankroll, aporte=0.0):
+    """Equity curve acumulada.
+    r=2 arranca en bankroll (BASE — sin P/L acumulado, sin aportes).
+    r>=3 suma al anterior.
+    Si la fila tiene un aporte (inyeccion/retiro de capital con fecha <= fecha_partido
+    y > fecha_partido_anterior), se suma antes que el P/L.
+    """
     pl = f'{CL["pl"]}{r}'
+    aporte_term = f'+{aporte}' if aporte else ''
     if r == 2:
-        return f'={bankroll}+{pl}'
-    return f'={CL["equity"]}{r-1}+{pl}'
+        return f'={bankroll}{aporte_term}+{pl}'
+    return f'={CL["equity"]}{r-1}{aporte_term}+{pl}'
 
 
 def f_brier(r):

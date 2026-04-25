@@ -29,8 +29,16 @@ from src.persistencia.excel_formulas import (
 )
 
 
-def poblar_backtest(wb, datos, bankroll):
-    """Crea la hoja principal con un row por partido. Retorna dict stats_liga."""
+def poblar_backtest(wb, datos, bankroll, aportes=None):
+    """Crea la hoja principal con un row por partido. Retorna dict stats_liga.
+
+    bankroll: bankroll BASE (no dinamico) — la equity curve arranca aqui.
+    aportes: lista [(fecha_str_YYYY-MM-DD, monto), ...] de aportes/retiros de capital.
+             Cada aporte se inyecta en la equity curve antes del partido cuya fecha
+             es >= fecha del aporte (y > fecha del partido anterior).
+    """
+    aportes = list(aportes or [])
+    aportes.sort(key=lambda x: x[0])  # asc por fecha
     ws = wb.active
     ws.title = "Backtest"
 
@@ -58,6 +66,11 @@ def poblar_backtest(wb, datos, bankroll):
     # Motor de picks NO usa estas probs, solo la columna BS Calibrado del Excel.
     coefs_beta = obtener_coefs_beta()
     mapas_pw = obtener_mapas_piecewise()
+
+    # Iterador de aportes: cada vez que la fecha del partido alcanza/supera la
+    # fecha de un aporte, lo "inyectamos" en esa fila (suma una vez al equity).
+    aporte_idx = 0
+    fecha_partido_anterior = None  # YYYY-MM-DD
 
     for idx, row_data in enumerate(datos):
         r = idx + 2
@@ -128,9 +141,29 @@ def poblar_backtest(wb, datos, bankroll):
         cell.font = FONT_DATA
         cell.number_format = '#,##0.00'
 
-        cell = ws.cell(r, COL['equity'], f_equity(r, bankroll))
+        # Calcular aporte a inyectar en esta fila: todos los aportes con fecha
+        # > fecha_partido_anterior y <= fecha_partido_actual.
+        fecha_iso = (
+            fecha_val.strftime('%Y-%m-%d')
+            if isinstance(fecha_val, date_type) else str(fecha_val)[:10]
+        )
+        aporte_fila = 0.0
+        while aporte_idx < len(aportes):
+            f_aporte, monto_aporte = aportes[aporte_idx]
+            if (fecha_partido_anterior is None or f_aporte > fecha_partido_anterior) and f_aporte <= fecha_iso:
+                aporte_fila += float(monto_aporte)
+                aporte_idx += 1
+            elif f_aporte <= (fecha_partido_anterior or ''):
+                # Aporte con fecha anterior al partido anterior: ya se aplicó.
+                aporte_idx += 1
+            else:
+                break  # aporte futuro
+
+        cell = ws.cell(r, COL['equity'], f_equity(r, bankroll, aporte=aporte_fila))
         cell.font = FONT_DATA
         cell.number_format = '#,##0.00'
+
+        fecha_partido_anterior = fecha_iso
 
         cell = ws.cell(r, COL['brier'], f_brier(r))
         cell.font = FONT_DATA

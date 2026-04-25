@@ -48,16 +48,23 @@ def _resucitar_liquidados_sin_goles(cursor):
 
 
 def _leer_configuracion(cursor):
-    """Lee bankroll operativo (dinamico o fijo) y fraccion_kelly de configuracion."""
+    """Lee bankroll BASE, bankroll OPERATIVO (dinamico/fijo) y fraccion_kelly.
+
+    Devuelve (bankroll_base, bankroll_operativo, fraccion_kelly).
+    bankroll_base: punto de partida fijo del Equity Curve (configuracion.bankroll).
+    bankroll_operativo: el que usa Kelly (= base + aportes + P/L si dinamico).
+    """
+    try:
+        cursor.execute("SELECT valor FROM configuracion WHERE clave = 'bankroll'")
+        bankroll_base = float(cursor.fetchone()[0])
+    except (TypeError, IndexError, ValueError):
+        bankroll_base = 100000.00
+
     try:
         from src.nucleo.motor_calculadora import obtener_bankroll_operativo
-        bankroll = obtener_bankroll_operativo(cursor)
+        bankroll_operativo = obtener_bankroll_operativo(cursor)
     except Exception:
-        try:
-            cursor.execute("SELECT valor FROM configuracion WHERE clave = 'bankroll'")
-            bankroll = float(cursor.fetchone()[0])
-        except (TypeError, IndexError):
-            bankroll = 100000.00
+        bankroll_operativo = bankroll_base
 
     try:
         cursor.execute("SELECT valor FROM configuracion WHERE clave = 'fraccion_kelly'")
@@ -66,7 +73,19 @@ def _leer_configuracion(cursor):
     except Exception:
         fraccion_kelly = 0.50
 
-    return bankroll, fraccion_kelly
+    return bankroll_base, bankroll_operativo, fraccion_kelly
+
+
+def _cargar_aportes(cursor):
+    """Lee la lista de aportes/retiros de capital ordenada por fecha asc.
+    Devuelve [(fecha_str, monto_float), ...] o [] si la tabla no existe."""
+    try:
+        rows = cursor.execute(
+            "SELECT fecha, monto FROM aportes_capital ORDER BY fecha ASC, id ASC"
+        ).fetchall()
+    except Exception:
+        return []
+    return [(str(f), float(m)) for f, m in rows]
 
 
 def _cargar_apuestas_live(cursor):
@@ -112,8 +131,9 @@ def main():
     _resucitar_liquidados_sin_goles(cursor)
     conn.commit()
 
-    bankroll, fraccion_kelly = _leer_configuracion(cursor)
+    bankroll_base, bankroll_operativo, fraccion_kelly = _leer_configuracion(cursor)
     apuestas_live = _cargar_apuestas_live(cursor)
+    aportes = _cargar_aportes(cursor)
 
     datos = _cargar_partidos(cursor)
     conn.close()
@@ -122,32 +142,29 @@ def main():
         print("[INFO] No hay partidos para sincronizar.")
         return
 
-    print(f"[INFO] {len(datos)} partidos a sincronizar. Bankroll: ${bankroll:,.2f}")
+    print(f"[INFO] {len(datos)} partidos a sincronizar. "
+          f"Bankroll base: ${bankroll_base:,.2f} · operativo: ${bankroll_operativo:,.2f} · "
+          f"aportes: {len(aportes)}")
 
     # --- Armar Excel ---
     wb = Workbook()
 
-    # 1) Hoja Backtest (+ recolecta stats por liga) — la activa por defecto
-    stats_liga = poblar_backtest(wb, datos, bankroll)
+    # 1) Hoja Backtest: equity curve arranca en bankroll BASE (fix double-counting)
+    #    + inyecta aportes en la fila correspondiente a su fecha.
+    stats_liga = poblar_backtest(wb, datos, bankroll_base, aportes=aportes)
 
-    # 2) Dashboard (como primera pestana)
+    # 2) Dashboard usa bankroll OPERATIVO (vista actual del capital).
     metricas = calcular_metricas_dashboard(datos, fraccion_kelly)
-    crear_hoja_dashboard(wb, metricas, bankroll, apuestas_live)
+    crear_hoja_dashboard(wb, metricas, bankroll_operativo, apuestas_live)
 
-    # 3) Sombra (auditoria Op1 vs Op4)
-    crear_hoja_sombra(wb, datos, bankroll)
+    # 3) Sombra (auditoria Op1 vs Op4) — usa el operativo como referencia.
+    crear_hoja_sombra(wb, datos, bankroll_operativo)
 
-    # 4) Resumen por liga
-    crear_hoja_resumen(wb, stats_liga, bankroll)
+    # 4) Resumen por liga (operativo).
+    crear_hoja_resumen(wb, stats_liga, bankroll_operativo)
 
-    # 5) Si Hubiera (resimulacion in-sample con reglas actuales + compounding)
-    # Usa bankroll BASE (no dinamico) para tener un punto de partida estable.
+    # 5) Si Hubiera (resimulacion): bankroll BASE (compounding desde el inicio).
     try:
-        cursor2 = sqlite3.connect(DB_NAME).cursor()
-        row_bk = cursor2.execute(
-            "SELECT valor FROM configuracion WHERE clave='bankroll'").fetchone()
-        bankroll_base = float(row_bk[0]) if row_bk else bankroll
-        cursor2.connection.close()
         crear_hoja_resimulacion(wb, datos, bankroll_base)
     except Exception as e:
         print(f"[AVISO] No se pudo generar la hoja 'Si Hubiera': {e}")

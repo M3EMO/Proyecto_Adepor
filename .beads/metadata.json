@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "adepor",
+  "project_id": "58fcc51a-f81c-4afd-a0cb-4fa5d5ad0ea1"
+}

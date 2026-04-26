@@ -233,6 +233,182 @@
       },
       "n_total_input": 590,
       "n_zero_stats": 9
+    },
+    "Ecuador": {
+      "config": {
+        "rho": -0.0839,
+        "coef_corner": 0.0204,
+        "promedio_liga": 1.2778
+      },
+      "metricas": {
+        "n": 120,
+        "hit_rate": 0.55,
+        "brier_mean": 0.623,
+        "xg_mse_local": 1.5115,
+        "xg_mse_visita": 0.8995,
+        "xg_bias_local": -0.1251,
+        "xg_bias_visita": 0.2812,
+        "outcomes_real": {
+          "1": 57,
+          "X": 34,
+          "2": 29
+        },
+        "base_rate_local": 0.475,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 56,
+            "p_max_avg": 0.3754,
+            "hit_rate": 0.5357,
+            "delta": 0.1603
+          },
+          "40-50": {
+            "n": 60,
+            "p_max_avg": 0.4362,
+            "hit_rate": 0.5333,
+            "delta": 0.0971
+          },
+          "50-60": {
+            "n": 4,
+            "p_max_avg": 0.5085,
+            "hit_rate": 1.0,
+            "delta": 0.4915
+          }
+        }
+      },
+      "n_total_input": 360,
+      "n_zero_stats": 360
+    },
+    "Peru": {
+      "config": {
+        "rho": -0.05,
+        "coef_corner": 0.023,
+        "promedio_liga": 1.3667
+      },
+      "metricas": {
+        "n": 153,
+        "hit_rate": 0.5686,
+        "brier_mean": 0.6024,
+        "xg_mse_local": 1.6693,
+        "xg_mse_visita": 1.2711,
+        "xg_bias_local": -0.2164,
+        "xg_bias_visita": 0.2464,
+        "outcomes_real": {
+          "1": 82,
+          "X": 38,
+          "2": 33
+        },
+        "base_rate_local": 0.5359,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 46,
+            "p_max_avg": 0.3832,
+            "hit_rate": 0.4348,
+            "delta": 0.0516
+          },
+          "40-50": {
+            "n": 86,
+            "p_max_avg": 0.4403,
+            "hit_rate": 0.6163,
+            "delta": 0.176
+          },
+          "50-60": {
+            "n": 21,
+            "p_max_avg": 0.5242,
+            "hit_rate": 0.6667,
+            "delta": 0.1424
+          }
+        }
+      },
+      "n_total_input": 495,
+      "n_zero_stats": 491
+    },
+    "Uruguay": {
+      "config": {
+        "rho": -0.0612,
+        "coef_corner": 0.02,
+        "promedio_liga": 1.2083
+      },
+      "metricas": {
+        "n": 120,
+        "hit_rate": 0.4417,
+        "brier_mean": 0.6418,
+        "xg_mse_local": 1.3618,
+        "xg_mse_visita": 1.1635,
+        "xg_bias_local": -0.1608,
+        "xg_bias_visita": -0.0682,
+        "outcomes_real": {
+          "1": 44,
+          "X": 31,
+          "2": 45
+        },
+        "base_rate_local": 0.3667,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 77,
+            "p_max_avg": 0.3727,
+            "hit_rate": 0.3636,
+            "delta": -0.009
+          },
+          "40-50": {
+            "n": 42,
+            "p_max_avg": 0.4262,
+            "hit_rate": 0.5952,
+            "delta": 0.1691
+          },
+          "50-60": {
+            "n": 1,
+            "p_max_avg": 0.5085,
+            "hit_rate": 0.0,
+            "delta": -0.5085
+          }
+        }
+      },
+      "n_total_input": 360,
+      "n_zero_stats": 360
+    },
+    "Venezuela": {
+      "config": {
+        "rho": -0.1491,
+        "coef_corner": 0.02,
+        "promedio_liga": 1.2039
+      },
+      "metricas": {
+        "n": 91,
+        "hit_rate": 0.4505,
+        "brier_mean": 0.6433,
+        "xg_mse_local": 1.0324,
+        "xg_mse_visita": 0.8273,
+        "xg_bias_local": -0.0397,
+        "xg_bias_visita": 0.128,
+        "outcomes_real": {
+          "1": 38,
+          "X": 29,
+          "2": 24
+        },
+        "base_rate_local": 0.4176,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 59,
+            "p_max_avg": 0.3699,
+            "hit_rate": 0.3898,
+            "delta": 0.0199
+          },
+          "40-50": {
+            "n": 31,
+            "p_max_avg": 0.4372,
+            "hit_rate": 0.5484,
+            "delta": 0.1112
+          },
+          "50-60": {
+            "n": 1,
+            "p_max_avg": 0.5194,
+            "hit_rate": 1.0,
+            "delta": 0.4806
+          }
+        }
+      },
+      "n_total_input": 537,
+      "n_zero_stats": 537
     }
   }
 }

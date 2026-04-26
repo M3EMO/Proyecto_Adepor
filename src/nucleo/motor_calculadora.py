@@ -638,6 +638,88 @@ def _log_shadow_margen(liga, margen_real, threshold_actual):
         pass  # Falla silenciosa: shadow no debe romper motor
 
 
+def _calcular_probs_skellam(xg_l, xg_v, max_goals=10):
+    """[SHADOW adepor-shadow-arq] Calcula probs 1X2 via Skellam (sin tau Dixon-Coles).
+    P(D=k) = sum_n P(X=k+n) * P(Y=n) donde X~Pois(xg_l), Y~Pois(xg_v).
+    """
+    import math
+    def pois(k, lam):
+        if lam <= 0 or k < 0:
+            return 0.0
+        try:
+            return math.exp(-lam) * (lam ** k) / math.factorial(k)
+        except (OverflowError, ValueError):
+            return 0.0
+    p_home = p_draw = p_away = 0.0
+    for d in range(-max_goals, max_goals + 1):
+        p_d = sum(pois(d + y, xg_l) * pois(y, xg_v)
+                  for y in range(max(0, -d), max_goals + 1))
+        if d > 0: p_home += p_d
+        elif d == 0: p_draw += p_d
+        else: p_away += p_d
+    total = p_home + p_draw + p_away
+    if total > 0:
+        return p_home/total, p_draw/total, p_away/total
+    return 1/3, 1/3, 1/3
+
+
+def _log_shadow_arquitecturas(id_partido, pais, fecha_partido, xg_l, xg_v, rho,
+                              p1_actual, px_actual, p2_actual,
+                              p1_no_fix5, px_no_fix5, p2_no_fix5,
+                              p1_no_hg, px_no_hg, p2_no_hg,
+                              p1_puro, px_puro, p2_puro,
+                              p1_hg_sel, px_hg_sel, p2_hg_sel):
+    """[SHADOW adepor-shadow-arq] Log decision con 6 variantes (incluye Skellam).
+    No afecta picks reales. Solo persiste para futura comparacion N>=80.
+    """
+    try:
+        # Computa Skellam
+        p1_sk, px_sk, p2_sk = _calcular_probs_skellam(xg_l, xg_v)
+
+        # Helper: argmax + margen
+        def argmax_margen(p1, px, p2):
+            opts = [("1", p1), ("X", px), ("2", p2)]
+            sorted_p = sorted(opts, key=lambda x: -x[1])
+            return sorted_p[0][0], sorted_p[0][1] - sorted_p[1][1]
+
+        ax_actual, mg_actual = argmax_margen(p1_actual, px_actual, p2_actual)
+        ax_no_fix5, mg_no_fix5 = argmax_margen(p1_no_fix5, px_no_fix5, p2_no_fix5)
+        ax_no_hg, mg_no_hg = argmax_margen(p1_no_hg, px_no_hg, p2_no_hg)
+        ax_puro, mg_puro = argmax_margen(p1_puro, px_puro, p2_puro)
+        ax_hg_sel, mg_hg_sel = argmax_margen(p1_hg_sel, px_hg_sel, p2_hg_sel)
+        ax_sk, mg_sk = argmax_margen(p1_sk, px_sk, p2_sk)
+
+        from datetime import datetime
+        ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        conn = sqlite3.connect(DB_NAME)
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT OR IGNORE INTO picks_shadow_arquitecturas
+            (fecha_log, id_partido, pais, fecha_partido,
+             xg_local, xg_visita, rho,
+             prob_1_actual, prob_x_actual, prob_2_actual, argmax_actual, margen_actual,
+             prob_1_no_fix5, prob_x_no_fix5, prob_2_no_fix5, argmax_no_fix5, margen_no_fix5,
+             prob_1_no_hg, prob_x_no_hg, prob_2_no_hg, argmax_no_hg, margen_no_hg,
+             prob_1_puro, prob_x_puro, prob_2_puro, argmax_puro, margen_puro,
+             prob_1_hg_sel, prob_x_hg_sel, prob_2_hg_sel, argmax_hg_sel, margen_hg_sel,
+             prob_1_skellam, prob_x_skellam, prob_2_skellam, argmax_skellam, margen_skellam)
+            VALUES (?, ?, ?, ?, ?, ?, ?,
+                    ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?,
+                    ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?)
+        """, (ts, id_partido, pais, fecha_partido,
+              xg_l, xg_v, rho,
+              p1_actual, px_actual, p2_actual, ax_actual, mg_actual,
+              p1_no_fix5, px_no_fix5, p2_no_fix5, ax_no_fix5, mg_no_fix5,
+              p1_no_hg, px_no_hg, p2_no_hg, ax_no_hg, mg_no_hg,
+              p1_puro, px_puro, p2_puro, ax_puro, mg_puro,
+              p1_hg_sel, px_hg_sel, p2_hg_sel, ax_hg_sel, mg_hg_sel,
+              p1_sk, px_sk, p2_sk, ax_sk, mg_sk))
+        conn.commit()
+        conn.close()
+    except Exception:
+        pass  # Falla silenciosa: shadow no debe romper motor
+
+
 def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None):
     """
     Evalua mercado 1X2 con cuatro caminos (Manifiesto II.E + V4.3/V4.4):
@@ -1047,6 +1129,37 @@ def main():
 
         # Fix #5 (V4.5): corrección de sesgo de compresión de calibración
         p1, px, p2 = corregir_calibracion(p1, px, p2)
+
+        # --- SHADOW arquitecturas (adepor-shadow-arq, 2026-04-26) ---
+        # Loggea 6 variantes para futura comparativa N>=80:
+        #   V0 actual = p1/px/p2 (con HG + Fix #5)
+        #   V1 no_fix5 = solo HG, sin Fix #5
+        #   V2 no_hg = solo Fix #5, sin HG
+        #   V3 puro = sin HG ni Fix #5 (=p1_raw)
+        #   V4 hg_sel = HG SOLO en bucket [0.45, 0.50)
+        #   V5 skellam = se computa en el logger
+        try:
+            # V1: solo HG (sin Fix #5) — re-aplicar HG sobre raw
+            p1_v1, px_v1, p2_v1 = aplicar_hallazgo_g(p1_raw, px_raw, p2_raw, pais, hallazgo_g_data)
+            # V2: solo Fix #5 (sin HG)
+            p1_v2, px_v2, p2_v2 = corregir_calibracion(p1_raw, px_raw, p2_raw)
+            # V3: puro
+            p1_v3, px_v3, p2_v3 = p1_raw, px_raw, p2_raw
+            # V4: HG selectivo (solo si p1_raw en [0.45, 0.50))
+            if 0.45 <= p1_raw < 0.50:
+                p1_v4, px_v4, p2_v4 = aplicar_hallazgo_g(p1_raw, px_raw, p2_raw, pais, hallazgo_g_data)
+            else:
+                p1_v4, px_v4, p2_v4 = p1_raw, px_raw, p2_raw
+            _log_shadow_arquitecturas(
+                id_partido, pais, fecha_str, xg_local, xg_visita, rho,
+                p1, px, p2,                    # V0 actual
+                p1_v1, px_v1, p2_v1,           # V1 no_fix5
+                p1_v2, px_v2, p2_v2,           # V2 no_hg
+                p1_v3, px_v3, p2_v3,           # V3 puro
+                p1_v4, px_v4, p2_v4,           # V4 hg_sel
+            )
+        except Exception:
+            pass  # Falla silenciosa: shadow no rompe motor
 
         # --- SHADOW: Log de incertidumbre ---
         # Umbral re-calibrado 2026-04-22: antes 0.15 (disparaba siempre), ahora 1.40

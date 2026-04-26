@@ -522,9 +522,12 @@ def normalizar_extremo(texto):
 
 def obtener_ema(equipo_norm, liga, historial_ema):
     """Devuelve EMA para (equipo_norm, liga). Fuzzy match scoped a la liga.
-    historial_ema es dict con key tupla (equipo_norm, liga)."""
+    historial_ema es dict con key tupla (equipo_norm, liga).
+    SHADOW EMA dual: incluye fav_corto_* / con_corto_* (default 1.4 si no poblado)."""
     default = {'fav_home': 1.4, 'con_home': 1.4, 'fav_away': 1.4, 'con_away': 1.4,
-               'var_fh': 0.1, 'var_ch': 0.1, 'var_fa': 0.1, 'var_ca': 0.1}
+               'var_fh': 0.1, 'var_ch': 0.1, 'var_fa': 0.1, 'var_ca': 0.1,
+               'fav_corto_home': 1.4, 'con_corto_home': 1.4,
+               'fav_corto_away': 1.4, 'con_corto_away': 1.4}
     data = historial_ema.get((equipo_norm, liga))
     if not data:
         # Fuzzy solo entre equipos de la misma liga (evita colisiones cross-liga)
@@ -828,11 +831,15 @@ def main():
     # Key compuesta (equipo_norm, liga): el mismo equipo_norm puede existir en varias ligas.
     cursor.execute("""
         SELECT equipo_norm, liga, ema_xg_favor_home, ema_xg_contra_home, ema_xg_favor_away, ema_xg_contra_away,
-               ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away
+               ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away,
+               ema_corto_favor_home, ema_corto_contra_home, ema_corto_favor_away, ema_corto_contra_away
         FROM historial_equipos
     """)
+    # SHADOW EMA dual (2026-04-26): se cargan ema_corto_* para calcular xg_*_corto en paralelo (no afecta picks).
     historial_ema = {(r[0], r[1]): {'fav_home': r[2], 'con_home': r[3], 'fav_away': r[4], 'con_away': r[5],
-                                    'var_fh': r[6], 'var_ch': r[7], 'var_fa': r[8], 'var_ca': r[9]} for r in cursor.fetchall()}
+                                    'var_fh': r[6], 'var_ch': r[7], 'var_fa': r[8], 'var_ca': r[9],
+                                    'fav_corto_home': r[10], 'con_corto_home': r[11],
+                                    'fav_corto_away': r[12], 'con_corto_away': r[13]} for r in cursor.fetchall()}
 
     cursor.execute("SELECT liga, rho_calculado FROM ligas_stats")
     rho_por_liga = {r[0]: r[1] for r in cursor.fetchall()}
@@ -897,6 +904,16 @@ def main():
         # FIX A REVERTIDO: la corrección de xG_visita debe hacerse en motor_data.py
         # (en el EMA), no aquí. Aplicarla en predicción flipa picks VISITA->LOCAL
         # correctos (Vasco vs Botafogo, Tigre vs Independiente). Ver análisis V4.6.
+
+        # --- SHADOW EMA dual (2026-04-26) ---
+        # xG corto = misma fórmula pero con EMAs de alfa duplicado (sin Bayesian shrinkage).
+        # NO entra al Poisson, NO afecta picks. Sólo se persiste para análisis comparativo posterior.
+        # .get() defensivo: si la columna ema_corto_* no estaba poblada (equipo nuevo, default 1.4),
+        # cae al EMA largo en lugar de fallar con KeyError.
+        xg_local_corto = (ema_l.get('fav_corto_home', ema_l['fav_home']) +
+                          ema_v.get('con_corto_away', ema_v['con_away'])) / 2.0
+        xg_visita_corto = (ema_v.get('fav_corto_away', ema_v['fav_away']) +
+                           ema_l.get('con_corto_home', ema_l['con_home'])) / 2.0
 
         # --- P5D fase3 (2026-04-20): GAMMA DE DISPLAY (no entra al Poisson) ---
         # Opcion D elegida: el xG crudo sigue entrando a Dixon-Coles para preservar
@@ -1082,7 +1099,9 @@ def main():
             'pick_shadow_1x2': pick_shadow_1x2, 'stk_shadow_1x2': stk_shadow_1x2,
             'incertidumbre': round(incertidumbre, 4),
             'xg_local': round(xg_local_display, 3), 'xg_visita': round(xg_visita_display, 3),  # P5D: gamma applied
-            'shadow_xg_l': round(sh_xg_l, 3), 'shadow_xg_v': round(sh_xg_v, 3)
+            'shadow_xg_l': round(sh_xg_l, 3), 'shadow_xg_v': round(sh_xg_v, 3),
+            # SHADOW EMA dual (2026-04-26): xG derivado de EMAs cortos. No afecta picks ni Poisson.
+            'xg_local_corto': round(xg_local_corto, 3), 'xg_visita_corto': round(xg_visita_corto, 3),
         })
 
     # --- FASE 3: AJUSTE DE COVARIANZA ---
@@ -1101,6 +1120,7 @@ def main():
                 apuesta_shadow_1x2=?, stake_shadow_1x2=?,
                 incertidumbre=?, xg_local=?, xg_visita=?,
                 shadow_xg_local=?, shadow_xg_visita=?,
+                xg_local_corto=?, xg_visita_corto=?,
                 estado='Calculado'
             WHERE id_partido=?
         """, (
@@ -1110,6 +1130,7 @@ def main():
             p['pick_shadow_1x2'], round(p['stk_shadow_1x2'], 2),
             p['incertidumbre'], p['xg_local'], p['xg_visita'],
             p['shadow_xg_l'], p['shadow_xg_v'],
+            p['xg_local_corto'], p['xg_visita_corto'],
             p['id_partido']
         ))
         calculados += 1

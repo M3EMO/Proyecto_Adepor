@@ -256,9 +256,27 @@ def main():
         n_proc = cursor.rowcount  # rowcount del ultimo DELETE
         print(f"[REBUILD] Tablas vaciadas. El sistema reclasificara todas las ligas a PROFUNDIDAD_INICIAL.")
 
-    cursor.execute("SELECT equipo_norm, equipo_real, liga, ema_xg_favor_home, ema_xg_contra_home, partidos_home, ema_xg_favor_away, ema_xg_contra_away, partidos_away, ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away FROM historial_equipos")
+    cursor.execute("""SELECT equipo_norm, equipo_real, liga,
+                              ema_xg_favor_home, ema_xg_contra_home, partidos_home,
+                              ema_xg_favor_away, ema_xg_contra_away, partidos_away,
+                              ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away,
+                              ema_corto_favor_home, ema_corto_contra_home, partidos_corto_home,
+                              ema_corto_favor_away, ema_corto_contra_away, partidos_corto_away
+                       FROM historial_equipos""")
     # Key: (equipo_norm, liga) — permite que el mismo equipo_norm coexista en varias ligas (Everton Chile/Inglaterra, etc.).
-    estado_equipos = {(row[0], row[2]): {"nombre": row[1], "liga": row[2], "fav_home": row[3], "con_home": row[4], "p_home": row[5], "fav_away": row[6], "con_away": row[7], "p_away": row[8], "var_fh": row[9] or 0.1, "var_ch": row[10] or 0.1, "var_fa": row[11] or 0.1, "var_ca": row[12] or 0.1} for row in cursor.fetchall()}
+    # SHADOW EMA dual (2026-04-26): columnas ema_corto_* persisten EMA con alfa=2*alfa_largo (capped 0.50), sin Bayesian shrinkage.
+    estado_equipos = {(row[0], row[2]): {
+        "nombre": row[1], "liga": row[2],
+        "fav_home": row[3], "con_home": row[4], "p_home": row[5],
+        "fav_away": row[6], "con_away": row[7], "p_away": row[8],
+        "var_fh": row[9] or 0.1, "var_ch": row[10] or 0.1, "var_fa": row[11] or 0.1, "var_ca": row[12] or 0.1,
+        "fav_corto_home": row[13] if row[13] is not None else 1.4,
+        "con_corto_home": row[14] if row[14] is not None else 1.4,
+        "p_corto_home":   row[15] if row[15] is not None else 0,
+        "fav_corto_away": row[16] if row[16] is not None else 1.4,
+        "con_corto_away": row[17] if row[17] is not None else 1.4,
+        "p_corto_away":   row[18] if row[18] is not None else 0,
+    } for row in cursor.fetchall()}
     
     cursor.execute("SELECT liga, total_partidos, empates, rho_calculado, total_goles, total_corners, coef_corner_calculado FROM ligas_stats")
     estado_ligas = {row[0]: {"total": row[1], "empates": row[2], "rho": row[3], "goles": row[4], "corners": row[5], "coef_c": row[6]} for row in cursor.fetchall()}
@@ -284,7 +302,9 @@ def main():
                 "nombre": eq_oficial, "liga": pais,
                 "fav_home": 1.4, "con_home": 1.4, "p_home": 0,
                 "fav_away": 1.4, "con_away": 1.4, "p_away": 0,
-                "var_fh": 0.1, "var_ch": 0.1, "var_fa": 0.1, "var_ca": 0.1
+                "var_fh": 0.1, "var_ch": 0.1, "var_fa": 0.1, "var_ca": 0.1,
+                "fav_corto_home": 1.4, "con_corto_home": 1.4, "p_corto_home": 0,
+                "fav_corto_away": 1.4, "con_corto_away": 1.4, "p_corto_away": 0,
             }
         if is_home:
             viejo_fav = estado_equipos[key]["fav_home"]
@@ -320,6 +340,24 @@ def main():
             estado_equipos[key]["fav_away"] = round((w_ema * nuevo_ema_fav) + (w_liga * promedio_liga), 3)
             estado_equipos[key]["con_away"] = round((w_ema * nuevo_ema_con) + (w_liga * promedio_liga), 3)
             estado_equipos[key]["p_away"] += 1
+
+        # --- SHADOW EMA dual (2026-04-26) ---
+        # Calcula EMA corto en paralelo con alfa = min(2 * alfa_largo, 0.50).
+        # SIN Bayesian shrinkage hacia promedio_liga: el corto refleja form crudo (decision Lead).
+        # Shadow puro: NO afecta xG predicho, picks, stakes, ni constantes Manifiesto.
+        alfa_corto = min(2 * alfa, 0.50)
+        if is_home:
+            viejo_fav_c = estado_equipos[key]["fav_corto_home"]
+            viejo_con_c = estado_equipos[key]["con_corto_home"]
+            estado_equipos[key]["fav_corto_home"] = round((xg_f * alfa_corto) + (viejo_fav_c * (1 - alfa_corto)), 3)
+            estado_equipos[key]["con_corto_home"] = round((xg_c * alfa_corto) + (viejo_con_c * (1 - alfa_corto)), 3)
+            estado_equipos[key]["p_corto_home"] += 1
+        else:
+            viejo_fav_c = estado_equipos[key]["fav_corto_away"]
+            viejo_con_c = estado_equipos[key]["con_corto_away"]
+            estado_equipos[key]["fav_corto_away"] = round((xg_f * alfa_corto) + (viejo_fav_c * (1 - alfa_corto)), 3)
+            estado_equipos[key]["con_corto_away"] = round((xg_c * alfa_corto) + (viejo_con_c * (1 - alfa_corto)), 3)
+            estado_equipos[key]["p_corto_away"] += 1
         equipos_actualizados.add(key)
 
     # --- FASE DE ANÁLISIS: AGRUPAR LIGAS POR NECESIDAD DE ESCANEO ---
@@ -503,8 +541,10 @@ def main():
                 INSERT INTO historial_equipos (equipo_norm, equipo_real, liga, ultima_actualizacion,
                                              ema_xg_favor_home, ema_xg_contra_home, partidos_home,
                                              ema_xg_favor_away, ema_xg_contra_away, partidos_away,
-                                             ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                                             ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away,
+                                             ema_corto_favor_home, ema_corto_contra_home, partidos_corto_home,
+                                             ema_corto_favor_away, ema_corto_contra_away, partidos_corto_away)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(equipo_norm, liga) DO UPDATE SET
                     equipo_real=excluded.equipo_real, ultima_actualizacion=excluded.ultima_actualizacion,
                     ema_xg_favor_home=excluded.ema_xg_favor_home,
@@ -516,8 +556,19 @@ def main():
                     ema_var_favor_home=excluded.ema_var_favor_home,
                     ema_var_contra_home=excluded.ema_var_contra_home,
                     ema_var_favor_away=excluded.ema_var_favor_away,
-                    ema_var_contra_away=excluded.ema_var_contra_away
-            """, (eq_norm, dt["nombre"], dt["liga"], hoy.strftime("%Y-%m-%d"), dt["fav_home"], dt["con_home"], dt["p_home"], dt["fav_away"], dt["con_away"], dt["p_away"], dt["var_fh"], dt["var_ch"], dt["var_fa"], dt["var_ca"]))
+                    ema_var_contra_away=excluded.ema_var_contra_away,
+                    ema_corto_favor_home=excluded.ema_corto_favor_home,
+                    ema_corto_contra_home=excluded.ema_corto_contra_home,
+                    partidos_corto_home=excluded.partidos_corto_home,
+                    ema_corto_favor_away=excluded.ema_corto_favor_away,
+                    ema_corto_contra_away=excluded.ema_corto_contra_away,
+                    partidos_corto_away=excluded.partidos_corto_away
+            """, (eq_norm, dt["nombre"], dt["liga"], hoy.strftime("%Y-%m-%d"),
+                  dt["fav_home"], dt["con_home"], dt["p_home"],
+                  dt["fav_away"], dt["con_away"], dt["p_away"],
+                  dt["var_fh"], dt["var_ch"], dt["var_fa"], dt["var_ca"],
+                  dt["fav_corto_home"], dt["con_corto_home"], dt["p_corto_home"],
+                  dt["fav_corto_away"], dt["con_corto_away"], dt["p_corto_away"]))
         
         for liga, stats in estado_ligas.items():
             # FIX: Se leen los valores ya calculados en memoria, en lugar de recalcularlos.

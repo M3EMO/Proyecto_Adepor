@@ -1,0 +1,947 @@
+{
+  "ts": "20260425_232235",
+  "bead_id": "adepor-8zz",
+  "snapshot_db_sha256": "444ac5be2ea9faf0716766376f6f5623f776f6391fab611cf032c8d78be18e7c",
+  "snapshot_db_sha256_now": "e5973b7a2449b9cf01ca26bced2cf43b2a4a62daabca9847c0ef7ec630fa501b",
+  "snapshot_match": false,
+  "snapshot_match_caveat": "El sha actual difiere del DataOps. SQLite puede modificar journal/metadata al abrir conn aun en SELECT. Datos NO modificados. Usar snapshot_db_sha256 (post-migration DataOps) como referencia oficial.",
+  "alfa_corto_por_liga": {
+    "Brasil": 0.4,
+    "Turquia": 0.4,
+    "Venezuela": 0.4,
+    "Noruega": 0.36,
+    "Peru": 0.36,
+    "Ecuador": 0.36,
+    "Argentina": 0.3,
+    "Chile": 0.3,
+    "Uruguay": 0.3,
+    "Colombia": 0.3,
+    "Bolivia": 0.3,
+    "Francia": 0.28,
+    "Alemania": 0.26,
+    "Inglaterra": 0.24,
+    "Espana": 0.24,
+    "Italia": 0.24
+  },
+  "divergencias_por_equipo": {
+    "n_equipos_analizados": 312,
+    "n_modulados": 243,
+    "n_fallback_puro": 69,
+    "top20": [
+      {
+        "equipo_norm": "chapecoense",
+        "equipo_real": "Chapecoense",
+        "liga": "Brasil",
+        "n_largo_home": 7,
+        "n_largo_away": 4,
+        "n_corto_home": 4,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 2.338,
+          "ch": 2.669,
+          "fa": 2.341,
+          "ca": 2.541
+        },
+        "ema_corto": {
+          "fh": 1.392,
+          "ch": 2.968,
+          "fa": 0.979,
+          "ca": 2.448
+        },
+        "deltas": {
+          "fh": 0.946,
+          "ch": 0.299,
+          "fa": 1.362,
+          "ca": 0.093
+        },
+        "delta_max": 1.362,
+        "delta_avg": 0.675,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "lillestrom",
+        "equipo_real": "Lillestrom",
+        "liga": "Noruega",
+        "n_largo_home": 1,
+        "n_largo_away": 4,
+        "n_corto_home": 1,
+        "n_corto_away": 3,
+        "ema_largo": {
+          "fh": 3.19,
+          "ch": 3.19,
+          "fa": 3.097,
+          "ca": 2.999
+        },
+        "ema_corto": {
+          "fh": 2.913,
+          "ch": 2.604,
+          "fa": 2.278,
+          "ca": 1.644
+        },
+        "deltas": {
+          "fh": 0.277,
+          "ch": 0.586,
+          "fa": 0.819,
+          "ca": 1.355
+        },
+        "delta_max": 1.355,
+        "delta_avg": 0.7592,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "athleticoparanaense",
+        "equipo_real": "Athletico Paranaense",
+        "liga": "Brasil",
+        "n_largo_home": 6,
+        "n_largo_away": 6,
+        "n_corto_home": 3,
+        "n_corto_away": 3,
+        "ema_largo": {
+          "fh": 2.554,
+          "ch": 2.248,
+          "fa": 2.313,
+          "ca": 2.389
+        },
+        "ema_corto": {
+          "fh": 2.558,
+          "ch": 0.899,
+          "fa": 1.208,
+          "ca": 1.731
+        },
+        "deltas": {
+          "fh": 0.004,
+          "ch": 1.349,
+          "fa": 1.105,
+          "ca": 0.658
+        },
+        "delta_max": 1.349,
+        "delta_avg": 0.779,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "aalesund",
+        "equipo_real": "Aalesund",
+        "liga": "Noruega",
+        "n_largo_home": 3,
+        "n_largo_away": 2,
+        "n_corto_home": 2,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 3.113,
+          "ch": 3.149,
+          "fa": 3.106,
+          "ca": 3.196
+        },
+        "ema_corto": {
+          "fh": 2.403,
+          "ch": 2.712,
+          "fa": 1.794,
+          "ca": 3.017
+        },
+        "deltas": {
+          "fh": 0.71,
+          "ch": 0.437,
+          "fa": 1.312,
+          "ca": 0.179
+        },
+        "delta_max": 1.312,
+        "delta_avg": 0.6595,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "centralespanolfutbolclub",
+        "equipo_real": "Central Español Fútbol Club",
+        "liga": "Uruguay",
+        "n_largo_home": 5,
+        "n_largo_away": 7,
+        "n_corto_home": 1,
+        "n_corto_away": 1,
+        "ema_largo": {
+          "fh": 2.32,
+          "ch": 2.308,
+          "fa": 2.197,
+          "ca": 2.652
+        },
+        "ema_corto": {
+          "fh": 2.224,
+          "ch": 2.216,
+          "fa": 1.811,
+          "ca": 3.914
+        },
+        "deltas": {
+          "fh": 0.096,
+          "ch": 0.092,
+          "fa": 0.386,
+          "ca": 1.262
+        },
+        "delta_max": 1.262,
+        "delta_avg": 0.459,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "albionfc",
+        "equipo_real": "Albion FC",
+        "liga": "Uruguay",
+        "n_largo_home": 7,
+        "n_largo_away": 6,
+        "n_corto_home": 1,
+        "n_corto_away": 1,
+        "ema_largo": {
+          "fh": 2.703,
+          "ch": 2.207,
+          "fa": 2.307,
+          "ca": 2.189
+        },
+        "ema_corto": {
+          "fh": 3.95,
+          "ch": 1.818,
+          "fa": 2.248,
+          "ca": 1.822
+        },
+        "deltas": {
+          "fh": 1.247,
+          "ch": 0.389,
+          "fa": 0.059,
+          "ca": 0.367
+        },
+        "delta_max": 1.247,
+        "delta_avg": 0.5155,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "internacional",
+        "equipo_real": "Internacional",
+        "liga": "Brasil",
+        "n_largo_home": 4,
+        "n_largo_away": 2,
+        "n_corto_home": 4,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 2.51,
+          "ch": 2.45,
+          "fa": 2.539,
+          "ca": 2.562
+        },
+        "ema_corto": {
+          "fh": 1.879,
+          "ch": 1.252,
+          "fa": 1.844,
+          "ca": 2.003
+        },
+        "deltas": {
+          "fh": 0.631,
+          "ch": 1.198,
+          "fa": 0.695,
+          "ca": 0.559
+        },
+        "delta_max": 1.198,
+        "delta_avg": 0.7707,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "gremio",
+        "equipo_real": "Gremio",
+        "liga": "Brasil",
+        "n_largo_home": 22,
+        "n_largo_away": 25,
+        "n_corto_home": 1,
+        "n_corto_away": 3,
+        "ema_largo": {
+          "fh": 2.386,
+          "ch": 1.934,
+          "fa": 1.929,
+          "ca": 2.36
+        },
+        "ema_corto": {
+          "fh": 1.807,
+          "ch": 1.57,
+          "fa": 0.797,
+          "ca": 1.746
+        },
+        "deltas": {
+          "fh": 0.579,
+          "ch": 0.364,
+          "fa": 1.132,
+          "ca": 0.614
+        },
+        "delta_max": 1.132,
+        "delta_avg": 0.6723,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "ikstart",
+        "equipo_real": "Ik Start",
+        "liga": "Noruega",
+        "n_largo_home": 2,
+        "n_largo_away": 3,
+        "n_corto_home": 2,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 3.122,
+          "ch": 3.11,
+          "fa": 3.09,
+          "ca": 3.142
+        },
+        "ema_corto": {
+          "fh": 2.3,
+          "ch": 2.046,
+          "fa": 1.969,
+          "ca": 2.556
+        },
+        "deltas": {
+          "fh": 0.822,
+          "ch": 1.064,
+          "fa": 1.121,
+          "ca": 0.586
+        },
+        "delta_max": 1.121,
+        "delta_avg": 0.8982,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "trujillanos",
+        "equipo_real": "Trujillanos",
+        "liga": "Venezuela",
+        "n_largo_home": 7,
+        "n_largo_away": 6,
+        "n_corto_home": 2,
+        "n_corto_away": 0,
+        "ema_largo": {
+          "fh": 2.17,
+          "ch": 2.38,
+          "fa": 2.326,
+          "ca": 2.593
+        },
+        "ema_corto": {
+          "fh": 1.063,
+          "ch": 1.94,
+          "fa": 2.326,
+          "ca": 2.593
+        },
+        "deltas": {
+          "fh": 1.107,
+          "ch": 0.44,
+          "fa": 0.0,
+          "ca": 0.0
+        },
+        "delta_max": 1.107,
+        "delta_avg": 0.3867,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "valerenga",
+        "equipo_real": "Valerenga",
+        "liga": "Noruega",
+        "n_largo_home": 17,
+        "n_largo_away": 15,
+        "n_corto_home": 2,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 2.534,
+          "ch": 2.819,
+          "fa": 2.723,
+          "ca": 2.677
+        },
+        "ema_corto": {
+          "fh": 1.563,
+          "ch": 2.508,
+          "fa": 2.261,
+          "ca": 1.623
+        },
+        "deltas": {
+          "fh": 0.971,
+          "ch": 0.311,
+          "fa": 0.462,
+          "ca": 1.054
+        },
+        "delta_max": 1.054,
+        "delta_avg": 0.6995,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "tromso",
+        "equipo_real": "Tromso",
+        "liga": "Noruega",
+        "n_largo_home": 18,
+        "n_largo_away": 16,
+        "n_corto_home": 3,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 2.83,
+          "ch": 2.353,
+          "fa": 2.832,
+          "ca": 2.425
+        },
+        "ema_corto": {
+          "fh": 2.203,
+          "ch": 1.303,
+          "fa": 2.421,
+          "ca": 1.501
+        },
+        "deltas": {
+          "fh": 0.627,
+          "ch": 1.05,
+          "fa": 0.411,
+          "ca": 0.924
+        },
+        "delta_max": 1.05,
+        "delta_avg": 0.753,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "rosenborg",
+        "equipo_real": "Rosenborg",
+        "liga": "Noruega",
+        "n_largo_home": 17,
+        "n_largo_away": 17,
+        "n_corto_home": 3,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 2.668,
+          "ch": 2.635,
+          "fa": 2.457,
+          "ca": 2.834
+        },
+        "ema_corto": {
+          "fh": 1.64,
+          "ch": 1.99,
+          "fa": 1.718,
+          "ca": 2.331
+        },
+        "deltas": {
+          "fh": 1.028,
+          "ch": 0.645,
+          "fa": 0.739,
+          "ca": 0.503
+        },
+        "delta_max": 1.028,
+        "delta_avg": 0.7288,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "cruzeiro",
+        "equipo_real": "Cruzeiro",
+        "liga": "Brasil",
+        "n_largo_home": 25,
+        "n_largo_away": 24,
+        "n_corto_home": 4,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 2.252,
+          "ch": 1.768,
+          "fa": 2.241,
+          "ca": 2.196
+        },
+        "ema_corto": {
+          "fh": 2.264,
+          "ch": 0.742,
+          "fa": 1.981,
+          "ca": 1.608
+        },
+        "deltas": {
+          "fh": 0.012,
+          "ch": 1.026,
+          "fa": 0.26,
+          "ca": 0.588
+        },
+        "delta_max": 1.026,
+        "delta_avg": 0.4715,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "gvsanjose",
+        "equipo_real": "GV San José",
+        "liga": "Bolivia",
+        "n_largo_home": 15,
+        "n_largo_away": 15,
+        "n_corto_home": 1,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 3.157,
+          "ch": 3.096,
+          "fa": 2.982,
+          "ca": 3.021
+        },
+        "ema_corto": {
+          "fh": 2.51,
+          "ch": 2.467,
+          "fa": 1.964,
+          "ca": 2.224
+        },
+        "deltas": {
+          "fh": 0.647,
+          "ch": 0.629,
+          "fa": 1.018,
+          "ca": 0.797
+        },
+        "delta_max": 1.018,
+        "delta_avg": 0.7728,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "istanbulbasaksehir",
+        "equipo_real": "Istanbul Basaksehir",
+        "liga": "Turquia",
+        "n_largo_home": 19,
+        "n_largo_away": 19,
+        "n_corto_home": 3,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 3.014,
+          "ch": 2.089,
+          "fa": 2.188,
+          "ca": 2.134
+        },
+        "ema_corto": {
+          "fh": 3.618,
+          "ch": 1.076,
+          "fa": 1.42,
+          "ca": 1.267
+        },
+        "deltas": {
+          "fh": 0.604,
+          "ch": 1.013,
+          "fa": 0.768,
+          "ca": 0.867
+        },
+        "delta_max": 1.013,
+        "delta_avg": 0.813,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "flamengo",
+        "equipo_real": "Flamengo",
+        "liga": "Brasil",
+        "n_largo_home": 22,
+        "n_largo_away": 23,
+        "n_corto_home": 2,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 2.49,
+          "ch": 1.858,
+          "fa": 2.071,
+          "ca": 2.053
+        },
+        "ema_corto": {
+          "fh": 2.554,
+          "ch": 1.356,
+          "fa": 1.081,
+          "ca": 2.066
+        },
+        "deltas": {
+          "fh": 0.064,
+          "ch": 0.502,
+          "fa": 0.99,
+          "ca": 0.013
+        },
+        "delta_max": 0.99,
+        "delta_avg": 0.3922,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "caykurrizespor",
+        "equipo_real": "Caykur Rizespor",
+        "liga": "Turquia",
+        "n_largo_home": 19,
+        "n_largo_away": 19,
+        "n_corto_home": 2,
+        "n_corto_away": 3,
+        "ema_largo": {
+          "fh": 2.771,
+          "ch": 2.314,
+          "fa": 2.092,
+          "ca": 2.473
+        },
+        "ema_corto": {
+          "fh": 3.036,
+          "ch": 2.02,
+          "fa": 1.133,
+          "ca": 2.247
+        },
+        "deltas": {
+          "fh": 0.265,
+          "ch": 0.294,
+          "fa": 0.959,
+          "ca": 0.226
+        },
+        "delta_max": 0.959,
+        "delta_avg": 0.436,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "vikingfk",
+        "equipo_real": "Viking fk",
+        "liga": "Noruega",
+        "n_largo_home": 16,
+        "n_largo_away": 17,
+        "n_corto_home": 3,
+        "n_corto_away": 2,
+        "ema_largo": {
+          "fh": 3.257,
+          "ch": 2.535,
+          "fa": 2.807,
+          "ca": 2.493
+        },
+        "ema_corto": {
+          "fh": 3.439,
+          "ch": 1.583,
+          "fa": 2.387,
+          "ca": 1.588
+        },
+        "deltas": {
+          "fh": 0.182,
+          "ch": 0.952,
+          "fa": 0.42,
+          "ca": 0.905
+        },
+        "delta_max": 0.952,
+        "delta_avg": 0.6147,
+        "is_fallback_puro": false
+      },
+      {
+        "equipo_norm": "remo",
+        "equipo_real": "Remo",
+        "liga": "Brasil",
+        "n_largo_home": 6,
+        "n_largo_away": 7,
+        "n_corto_home": 3,
+        "n_corto_away": 3,
+        "ema_largo": {
+          "fh": 2.303,
+          "ch": 2.43,
+          "fa": 2.319,
+          "ca": 2.539
+        },
+        "ema_corto": {
+          "fh": 1.439,
+          "ch": 1.693,
+          "fa": 1.394,
+          "ca": 2.261
+        },
+        "deltas": {
+          "fh": 0.864,
+          "ch": 0.737,
+          "fa": 0.925,
+          "ca": 0.278
+        },
+        "delta_max": 0.925,
+        "delta_avg": 0.701,
+        "is_fallback_puro": false
+      }
+    ],
+    "agregados_por_liga": {
+      "Brasil": {
+        "n_equipos": 25,
+        "mean_delta_avg": 0.3961,
+        "p95_delta_avg": 0.701
+      },
+      "Noruega": {
+        "n_equipos": 19,
+        "mean_delta_avg": 0.5136,
+        "p95_delta_avg": 0.7592
+      },
+      "Uruguay": {
+        "n_equipos": 16,
+        "mean_delta_avg": 0.2358,
+        "p95_delta_avg": 0.459
+      },
+      "Venezuela": {
+        "n_equipos": 15,
+        "mean_delta_avg": 0.2073,
+        "p95_delta_avg": 0.3777
+      },
+      "Bolivia": {
+        "n_equipos": 16,
+        "mean_delta_avg": 0.2768,
+        "p95_delta_avg": 0.6055
+      },
+      "Turquia": {
+        "n_equipos": 21,
+        "mean_delta_avg": 0.4221,
+        "p95_delta_avg": 0.698
+      },
+      "Peru": {
+        "n_equipos": 20,
+        "mean_delta_avg": 0.1551,
+        "p95_delta_avg": 0.3225
+      },
+      "Inglaterra": {
+        "n_equipos": 21,
+        "mean_delta_avg": 0.3,
+        "p95_delta_avg": 0.4645
+      },
+      "Argentina": {
+        "n_equipos": 31,
+        "mean_delta_avg": 0.2307,
+        "p95_delta_avg": 0.351
+      },
+      "Colombia": {
+        "n_equipos": 19,
+        "mean_delta_avg": 0.121,
+        "p95_delta_avg": 0.2657
+      },
+      "Chile": {
+        "n_equipos": 15,
+        "mean_delta_avg": 0.1071,
+        "p95_delta_avg": 0.3863
+      },
+      "Alemania": {
+        "n_equipos": 18,
+        "mean_delta_avg": 0.1192,
+        "p95_delta_avg": 0.263
+      },
+      "Espana": {
+        "n_equipos": 22,
+        "mean_delta_avg": 0.1672,
+        "p95_delta_avg": 0.251
+      },
+      "Ecuador": {
+        "n_equipos": 16,
+        "mean_delta_avg": 0.197,
+        "p95_delta_avg": 0.2965
+      },
+      "Francia": {
+        "n_equipos": 17,
+        "mean_delta_avg": 0.0643,
+        "p95_delta_avg": 0.2213
+      },
+      "Italia": {
+        "n_equipos": 21,
+        "mean_delta_avg": 0.0648,
+        "p95_delta_avg": 0.1965
+      }
+    },
+    "boca_juniors_arg": {
+      "equipo_norm": "bocajuniors",
+      "equipo_real": "Boca Juniors",
+      "liga": "Argentina",
+      "n_largo_home": 21,
+      "n_largo_away": 17,
+      "n_corto_home": 2,
+      "n_corto_away": 3,
+      "ema_largo": {
+        "fh": 1.785,
+        "ch": 1.546,
+        "fa": 2.015,
+        "ca": 1.564
+      },
+      "ema_corto": {
+        "fh": 1.781,
+        "ch": 1.2,
+        "fa": 2.125,
+        "ca": 0.856
+      },
+      "deltas": {
+        "fh": 0.004,
+        "ch": 0.346,
+        "fa": 0.11,
+        "ca": 0.708
+      },
+      "delta_max": 0.708,
+      "delta_avg": 0.292,
+      "is_fallback_puro": false
+    }
+  },
+  "hit_rate_shadow_vs_actual": {
+    "status": "PENDING_DATA",
+    "n_picks_reales": 117,
+    "n_con_xg_corto": 0,
+    "caveat": "xg_*_corto NULL en todos los Liquidados. Espera proximo ciclo motor_fixture+motor_calculadora."
+  },
+  "regime_change_cusum": {
+    "Alemania": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 7,
+      "n_min": 50
+    },
+    "Argentina": {
+      "status": "OK",
+      "n": 78,
+      "n_post_warmup": 29,
+      "warmup_window": 50,
+      "mean_brier_rolling": 0.19648,
+      "sigma_brier_rolling": 0.00492,
+      "cusum_actual": 0.06398,
+      "umbral_1_5_sigma": 0.00738,
+      "umbral_2_0_sigma": 0.00984,
+      "flag_1_5_disparado_idx": 69,
+      "flag_1_5_fecha": "2026-04-20 21:45",
+      "flag_2_0_disparado_idx": 70,
+      "flag_2_0_fecha": "2026-04-23 20:00",
+      "brier_rolling_actual": 0.20504
+    },
+    "Bolivia": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 15,
+      "n_min": 50
+    },
+    "Brasil": {
+      "status": "OK",
+      "n": 64,
+      "n_post_warmup": 15,
+      "warmup_window": 50,
+      "mean_brier_rolling": 0.19934,
+      "sigma_brier_rolling": 0.00159,
+      "cusum_actual": 0.00678,
+      "umbral_1_5_sigma": 0.00239,
+      "umbral_2_0_sigma": 0.00319,
+      "flag_1_5_disparado_idx": 56,
+      "flag_1_5_fecha": "2026-04-19 16:00",
+      "flag_2_0_disparado_idx": 57,
+      "flag_2_0_fecha": "2026-04-19 16:00",
+      "brier_rolling_actual": 0.20161
+    },
+    "Chile": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 16,
+      "n_min": 50
+    },
+    "Colombia": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 21,
+      "n_min": 50
+    },
+    "Ecuador": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 23,
+      "n_min": 50
+    },
+    "Espana": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 15,
+      "n_min": 50
+    },
+    "Francia": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 5,
+      "n_min": 50
+    },
+    "Inglaterra": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 38,
+      "n_min": 50
+    },
+    "Italia": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 5,
+      "n_min": 50
+    },
+    "Noruega": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 34,
+      "n_min": 50
+    },
+    "Peru": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 20,
+      "n_min": 50
+    },
+    "Turquia": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 38,
+      "n_min": 50
+    },
+    "Uruguay": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 16,
+      "n_min": 50
+    },
+    "Venezuela": {
+      "status": "INSUFFICIENT_DATA",
+      "n": 16,
+      "n_min": 50
+    }
+  },
+  "caso_boca": {
+    "status": "OK",
+    "equipo": "Boca Juniors",
+    "liga": "Argentina",
+    "n_largo": {
+      "home": 21,
+      "away": 17
+    },
+    "n_corto": {
+      "home": 2,
+      "away": 3
+    },
+    "ema_largo": {
+      "fav_home": 1.785,
+      "contra_home": 1.546,
+      "fav_away": 2.015,
+      "contra_away": 1.564
+    },
+    "ema_corto": {
+      "fav_home": 1.781,
+      "contra_home": 1.2,
+      "fav_away": 2.125,
+      "contra_away": 0.856
+    },
+    "deltas": {
+      "fav_home": -0.004,
+      "fav_away": 0.11
+    },
+    "el_corto_detecta_upturn": false,
+    "alfa_corto_argentina": 0.3,
+    "ultimos_10_partidos": [
+      {
+        "fecha": "2026-04-23 20:00",
+        "local": "Defensa y Justicia",
+        "visita": "Boca Juniors",
+        "goles_l": 0,
+        "goles_v": 4,
+        "xg_local": 1.124,
+        "xg_visita": 1.149,
+        "pick_dir_actual": "X"
+      },
+      {
+        "fecha": "2026-04-19 17:00",
+        "local": "River Plate",
+        "visita": "Boca Juniors",
+        "goles_l": 0,
+        "goles_v": 1,
+        "xg_local": 1.169,
+        "xg_visita": 1.083,
+        "pick_dir_actual": "L"
+      },
+      {
+        "fecha": "2026-04-11 19:30",
+        "local": "Boca Juniors",
+        "visita": "Independiente",
+        "goles_l": 1,
+        "goles_v": 1,
+        "xg_local": 1.145,
+        "xg_visita": 1.026,
+        "pick_dir_actual": "L"
+      },
+      {
+        "fecha": "2026-04-02 00:00",
+        "local": "Talleres (córdoba)",
+        "visita": "Boca Juniors",
+        "goles_l": 0,
+        "goles_v": 1,
+        "xg_local": 1.123,
+        "xg_visita": 1.094,
+        "pick_dir_actual": "X"
+      },
+      {
+        "fecha": "2026-03-22 00:00",
+        "local": "Boca Juniors",
+        "visita": "Instituto (córdoba)",
+        "goles_l": 2,
+        "goles_v": 0,
+        "xg_local": 1.141,
+        "xg_visita": 1.075,
+        "pick_dir_actual": "L"
+      }
+    ],
+    "caveat_estadistico": "N=38 partidos; segun Miller-Sanjurjo no distingue skill de luck. Narrativa, no evidencia firme."
+  },
+  "limitaciones_metodologicas": [
+    "(a) proxy direccional para flip, no Poisson exacto",
+    "(b) CUSUM retrospectivo, no predictivo (GARCH out-of-scope)",
+    "(c) caso Boca N=38: narrativa no evidencia (Miller-Sanjurjo)",
+    "(d) delta_brier_proxy heuristico, no Brier real recalculado",
+    "(e) seed=ema_largo en backfill: information leakage retroactivo, mitigado porque alfa_corto~0.30 -> peso seed cae 17% tras 5 partidos, 3% tras 10",
+    "(f) CUSUM con warmup=VENTANA_BRIER: solo evalua flags despues de N>=ventana. Para Argentina (N=78) y Brasil (N=64), eso deja 28 y 14 puntos post-warmup respectivamente."
+  ]
+}

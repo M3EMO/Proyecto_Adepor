@@ -590,6 +590,54 @@ def calcular_shadow_altitud(xg_local, xg_visita, loc_norm, altitudes):
 # CAPA DE DECISION (Evaluadores de Mercado)
 # ==========================================================================
 
+def _log_shadow_margen(liga, margen_real, threshold_actual):
+    """[SHADOW MODE adepor-dx8 PARTE A.2] Log cada decision de margen con threshold actual
+    vs threshold optimo derivado per-liga (Opcion B). Sin afectar comportamiento.
+
+    No requiere id_partido — el logging es agregado por liga + fecha. Para correlacion
+    con picks reales, post-process con JOIN sobre partidos_backtest por timestamp + liga.
+    """
+    if not liga:
+        return
+    try:
+        # Cache global del mapeo optimo (cargar 1 vez, no en cada call)
+        if not hasattr(_log_shadow_margen, '_optimos_cache'):
+            try:
+                conn = sqlite3.connect(DB_NAME)
+                cur = conn.cursor()
+                cur.execute("SELECT liga, threshold_optimo FROM margen_optimo_per_liga")
+                _log_shadow_margen._optimos_cache = {r[0]: r[1] for r in cur.fetchall()}
+                conn.close()
+            except Exception:
+                _log_shadow_margen._optimos_cache = {}
+        threshold_optimo_b = _log_shadow_margen._optimos_cache.get(liga)
+        if threshold_optimo_b is None:
+            return
+        threshold_floor_c = 0.05  # Opcion C aplicada en prod
+        pasaria_actual = 1 if margen_real >= threshold_actual else 0
+        pasaria_b = 1 if margen_real >= threshold_optimo_b else 0
+        pasaria_c = 1 if margen_real >= threshold_floor_c else 0
+        # Solo loggear si hay diferencia entre las opciones (eventos interesantes)
+        if pasaria_actual != pasaria_b or pasaria_actual != pasaria_c:
+            from datetime import datetime
+            ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            conn = sqlite3.connect(DB_NAME)
+            cur = conn.cursor()
+            cur.execute("""
+                INSERT OR IGNORE INTO picks_shadow_margen_log
+                (fecha_log, id_partido, liga, margen_real, threshold_actual,
+                 threshold_optimo_b, threshold_floor_c, pasaria_actual,
+                 pasaria_opcion_b, pasaria_opcion_c)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (ts, f"runtime_{ts}_{liga}", liga, margen_real, threshold_actual,
+                  threshold_optimo_b, threshold_floor_c, pasaria_actual,
+                  pasaria_b, pasaria_c))
+            conn.commit()
+            conn.close()
+    except Exception:
+        pass  # Falla silenciosa: shadow no debe romper motor
+
+
 def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None):
     """
     Evalua mercado 1X2 con cuatro caminos (Manifiesto II.E + V4.3/V4.4):
@@ -613,8 +661,18 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None):
         return "[PASAR] Sin Cuotas", -100, 0
 
     probs_ord = sorted([p1, px, p2])
-    if (probs_ord[2] - probs_ord[1]) < margen_pred:
-        return "[PASAR] Margen Predictivo Insuficiente (<5%)", -100, 0
+    margen_real = probs_ord[2] - probs_ord[1]
+
+    # SHADOW MODE adepor-dx8 PARTE A.2: log decision con threshold optimo per-liga
+    # No afecta comportamiento (read-only logging para futuro analisis Opcion B vs C).
+    try:
+        _log_shadow_margen(liga, margen_real, margen_pred)
+    except Exception:
+        # Cualquier error en logging NO debe romper el motor
+        pass
+
+    if margen_real < margen_pred:
+        return f"[PASAR] Margen Predictivo Insuficiente (<{margen_pred*100:.1f}%)", -100, 0
 
     probs  = {"LOCAL": p1, "VISITA": p2}
     cuotas = {"LOCAL": c1, "VISITA": c2}

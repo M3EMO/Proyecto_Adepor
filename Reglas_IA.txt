@@ -184,8 +184,17 @@ A. FILTROS GLOBALES
 - FLOOR_PROB_MIN = 0.33      — Probabilidad mínima absoluta para cualquier apuesta.
 - APUESTA_EMPATE_PERMITIDA = False — Bloqueo total de picks EMPATE.
   Razón: modelo sobreestima empates +7.9% (25.7% modelo vs 17.9% real en backtest de 92 partidos).
-- MARGEN_PREDICTIVO_1X2 = 0.03 — La prob del favorito debe superar a la segunda opción en ≥3%.
-  (V4.3: bajado de 0.05; backtest muestra 8 apuestas adicionales con 62.5% hit.)
+- MARGEN_PREDICTIVO_1X2 = 0.05 — La prob del favorito debe superar a la segunda opción en ≥5%.
+  (V4.5 2026-04-26 PROPOSAL adepor-dx8: subido de 0.03 a 0.05 con evidencia walk-forward
+  N=4938 predicciones vs N=8 de V4.3 original. Hit rate pool 49.5% → 53.4% (+3.9pp) /
+  -27% volumen. 15/15 ligas mejoran. Aplicado como FLOOR universal sobre per-liga via
+  config_motor_valores.margen_predictivo_1x2 — todas las ligas con valor < 0.05 fueron
+  subidas a 0.05. Snapshot rollback: snapshots/fondo_quant_20260426_144240_pre_dx8_opcion_c.db.
+  V4.3 history: 0.05 → 0.03 con N=8 hit 62.5%. V4.5 revierte con N=4938 walk-forward.
+  Bead decision-log critico: adepor-9gs (CONDICIONAL → APROBADO con autorizacion humana).
+  SHADOW MODE Opcion B activo en paralelo: tabla picks_shadow_margen_log loguea picks
+  que se hubieran filtrado con threshold optimo per-liga derivado, para futura PROPOSAL
+  si yield real demuestra ventaja.)
 
 B. EV ESCALADO POR CONFIANZA (función min_ev_escalado)
   prob >= 50%  ->  EV mínimo 3%

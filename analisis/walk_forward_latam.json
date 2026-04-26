@@ -1,0 +1,594 @@
+{
+  "bead_id": "adepor-bgt",
+  "iter": 2,
+  "scope": "LATAM 9 ligas (API-Football, goals-only EMA)",
+  "limitacion": "API free tier no provee SoT/shots/corners; xg=goles directos.",
+  "config_global": {
+    "alfa_ema": 0.18,
+    "n0_ancla": 5,
+    "temps_train": [
+      2021,
+      2022,
+      2023
+    ],
+    "temp_predict": 2024
+  },
+  "ligas": {
+    "Argentina": {
+      "config": {
+        "rho": -0.052,
+        "promedio_liga": 1.0847,
+        "n_total": 1334
+      },
+      "estado_temps": {
+        "2021": {
+          "status": "ok",
+          "n": 0
+        },
+        "2022": {
+          "status": "ok",
+          "n": 578
+        },
+        "2023": {
+          "status": "ok",
+          "n": 378
+        },
+        "2024": {
+          "status": "ok",
+          "n": 378
+        }
+      },
+      "metricas": {
+        "n": 378,
+        "hit_rate": 0.4418,
+        "brier_mean": 0.6444,
+        "xg_mse_local": 1.1787,
+        "xg_mse_visita": 0.9364,
+        "xg_bias_local": -0.053,
+        "xg_bias_visita": 0.1253,
+        "outcomes_real": {
+          "1": 170,
+          "X": 127,
+          "2": 81
+        },
+        "base_rate_local": 0.4497,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 187,
+            "p_max_avg": 0.3734,
+            "hit_rate": 0.3957,
+            "delta": 0.0223
+          },
+          "40-50": {
+            "n": 176,
+            "p_max_avg": 0.44,
+            "hit_rate": 0.4773,
+            "delta": 0.0372
+          },
+          "50-60": {
+            "n": 15,
+            "p_max_avg": 0.5259,
+            "hit_rate": 0.6,
+            "delta": 0.0741
+          }
+        }
+      }
+    },
+    "Brasil": {
+      "config": {
+        "rho": -0.0417,
+        "promedio_liga": 1.2193,
+        "n_total": 1140
+      },
+      "estado_temps": {
+        "2021": {
+          "status": "ok",
+          "n": 0
+        },
+        "2022": {
+          "status": "ok",
+          "n": 380
+        },
+        "2023": {
+          "status": "ok",
+          "n": 380
+        },
+        "2024": {
+          "status": "ok",
+          "n": 380
+        }
+      },
+      "metricas": {
+        "n": 380,
+        "hit_rate": 0.4711,
+        "brier_mean": 0.632,
+        "xg_mse_local": 1.1863,
+        "xg_mse_visita": 0.9496,
+        "xg_bias_local": -0.0954,
+        "xg_bias_visita": 0.0818,
+        "outcomes_real": {
+          "1": 180,
+          "X": 101,
+          "2": 99
+        },
+        "base_rate_local": 0.4737,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 152,
+            "p_max_avg": 0.3785,
+            "hit_rate": 0.4145,
+            "delta": 0.036
+          },
+          "40-50": {
+            "n": 192,
+            "p_max_avg": 0.4379,
+            "hit_rate": 0.4531,
+            "delta": 0.0153
+          },
+          "50-60": {
+            "n": 34,
+            "p_max_avg": 0.5253,
+            "hit_rate": 0.7941,
+            "delta": 0.2689
+          },
+          "60-70": {
+            "n": 2,
+            "p_max_avg": 0.6268,
+            "hit_rate": 1.0,
+            "delta": 0.3732
+          }
+        }
+      }
+    },
+    "Bolivia": {
+      "config": {
+        "rho": -0.0312,
+        "promedio_liga": 1.4248,
+        "n_total": 924
+      },
+      "estado_temps": {
+        "2021": {
+          "status": "ok",
+          "n": 0
+        },
+        "2022": {
+          "status": "ok",
+          "n": 332
+        },
+        "2023": {
+          "status": "ok",
+          "n": 273
+        },
+        "2024": {
+          "status": "ok",
+          "n": 319
+        }
+      },
+      "metricas": {
+        "n": 319,
+        "hit_rate": 0.511,
+        "brier_mean": 0.611,
+        "xg_mse_local": 2.0697,
+        "xg_mse_visita": 1.1845,
+        "xg_bias_local": -0.1964,
+        "xg_bias_visita": 0.0501,
+        "outcomes_real": {
+          "1": 165,
+          "X": 72,
+          "2": 82
+        },
+        "base_rate_local": 0.5172,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 57,
+            "p_max_avg": 0.3823,
+            "hit_rate": 0.4211,
+            "delta": 0.0388
+          },
+          "40-50": {
+            "n": 185,
+            "p_max_avg": 0.4457,
+            "hit_rate": 0.4919,
+            "delta": 0.0462
+          },
+          "50-60": {
+            "n": 69,
+            "p_max_avg": 0.5427,
+            "hit_rate": 0.6232,
+            "delta": 0.0805
+          },
+          "60-70": {
+            "n": 8,
+            "p_max_avg": 0.634,
+            "hit_rate": 0.625,
+            "delta": -0.009
+          }
+        }
+      }
+    },
+    "Chile": {
+      "config": {
+        "rho": -0.0297,
+        "promedio_liga": 1.3431,
+        "n_total": 720
+      },
+      "estado_temps": {
+        "2021": {
+          "status": "ok",
+          "n": 0
+        },
+        "2022": {
+          "status": "ok",
+          "n": 240
+        },
+        "2023": {
+          "status": "ok",
+          "n": 240
+        },
+        "2024": {
+          "status": "ok",
+          "n": 240
+        }
+      },
+      "metricas": {
+        "n": 240,
+        "hit_rate": 0.475,
+        "brier_mean": 0.632,
+        "xg_mse_local": 1.5201,
+        "xg_mse_visita": 1.254,
+        "xg_bias_local": -0.134,
+        "xg_bias_visita": 0.0725,
+        "outcomes_real": {
+          "1": 110,
+          "X": 52,
+          "2": 78
+        },
+        "base_rate_local": 0.4583,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 90,
+            "p_max_avg": 0.3823,
+            "hit_rate": 0.4333,
+            "delta": 0.0511
+          },
+          "40-50": {
+            "n": 133,
+            "p_max_avg": 0.4349,
+            "hit_rate": 0.4887,
+            "delta": 0.0539
+          },
+          "50-60": {
+            "n": 17,
+            "p_max_avg": 0.5136,
+            "hit_rate": 0.5882,
+            "delta": 0.0746
+          }
+        }
+      }
+    },
+    "Colombia": {
+      "config": {
+        "rho": -0.0454,
+        "promedio_liga": 1.1141,
+        "n_total": 1332
+      },
+      "estado_temps": {
+        "2021": {
+          "status": "ok",
+          "n": 0
+        },
+        "2022": {
+          "status": "ok",
+          "n": 451
+        },
+        "2023": {
+          "status": "ok",
+          "n": 450
+        },
+        "2024": {
+          "status": "ok",
+          "n": 431
+        }
+      },
+      "metricas": {
+        "n": 431,
+        "hit_rate": 0.464,
+        "brier_mean": 0.6376,
+        "xg_mse_local": 1.2164,
+        "xg_mse_visita": 0.8911,
+        "xg_bias_local": -0.0649,
+        "xg_bias_visita": 0.1016,
+        "outcomes_real": {
+          "1": 200,
+          "X": 115,
+          "2": 116
+        },
+        "base_rate_local": 0.464,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 183,
+            "p_max_avg": 0.3722,
+            "hit_rate": 0.4044,
+            "delta": 0.0321
+          },
+          "40-50": {
+            "n": 206,
+            "p_max_avg": 0.4406,
+            "hit_rate": 0.4903,
+            "delta": 0.0497
+          },
+          "50-60": {
+            "n": 40,
+            "p_max_avg": 0.5369,
+            "hit_rate": 0.575,
+            "delta": 0.0381
+          },
+          "60-70": {
+            "n": 2,
+            "p_max_avg": 0.6299,
+            "hit_rate": 1.0,
+            "delta": 0.3701
+          }
+        }
+      }
+    },
+    "Ecuador": {
+      "config": {
+        "rho": -0.0839,
+        "promedio_liga": 1.2538,
+        "n_total": 725
+      },
+      "estado_temps": {
+        "2021": {
+          "status": "ok",
+          "n": 0
+        },
+        "2022": {
+          "status": "ok",
+          "n": 242
+        },
+        "2023": {
+          "status": "ok",
+          "n": 241
+        },
+        "2024": {
+          "status": "ok",
+          "n": 242
+        }
+      },
+      "metricas": {
+        "n": 242,
+        "hit_rate": 0.5207,
+        "brier_mean": 0.6257,
+        "xg_mse_local": 1.8554,
+        "xg_mse_visita": 1.0761,
+        "xg_bias_local": -0.2179,
+        "xg_bias_visita": 0.0737,
+        "outcomes_real": {
+          "1": 113,
+          "X": 64,
+          "2": 65
+        },
+        "base_rate_local": 0.4669,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 95,
+            "p_max_avg": 0.3771,
+            "hit_rate": 0.5263,
+            "delta": 0.1492
+          },
+          "40-50": {
+            "n": 119,
+            "p_max_avg": 0.4404,
+            "hit_rate": 0.4874,
+            "delta": 0.047
+          },
+          "50-60": {
+            "n": 27,
+            "p_max_avg": 0.5262,
+            "hit_rate": 0.6667,
+            "delta": 0.1405
+          },
+          "60-70": {
+            "n": 1,
+            "p_max_avg": 0.6334,
+            "hit_rate": 0.0,
+            "delta": -0.6334
+          }
+        }
+      }
+    },
+    "Peru": {
+      "config": {
+        "rho": -0.05,
+        "promedio_liga": 1.3138,
+        "n_total": 996
+      },
+      "estado_temps": {
+        "2021": {
+          "status": "ok",
+          "n": 0
+        },
+        "2022": {
+          "status": "ok",
+          "n": 346
+        },
+        "2023": {
+          "status": "ok",
+          "n": 344
+        },
+        "2024": {
+          "status": "ok",
+          "n": 306
+        }
+      },
+      "metricas": {
+        "n": 306,
+        "hit_rate": 0.5458,
+        "brier_mean": 0.5878,
+        "xg_mse_local": 1.6007,
+        "xg_mse_visita": 1.4547,
+        "xg_bias_local": -0.1757,
+        "xg_bias_visita": 0.1096,
+        "outcomes_real": {
+          "1": 161,
+          "X": 77,
+          "2": 68
+        },
+        "base_rate_local": 0.5261,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 83,
+            "p_max_avg": 0.3791,
+            "hit_rate": 0.3855,
+            "delta": 0.0064
+          },
+          "40-50": {
+            "n": 150,
+            "p_max_avg": 0.4472,
+            "hit_rate": 0.54,
+            "delta": 0.0928
+          },
+          "50-60": {
+            "n": 61,
+            "p_max_avg": 0.5418,
+            "hit_rate": 0.6885,
+            "delta": 0.1468
+          },
+          "60-70": {
+            "n": 11,
+            "p_max_avg": 0.6319,
+            "hit_rate": 1.0,
+            "delta": 0.3681
+          },
+          "70-80": {
+            "n": 1,
+            "p_max_avg": 0.7241,
+            "hit_rate": 1.0,
+            "delta": 0.2759
+          }
+        }
+      }
+    },
+    "Uruguay": {
+      "config": {
+        "rho": -0.0612,
+        "promedio_liga": 1.1981,
+        "n_total": 530
+      },
+      "estado_temps": {
+        "2021": {
+          "status": "ok",
+          "n": 0
+        },
+        "2022": {
+          "status": "ok",
+          "n": 176
+        },
+        "2023": {
+          "status": "ok",
+          "n": 177
+        },
+        "2024": {
+          "status": "ok",
+          "n": 177
+        }
+      },
+      "metricas": {
+        "n": 177,
+        "hit_rate": 0.4068,
+        "brier_mean": 0.6557,
+        "xg_mse_local": 1.3197,
+        "xg_mse_visita": 1.2368,
+        "xg_bias_local": -0.1039,
+        "xg_bias_visita": -0.0598,
+        "outcomes_real": {
+          "1": 67,
+          "X": 45,
+          "2": 65
+        },
+        "base_rate_local": 0.3785,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 111,
+            "p_max_avg": 0.3715,
+            "hit_rate": 0.3694,
+            "delta": -0.0022
+          },
+          "40-50": {
+            "n": 65,
+            "p_max_avg": 0.4338,
+            "hit_rate": 0.4769,
+            "delta": 0.0432
+          },
+          "50-60": {
+            "n": 1,
+            "p_max_avg": 0.5259,
+            "hit_rate": 0.0,
+            "delta": -0.5259
+          }
+        }
+      }
+    },
+    "Venezuela": {
+      "config": {
+        "rho": -0.1491,
+        "promedio_liga": 1.2066,
+        "n_total": 731
+      },
+      "estado_temps": {
+        "2021": {
+          "status": "ok",
+          "n": 0
+        },
+        "2022": {
+          "status": "ok",
+          "n": 276
+        },
+        "2023": {
+          "status": "ok",
+          "n": 222
+        },
+        "2024": {
+          "status": "ok",
+          "n": 233
+        }
+      },
+      "metricas": {
+        "n": 233,
+        "hit_rate": 0.4893,
+        "brier_mean": 0.6404,
+        "xg_mse_local": 1.1943,
+        "xg_mse_visita": 0.9341,
+        "xg_bias_local": -0.0757,
+        "xg_bias_visita": 0.0211,
+        "outcomes_real": {
+          "1": 98,
+          "X": 70,
+          "2": 65
+        },
+        "base_rate_local": 0.4206,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 133,
+            "p_max_avg": 0.3703,
+            "hit_rate": 0.4962,
+            "delta": 0.126
+          },
+          "40-50": {
+            "n": 91,
+            "p_max_avg": 0.4348,
+            "hit_rate": 0.4615,
+            "delta": 0.0267
+          },
+          "50-60": {
+            "n": 9,
+            "p_max_avg": 0.5195,
+            "hit_rate": 0.6667,
+            "delta": 0.1472
+          }
+        }
+      }
+    }
+  }
+}

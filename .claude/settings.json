@@ -21,6 +21,28 @@
         ],
         "matcher": ""
       }
+    ],
+    "TaskCreated": [
+      {
+        "hooks": [
+          {
+            "command": "py scripts/hooks/validate_task_created.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "command": "py scripts/hooks/validate_task_completed.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
     ]
   }
 }

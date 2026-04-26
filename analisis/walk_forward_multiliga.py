@@ -54,6 +54,7 @@ LIGAS = {
     "Francia":    "F1",
     "Alemania":   "D1",
     "Turquia":    "T1",
+    "Noruega":    "N1",  # Eliteserien (agregado 2026-04-26 para coverage completo)
 }
 TEMPS_TRAIN = ["2122", "2223", "2324"]
 TEMPS_PREDICT = ["2425"]

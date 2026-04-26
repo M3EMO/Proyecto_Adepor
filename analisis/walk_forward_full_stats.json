@@ -151,6 +151,88 @@
       },
       "n_total_input": 553,
       "n_zero_stats": 553
+    },
+    "Chile": {
+      "config": {
+        "rho": -0.0297,
+        "coef_corner": 0.022,
+        "promedio_liga": 1.3431
+      },
+      "metricas": {
+        "n": 240,
+        "hit_rate": 0.5167,
+        "brier_mean": 0.6246,
+        "xg_mse_local": 1.5199,
+        "xg_mse_visita": 1.2778,
+        "xg_bias_local": 0.0479,
+        "xg_bias_visita": 0.199,
+        "outcomes_real": {
+          "1": 110,
+          "X": 52,
+          "2": 78
+        },
+        "base_rate_local": 0.4583,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 74,
+            "p_max_avg": 0.3866,
+            "hit_rate": 0.4189,
+            "delta": 0.0323
+          },
+          "40-50": {
+            "n": 161,
+            "p_max_avg": 0.4334,
+            "hit_rate": 0.5528,
+            "delta": 0.1194
+          },
+          "50-60": {
+            "n": 5,
+            "p_max_avg": 0.5201,
+            "hit_rate": 0.8,
+            "delta": 0.2799
+          }
+        }
+      },
+      "n_total_input": 720,
+      "n_zero_stats": 1
+    },
+    "Colombia": {
+      "config": {
+        "rho": -0.0454,
+        "coef_corner": 0.0215,
+        "promedio_liga": 1.1025
+      },
+      "metricas": {
+        "n": 190,
+        "hit_rate": 0.4526,
+        "brier_mean": 0.6463,
+        "xg_mse_local": 1.169,
+        "xg_mse_visita": 0.9905,
+        "xg_bias_local": 0.0809,
+        "xg_bias_visita": 0.2507,
+        "outcomes_real": {
+          "1": 84,
+          "X": 50,
+          "2": 56
+        },
+        "base_rate_local": 0.4421,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 84,
+            "p_max_avg": 0.3808,
+            "hit_rate": 0.4048,
+            "delta": 0.024
+          },
+          "40-50": {
+            "n": 106,
+            "p_max_avg": 0.4297,
+            "hit_rate": 0.4906,
+            "delta": 0.0609
+          }
+        }
+      },
+      "n_total_input": 590,
+      "n_zero_stats": 9
     }
   }
 }

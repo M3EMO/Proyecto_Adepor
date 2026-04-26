@@ -297,6 +297,54 @@
           }
         }
       }
+    },
+    "Noruega": {
+      "config": {
+        "rho": -0.1069,
+        "coef_corner": 0.0232,
+        "promedio_liga": 1.518
+      },
+      "metricas": {
+        "n": 306,
+        "hit_rate": 0.5425,
+        "brier_mean": 0.6011,
+        "xg_mse_local": 1.8429,
+        "xg_mse_visita": 1.4849,
+        "xg_bias_local": 0.0869,
+        "xg_bias_visita": 0.2553,
+        "outcomes_real": {
+          "1": 139,
+          "X": 77,
+          "2": 90
+        },
+        "base_rate_local": 0.4542,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 66,
+            "p_max_avg": 0.3865,
+            "hit_rate": 0.5,
+            "delta": 0.1135
+          },
+          "40-50": {
+            "n": 181,
+            "p_max_avg": 0.4453,
+            "hit_rate": 0.4696,
+            "delta": 0.0243
+          },
+          "50-60": {
+            "n": 53,
+            "p_max_avg": 0.539,
+            "hit_rate": 0.8113,
+            "delta": 0.2723
+          },
+          "60-70": {
+            "n": 6,
+            "p_max_avg": 0.624,
+            "hit_rate": 0.8333,
+            "delta": 0.2093
+          }
+        }
+      }
     }
   }
 }

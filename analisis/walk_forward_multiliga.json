@@ -1,0 +1,302 @@
+{
+  "bead_id": "adepor-bgt",
+  "scope": "multi-liga EUR (CSV football-data.co.uk)",
+  "config_global": {
+    "alfa_ema": 0.18,
+    "n0_ancla": 5,
+    "beta_sot": 0.352,
+    "beta_shots_off": 0.01,
+    "temps_train": [
+      "2122",
+      "2223",
+      "2324"
+    ],
+    "temps_predict": [
+      "2425"
+    ]
+  },
+  "ligas": {
+    "Inglaterra": {
+      "config": {
+        "rho": -0.03,
+        "coef_corner": 0.0221,
+        "promedio_liga": 1.4855
+      },
+      "metricas": {
+        "n": 380,
+        "hit_rate": 0.5184,
+        "brier_mean": 0.6155,
+        "xg_mse_local": 1.6105,
+        "xg_mse_visita": 1.325,
+        "xg_bias_local": 0.2278,
+        "xg_bias_visita": 0.1551,
+        "outcomes_real": {
+          "1": 155,
+          "X": 93,
+          "2": 132
+        },
+        "base_rate_local": 0.4079,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 64,
+            "p_max_avg": 0.3903,
+            "hit_rate": 0.4062,
+            "delta": 0.0159
+          },
+          "40-50": {
+            "n": 251,
+            "p_max_avg": 0.4429,
+            "hit_rate": 0.5139,
+            "delta": 0.071
+          },
+          "50-60": {
+            "n": 63,
+            "p_max_avg": 0.5325,
+            "hit_rate": 0.6508,
+            "delta": 0.1183
+          },
+          "60-70": {
+            "n": 2,
+            "p_max_avg": 0.6706,
+            "hit_rate": 0.5,
+            "delta": -0.1706
+          }
+        }
+      }
+    },
+    "Italia": {
+      "config": {
+        "rho": -0.0562,
+        "coef_corner": 0.0218,
+        "promedio_liga": 1.325
+      },
+      "metricas": {
+        "n": 380,
+        "hit_rate": 0.4947,
+        "brier_mean": 0.6204,
+        "xg_mse_local": 1.2085,
+        "xg_mse_visita": 1.2549,
+        "xg_bias_local": 0.1713,
+        "xg_bias_visita": 0.1582,
+        "outcomes_real": {
+          "1": 151,
+          "X": 108,
+          "2": 121
+        },
+        "base_rate_local": 0.3974,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 121,
+            "p_max_avg": 0.3834,
+            "hit_rate": 0.3471,
+            "delta": -0.0363
+          },
+          "40-50": {
+            "n": 222,
+            "p_max_avg": 0.4417,
+            "hit_rate": 0.5405,
+            "delta": 0.0988
+          },
+          "50-60": {
+            "n": 36,
+            "p_max_avg": 0.5248,
+            "hit_rate": 0.6944,
+            "delta": 0.1697
+          },
+          "60-70": {
+            "n": 1,
+            "p_max_avg": 0.6086,
+            "hit_rate": 1.0,
+            "delta": 0.3914
+          }
+        }
+      }
+    },
+    "Espana": {
+      "config": {
+        "rho": -0.037,
+        "coef_corner": 0.0216,
+        "promedio_liga": 1.2849
+      },
+      "metricas": {
+        "n": 380,
+        "hit_rate": 0.4658,
+        "brier_mean": 0.6201,
+        "xg_mse_local": 1.4148,
+        "xg_mse_visita": 1.1166,
+        "xg_bias_local": 0.1173,
+        "xg_bias_visita": 0.1408,
+        "outcomes_real": {
+          "1": 169,
+          "X": 97,
+          "2": 114
+        },
+        "base_rate_local": 0.4447,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 98,
+            "p_max_avg": 0.3824,
+            "hit_rate": 0.3061,
+            "delta": -0.0762
+          },
+          "40-50": {
+            "n": 217,
+            "p_max_avg": 0.4399,
+            "hit_rate": 0.4516,
+            "delta": 0.0118
+          },
+          "50-60": {
+            "n": 59,
+            "p_max_avg": 0.5368,
+            "hit_rate": 0.7627,
+            "delta": 0.2259
+          },
+          "60-70": {
+            "n": 6,
+            "p_max_avg": 0.6178,
+            "hit_rate": 0.6667,
+            "delta": 0.0489
+          }
+        }
+      }
+    },
+    "Francia": {
+      "config": {
+        "rho": -0.085,
+        "coef_corner": 0.0241,
+        "promedio_liga": 1.4107
+      },
+      "metricas": {
+        "n": 306,
+        "hit_rate": 0.5359,
+        "brier_mean": 0.6056,
+        "xg_mse_local": 1.7115,
+        "xg_mse_visita": 1.3997,
+        "xg_bias_local": 0.0679,
+        "xg_bias_visita": 0.1771,
+        "outcomes_real": {
+          "1": 143,
+          "X": 62,
+          "2": 101
+        },
+        "base_rate_local": 0.4673,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 76,
+            "p_max_avg": 0.3856,
+            "hit_rate": 0.3816,
+            "delta": -0.004
+          },
+          "40-50": {
+            "n": 196,
+            "p_max_avg": 0.4427,
+            "hit_rate": 0.5714,
+            "delta": 0.1287
+          },
+          "50-60": {
+            "n": 34,
+            "p_max_avg": 0.5336,
+            "hit_rate": 0.6765,
+            "delta": 0.1429
+          }
+        }
+      }
+    },
+    "Alemania": {
+      "config": {
+        "rho": -0.1216,
+        "coef_corner": 0.0264,
+        "promedio_liga": 1.5805
+      },
+      "metricas": {
+        "n": 306,
+        "hit_rate": 0.4346,
+        "brier_mean": 0.6284,
+        "xg_mse_local": 1.8401,
+        "xg_mse_visita": 1.4875,
+        "xg_bias_local": 0.1803,
+        "xg_bias_visita": 0.0911,
+        "outcomes_real": {
+          "1": 118,
+          "X": 77,
+          "2": 111
+        },
+        "base_rate_local": 0.3856,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 85,
+            "p_max_avg": 0.3863,
+            "hit_rate": 0.2471,
+            "delta": -0.1392
+          },
+          "40-50": {
+            "n": 171,
+            "p_max_avg": 0.4383,
+            "hit_rate": 0.4444,
+            "delta": 0.0061
+          },
+          "50-60": {
+            "n": 46,
+            "p_max_avg": 0.5374,
+            "hit_rate": 0.7174,
+            "delta": 0.18
+          },
+          "60-70": {
+            "n": 4,
+            "p_max_avg": 0.6171,
+            "hit_rate": 0.75,
+            "delta": 0.1329
+          }
+        }
+      }
+    },
+    "Turquia": {
+      "config": {
+        "rho": -0.0712,
+        "coef_corner": 0.0228,
+        "promedio_liga": 1.4453
+      },
+      "metricas": {
+        "n": 342,
+        "hit_rate": 0.5585,
+        "brier_mean": 0.5915,
+        "xg_mse_local": 1.6922,
+        "xg_mse_visita": 1.3437,
+        "xg_bias_local": 0.0488,
+        "xg_bias_visita": 0.1886,
+        "outcomes_real": {
+          "1": 166,
+          "X": 80,
+          "2": 96
+        },
+        "base_rate_local": 0.4854,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 69,
+            "p_max_avg": 0.384,
+            "hit_rate": 0.3478,
+            "delta": -0.0362
+          },
+          "40-50": {
+            "n": 212,
+            "p_max_avg": 0.4454,
+            "hit_rate": 0.5566,
+            "delta": 0.1112
+          },
+          "50-60": {
+            "n": 59,
+            "p_max_avg": 0.5333,
+            "hit_rate": 0.7966,
+            "delta": 0.2633
+          },
+          "60-70": {
+            "n": 2,
+            "p_max_avg": 0.6285,
+            "hit_rate": 1.0,
+            "delta": 0.3715
+          }
+        }
+      }
+    }
+  }
+}

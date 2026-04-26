@@ -3,15 +3,60 @@ import requests
 import json
 import os
 import difflib
+from datetime import datetime, timedelta
 from src.comun import gestor_nombres
 from src.comun.config_sistema import MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 
 # ==========================================
-# MOTOR CUOTAS V9.2 (RADAR SHARP + JERARQUIA PINNACLE O/U + CONFIG CENTRALIZADA)
-# Responsabilidad: Auto-Matching relajado, Linea 2.5 Estricta y Jerarquia Pinnacle.
+# MOTOR CUOTAS V9.3 (RADAR SHARP + CAPTURA CUOTA_CIERRE PARA CLV)
+# Responsabilidad: Auto-Matching, Linea 2.5 Estricta y Jerarquia Pinnacle.
+# V9.3 (2026-04-25, bead adepor-dl6): captura cuota_cierre_1x2/ou cuando el
+#       partido esta dentro de la ventana <2h del kickoff y tiene pick con stake>0.
+#       Cambio aditivo: NO altera la logica de UPDATE existente de cuota_1/x/2/o25/u25.
+#       Decision Lead: SOBREESCRIBIR dentro de la ventana (siempre tomar el valor
+#       mas fresco), NO sobreescribir si el partido ya paso (preserva cierre legitimo).
 # V9.2: O/U ahora prioriza Pinnacle igual que 1X2. MAPA_LIGAS_ODDS importado
 #       desde config_sistema — agregar ligas en un solo lugar.
 # ==========================================
+
+# Ventana CLV: capturar cuota_cierre cuando faltan <= 2h al kickoff
+VENTANA_CIERRE = timedelta(hours=2)
+
+
+def _seleccionar_cuota_cierre(apuesta_str, c1, cx, c2, co, cu):
+    """
+    Dada la apuesta_1x2 / apuesta_ou (formato "[APOSTAR] 1", "[APOSTAR] X",
+    "[APOSTAR] 2", "[APOSTAR] OVER", "[APOSTAR] UNDER"), retorna la cuota
+    cierre capturada para ese pick. Retorna 0.0 si no hay match o no aplica.
+    """
+    if not apuesta_str:
+        return 0.0
+    s = apuesta_str.strip().upper()
+    if not s.startswith("[APOSTAR]"):
+        return 0.0
+    pick = s.replace("[APOSTAR]", "").strip()
+    if pick == "1":     return c1 or 0.0
+    if pick == "X":     return cx or 0.0
+    if pick == "2":     return c2 or 0.0
+    if pick == "OVER":  return co or 0.0
+    if pick == "UNDER": return cu or 0.0
+    return 0.0
+
+
+def _en_ventana_cierre(fecha_str):
+    """
+    True si el partido esta dentro de la ventana de captura: fecha esta entre
+    now y now+2h (kickoff inminente). Fuera de eso: skip (NO sobreescribir).
+    fecha_str formato esperado: 'YYYY-MM-DD HH:MM'.
+    """
+    if not fecha_str:
+        return False
+    try:
+        fp = datetime.strptime(fecha_str, '%Y-%m-%d %H:%M')
+    except (ValueError, TypeError):
+        return False
+    delta = fp - datetime.now()
+    return timedelta(0) <= delta <= VENTANA_CIERRE
 
 MODO_INTERACTIVO = os.getenv('PROYECTO_MODO_INTERACTIVO') == '1'
 DICCIONARIO_FILE = 'diccionario_equipos.json'
@@ -110,8 +155,10 @@ def main():
     
     # Solo partidos sin resultado: goles_l IS NULL descarta partidos ya jugados pero
     # no liquidados aun, evitando consultas inutiles a la API por partidos pasados.
+    # V9.3: traemos fecha + apuestas + stakes para soporte CLV (captura cuota_cierre).
     cursor.execute("""
-        SELECT id_partido, local, visita, pais FROM partidos_backtest
+        SELECT id_partido, local, visita, pais, fecha, apuesta_1x2, apuesta_ou, stake_1x2, stake_ou
+        FROM partidos_backtest
         WHERE estado != 'Liquidado' AND goles_l IS NULL AND goles_v IS NULL
     """)
     partidos = cursor.fetchall()
@@ -157,7 +204,7 @@ def main():
             })
 
         for p in lista_partidos:
-            id_p, loc_espn, vis_espn, _ = p
+            id_p, loc_espn, vis_espn, _, fecha_p, ap_1x2, ap_ou, stk_1x2, stk_ou = p
             loc_norm = gestor_nombres.limpiar_texto(loc_espn)
             vis_norm = gestor_nombres.limpiar_texto(vis_espn)
             encontrado = False
@@ -203,6 +250,27 @@ def main():
                     cuotas_actualizadas += 1
                     print(f"      [MATCH] Cuotas capturadas: {loc_espn} vs {vis_espn} | 1={c1} X={cx} 2={c2} O={co} U={cu}")
                     encontrado = True
+
+                    # --- V9.3: captura cuota_cierre para CLV ---
+                    # Solo si: (a) en ventana <2h al kickoff, (b) hay pick con stake>0.
+                    # SOBREESCRIBIR dentro de la ventana (decision Lead 2026-04-25).
+                    # Fuera de la ventana: NO tocar (preserva cierre legitimo o nulo).
+                    if _en_ventana_cierre(fecha_p):
+                        cierre_1x2_nuevo = 0.0
+                        cierre_ou_nuevo  = 0.0
+                        if stk_1x2 and stk_1x2 > 0:
+                            cierre_1x2_nuevo = _seleccionar_cuota_cierre(ap_1x2, c1, cx, c2, co, cu)
+                        if stk_ou and stk_ou > 0:
+                            cierre_ou_nuevo  = _seleccionar_cuota_cierre(ap_ou,  c1, cx, c2, co, cu)
+                        if cierre_1x2_nuevo > 0 or cierre_ou_nuevo > 0:
+                            cursor.execute("""
+                                UPDATE partidos_backtest SET
+                                cuota_cierre_1x2 = CASE WHEN ? > 0 THEN ? ELSE cuota_cierre_1x2 END,
+                                cuota_cierre_ou  = CASE WHEN ? > 0 THEN ? ELSE cuota_cierre_ou  END
+                                WHERE id_partido=?
+                            """, (cierre_1x2_nuevo, cierre_1x2_nuevo,
+                                  cierre_ou_nuevo,  cierre_ou_nuevo, id_p))
+                            print(f"         [CLV] cuota_cierre capturada: 1x2={cierre_1x2_nuevo} ou={cierre_ou_nuevo} (kickoff en ventana)")
                 else:
                     print(f"      [ALERTA] Partido encontrado pero sin cuotas sharp: {loc_espn} vs {vis_espn}")
 

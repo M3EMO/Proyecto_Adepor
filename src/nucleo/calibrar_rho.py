@@ -24,6 +24,7 @@ import math
 import sqlite3
 import json
 import os
+import time
 import requests
 from src.comun.config_sistema import DB_NAME, LIGAS_ESPN, API_KEY_FOOTBALL, MAPA_LIGAS_API_FOOTBALL
 
@@ -36,15 +37,26 @@ RHO_FLOOR     = -0.03   # Floor minimo: siempre se aplica alguna correccion DC.
                          # El floor -0.03 asegura que el modelo mantenga una correccion
                          # minima en caso de que la senal de datos sea ambigua.
 MIN_PARTIDOS  = 80      # Minimo para que el MLE sea confiable
-TIMEOUT_HTTP  = 20      # segundos por request
+TIMEOUT_HTTP  = 30      # segundos por request (aumentado de 20 para CSVs grandes)
+MAX_REINTENTOS_CSV = 3  # Reintentos con backoff 2/4/8s ante timeout o 5xx
+
+# --- Flags de runtime (env vars, no rompen ejecucion default) ---
+# RHO_SOLO_LIGA: si esta seteada, calibra solo esa liga (ej: "Inglaterra").
+# RHO_DRY_RUN=1: imprime resultados pero NO actualiza ligas_stats en DB.
+SOLO_LIGA  = os.getenv('RHO_SOLO_LIGA', '').strip()
+DRY_RUN    = os.getenv('RHO_DRY_RUN', '') == '1'
 
 # --- Fuentes: football-data.co.uk (formato CSV antiguo) ---
 # Columnas: HomeTeam, AwayTeam, FTHG (Full Time Home Goals), FTAG
 FUENTES_CSV = {
     "Inglaterra": [
+        # 5 temporadas (recalibracion 2026-04-25, bead adepor-dl6).
+        # 2526 puede estar incompleta a abril 2026 — aceptable, suma datos recientes.
+        "https://www.football-data.co.uk/mmz4281/2526/E0.csv",
         "https://www.football-data.co.uk/mmz4281/2425/E0.csv",
         "https://www.football-data.co.uk/mmz4281/2324/E0.csv",
         "https://www.football-data.co.uk/mmz4281/2223/E0.csv",
+        "https://www.football-data.co.uk/mmz4281/2122/E0.csv",
     ],
     "Noruega": [
         "https://www.football-data.co.uk/mmz4281/2425/N1.csv",
@@ -249,28 +261,45 @@ def _parsear_csv(texto):
     return partidos
 
 
-def descargar_partidos_csv(liga, urls):
-    """Descarga y acumula partidos de URLs de football-data.co.uk."""
+def descargar_partidos_csv(liga, urls, por_url=None):
+    """
+    Descarga y acumula partidos de URLs de football-data.co.uk.
+    Reintentos con backoff exponencial 2/4/8s ante timeout o 5xx (max 3 intentos).
+    Si por_url es dict, agrega lista de partidos descargados por cada URL para
+    estadisticas por temporada.
+    """
     todos = []
     for url in urls:
-        try:
-            resp = requests.get(url, timeout=TIMEOUT_HTTP)
-            if resp.status_code != 200:
-                print(f"   [SKIP] HTTP {resp.status_code} -> {url}")
-                continue
+        partidos_url = []
+        for intento in range(1, MAX_REINTENTOS_CSV + 1):
             try:
-                texto = resp.content.decode("utf-8")
-            except UnicodeDecodeError:
-                texto = resp.content.decode("latin-1")
-
-            partidos = _parsear_csv(texto)
-            if partidos:
-                print(f"   [OK] {len(partidos)} partidos <- {url}")
-                todos.extend(partidos)
-            else:
-                print(f"   [VACÍO] No se encontraron columnas válidas -> {url}")
-        except requests.exceptions.RequestException as e:
-            print(f"   [ERROR RED] {url}: {e}")
+                resp = requests.get(url, timeout=TIMEOUT_HTTP)
+                # 5xx -> reintentar; 4xx -> dar por perdido (URL mala)
+                if resp.status_code >= 500:
+                    raise requests.exceptions.RequestException(f"HTTP {resp.status_code}")
+                if resp.status_code != 200:
+                    print(f"   [SKIP] HTTP {resp.status_code} -> {url}")
+                    break
+                try:
+                    texto = resp.content.decode("utf-8")
+                except UnicodeDecodeError:
+                    texto = resp.content.decode("latin-1")
+                partidos_url = _parsear_csv(texto)
+                if partidos_url:
+                    print(f"   [OK] {len(partidos_url)} partidos <- {url}")
+                    todos.extend(partidos_url)
+                else:
+                    print(f"   [VACIO] No se encontraron columnas validas -> {url}")
+                break  # exito o vacio: salir del retry loop
+            except requests.exceptions.RequestException as e:
+                if intento < MAX_REINTENTOS_CSV:
+                    espera = 2 ** intento  # 2, 4, 8s
+                    print(f"   [RETRY {intento}/{MAX_REINTENTOS_CSV}] {url}: {e}. Espera {espera}s...")
+                    time.sleep(espera)
+                else:
+                    print(f"   [ERROR RED] {url}: {e} (agotados reintentos)")
+        if isinstance(por_url, dict):
+            por_url[url] = partidos_url
     return todos
 
 
@@ -375,9 +404,19 @@ def main():
     print("=" * 62)
     print("calibrar_rho.py  —  Estimacion MLE de rho por liga")
     print("MLE con lambda/mu especifico por equipo (Dixon-Coles 1997)")
+    if SOLO_LIGA:
+        print(f"[FLAG] RHO_SOLO_LIGA={SOLO_LIGA} -> calibrando solo esta liga")
+    if DRY_RUN:
+        print("[FLAG] RHO_DRY_RUN=1 -> NO se actualiza ligas_stats en DB")
     print("=" * 62)
 
     ligas_activas = set(LIGAS_ESPN.values())
+    if SOLO_LIGA:
+        if SOLO_LIGA not in ligas_activas:
+            print(f"[ERROR] '{SOLO_LIGA}' no esta en LIGAS_ESPN. Abort.")
+            return
+        ligas_activas = {SOLO_LIGA}
+
     resultados = {}
 
     # --- Ligas con datos CSV (football-data.co.uk) ---
@@ -385,7 +424,9 @@ def main():
         if liga not in ligas_activas:
             continue
         print(f"\n[{liga}] Fuente: football-data.co.uk")
-        partidos = descargar_partidos_csv(liga, urls)
+        por_url = {}
+        partidos = descargar_partidos_csv(liga, urls, por_url=por_url)
+        _imprimir_stats_por_temporada(por_url)
         _procesar_liga(liga, partidos, resultados)
 
     # --- Ligas sin CSV: usar API-Football ---
@@ -403,12 +444,30 @@ def main():
         origen = "FALLBACK" if rho == RHO_FALLBACK else "MLE"
         print(f"   {liga:15s}: {rho:+.4f}  [{origen}]")
 
-    print("\nActualizando base de datos...")
-    actualizar_rho_en_db(resultados)
-
-    print("\n[HECHO] rho_calculado actualizado en ligas_stats.")
-    print("motor_calculadora.py lo leerá en la próxima ejecución.")
+    if DRY_RUN:
+        print("\n[DRY RUN] ligas_stats NO se actualiza. Revisar resultado y commit manual si OK.")
+    else:
+        print("\nActualizando base de datos...")
+        actualizar_rho_en_db(resultados)
+        print("\n[HECHO] rho_calculado actualizado en ligas_stats.")
+        print("motor_calculadora.py lo leera en la proxima ejecucion.")
     print("=" * 62)
+
+
+def _imprimir_stats_por_temporada(por_url):
+    """Imprime N partidos y % empates por cada CSV (temporada). Audita 2024-25 atipico."""
+    if not por_url:
+        return
+    print("   --- Stats por temporada ---")
+    for url, partidos in por_url.items():
+        if not partidos:
+            print(f"   {url[-12:]}: sin datos")
+            continue
+        n = len(partidos)
+        empates = sum(1 for _, _, hg, ag in partidos if hg == ag)
+        pct = 100 * empates / n
+        avg_total = sum(hg + ag for _, _, hg, ag in partidos) / n
+        print(f"   {url[-12:]}: N={n}, empates={empates} ({pct:.1f}%), avg_total_goles={avg_total:.2f}")
 
 
 def _procesar_liga(liga, partidos, resultados):

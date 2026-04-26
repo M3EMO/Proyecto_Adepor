@@ -44,6 +44,15 @@ Leer `Reglas_IA.txt` antes de auditar. Verificar:
 - ¿Rompe algún fix existente que ya fue validado? (Fix #5, Hallazgo G, etc.)
 - Máxima I: PRESERVACIÓN DEL CAPITAL > beneficio. ¿La propuesta aumenta el riesgo?
 
+**CHECK obligatorio anti-duplicacion** — antes de validar un PROPOSAL:
+```sql
+sqlite3 fondo_quant.db "SELECT * FROM motor_filtros_activos WHERE filtro LIKE '%<keyword>%';"
+```
+Si el cambio propuesto SOLAPA con un filtro existente, marcar veredicto CONDICIONAL
+con COND-1 = "aclarar interaccion con filtro existente". Caso ejemplo: bead
+`adepor-dx8` propuso "agregar MARGEN_MIN_DECISION_1X2" que ya existia como
+MARGEN_PREDICTIVO_1X2. Detectar este patron es prioridad #1.
+
 ### 3. Errores estadísticos comunes a detectar
 - **Sesgo de supervivencia**: ¿se están mirando solo los casos exitosos?
 - **Data snooping**: ¿se probaron 20 estrategias y se reporta solo la ganadora?

@@ -140,6 +140,25 @@ NO abrir PROPOSAL automáticamente solo porque el Investigador lo recomendó. Si
 backtest agregado NO sostiene la recomendación: reportá honestamente y NO abras
 PROPOSAL. Preferí honestidad sobre paciencia humana.
 
+## INVENTARIO DE FILTROS — consultar ANTES de optimizar
+
+ANTES de proponer cambios al motor, consultar:
+
+```sql
+sqlite3 fondo_quant.db "SELECT * FROM motor_filtros_activos ORDER BY referencia_manifesto;"
+```
+
+Lista los 19 filtros activos (FLOOR, MARGEN, DIVERGENCIA, EV_MIN, HALLAZGO_G, FIX_5,
+GAMMA, ALFA_EMA, BETA, RHO, KELLY caps, ALTITUD). Si vas a re-calibrar un coeficiente,
+verificar primero:
+
+1. `motor_filtros_activos.parametro_clave` apunta al `config_motor_valores.clave`
+2. `SELECT scope, valor_real, fuente FROM config_motor_valores WHERE clave = '<X>'`
+3. Si la fuente dice "fase3_F9_calibrado_..." o similar, hay calibracion previa con
+   evidencia. Tu propuesta debe SUPERAR esa evidencia (mas N, mejor metodologia).
+
+Tambien la tabla `xg_calibration_history` tiene metricas walk-forward por liga.
+
 ## RESTRICCIONES
 
 - NO aplicar cambios sin que el agente crítico los valide

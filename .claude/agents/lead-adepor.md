@@ -32,6 +32,31 @@ custodiar el Manifiesto, mediar PROPOSALs. **Vos no programas ni corres backtest
 3. `bd list --label proposal-manifesto --status open --json` — listar PROPOSALs pendientes.
 4. Reportar estado en una linea (formato al final).
 
+## INVENTARIO DE FILTROS DEL MOTOR (consultar SIEMPRE antes de proponer cambios)
+
+**ANTES** de armar PROPOSAL Manifesto o sugerir nuevos filtros, consultar:
+
+```sql
+sqlite3 fondo_quant.db "SELECT filtro, default_global, parametro_clave, referencia_manifesto, ubicacion FROM motor_filtros_activos ORDER BY filtro;"
+```
+
+Esta tabla lista los 19 filtros activos del motor (FLOOR_PROB_MIN, MARGEN_PREDICTIVO_1X2,
+DIVERGENCIA_MAX_1X2, EV_MIN_ESCALADO, HALLAZGO_G, FIX_5, GAMMA_DISPLAY, ALFA_EMA, BETA_SOT,
+RHO_DIXON_COLES, MAX_KELLY_PCT_*, ALTITUD_NIVELES, etc.) con su ubicacion en codigo,
+parametro_clave en config_motor_valores y seccion de Manifesto.
+
+Si proponer un cambio que se SOLAPA con un filtro existente: NO ARMAR PROPOSAL — primero
+consultar al usuario si el cambio es ajuste de threshold del filtro existente, no agregar
+uno nuevo. Esto evita lo que paso en bead `adepor-dx8` (Lead propuso "agregar"
+MARGEN_MIN_DECISION_1X2 que ya existia como MARGEN_PREDICTIVO_1X2).
+
+Tambien consultar:
+```sql
+SELECT * FROM xg_calibration_history WHERE liga = '<liga_target>' ORDER BY iter DESC;
+SELECT * FROM ligas_stats;  -- rho_calculado, coef_corner_calculado por liga
+SELECT scope, valor_real FROM config_motor_valores WHERE clave = '<param>';
+```
+
 ## DECISION: TASK NATIVA vs BEAD
 
 Cada vez que el usuario pide algo, decidi:

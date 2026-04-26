@@ -1,0 +1,156 @@
+{
+  "bead_id": "adepor-bgt",
+  "iter": 3,
+  "scope": "LATAM full stats (ESPN scraped via scraper_espn_historico.py)",
+  "config_global": {
+    "alfa_ema": 0.18,
+    "n0_ancla": 5,
+    "beta_sot": 0.352,
+    "beta_shots_off": 0.01,
+    "temps_train": [
+      2022,
+      2023
+    ],
+    "temp_predict": 2024
+  },
+  "ligas": {
+    "Argentina": {
+      "config": {
+        "rho": -0.052,
+        "coef_corner": 0.0179,
+        "promedio_liga": 1.0463
+      },
+      "metricas": {
+        "n": 378,
+        "hit_rate": 0.4497,
+        "brier_mean": 0.6467,
+        "xg_mse_local": 1.1754,
+        "xg_mse_visita": 0.9792,
+        "xg_bias_local": 0.1023,
+        "xg_bias_visita": 0.2648,
+        "outcomes_real": {
+          "1": 170,
+          "X": 127,
+          "2": 81
+        },
+        "base_rate_local": 0.4497,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 155,
+            "p_max_avg": 0.3772,
+            "hit_rate": 0.4,
+            "delta": 0.0228
+          },
+          "40-50": {
+            "n": 210,
+            "p_max_avg": 0.4333,
+            "hit_rate": 0.4762,
+            "delta": 0.0429
+          },
+          "50-60": {
+            "n": 13,
+            "p_max_avg": 0.516,
+            "hit_rate": 0.6154,
+            "delta": 0.0993
+          }
+        }
+      },
+      "n_total_input": 1134,
+      "n_zero_stats": 21
+    },
+    "Brasil": {
+      "config": {
+        "rho": -0.0417,
+        "coef_corner": 0.0223,
+        "promedio_liga": 1.2193
+      },
+      "metricas": {
+        "n": 380,
+        "hit_rate": 0.4868,
+        "brier_mean": 0.6336,
+        "xg_mse_local": 1.1916,
+        "xg_mse_visita": 1.028,
+        "xg_bias_local": 0.1211,
+        "xg_bias_visita": 0.2853,
+        "outcomes_real": {
+          "1": 180,
+          "X": 101,
+          "2": 99
+        },
+        "base_rate_local": 0.4737,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 127,
+            "p_max_avg": 0.3839,
+            "hit_rate": 0.4016,
+            "delta": 0.0177
+          },
+          "40-50": {
+            "n": 230,
+            "p_max_avg": 0.4421,
+            "hit_rate": 0.5217,
+            "delta": 0.0796
+          },
+          "50-60": {
+            "n": 23,
+            "p_max_avg": 0.5231,
+            "hit_rate": 0.6087,
+            "delta": 0.0856
+          }
+        }
+      },
+      "n_total_input": 1140,
+      "n_zero_stats": 43
+    },
+    "Bolivia": {
+      "config": {
+        "rho": -0.0312,
+        "coef_corner": 0.02,
+        "promedio_liga": 1.3454
+      },
+      "metricas": {
+        "n": 64,
+        "hit_rate": 0.5625,
+        "brier_mean": 0.5972,
+        "xg_mse_local": 1.324,
+        "xg_mse_visita": 0.9603,
+        "xg_bias_local": -0.2005,
+        "xg_bias_visita": 0.0557,
+        "outcomes_real": {
+          "1": 36,
+          "X": 15,
+          "2": 13
+        },
+        "base_rate_local": 0.5625,
+        "calibracion_por_bucket": {
+          "30-40": {
+            "n": 17,
+            "p_max_avg": 0.3792,
+            "hit_rate": 0.4118,
+            "delta": 0.0326
+          },
+          "40-50": {
+            "n": 38,
+            "p_max_avg": 0.461,
+            "hit_rate": 0.6053,
+            "delta": 0.1442
+          },
+          "50-60": {
+            "n": 8,
+            "p_max_avg": 0.5383,
+            "hit_rate": 0.75,
+            "delta": 0.2117
+          },
+          "60-70": {
+            "n": 1,
+            "p_max_avg": 0.6235,
+            "hit_rate": 0.0,
+            "delta": -0.6235
+          }
+        }
+      },
+      "n_total_input": 553,
+      "n_zero_stats": 553
+    }
+  }
+}

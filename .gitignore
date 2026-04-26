@@ -37,6 +37,7 @@ log_diario.txt
 
 # Claude Code settings locales
 .claude/settings.local.json
+.claude/scheduled_tasks.lock
 
 # Editor
 .vscode/

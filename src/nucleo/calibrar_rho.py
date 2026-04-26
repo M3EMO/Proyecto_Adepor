@@ -36,7 +36,13 @@ RHO_FLOOR     = -0.03   # Floor minimo: siempre se aplica alguna correccion DC.
                          # predice (4.39% obs vs 4.87% esperado), lo que implica rho~0.
                          # El floor -0.03 asegura que el modelo mantenga una correccion
                          # minima en caso de que la senal de datos sea ambigua.
-MIN_PARTIDOS  = 80      # Minimo para que el MLE sea confiable
+MIN_PARTIDOS  = 80      # Minimo para que el MLE sea confiable (aplica EUR + global)
+MIN_PARTIDOS_LATAM = 150  # Minimo elevado para ligas LATAM (literatura DC LATAM
+                         # escasa; con N<150 el MLE local puede capturar ruido como
+                         # senial. Bumpeado en adepor-ehj 2026-04-26 tras confirmar
+                         # que las 9 ligas LATAM tienen N_externo >= 530 post m4g).
+LIGAS_LATAM = {"Argentina", "Bolivia", "Brasil", "Chile", "Colombia",
+               "Ecuador", "Peru", "Uruguay", "Venezuela"}
 TIMEOUT_HTTP  = 30      # segundos por request (aumentado de 20 para CSVs grandes)
 MAX_REINTENTOS_CSV = 3  # Reintentos con backoff 2/4/8s ante timeout o 5xx
 
@@ -485,6 +491,14 @@ def _procesar_liga(liga, partidos, resultados):
     empates = sum(1 for _, _, hg, ag in partidos if hg == ag)
 
     print(f"   Total: {n} partidos | avg_goles_L={lam_avg:.3f} | avg_goles_V={mu_avg:.3f} | empates={empates} ({100*empates/n:.1f}%)")
+
+    # Threshold por liga: LATAM requiere N>=150, resto N>=80 (adepor-ehj)
+    min_required = MIN_PARTIDOS_LATAM if liga in LIGAS_LATAM else MIN_PARTIDOS
+    if n < min_required:
+        print(f"   [FALLBACK] Solo {n} partidos (min_{liga}={min_required}, "
+              f"region={'LATAM' if liga in LIGAS_LATAM else 'EUR/global'}). rho = {RHO_FALLBACK}")
+        resultados[liga] = RHO_FALLBACK
+        return
 
     rho = estimar_rho_mle(partidos)
     if rho is None:

@@ -14,21 +14,8 @@ from src.comun.resolucion import determinar_resultado_token
 DB_NAME = 'fondo_quant.db'
 
 
-def _cuota_apostada_para_pick(apuesta_str, c1, cx, c2, co, cu):
-    """
-    Dada apuesta_1x2 / apuesta_ou con prefijo [APOSTAR], retorna la cuota
-    a la que se apostó (selecciona entre c1/cx/c2/co/cu).
-    Retorna 0.0 si no es un pick aplicable.
-    """
-    if not apuesta_str:
-        return 0.0
-    s = apuesta_str.strip().upper()
-    if "[APOSTAR] 1" in s and "[APOSTAR] 1X" not in s:  return c1 or 0.0
-    if "[APOSTAR] X" in s:     return cx or 0.0
-    if "[APOSTAR] 2" in s and "[APOSTAR] 2X" not in s:  return c2 or 0.0
-    if "[APOSTAR] OVER" in s:  return co or 0.0
-    if "[APOSTAR] UNDER" in s: return cu or 0.0
-    return 0.0
+# adepor-6ph: helper unificado en src/comun/picks.cuota_para_pick
+from src.comun.picks import cuota_para_pick as _cuota_apostada_para_pick
 
 
 def _calcular_clv_pct(cuota_apostada, cuota_cierre):

@@ -23,24 +23,8 @@ from src.comun.config_sistema import MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 VENTANA_CIERRE = timedelta(hours=2)
 
 
-def _seleccionar_cuota_cierre(apuesta_str, c1, cx, c2, co, cu):
-    """
-    Dada la apuesta_1x2 / apuesta_ou (formato "[APOSTAR] 1", "[APOSTAR] X",
-    "[APOSTAR] 2", "[APOSTAR] OVER", "[APOSTAR] UNDER"), retorna la cuota
-    cierre capturada para ese pick. Retorna 0.0 si no hay match o no aplica.
-    """
-    if not apuesta_str:
-        return 0.0
-    s = apuesta_str.strip().upper()
-    if not s.startswith("[APOSTAR]"):
-        return 0.0
-    pick = s.replace("[APOSTAR]", "").strip()
-    if pick == "1":     return c1 or 0.0
-    if pick == "X":     return cx or 0.0
-    if pick == "2":     return c2 or 0.0
-    if pick == "OVER":  return co or 0.0
-    if pick == "UNDER": return cu or 0.0
-    return 0.0
+# adepor-6ph: helper unificado en src/comun/picks.cuota_para_pick
+from src.comun.picks import cuota_para_pick as _seleccionar_cuota_cierre
 
 
 def _en_ventana_cierre(fecha_str):

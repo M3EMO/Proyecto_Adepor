@@ -1,0 +1,58 @@
+{
+  "bead_id": "adepor-wxv",
+  "metodologia": {
+    "n_bootstrap": 200,
+    "seed": 20260426,
+    "fuente": "football-data.co.uk CSV (5 temps EPL)"
+  },
+  "point_estimate": {
+    "rho_mle": -0.02,
+    "n_total": 1852
+  },
+  "bootstrap_ci_95": {
+    "n_resamples_validos": 200,
+    "rho_mean": -0.026365,
+    "ci_lo_2.5p": -0.08105,
+    "ci_hi_97.5p": 0.0,
+    "incluye_cero": true,
+    "incluye_minus_013": false
+  },
+  "split_temporadas": {
+    "2122": {
+      "n": 380,
+      "rho_mle": 0.0
+    },
+    "2223": {
+      "n": 380,
+      "rho_mle": 0.0
+    },
+    "2324": {
+      "n": 380,
+      "rho_mle": -0.011
+    },
+    "2425": {
+      "n": 380,
+      "rho_mle": -0.021
+    },
+    "2526": {
+      "n": 332,
+      "rho_mle": -0.142
+    }
+  },
+  "split_H1_H2": {
+    "H1_marks": [
+      "2122",
+      "2223"
+    ],
+    "H2_marks": [
+      "2324",
+      "2425",
+      "2526"
+    ],
+    "H1_n": 760,
+    "H2_n": 1092,
+    "H1_rho": 0.0,
+    "H2_rho": -0.058,
+    "delta_H2_H1": -0.058
+  }
+}

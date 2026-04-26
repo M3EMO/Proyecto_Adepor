@@ -1,0 +1,121 @@
+{
+  "bead_id": "adepor-m4g",
+  "metodologia": {
+    "ligas_target": [
+      "Chile",
+      "Colombia",
+      "Ecuador",
+      "Espana",
+      "Francia",
+      "Italia",
+      "Peru",
+      "Uruguay",
+      "Venezuela"
+    ],
+    "temporadas": [
+      2024,
+      2023,
+      2022,
+      2021
+    ],
+    "max_retries_por_temporada": 4,
+    "backoff_base_seg": [
+      5,
+      15,
+      30,
+      60
+    ],
+    "sleep_entre_temporadas": 6,
+    "sleep_entre_ligas": 12,
+    "shrinkage_target": -0.12,
+    "shrinkage_pseudo_n": 200,
+    "outlier_range": [
+      -0.2,
+      0.05
+    ],
+    "floor": -0.03
+  },
+  "resultados": {
+    "Chile": {
+      "n_externo": 720,
+      "estado": "MLE_OK",
+      "rho_mle": 0.0,
+      "rho_post_shrinkage": -0.0261,
+      "rho_propuesto_externo": -0.03,
+      "outlier": false,
+      "shrinkage_w": 0.7826
+    },
+    "Colombia": {
+      "n_externo": 1332,
+      "estado": "MLE_OK",
+      "rho_mle": -0.04,
+      "rho_post_shrinkage": -0.0504,
+      "rho_propuesto_externo": -0.0504,
+      "outlier": false,
+      "shrinkage_w": 0.8695
+    },
+    "Ecuador": {
+      "n_externo": 725,
+      "estado": "MLE_OK",
+      "rho_mle": -0.074,
+      "rho_post_shrinkage": -0.0839,
+      "rho_propuesto_externo": -0.0839,
+      "outlier": false,
+      "shrinkage_w": 0.7838
+    },
+    "Espana": {
+      "n_externo": 1140,
+      "estado": "MLE_OK",
+      "rho_mle": 0.0,
+      "rho_post_shrinkage": -0.0179,
+      "rho_propuesto_externo": -0.03,
+      "outlier": false,
+      "shrinkage_w": 0.8507
+    },
+    "Francia": {
+      "n_externo": 994,
+      "estado": "MLE_OK",
+      "rho_mle": -0.078,
+      "rho_post_shrinkage": -0.085,
+      "rho_propuesto_externo": -0.085,
+      "outlier": false,
+      "shrinkage_w": 0.8325
+    },
+    "Italia": {
+      "n_externo": 1141,
+      "estado": "MLE_OK",
+      "rho_mle": -0.045,
+      "rho_post_shrinkage": -0.0562,
+      "rho_propuesto_externo": -0.0562,
+      "outlier": false,
+      "shrinkage_w": 0.8509
+    },
+    "Peru": {
+      "n_externo": 996,
+      "estado": "MLE_OK",
+      "rho_mle": -0.036,
+      "rho_post_shrinkage": -0.05,
+      "rho_propuesto_externo": -0.05,
+      "outlier": false,
+      "shrinkage_w": 0.8328
+    },
+    "Uruguay": {
+      "n_externo": 530,
+      "estado": "MLE_OK",
+      "rho_mle": -0.039,
+      "rho_post_shrinkage": -0.0612,
+      "rho_propuesto_externo": -0.0612,
+      "outlier": false,
+      "shrinkage_w": 0.726
+    },
+    "Venezuela": {
+      "n_externo": 731,
+      "estado": "MLE_OK",
+      "rho_mle": -0.157,
+      "rho_post_shrinkage": -0.1491,
+      "rho_propuesto_externo": -0.1491,
+      "outlier": false,
+      "shrinkage_w": 0.7852
+    }
+  }
+}

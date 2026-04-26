@@ -52,7 +52,45 @@ Leer `Reglas_IA.txt` antes de auditar. Verificar:
 - **Base rate neglect**: ¿se compara contra el base rate correcto?
 - **p-hacking**: ¿se ajustaron los umbrales hasta que el backtest diera bien?
 
-### 4. Integridad del pipeline
+### 4. Anti-patterns que NO se ven a simple vista
+
+#### a. Inflación de confianza sin mejora predictiva
+Patrón clásico: feature SHADOW infla las probabilidades (ej: `p1` sube de 0.55 a 0.78)
+pero el hit rate NO mejora. El delta_brier promedio puede dar negativo (favor SHADOW)
+mientras que partidos donde el equipo no gana explotan en Brier. RIESGO: en sizing Kelly,
+sobreapuesta cuando la prob inflada lleva a stake mayor.
+
+**Test obligatorio**: comparar hit_rate_A vs hit_rate_B. Si son idénticos pero
+delta_brier difiere, sospechar inflación de confianza. Inspeccionar distribución
+del delta partido a partido (no solo la media): si es BIMODAL (mayoría mejora pero
+minoría empeora catastróficamente), el riesgo de cola contraindica activar.
+
+#### b. Feature COMPUTADO ≠ feature APLICADO
+Antes de aprobar A/B sobre feature SHADOW, verificar que el feature esté APLICADO en
+TODOS los partidos del set, no solo COMPUTADO. Ejemplo altitud: `shadow_xg` se calcula
+siempre pero el multiplicador solo aplica si el equipo está en el catálogo. Si el A/B
+incluye partidos sin aplicación efectiva, el delta_brier estará dominado por shifts no
+relacionados al feature (ej: gamma_display).
+
+**Acceptance criteria nuevo**: el optimizador debe reportar `N_efectivo` (donde el
+feature aplica) vs `N_total_elegible`. Si N_efectivo / N_total < 50%, VETO automático
+hasta que se complete el catálogo o se filtre apropiadamente.
+
+#### c. Anti retro-fit circular
+Si los multiplicadores/coeficientes propuestos fueron originalmente calibrados con
+el MISMO dataset que se usa para el A/B confirmatorio: el delta favorable es retro-fit,
+no señal real. Pedir al optimizador demostrar independencia del dataset. Si no se
+puede demostrar: mantener SHADOW indefinidamente.
+
+### 5. Interpretación espíritu vs letra del criterio
+Cuando los criterios mecánicos (EV<5%, N<30, etc.) generan resultado contraintuitivo,
+identificar el ESPÍRITU del criterio (qué riesgo intenta proteger) y aplicar criterio
+cualitativo. Ejemplo: "EV no medible no es ausencia de evidencia — si hay evidencia
+externa (literatura con N out-of-sample alto), eso es válido como respaldo". Preferir
+veredicto CONDICIONAL en lugar de VETO/APROBADO total cuando los criterios mecánicos
+no aplican limpiamente.
+
+### 6. Integridad del pipeline
 Verificar que las propuestas no rompen el flujo:
 ```
 motor_fixture → motor_data → motor_cuotas → motor_calculadora → motor_arbitro → motor_backtest → motor_sincronizador

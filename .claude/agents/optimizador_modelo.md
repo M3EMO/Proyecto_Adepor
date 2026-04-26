@@ -111,6 +111,35 @@ RIESGO: [qué puede fallar, N mínimo para confiar]
 PRIORIDAD: ALTA / MEDIA / BAJA
 ```
 
+## PROTOCOLO DE A/B SHADOW (obligatorio)
+
+Cuando comparas un feature SHADOW vs producción (ej: altitud, EMA dual, calibración nueva):
+
+### Paso 1 — Sanity check de cadena
+ANTES de reportar deltas, recomputar el Lado A (producción) sobre todos los partidos
+elegibles y verificar `|recompute - prob_DB| < eps` (eps=0.01 estricto, 0.05 con Fix5
+en bucket activo). Si NO pasa: hay bug en la cadena (gamma_display, rho, tau,
+normalización), reportar y parar. **Acceptance criteria: sanity_check_recompute_vs_db
+debe figurar en el JSON output con N_pass/N_total.**
+
+### Paso 2 — Filtrar a N efectivo real
+El feature SHADOW puede estar COMPUTADO en todos los partidos pero APLICADO solo en
+algunos (ejemplo altitud: `shadow_xg` siempre se calcula, pero el multiplicador
+1.35/1.25/etc solo aplica si el equipo está en el catálogo `equipos_altitud`).
+Filtrar el A/B a los partidos donde el feature ESTÁ APLICADO. Reportar N_efectivo
+y N_total_elegible.
+
+### Paso 3 — Distinguir 'puro' vs 'sistema'
+Reportar SIEMPRE dos versiones del A/B:
+- **puro**: feature aislado, sin Hallazgo G ni Fix #5 en ambos lados.
+- **sistema**: feature dentro del sistema completo (HG + Fix #5 si aplican).
+Las dos pueden divergir significativamente y son complementarias.
+
+### Paso 4 — Protocolo cuando evidencia CONTRADICE hipótesis del Investigador
+NO abrir PROPOSAL automáticamente solo porque el Investigador lo recomendó. Si tu
+backtest agregado NO sostiene la recomendación: reportá honestamente y NO abras
+PROPOSAL. Preferí honestidad sobre paciencia humana.
+
 ## RESTRICCIONES
 
 - NO aplicar cambios sin que el agente crítico los valide

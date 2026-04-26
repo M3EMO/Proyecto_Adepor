@@ -218,3 +218,12 @@ está inactivo para esta liga. Activación automática al cruzar ese umbral.
 - **Si un ID no se encuentra**: documentarlo con comentario y usar placeholder, no romper el sistema
 - **Un solo equipo por sesión**: no crear sub-agentes
 - **Siempre reportar** qué cambios se hicieron y cuáles quedaron pendientes
+
+## CONVENCIONES DE BEADS
+
+- **Formato `bead_id`**: SIEMPRE usar el hash que `bd create` genera automáticamente
+  (formato `adepor-<hash>`, ej: `adepor-yl8`). NUNCA usar IDs custom como
+  `dataops_backfill_ema_auto_001`. El hash automático es necesario para que las
+  herramientas (`bd dep add`, `bd close`, search) funcionen consistentemente.
+- **Antes de quedar idle**: `bd close` o `bd note` el bead asignado + `SendMessage`
+  al Lead con el bead_id y summary. No dejes tasks abiertas sin reportar.

@@ -94,6 +94,24 @@ IMPACTO EN MODELO: [ALTO / MEDIO / BAJO — qué mejora concretamente]
 EJEMPLO: [una llamada real con respuesta recortada]
 ```
 
+## PROTOCOLO DE CIERRE (obligatorio)
+
+Antes de quedar idle al terminar tu research:
+
+1. **`bd note <bead_id>`** con findings + paths a evidence (CSVs, JSONs, papers).
+2. **`bd close <bead_id>`** con reason de cierre.
+3. **`SendMessage` al critico-sintesis** (o al teammate que el Lead te asigne) con:
+   - `bead_id`
+   - summary 5-10 líneas con conclusiones accionables
+   - paths a evidence
+   AUNQUE tu trabajo sea self-evident. Cerrar bead silenciosamente sin SendMessage
+   deja tu input fuera de la auditoría.
+4. Recién entonces idle.
+
+Razón: en research multi-investigador (Investigador + Investigador-xG + ...),
+si un bead no llega al crítico-síntesis vía SendMessage explícito, queda fuera
+de la consolidación.
+
 ## RESTRICCIONES
 
 - NO implementar código — solo investigar

@@ -1,0 +1,173 @@
+{
+  "bead_id": "adepor-1vt",
+  "metodologia": {
+    "temporadas_api_extended": [
+      2024,
+      2023,
+      2022,
+      2021
+    ],
+    "min_partidos_europa": 80,
+    "min_partidos_latam": 150,
+    "shrinkage_target": -0.12,
+    "shrinkage_pseudo_n": 200,
+    "outlier_range": [
+      -0.2,
+      0.05
+    ],
+    "floor": -0.03
+  },
+  "resultados": {
+    "Alemania": {
+      "fuente": "API-Football",
+      "n_externo": 923,
+      "estado": "MLE_OK",
+      "rho_mle": -0.122,
+      "rho_post_shrinkage": -0.1216,
+      "rho_propuesto_externo": -0.1216,
+      "outlier": false,
+      "shrinkage_w": 0.8219
+    },
+    "Argentina": {
+      "fuente": "API-Football",
+      "n_externo": 1334,
+      "estado": "MLE_OK",
+      "rho_mle": -0.074,
+      "rho_post_shrinkage": -0.08,
+      "rho_propuesto_externo": -0.08,
+      "outlier": false,
+      "shrinkage_w": 0.8696
+    },
+    "Bolivia": {
+      "fuente": "API-Football",
+      "n_externo": 924,
+      "estado": "MLE_OK",
+      "rho_mle": 0.0,
+      "rho_post_shrinkage": -0.0214,
+      "rho_propuesto_externo": -0.03,
+      "outlier": false,
+      "shrinkage_w": 0.8221
+    },
+    "Brasil": {
+      "fuente": "API-Football",
+      "n_externo": 380,
+      "estado": "MLE_OK",
+      "rho_mle": -0.037,
+      "rho_post_shrinkage": -0.0656,
+      "rho_propuesto_externo": -0.0656,
+      "outlier": false,
+      "shrinkage_w": 0.6552
+    },
+    "Chile": {
+      "fuente": "API-Football",
+      "n_externo": 0,
+      "min_requerido": 150,
+      "estado": "N_INSUFICIENTE",
+      "rho_mle": null,
+      "rho_post_shrinkage": null,
+      "rho_propuesto_externo": null
+    },
+    "Colombia": {
+      "fuente": "API-Football",
+      "n_externo": 0,
+      "min_requerido": 150,
+      "estado": "N_INSUFICIENTE",
+      "rho_mle": null,
+      "rho_post_shrinkage": null,
+      "rho_propuesto_externo": null
+    },
+    "Ecuador": {
+      "fuente": "API-Football",
+      "n_externo": 0,
+      "min_requerido": 150,
+      "estado": "N_INSUFICIENTE",
+      "rho_mle": null,
+      "rho_post_shrinkage": null,
+      "rho_propuesto_externo": null
+    },
+    "Espana": {
+      "fuente": "API-Football",
+      "n_externo": 0,
+      "min_requerido": 80,
+      "estado": "N_INSUFICIENTE",
+      "rho_mle": null,
+      "rho_post_shrinkage": null,
+      "rho_propuesto_externo": null
+    },
+    "Francia": {
+      "fuente": "API-Football",
+      "n_externo": 0,
+      "min_requerido": 80,
+      "estado": "N_INSUFICIENTE",
+      "rho_mle": null,
+      "rho_post_shrinkage": null,
+      "rho_propuesto_externo": null
+    },
+    "Inglaterra": {
+      "fuente": "CSV",
+      "n_externo": 1140,
+      "estado": "MLE_OK",
+      "rho_mle": 0.0,
+      "rho_post_shrinkage": -0.0179,
+      "rho_propuesto_externo": -0.03,
+      "outlier": false,
+      "shrinkage_w": 0.8507
+    },
+    "Italia": {
+      "fuente": "API-Football",
+      "n_externo": 0,
+      "min_requerido": 80,
+      "estado": "N_INSUFICIENTE",
+      "rho_mle": null,
+      "rho_post_shrinkage": null,
+      "rho_propuesto_externo": null
+    },
+    "Noruega": {
+      "fuente": "CSV",
+      "n_externo": 918,
+      "estado": "MLE_OK",
+      "rho_mle": -0.104,
+      "rho_post_shrinkage": -0.1069,
+      "rho_propuesto_externo": -0.1069,
+      "outlier": false,
+      "shrinkage_w": 0.8211
+    },
+    "Peru": {
+      "fuente": "API-Football",
+      "n_externo": 0,
+      "min_requerido": 150,
+      "estado": "N_INSUFICIENTE",
+      "rho_mle": null,
+      "rho_post_shrinkage": null,
+      "rho_propuesto_externo": null
+    },
+    "Turquia": {
+      "fuente": "CSV",
+      "n_externo": 1064,
+      "estado": "MLE_OK",
+      "rho_mle": -0.062,
+      "rho_post_shrinkage": -0.0712,
+      "rho_propuesto_externo": -0.0712,
+      "outlier": false,
+      "shrinkage_w": 0.8418
+    },
+    "Uruguay": {
+      "fuente": "API-Football",
+      "n_externo": 0,
+      "min_requerido": 150,
+      "estado": "N_INSUFICIENTE",
+      "rho_mle": null,
+      "rho_post_shrinkage": null,
+      "rho_propuesto_externo": null
+    },
+    "Venezuela": {
+      "fuente": "API-Football",
+      "n_externo": 0,
+      "min_requerido": 150,
+      "estado": "N_INSUFICIENTE",
+      "rho_mle": null,
+      "rho_post_shrinkage": null,
+      "rho_propuesto_externo": null
+    }
+  }
+}

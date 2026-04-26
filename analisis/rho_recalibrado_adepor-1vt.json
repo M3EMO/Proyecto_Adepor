@@ -1,0 +1,463 @@
+{
+  "bead_id": "adepor-1vt",
+  "snapshot_db_path": "shadow_dbs\\shadow_adepor-1vt.db",
+  "snapshot_db_sha256": "bd550d9ed7f2bd75cd76f0617adc05bf92919be871dc0ac39c293c6ecda22e1a",
+  "metodologia": {
+    "grid": "rho in [-0.25, 0.05] step 0.005",
+    "umbral_insample": 50,
+    "shrinkage_target": -0.12,
+    "shrinkage_pseudo_n": 200,
+    "outlier_range": [
+      -0.2,
+      0.05
+    ],
+    "floor": -0.03,
+    "fallback_actual_no_modificado": -0.09,
+    "criterio_significancia": "abs(delta_brier_combinado) >= 0.015"
+  },
+  "metodologia_externa": {
+    "temporadas_api_extended": [
+      2024,
+      2023,
+      2022,
+      2021
+    ],
+    "min_partidos_europa": 80,
+    "min_partidos_latam": 150,
+    "shrinkage_target": -0.12,
+    "shrinkage_pseudo_n": 200,
+    "outlier_range": [
+      -0.2,
+      0.05
+    ],
+    "floor": -0.03
+  },
+  "limitaciones": {
+    "tipo_evaluacion": "in-sample (sin holdout, N insuficiente para split)",
+    "ev_horizonte_caveat": "picks reales 1x2=0, picks O/U <=10 -> yield es ruido. Brier es metrica primaria.",
+    "circularidad_data": "partidos_backtest.prob_X fue calculado con rho_calculado actual; recomputo desde xg_local/xg_visita persistido.",
+    "investigador_findings_bead": "adepor-c2g",
+    "investigador_resumen": "literatura europea -0.10 a -0.15, LATAM extrapolado, recalibrar cada season, shrinkage hacia -0.12",
+    "rate_limit_api_football": "9 ligas no descargadas por HTTP 429: Chile, Colombia, Ecuador, Espana, Francia, Italia, Peru, Uruguay, Venezuela. Para estas se mantiene rho_actual."
+  },
+  "logica_decision": [
+    "MLE_EXTERNO: si N_externo >= min_required (Eur 80, LATAM 150) -> rho_propuesto_externo",
+    "IN_SAMPLE_SIGNIFICATIVO: si in-sample N>=50 y |delta_brier|>=0.015 -> rho_propuesto_insample",
+    "MANTENER_NO_SIGNIFICATIVO / MANTENER_SIN_EVIDENCIA: rho_actual sin cambio"
+  ],
+  "resultados_por_liga": {
+    "Alemania": {
+      "liga": "Alemania",
+      "rho_actual_ligas_stats": -0.0411,
+      "in_sample": {
+        "n_liquidados": 7,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0411,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 923,
+        "estado": "MLE_OK",
+        "rho_mle": -0.122,
+        "rho_propuesto_externo": -0.1216,
+        "outlier": false
+      },
+      "rho_propuesto_final": -0.1216,
+      "fuente_decision": "MLE_EXTERNO",
+      "justificacion": "MLE externo OK con N=923 (>= min). Out-of-sample. Shrinkage hacia -0.12 con w=0.8219.",
+      "cambio": true,
+      "delta_rho": -0.0805
+    },
+    "Argentina": {
+      "liga": "Argentina",
+      "rho_actual_ligas_stats": -0.0521,
+      "in_sample": {
+        "n_liquidados": 75,
+        "estado": "ANALIZADO_INSAMPLE",
+        "rho_optimo_grid": 0.05,
+        "rho_propuesto_insample": -0.0736,
+        "delta_brier_combinado": 0.000222,
+        "significativo_brier_015": false
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 1334,
+        "estado": "MLE_OK",
+        "rho_mle": -0.074,
+        "rho_propuesto_externo": -0.08,
+        "outlier": false
+      },
+      "rho_propuesto_final": -0.08,
+      "fuente_decision": "MLE_EXTERNO",
+      "justificacion": "MLE externo OK con N=1334 (>= min). Out-of-sample. Shrinkage hacia -0.12 con w=0.8696.",
+      "cambio": true,
+      "delta_rho": -0.0279
+    },
+    "Bolivia": {
+      "liga": "Bolivia",
+      "rho_actual_ligas_stats": -0.0314,
+      "in_sample": {
+        "n_liquidados": 14,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0314,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 924,
+        "estado": "MLE_OK",
+        "rho_mle": 0.0,
+        "rho_propuesto_externo": -0.03,
+        "outlier": false
+      },
+      "rho_propuesto_final": -0.03,
+      "fuente_decision": "MLE_EXTERNO",
+      "justificacion": "MLE externo OK con N=924 (>= min). Out-of-sample. Shrinkage hacia -0.12 con w=0.8221.",
+      "cambio": true,
+      "delta_rho": 0.0014
+    },
+    "Brasil": {
+      "liga": "Brasil",
+      "rho_actual_ligas_stats": -0.0413,
+      "in_sample": {
+        "n_liquidados": 54,
+        "estado": "ANALIZADO_INSAMPLE",
+        "rho_optimo_grid": 0.05,
+        "rho_propuesto_insample": -0.0839,
+        "delta_brier_combinado": 0.000245,
+        "significativo_brier_015": false
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 380,
+        "estado": "MLE_OK",
+        "rho_mle": -0.037,
+        "rho_propuesto_externo": -0.0656,
+        "outlier": false
+      },
+      "rho_propuesto_final": -0.0656,
+      "fuente_decision": "MLE_EXTERNO",
+      "justificacion": "MLE externo OK con N=380 (>= min). Out-of-sample. Shrinkage hacia -0.12 con w=0.6552.",
+      "cambio": true,
+      "delta_rho": -0.0243
+    },
+    "Chile": {
+      "liga": "Chile",
+      "rho_actual_ligas_stats": -0.0298,
+      "in_sample": {
+        "n_liquidados": 15,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0298,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 0,
+        "estado": "N_INSUFICIENTE",
+        "rho_mle": null,
+        "rho_propuesto_externo": null,
+        "outlier": null
+      },
+      "rho_propuesto_final": -0.0298,
+      "fuente_decision": "MANTENER_SIN_EVIDENCIA",
+      "justificacion": "Sin datos in-sample (N<50) y MLE externo no disponible (estado=N_INSUFICIENTE). Mantener rho_calculado actual.",
+      "cambio": false,
+      "delta_rho": 0.0
+    },
+    "Colombia": {
+      "liga": "Colombia",
+      "rho_actual_ligas_stats": -0.0456,
+      "in_sample": {
+        "n_liquidados": 20,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0456,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 0,
+        "estado": "N_INSUFICIENTE",
+        "rho_mle": null,
+        "rho_propuesto_externo": null,
+        "outlier": null
+      },
+      "rho_propuesto_final": -0.0456,
+      "fuente_decision": "MANTENER_SIN_EVIDENCIA",
+      "justificacion": "Sin datos in-sample (N<50) y MLE externo no disponible (estado=N_INSUFICIENTE). Mantener rho_calculado actual.",
+      "cambio": false,
+      "delta_rho": 0.0
+    },
+    "Ecuador": {
+      "liga": "Ecuador",
+      "rho_actual_ligas_stats": -0.0462,
+      "in_sample": {
+        "n_liquidados": 22,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0462,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 0,
+        "estado": "N_INSUFICIENTE",
+        "rho_mle": null,
+        "rho_propuesto_externo": null,
+        "outlier": null
+      },
+      "rho_propuesto_final": -0.0462,
+      "fuente_decision": "MANTENER_SIN_EVIDENCIA",
+      "justificacion": "Sin datos in-sample (N<50) y MLE externo no disponible (estado=N_INSUFICIENTE). Mantener rho_calculado actual.",
+      "cambio": false,
+      "delta_rho": 0.0
+    },
+    "Espana": {
+      "liga": "Espana",
+      "rho_actual_ligas_stats": -0.037,
+      "in_sample": {
+        "n_liquidados": 15,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.037,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 0,
+        "estado": "N_INSUFICIENTE",
+        "rho_mle": null,
+        "rho_propuesto_externo": null,
+        "outlier": null
+      },
+      "rho_propuesto_final": -0.037,
+      "fuente_decision": "MANTENER_SIN_EVIDENCIA",
+      "justificacion": "Sin datos in-sample (N<50) y MLE externo no disponible (estado=N_INSUFICIENTE). Mantener rho_calculado actual.",
+      "cambio": false,
+      "delta_rho": 0.0
+    },
+    "Francia": {
+      "liga": "Francia",
+      "rho_actual_ligas_stats": -0.0371,
+      "in_sample": {
+        "n_liquidados": 5,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0371,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 0,
+        "estado": "N_INSUFICIENTE",
+        "rho_mle": null,
+        "rho_propuesto_externo": null,
+        "outlier": null
+      },
+      "rho_propuesto_final": -0.0371,
+      "fuente_decision": "MANTENER_SIN_EVIDENCIA",
+      "justificacion": "Sin datos in-sample (N<50) y MLE externo no disponible (estado=N_INSUFICIENTE). Mantener rho_calculado actual.",
+      "cambio": false,
+      "delta_rho": 0.0
+    },
+    "Inglaterra": {
+      "liga": "Inglaterra",
+      "rho_actual_ligas_stats": -0.0414,
+      "in_sample": {
+        "n_liquidados": 38,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0414,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "CSV",
+        "n_externo": 1140,
+        "estado": "MLE_OK",
+        "rho_mle": 0.0,
+        "rho_propuesto_externo": -0.03,
+        "outlier": false
+      },
+      "rho_propuesto_final": -0.03,
+      "fuente_decision": "MLE_EXTERNO",
+      "justificacion": "MLE externo OK con N=1140 (>= min). Out-of-sample. Shrinkage hacia -0.12 con w=0.8507.",
+      "cambio": true,
+      "delta_rho": 0.0114
+    },
+    "Italia": {
+      "liga": "Italia",
+      "rho_actual_ligas_stats": -0.0397,
+      "in_sample": {
+        "n_liquidados": 5,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0397,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 0,
+        "estado": "N_INSUFICIENTE",
+        "rho_mle": null,
+        "rho_propuesto_externo": null,
+        "outlier": null
+      },
+      "rho_propuesto_final": -0.0397,
+      "fuente_decision": "MANTENER_SIN_EVIDENCIA",
+      "justificacion": "Sin datos in-sample (N<50) y MLE externo no disponible (estado=N_INSUFICIENTE). Mantener rho_calculado actual.",
+      "cambio": false,
+      "delta_rho": 0.0
+    },
+    "Noruega": {
+      "liga": "Noruega",
+      "rho_actual_ligas_stats": -0.0312,
+      "in_sample": {
+        "n_liquidados": 34,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0312,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "CSV",
+        "n_externo": 918,
+        "estado": "MLE_OK",
+        "rho_mle": -0.104,
+        "rho_propuesto_externo": -0.1069,
+        "outlier": false
+      },
+      "rho_propuesto_final": -0.1069,
+      "fuente_decision": "MLE_EXTERNO",
+      "justificacion": "MLE externo OK con N=918 (>= min). Out-of-sample. Shrinkage hacia -0.12 con w=0.8211.",
+      "cambio": true,
+      "delta_rho": -0.0757
+    },
+    "Peru": {
+      "liga": "Peru",
+      "rho_actual_ligas_stats": -0.0396,
+      "in_sample": {
+        "n_liquidados": 19,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0396,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 0,
+        "estado": "N_INSUFICIENTE",
+        "rho_mle": null,
+        "rho_propuesto_externo": null,
+        "outlier": null
+      },
+      "rho_propuesto_final": -0.0396,
+      "fuente_decision": "MANTENER_SIN_EVIDENCIA",
+      "justificacion": "Sin datos in-sample (N<50) y MLE externo no disponible (estado=N_INSUFICIENTE). Mantener rho_calculado actual.",
+      "cambio": false,
+      "delta_rho": 0.0
+    },
+    "Turquia": {
+      "liga": "Turquia",
+      "rho_actual_ligas_stats": -0.0466,
+      "in_sample": {
+        "n_liquidados": 35,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0466,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "CSV",
+        "n_externo": 1064,
+        "estado": "MLE_OK",
+        "rho_mle": -0.062,
+        "rho_propuesto_externo": -0.0712,
+        "outlier": false
+      },
+      "rho_propuesto_final": -0.0712,
+      "fuente_decision": "MLE_EXTERNO",
+      "justificacion": "MLE externo OK con N=1064 (>= min). Out-of-sample. Shrinkage hacia -0.12 con w=0.8418.",
+      "cambio": true,
+      "delta_rho": -0.0246
+    },
+    "Uruguay": {
+      "liga": "Uruguay",
+      "rho_actual_ligas_stats": -0.041,
+      "in_sample": {
+        "n_liquidados": 15,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.041,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 0,
+        "estado": "N_INSUFICIENTE",
+        "rho_mle": null,
+        "rho_propuesto_externo": null,
+        "outlier": null
+      },
+      "rho_propuesto_final": -0.041,
+      "fuente_decision": "MANTENER_SIN_EVIDENCIA",
+      "justificacion": "Sin datos in-sample (N<50) y MLE externo no disponible (estado=N_INSUFICIENTE). Mantener rho_calculado actual.",
+      "cambio": false,
+      "delta_rho": 0.0
+    },
+    "Venezuela": {
+      "liga": "Venezuela",
+      "rho_actual_ligas_stats": -0.0419,
+      "in_sample": {
+        "n_liquidados": 10,
+        "estado": "SKIP_N_INSUFICIENTE",
+        "rho_optimo_grid": null,
+        "rho_propuesto_insample": -0.0419,
+        "delta_brier_combinado": null,
+        "significativo_brier_015": null
+      },
+      "externo_mle": {
+        "fuente": "API-Football",
+        "n_externo": 0,
+        "estado": "N_INSUFICIENTE",
+        "rho_mle": null,
+        "rho_propuesto_externo": null,
+        "outlier": null
+      },
+      "rho_propuesto_final": -0.0419,
+      "fuente_decision": "MANTENER_SIN_EVIDENCIA",
+      "justificacion": "Sin datos in-sample (N<50) y MLE externo no disponible (estado=N_INSUFICIENTE). Mantener rho_calculado actual.",
+      "cambio": false,
+      "delta_rho": 0.0
+    }
+  },
+  "aggregate": {
+    "n_total_liquidados_db": 383,
+    "n_analizados_in_sample": 129,
+    "n_externo_mle_total": 6683,
+    "brier_combinado_antes_in_sample": 0.21916,
+    "brier_combinado_despues_in_sample": 0.219391,
+    "delta_brier_global_in_sample": 0.000232,
+    "ev_total_horizonte_antes": 0.0,
+    "ev_total_horizonte_despues": 0.0,
+    "ev_total_horizonte_caveat": "No calculado: 0 picks 1x2 reales y 10 picks O/U totales. Senal estadistica nula. No se reporta yield.",
+    "delta_yield": null,
+    "delta_yield_caveat": "No calculable por baja N_picks. Brier es metrica primaria."
+  }
+}

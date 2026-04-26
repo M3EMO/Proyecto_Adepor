@@ -1,0 +1,325 @@
+{
+  "Alemania": {
+    "lado_A_motor_actual": {
+      "n": 468,
+      "hit_rate": 0.4744,
+      "brier_mean": 0.63,
+      "xg_mse_local": 1.8141,
+      "xg_mse_visita": 1.5156,
+      "xg_bias_local": 0.1464,
+      "xg_bias_visita": 0.1111,
+      "base_rate_local": 0.391,
+      "edge_pp": 8.3333
+    },
+    "lado_B_ols_coef": {
+      "n": 468,
+      "hit_rate": 0.4744,
+      "brier_mean": 0.6376,
+      "xg_mse_local": 1.82,
+      "xg_mse_visita": 1.5308,
+      "xg_bias_local": -0.0052,
+      "xg_bias_visita": 0.0392,
+      "base_rate_local": 0.391,
+      "edge_pp": 8.3333
+    },
+    "delta": {
+      "hit_rate": 0.0,
+      "brier_mean": 0.0076,
+      "xg_mse_local": 0.0059,
+      "xg_bias_local": -0.1516
+    },
+    "veredicto": "IGUAL"
+  },
+  "Argentina": {
+    "lado_A_motor_actual": {
+      "n": 378,
+      "hit_rate": 0.4497,
+      "brier_mean": 0.6467,
+      "xg_mse_local": 1.1754,
+      "xg_mse_visita": 0.9792,
+      "xg_bias_local": 0.1023,
+      "xg_bias_visita": 0.2648,
+      "base_rate_local": 0.4497,
+      "edge_pp": 0.0
+    },
+    "lado_B_ols_coef": {
+      "n": 378,
+      "hit_rate": 0.4418,
+      "brier_mean": 0.6505,
+      "xg_mse_local": 1.1799,
+      "xg_mse_visita": 0.9385,
+      "xg_bias_local": -0.0972,
+      "xg_bias_visita": 0.1497,
+      "base_rate_local": 0.4497,
+      "edge_pp": -0.7937
+    },
+    "delta": {
+      "hit_rate": -0.0079,
+      "brier_mean": 0.0038,
+      "xg_mse_local": 0.0045,
+      "xg_bias_local": -0.1995
+    },
+    "veredicto": "EMPEORA"
+  },
+  "Brasil": {
+    "lado_A_motor_actual": {
+      "n": 380,
+      "hit_rate": 0.4868,
+      "brier_mean": 0.6336,
+      "xg_mse_local": 1.1916,
+      "xg_mse_visita": 1.028,
+      "xg_bias_local": 0.1211,
+      "xg_bias_visita": 0.2853,
+      "base_rate_local": 0.4737,
+      "edge_pp": 1.3158
+    },
+    "lado_B_ols_coef": {
+      "n": 380,
+      "hit_rate": 0.4789,
+      "brier_mean": 0.6423,
+      "xg_mse_local": 1.1874,
+      "xg_mse_visita": 0.9662,
+      "xg_bias_local": -0.1193,
+      "xg_bias_visita": 0.1327,
+      "base_rate_local": 0.4737,
+      "edge_pp": 0.5263
+    },
+    "delta": {
+      "hit_rate": -0.0079,
+      "brier_mean": 0.0087,
+      "xg_mse_local": -0.0042,
+      "xg_bias_local": -0.2404
+    },
+    "veredicto": "EMPEORA"
+  },
+  "Chile": {
+    "lado_A_motor_actual": {
+      "n": 240,
+      "hit_rate": 0.5167,
+      "brier_mean": 0.6246,
+      "xg_mse_local": 1.5199,
+      "xg_mse_visita": 1.2778,
+      "xg_bias_local": 0.0479,
+      "xg_bias_visita": 0.199,
+      "base_rate_local": 0.4583,
+      "edge_pp": 5.8333
+    },
+    "lado_B_ols_coef": {
+      "n": 240,
+      "hit_rate": 0.5167,
+      "brier_mean": 0.6321,
+      "xg_mse_local": 1.5185,
+      "xg_mse_visita": 1.258,
+      "xg_bias_local": -0.1337,
+      "xg_bias_visita": 0.0887,
+      "base_rate_local": 0.4583,
+      "edge_pp": 5.8333
+    },
+    "delta": {
+      "hit_rate": 0.0,
+      "brier_mean": 0.0075,
+      "xg_mse_local": -0.0014,
+      "xg_bias_local": -0.1816
+    },
+    "veredicto": "IGUAL"
+  },
+  "Colombia": {
+    "lado_A_motor_actual": {
+      "n": 190,
+      "hit_rate": 0.4526,
+      "brier_mean": 0.6463,
+      "xg_mse_local": 1.169,
+      "xg_mse_visita": 0.9905,
+      "xg_bias_local": 0.0809,
+      "xg_bias_visita": 0.2507,
+      "base_rate_local": 0.4421,
+      "edge_pp": 1.0526
+    },
+    "lado_B_ols_coef": {
+      "n": 190,
+      "hit_rate": 0.4,
+      "brier_mean": 0.6555,
+      "xg_mse_local": 1.1718,
+      "xg_mse_visita": 0.9563,
+      "xg_bias_local": -0.1116,
+      "xg_bias_visita": 0.15,
+      "base_rate_local": 0.4421,
+      "edge_pp": -4.2105
+    },
+    "delta": {
+      "hit_rate": -0.0526,
+      "brier_mean": 0.0092,
+      "xg_mse_local": 0.0028,
+      "xg_bias_local": -0.1925
+    },
+    "veredicto": "EMPEORA"
+  },
+  "Espana": {
+    "lado_A_motor_actual": {
+      "n": 580,
+      "hit_rate": 0.4759,
+      "brier_mean": 0.6242,
+      "xg_mse_local": 1.5331,
+      "xg_mse_visita": 1.1553,
+      "xg_bias_local": 0.0669,
+      "xg_bias_visita": 0.1515,
+      "base_rate_local": 0.4431,
+      "edge_pp": 3.2759
+    },
+    "lado_B_ols_coef": {
+      "n": 580,
+      "hit_rate": 0.4828,
+      "brier_mean": 0.6308,
+      "xg_mse_local": 1.5573,
+      "xg_mse_visita": 1.1464,
+      "xg_bias_local": -0.0967,
+      "xg_bias_visita": 0.0635,
+      "base_rate_local": 0.4431,
+      "edge_pp": 3.9655
+    },
+    "delta": {
+      "hit_rate": 0.0069,
+      "brier_mean": 0.0066,
+      "xg_mse_local": 0.0242,
+      "xg_bias_local": -0.1636
+    },
+    "veredicto": "EMPEORA"
+  },
+  "Francia": {
+    "lado_A_motor_actual": {
+      "n": 459,
+      "hit_rate": 0.4967,
+      "brier_mean": 0.6207,
+      "xg_mse_local": 1.5914,
+      "xg_mse_visita": 1.4113,
+      "xg_bias_local": 0.0697,
+      "xg_bias_visita": 0.112,
+      "base_rate_local": 0.4314,
+      "edge_pp": 6.5359
+    },
+    "lado_B_ols_coef": {
+      "n": 459,
+      "hit_rate": 0.4902,
+      "brier_mean": 0.6271,
+      "xg_mse_local": 1.6052,
+      "xg_mse_visita": 1.413,
+      "xg_bias_local": -0.0874,
+      "xg_bias_visita": 0.0068,
+      "base_rate_local": 0.4314,
+      "edge_pp": 5.8824
+    },
+    "delta": {
+      "hit_rate": -0.0065,
+      "brier_mean": 0.0064,
+      "xg_mse_local": 0.0138,
+      "xg_bias_local": -0.1571
+    },
+    "veredicto": "EMPEORA"
+  },
+  "Inglaterra": {
+    "lado_A_motor_actual": {
+      "n": 564,
+      "hit_rate": 0.5266,
+      "brier_mean": 0.6155,
+      "xg_mse_local": 1.6655,
+      "xg_mse_visita": 1.463,
+      "xg_bias_local": 0.1124,
+      "xg_bias_visita": 0.1079,
+      "base_rate_local": 0.4184,
+      "edge_pp": 10.8156
+    },
+    "lado_B_ols_coef": {
+      "n": 564,
+      "hit_rate": 0.5089,
+      "brier_mean": 0.6226,
+      "xg_mse_local": 1.6786,
+      "xg_mse_visita": 1.4661,
+      "xg_bias_local": -0.0385,
+      "xg_bias_visita": 0.0029,
+      "base_rate_local": 0.4184,
+      "edge_pp": 9.0426
+    },
+    "delta": {
+      "hit_rate": -0.0177,
+      "brier_mean": 0.0071,
+      "xg_mse_local": 0.0131,
+      "xg_bias_local": -0.1509
+    },
+    "veredicto": "EMPEORA"
+  },
+  "Italia": {
+    "lado_A_motor_actual": {
+      "n": 580,
+      "hit_rate": 0.4759,
+      "brier_mean": 0.6317,
+      "xg_mse_local": 1.2451,
+      "xg_mse_visita": 1.2886,
+      "xg_bias_local": 0.0986,
+      "xg_bias_visita": 0.1117,
+      "base_rate_local": 0.3914,
+      "edge_pp": 8.4483
+    },
+    "lado_B_ols_coef": {
+      "n": 580,
+      "hit_rate": 0.4759,
+      "brier_mean": 0.6387,
+      "xg_mse_local": 1.2561,
+      "xg_mse_visita": 1.2876,
+      "xg_bias_local": -0.0485,
+      "xg_bias_visita": 0.0255,
+      "base_rate_local": 0.3914,
+      "edge_pp": 8.4483
+    },
+    "delta": {
+      "hit_rate": 0.0,
+      "brier_mean": 0.007,
+      "xg_mse_local": 0.011,
+      "xg_bias_local": -0.1471
+    },
+    "veredicto": "IGUAL"
+  },
+  "Turquia": {
+    "lado_A_motor_actual": {
+      "n": 551,
+      "hit_rate": 0.5408,
+      "brier_mean": 0.6091,
+      "xg_mse_local": 1.7355,
+      "xg_mse_visita": 1.361,
+      "xg_bias_local": 0.0112,
+      "xg_bias_visita": 0.216,
+      "base_rate_local": 0.4719,
+      "edge_pp": 6.8966
+    },
+    "lado_B_ols_coef": {
+      "n": 551,
+      "hit_rate": 0.5463,
+      "brier_mean": 0.6189,
+      "xg_mse_local": 1.7822,
+      "xg_mse_visita": 1.3536,
+      "xg_bias_local": -0.1266,
+      "xg_bias_visita": 0.126,
+      "base_rate_local": 0.4719,
+      "edge_pp": 7.441
+    },
+    "delta": {
+      "hit_rate": 0.0055,
+      "brier_mean": 0.0098,
+      "xg_mse_local": 0.0467,
+      "xg_bias_local": -0.1378
+    },
+    "veredicto": "EMPEORA"
+  },
+  "__resumen__": {
+    "n_ligas": 10,
+    "n_obs_pool": 4390,
+    "hit_pool_A": 0.4925,
+    "hit_pool_B": 0.4875,
+    "delta_hit_pool": -0.005,
+    "brier_pool_A": 0.6262,
+    "brier_pool_B": 0.6335,
+    "delta_brier_pool": 0.0073,
+    "n_mejora": 0,
+    "n_igual": 3,
+    "n_empeora": 7
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "n_total": 342,
+  "coincidencias": 324,
+  "flips": 18,
+  "v_a_fix5": {
+    "n_apostados": 88,
+    "n_gano": 37,
+    "hit_rate_pct": 42.04545454545455,
+    "stake_total": 2.1957021491119306,
+    "profit": 1.0153494468069966,
+    "yield_pct": 46.242585644763466
+  },
+  "v_b_fix6v2": {
+    "n_apostados": 106,
+    "n_gano": 45,
+    "hit_rate_pct": 42.45283018867924,
+    "stake_total": 2.6448285717057267,
+    "profit": 1.1521909497873668,
+    "yield_pct": 43.56391798370075
+  },
+  "delta_yield_pct": -2.6786676610627183,
+  "delta_apuestas": 18,
+  "delta_hit_rate_pp": 0.40737564322469666
+}

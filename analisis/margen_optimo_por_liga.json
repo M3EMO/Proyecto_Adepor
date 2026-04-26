@@ -1,0 +1,1599 @@
+{
+  "fecha": "2026-04-26T14:32:58.097832",
+  "global_actual": 0.03,
+  "per_liga": {
+    "Inglaterra": {
+      "n_total": 564,
+      "hit_base": 0.5266,
+      "margen_actual_config": 0.015,
+      "actual_eval": {
+        "threshold": 0.015,
+        "n_kept": 516,
+        "pct_kept": 91.5,
+        "hit_rate": 0.5426,
+        "delta_vs_base": 0.016
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 416,
+        "pct_kept": 73.8,
+        "hit_rate": 0.5697,
+        "delta_vs_base": 0.0431
+      },
+      "optimo": {
+        "threshold": 0.1,
+        "n_kept": 287,
+        "pct_kept": 50.9,
+        "hit_rate": 0.6098,
+        "delta_vs_base": 0.0832
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 564,
+          "pct_kept": 100.0,
+          "hit_rate": 0.5266,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 547,
+          "pct_kept": 97.0,
+          "hit_rate": 0.5265,
+          "delta_vs_base": -0.0001
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 531,
+          "pct_kept": 94.1,
+          "hit_rate": 0.533,
+          "delta_vs_base": 0.0064
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 516,
+          "pct_kept": 91.5,
+          "hit_rate": 0.5426,
+          "delta_vs_base": 0.016
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 504,
+          "pct_kept": 89.4,
+          "hit_rate": 0.5456,
+          "delta_vs_base": 0.019
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 492,
+          "pct_kept": 87.2,
+          "hit_rate": 0.5427,
+          "delta_vs_base": 0.0161
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 481,
+          "pct_kept": 85.3,
+          "hit_rate": 0.5447,
+          "delta_vs_base": 0.0181
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 447,
+          "pct_kept": 79.3,
+          "hit_rate": 0.5548,
+          "delta_vs_base": 0.0282
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 416,
+          "pct_kept": 73.8,
+          "hit_rate": 0.5697,
+          "delta_vs_base": 0.0431
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 362,
+          "pct_kept": 64.2,
+          "hit_rate": 0.5856,
+          "delta_vs_base": 0.059
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 287,
+          "pct_kept": 50.9,
+          "hit_rate": 0.6098,
+          "delta_vs_base": 0.0832
+        }
+      ]
+    },
+    "Italia": {
+      "n_total": 580,
+      "hit_base": 0.4759,
+      "margen_actual_config": 0.03,
+      "actual_eval": {
+        "threshold": 0.03,
+        "n_kept": 488,
+        "pct_kept": 84.1,
+        "hit_rate": 0.502,
+        "delta_vs_base": 0.0262
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 417,
+        "pct_kept": 71.9,
+        "hit_rate": 0.5132,
+        "delta_vs_base": 0.0373
+      },
+      "optimo": {
+        "threshold": 0.07,
+        "n_kept": 356,
+        "pct_kept": 61.4,
+        "hit_rate": 0.5365,
+        "delta_vs_base": 0.0607
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 580,
+          "pct_kept": 100.0,
+          "hit_rate": 0.4759,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 568,
+          "pct_kept": 97.9,
+          "hit_rate": 0.4806,
+          "delta_vs_base": 0.0048
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 560,
+          "pct_kept": 96.6,
+          "hit_rate": 0.4821,
+          "delta_vs_base": 0.0063
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 545,
+          "pct_kept": 94.0,
+          "hit_rate": 0.4881,
+          "delta_vs_base": 0.0122
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 524,
+          "pct_kept": 90.3,
+          "hit_rate": 0.4962,
+          "delta_vs_base": 0.0203
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 509,
+          "pct_kept": 87.8,
+          "hit_rate": 0.4951,
+          "delta_vs_base": 0.0192
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 488,
+          "pct_kept": 84.1,
+          "hit_rate": 0.502,
+          "delta_vs_base": 0.0262
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 452,
+          "pct_kept": 77.9,
+          "hit_rate": 0.5088,
+          "delta_vs_base": 0.033
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 417,
+          "pct_kept": 71.9,
+          "hit_rate": 0.5132,
+          "delta_vs_base": 0.0373
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 356,
+          "pct_kept": 61.4,
+          "hit_rate": 0.5365,
+          "delta_vs_base": 0.0607
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 269,
+          "pct_kept": 46.4,
+          "hit_rate": 0.5836,
+          "delta_vs_base": 0.1078
+        }
+      ]
+    },
+    "Espana": {
+      "n_total": 580,
+      "hit_base": 0.4759,
+      "margen_actual_config": 0.03,
+      "actual_eval": {
+        "threshold": 0.03,
+        "n_kept": 492,
+        "pct_kept": 84.8,
+        "hit_rate": 0.498,
+        "delta_vs_base": 0.0221
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 433,
+        "pct_kept": 74.7,
+        "hit_rate": 0.5196,
+        "delta_vs_base": 0.0438
+      },
+      "optimo": {
+        "threshold": 0.07,
+        "n_kept": 374,
+        "pct_kept": 64.5,
+        "hit_rate": 0.5321,
+        "delta_vs_base": 0.0562
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 580,
+          "pct_kept": 100.0,
+          "hit_rate": 0.4759,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 563,
+          "pct_kept": 97.1,
+          "hit_rate": 0.4831,
+          "delta_vs_base": 0.0073
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 548,
+          "pct_kept": 94.5,
+          "hit_rate": 0.4909,
+          "delta_vs_base": 0.015
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 538,
+          "pct_kept": 92.8,
+          "hit_rate": 0.4944,
+          "delta_vs_base": 0.0186
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 520,
+          "pct_kept": 89.7,
+          "hit_rate": 0.4962,
+          "delta_vs_base": 0.0203
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 508,
+          "pct_kept": 87.6,
+          "hit_rate": 0.498,
+          "delta_vs_base": 0.0222
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 492,
+          "pct_kept": 84.8,
+          "hit_rate": 0.498,
+          "delta_vs_base": 0.0221
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 462,
+          "pct_kept": 79.7,
+          "hit_rate": 0.5087,
+          "delta_vs_base": 0.0328
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 433,
+          "pct_kept": 74.7,
+          "hit_rate": 0.5196,
+          "delta_vs_base": 0.0438
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 374,
+          "pct_kept": 64.5,
+          "hit_rate": 0.5321,
+          "delta_vs_base": 0.0562
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 281,
+          "pct_kept": 48.4,
+          "hit_rate": 0.5587,
+          "delta_vs_base": 0.0829
+        }
+      ]
+    },
+    "Francia": {
+      "n_total": 459,
+      "hit_base": 0.4967,
+      "margen_actual_config": 0.03,
+      "actual_eval": {
+        "threshold": 0.03,
+        "n_kept": 387,
+        "pct_kept": 84.3,
+        "hit_rate": 0.5116,
+        "delta_vs_base": 0.0149
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 327,
+        "pct_kept": 71.2,
+        "hit_rate": 0.5352,
+        "delta_vs_base": 0.0384
+      },
+      "optimo": {
+        "threshold": 0.07,
+        "n_kept": 274,
+        "pct_kept": 59.7,
+        "hit_rate": 0.562,
+        "delta_vs_base": 0.0653
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 459,
+          "pct_kept": 100.0,
+          "hit_rate": 0.4967,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 450,
+          "pct_kept": 98.0,
+          "hit_rate": 0.5,
+          "delta_vs_base": 0.0033
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 434,
+          "pct_kept": 94.6,
+          "hit_rate": 0.5069,
+          "delta_vs_base": 0.0102
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 423,
+          "pct_kept": 92.2,
+          "hit_rate": 0.5083,
+          "delta_vs_base": 0.0115
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 406,
+          "pct_kept": 88.5,
+          "hit_rate": 0.5172,
+          "delta_vs_base": 0.0205
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 400,
+          "pct_kept": 87.1,
+          "hit_rate": 0.5175,
+          "delta_vs_base": 0.0208
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 387,
+          "pct_kept": 84.3,
+          "hit_rate": 0.5116,
+          "delta_vs_base": 0.0149
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 358,
+          "pct_kept": 78.0,
+          "hit_rate": 0.5168,
+          "delta_vs_base": 0.02
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 327,
+          "pct_kept": 71.2,
+          "hit_rate": 0.5352,
+          "delta_vs_base": 0.0384
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 274,
+          "pct_kept": 59.7,
+          "hit_rate": 0.562,
+          "delta_vs_base": 0.0653
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 195,
+          "pct_kept": 42.5,
+          "hit_rate": 0.5692,
+          "delta_vs_base": 0.0725
+        }
+      ]
+    },
+    "Alemania": {
+      "n_total": 468,
+      "hit_base": 0.4744,
+      "margen_actual_config": 0.03,
+      "actual_eval": {
+        "threshold": 0.03,
+        "n_kept": 399,
+        "pct_kept": 85.3,
+        "hit_rate": 0.4812,
+        "delta_vs_base": 0.0068
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 342,
+        "pct_kept": 73.1,
+        "hit_rate": 0.5029,
+        "delta_vs_base": 0.0286
+      },
+      "optimo": {
+        "threshold": 0.07,
+        "n_kept": 289,
+        "pct_kept": 61.8,
+        "hit_rate": 0.5329,
+        "delta_vs_base": 0.0585
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 468,
+          "pct_kept": 100.0,
+          "hit_rate": 0.4744,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 455,
+          "pct_kept": 97.2,
+          "hit_rate": 0.4769,
+          "delta_vs_base": 0.0026
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 446,
+          "pct_kept": 95.3,
+          "hit_rate": 0.4731,
+          "delta_vs_base": -0.0013
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 433,
+          "pct_kept": 92.5,
+          "hit_rate": 0.4711,
+          "delta_vs_base": -0.0032
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 418,
+          "pct_kept": 89.3,
+          "hit_rate": 0.4785,
+          "delta_vs_base": 0.0041
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 411,
+          "pct_kept": 87.8,
+          "hit_rate": 0.4793,
+          "delta_vs_base": 0.005
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 399,
+          "pct_kept": 85.3,
+          "hit_rate": 0.4812,
+          "delta_vs_base": 0.0068
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 371,
+          "pct_kept": 79.3,
+          "hit_rate": 0.5013,
+          "delta_vs_base": 0.027
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 342,
+          "pct_kept": 73.1,
+          "hit_rate": 0.5029,
+          "delta_vs_base": 0.0286
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 289,
+          "pct_kept": 61.8,
+          "hit_rate": 0.5329,
+          "delta_vs_base": 0.0585
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 220,
+          "pct_kept": 47.0,
+          "hit_rate": 0.5455,
+          "delta_vs_base": 0.0711
+        }
+      ]
+    },
+    "Turquia": {
+      "n_total": 551,
+      "hit_base": 0.5408,
+      "margen_actual_config": 0.02,
+      "actual_eval": {
+        "threshold": 0.02,
+        "n_kept": 486,
+        "pct_kept": 88.2,
+        "hit_rate": 0.572,
+        "delta_vs_base": 0.0312
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 402,
+        "pct_kept": 73.0,
+        "hit_rate": 0.5995,
+        "delta_vs_base": 0.0587
+      },
+      "optimo": {
+        "threshold": 0.07,
+        "n_kept": 350,
+        "pct_kept": 63.5,
+        "hit_rate": 0.6171,
+        "delta_vs_base": 0.0763
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 551,
+          "pct_kept": 100.0,
+          "hit_rate": 0.5408,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 537,
+          "pct_kept": 97.5,
+          "hit_rate": 0.5456,
+          "delta_vs_base": 0.0048
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 522,
+          "pct_kept": 94.7,
+          "hit_rate": 0.5498,
+          "delta_vs_base": 0.009
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 506,
+          "pct_kept": 91.8,
+          "hit_rate": 0.5593,
+          "delta_vs_base": 0.0185
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 486,
+          "pct_kept": 88.2,
+          "hit_rate": 0.572,
+          "delta_vs_base": 0.0312
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 472,
+          "pct_kept": 85.7,
+          "hit_rate": 0.5805,
+          "delta_vs_base": 0.0397
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 457,
+          "pct_kept": 82.9,
+          "hit_rate": 0.5886,
+          "delta_vs_base": 0.0478
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 426,
+          "pct_kept": 77.3,
+          "hit_rate": 0.5962,
+          "delta_vs_base": 0.0554
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 402,
+          "pct_kept": 73.0,
+          "hit_rate": 0.5995,
+          "delta_vs_base": 0.0587
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 350,
+          "pct_kept": 63.5,
+          "hit_rate": 0.6171,
+          "delta_vs_base": 0.0763
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 264,
+          "pct_kept": 47.9,
+          "hit_rate": 0.6439,
+          "delta_vs_base": 0.1031
+        }
+      ]
+    },
+    "Argentina": {
+      "n_total": 378,
+      "hit_base": 0.4497,
+      "margen_actual_config": 0.015,
+      "actual_eval": {
+        "threshold": 0.015,
+        "n_kept": 352,
+        "pct_kept": 93.1,
+        "hit_rate": 0.4489,
+        "delta_vs_base": -0.0009
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 298,
+        "pct_kept": 78.8,
+        "hit_rate": 0.4631,
+        "delta_vs_base": 0.0134
+      },
+      "optimo": {
+        "threshold": 0.1,
+        "n_kept": 195,
+        "pct_kept": 51.6,
+        "hit_rate": 0.4974,
+        "delta_vs_base": 0.0477
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 378,
+          "pct_kept": 100.0,
+          "hit_rate": 0.4497,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 371,
+          "pct_kept": 98.1,
+          "hit_rate": 0.4501,
+          "delta_vs_base": 0.0004
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 359,
+          "pct_kept": 95.0,
+          "hit_rate": 0.4429,
+          "delta_vs_base": -0.0068
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 352,
+          "pct_kept": 93.1,
+          "hit_rate": 0.4489,
+          "delta_vs_base": -0.0009
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 347,
+          "pct_kept": 91.8,
+          "hit_rate": 0.4524,
+          "delta_vs_base": 0.0027
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 340,
+          "pct_kept": 89.9,
+          "hit_rate": 0.4588,
+          "delta_vs_base": 0.0091
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 334,
+          "pct_kept": 88.4,
+          "hit_rate": 0.4581,
+          "delta_vs_base": 0.0083
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 315,
+          "pct_kept": 83.3,
+          "hit_rate": 0.4571,
+          "delta_vs_base": 0.0074
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 298,
+          "pct_kept": 78.8,
+          "hit_rate": 0.4631,
+          "delta_vs_base": 0.0134
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 262,
+          "pct_kept": 69.3,
+          "hit_rate": 0.4733,
+          "delta_vs_base": 0.0235
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 195,
+          "pct_kept": 51.6,
+          "hit_rate": 0.4974,
+          "delta_vs_base": 0.0477
+        }
+      ]
+    },
+    "Brasil": {
+      "n_total": 380,
+      "hit_base": 0.4868,
+      "margen_actual_config": 0.02,
+      "actual_eval": {
+        "threshold": 0.02,
+        "n_kept": 338,
+        "pct_kept": 88.9,
+        "hit_rate": 0.497,
+        "delta_vs_base": 0.0102
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 275,
+        "pct_kept": 72.4,
+        "hit_rate": 0.52,
+        "delta_vs_base": 0.0332
+      },
+      "optimo": {
+        "threshold": 0.07,
+        "n_kept": 239,
+        "pct_kept": 62.9,
+        "hit_rate": 0.5314,
+        "delta_vs_base": 0.0445
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 380,
+          "pct_kept": 100.0,
+          "hit_rate": 0.4868,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 369,
+          "pct_kept": 97.1,
+          "hit_rate": 0.4932,
+          "delta_vs_base": 0.0064
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 356,
+          "pct_kept": 93.7,
+          "hit_rate": 0.4972,
+          "delta_vs_base": 0.0103
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 347,
+          "pct_kept": 91.3,
+          "hit_rate": 0.4986,
+          "delta_vs_base": 0.0117
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 338,
+          "pct_kept": 88.9,
+          "hit_rate": 0.497,
+          "delta_vs_base": 0.0102
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 326,
+          "pct_kept": 85.8,
+          "hit_rate": 0.5,
+          "delta_vs_base": 0.0132
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 319,
+          "pct_kept": 83.9,
+          "hit_rate": 0.5078,
+          "delta_vs_base": 0.021
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 295,
+          "pct_kept": 77.6,
+          "hit_rate": 0.522,
+          "delta_vs_base": 0.0352
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 275,
+          "pct_kept": 72.4,
+          "hit_rate": 0.52,
+          "delta_vs_base": 0.0332
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 239,
+          "pct_kept": 62.9,
+          "hit_rate": 0.5314,
+          "delta_vs_base": 0.0445
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 189,
+          "pct_kept": 49.7,
+          "hit_rate": 0.5344,
+          "delta_vs_base": 0.0475
+        }
+      ]
+    },
+    "Bolivia": {
+      "n_total": 64,
+      "hit_base": 0.5625,
+      "margen_actual_config": 0.03,
+      "actual_eval": {
+        "threshold": 0.03,
+        "n_kept": 56,
+        "pct_kept": 87.5,
+        "hit_rate": 0.5893,
+        "delta_vs_base": 0.0268
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 51,
+        "pct_kept": 79.7,
+        "hit_rate": 0.6275,
+        "delta_vs_base": 0.065
+      },
+      "optimo": {
+        "threshold": 0.1,
+        "n_kept": 44,
+        "pct_kept": 68.8,
+        "hit_rate": 0.6364,
+        "delta_vs_base": 0.0739
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 64,
+          "pct_kept": 100.0,
+          "hit_rate": 0.5625,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 62,
+          "pct_kept": 96.9,
+          "hit_rate": 0.5484,
+          "delta_vs_base": -0.0141
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 60,
+          "pct_kept": 93.8,
+          "hit_rate": 0.5667,
+          "delta_vs_base": 0.0042
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 59,
+          "pct_kept": 92.2,
+          "hit_rate": 0.5763,
+          "delta_vs_base": 0.0138
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 59,
+          "pct_kept": 92.2,
+          "hit_rate": 0.5763,
+          "delta_vs_base": 0.0138
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 58,
+          "pct_kept": 90.6,
+          "hit_rate": 0.569,
+          "delta_vs_base": 0.0065
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 56,
+          "pct_kept": 87.5,
+          "hit_rate": 0.5893,
+          "delta_vs_base": 0.0268
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 53,
+          "pct_kept": 82.8,
+          "hit_rate": 0.6226,
+          "delta_vs_base": 0.0601
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 51,
+          "pct_kept": 79.7,
+          "hit_rate": 0.6275,
+          "delta_vs_base": 0.065
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 46,
+          "pct_kept": 71.9,
+          "hit_rate": 0.6304,
+          "delta_vs_base": 0.0679
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 44,
+          "pct_kept": 68.8,
+          "hit_rate": 0.6364,
+          "delta_vs_base": 0.0739
+        }
+      ]
+    },
+    "Chile": {
+      "n_total": 240,
+      "hit_base": 0.5167,
+      "margen_actual_config": 0.02,
+      "actual_eval": {
+        "threshold": 0.02,
+        "n_kept": 213,
+        "pct_kept": 88.8,
+        "hit_rate": 0.5211,
+        "delta_vs_base": 0.0045
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 159,
+        "pct_kept": 66.2,
+        "hit_rate": 0.566,
+        "delta_vs_base": 0.0494
+      },
+      "optimo": {
+        "threshold": 0.07,
+        "n_kept": 133,
+        "pct_kept": 55.4,
+        "hit_rate": 0.5714,
+        "delta_vs_base": 0.0548
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 240,
+          "pct_kept": 100.0,
+          "hit_rate": 0.5167,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 237,
+          "pct_kept": 98.8,
+          "hit_rate": 0.5148,
+          "delta_vs_base": -0.0019
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 226,
+          "pct_kept": 94.2,
+          "hit_rate": 0.5177,
+          "delta_vs_base": 0.001
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 221,
+          "pct_kept": 92.1,
+          "hit_rate": 0.5249,
+          "delta_vs_base": 0.0082
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 213,
+          "pct_kept": 88.8,
+          "hit_rate": 0.5211,
+          "delta_vs_base": 0.0045
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 204,
+          "pct_kept": 85.0,
+          "hit_rate": 0.5245,
+          "delta_vs_base": 0.0078
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 190,
+          "pct_kept": 79.2,
+          "hit_rate": 0.5316,
+          "delta_vs_base": 0.0149
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 174,
+          "pct_kept": 72.5,
+          "hit_rate": 0.546,
+          "delta_vs_base": 0.0293
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 159,
+          "pct_kept": 66.2,
+          "hit_rate": 0.566,
+          "delta_vs_base": 0.0494
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 133,
+          "pct_kept": 55.4,
+          "hit_rate": 0.5714,
+          "delta_vs_base": 0.0548
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 91,
+          "pct_kept": 37.9,
+          "hit_rate": 0.5824,
+          "delta_vs_base": 0.0658
+        }
+      ]
+    },
+    "Colombia": {
+      "n_total": 190,
+      "hit_base": 0.4526,
+      "margen_actual_config": 0.02,
+      "actual_eval": {
+        "threshold": 0.02,
+        "n_kept": 175,
+        "pct_kept": 92.1,
+        "hit_rate": 0.4571,
+        "delta_vs_base": 0.0045
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 145,
+        "pct_kept": 76.3,
+        "hit_rate": 0.4759,
+        "delta_vs_base": 0.0232
+      },
+      "optimo": {
+        "threshold": 0.07,
+        "n_kept": 117,
+        "pct_kept": 61.6,
+        "hit_rate": 0.4872,
+        "delta_vs_base": 0.0345
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 190,
+          "pct_kept": 100.0,
+          "hit_rate": 0.4526,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 183,
+          "pct_kept": 96.3,
+          "hit_rate": 0.4481,
+          "delta_vs_base": -0.0045
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 180,
+          "pct_kept": 94.7,
+          "hit_rate": 0.45,
+          "delta_vs_base": -0.0026
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 178,
+          "pct_kept": 93.7,
+          "hit_rate": 0.4551,
+          "delta_vs_base": 0.0024
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 175,
+          "pct_kept": 92.1,
+          "hit_rate": 0.4571,
+          "delta_vs_base": 0.0045
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 169,
+          "pct_kept": 88.9,
+          "hit_rate": 0.4497,
+          "delta_vs_base": -0.0029
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 164,
+          "pct_kept": 86.3,
+          "hit_rate": 0.4512,
+          "delta_vs_base": -0.0014
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 156,
+          "pct_kept": 82.1,
+          "hit_rate": 0.4615,
+          "delta_vs_base": 0.0089
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 145,
+          "pct_kept": 76.3,
+          "hit_rate": 0.4759,
+          "delta_vs_base": 0.0232
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 117,
+          "pct_kept": 61.6,
+          "hit_rate": 0.4872,
+          "delta_vs_base": 0.0345
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 78,
+          "pct_kept": 41.1,
+          "hit_rate": 0.5,
+          "delta_vs_base": 0.0474
+        }
+      ]
+    },
+    "Ecuador": {
+      "n_total": 120,
+      "hit_base": 0.55,
+      "margen_actual_config": 0.015,
+      "actual_eval": {
+        "threshold": 0.015,
+        "n_kept": 104,
+        "pct_kept": 86.7,
+        "hit_rate": 0.5577,
+        "delta_vs_base": 0.0077
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 88,
+        "pct_kept": 73.3,
+        "hit_rate": 0.5682,
+        "delta_vs_base": 0.0182
+      },
+      "optimo": {
+        "threshold": 0.05,
+        "n_kept": 88,
+        "pct_kept": 73.3,
+        "hit_rate": 0.5682,
+        "delta_vs_base": 0.0182
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 120,
+          "pct_kept": 100.0,
+          "hit_rate": 0.55,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 112,
+          "pct_kept": 93.3,
+          "hit_rate": 0.5446,
+          "delta_vs_base": -0.0054
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 108,
+          "pct_kept": 90.0,
+          "hit_rate": 0.5463,
+          "delta_vs_base": -0.0037
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 104,
+          "pct_kept": 86.7,
+          "hit_rate": 0.5577,
+          "delta_vs_base": 0.0077
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 103,
+          "pct_kept": 85.8,
+          "hit_rate": 0.5534,
+          "delta_vs_base": 0.0034
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 102,
+          "pct_kept": 85.0,
+          "hit_rate": 0.549,
+          "delta_vs_base": -0.001
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 99,
+          "pct_kept": 82.5,
+          "hit_rate": 0.5556,
+          "delta_vs_base": 0.0056
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 94,
+          "pct_kept": 78.3,
+          "hit_rate": 0.5638,
+          "delta_vs_base": 0.0138
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 88,
+          "pct_kept": 73.3,
+          "hit_rate": 0.5682,
+          "delta_vs_base": 0.0182
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 71,
+          "pct_kept": 59.2,
+          "hit_rate": 0.5634,
+          "delta_vs_base": 0.0134
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 57,
+          "pct_kept": 47.5,
+          "hit_rate": 0.5439,
+          "delta_vs_base": -0.0061
+        }
+      ]
+    },
+    "Peru": {
+      "n_total": 153,
+      "hit_base": 0.5686,
+      "margen_actual_config": 0.015,
+      "actual_eval": {
+        "threshold": 0.015,
+        "n_kept": 140,
+        "pct_kept": 91.5,
+        "hit_rate": 0.5857,
+        "delta_vs_base": 0.0171
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 122,
+        "pct_kept": 79.7,
+        "hit_rate": 0.6066,
+        "delta_vs_base": 0.0379
+      },
+      "optimo": {
+        "threshold": 0.1,
+        "n_kept": 88,
+        "pct_kept": 57.5,
+        "hit_rate": 0.6477,
+        "delta_vs_base": 0.0791
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 153,
+          "pct_kept": 100.0,
+          "hit_rate": 0.5686,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 152,
+          "pct_kept": 99.3,
+          "hit_rate": 0.5658,
+          "delta_vs_base": -0.0028
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 148,
+          "pct_kept": 96.7,
+          "hit_rate": 0.5811,
+          "delta_vs_base": 0.0125
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 140,
+          "pct_kept": 91.5,
+          "hit_rate": 0.5857,
+          "delta_vs_base": 0.0171
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 140,
+          "pct_kept": 91.5,
+          "hit_rate": 0.5857,
+          "delta_vs_base": 0.0171
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 138,
+          "pct_kept": 90.2,
+          "hit_rate": 0.587,
+          "delta_vs_base": 0.0183
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 137,
+          "pct_kept": 89.5,
+          "hit_rate": 0.5839,
+          "delta_vs_base": 0.0153
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 128,
+          "pct_kept": 83.7,
+          "hit_rate": 0.6016,
+          "delta_vs_base": 0.0329
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 122,
+          "pct_kept": 79.7,
+          "hit_rate": 0.6066,
+          "delta_vs_base": 0.0379
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 105,
+          "pct_kept": 68.6,
+          "hit_rate": 0.619,
+          "delta_vs_base": 0.0504
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 88,
+          "pct_kept": 57.5,
+          "hit_rate": 0.6477,
+          "delta_vs_base": 0.0791
+        }
+      ]
+    },
+    "Uruguay": {
+      "n_total": 120,
+      "hit_base": 0.4417,
+      "margen_actual_config": 0.015,
+      "actual_eval": {
+        "threshold": 0.015,
+        "n_kept": 93,
+        "pct_kept": 77.5,
+        "hit_rate": 0.4624,
+        "delta_vs_base": 0.0207
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 68,
+        "pct_kept": 56.7,
+        "hit_rate": 0.4853,
+        "delta_vs_base": 0.0436
+      },
+      "optimo": {
+        "threshold": 0.05,
+        "n_kept": 68,
+        "pct_kept": 56.7,
+        "hit_rate": 0.4853,
+        "delta_vs_base": 0.0436
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 120,
+          "pct_kept": 100.0,
+          "hit_rate": 0.4417,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 110,
+          "pct_kept": 91.7,
+          "hit_rate": 0.4545,
+          "delta_vs_base": 0.0129
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 102,
+          "pct_kept": 85.0,
+          "hit_rate": 0.451,
+          "delta_vs_base": 0.0093
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 93,
+          "pct_kept": 77.5,
+          "hit_rate": 0.4624,
+          "delta_vs_base": 0.0207
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 91,
+          "pct_kept": 75.8,
+          "hit_rate": 0.4725,
+          "delta_vs_base": 0.0309
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 88,
+          "pct_kept": 73.3,
+          "hit_rate": 0.4659,
+          "delta_vs_base": 0.0242
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 85,
+          "pct_kept": 70.8,
+          "hit_rate": 0.4824,
+          "delta_vs_base": 0.0407
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 75,
+          "pct_kept": 62.5,
+          "hit_rate": 0.4667,
+          "delta_vs_base": 0.025
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 68,
+          "pct_kept": 56.7,
+          "hit_rate": 0.4853,
+          "delta_vs_base": 0.0436
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 53,
+          "pct_kept": 44.2,
+          "hit_rate": 0.566,
+          "delta_vs_base": 0.1244
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 31,
+          "pct_kept": 25.8,
+          "hit_rate": 0.6452,
+          "delta_vs_base": 0.2035
+        }
+      ]
+    },
+    "Venezuela": {
+      "n_total": 91,
+      "hit_base": 0.4505,
+      "margen_actual_config": 0.015,
+      "actual_eval": {
+        "threshold": 0.015,
+        "n_kept": 79,
+        "pct_kept": 86.8,
+        "hit_rate": 0.4684,
+        "delta_vs_base": 0.0178
+      },
+      "thr_005_eval": {
+        "threshold": 0.05,
+        "n_kept": 56,
+        "pct_kept": 61.5,
+        "hit_rate": 0.5179,
+        "delta_vs_base": 0.0673
+      },
+      "optimo": {
+        "threshold": 0.05,
+        "n_kept": 56,
+        "pct_kept": 61.5,
+        "hit_rate": 0.5179,
+        "delta_vs_base": 0.0673
+      },
+      "todas_evaluaciones": [
+        {
+          "threshold": 0.0,
+          "n_kept": 91,
+          "pct_kept": 100.0,
+          "hit_rate": 0.4505,
+          "delta_vs_base": 0.0
+        },
+        {
+          "threshold": 0.005,
+          "n_kept": 87,
+          "pct_kept": 95.6,
+          "hit_rate": 0.4598,
+          "delta_vs_base": 0.0092
+        },
+        {
+          "threshold": 0.01,
+          "n_kept": 83,
+          "pct_kept": 91.2,
+          "hit_rate": 0.4699,
+          "delta_vs_base": 0.0193
+        },
+        {
+          "threshold": 0.015,
+          "n_kept": 79,
+          "pct_kept": 86.8,
+          "hit_rate": 0.4684,
+          "delta_vs_base": 0.0178
+        },
+        {
+          "threshold": 0.02,
+          "n_kept": 74,
+          "pct_kept": 81.3,
+          "hit_rate": 0.473,
+          "delta_vs_base": 0.0224
+        },
+        {
+          "threshold": 0.025,
+          "n_kept": 71,
+          "pct_kept": 78.0,
+          "hit_rate": 0.4789,
+          "delta_vs_base": 0.0283
+        },
+        {
+          "threshold": 0.03,
+          "n_kept": 67,
+          "pct_kept": 73.6,
+          "hit_rate": 0.4925,
+          "delta_vs_base": 0.042
+        },
+        {
+          "threshold": 0.04,
+          "n_kept": 60,
+          "pct_kept": 65.9,
+          "hit_rate": 0.5167,
+          "delta_vs_base": 0.0661
+        },
+        {
+          "threshold": 0.05,
+          "n_kept": 56,
+          "pct_kept": 61.5,
+          "hit_rate": 0.5179,
+          "delta_vs_base": 0.0673
+        },
+        {
+          "threshold": 0.07,
+          "n_kept": 39,
+          "pct_kept": 42.9,
+          "hit_rate": 0.5385,
+          "delta_vs_base": 0.0879
+        },
+        {
+          "threshold": 0.1,
+          "n_kept": 26,
+          "pct_kept": 28.6,
+          "hit_rate": 0.5,
+          "delta_vs_base": 0.0495
+        }
+      ]
+    }
+  },
+  "comparativa_opciones": {
+    "actual_mix": {
+      "n": 4318,
+      "hit": 0.5113352477999074
+    },
+    "opcion_A_default_005_per_liga_intacto": {
+      "n": 4071,
+      "hit": 0.5192827315155981
+    },
+    "opcion_B_per_liga_optimo": {
+      "n": 2958,
+      "hit": 0.5554428668018931
+    },
+    "opcion_C_floor_005": {
+      "n": 3599,
+      "hit": 0.5340372325646012
+    }
+  }
+}

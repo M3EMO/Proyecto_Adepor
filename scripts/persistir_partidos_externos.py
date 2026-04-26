@@ -75,6 +75,13 @@ def parse_csv_temp(texto, codigo):
                 "as": int(r.get("AS", 0) or 0),
                 "hc": int(r.get("HC", 0) or 0),
                 "ac": int(r.get("AC", 0) or 0),
+                # Legacy historico extendido (2026-04-26): faltas + tarjetas
+                "hf": int(r.get("HF", 0) or 0),
+                "af": int(r.get("AF", 0) or 0),
+                "hy": int(r.get("HY", 0) or 0),
+                "ay": int(r.get("AY", 0) or 0),
+                "hr": int(r.get("HR", 0) or 0),
+                "ar": int(r.get("AR", 0) or 0),
                 "evt_id": None,
                 "temp": temp,
             })
@@ -86,22 +93,46 @@ def parse_csv_temp(texto, codigo):
 def insert_partidos(con, liga, fuente, partidos):
     cur = con.cursor()
     inserted = 0
+    updated = 0
     skipped = 0
     for p in partidos:
         has_stats = 1 if (p["hs"] != 0 or p["hst"] != 0 or p["hc"] != 0) else 0
+        # Faltas/tarjetas (None si no provistas — ej ESPN cache antiguo)
+        hf = p.get("hf")
+        af = p.get("af")
+        hy = p.get("hy")
+        ay = p.get("ay")
+        hr = p.get("hr")
+        ar = p.get("ar")
         try:
             cur.execute("""
                 INSERT INTO partidos_historico_externo
-                (liga, temp, fecha, fuente, ht, at, hg, ag, hst, ast, hs, as_, hc, ac, has_full_stats, evt_id_externo)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (liga, temp, fecha, fuente, ht, at, hg, ag, hst, ast, hs, as_, hc, ac,
+                 has_full_stats, evt_id_externo, hf, af, hy, ay, hr, ar)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (liga, p["temp"], p["fecha"], fuente,
                   p["ht"], p["at"], p["hg"], p["ag"],
                   p["hst"], p["ast"], p["hs"], p["as"],
-                  p["hc"], p["ac"], has_stats, p.get("evt_id")))
+                  p["hc"], p["ac"], has_stats, p.get("evt_id"),
+                  hf, af, hy, ay, hr, ar))
             inserted += 1
         except sqlite3.IntegrityError:
-            skipped += 1
-    return inserted, skipped
+            # Ya existe — UPDATE faltas/tarjetas si las nuevas son no-None y la fila existente las tiene NULL
+            if any(x is not None for x in [hf, af, hy, ay, hr, ar]):
+                cur.execute("""
+                    UPDATE partidos_historico_externo
+                    SET hf = COALESCE(hf, ?), af = COALESCE(af, ?),
+                        hy = COALESCE(hy, ?), ay = COALESCE(ay, ?),
+                        hr = COALESCE(hr, ?), ar = COALESCE(ar, ?)
+                    WHERE liga = ? AND temp = ? AND fecha = ? AND ht = ? AND at = ?
+                """, (hf, af, hy, ay, hr, ar, liga, p["temp"], p["fecha"], p["ht"], p["at"]))
+                if cur.rowcount > 0:
+                    updated += 1
+                else:
+                    skipped += 1
+            else:
+                skipped += 1
+    return inserted, skipped, updated
 
 
 def main():
@@ -125,8 +156,8 @@ def main():
                 fe = p.get("fecha", "")
                 if isinstance(fe, str) and "T" in fe:
                     p["fecha"] = fe.replace("T", " ").replace("Z", "")
-            ins, skp = insert_partidos(con, liga, "espn-core", partidos)
-            print(f"  {liga} {temp}: insertados={ins} duplicados_skip={skp}")
+            ins, skp, upd = insert_partidos(con, liga, "espn-core", partidos)
+            print(f"  {liga} {temp}: insertados={ins} updated={upd} duplicados={skp}")
             total_inserted += ins
             total_skipped += skp
         con.commit()
@@ -144,8 +175,8 @@ def main():
                 print(f"  [ERROR] {liga} {codigo}: {e}")
                 continue
             partidos = parse_csv_temp(texto, codigo)
-            ins, skp = insert_partidos(con, liga, "football-data.co.uk", partidos)
-            print(f"  {liga} {codigo}: N_csv={len(partidos)} insertados={ins} duplicados_skip={skp}")
+            ins, skp, upd = insert_partidos(con, liga, "football-data.co.uk", partidos)
+            print(f"  {liga} {codigo}: N_csv={len(partidos)} insertados={ins} updated={upd} duplicados={skp}")
             total_inserted += ins
             total_skipped += skp
     con.commit()

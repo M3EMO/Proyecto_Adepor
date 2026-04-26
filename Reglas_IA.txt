@@ -316,8 +316,16 @@ H. PRIOR DINÁMICO DE VENTAJA LOCAL POR LIGA (Hallazgo G, V4.8)
          p1_nuevo = p1 + boost  (cap: máximo 0.95)
          px y p2 se reducen proporcionalmente y se renormaliza a suma=1.
 
-  ESTADO ACTUAL (2026-04): INACTIVO para todas las ligas (ninguna tiene N >= 50 liquidados).
-  El código está implementado y listo. Se activará automáticamente cuando el N se alcance.
+  ESTADO ACTUAL (2026-04-26, V4.6 update): ACTIVO en 2 de 16 ligas:
+    - Argentina:  N=79 liquidados, freq_local_real=0.494 (boost dinámico cuando p1 < 0.494)
+    - Brasil:     N=65 liquidados, freq_local_real=0.539 (boost dinámico cuando p1 < 0.539)
+  Resto de ligas (14): INACTIVO por N<50. La activación es automática al cruzar N=50.
+  Crítico de bead adepor-0ll detectó que la versión anterior decía 'INACTIVO para todas
+  las ligas' incluso después de que Argentina y Brasil cruzaran el threshold; corregido aquí.
+  Para verificar estado en DB:
+    sqlite3 fondo_quant.db "SELECT pais, COUNT(*), AVG(CASE WHEN goles_l>goles_v THEN 1.0 ELSE 0.0 END)
+                            FROM partidos_backtest WHERE estado='Liquidado'
+                            GROUP BY pais HAVING COUNT(*) >= 50;"
 
   PARÁMETROS:
     N_MIN_HALLAZGO_G = 50  (umbral de activación por liga)

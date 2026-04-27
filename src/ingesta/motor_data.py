@@ -156,6 +156,82 @@ def calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga=0.03, pais=
     xg_final = (xg_calc * 0.70) + (goles_reales * 0.30)
     return round(xg_final, 3)
 
+
+def calcular_xg_v6(estadisticas, goles_reales, liga=None, conn=None):
+    """[SHADOW V6 — adepor-d7h] xG recalibrado con coeficientes OLS empíricos.
+
+    Audit 2026-04-26 detectó 3 errores estructurales en la fórmula original:
+      1. β_shots_off positivo en código (+0.010) vs negativo empírico (~-0.027)
+      2. coef_corner positivo en código (+0.02) vs negativo empírico (~-0.055)
+      3. Intercept ausente (asume 0) vs OLS estima ~+0.46 goles baseline
+
+    Coefs leídos desde config_motor_valores con clave *_v6_shadow.
+    Lookup: scope=liga primero, fallback scope=global (pool 10 ligas).
+    Fuente: OLS_2026-04-26_adepor-d7h sobre N=24,164 obs partidos_historico_externo.
+
+    Híbrido 0.70/0.30 se mantiene por consistencia con V0..V5 (re-EMA dual).
+    NO afecta producción — uso exclusivo en backfill_xg_v6_shadow + motor_calculadora SHADOW.
+    """
+    goles_reales = safe_float(goles_reales)
+    if not estadisticas:
+        return goles_reales
+
+    sot, corners, total_shots = 0, 0, 0
+    for stat in estadisticas:
+        nombre = stat.get('name', '')
+        valor = safe_int(stat.get('displayValue'))
+        if nombre == 'shotsOnTarget':
+            sot = valor
+        elif nombre == 'wonCorners':
+            corners = valor
+        elif nombre == 'totalShots':
+            total_shots = valor
+
+    shots_off = max(0, total_shots - sot)
+
+    # Lookup de coeficientes: liga > global
+    own_conn = conn is None
+    if own_conn:
+        conn = sqlite3.connect(DB_NAME)
+    cur = conn.cursor()
+
+    def _coef(clave, scope_liga):
+        # Intenta scope=liga, fallback scope=global
+        row = cur.execute(
+            "SELECT valor_real FROM config_motor_valores WHERE clave=? AND scope=?",
+            (clave, scope_liga or '__none__')
+        ).fetchone()
+        if row is not None and row[0] is not None:
+            return float(row[0])
+        row = cur.execute(
+            "SELECT valor_real FROM config_motor_valores WHERE clave=? AND scope='global'",
+            (clave,)
+        ).fetchone()
+        return float(row[0]) if row and row[0] is not None else None
+
+    beta_sot = _coef('beta_sot_v6_shadow', liga)
+    beta_off = _coef('beta_off_v6_shadow', liga)
+    coef_corner = _coef('coef_corner_v6_shadow', liga)
+    intercept = _coef('intercept_v6_shadow', liga)
+
+    if own_conn:
+        conn.close()
+
+    if any(v is None for v in (beta_sot, beta_off, coef_corner, intercept)):
+        # Coefs no persistidos -> caer al híbrido legacy
+        return calcular_xg_hibrido(estadisticas, goles_reales, pais=liga)
+
+    xg_calc = (sot * beta_sot) + (shots_off * beta_off) + (corners * coef_corner) + intercept
+    # Floor: OLS puede dar negativo si stats=0 e intercept bajo. Forzamos >=0 para Poisson.
+    xg_calc = max(0.0, xg_calc)
+
+    if xg_calc == 0 and goles_reales > 0:
+        return goles_reales
+
+    xg_final = (xg_calc * 0.70) + (goles_reales * 0.30)
+    return round(xg_final, 3)
+
+
 def ajustar_xg_por_estado_juego(xg_crudo, goles_a_favor, goles_en_contra):
     """
     Aplica un ajuste heurístico al xG basado en el resultado final para simular

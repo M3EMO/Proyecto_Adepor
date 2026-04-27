@@ -87,9 +87,12 @@ FLOOR_PROB_MIN, MAX_KELLY_PCT_*, etc.)** se debe:
 El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreated`.
 
 **Estado actual (2026-04-26):**
-- **Versión:** V4.6 (post-corrección §IV.H que clarifica HG ACTIVO en Argentina+Brasil)
-- **SHA-256:** `c1f3a1d2ce80dc82e9bd37c2c9cfc2aef2d6f60e8fbf949d07bf70779efd4f1f`
+- **Versión:** V5.0 (Layer 2 adepor-edk: V12 standalone en Turquía)
+- **SHA-256:** `6609ee919e81b0613f28424dcfa37e7a4e1aabff0bf0361b531cd06451acb32e`
 - **Locked:** `configuracion.manifesto_locked = 'true'`
+- **Cambio V5.0:** nueva §L "Arquitectura de Decisión por Liga". Override
+  `arch_decision_per_liga = '{"Turquia": "V12"}'` (config_motor_valores). Otras 15 ligas
+  mantienen V0 default. H4 X-rescue (Layer 3 propuesto) queda en SHADOW, no aplicado.
 - **Validación rápida:** `py -c "import sqlite3; print(sqlite3.connect('fondo_quant.db').execute(\"SELECT valor FROM configuracion WHERE clave='manifesto_sha256'\").fetchone()[0])"`
 
 ### Multi-Agent Team (experimental)
@@ -146,11 +149,14 @@ filtros/motores/históricos por inspección de archivos.
 |---|---|---|
 | `motor_filtros_activos` | 19 | Inventario de los 19 filtros activos del motor (origen, parámetro, estado). Único punto de verdad |
 | `pipeline_motores` | 14 | Documentación de los 14 motores del pipeline (nombre, frecuencia, responsabilidad, dependencias) |
-| `config_motor_valores` | 142 | Parámetros operativos del motor (FLOOR_PROB, MARGEN, EV-min, Kelly cap, etc. — scope universal o por liga) |
+| `config_motor_valores` | 200+ | Parámetros operativos del motor (FLOOR_PROB, MARGEN, EV-min, Kelly cap, OLS V6, LR V12, V12b1/b2/b3, anchor batch — scope universal o por liga) |
 | `predicciones_walkforward` | 23.268 | Predicciones walk-forward persistidas para calibración futura sin re-scraping |
 | `partidos_historico_externo` | 14.489 | Stats crudas legacy (incluye faltas/tarjetas) — fuente para A/B de features alternativos |
 | `xg_calibration_history` | 25 | Log iterativo de calibraciones xG (cada iter persiste OLS coef + R² + comentario) |
 | `margen_optimo_per_liga` | 15 ligas | Thresholds de margen derivados por liga (display + análisis) |
+| `historial_equipos_v6_shadow` | 402 equipos | EMA xG OLS recalibrado por equipo (V6 SHADOW input para V7/V12) |
+| `online_sgd_log` | crece | Log diagnóstico de cada SGD step del motor adaptativo (grad, weight, brier, dW, reverted) |
+| `drift_alerts` | crece | Alertas de drift Brier rolling 30d vs baseline+2σ (motor adaptativo) |
 
 Comando de exploración rápida (lista todas las tablas con conteo real de filas):
 ```bash
@@ -170,8 +176,25 @@ pagar el costo de revertir cambios mal calibrados.
 | Tabla SHADOW | Filas | Origen | Trigger de promoción |
 |---|---|---|---|
 | `picks_shadow_margen_log` | 21 | V4.5 SHADOW (margen_predictivo) | bead `adepor-dx8` (FLOOR universal aprobado) |
-| `picks_shadow_arquitecturas` | 73 | 6 arquitecturas V0–V5 (incluye Skellam) | bead `adepor-57p` — re-eval con N≥80 |
+| `picks_shadow_arquitecturas` | 73+ | Arquitecturas V0–V12 (V6 OLS+DC, V7 Skellam, V12 LR multinomial). V8/V9/V10/V11 cerradas 2026-04-26 (no validaron OOS). | bead `adepor-617` (PROPOSAL H4 V0+X-rescue) — pending N≥500 |
 | `backfill_ema_shadow_log` | 6 | Backfill EMA dual-mode (estricto a prod / laxo a shadow) | observación longitudinal (sin trigger N) |
+| `historial_equipos_v6_shadow` | 402 equipos | EMA paralelo xG OLS recalibrado (input V6/V7/V12) | bead `adepor-d7h` (infra SHADOW) |
+| `online_sgd_log` | crece | SGD steps del motor adaptativo permanente (V12 weights) | NO se promueve — es runtime adaptativo |
+| `drift_alerts` | crece | Alertas Brier rolling > baseline+2σ | trigger automático bead PROPOSAL re-train batch |
+
+**Arquitecturas SHADOW vivas (loggeadas en cada corrida del motor)**:
+- **V0** = Poisson DC + xG legacy (motor producción actual)
+- **V6** = Poisson DC + xG OLS recalibrado
+- **V7** = Skellam + xG OLS (sin tau DC)
+- **V12** = LR multinomial (xG + H2H + varianza + mes), per-liga + global pool
+- **V12b1/b2/b3** = LR pool global ridge=0.1 con/sin H2H + class_weights (persistidas en config como referencia, no logueadas rutinariamente)
+
+**Hallazgos OOS 2026-04-26** (test 2024 N=2,768):
+- V0 raw GANA hit (0.488) y Brier (0.6182) en OOS estricto
+- Hallazgo G EMPEORA V0/V6/V7 −1.2pp hit, +0.0044 Brier
+- Fix #5 inocuo (cero impacto OOS)
+- V12 sub-confidente en local: solo gana con HG (+0.6pp), única arquitectura beneficiada
+- H4 V0+X-rescue (V0 default + override X si V12 dice X y P(X)>0.30): hit 0.520, yield +0.246 sobre N=127 partidos_backtest con cuotas reales — PROPOSAL `adepor-617` BLOQUEADO pending N≥500
 
 **Reglas del patrón:**
 - Toda tabla shadow lleva `timestamp` para auditoría longitudinal
@@ -179,13 +202,26 @@ pagar el costo de revertir cambios mal calibrados.
 - El motor de calculadora puede leer SHADOW pero **nunca** decide con esos datos hasta promoción explícita
 - Promover de SHADOW a producción requiere bead `[PROPOSAL: MANIFESTO CHANGE]` o evidencia equivalente
 
+### Motor adaptativo (FASE 1.5 del pipeline)
+
+`motor_adaptativo.py` corre permanentemente cada `py ejecutar_proyecto.py`:
+1. Identifica partidos liquidados desde `motor_adaptativo_last_run` (idempotente)
+2. Aplica SGD step sobre `lr_v12_weights[liga]` + `[global]` paralelo (warmup 100, lr=0.005, ridge=0.1, anchor=0.05)
+3. Auto-audit sobre últimos 200 SGD steps: revierte a anchor batch si detecta WEIGHT_NORM > 50, GRAD_NORM > 5, o BRIER > baseline×1.10. Cooldown 7 días.
+4. Drift detector ventana 30d sobre Brier rolling
+5. Persiste `last_run` timestamp
+
+NO afecta motor productivo (V0 sigue decidiendo argmax). Solo actualiza V12 SHADOW. Plan completo en `docs/ml_adaptativo_plan.md`.
+
 ### Documentación viva
 
 Estos artefactos están checked-in y son la "memoria operativa" del proyecto. Lectura obligatoria antes de proponer cambios estructurales:
 
-- `Reglas_IA.txt` — Manifiesto matemático/arquitectural (versión actual V4.6)
+- `Reglas_IA.txt` — Manifiesto matemático/arquitectural (versión actual V5.0)
 - `docs/pipeline_overview.md` — spec discoverable del pipeline (qué motor hace qué, en qué orden, con qué inputs/outputs)
 - `docs/xg_calibration_history.md` — log iterativo de cómo se ha calibrado el xG histórico
+- `docs/ml_adaptativo_plan.md` — plan 3 capas (L1 EMA+rho, L2 online SGD V12, L3 drift detector). Estado: F1+F2+F3 implementados.
+- `docs/plan_ampliacion_cuotas.md` — plan scraper football-data.co.uk para llevar N=127 → N≥3000 de validación H4
 - `docs/arquitectura/`, `docs/fase3/`, `docs/fase4/`, `docs/historico/`, `docs/ux/` — documentación por dominio
 - `sintesis_body.md` — artefacto histórico-evolutivo del crítico-sintesis (research consolidado 2026-04-25 + anexos 2026-04-26)
 - `analisis/` — backtests, A/B, ablations, walk-forwards (cada uno con su `.json` reproducible y `.py` que lo generó)

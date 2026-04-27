@@ -663,6 +663,235 @@ def _calcular_probs_skellam(xg_l, xg_v, max_goals=10):
     return 1/3, 1/3, 1/3
 
 
+def _get_xg_v6_para_partido(loc_norm, vis_norm, conn):
+    """[SHADOW V6 — adepor-d7h] Lookup EMAs V6 shadow y compone xG por partido.
+
+    Aplica misma fórmula simétrica que el motor real:
+        xg_local_v6  = (ema_fav_home_local + ema_contra_away_visita) / 2
+        xg_visita_v6 = (ema_fav_away_visita + ema_contra_home_local) / 2
+
+    Devuelve (xg_l_v6, xg_v_v6) o (None, None) si lookup falla.
+    """
+    try:
+        cur = conn.cursor()
+        row_l = cur.execute("""
+            SELECT ema_xg_v6_favor_home, ema_xg_v6_contra_home
+            FROM historial_equipos_v6_shadow WHERE equipo_norm = ?
+        """, (loc_norm,)).fetchone()
+        row_v = cur.execute("""
+            SELECT ema_xg_v6_favor_away, ema_xg_v6_contra_away
+            FROM historial_equipos_v6_shadow WHERE equipo_norm = ?
+        """, (vis_norm,)).fetchone()
+        if not row_l or not row_v:
+            return None, None
+        if row_l[0] is None or row_l[1] is None or row_v[0] is None or row_v[1] is None:
+            return None, None
+        xg_l_v6 = (row_l[0] + row_v[1]) / 2.0
+        xg_v_v6 = (row_v[0] + row_l[1]) / 2.0
+        return max(0.10, xg_l_v6), max(0.10, xg_v_v6)
+    except Exception:
+        return None, None
+
+
+def _calcular_probs_poisson_dc(xg_l, xg_v, rho, max_goals=10):
+    """[SHADOW] Probs 1X2 via Poisson bivariado con tau Dixon-Coles.
+
+    Réplica de la matriz del motor (líneas ~1086) sin O/U ni factor_corr_xg_ou.
+    Usado para V6 (xG recalibrado pasa por DC). V5 Skellam ignora tau.
+    """
+    if xg_l <= 0 or xg_v <= 0:
+        return 1/3, 1/3, 1/3
+    p1 = px = p2 = 0.0
+    for i in range(max_goals):
+        for j in range(max_goals):
+            pb = poisson(i, xg_l) * poisson(j, xg_v)
+            pb *= tau(i, j, xg_l, xg_v, rho)
+            if i > j:
+                p1 += pb
+            elif i == j:
+                px += pb
+            else:
+                p2 += pb
+    s = p1 + px + p2
+    if s > 0:
+        return p1/s, px/s, p2/s
+    return 1/3, 1/3, 1/3
+
+
+def _h2h_features(loc_norm, vis_norm, liga, fecha_partido_str, conn):
+    """V12 helper: features H2H sobre encuentros previos (avg_g, freq_local, freq_X)."""
+    try:
+        cur = conn.cursor()
+        rows = cur.execute("""
+            SELECT ht, hg, ag, fecha
+            FROM partidos_historico_externo
+            WHERE has_full_stats = 1 AND liga = ?
+              AND ((LOWER(ht) LIKE ? AND LOWER(at) LIKE ?) OR (LOWER(ht) LIKE ? AND LOWER(at) LIKE ?))
+              AND fecha < ?
+        """, (liga,
+              f'%{loc_norm[:6]}%', f'%{vis_norm[:6]}%',
+              f'%{vis_norm[:6]}%', f'%{loc_norm[:6]}%',
+              fecha_partido_str)).fetchall()
+        if not rows:
+            return 2.7, 0.45, 0.26
+        from src.comun.gestor_nombres import limpiar_texto as _limpiar
+        prev = []
+        for ht_r, hg, ag, fch in rows:
+            ht_n = _limpiar(ht_r)
+            if ht_n in (loc_norm, vis_norm):
+                prev.append({'home_real': ht_n, 'hg': hg, 'ag': ag})
+        if not prev:
+            return 2.7, 0.45, 0.26
+        avg_g = sum(p['hg'] + p['ag'] for p in prev) / len(prev)
+        n_loc_win = sum(1 for p in prev if (p['home_real'] == loc_norm and p['hg'] > p['ag']) or
+                                            (p['home_real'] != loc_norm and p['ag'] > p['hg']))
+        n_x = sum(1 for p in prev if p['hg'] == p['ag'])
+        return avg_g, n_loc_win / len(prev), n_x / len(prev)
+    except Exception:
+        return 2.7, 0.45, 0.26
+
+
+def _calcular_probs_v12_lr(xg_l, xg_v, loc_norm, vis_norm, liga, fecha_partido_str, conn):
+    """[SHADOW V12 — adepor-d7h] Logistic multinomial con features ampliados.
+
+    Features (D=13):
+        [1, xg_l, xg_v, delta, |delta|, avg, prod,
+         h2h_avg_g, h2h_freq_local, h2h_freq_x,
+         var_local_pred, var_visita_pred, mes_partido]
+
+    Lee pesos W + standardization (mean, std) desde lr_v12_weights scope=liga, fallback global.
+    Aplica softmax(W @ x_std) sin scipy.
+    """
+    import json as _json
+    try:
+        cur = conn.cursor()
+        row = cur.execute(
+            "SELECT valor_texto FROM config_motor_valores WHERE clave='lr_v12_weights' AND scope=?",
+            (liga or '__none__',)
+        ).fetchone()
+        if not row or row[0] is None:
+            row = cur.execute(
+                "SELECT valor_texto FROM config_motor_valores WHERE clave='lr_v12_weights' AND scope='global'"
+            ).fetchone()
+        if not row or row[0] is None:
+            return 1/3, 1/3, 1/3
+        payload = _json.loads(row[0])
+        W = payload['W']  # 3×D
+        mean = payload['mean']
+        std = payload['std']
+
+        # Varianza histórica (lookup historial_equipos legacy)
+        var_l_row = cur.execute("""
+            SELECT ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away
+            FROM historial_equipos WHERE equipo_norm = ?
+        """, (loc_norm,)).fetchone()
+        var_v_row = cur.execute("""
+            SELECT ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away
+            FROM historial_equipos WHERE equipo_norm = ?
+        """, (vis_norm,)).fetchone()
+        var_local_pred = 0.5
+        var_visita_pred = 0.5
+        if var_l_row and var_v_row:
+            var_local_pred = ((var_l_row[0] or 0.5) + (var_v_row[3] or 0.5)) / 2.0
+            var_visita_pred = ((var_v_row[2] or 0.5) + (var_l_row[1] or 0.5)) / 2.0
+
+        # H2H
+        h2h_g, h2h_floc, h2h_fx = _h2h_features(loc_norm, vis_norm, liga, fecha_partido_str, conn)
+
+        # Mes
+        try:
+            mes = int(fecha_partido_str[5:7])
+        except Exception:
+            mes = 6
+
+        feats = [
+            1.0, xg_l, xg_v, xg_l - xg_v, abs(xg_l - xg_v),
+            (xg_l + xg_v) / 2.0, xg_l * xg_v,
+            h2h_g, h2h_floc, h2h_fx,
+            var_local_pred, var_visita_pred, float(mes),
+        ]
+
+        # Standardize (skip intercept)
+        feats_std = list(feats)
+        for i in range(1, len(feats)):
+            sd = std[i] if std[i] > 0 else 1.0
+            feats_std[i] = (feats[i] - mean[i]) / sd
+
+        # Softmax(W @ feats_std)
+        logits = [sum(w * x for w, x in zip(row, feats_std)) for row in W]
+        m = max(logits)
+        exps = [math.exp(z - m) for z in logits]
+        s = sum(exps)
+        if s <= 0:
+            return 1/3, 1/3, 1/3
+        return exps[0]/s, exps[1]/s, exps[2]/s
+    except Exception:
+        return 1/3, 1/3, 1/3
+
+
+def _log_shadow_v6_v7(id_partido, xg_v6_l, xg_v6_v, rho, liga=None,
+                       loc_norm=None, vis_norm=None, fecha_partido_str=None):
+    """[SHADOW V6/V7/V12 — adepor-d7h] UPDATE post-INSERT con probs xG recalibrado.
+
+    V6  = Poisson DC + tau sobre xG_v6 (motor V0 con xG distinto).
+    V7  = Skellam sobre xG_v6 (sin tau DC).
+    V12 = Logistic multinomial (softmax + GD) con features ampliados (xG + H2H + varianza + mes).
+
+    V8/V9/V10/V11 fueron descartadas 2026-04-26 (no aportan OOS, no superan V0 raw).
+    V12b1/b2/b3 persistidas en config_motor_valores como referencia (no se loguean rutinariamente
+    en cada corrida; usar analisis/calibrar_v12b.py para regenerar).
+
+    Falla silenciosamente si lookup V6 falló o si UPDATE rompe.
+    """
+    try:
+        if xg_v6_l is None or xg_v6_v is None:
+            return
+        p1_v6, px_v6, p2_v6 = _calcular_probs_poisson_dc(xg_v6_l, xg_v6_v, rho)
+        p1_v7, px_v7, p2_v7 = _calcular_probs_skellam(xg_v6_l, xg_v6_v)
+
+        # V12: Logistic multinomial con features ampliados (H2H + varianza + mes)
+        if loc_norm and vis_norm and fecha_partido_str:
+            conn_v12 = sqlite3.connect(DB_NAME)
+            try:
+                p1_v12, px_v12, p2_v12 = _calcular_probs_v12_lr(
+                    xg_v6_l, xg_v6_v, loc_norm, vis_norm, liga, fecha_partido_str, conn_v12)
+            finally:
+                conn_v12.close()
+        else:
+            p1_v12, px_v12, p2_v12 = 1/3, 1/3, 1/3
+
+        def _amg(p1, px, p2):
+            opts = sorted([("1", p1), ("X", px), ("2", p2)], key=lambda x: -x[1])
+            return opts[0][0], opts[0][1] - opts[1][1]
+
+        ax_v6, mg_v6 = _amg(p1_v6, px_v6, p2_v6)
+        ax_v7, mg_v7 = _amg(p1_v7, px_v7, p2_v7)
+        ax_v12, mg_v12 = _amg(p1_v12, px_v12, p2_v12)
+
+        conn = sqlite3.connect(DB_NAME)
+        cur = conn.cursor()
+        cur.execute("""
+            UPDATE picks_shadow_arquitecturas
+            SET xg_v6_local = ?, xg_v6_visita = ?,
+                prob_1_v6_recal = ?, prob_x_v6_recal = ?, prob_2_v6_recal = ?,
+                argmax_v6_recal = ?, margen_v6_recal = ?,
+                prob_1_v7_recal_skellam = ?, prob_x_v7_recal_skellam = ?, prob_2_v7_recal_skellam = ?,
+                argmax_v7_recal_skellam = ?, margen_v7_recal_skellam = ?,
+                prob_1_v12_lr = ?, prob_x_v12_lr = ?, prob_2_v12_lr = ?,
+                argmax_v12_lr = ?, margen_v12_lr = ?
+            WHERE id_partido = ?
+              AND fecha_log = (SELECT MAX(fecha_log) FROM picks_shadow_arquitecturas WHERE id_partido = ?)
+        """, (xg_v6_l, xg_v6_v,
+              p1_v6, px_v6, p2_v6, ax_v6, mg_v6,
+              p1_v7, px_v7, p2_v7, ax_v7, mg_v7,
+              p1_v12, px_v12, p2_v12, ax_v12, mg_v12,
+              id_partido, id_partido))
+        conn.commit()
+        conn.close()
+    except Exception:
+        pass  # Falla silenciosa: shadow no rompe motor
+
+
 def _log_shadow_arquitecturas(id_partido, pais, fecha_partido, xg_l, xg_v, rho,
                               p1_actual, px_actual, p2_actual,
                               p1_no_fix5, px_no_fix5, p2_no_fix5,
@@ -1158,8 +1387,39 @@ def main():
                 p1_v3, px_v3, p2_v3,           # V3 puro
                 p1_v4, px_v4, p2_v4,           # V4 hg_sel
             )
+            # V6..V12 SHADOW (adepor-d7h): xG recalibrado OLS + 7 arquitecturas para activar empates
+            xg_v6_l, xg_v6_v = _get_xg_v6_para_partido(loc_norm, vis_norm, conn)
+            _log_shadow_v6_v7(id_partido, xg_v6_l, xg_v6_v, rho,
+                              liga=pais, loc_norm=loc_norm, vis_norm=vis_norm,
+                              fecha_partido_str=fecha_str)
         except Exception:
             pass  # Falla silenciosa: shadow no rompe motor
+
+        # --- LAYER 2 V5.0 [MANIFESTO-CHANGE-APPROVED:bd-adepor-edk]: arch override per liga ---
+        # Permite override de arquitectura argmax 1x2 por liga. Statu quo (config vacia)
+        # mantiene V0 default. Aprobado 2026-04-26 sobre N=271 OOS Pinnacle Turquia 2024
+        # (V12 yield +0.116 CI95 [+0.003, +0.242] ***).
+        # Falla silenciosa: si V12 weights faltan o xG_v6 no resuelve, mantiene V0.
+        try:
+            import json as _json_arch
+            _arch_json = get_param('arch_decision_per_liga', scope='global', default='{}')
+            _arch_map = _json_arch.loads(_arch_json) if _arch_json else {}
+            if _arch_map.get(pais) == 'V12':
+                xg6_l_arch, xg6_v_arch = _get_xg_v6_para_partido(loc_norm, vis_norm, conn)
+                if xg6_l_arch is not None and xg6_v_arch is not None:
+                    _conn_arch = sqlite3.connect(DB_NAME)
+                    try:
+                        p1_v12_arch, px_v12_arch, p2_v12_arch = _calcular_probs_v12_lr(
+                            xg6_l_arch, xg6_v_arch, loc_norm, vis_norm, pais, fecha_str, _conn_arch)
+                    finally:
+                        _conn_arch.close()
+                    p1_v0_pre, px_v0_pre, p2_v0_pre = p1, px, p2
+                    p1, px, p2 = p1_v12_arch, px_v12_arch, p2_v12_arch
+                    print(f"   [ARCH-V5.0:V12] {local} vs {visita} ({pais}) | "
+                          f"V0=({p1_v0_pre:.3f},{px_v0_pre:.3f},{p2_v0_pre:.3f}) -> "
+                          f"V12=({p1:.3f},{px:.3f},{p2:.3f})")
+        except Exception as _e_arch:
+            print(f"   [ARCH-V5.0-FAIL] {pais}: {_e_arch}, fallback V0")
 
         # --- SHADOW: Log de incertidumbre ---
         # Umbral re-calibrado 2026-04-22: antes 0.15 (disparaba siempre), ahora 1.40

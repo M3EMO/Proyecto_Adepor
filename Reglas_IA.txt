@@ -369,3 +369,39 @@ K. SHADOW — GRUPO DE CONTROL (V4.8)
     [DIVERGENCIA] Op1 exclusivo: N1 | Shadow exclusivo: N2 | Coincidentes: N3
     N2 > 0 significa que Shadow abre apuestas que Op1 rechazó (generalmente
     por Fix #5 o Hallazgo G que subieron/bajaron la prob lo suficiente para cruzar un umbral).
+
+L. ARQUITECTURA DE DECISION POR LIGA — V12 STANDALONE (V5.0, bd-adepor-edk APPROVED 2026-04-26)
+  El motor permite override de la arquitectura usada para argmax 1X2 SOLO en ligas
+  donde haya evidencia OOS estadísticamente significativa al 95%.
+
+  Default global: V0 (Poisson Bivariado Dixon-Coles sobre xG legacy + HG + Fix #5).
+  Override por liga: clave 'arch_decision_per_liga' en config_motor_valores (scope=global)
+                     como JSON {liga: arch_id}. arch_id ∈ {'V12'} (extensible).
+
+  ESTADO ACTUAL (2026-04-26, V5.0):
+    - Turquia: V12 LR multinomial (13 features sobre xG_v6 + H2H + varianza + mes).
+      Evidencia: walk-forward OOS Pinnacle closing 2024 N=271, yield V12 +0.116
+      CI95 [+0.003, +0.242] *** vs V0 +0.095 [-0.025, +0.223] (no signif).
+    - Resto (15 ligas): V0 default (NO override).
+
+  IMPLEMENTACION (motor_calculadora.py):
+    Después de aplicar Hallazgo G + Fix #5 sobre p1/px/p2 (V0 final), antes de
+    evaluar_mercado_1x2, leer arch_decision_per_liga. Si arch_target == 'V12':
+      1. Obtener xG_v6 vía _get_xg_v6_para_partido(loc_norm, vis_norm)
+      2. Obtener probs V12 vía _calcular_probs_v12_lr (mismo motor SHADOW V12)
+      3. Reemplazar p1, px, p2 con probs V12 (V0 queda en p1_v0_pre/px_v0_pre/p2_v0_pre
+         para logging)
+    Falla silenciosa: si V12 weights faltan o xG_v6 no resuelve → mantiene V0 default.
+
+  REGLA DE PROMOCION:
+    Solo se agrega liga al override si:
+    - Walk-forward OOS estricto N >= 200 con cuotas Pinnacle closing
+    - Yield V12 > V0 con CI95 95% que NO incluye 0
+    - Bead PROPOSAL con label approved-by-lead
+
+  REGLA DE REVERSION:
+    Si en SHADOW continuo se observa degradación V12 vs V0 en N >= 100 partidos
+    posteriores, remover liga del override en config_motor_valores.
+
+  ALCANCE: solo afecta argmax 1X2 (capa de decisión). NO toca xG, EMA, Bayesiano,
+  Hallazgo G, Fix #5, ni filtros de stake. Reversión = SQL UPDATE simple.

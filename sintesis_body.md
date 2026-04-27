@@ -321,3 +321,232 @@ Ningun hallazgo de EMA improvements puede ir a produccion sin tocar la logica de
 - **adepor-d4r** (inv-form): form/rachas Boca + EMA improvements v2
 - **adepor-mcn** (inv-apuestas): yield+Brier+Kelly, 15 papers
 - **inv-xg**: bead_id no transmitido al critico-sintesis. Lead notificado.
+
+
+---
+
+# ANEXO 2026-04-26 (PARTE 2) — Cierre experimento V6-V12 SHADOW + Motor adaptativo
+
+## Contexto
+
+Sesion extendida 2026-04-26 (post-anexo PARTE 1): el usuario pidio auditar el calculo de xG.
+Esto disparo un experimento de 7 arquitecturas SHADOW (V6-V12) con multiple analisis OOS.
+Resultado final: V0 raw sigue siendo el mejor argmax-default, pero se identificaron parches
+toxicos en producci on y un hibrido prometedor (H4) con evidencia preliminar.
+
+## Hallazgos principales
+
+### 1. xG OLS recalibrado (V6) — diagnostico
+
+Audit OLS sobre N=24,164 obs (10 ligas) detecto 3 errores estructurales en Reglas_IA.txt §II.A:
+
+- beta_shots_off positivo (+0.010 codigo) vs OLS empirico (-0.027)  → SIGNO INVERTIDO
+- coef_corner positivo (+0.02 codigo) vs OLS empirico (-0.055)  → SIGNO INVERTIDO
+- intercept ausente (asume 0) vs OLS estima +0.46 goles baseline  → MISSING
+
+Bias xG_total V0 legacy = +1.93 goles/partido (sobreestima). gamma_display=0.59 era parche.
+Bias xG_total V6 OLS = +0.08 goles. Pero NO se traduce en mejor 1X2 OOS.
+
+### 2. Resultado OOS estricto (test 2024 N=2,768)
+
+Walk-forward EMA cutoff 2023-12-31, sin leak comparativo:
+
+| Modelo | hit | Brier |
+|---|---:|---:|
+| V0 raw | **0.488** | **0.6182** |
+| V6 OLS+DC | 0.482 | 0.6222 |
+| V7 Skellam | 0.482 | 0.6223 |
+| V12 LR multinomial | 0.473 | 0.6219 |
+
+**V0 raw GANA OOS**. La superioridad in-sample de V12 (5pp) era 100% leak.
+
+### 3. Audit parches V0 OOS
+
+| Parche | Δhit | Veredicto |
+|---|---:|---|
+| Hallazgo G | **−1.2pp** | TOXICO |
+| Fix #5 | =0 | Inocuo |
+| Hallazgo G + Fix #5 | −1.2pp | Mismo |
+
+HALLAZGO_G_ACTIVO=True (default producci on) **degrada el motor 1.2pp OOS**.
+
+### 4. H4 V0+X-rescue (sobre cuotas reales N=127)
+
+H4 = V0 default + override 'X' si V12 dice argmax=X y P(X) > 0.30.
+
+| | hit | yield_A | yield_B (EV>5%) |
+|---|---:|---:|---:|
+| V0 baseline | 0.488 | +0.157 | +0.255 |
+| **H4** | **0.520** | **+0.246** | +0.317 |
+
+Threshold sweep [0.25, 0.50] confirma robustez en [0.25, 0.35]. Elegido: 0.30.
+**Caveat**: N=127 chico (CI95 ±10pp). PROPOSAL adepor-617 BLOQUEADO pending N≥500.
+
+### 5. Empate cuasi-aleatorio dado xG
+
+Cohen's d uniformemente <0.13 para todas las features (xg, delta, h2h_fx, var, etc.) en
+discriminar X vs no-X. Buckets bivariate: freq_X siempre 0.21-0.30. Sin patron explotable.
+
+V12 sub-detecta empates (3.2% picks vs 25.9% real) con precision 33% (cerca de base).
+Para activar empates con edge real se necesitan **features pre-partido NO presentes hoy**:
+alineaciones, lesiones jugadores top, posicion tabla, motivacional. Scrapeable pero costoso.
+
+## Motor adaptativo permanente (NUEVO)
+
+Implementado `motor_adaptativo.py` integrado en `ejecutar_proyecto.py` FASE 3.5 (entre
+motor_data y motor_fixture). Cada corrida del pipeline:
+
+1. Identifica partidos liquidados nuevos (idempotente via `motor_adaptativo_last_run`)
+2. SGD step sobre `lr_v12_weights[liga]` + `[global]` paralelo (warmup 100, lr=0.005,
+   ridge=0.1, anchor regularization=0.05)
+3. Auto-audit ultimos 200 SGD steps: WEIGHT_NORM>50 / GRAD_NORM>5 / BRIER>baseline×1.10
+   → AUTO-REVERT al anchor batch (cooldown 7d)
+4. Drift detector ventana 30d sobre Brier rolling vs baseline+2σ
+5. Persiste last_run timestamp
+
+Smoke test 2026-04-26: 373 partidos backtest reales procesados, 102 SGD steps efectivos
+(271 warmup), 0 reverts, Brier_avg=0.5296 (mejor que baseline batch 0.587), weight_norm=0.61
+estable. Tablas: `online_sgd_log`, `drift_alerts`.
+
+## Estado final beads
+
+| Bead | Estado | Rol |
+|---|---|---|
+| adepor-d7h | OPEN | Infra SHADOW V6/V7/V12/V12b + motor_adaptativo |
+| adepor-617 | OPEN P1 | PROPOSAL H4 V0+X-rescue + desactivar HG. BLOQUEADO pending N>=500 |
+| adepor-2yo | CLOSED | PROPOSAL V12 viejo descartado tras OOS |
+
+## Conclusion estrategica
+
+1. **El motor V0 actual SIN parches toxicos seria mas fuerte** (+1.2pp hit OOS).
+2. **xG recalibrado V6 NO mejora 1X2** aunque corrige bias goles. Aceptamos status quo en xG.
+3. **Empate es ruido estructural** dado el feature space xG. Sin scraping de alineaciones/
+   lesiones, ningun modelo va a mover la aguja en X.
+4. **H4 hibrido prometedor** pero requiere N>=500 con cuotas reales antes de promover.
+5. **ML adaptativo activo**: V12 SHADOW se actualiza online cada corrida con auto-reverts
+   protegidos. NO afecta motor productivo. Drift detector alertara si Brier degrada.
+
+## Archivos generados sesion 2026-04-26
+
+| Tipo | Archivo |
+|---|---|
+| Script | `analisis/calibrar_xg_por_liga_ols.py`, `calibrar_v12.py`, `calibrar_v12b.py` |
+| Script | `analisis/comparativo_v6_v7.py`, `walk_forward_v12_oos.py`, `walk_forward_v12b_skellam.py`, `walk_forward_v12_clean.py` |
+| Script | `analisis/audit_parches_v0_oos.py`, `audit_parches_extendido.py`, `v12_vs_v0_subset_x.py` |
+| Script | `analisis/yield_v0_v12_backtest.py`, `yield_hibridos_backtest.py`, `sweep_threshold_h4.py` |
+| Motor | `motor_adaptativo.py`, `scripts/online_sgd_v12.py`, `scripts/drift_detector.py` |
+| Backfill | `scripts/persistir_coefs_xg_v6.py`, `backfill_xg_v6_shadow.py` |
+| Doc | `docs/ml_adaptativo_plan.md`, `docs/plan_ampliacion_cuotas.md` |
+| DB | snapshot `snapshots/fondo_quant_20260426_181820_pre_xg_v6_shadow.db` |
+| Tabla nueva | `historial_equipos_v6_shadow`, `online_sgd_log`, `drift_alerts` |
+
+---
+
+# ANEXO 2026-04-26 (PARTE 3) — Plan ampliacion cuotas EJECUTADO + V5.0 APROBADO
+
+## Contexto
+
+Sesion 2026-04-26 PARTE 3: ejecutar plan_ampliacion_cuotas.md para validar PROPOSAL adepor-617
+(H4 V0+X-rescue) con N grande contra cuotas Pinnacle closing reales 2024.
+
+## Hallazgos principales
+
+### F1 — Scraper football-data.co.uk
+
+Tabla nueva `cuotas_externas_historico` (13.332 filas):
+- 8.600 mmz4281 (6 EUR full schema): E0/D1/I1/SP1/F1/T1, JOIN 100% match con partidos_historico_externo.
+- 967 NOR via /new/NOR.csv (Noruega Eliteserien — fix bug `adepor-a0i` que confundia N1=Eredivisie con Noruega).
+- 3.765 ARG/BRA via /new/{ARG,BRA}.csv. JOIN 87-90% post-aliases (30 mappings CSV→ESPN).
+
+Drop del scope original: E1 (English Championship) y P1 (Portugal) NO estan en
+partidos_historico_externo → JOIN inutil.
+
+### F2 — Walk-forward OOS estricto
+
+Test 2024 EUR + ARG + BRA, warmup EMA 2021-2023, N=2.348 partidos. Bootstrap CI95 B=1.000.
+
+| Estrategia (8 ligas, sin filtro) | Yield | CI95 | Sig 95% |
+|---|---|---|---|
+| V0 statu quo | -0.003 | [-0.046, +0.043] | . |
+| V12 uniforme | +0.007 | [-0.039, +0.053] | . |
+| H4 thresh=0.35 uniforme | +0.010 | [-0.036, +0.054] | . |
+| L2 (V12 TUR + V0 resto) | -0.000 | [-0.042, +0.046] | . |
+| L2+L3 (V12 TUR + H4 resto) | +0.012 | [-0.034, +0.057] | . |
+
+**Por liga:** SOLO Turquia es estadisticamente significativa al 95%. V12 TUR yield +0.116
+[+0.003, +0.242] ★ con N=271. Resto de ligas tienen yields apuntando en direccion
+esperada (positivo en TUR/ITA/FRA/ENG, negativo en DE/ES, marginal LATAM) pero CI95 amplios.
+
+Coincidencia con `xg_calibration_history.md` tier verde (TUR/ITA/FRA/ENG +7-11pp edge real)
+descarta data-snooping puro: hay senal estructural pre-existente.
+
+### F3 — PROPOSAL adepor-617 invalidado
+
+H4 con N=127 daba yield +0.246. Con N=1.806 sobre Pinnacle cae a +0.011 (CI95 incluye 0).
+Reconciliacion con N=127 ORIGINAL: imposible. partidos_backtest fecha 2026 mixto
+LATAM+EUR, cuotas_externas 2021-2024 EUR Pinnacle. Match: 0/418 (poblaciones disjuntas).
+
+Sucesor `adepor-edk` con 3 layers:
+- Layer 1 (filtro liga apostar/no): **RECHAZADO** por usuario ("mantener todas las ligas").
+- Layer 2 (V12 standalone Turquia): **APROBADO Y APLICADO**.
+- Layer 3 (H4 X-rescue thresh=0.35): **SHADOW, no aplicado**.
+
+## V5.0 APLICADO en producción
+
+Manifesto bump V4.6 → V5.0:
+- Reglas_IA.txt nueva §L "Arquitectura de Decisión por Liga"
+- SHA-256: `c1f3a1d2...` → `6609ee91...`
+- `configuracion.manifesto_sha256` actualizado
+
+motor_calculadora.py:1397-1418 — bloque LAYER 2 fail-silent. Si arch_target=='V12':
+1. _get_xg_v6_para_partido(loc_norm, vis_norm) → xG_v6
+2. _calcular_probs_v12_lr(xg_v6, ...) → V12 probs
+3. Override p1, px, p2 antes de evaluar_mercado_1x2
+
+config_motor_valores: `arch_decision_per_liga = '{"Turquia": "V12"}'` (tipo=text).
+
+Bug colateral encontrado y resuelto: `config_motor.py::_coerce` no manejaba `tipo='json'` →
+retornaba `valor_real` (NULL). Cambiado a `tipo='text'`, motor parsea localmente con json.loads.
+
+## Validación end-to-end (corrida real 2026-04-26)
+
+8 partidos turcos pendientes re-evaluados con V12 override. Logs `[ARCH-V5.0:V12]` visibles:
+
+| Partido | V0 pick | V12 pick | Cambio |
+|---|---|---|---|
+| Alanyaspor vs Samsunspor | 1 | 1 | + confianza |
+| Besiktas vs Fatih Karagumruk | 1 | 1 | + confianza |
+| Konyaspor vs Trabzonspor | 1 | 1 | — |
+| Caykur Rizespor vs Konyaspor | 1 | 1 | + confianza |
+| Gaziantep FK vs Besiktas | 2 (0.357) | **1 (0.412)** | **flip 2→1** |
+| Fenerbahce vs Istanbul Basaksehir | 1 | 1 | + confianza |
+| Samsunspor vs Galatasaray | 1 (0.458) | **2 (0.471)** | **flip 1→2** |
+| Trabzonspor vs Goztepe | 1 (0.440) | **2 (0.383)** | **flip 1→2** |
+
+3 de 8 partidos cambiaron pick. Stakes y EV recalculados con probs V12.
+
+## Estado final beads
+
+| Bead | Estado | Rol |
+|---|---|---|
+| adepor-617 | OPEN obsoleto | Sucedido por adepor-edk (H4 standalone no valida con N grande) |
+| adepor-edk | OPEN approved-by-lead | V5.0 aplicada parcialmente (Layer 2 prod, Layer 3 shadow) |
+| adepor-a0i | OPEN | Bug N1=Eredivisie fixed para scraper cuotas; calibrar_rho.py pendiente |
+
+## Archivos generados sesion 2026-04-26 PARTE 3
+
+| Tipo | Archivo |
+|---|---|
+| Script | `scripts/scraper_football_data_cuotas.py` (mmz4281 + /new/, ALIASES_NEW_FORMAT) |
+| Script | `analisis/yield_v0_v12_backtest_extendido.py`, `yield_v0_v12_F2_completo.py`, `yield_v0_v12_F2_sin_filtro.py` |
+| Script | `analisis/audit_yield_F2.py`, `audit_yield_F2_sweep_y_ci.py`, `audit_yield_F2_filtro_liga.py` |
+| Motor | `src/nucleo/motor_calculadora.py:1397-1418` (Layer 2 V12 override) |
+| Manifesto | `Reglas_IA.txt` §L (V5.0) |
+| Config | `config_motor_valores.arch_decision_per_liga = '{"Turquia": "V12"}'` |
+| DB | snapshot `snapshots/fondo_quant_20260426_215241_pre_cuotas_externas_F1.db` (10.96 MB, pre-F1) |
+| DB | snapshot `snapshots/fondo_quant_20260426_224017_pre_v5_layer2_v12_tur.db` (18.31 MB, pre-V5.0) |
+| DB | tabla `cuotas_externas_historico` (13.332 filas, 9 ligas) |
+| Doc | `docs/plan_ampliacion_cuotas.md` (F1+F2+F3 marcados ejecutados) |
+| Doc | `docs/pipeline_overview.md` (motor 7 documenta override V5.0) |
+| Doc | `docs/xg_calibration_history.md` (Anexo PARTE 3) |
+| JSON | 4 outputs persistidos en `analisis/*.json` con bootstrap CI95 |

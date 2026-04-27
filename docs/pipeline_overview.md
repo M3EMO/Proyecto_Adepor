@@ -23,14 +23,32 @@ py ejecutar_proyecto.py --help     # Lista subcomandos
 | 1.6 | LIQUIDACION | evaluar_pretest | no | Auto-flip LIVE/PRETEST por liga |
 | 2 | LIQUIDACION | motor_arbitro | no | Tarjetas y eventos arbitrales |
 | 3 | LIQUIDACION | motor_data | **SI** | EMA + Bayesian + xg_hibrido (scrapea ESPN histórico) |
+| **3.5** | **LIQUIDACION** | **motor_adaptativo** | **no** | **ML adaptativo: SGD V12 online + auto-audit + drift detector. Idempotente. Lee partidos liquidados nuevos desde last_run** |
 | 4 | HORIZONTE | motor_fixture | **SI** | Proyecta calendario futuro |
 | 5 | HORIZONTE | motor_tactico | no | Formaciones esperadas y DTs |
 | 6 | HORIZONTE | motor_cuotas | **SI** | Cuotas 1X2/OU + cuota_cierre (CLV V9.3) |
 | 6.5 | HORIZONTE | motor_cuotas_apifootball | no | Cuotas LATAM (API-Football) |
-| 7 | DECISIONES | motor_calculadora | **SI** | **Cerebro:** Poisson + Dixon-Coles + 4 Caminos + Kelly |
+| 7 | DECISIONES | motor_calculadora | **SI** | **Cerebro:** Poisson + Dixon-Coles + 4 Caminos + Kelly. Loggea V0 + V6 + V7 + V12 SHADOW. **V5.0 (2026-04-26):** override `arch_decision_per_liga` activo — V12 standalone para argmax 1X2 SOLO en Turquía (`adepor-edk` APPROVED). Resto de 15 ligas mantiene V0 default. |
 | 8 | EXCEL | motor_backtest (2da vez) | no | Doble barrido liquidación |
 | 8.5 | EXCEL | motor_liquidador (2da vez) | no | Barrido final apuestas |
 | 9 | EXCEL | **motor_sincronizador** | **SI** | Genera `Backtest_Modelo.xlsx` |
+
+### Motor 3.5: motor_adaptativo (NUEVO 2026-04-26)
+
+Corre en cada pipeline diario. NO crítico (resilient: si falla no rompe el flujo).
+
+**Pipeline interno**:
+1. Identifica partidos liquidados nuevos (`partidos_backtest` con stats raw + resultado, fecha > `motor_adaptativo_last_run`)
+2. Para cada partido: SGD step sobre `lr_v12_weights[liga]` y `[global]` paralelo (warmup 100, lr=0.005, ridge=0.1, anchor regularization=0.05)
+3. Auto-audit últimos 200 SGD steps: si detecta WEIGHT_NORM>50 / GRAD_NORM>5 / BRIER>baseline×1.10 → AUTO-REVERT a anchor batch (cooldown 7d)
+4. Drift detector ventana 30d sobre Brier rolling vs baseline+2σ → alerta + bead
+5. Persiste `motor_adaptativo_last_run` timestamp
+
+**Tablas relacionadas**: `online_sgd_log`, `drift_alerts`, configs `lr_v12_weights[scope]`, `lr_v12_weights_batch_anchor[scope]`, `online_sgd_n_partidos[scope]`, `motor_adaptativo_last_run`.
+
+**Dependencia**: requiere V12 weights persistidas (`config_motor_valores.lr_v12_weights`). Generadas por `analisis/calibrar_v12.py`. Si no existen, motor_adaptativo skip silente.
+
+**Plan completo**: `docs/ml_adaptativo_plan.md`
 
 Query DB para inventario actualizado:
 ```sql
@@ -64,6 +82,8 @@ Categorías (ver `motor_filtros_activos.referencia_manifesto`):
 
 - **Decisión** (II.E): FLOOR_PROB_MIN, **MARGEN_PREDICTIVO_1X2** (V4.5 = 0.05),
   DIVERGENCIA_MAX_1X2, EV_MIN_ESCALADO, HALLAZGO_G/C, FIX_5
+- **Arquitectura por liga** (§L V5.0): `arch_decision_per_liga` JSON {liga: arch_id}.
+  Activo: `{"Turquia": "V12"}`. Override del argmax 1X2 sobre V0. Fallback silencioso.
 - **xG** (II.A): BETA_SOT, BETA_SHOTS_OFF, COEF_CORNER_LIGA, GAMMA_DISPLAY, RHO_DIXON_COLES
 - **EMA** (II.B): ALFA_EMA (scope-liga), N0_ANCLA
 - **Stake** (II.I): MAX_KELLY_PCT_NORMAL/ALTO

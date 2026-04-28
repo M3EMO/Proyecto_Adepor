@@ -1,0 +1,192 @@
+{
+  "fecha": "2026-04-28T12:07:46.259713",
+  "n_picks_total": 358,
+  "discrepancias_por_liga": {
+    "Argentina": {
+      "total": 55,
+      "old_bloq": 21,
+      "new_bloq": 0,
+      "ambos_bloq": 0,
+      "discrep": 21,
+      "old_si_new_no": 21,
+      "old_no_new_si": 0
+    },
+    "Inglaterra": {
+      "total": 34,
+      "old_bloq": 8,
+      "new_bloq": 34,
+      "ambos_bloq": 8,
+      "discrep": 26,
+      "old_si_new_no": 0,
+      "old_no_new_si": 26
+    },
+    "Brasil": {
+      "total": 58,
+      "old_bloq": 20,
+      "new_bloq": 0,
+      "ambos_bloq": 0,
+      "discrep": 20,
+      "old_si_new_no": 20,
+      "old_no_new_si": 0
+    },
+    "Turquia": {
+      "total": 47,
+      "old_bloq": 7,
+      "new_bloq": 47,
+      "ambos_bloq": 7,
+      "discrep": 40,
+      "old_si_new_no": 0,
+      "old_no_new_si": 40
+    },
+    "Noruega": {
+      "total": 29,
+      "old_bloq": 4,
+      "new_bloq": 0,
+      "ambos_bloq": 0,
+      "discrep": 4,
+      "old_si_new_no": 4,
+      "old_no_new_si": 0
+    },
+    "Chile": {
+      "total": 19,
+      "old_bloq": 8,
+      "new_bloq": 0,
+      "ambos_bloq": 0,
+      "discrep": 8,
+      "old_si_new_no": 8,
+      "old_no_new_si": 0
+    },
+    "Uruguay": {
+      "total": 6,
+      "old_bloq": 0,
+      "new_bloq": 0,
+      "ambos_bloq": 0,
+      "discrep": 0,
+      "old_si_new_no": 0,
+      "old_no_new_si": 0
+    },
+    "Colombia": {
+      "total": 13,
+      "old_bloq": 9,
+      "new_bloq": 0,
+      "ambos_bloq": 0,
+      "discrep": 9,
+      "old_si_new_no": 9,
+      "old_no_new_si": 0
+    },
+    "Espana": {
+      "total": 20,
+      "old_bloq": 10,
+      "new_bloq": 20,
+      "ambos_bloq": 10,
+      "discrep": 10,
+      "old_si_new_no": 0,
+      "old_no_new_si": 10
+    },
+    "Bolivia": {
+      "total": 21,
+      "old_bloq": 0,
+      "new_bloq": 0,
+      "ambos_bloq": 0,
+      "discrep": 0,
+      "old_si_new_no": 0,
+      "old_no_new_si": 0
+    },
+    "Ecuador": {
+      "total": 17,
+      "old_bloq": 0,
+      "new_bloq": 0,
+      "ambos_bloq": 0,
+      "discrep": 0,
+      "old_si_new_no": 0,
+      "old_no_new_si": 0
+    },
+    "Francia": {
+      "total": 11,
+      "old_bloq": 10,
+      "new_bloq": 11,
+      "ambos_bloq": 10,
+      "discrep": 1,
+      "old_si_new_no": 0,
+      "old_no_new_si": 1
+    },
+    "Peru": {
+      "total": 10,
+      "old_bloq": 6,
+      "new_bloq": 0,
+      "ambos_bloq": 0,
+      "discrep": 6,
+      "old_si_new_no": 6,
+      "old_no_new_si": 0
+    },
+    "Alemania": {
+      "total": 10,
+      "old_bloq": 2,
+      "new_bloq": 10,
+      "ambos_bloq": 2,
+      "discrep": 8,
+      "old_si_new_no": 0,
+      "old_no_new_si": 8
+    },
+    "Italia": {
+      "total": 8,
+      "old_bloq": 7,
+      "new_bloq": 8,
+      "ambos_bloq": 7,
+      "discrep": 1,
+      "old_si_new_no": 0,
+      "old_no_new_si": 1
+    }
+  },
+  "yield_filtros": {
+    "BASELINE (todos liquidados con stake>0)": {
+      "n": 228,
+      "hit_pct": 51.32,
+      "sum_stake": 13592747.21,
+      "sum_pl": 2388335.62,
+      "yield_pct": 17.57
+    },
+    "M.1 solo (TOP-5 ligas)": {
+      "n": 143,
+      "hit_pct": 57.34,
+      "sum_stake": 6196505.13,
+      "sum_pl": 3098698.98,
+      "yield_pct": 50.01
+    },
+    "M.1 + M.2 (TOP-5 + n_acum<60)": {
+      "n": 89,
+      "hit_pct": 61.8,
+      "sum_stake": 4054381.14,
+      "sum_pl": 2387902.88,
+      "yield_pct": 58.9
+    },
+    "M.1 + M.3 OLD (TOP-5 + bin_OLD!=Q4)": {
+      "n": 108,
+      "hit_pct": 61.11,
+      "sum_stake": 3414408.61,
+      "sum_pl": 2693453.81,
+      "yield_pct": 78.88
+    },
+    "M.1 + M.3 NEW (TOP-5 + bin_NEW!=Q4)": {
+      "n": 93,
+      "hit_pct": 53.76,
+      "sum_stake": 3885940.46,
+      "sum_pl": 1751402.56,
+      "yield_pct": 45.07
+    },
+    "M.1 + M.2 + M.3 OLD": {
+      "n": 68,
+      "hit_pct": 66.18,
+      "sum_stake": 2401261.47,
+      "sum_pl": 2010465.88,
+      "yield_pct": 83.73
+    },
+    "M.1 + M.2 + M.3 NEW": {
+      "n": 54,
+      "hit_pct": 61.11,
+      "sum_stake": 2455743.62,
+      "sum_pl": 1543017.26,
+      "yield_pct": 62.83
+    }
+  }
+}

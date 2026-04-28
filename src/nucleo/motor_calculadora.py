@@ -954,34 +954,34 @@ def _get_n_acum_pre_partido(liga, equipo_norm, fecha_str, conn):
 def _get_momento_bin_4(liga, fecha_str, conn):
     """[V5.1 §M.3 — bd-adepor-ptk] Cuartil temporal del partido en su temporada.
 
-    Calcula pct_temp = (fecha - temp_min) / (temp_max - temp_min) y lo
-    discretiza en cuartos {0=Q1_arr, 1=Q2_ini, 2=Q3_mit, 3=Q4_cie}.
-
-    FUENTE DE TEMP_MIN/MAX (V5.1.1 — bug fix 2026-04-28):
-      Lee de tabla liga_calendario_temp (calendario individual por liga,
-      por ano, no template). Antes derivaba de rango observado en
-      historial_equipos_stats lo cual rompia para temps en curso.
-
-    Resolucion del 'temp del calendario':
+    Lee de tabla liga_calendario_temp (calendario individual por liga, por ano,
+    no template). Resolucion del 'temp del calendario':
       EUR top (ago-may): temp = ano de cierre. Ej: Premier 25-26 -> temp=2026.
       LATAM anual: temp = ano del torneo. Ej: Brasileirao 2026 -> temp=2026.
       Argentina semestral (Apertura): temp = ano del Apertura.
 
     Si liga+temp no calibrada en liga_calendario_temp -> None (fail-safe,
     M.3 no bloquea).
+
+    NOTA OPERATIVA (V5.1.2, 2026-04-28):
+      El filtro M.3 fue DESACTIVADO via config_motor_valores.filtro_picks_v51
+      (excluir_q4=false) tras audit in-sample 2026 que mostro que M.3 NEW
+      bloqueaba EUR top (Inglaterra +70.7%, Turquia +50.8%). La calibracion
+      OOS 2024 (Q4 yield -16.1% sig) NO se transfiere al regimen 2026.
+
+      Esta funcion sigue retornando el bin correcto (calendario real) para que
+      la columna v13_aplicable y otros consumidores sigan funcionando. El
+      bloqueo M.3 se controla via flag, no via implementacion.
+
+      Re-activacion condicional planeada en Fase 2 (bead adepor-09s):
+        - Si yield_rolling(liga) cae bajo umbral 2sigma -> activar M.3 esa liga.
+        - Si regimen detectado como 'tipo 2023', activar M.3 selectivamente.
     """
     try:
         cur = conn.cursor()
-        # Ano del partido como temp candidato. Si fecha es 2025-09-15 (Premier
-        # 25-26), ano=2025 pero temp del motor seria 2026 (cierre). Probamos
-        # temp=ano y temp=ano+1 (caso EUR ago-may con fecha en mitad-temp pre-cierre).
         ano = int(fecha_str[:4])
-        # Probar primero temp=ano (caso LATAM y EUR-cierre primer semestre del ano)
-        # Si fecha cae fuera del rango, probar temp=ano+1.
-        temp_candidatas = [ano, ano + 1]
-        f_min = f_max = None
-        temp_usada = None
-        for temp in temp_candidatas:
+        # Probar temp=ano y temp=ano+1 (caso EUR ago-may con fecha pre-cierre)
+        for temp in (ano, ano + 1):
             r = cur.execute("""
                 SELECT fecha_inicio, fecha_fin FROM liga_calendario_temp
                 WHERE liga = ? AND temp = ?
@@ -989,30 +989,19 @@ def _get_momento_bin_4(liga, fecha_str, conn):
             if not r:
                 continue
             if r[0] <= fecha_str <= r[1]:
-                f_min, f_max, temp_usada = r[0], r[1], temp
-                break
-            # Si no esta dentro del rango pero es el candidato, lo guardamos como fallback
-            if f_min is None:
-                f_min, f_max, temp_usada = r[0], r[1], temp
-        if f_min is None or f_max is None:
-            return None  # liga sin calendario o fecha fuera de cualquier temp
-        # Calcular pct
-        r_pct = cur.execute(
-            "SELECT julianday(?) - julianday(?), julianday(?) - julianday(?)",
-            (fecha_str, f_min, f_max, f_min)
-        ).fetchone()
-        delta_partido, delta_temp = r_pct[0], r_pct[1]
-        if delta_temp is None or delta_temp <= 0:
-            return None
-        pct = max(0.0, min(1.0, delta_partido / delta_temp))
-        if pct < 0.25:
-            return 0
-        elif pct < 0.50:
-            return 1
-        elif pct < 0.75:
-            return 2
-        else:
-            return 3
+                f_min, f_max = r[0], r[1]
+                r_pct = cur.execute(
+                    "SELECT julianday(?) - julianday(?), julianday(?) - julianday(?)",
+                    (fecha_str, f_min, f_max, f_min)
+                ).fetchone()
+                delta_partido, delta_temp = r_pct[0], r_pct[1]
+                if delta_temp and delta_temp > 0:
+                    pct = max(0.0, min(1.0, delta_partido / delta_temp))
+                    if pct < 0.25: return 0
+                    if pct < 0.50: return 1
+                    if pct < 0.75: return 2
+                    return 3
+        return None
     except Exception:
         return None
 

@@ -1,0 +1,258 @@
+{
+  "por_temp_liga": {
+    "2022": {
+      "Argentina": {
+        "baseline": {
+          "n": 264,
+          "n_apost": 139,
+          "yield": 9.9
+        },
+        "M3_OLD": {
+          "n": 181,
+          "n_apost": 98,
+          "yield": 17.8
+        },
+        "M3_NEW": {
+          "n": 120,
+          "n_apost": 63,
+          "yield": 37.8
+        }
+      },
+      "Brasil": {
+        "baseline": {
+          "n": 216,
+          "n_apost": 105,
+          "yield": -9.8
+        },
+        "M3_OLD": {
+          "n": 145,
+          "n_apost": 70,
+          "yield": -12.3
+        },
+        "M3_NEW": {
+          "n": 145,
+          "n_apost": 70,
+          "yield": -12.3
+        }
+      },
+      "Inglaterra": {
+        "baseline": {
+          "n": 350,
+          "n_apost": 39,
+          "yield": 31.5
+        },
+        "M3_OLD": {
+          "n": 116,
+          "n_apost": 5,
+          "yield": -19.4
+        },
+        "M3_NEW": {
+          "n": 231,
+          "n_apost": 20,
+          "yield": 23.6
+        }
+      },
+      "Turquia": {
+        "baseline": {
+          "n": 284,
+          "n_apost": 32,
+          "yield": -6.8
+        },
+        "M3_OLD": {
+          "n": 284,
+          "n_apost": 32,
+          "yield": -6.8
+        },
+        "M3_NEW": {
+          "n": 206,
+          "n_apost": 10,
+          "yield": 13.5
+        }
+      }
+    },
+    "2023": {
+      "Argentina": {
+        "baseline": {
+          "n": 308,
+          "n_apost": 172,
+          "yield": 9.8
+        },
+        "M3_OLD": {
+          "n": 229,
+          "n_apost": 127,
+          "yield": 24.5
+        },
+        "M3_NEW": {
+          "n": 308,
+          "n_apost": 172,
+          "yield": 9.8
+        }
+      },
+      "Brasil": {
+        "baseline": {
+          "n": 312,
+          "n_apost": 146,
+          "yield": 8.5
+        },
+        "M3_OLD": {
+          "n": 208,
+          "n_apost": 96,
+          "yield": 16.0
+        },
+        "M3_NEW": {
+          "n": 217,
+          "n_apost": 104,
+          "yield": 19.2
+        }
+      },
+      "Inglaterra": {
+        "baseline": {
+          "n": 371,
+          "n_apost": 80,
+          "yield": -4.8
+        },
+        "M3_OLD": {
+          "n": 58,
+          "n_apost": 16,
+          "yield": -29.1
+        },
+        "M3_NEW": {
+          "n": 264,
+          "n_apost": 57,
+          "yield": 1.4
+        }
+      },
+      "Turquia": {
+        "baseline": {
+          "n": 370,
+          "n_apost": 66,
+          "yield": -14.0
+        },
+        "M3_OLD": {
+          "n": 370,
+          "n_apost": 66,
+          "yield": -14.0
+        },
+        "M3_NEW": {
+          "n": 285,
+          "n_apost": 54,
+          "yield": -5.0
+        }
+      }
+    },
+    "2024": {
+      "Argentina": {
+        "baseline": {
+          "n": 335,
+          "n_apost": 175,
+          "yield": 21.6
+        },
+        "M3_OLD": {
+          "n": 210,
+          "n_apost": 112,
+          "yield": 32.0
+        },
+        "M3_NEW": {
+          "n": 190,
+          "n_apost": 103,
+          "yield": 27.6
+        }
+      },
+      "Brasil": {
+        "baseline": {
+          "n": 327,
+          "n_apost": 170,
+          "yield": -13.7
+        },
+        "M3_OLD": {
+          "n": 237,
+          "n_apost": 122,
+          "yield": -5.0
+        },
+        "M3_NEW": {
+          "n": 237,
+          "n_apost": 122,
+          "yield": -5.0
+        }
+      },
+      "Inglaterra": {
+        "baseline": {
+          "n": 377,
+          "n_apost": 95,
+          "yield": 5.4
+        },
+        "M3_OLD": {
+          "n": 56,
+          "n_apost": 20,
+          "yield": -45.8
+        },
+        "M3_NEW": {
+          "n": 283,
+          "n_apost": 76,
+          "yield": 11.4
+        }
+      },
+      "Turquia": {
+        "baseline": {
+          "n": 333,
+          "n_apost": 74,
+          "yield": 19.1
+        },
+        "M3_OLD": {
+          "n": 100,
+          "n_apost": 22,
+          "yield": 15.4
+        },
+        "M3_NEW": {
+          "n": 244,
+          "n_apost": 54,
+          "yield": 20.0
+        }
+      }
+    }
+  },
+  "deltas_M3_NEW_minus_OLD": {
+    "Argentina": {
+      "hist": {
+        "2022": 19.999999999999996,
+        "2023": -14.7,
+        "2024": -4.399999999999999
+      },
+      "real_2026": 0.0
+    },
+    "Brasil": {
+      "hist": {
+        "2022": 0.0,
+        "2023": 3.1999999999999993,
+        "2024": 0.0
+      },
+      "real_2026": 0.0
+    },
+    "Inglaterra": {
+      "hist": {
+        "2022": 43.0,
+        "2023": 30.5,
+        "2024": 57.199999999999996
+      },
+      "real_2026": -70.7
+    },
+    "Noruega": {
+      "hist": {},
+      "real_2026": 0.0
+    },
+    "Turquia": {
+      "hist": {
+        "2022": 20.3,
+        "2023": 9.0,
+        "2024": 4.6
+      },
+      "real_2026": -50.8
+    }
+  },
+  "distancias": {
+    "2022": 67.79,
+    "2023": 59.25,
+    "2024": 69.73
+  },
+  "temp_mas_similar": "2023"
+}

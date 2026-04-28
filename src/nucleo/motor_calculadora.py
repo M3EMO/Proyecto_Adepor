@@ -697,6 +697,78 @@ def _calcular_probs_skellam(xg_l, xg_v, max_goals=10):
     return 1/3, 1/3, 1/3
 
 
+def _get_n_acum_pre_partido(liga, equipo_norm, fecha_str, conn):
+    """[V5.1 §M.2 — bd-adepor-ptk] Snapshot n_acum del local PRE-partido.
+
+    Lookup en historial_equipos_stats el partido inmediatamente anterior
+    a fecha_str para (liga, equipo_norm). Devuelve int o None si no hay
+    cobertura (la liga no esta scrapeada o es primer partido del equipo).
+
+    Si retorna None, el filtro M.2 NO bloquea (fail-safe).
+    """
+    try:
+        cur = conn.cursor()
+        # historial_equipos_stats puede tener equipos por nombre normalizado o no.
+        # Probamos ambos: equipo_norm directo y también buscando coincidencia case-insensitive
+        r = cur.execute("""
+            SELECT n_acum FROM historial_equipos_stats
+            WHERE liga = ? AND equipo = ? AND fecha < ?
+            ORDER BY fecha DESC LIMIT 1
+        """, (liga, equipo_norm, fecha_str)).fetchone()
+        if r and r[0] is not None:
+            return int(r[0])
+        return None
+    except Exception:
+        return None
+
+
+def _get_momento_bin_4(liga, fecha_str, conn):
+    """[V5.1 §M.3 — bd-adepor-ptk] Cuartil temporal del partido en su temporada.
+
+    Calcula pct_temp = (fecha - temp_min) / (temp_max - temp_min) y lo
+    discretiza en cuartos {0=Q1_arr, 1=Q2_ini, 2=Q3_mit, 3=Q4_cie}.
+
+    temp_min/temp_max derivados desde historial_equipos_stats por (liga,
+    año del partido). Si la temp en curso aun no llego al maximo (motor
+    en vivo), se usa fecha_str como temp_max efectivo (extiende rango).
+
+    Si N partidos en la liga+temp < 10 -> insuficiente data, retorna None.
+    Si retorna None, el filtro M.3 NO bloquea (fail-safe).
+    """
+    try:
+        cur = conn.cursor()
+        año = fecha_str[:4]
+        r = cur.execute("""
+            SELECT MIN(fecha), MAX(fecha), COUNT(*) FROM historial_equipos_stats
+            WHERE liga = ? AND substr(fecha, 1, 4) = ?
+        """, (liga, año)).fetchone()
+        if not r or r[2] is None or r[2] < 10:
+            return None
+        f_min, f_max, _ = r[0], r[1], r[2]
+        if not f_min or not f_max:
+            return None
+        # Si fecha_str > f_max, extender el rango (motor en vivo)
+        f_max_efectivo = f_max if fecha_str <= f_max else fecha_str
+        # Conversion via SQLite julianday (mas robusto que parseo manual)
+        r_pct = cur.execute("""
+            SELECT julianday(?) - julianday(?), julianday(?) - julianday(?)
+        """, (fecha_str, f_min, f_max_efectivo, f_min)).fetchone()
+        delta_partido, delta_temp = r_pct[0], r_pct[1]
+        if delta_temp is None or delta_temp <= 0:
+            return None
+        pct = max(0.0, min(1.0, delta_partido / delta_temp))
+        if pct < 0.25:
+            return 0
+        elif pct < 0.50:
+            return 1
+        elif pct < 0.75:
+            return 2
+        else:
+            return 3
+    except Exception:
+        return None
+
+
 def _get_xg_v6_para_partido(loc_norm, vis_norm, conn):
     """[SHADOW V6 — adepor-d7h] Lookup EMAs V6 shadow y compone xG por partido.
 
@@ -1492,8 +1564,17 @@ def main():
         c1_v, cx_v, c2_v = safe_float(c1), safe_float(cx), safe_float(c2)
         co_v, cu_v = safe_float(co), safe_float(cu)
 
+        # V5.1 §M.2/M.3 (bd-adepor-ptk APPROVED, activacion via bd-adepor-27x):
+        # Lookup n_acum del local pre-partido + cuartil temporal de la temp.
+        # Fail-safe: ambos pueden ser None si cobertura faltante; el filtro
+        # interno de evaluar_mercado_1x2 NO bloquea con None.
+        _n_acum_l_v51 = _get_n_acum_pre_partido(pais, loc_norm, fecha_str, conn)
+        _momento_bin_v51 = _get_momento_bin_4(pais, fecha_str, conn)
+
         # Evaluacion raw (sin filtros adicionales) — Fix #4: pasa pais para div_max por liga
-        pick_1x2_raw, ev_1x2, cu_1x2 = evaluar_mercado_1x2(p1, px, p2, c1_v, cx_v, c2_v, liga=pais)
+        pick_1x2_raw, ev_1x2, cu_1x2 = evaluar_mercado_1x2(
+            p1, px, p2, c1_v, cx_v, c2_v, liga=pais,
+            n_acum_l=_n_acum_l_v51, momento_bin_4=_momento_bin_v51)
 
         # Extraer prob del outcome elegido en raw
         prob_raw_1x2 = 0.0
@@ -1518,7 +1599,8 @@ def main():
         # aplica los mismos filtros de Opcion 1 (floor 33% + EV escalado),
         # pero SIN multiplicador de stake por delta xG.
         pick_shadow_raw, ev_shadow_raw, cu_shadow_raw = evaluar_mercado_1x2(
-            p1_raw, px_raw, p2_raw, c1_v, cx_v, c2_v, liga=pais)
+            p1_raw, px_raw, p2_raw, c1_v, cx_v, c2_v, liga=pais,
+            n_acum_l=_n_acum_l_v51, momento_bin_4=_momento_bin_v51)
         prob_shadow_raw = 0.0
         if "[APOSTAR]" in pick_shadow_raw:
             if   "LOCAL"  in pick_shadow_raw: prob_shadow_raw = p1_raw

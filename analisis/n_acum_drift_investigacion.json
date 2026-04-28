@@ -1,0 +1,771 @@
+{
+  "n_total_oos": 7867,
+  "n_filtrado": 4584,
+  "logica_pick": "argmax gap>=5%, EV>=3%, K cap 2.5%",
+  "tests": {
+    "T0_replica_base": {
+      "<10": {
+        "n_pred": 294,
+        "n_apost": 67,
+        "n_gano": 29,
+        "hit_pct": 43.28,
+        "yield_pct": 33.31,
+        "sum_stake": 1.675,
+        "sum_pl": 0.558,
+        "ci95_lo": -2.87,
+        "ci95_hi": 70.08
+      },
+      "10-29": {
+        "n_pred": 1209,
+        "n_apost": 344,
+        "n_gano": 128,
+        "hit_pct": 37.21,
+        "yield_pct": 8.13,
+        "sum_stake": 8.5962,
+        "sum_pl": 0.6993,
+        "ci95_lo": -8.09,
+        "ci95_hi": 24.05
+      },
+      "30-59": {
+        "n_pred": 1427,
+        "n_apost": 480,
+        "n_gano": 177,
+        "hit_pct": 36.88,
+        "yield_pct": 3.93,
+        "sum_stake": 12.0,
+        "sum_pl": 0.472,
+        "ci95_lo": -7.96,
+        "ci95_hi": 17.29
+      },
+      ">=60": {
+        "n_pred": 1654,
+        "n_apost": 478,
+        "n_gano": 152,
+        "hit_pct": 31.8,
+        "yield_pct": -13.7,
+        "sum_stake": 11.9479,
+        "sum_pl": -1.6367,
+        "ci95_lo": -25.1,
+        "ci95_hi": -1.73
+      }
+    },
+    "T1_matriz_nacum_x_momento": {
+      "<10": {
+        "Q1": {
+          "n_pred": 173,
+          "n_apost": 17,
+          "n_gano": 3,
+          "hit_pct": 17.65,
+          "yield_pct": -50.0,
+          "sum_stake": 0.425,
+          "sum_pl": -0.2125,
+          "ci95_lo": -100.0,
+          "ci95_hi": 13.09
+        },
+        "Q2": {
+          "n_pred": 121,
+          "n_apost": 50,
+          "n_gano": 26,
+          "hit_pct": 52.0,
+          "yield_pct": 61.64,
+          "sum_stake": 1.25,
+          "sum_pl": 0.7705,
+          "ci95_lo": 18.01,
+          "ci95_hi": 100.78
+        },
+        "Q3": null,
+        "Q4": null
+      },
+      "10-29": {
+        "Q1": {
+          "n_pred": 48,
+          "n_apost": 27,
+          "n_gano": 8,
+          "hit_pct": 29.63,
+          "yield_pct": -15.63,
+          "sum_stake": 0.675,
+          "sum_pl": -0.1055,
+          "ci95_lo": -62.23,
+          "ci95_hi": 36.41
+        },
+        "Q2": {
+          "n_pred": 302,
+          "n_apost": 73,
+          "n_gano": 28,
+          "hit_pct": 38.36,
+          "yield_pct": 5.36,
+          "sum_stake": 1.822,
+          "sum_pl": 0.0977,
+          "ci95_lo": -25.25,
+          "ci95_hi": 39.32
+        },
+        "Q3": {
+          "n_pred": 552,
+          "n_apost": 149,
+          "n_gano": 59,
+          "hit_pct": 39.6,
+          "yield_pct": 16.87,
+          "sum_stake": 3.725,
+          "sum_pl": 0.6285,
+          "ci95_lo": -7.06,
+          "ci95_hi": 39.81
+        },
+        "Q4": {
+          "n_pred": 307,
+          "n_apost": 95,
+          "n_gano": 33,
+          "hit_pct": 34.74,
+          "yield_pct": 3.31,
+          "sum_stake": 2.3742,
+          "sum_pl": 0.0785,
+          "ci95_lo": -27.52,
+          "ci95_hi": 35.11
+        }
+      },
+      "30-59": {
+        "Q1": {
+          "n_pred": 372,
+          "n_apost": 120,
+          "n_gano": 44,
+          "hit_pct": 36.67,
+          "yield_pct": 6.9,
+          "sum_stake": 3.0,
+          "sum_pl": 0.207,
+          "ci95_lo": -18.5,
+          "ci95_hi": 34.02
+        },
+        "Q2": {
+          "n_pred": 414,
+          "n_apost": 134,
+          "n_gano": 56,
+          "hit_pct": 41.79,
+          "yield_pct": 16.04,
+          "sum_stake": 3.35,
+          "sum_pl": 0.5372,
+          "ci95_lo": -6.4,
+          "ci95_hi": 42.11
+        },
+        "Q3": {
+          "n_pred": 245,
+          "n_apost": 91,
+          "n_gano": 36,
+          "hit_pct": 39.56,
+          "yield_pct": 18.1,
+          "sum_stake": 2.275,
+          "sum_pl": 0.4117,
+          "ci95_lo": -13.17,
+          "ci95_hi": 51.44
+        },
+        "Q4": {
+          "n_pred": 396,
+          "n_apost": 135,
+          "n_gano": 41,
+          "hit_pct": 30.37,
+          "yield_pct": -20.27,
+          "sum_stake": 3.375,
+          "sum_pl": -0.684,
+          "ci95_lo": -39.53,
+          "ci95_hi": 0.16
+        }
+      },
+      ">=60": {
+        "Q1": {
+          "n_pred": 205,
+          "n_apost": 59,
+          "n_gano": 16,
+          "hit_pct": 27.12,
+          "yield_pct": -31.93,
+          "sum_stake": 1.475,
+          "sum_pl": -0.471,
+          "ci95_lo": -58.34,
+          "ci95_hi": -1.63
+        },
+        "Q2": {
+          "n_pred": 284,
+          "n_apost": 88,
+          "n_gano": 31,
+          "hit_pct": 35.23,
+          "yield_pct": -6.05,
+          "sum_stake": 2.1982,
+          "sum_pl": -0.1329,
+          "ci95_lo": -34.23,
+          "ci95_hi": 23.46
+        },
+        "Q3": {
+          "n_pred": 456,
+          "n_apost": 124,
+          "n_gano": 47,
+          "hit_pct": 37.9,
+          "yield_pct": 3.84,
+          "sum_stake": 3.1,
+          "sum_pl": 0.119,
+          "ci95_lo": -20.6,
+          "ci95_hi": 28.36
+        },
+        "Q4": {
+          "n_pred": 709,
+          "n_apost": 207,
+          "n_gano": 58,
+          "hit_pct": 28.02,
+          "yield_pct": -22.26,
+          "sum_stake": 5.1748,
+          "sum_pl": -1.1518,
+          "ci95_lo": -38.16,
+          "ci95_hi": -3.94
+        }
+      }
+    },
+    "T2_por_liga": {
+      "Alemania": {
+        "<10": {
+          "n_pred": 14,
+          "n_apost": 1,
+          "n_gano": 0,
+          "hit_pct": 0.0,
+          "yield_pct": -100.0,
+          "sum_stake": 0.025,
+          "sum_pl": -0.025
+        },
+        "10-29": {
+          "n_pred": 63,
+          "n_apost": 8,
+          "n_gano": 2,
+          "hit_pct": 25.0,
+          "yield_pct": 31.13,
+          "sum_stake": 0.2,
+          "sum_pl": 0.0623
+        },
+        "30-59": {
+          "n_pred": 63,
+          "n_apost": 6,
+          "n_gano": 0,
+          "hit_pct": 0.0,
+          "yield_pct": -100.0,
+          "sum_stake": 0.15,
+          "sum_pl": -0.15
+        },
+        ">=60": {
+          "n_pred": 81,
+          "n_apost": 13,
+          "n_gano": 6,
+          "hit_pct": 46.15,
+          "yield_pct": 43.08,
+          "sum_stake": 0.325,
+          "sum_pl": 0.14
+        }
+      },
+      "Argentina": {
+        "<10": {
+          "n_pred": 62,
+          "n_apost": 34,
+          "n_gano": 16,
+          "hit_pct": 47.06,
+          "yield_pct": 47.12,
+          "sum_stake": 0.85,
+          "sum_pl": 0.4005
+        },
+        "10-29": {
+          "n_pred": 253,
+          "n_apost": 142,
+          "n_gano": 51,
+          "hit_pct": 35.92,
+          "yield_pct": 7.89,
+          "sum_stake": 3.55,
+          "sum_pl": 0.28
+        },
+        "30-59": {
+          "n_pred": 331,
+          "n_apost": 176,
+          "n_gano": 68,
+          "hit_pct": 38.64,
+          "yield_pct": 16.47,
+          "sum_stake": 4.4,
+          "sum_pl": 0.7245
+        },
+        ">=60": {
+          "n_pred": 223,
+          "n_apost": 111,
+          "n_gano": 39,
+          "hit_pct": 35.14,
+          "yield_pct": -1.6,
+          "sum_stake": 2.7748,
+          "sum_pl": -0.0443
+        }
+      },
+      "Brasil": {
+        "<10": {
+          "n_pred": 42,
+          "n_apost": 25,
+          "n_gano": 9,
+          "hit_pct": 36.0,
+          "yield_pct": 11.8,
+          "sum_stake": 0.625,
+          "sum_pl": 0.0737
+        },
+        "10-29": {
+          "n_pred": 171,
+          "n_apost": 91,
+          "n_gano": 37,
+          "hit_pct": 40.66,
+          "yield_pct": 9.01,
+          "sum_stake": 2.275,
+          "sum_pl": 0.205
+        },
+        "30-59": {
+          "n_pred": 273,
+          "n_apost": 140,
+          "n_gano": 54,
+          "hit_pct": 38.57,
+          "yield_pct": -1.43,
+          "sum_stake": 3.5,
+          "sum_pl": -0.05
+        },
+        ">=60": {
+          "n_pred": 340,
+          "n_apost": 151,
+          "n_gano": 48,
+          "hit_pct": 31.79,
+          "yield_pct": -15.5,
+          "sum_stake": 3.775,
+          "sum_pl": -0.585
+        }
+      },
+      "Espana": {
+        "<10": {
+          "n_pred": 30,
+          "n_apost": 1,
+          "n_gano": 0,
+          "hit_pct": 0.0,
+          "yield_pct": -100.0,
+          "sum_stake": 0.025,
+          "sum_pl": -0.025
+        },
+        "10-29": {
+          "n_pred": 124,
+          "n_apost": 20,
+          "n_gano": 8,
+          "hit_pct": 40.0,
+          "yield_pct": 25.3,
+          "sum_stake": 0.5,
+          "sum_pl": 0.1265
+        },
+        "30-59": {
+          "n_pred": 156,
+          "n_apost": 41,
+          "n_gano": 11,
+          "hit_pct": 26.83,
+          "yield_pct": -30.2,
+          "sum_stake": 1.025,
+          "sum_pl": -0.3095
+        },
+        ">=60": {
+          "n_pred": 241,
+          "n_apost": 44,
+          "n_gano": 9,
+          "hit_pct": 20.45,
+          "yield_pct": -44.68,
+          "sum_stake": 1.1,
+          "sum_pl": -0.4915
+        }
+      },
+      "Francia": {
+        "<10": {
+          "n_pred": 34,
+          "n_apost": 0,
+          "n_gano": 0,
+          "hit_pct": 0.0,
+          "yield_pct": 0.0,
+          "sum_stake": 0.0,
+          "sum_pl": 0.0
+        },
+        "10-29": {
+          "n_pred": 139,
+          "n_apost": 13,
+          "n_gano": 4,
+          "hit_pct": 30.77,
+          "yield_pct": -1.77,
+          "sum_stake": 0.325,
+          "sum_pl": -0.0057
+        },
+        "30-59": {
+          "n_pred": 186,
+          "n_apost": 36,
+          "n_gano": 16,
+          "hit_pct": 44.44,
+          "yield_pct": 27.42,
+          "sum_stake": 0.9,
+          "sum_pl": 0.2468
+        },
+        ">=60": {
+          "n_pred": 234,
+          "n_apost": 51,
+          "n_gano": 17,
+          "hit_pct": 33.33,
+          "yield_pct": -15.84,
+          "sum_stake": 1.2732,
+          "sum_pl": -0.2017
+        }
+      },
+      "Inglaterra": {
+        "<10": {
+          "n_pred": 26,
+          "n_apost": 0,
+          "n_gano": 0,
+          "hit_pct": 0.0,
+          "yield_pct": 0.0,
+          "sum_stake": 0.0,
+          "sum_pl": 0.0
+        },
+        "10-29": {
+          "n_pred": 111,
+          "n_apost": 17,
+          "n_gano": 4,
+          "hit_pct": 23.53,
+          "yield_pct": -39.95,
+          "sum_stake": 0.4242,
+          "sum_pl": -0.1695
+        },
+        "30-59": {
+          "n_pred": 139,
+          "n_apost": 32,
+          "n_gano": 12,
+          "hit_pct": 37.5,
+          "yield_pct": 19.81,
+          "sum_stake": 0.8,
+          "sum_pl": 0.1585
+        },
+        ">=60": {
+          "n_pred": 220,
+          "n_apost": 43,
+          "n_gano": 14,
+          "hit_pct": 32.56,
+          "yield_pct": -11.84,
+          "sum_stake": 1.075,
+          "sum_pl": -0.1272
+        }
+      },
+      "Italia": {
+        "<10": {
+          "n_pred": 53,
+          "n_apost": 4,
+          "n_gano": 2,
+          "hit_pct": 50.0,
+          "yield_pct": 59.75,
+          "sum_stake": 0.1,
+          "sum_pl": 0.0598
+        },
+        "10-29": {
+          "n_pred": 221,
+          "n_apost": 24,
+          "n_gano": 7,
+          "hit_pct": 29.17,
+          "yield_pct": -11.42,
+          "sum_stake": 0.6,
+          "sum_pl": -0.0685
+        },
+        "30-59": {
+          "n_pred": 245,
+          "n_apost": 38,
+          "n_gano": 14,
+          "hit_pct": 36.84,
+          "yield_pct": -0.71,
+          "sum_stake": 0.95,
+          "sum_pl": -0.0068
+        },
+        ">=60": {
+          "n_pred": 315,
+          "n_apost": 65,
+          "n_gano": 19,
+          "hit_pct": 29.23,
+          "yield_pct": -20.12,
+          "sum_stake": 1.625,
+          "sum_pl": -0.327
+        }
+      },
+      "Turquia": {
+        "<10": {
+          "n_pred": 33,
+          "n_apost": 2,
+          "n_gano": 2,
+          "hit_pct": 100.0,
+          "yield_pct": 148.0,
+          "sum_stake": 0.05,
+          "sum_pl": 0.074
+        },
+        "10-29": {
+          "n_pred": 127,
+          "n_apost": 29,
+          "n_gano": 15,
+          "hit_pct": 51.72,
+          "yield_pct": 37.29,
+          "sum_stake": 0.722,
+          "sum_pl": 0.2692
+        },
+        "30-59": {
+          "n_pred": 34,
+          "n_apost": 11,
+          "n_gano": 2,
+          "hit_pct": 18.18,
+          "yield_pct": -51.45,
+          "sum_stake": 0.275,
+          "sum_pl": -0.1415
+        },
+        ">=60": null
+      }
+    },
+    "T3_correlacion": {
+      "pearson_r": 0.207,
+      "spearman_rho": 0.2104,
+      "spearman_p_aprox": 2.315249938681496e-47,
+      "n": 4584
+    },
+    "T4_solo_momento": {
+      "Q1_arr": {
+        "n_pred": 798,
+        "n_apost": 223,
+        "n_gano": 71,
+        "hit_pct": 31.84,
+        "yield_pct": -10.44,
+        "sum_stake": 5.575,
+        "sum_pl": -0.582,
+        "ci95_lo": -27.8,
+        "ci95_hi": 7.67
+      },
+      "Q2_ini": {
+        "n_pred": 1121,
+        "n_apost": 345,
+        "n_gano": 141,
+        "hit_pct": 40.87,
+        "yield_pct": 14.76,
+        "sum_stake": 8.6202,
+        "sum_pl": 1.2726,
+        "ci95_lo": 0.06,
+        "ci95_hi": 29.3
+      },
+      "Q3_mit": {
+        "n_pred": 1253,
+        "n_apost": 364,
+        "n_gano": 142,
+        "hit_pct": 39.01,
+        "yield_pct": 12.74,
+        "sum_stake": 9.1,
+        "sum_pl": 1.1593,
+        "ci95_lo": -2.11,
+        "ci95_hi": 27.73
+      },
+      "Q4_cie": {
+        "n_pred": 1412,
+        "n_apost": 437,
+        "n_gano": 132,
+        "hit_pct": 30.21,
+        "yield_pct": -16.09,
+        "sum_stake": 10.924,
+        "sum_pl": -1.7572,
+        "ci95_lo": -28.54,
+        "ci95_hi": -3.29
+      }
+    },
+    "T5_comparacion_magnitudes": {
+      "rango_n_acum_pp": 47.01,
+      "rango_momento_pp": 30.85,
+      "ratio": 1.52
+    },
+    "T6_filtros_operativos": {
+      "BASELINE (sin filtro)": {
+        "n_pred": 4584,
+        "n_apost": 1369,
+        "n_gano": 486,
+        "hit_pct": 35.5,
+        "yield_pct": 0.27,
+        "sum_stake": 34.2192,
+        "sum_pl": 0.0926,
+        "ci95_lo": -7.01,
+        "ci95_hi": 7.34
+      },
+      "Excluir n_acum_l >=60": {
+        "n_pred": 2930,
+        "n_apost": 891,
+        "n_gano": 334,
+        "hit_pct": 37.49,
+        "yield_pct": 7.76,
+        "sum_stake": 22.2712,
+        "sum_pl": 1.7293,
+        "ci95_lo": -1.04,
+        "ci95_hi": 17.25
+      },
+      "Excluir momento Q4 (cierre)": {
+        "n_pred": 3172,
+        "n_apost": 932,
+        "n_gano": 354,
+        "hit_pct": 37.98,
+        "yield_pct": 7.94,
+        "sum_stake": 23.2952,
+        "sum_pl": 1.8498,
+        "ci95_lo": -1.94,
+        "ci95_hi": 17.02
+      },
+      "Excluir (n_acum>=60 OR Q4)": {
+        "n_pred": 2227,
+        "n_apost": 661,
+        "n_gano": 260,
+        "hit_pct": 39.33,
+        "yield_pct": 14.13,
+        "sum_stake": 16.522,
+        "sum_pl": 2.3347,
+        "ci95_lo": 2.34,
+        "ci95_hi": 24.83
+      },
+      "Excluir (n_acum>=60 AND Q4)": {
+        "n_pred": 3875,
+        "n_apost": 1162,
+        "n_gano": 428,
+        "hit_pct": 36.83,
+        "yield_pct": 4.28,
+        "sum_stake": 29.0444,
+        "sum_pl": 1.2444,
+        "ci95_lo": -4.09,
+        "ci95_hi": 12.83
+      },
+      "Solo n_acum<30 (joven EMA)": {
+        "n_pred": 1503,
+        "n_apost": 411,
+        "n_gano": 157,
+        "hit_pct": 38.2,
+        "yield_pct": 12.24,
+        "sum_stake": 10.2712,
+        "sum_pl": 1.2573,
+        "ci95_lo": -1.8,
+        "ci95_hi": 27.37
+      },
+      "Solo momento Q2-Q3 (medio temp)": {
+        "n_pred": 2374,
+        "n_apost": 709,
+        "n_gano": 283,
+        "hit_pct": 39.92,
+        "yield_pct": 13.72,
+        "sum_stake": 17.7202,
+        "sum_pl": 2.4318,
+        "ci95_lo": 3.14,
+        "ci95_hi": 23.48
+      }
+    },
+    "T7_lado_visita": {
+      "<10": {
+        "n_pred": 220,
+        "n_apost": 49,
+        "n_gano": 17,
+        "hit_pct": 34.69,
+        "yield_pct": 7.78,
+        "sum_stake": 1.225,
+        "sum_pl": 0.0953,
+        "ci95_lo": -33.94,
+        "ci95_hi": 55.14
+      },
+      "10-29": {
+        "n_pred": 907,
+        "n_apost": 249,
+        "n_gano": 94,
+        "hit_pct": 37.75,
+        "yield_pct": 6.74,
+        "sum_stake": 6.2242,
+        "sum_pl": 0.4198,
+        "ci95_lo": -10.51,
+        "ci95_hi": 23.94
+      },
+      "30-59": {
+        "n_pred": 1066,
+        "n_apost": 397,
+        "n_gano": 155,
+        "hit_pct": 39.04,
+        "yield_pct": 12.5,
+        "sum_stake": 9.925,
+        "sum_pl": 1.2408,
+        "ci95_lo": -1.66,
+        "ci95_hi": 28.26
+      },
+      ">=60": {
+        "n_pred": 1182,
+        "n_apost": 455,
+        "n_gano": 155,
+        "hit_pct": 34.07,
+        "yield_pct": -7.84,
+        "sum_stake": 11.3729,
+        "sum_pl": -0.8917,
+        "ci95_lo": -18.83,
+        "ci95_hi": 5.07
+      }
+    },
+    "T8_cruce_top4_liga": {
+      "TOP-4 baseline": {
+        "n_pred": 2385,
+        "n_apost": 1004,
+        "n_gano": 371,
+        "hit_pct": 36.95,
+        "yield_pct": 4.26,
+        "sum_stake": 25.096,
+        "sum_pl": 1.068,
+        "ci95_lo": -4.46,
+        "ci95_hi": 13.13
+      },
+      "TOP-4 + excluir n_acum>=60": {
+        "n_pred": 1602,
+        "n_apost": 699,
+        "n_gano": 270,
+        "hit_pct": 38.63,
+        "yield_pct": 10.44,
+        "sum_stake": 17.4712,
+        "sum_pl": 1.8245,
+        "ci95_lo": -1.36,
+        "ci95_hi": 20.94
+      },
+      "TOP-4 + excluir Q4": {
+        "n_pred": 1616,
+        "n_apost": 679,
+        "n_gano": 271,
+        "hit_pct": 39.91,
+        "yield_pct": 12.8,
+        "sum_stake": 16.972,
+        "sum_pl": 2.1717,
+        "ci95_lo": 2.65,
+        "ci95_hi": 23.59
+      },
+      "TOP-4 + excluir (n_acum>=60 OR Q4)": {
+        "n_pred": 1188,
+        "n_apost": 513,
+        "n_gano": 209,
+        "hit_pct": 40.74,
+        "yield_pct": 17.42,
+        "sum_stake": 12.822,
+        "sum_pl": 2.2337,
+        "ci95_lo": 4.73,
+        "ci95_hi": 30.21
+      },
+      "Otras 4 baseline": {
+        "n_pred": 2199,
+        "n_apost": 365,
+        "n_gano": 115,
+        "hit_pct": 31.51,
+        "yield_pct": -10.69,
+        "sum_stake": 9.1232,
+        "sum_pl": -0.9754,
+        "ci95_lo": -24.05,
+        "ci95_hi": 3.23
+      },
+      "Otras 4 + excluir (n_acum>=60 OR Q4)": {
+        "n_pred": 1039,
+        "n_apost": 148,
+        "n_gano": 51,
+        "hit_pct": 34.46,
+        "yield_pct": 2.73,
+        "sum_stake": 3.7,
+        "sum_pl": 0.101,
+        "ci95_lo": -21.54,
+        "ci95_hi": 26.87
+      }
+    }
+  },
+  "veredicto": [
+    "H1 (n_acum proxy de momento) PARCIAL: correlacion media r=+0.21/rho=+0.21",
+    "Ambos rangos similares. H3 (combinacion) plausible. Ver matriz T1 para concluir."
+  ]
+}

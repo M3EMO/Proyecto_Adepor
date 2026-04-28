@@ -31,6 +31,13 @@ from src.comun.config_sistema import DB_NAME, LIGAS_ESPN, API_KEY_FOOTBALL, MAPA
 # --- Constantes ---
 RHO_FALLBACK  = -0.09   # Fallback del sistema (Manifiesto V4.8)
 RHO_MIN       = -0.30   # Limite inferior del grid search
+RHO_MAX       = 0.05    # Limite superior del grid search (adepor-cae 2026-04-27).
+                         # Extendido de 0.00 -> +0.05 para que el MLE pueda devolver
+                         # valores positivos cuando el optimum de log-likelihood
+                         # esta del lado positivo (ej. ligas post-COVID con menos
+                         # 0-0 que Poisson predice). Nota: RHO_FLOOR=-0.03 sigue
+                         # clampeando el rho final aun si MLE da positivo — el
+                         # warning queda igualmente loggeado como diagnostico.
 RHO_FLOOR     = -0.03   # Floor minimo: siempre se aplica alguna correccion DC.
                          # Nota: el PL moderno (2022-25) tiene menos 0-0 que Poisson
                          # predice (4.39% obs vs 4.87% esperado), lo que implica rho~0.
@@ -64,11 +71,11 @@ FUENTES_CSV = {
         "https://www.football-data.co.uk/mmz4281/2223/E0.csv",
         "https://www.football-data.co.uk/mmz4281/2122/E0.csv",
     ],
-    "Noruega": [
-        "https://www.football-data.co.uk/mmz4281/2425/N1.csv",
-        "https://www.football-data.co.uk/mmz4281/2324/N1.csv",
-        "https://www.football-data.co.uk/mmz4281/2223/N1.csv",
-    ],
+    # Noruega REMOVIDA 2026-04-27 (adepor-a0i): el codigo N1 de
+    # football-data.co.uk corresponde a Eredivisie holandesa, NO a la
+    # Eliteserien noruega. Football-data.co.uk no cubre Noruega. La liga
+    # cae al fallback API-Football (MAPA_LIGAS_API_FOOTBALL["Noruega"]=69)
+    # automaticamente en el bloque ligas_sin_csv del main().
     "Turquia": [
         "https://www.football-data.co.uk/mmz4281/2425/T1.csv",
         "https://www.football-data.co.uk/mmz4281/2324/T1.csv",
@@ -172,7 +179,8 @@ def _estimar_lambdas_por_equipo(partidos_full):
 
 def estimar_rho_mle(partidos_full):
     """
-    Estima rho via grid search MLE sobre [-0.30, 0.00] con paso 0.001.
+    Estima rho via grid search MLE sobre [RHO_MIN, RHO_MAX] (default
+    [-0.30, +0.05]) con paso 0.001.
 
     Por que lambda/mu por equipo (y no promedio de liga):
         Usar un solo lambda/mu promedio subestima la varianza real
@@ -204,13 +212,24 @@ def estimar_rho_mle(partidos_full):
     mejor_rho = RHO_FALLBACK
     mejor_ll  = -math.inf
 
-    pasos = int((0.0 - RHO_MIN) * 1000) + 1
+    pasos = int((RHO_MAX - RHO_MIN) * 1000) + 1
     for k in range(pasos):
         rho_c = round(RHO_MIN + k * 0.001, 4)
         ll = _log_verosimilitud_total(partidos_lm, rho_c)
         if ll > mejor_ll:
             mejor_ll = ll
             mejor_rho = rho_c
+
+    if mejor_rho > 0:
+        print(f"   [WARNING] rho positivo detectado ({mejor_rho:+.4f}). "
+              f"Validar contra literatura. Floor RHO_FLOOR={RHO_FLOOR} "
+              f"clampeara este valor en _procesar_liga.")
+    elif mejor_rho >= RHO_MAX - 0.001:
+        print(f"   [WARNING] rho={mejor_rho:+.4f} toca techo del grid (RHO_MAX={RHO_MAX}). "
+              f"True optimum podria ser mas positivo — considerar ampliar grid.")
+    elif mejor_rho <= RHO_MIN + 0.001:
+        print(f"   [WARNING] rho={mejor_rho:+.4f} toca piso del grid (RHO_MIN={RHO_MIN}). "
+              f"True optimum podria ser mas negativo — considerar ampliar grid.")
 
     return mejor_rho
 

@@ -1,0 +1,190 @@
+{
+  "n_total_picks": 358,
+  "n_triangulable": 266,
+  "ligas_excluidas_no_cobertura": {
+    "Brasil": 4,
+    "Argentina": 9,
+    "Noruega": 12,
+    "Turquia": 6,
+    "Inglaterra": 1,
+    "Chile": 6,
+    "Uruguay": 6,
+    "Bolivia": 21,
+    "Ecuador": 17,
+    "Peru": 2,
+    "Colombia": 2,
+    "Espana": 3,
+    "Alemania": 1,
+    "Francia": 2
+  },
+  "tests": {
+    "TR1_n_acum_real": {
+      "<10": {
+        "n_pred": 31,
+        "n_apost": 31,
+        "hit_pct": 51.61,
+        "yield_pct": 31.31,
+        "ci95_lo": -25.12,
+        "ci95_hi": 85.75
+      },
+      "10-29": {
+        "n_pred": 10,
+        "n_apost": 10,
+        "hit_pct": 50.0,
+        "yield_pct": -14.84,
+        "ci95_lo": -80.3,
+        "ci95_hi": 105.54
+      },
+      "30-59": {
+        "n_pred": 33,
+        "n_apost": 33,
+        "hit_pct": 60.61,
+        "yield_pct": 56.62,
+        "ci95_lo": -7.91,
+        "ci95_hi": 118.5
+      },
+      ">=60": {
+        "n_pred": 92,
+        "n_apost": 92,
+        "hit_pct": 44.57,
+        "yield_pct": -0.23,
+        "ci95_lo": -27.61,
+        "ci95_hi": 30.01
+      }
+    },
+    "TR2_momento_real": {
+      "Q1_arr": {
+        "n_pred": 36,
+        "n_apost": 36,
+        "hit_pct": 55.56,
+        "yield_pct": 7.38,
+        "ci95_lo": -43.2,
+        "ci95_hi": 77.61
+      },
+      "Q2_ini": {
+        "n_pred": 30,
+        "n_apost": 30,
+        "hit_pct": 56.67,
+        "yield_pct": 80.38,
+        "ci95_lo": 9.26,
+        "ci95_hi": 156.69
+      },
+      "Q3_mit": {
+        "n_pred": 35,
+        "n_apost": 35,
+        "hit_pct": 48.57,
+        "yield_pct": 15.77,
+        "ci95_lo": -26.93,
+        "ci95_hi": 62.8
+      },
+      "Q4_cie": {
+        "n_pred": 65,
+        "n_apost": 65,
+        "hit_pct": 43.08,
+        "yield_pct": 4.32,
+        "ci95_lo": -27.05,
+        "ci95_hi": 37.74
+      }
+    },
+    "TR3_filtros_reales": {
+      "BASELINE (todos triangulables)": {
+        "n_pred": 166,
+        "n_apost": 166,
+        "hit_pct": 49.4,
+        "yield_pct": 14.98,
+        "ci95_lo": -7.7,
+        "ci95_hi": 40.08
+      },
+      "Excluir n_acum_l>=60": {
+        "n_pred": 74,
+        "n_apost": 74,
+        "hit_pct": 55.41,
+        "yield_pct": 35.78,
+        "ci95_lo": 0.69,
+        "ci95_hi": 71.92
+      },
+      "Excluir momento Q4": {
+        "n_pred": 101,
+        "n_apost": 101,
+        "hit_pct": 53.47,
+        "yield_pct": 29.14,
+        "ci95_lo": -2.42,
+        "ci95_hi": 60.12
+      },
+      "Excluir (n_acum>=60 OR Q4)": {
+        "n_pred": 45,
+        "n_apost": 45,
+        "hit_pct": 62.22,
+        "yield_pct": 58.76,
+        "ci95_lo": 11.1,
+        "ci95_hi": 100.46
+      },
+      "TOP-5 ligas (Arg/Bra/Ing/Nor/Tur)": {
+        "n_pred": 119,
+        "n_apost": 119,
+        "hit_pct": 54.62,
+        "yield_pct": 40.65,
+        "ci95_lo": 10.23,
+        "ci95_hi": 71.53
+      },
+      "TOP-5 + excluir (n_acum>=60 OR Q4)": {
+        "n_pred": 44,
+        "n_apost": 44,
+        "hit_pct": 63.64,
+        "yield_pct": 68.04,
+        "ci95_lo": 23.34,
+        "ci95_hi": 105.73
+      }
+    },
+    "TR4_filtros_unitario": {
+      "BASELINE (todos triangulables)": {
+        "n_pred": 266,
+        "n_apost": 266,
+        "hit_pct": 59.4,
+        "yield_pct": 34.47,
+        "ci95_lo": 18.33,
+        "ci95_hi": 51.68
+      },
+      "Excluir n_acum_l>=60": {
+        "n_pred": 114,
+        "n_apost": 114,
+        "hit_pct": 62.28,
+        "yield_pct": 36.5,
+        "ci95_lo": 15.32,
+        "ci95_hi": 59.39
+      },
+      "Excluir momento Q4": {
+        "n_pred": 160,
+        "n_apost": 160,
+        "hit_pct": 62.5,
+        "yield_pct": 49.4,
+        "ci95_lo": 27.22,
+        "ci95_hi": 72.83
+      },
+      "Excluir (n_acum>=60 OR Q4)": {
+        "n_pred": 71,
+        "n_apost": 71,
+        "hit_pct": 67.61,
+        "yield_pct": 47.17,
+        "ci95_lo": 18.39,
+        "ci95_hi": 73.86
+      },
+      "TOP-5 ligas (Arg/Bra/Ing/Nor/Tur)": {
+        "n_pred": 191,
+        "n_apost": 191,
+        "hit_pct": 62.83,
+        "yield_pct": 49.55,
+        "ci95_lo": 31.67,
+        "ci95_hi": 70.52
+      },
+      "TOP-5 + excluir (n_acum>=60 OR Q4)": {
+        "n_pred": 65,
+        "n_apost": 65,
+        "hit_pct": 66.15,
+        "yield_pct": 48.23,
+        "ci95_lo": 18.29,
+        "ci95_hi": 77.96
+      }
+    }
+  }
+}

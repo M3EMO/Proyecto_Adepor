@@ -196,6 +196,40 @@ CONSENSO_CUOTA_MAX = get_param('consenso_cuota_max', default=2.00)       # Cuota
 # Ningun camino puede seleccionar EMPATE como pick final.
 APUESTA_EMPATE_PERMITIDA = get_param('apuesta_empate_permitida', default=False)
 
+# --- Filtro de picks apostables V5.1 (Manifesto §M, bd-adepor-ptk APPROVED 2026-04-28) ---
+# Triple filtro:
+#   M.1 liga in LIGAS_APOSTABLES (default {Argentina, Brasil, Inglaterra, Noruega, Turquia})
+#   M.2 n_acum_l < n_acum_max (default 60)  — solo si n_acum_l != None
+#   M.3 momento_bin_4 != 3 (excluye Q4 cierre) — solo si momento_bin_4 != None
+# Evidencia: docs/findings_n_acum_drift.md. Validado dual OOS Pinnacle 2022-24
+# N=4584 (yield +17.4 [+4.7,+30.2]) + real 2026-03/04 N=44 (yield +68.0 [+23.3,+100.5]).
+# Fail-safe: si n_acum_l/momento_bin_4 son None (cobertura faltante o llamador legacy),
+# NO bloquea — el pick pasa. Solo el filtro liga es siempre activo.
+def _cargar_filtro_picks_v51():
+    """Carga filtro_picks_v51 desde config_motor_valores. Devuelve dict con
+    keys 'ligas' (set), 'n_acum_max' (int), 'excluir_q4' (bool). Si no existe,
+    devuelve None (filtro desactivado)."""
+    try:
+        raw = get_param('filtro_picks_v51', scope='global', default=None)
+        if raw is None:
+            return None
+        if isinstance(raw, str):
+            import json as _json
+            cfg = _json.loads(raw)
+        elif isinstance(raw, dict):
+            cfg = raw
+        else:
+            return None
+        return {
+            'ligas': set(cfg.get('ligas', [])),
+            'n_acum_max': int(cfg.get('n_acum_max', 60)),
+            'excluir_q4': bool(cfg.get('excluir_q4', True)),
+        }
+    except Exception:
+        return None
+
+_FILTRO_PICKS_V51 = _cargar_filtro_picks_v51()
+
 # Mercado O/U 2.5 (complementario — opera solo cuando no hay señal 1X2)
 # True  = activo  (backtest post-fix: 5 bets, 100% hit, +140.6% yield)
 # False = shadow  (registra pick_ou en DB pero stake_ou = 0, sin dinero real)
@@ -949,7 +983,8 @@ def _log_shadow_arquitecturas(id_partido, pais, fecha_partido, xg_l, xg_v, rho,
         pass  # Falla silenciosa: shadow no debe romper motor
 
 
-def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None):
+def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None,
+                          n_acum_l=None, momento_bin_4=None):
     """
     Evalua mercado 1X2 con cuatro caminos (Manifiesto II.E + V4.3/V4.4):
     1. Favorito del modelo: umbral estandar, divergencia <= div_max (por liga)
@@ -957,7 +992,28 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None):
     2B. Desacuerdo Modelo-Mercado: prob >= 40%, div entre div_max y 0.30
     3. Alta Conviccion: EV >= 1.0, cuota <= 8.0 (mercado claramente equivocado)
     Fix #4 (V4.4): div_max es especifico por liga segun eficiencia de mercado.
+
+    V5.1 (Manifesto §M, bd-adepor-ptk): triple filtro pre-pricing.
+        n_acum_l: snapshot pre-partido del local en historial_equipos_stats
+                  (None si cobertura faltante -> filtro EMA se omite).
+        momento_bin_4: cuartil temporal de la liga/temp en el partido
+                       (None -> filtro momento se omite).
     """
+    # ===== V5.1 FILTRO M (bd-adepor-ptk APPROVED) =====
+    # M.1: liga apostable. M.2: madurez EMA local. M.3: momento temp.
+    if _FILTRO_PICKS_V51 is not None:
+        # M.1: liga apostable
+        if liga is not None and liga not in _FILTRO_PICKS_V51['ligas']:
+            return f"[PASAR] Liga No Apostable (V5.1)", -100, 0
+        # M.2: madurez EMA local (fail-safe: si n_acum_l es None, NO bloquea)
+        if n_acum_l is not None and n_acum_l >= _FILTRO_PICKS_V51['n_acum_max']:
+            return f"[PASAR] EMA Madura n_acum>={_FILTRO_PICKS_V51['n_acum_max']} (V5.1)", -100, 0
+        # M.3: cierre temporada (Q4). fail-safe: si momento_bin_4 es None, NO bloquea
+        if (_FILTRO_PICKS_V51.get('excluir_q4', False)
+                and momento_bin_4 is not None and momento_bin_4 == 3):
+            return f"[PASAR] Cierre Temporada Q4 (V5.1)", -100, 0
+    # ===== fin filtro V5.1 =====
+
     # Resolver divergencia maxima segun eficiencia de mercado de la liga (F4 via DB)
     if liga:
         div_max = get_param('divergencia_max_1x2', scope=liga,

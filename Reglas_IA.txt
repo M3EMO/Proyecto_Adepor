@@ -405,3 +405,82 @@ L. ARQUITECTURA DE DECISION POR LIGA — V12 STANDALONE (V5.0, bd-adepor-edk APP
 
   ALCANCE: solo afecta argmax 1X2 (capa de decisión). NO toca xG, EMA, Bayesiano,
   Hallazgo G, Fix #5, ni filtros de stake. Reversión = SQL UPDATE simple.
+
+M. FILTRO DE PICKS APOSTABLES — TRIPLE FILTRO (V5.1, bd-adepor-ptk APPROVED 2026-04-28)
+  El motor genera picks operativos (stake > 0) SOLO cuando se cumplen los 3 filtros:
+
+  M.1 FILTRO LIGA APOSTABLE
+    apostar_solo_si liga in LIGAS_APOSTABLES
+    LIGAS_APOSTABLES = {Argentina, Brasil, Inglaterra, Noruega, Turquia}
+    Justificación: tier verde walk-forward OOS 2024 + tier verde in-sample N=358.
+    Re-evaluable mensual via adepor-j4e cuando ligas no listadas acumulen N>=30
+    picks in-sample. Otras ligas siguen procesándose en SHADOW (no generan stake).
+
+  M.2 FILTRO MADUREZ EMA
+    apostar_solo_si n_acum_l < N_ACUM_MAX
+    N_ACUM_MAX = 60 (snapshot pre-partido del local)
+    Justificación: bead adepor-0ac N=4584 OOS, bucket n_acum>=60 yield -13.7%
+    CI95 [-25.1, -1.7] *** vs <10 +33.3%. Efecto INDEPENDIENTE de momento_temp
+    (Pearson r=+0.21, no es proxy). Validado simétrico en visita (T7).
+
+  M.3 FILTRO MOMENTO TEMPORADA
+    apostar_solo_si momento_bin_4(fecha, liga, temp) != 3 (excluye Q4 cierre)
+    momento_bin_4 = floor(pct_temp * 4) donde pct_temp = (fecha - liga_temp_min) /
+                     (liga_temp_max - liga_temp_min). Q4 = pct_temp in [0.75, 1.00].
+    Justificación: bead adepor-0ac N=4584, Q4 yield -16.1% CI95 [-28.5, -3.3] ***
+    vs Q2 +14.8% / Q3 +12.7%. Efecto independiente de n_acum (matriz T1 muestra
+    Q4 daña en ambos buckets 30-59 y >=60).
+
+  CONFIG OPERATIVO (single source of truth):
+    INSERT INTO config_motor_valores (clave, scope, valor_real, tipo)
+    VALUES ('filtro_picks_v51', 'global',
+            '{"ligas": ["Argentina","Brasil","Inglaterra","Noruega","Turquia"],
+              "n_acum_max": 60, "excluir_q4": true}', 'json');
+
+  IMPLEMENTACION (motor_calculadora.py):
+    Guard al inicio del pricing operativo (antes de evaluar caminos):
+      filtro = get_param('filtro_picks_v51', scope='global', tipo='json')
+      if liga not in filtro['ligas']:
+          return [PASAR] Liga No Apostable, ev_fav, c_fav
+      if n_acum_l is not None and n_acum_l >= filtro['n_acum_max']:
+          return [PASAR] EMA Madura (n_acum>={N_ACUM_MAX}), ev_fav, c_fav
+      if filtro.get('excluir_q4', False) and momento_bin_4 == 3:
+          return [PASAR] Cierre Temporada (Q4), ev_fav, c_fav
+      # ... pipeline normal de caminos C1/C2B/C3/C4/C2
+
+    n_acum_l y momento_bin_4 deben calcularse en motor_data.py (pre-pricing) y
+    pasarse al evaluador. Falla silenciosa: si n_acum_l es None (cobertura
+    historial_equipos_stats faltante) → SE APUESTA (no bloquea picks).
+    Si momento_bin_4 es None → SE APUESTA.
+
+  EVIDENCIA AGREGADA (validacion dual):
+
+    OOS Pinnacle 2022-2024 N=4584:
+      | Filtro                                  | NA  | Hit% | Yield% | CI95 |
+      | BASELINE (sin filtro)                   |1369 | 35.5 | +0.3   | [-7.0,+7.3] |
+      | TOP-5 + (n_acum>=60 OR Q4) excluidos    | 513 | 40.7 | +17.4  | [+4.7,+30.2] ** |
+
+    IN-SAMPLE real 2026-03/04 N=266 (stake real $):
+      | Filtro                                  | NA  | Hit% | Yield% | CI95 |
+      | BASELINE                                | 166 | 49.4 | +15.0  | [-7.7,+40.1] |
+      | TOP-5 + (n_acum>=60 OR Q4) excluidos    |  44 | 63.6 | +68.0  | [+23.3,+100.5] *** |
+
+    Findings: docs/findings_n_acum_drift.md. Scripts: analisis/n_acum_*.
+
+  REGLA DE PROMOCION DE LIGA AL TIER APOSTABLE:
+    Reevaluación mensual obligatoria via adepor-j4e:
+    - Si liga descartada acumula N>=30 picks in-sample con yield CI95_lo > 0
+      → considerar agregarla a LIGAS_APOSTABLES
+    - Si liga apostable acumula N>=30 picks con yield CI95_hi < 0
+      → considerar removerla
+    Cambio = bead [PROPOSAL: MANIFESTO CHANGE] + approved-by-lead.
+
+  REGLA DE REVERSION:
+    Si en N>=200 picks operativos post-V5.1 el yield agregado del motor cae
+    por debajo de baseline pre-V5.1 (yield < 0 con CI95_lo < -10pp), reformular
+    o revertir filtros. SQL UPDATE simple sobre config_motor_valores.
+
+  ALCANCE: capa de SELECCION de picks (entre evaluacion de caminos y stake>0).
+  NO modifica xG, EMA, probs, cuotas, Kelly, ni Manifesto §IV (caminos).
+  Solo decide SI un pick generado pasa a operativo. Reversion completa via
+  config_motor_valores.

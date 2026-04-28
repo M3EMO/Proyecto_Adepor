@@ -1,0 +1,381 @@
+{
+  "fecha_calibracion": "2026-04-28T10:24:55.232712",
+  "n_total_dataset": 5005,
+  "lambdas_grid": [
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "n_folds_cv": 5,
+  "min_n_liga": 100,
+  "feature_names": [
+    "atk_sots",
+    "atk_shot_pct",
+    "atk_pos",
+    "atk_pass_pct",
+    "atk_corners",
+    "def_sots_c",
+    "def_shot_pct_c"
+  ],
+  "calibraciones": {
+    "Alemania": {
+      "skipped": true,
+      "razon": "N<100"
+    },
+    "Argentina": {
+      "local": {
+        "n_train": 676,
+        "n_test": 368,
+        "lambda_opt": 100.0,
+        "intercept": 0.1353730835767648,
+        "coefs": {
+          "atk_sots": 0.08014023895630744,
+          "atk_shot_pct": 0.23679641976674032,
+          "atk_pos": 0.013927994737278388,
+          "atk_pass_pct": 0.631871272277848,
+          "atk_corners": -0.055666974313055846,
+          "def_sots_c": -0.06203370206955627,
+          "def_shot_pct_c": 0.2403706014300757
+        },
+        "mse_test": 1.1769,
+        "r2_oos": -0.0091,
+        "naive_mse_test": 1.1662,
+        "mse_gain_vs_naive": -0.0106,
+        "mean_pred": 1.13,
+        "mean_real": 1.22
+      },
+      "visita": {
+        "n_train": 676,
+        "n_test": 368,
+        "lambda_opt": 100.0,
+        "intercept": 0.33705344755242894,
+        "coefs": {
+          "atk_sots": 0.07993307502051068,
+          "atk_shot_pct": -0.8355803327322389,
+          "atk_pos": 0.003920452819950004,
+          "atk_pass_pct": 0.22366089034819397,
+          "atk_corners": 0.0456280195456634,
+          "def_sots_c": -0.019996184097420586,
+          "def_shot_pct_c": 0.11405968556706517
+        },
+        "mse_test": 0.9296,
+        "r2_oos": -0.0036,
+        "naive_mse_test": 0.9312,
+        "mse_gain_vs_naive": 0.0015,
+        "mean_pred": 0.854,
+        "mean_real": 0.834
+      }
+    },
+    "Brasil": {
+      "local": {
+        "n_train": 691,
+        "n_test": 370,
+        "lambda_opt": 100.0,
+        "intercept": 0.448408949170513,
+        "coefs": {
+          "atk_sots": 0.08929701423579156,
+          "atk_shot_pct": -1.9406152650833373,
+          "atk_pos": 0.0047105991306561805,
+          "atk_pass_pct": 1.391327562222246,
+          "atk_corners": 0.019373975097658796,
+          "def_sots_c": -0.08545957696747619,
+          "def_shot_pct_c": 0.5639767273366777
+        },
+        "mse_test": 1.1813,
+        "r2_oos": 0.0015,
+        "naive_mse_test": 1.1832,
+        "mse_gain_vs_naive": 0.0019,
+        "mean_pred": 1.42,
+        "mean_real": 1.414
+      },
+      "visita": {
+        "n_train": 691,
+        "n_test": 370,
+        "lambda_opt": 100.0,
+        "intercept": 0.5833128375132287,
+        "coefs": {
+          "atk_sots": 0.06517535577025228,
+          "atk_shot_pct": 0.07712564393393967,
+          "atk_pos": 0.0038291086548730845,
+          "atk_pass_pct": 0.2271131735582258,
+          "atk_corners": 0.014761599696991949,
+          "def_sots_c": -0.07967368931533085,
+          "def_shot_pct_c": 0.11307436549158364
+        },
+        "mse_test": 0.9012,
+        "r2_oos": 0.0135,
+        "naive_mse_test": 0.9137,
+        "mse_gain_vs_naive": 0.0125,
+        "mean_pred": 1.034,
+        "mean_real": 1.005
+      }
+    },
+    "Chile": {
+      "local": {
+        "n_train": 430,
+        "n_test": 230,
+        "lambda_opt": 100.0,
+        "intercept": -0.3048661663264296,
+        "coefs": {
+          "atk_sots": 0.06818259374560443,
+          "atk_shot_pct": 0.6660908839376456,
+          "atk_pos": -0.0011539259704339284,
+          "atk_pass_pct": 1.4980707375236646,
+          "atk_corners": 0.03510565158393725,
+          "def_sots_c": -0.02491725127041413,
+          "def_shot_pct_c": 0.31489569653356014
+        },
+        "mse_test": 1.7656,
+        "r2_oos": -0.1691,
+        "naive_mse_test": 1.5165,
+        "mse_gain_vs_naive": -0.249,
+        "mean_pred": 1.199,
+        "mean_real": 1.526
+      },
+      "visita": {
+        "n_train": 430,
+        "n_test": 230,
+        "lambda_opt": 100.0,
+        "intercept": -0.04706618592938705,
+        "coefs": {
+          "atk_sots": 0.0229089257958362,
+          "atk_shot_pct": -0.19457219635663167,
+          "atk_pos": 0.007542051834403796,
+          "atk_pass_pct": 0.557583532465124,
+          "atk_corners": 0.11822396693257656,
+          "def_sots_c": 0.005996778890322979,
+          "def_shot_pct_c": -0.5929116648731184
+        },
+        "mse_test": 1.256,
+        "r2_oos": 0.0182,
+        "naive_mse_test": 1.2815,
+        "mse_gain_vs_naive": 0.0255,
+        "mean_pred": 1.077,
+        "mean_real": 1.226
+      }
+    },
+    "Colombia": {
+      "local": {
+        "n_train": 339,
+        "n_test": 185,
+        "lambda_opt": 100.0,
+        "intercept": 1.2855939393280724,
+        "coefs": {
+          "atk_sots": 0.06655674313832434,
+          "atk_shot_pct": -1.1945456964292076,
+          "atk_pos": 0.008669884636345711,
+          "atk_pass_pct": -0.38878567273961806,
+          "atk_corners": 0.003818595429514485,
+          "def_sots_c": 0.046571801222342495,
+          "def_shot_pct_c": -0.47237708972136344
+        },
+        "mse_test": 1.2093,
+        "r2_oos": -0.0098,
+        "naive_mse_test": 1.2039,
+        "mse_gain_vs_naive": -0.0054,
+        "mean_pred": 1.323,
+        "mean_real": 1.259
+      },
+      "visita": {
+        "n_train": 339,
+        "n_test": 185,
+        "lambda_opt": 100.0,
+        "intercept": 0.7504166611398281,
+        "coefs": {
+          "atk_sots": 0.0009631021956870989,
+          "atk_shot_pct": -0.4445707883061872,
+          "atk_pos": 0.011355364871123232,
+          "atk_pass_pct": -0.024372611509005385,
+          "atk_corners": -0.005434497953059198,
+          "def_sots_c": -0.08151805734160732,
+          "def_shot_pct_c": 0.2611710882760635
+        },
+        "mse_test": 0.9274,
+        "r2_oos": 0.0127,
+        "naive_mse_test": 0.9405,
+        "mse_gain_vs_naive": 0.0131,
+        "mean_pred": 0.884,
+        "mean_real": 0.919
+      }
+    },
+    "Espana": {
+      "local": {
+        "n_train": 185,
+        "n_test": 90,
+        "lambda_opt": 1.0,
+        "intercept": 0.04750476589350949,
+        "coefs": {
+          "atk_sots": 0.4301614407138175,
+          "atk_shot_pct": -0.7479384452368856,
+          "atk_pos": 0.03524227589195071,
+          "atk_pass_pct": -0.21832277019295185,
+          "atk_corners": -0.325367614009742,
+          "def_sots_c": -0.12432455881611801,
+          "def_shot_pct_c": 1.328675807926566
+        },
+        "mse_test": 1.5405,
+        "r2_oos": 0.1191,
+        "naive_mse_test": 1.7537,
+        "mse_gain_vs_naive": 0.2132,
+        "mean_pred": 1.649,
+        "mean_real": 1.611
+      },
+      "visita": {
+        "n_train": 185,
+        "n_test": 90,
+        "lambda_opt": 100.0,
+        "intercept": -0.06339893037195155,
+        "coefs": {
+          "atk_sots": 0.11954190495209842,
+          "atk_shot_pct": -0.27458441447856385,
+          "atk_pos": 0.011078423403353032,
+          "atk_pass_pct": 0.04000772805037406,
+          "atk_corners": 0.010467971265209286,
+          "def_sots_c": -0.010249730825303218,
+          "def_shot_pct_c": 0.6202041124230021
+        },
+        "mse_test": 1.2255,
+        "r2_oos": 0.1061,
+        "naive_mse_test": 1.4354,
+        "mse_gain_vs_naive": 0.2099,
+        "mean_pred": 1.17,
+        "mean_real": 1.389
+      }
+    },
+    "Francia": {
+      "local": {
+        "n_train": 266,
+        "n_test": 110,
+        "lambda_opt": 10.0,
+        "intercept": 1.7442514244996006,
+        "coefs": {
+          "atk_sots": -0.14075775203280602,
+          "atk_shot_pct": 1.1400687175507793,
+          "atk_pos": 0.0493357497751227,
+          "atk_pass_pct": -2.4130141401328986,
+          "atk_corners": 0.06315923967807001,
+          "def_sots_c": -0.11148244557130967,
+          "def_shot_pct_c": -0.9005139382153573
+        },
+        "mse_test": 1.298,
+        "r2_oos": 0.0817,
+        "naive_mse_test": 1.4142,
+        "mse_gain_vs_naive": 0.1161,
+        "mean_pred": 1.448,
+        "mean_real": 1.491
+      },
+      "visita": {
+        "n_train": 266,
+        "n_test": 110,
+        "lambda_opt": 100.0,
+        "intercept": 1.1965948424910668,
+        "coefs": {
+          "atk_sots": 0.07658120731965627,
+          "atk_shot_pct": -0.15448743613576757,
+          "atk_pos": 0.0035845202339729,
+          "atk_pass_pct": -0.01812358597061486,
+          "atk_corners": -0.0282172240369066,
+          "def_sots_c": -0.07104494934276742,
+          "def_shot_pct_c": -0.00036509822890095495
+        },
+        "mse_test": 1.3654,
+        "r2_oos": 0.0163,
+        "naive_mse_test": 1.3965,
+        "mse_gain_vs_naive": 0.0311,
+        "mean_pred": 1.199,
+        "mean_real": 1.291
+      }
+    },
+    "Inglaterra": {
+      "local": {
+        "n_train": 147,
+        "n_test": 72,
+        "lambda_opt": 100.0,
+        "intercept": 0.14876345775110966,
+        "coefs": {
+          "atk_sots": 0.1552815997232473,
+          "atk_shot_pct": 0.2589533281881063,
+          "atk_pos": 0.007529638210241719,
+          "atk_pass_pct": 0.02782100004543795,
+          "atk_corners": 0.05742866738561347,
+          "def_sots_c": -0.03126897371741169,
+          "def_shot_pct_c": 0.7764998873925886
+        },
+        "mse_test": 1.1012,
+        "r2_oos": -0.0814,
+        "naive_mse_test": 1.0383,
+        "mse_gain_vs_naive": -0.0628,
+        "mean_pred": 1.77,
+        "mean_real": 1.403
+      },
+      "visita": {
+        "n_train": 147,
+        "n_test": 72,
+        "lambda_opt": 10.0,
+        "intercept": 1.0213570007648651,
+        "coefs": {
+          "atk_sots": 0.28434284872893845,
+          "atk_shot_pct": -2.0967010983811267,
+          "atk_pos": 0.02151096399169891,
+          "atk_pass_pct": -1.9159238463950634,
+          "atk_corners": 0.0022563401733867775,
+          "def_sots_c": -0.16582824096206852,
+          "def_shot_pct_c": 2.6947380040721605
+        },
+        "mse_test": 1.2977,
+        "r2_oos": 0.0378,
+        "naive_mse_test": 1.3568,
+        "mse_gain_vs_naive": 0.0591,
+        "mean_pred": 1.311,
+        "mean_real": 1.389
+      }
+    },
+    "Italia": {
+      "local": {
+        "n_train": 435,
+        "n_test": 227,
+        "lambda_opt": 10.0,
+        "intercept": 0.856279985147924,
+        "coefs": {
+          "atk_sots": 0.23514703212508214,
+          "atk_shot_pct": -1.2221378481726997,
+          "atk_pos": 0.007895421830102617,
+          "atk_pass_pct": 0.12277717703632256,
+          "atk_corners": -0.10617517149854522,
+          "def_sots_c": -0.1178732545673946,
+          "def_shot_pct_c": 1.5551085101172382
+        },
+        "mse_test": 1.0403,
+        "r2_oos": 0.0852,
+        "naive_mse_test": 1.1494,
+        "mse_gain_vs_naive": 0.1091,
+        "mean_pred": 1.401,
+        "mean_real": 1.264
+      },
+      "visita": {
+        "n_train": 435,
+        "n_test": 227,
+        "lambda_opt": 100.0,
+        "intercept": 0.9670159481661986,
+        "coefs": {
+          "atk_sots": 0.11257900664022269,
+          "atk_shot_pct": 0.2514203925293924,
+          "atk_pos": 0.0037730828883069615,
+          "atk_pass_pct": -0.45278361681130724,
+          "atk_corners": 0.014963047490299308,
+          "def_sots_c": -0.07397505137035204,
+          "def_shot_pct_c": 0.2718636414047789
+        },
+        "mse_test": 1.1728,
+        "r2_oos": 0.0269,
+        "naive_mse_test": 1.2053,
+        "mse_gain_vs_naive": 0.0324,
+        "mean_pred": 1.181,
+        "mean_real": 1.181
+      }
+    },
+    "Turquia": {}
+  }
+}

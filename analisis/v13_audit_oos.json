@@ -1,0 +1,106 @@
+{
+  "fecha_audit": "2026-04-28",
+  "r2_threshold": 0.05,
+  "ligas_calibradas": [
+    "Argentina",
+    "Brasil",
+    "Chile",
+    "Colombia",
+    "Espana",
+    "Francia",
+    "Inglaterra",
+    "Italia"
+  ],
+  "ligas_elegibles_v13": [
+    "Espana",
+    "Francia",
+    "Italia"
+  ],
+  "n_oos_24": 1306,
+  "tests": {
+    "global_v0_vs_v13": {
+      "v0": {
+        "brier": 0.6338,
+        "n_apost": 86,
+        "n_gano": 23,
+        "hit_pct": 26.74,
+        "yield_pct": -31.15,
+        "ci95_lo": -55.17,
+        "ci95_hi": -8.42
+      },
+      "v13": {
+        "brier": 0.6286,
+        "n_skipped": 0,
+        "n_apost": 120,
+        "n_gano": 41,
+        "hit_pct": 34.17,
+        "yield_pct": -6.69,
+        "ci95_lo": -28.61,
+        "ci95_hi": 16.64
+      },
+      "brier_delta": -0.0052
+    },
+    "por_liga": {
+      "Espana": {
+        "v0": {
+          "brier": 0.6365,
+          "n_apost": 20,
+          "n_gano": 1,
+          "hit_pct": 5.0,
+          "yield_pct": -87.0,
+          "ci95_lo": -100.0,
+          "ci95_hi": -61.0
+        },
+        "v13": {
+          "brier": 0.6194,
+          "n_apost": 32,
+          "n_gano": 8,
+          "hit_pct": 25.0,
+          "yield_pct": -34.91,
+          "ci95_lo": -75.9,
+          "ci95_hi": 9.12
+        }
+      },
+      "Francia": {
+        "v0": {
+          "brier": 0.6306,
+          "n_apost": 24,
+          "n_gano": 7,
+          "hit_pct": 29.17,
+          "yield_pct": -25.19,
+          "ci95_lo": -71.21,
+          "ci95_hi": 24.52
+        },
+        "v13": {
+          "brier": 0.6277,
+          "n_apost": 36,
+          "n_gano": 13,
+          "hit_pct": 36.11,
+          "yield_pct": 3.56,
+          "ci95_lo": -42.39,
+          "ci95_hi": 53.59
+        }
+      },
+      "Italia": {
+        "v0": {
+          "brier": 0.6343,
+          "n_apost": 42,
+          "n_gano": 15,
+          "hit_pct": 35.71,
+          "yield_pct": -7.95,
+          "ci95_lo": -46.39,
+          "ci95_hi": 30.88
+        },
+        "v13": {
+          "brier": 0.6326,
+          "n_apost": 52,
+          "n_gano": 20,
+          "hit_pct": 38.46,
+          "yield_pct": 3.66,
+          "ci95_lo": -34.87,
+          "ci95_hi": 40.11
+        }
+      }
+    }
+  }
+}

@@ -697,6 +697,166 @@ def _calcular_probs_skellam(xg_l, xg_v, max_goals=10):
     return 1/3, 1/3, 1/3
 
 
+def _cargar_v13_coefs():
+    """[V13 SHADOW — bd-adepor-3ip] Carga coefs ridge por liga al import.
+
+    Devuelve dict[liga][target] = {intercept, coefs (FEATURE_NAMES->valor), r2_oos}.
+    Solo incluye ligas con R2_oos >= 0.05 (umbral elegibilidad).
+
+    Si tabla v13_coef_por_liga no existe o está vacía, devuelve {} (V13 desactivado).
+    """
+    try:
+        import json as _json_v13
+        _conn = sqlite3.connect(DB_NAME)
+        _cur = _conn.cursor()
+        _rows = _cur.execute("""
+            SELECT liga, target, intercept, coefs_json, r2_oos
+            FROM v13_coef_por_liga
+            WHERE (liga, target, calibrado_en) IN (
+                SELECT liga, target, MAX(calibrado_en)
+                FROM v13_coef_por_liga
+                GROUP BY liga, target
+            )
+        """).fetchall()
+        _conn.close()
+        _out = {}
+        for liga, target, intercept, coefs_json, r2 in _rows:
+            if r2 is None or r2 < 0.05:
+                continue
+            _out.setdefault(liga, {})[target] = {
+                "intercept": float(intercept),
+                "coefs": _json_v13.loads(coefs_json),
+                "r2_oos": float(r2),
+            }
+        return _out
+    except Exception:
+        return {}
+
+
+_V13_COEFS = _cargar_v13_coefs()
+_V13_FEATURE_NAMES = [
+    "atk_sots", "atk_shot_pct", "atk_pos", "atk_pass_pct", "atk_corners",
+    "def_sots_c", "def_shot_pct_c",
+]
+
+
+def _calcular_xg_v13(liga, equipo_attaque, equipo_defensa, fecha_str, conn,
+                      target_local=True):
+    """[V13 SHADOW] Calcula xG para 'equipo_attaque' contra 'equipo_defensa'.
+
+    Si target_local=True: ataque del local en su rol home + defensa del visita
+    en su rol away. Si target_local=False: viceversa (ataque del visita + defensa
+    del local).
+
+    Devuelve xG predicho (float >= 0.10) o None si liga no elegible o EMAs faltan.
+    """
+    cf_liga = _V13_COEFS.get(liga)
+    if not cf_liga:
+        return None
+    target = "local" if target_local else "visita"
+    cf = cf_liga.get(target)
+    if not cf:
+        return None
+    try:
+        cur = conn.cursor()
+        # EMA del atacante (en su rol home si target_local; away si no)
+        # Como el script de calibracion usa ema_l del equipo en rol home, mantenemos
+        # esa convencion aqui: ataque siempre lee ema_l (la 'ema en casa') del equipo.
+        # Si target_local=True, ataque=local jugando en casa; si False, ataque=visita
+        # pero usamos su EMA tambien (su 'ema_l' representa su rendimiento general
+        # que ya esta calibrado por el ridge contra goles reales).
+        r_atk = cur.execute("""
+            SELECT ema_l_sots, ema_l_shot_pct, ema_l_pos, ema_l_pass_pct,
+                   ema_l_corners, ema_c_sots, ema_c_shot_pct
+            FROM historial_equipos_stats
+            WHERE liga=? AND equipo=? AND fecha < ? AND n_acum >= 5
+            ORDER BY fecha DESC LIMIT 1
+        """, (liga, equipo_attaque, fecha_str)).fetchone()
+        r_def = cur.execute("""
+            SELECT ema_c_sots, ema_c_shot_pct
+            FROM historial_equipos_stats
+            WHERE liga=? AND equipo=? AND fecha < ? AND n_acum >= 5
+            ORDER BY fecha DESC LIMIT 1
+        """, (liga, equipo_defensa, fecha_str)).fetchone()
+        if not r_atk or not r_def:
+            return None
+        if any(v is None for v in r_atk) or any(v is None for v in r_def):
+            return None
+        # Vector de features siguiendo FEATURE_NAMES order
+        # atk_sots, atk_shot_pct, atk_pos, atk_pass_pct, atk_corners,
+        # def_sots_c, def_shot_pct_c
+        feats = [r_atk[0], r_atk[1], r_atk[2], r_atk[3], r_atk[4],
+                 r_def[0], r_def[1]]
+        coefs_arr = [cf["coefs"][n] for n in _V13_FEATURE_NAMES]
+        pred = cf["intercept"] + sum(f * c for f, c in zip(feats, coefs_arr))
+        return max(0.10, float(pred))
+    except Exception:
+        return None
+
+
+def _log_shadow_v13(id_partido, liga, local, visita, fecha_str, rho):
+    """[V13 SHADOW — bd-adepor-3ip] UPDATE post-INSERT con probs V13.
+
+    V13 = Poisson DC + xG ridge (sots, shot_pct, pos, pass_pct, corners + def features)
+    Solo aplica a ligas con R2_oos>=0.05 (Espana, Francia, Italia, etc).
+    Para ligas no elegibles, deja columnas V13 en NULL + v13_aplicable=0.
+
+    Falla silenciosa.
+    """
+    try:
+        if not _V13_COEFS or liga not in _V13_COEFS:
+            # Liga no elegible: marcar v13_aplicable=0
+            conn = sqlite3.connect(DB_NAME)
+            cur = conn.cursor()
+            cur.execute("""
+                UPDATE picks_shadow_arquitecturas
+                SET v13_aplicable = 0
+                WHERE id_partido = ?
+                  AND fecha_log = (SELECT MAX(fecha_log) FROM picks_shadow_arquitecturas WHERE id_partido = ?)
+            """, (id_partido, id_partido))
+            conn.commit()
+            conn.close()
+            return
+
+        conn = sqlite3.connect(DB_NAME)
+        xg_l_v13 = _calcular_xg_v13(liga, local, visita, fecha_str, conn, target_local=True)
+        xg_v_v13 = _calcular_xg_v13(liga, visita, local, fecha_str, conn, target_local=False)
+
+        if xg_l_v13 is None or xg_v_v13 is None:
+            cur = conn.cursor()
+            cur.execute("""
+                UPDATE picks_shadow_arquitecturas
+                SET v13_aplicable = 0
+                WHERE id_partido = ?
+                  AND fecha_log = (SELECT MAX(fecha_log) FROM picks_shadow_arquitecturas WHERE id_partido = ?)
+            """, (id_partido, id_partido))
+            conn.commit()
+            conn.close()
+            return
+
+        p1_v13, px_v13, p2_v13 = _calcular_probs_poisson_dc(xg_l_v13, xg_v_v13, rho)
+        opts = [("1", p1_v13), ("X", px_v13), ("2", p2_v13)]
+        sorted_p = sorted(opts, key=lambda x: -x[1])
+        ax_v13 = sorted_p[0][0]
+        mg_v13 = sorted_p[0][1] - sorted_p[1][1]
+
+        cur = conn.cursor()
+        cur.execute("""
+            UPDATE picks_shadow_arquitecturas
+            SET xg_v13_local = ?, xg_v13_visita = ?,
+                prob_1_v13 = ?, prob_x_v13 = ?, prob_2_v13 = ?,
+                argmax_v13 = ?, margen_v13 = ?,
+                v13_aplicable = 1
+            WHERE id_partido = ?
+              AND fecha_log = (SELECT MAX(fecha_log) FROM picks_shadow_arquitecturas WHERE id_partido = ?)
+        """, (xg_l_v13, xg_v_v13, p1_v13, px_v13, p2_v13, ax_v13, mg_v13,
+              id_partido, id_partido))
+        conn.commit()
+        conn.close()
+    except Exception:
+        pass  # Falla silenciosa: V13 shadow no rompe motor
+
+
 def _get_n_acum_pre_partido(liga, equipo_norm, fecha_str, conn):
     """[V5.1 §M.2 — bd-adepor-ptk] Snapshot n_acum del local PRE-partido.
 
@@ -1520,6 +1680,10 @@ def main():
             _log_shadow_v6_v7(id_partido, xg_v6_l, xg_v6_v, rho,
                               liga=pais, loc_norm=loc_norm, vis_norm=vis_norm,
                               fecha_partido_str=fecha_str)
+            # V13 SHADOW (bd-adepor-3ip): xG ridge aumentado con posesion + stats avanzadas
+            # Solo aplica a ligas con R2_oos>=0.05 (Espana, Francia, Italia post-calibracion 2026-04-28).
+            # Falla silenciosa: si liga no elegible o EMAs faltan, v13_aplicable=0.
+            _log_shadow_v13(id_partido, pais, local, visita, fecha_str, rho)
         except Exception:
             pass  # Falla silenciosa: shadow no rompe motor
 

@@ -1,0 +1,394 @@
+{
+  "fecha": "2026-04-28T12:30:22.780408",
+  "tests": {
+    "M1_por_año": {
+      "BASELINE (todas ligas)": {
+        "2022": {
+          "n_apost": 453,
+          "n_gano": 169,
+          "hit_pct": 37.31,
+          "yield_pct": 9.82,
+          "ci95_lo": -4.38,
+          "ci95_hi": 22.96
+        },
+        "2023": {
+          "n_apost": 729,
+          "n_gano": 249,
+          "hit_pct": 34.16,
+          "yield_pct": -4.4,
+          "ci95_lo": -14.43,
+          "ci95_hi": 5.73
+        },
+        "2024": {
+          "n_apost": 820,
+          "n_gano": 285,
+          "hit_pct": 34.76,
+          "yield_pct": 0.12,
+          "ci95_lo": -9.35,
+          "ci95_hi": 10.55
+        }
+      },
+      "M.1 (solo TOP-5)": {
+        "2022": {
+          "n_apost": 315,
+          "n_gano": 115,
+          "hit_pct": 36.51,
+          "yield_pct": 4.33,
+          "ci95_lo": -11.39,
+          "ci95_hi": 19.76
+        },
+        "2023": {
+          "n_apost": 464,
+          "n_gano": 171,
+          "hit_pct": 36.85,
+          "yield_pct": 3.49,
+          "ci95_lo": -8.73,
+          "ci95_hi": 16.26
+        },
+        "2024": {
+          "n_apost": 514,
+          "n_gano": 192,
+          "hit_pct": 37.35,
+          "yield_pct": 6.55,
+          "ci95_lo": -6.23,
+          "ci95_hi": 18.71
+        }
+      },
+      "NO TOP-5 (resto)": {
+        "2022": {
+          "n_apost": 138,
+          "n_gano": 54,
+          "hit_pct": 39.13,
+          "yield_pct": 22.35,
+          "ci95_lo": -4.47,
+          "ci95_hi": 50.61
+        },
+        "2023": {
+          "n_apost": 265,
+          "n_gano": 78,
+          "hit_pct": 29.43,
+          "yield_pct": -18.22,
+          "ci95_lo": -33.53,
+          "ci95_hi": -2.35
+        },
+        "2024": {
+          "n_apost": 306,
+          "n_gano": 93,
+          "hit_pct": 30.39,
+          "yield_pct": -10.69,
+          "ci95_lo": -26.91,
+          "ci95_hi": 5.33
+        }
+      }
+    },
+    "M2_por_año": {
+      "TOP-5 baseline (sin M.2)": {
+        "2022": {
+          "n_apost": 315,
+          "n_gano": 115,
+          "hit_pct": 36.51,
+          "yield_pct": 4.33,
+          "ci95_lo": -11.39,
+          "ci95_hi": 19.76
+        },
+        "2023": {
+          "n_apost": 464,
+          "n_gano": 171,
+          "hit_pct": 36.85,
+          "yield_pct": 3.49,
+          "ci95_lo": -8.73,
+          "ci95_hi": 16.26
+        },
+        "2024": {
+          "n_apost": 514,
+          "n_gano": 192,
+          "hit_pct": 37.35,
+          "yield_pct": 6.55,
+          "ci95_lo": -6.23,
+          "ci95_hi": 18.71
+        }
+      },
+      "TOP-5 + M.2 (n_acum<60)": {
+        "2022": {
+          "n_apost": 315,
+          "n_gano": 115,
+          "hit_pct": 36.51,
+          "yield_pct": 4.33,
+          "ci95_lo": -11.39,
+          "ci95_hi": 19.76
+        },
+        "2023": {
+          "n_apost": 411,
+          "n_gano": 152,
+          "hit_pct": 36.98,
+          "yield_pct": 3.97,
+          "ci95_lo": -9.76,
+          "ci95_hi": 17.75
+        },
+        "2024": {
+          "n_apost": 262,
+          "n_gano": 110,
+          "hit_pct": 41.98,
+          "yield_pct": 24.37,
+          "ci95_lo": 5.73,
+          "ci95_hi": 44.66
+        }
+      },
+      "TOP-5 con n_acum>=60": {
+        "2022": {
+          "n_apost": 0,
+          "n_gano": 0,
+          "hit_pct": 0,
+          "yield_pct": 0,
+          "ci95_lo": null,
+          "ci95_hi": null
+        },
+        "2023": {
+          "n_apost": 53,
+          "n_gano": 19,
+          "hit_pct": 35.85,
+          "yield_pct": -0.23,
+          "ci95_lo": -35.04,
+          "ci95_hi": 38.1
+        },
+        "2024": {
+          "n_apost": 252,
+          "n_gano": 82,
+          "hit_pct": 32.54,
+          "yield_pct": -11.96,
+          "ci95_lo": -28.49,
+          "ci95_hi": 4.7
+        }
+      }
+    },
+    "M3_subset_2026_por_año": {
+      "Argentina": {
+        "Q2": {
+          "2022": {
+            "n_apost": 0,
+            "n_gano": 0,
+            "hit_pct": 0,
+            "yield_pct": 0,
+            "ci95_lo": null,
+            "ci95_hi": null
+          },
+          "2023": {
+            "n_apost": 65,
+            "n_gano": 27,
+            "hit_pct": 41.54,
+            "yield_pct": 19.55,
+            "ci95_lo": -14.34,
+            "ci95_hi": 55.36
+          },
+          "2024": {
+            "n_apost": 21,
+            "n_gano": 9,
+            "hit_pct": 42.86,
+            "yield_pct": 70.9,
+            "ci95_lo": -16.58,
+            "ci95_hi": 164.86
+          }
+        },
+        "Q3": {
+          "2022": {
+            "n_apost": 63,
+            "n_gano": 29,
+            "hit_pct": 46.03,
+            "yield_pct": 37.84,
+            "ci95_lo": 0.82,
+            "ci95_hi": 76.63
+          },
+          "2023": {
+            "n_apost": 34,
+            "n_gano": 7,
+            "hit_pct": 20.59,
+            "yield_pct": -45.68,
+            "ci95_lo": -79.15,
+            "ci95_hi": -7.97
+          },
+          "2024": {
+            "n_apost": 73,
+            "n_gano": 32,
+            "hit_pct": 43.84,
+            "yield_pct": 22.45,
+            "ci95_lo": -11.51,
+            "ci95_hi": 56.25
+          }
+        }
+      },
+      "Brasil": {
+        "Q1": {
+          "2022": {
+            "n_apost": 16,
+            "n_gano": 4,
+            "hit_pct": 25.0,
+            "yield_pct": -38.63,
+            "ci95_lo": -86.0,
+            "ci95_hi": 18.52
+          },
+          "2023": {
+            "n_apost": 32,
+            "n_gano": 13,
+            "hit_pct": 40.62,
+            "yield_pct": 8.69,
+            "ci95_lo": -36.07,
+            "ci95_hi": 54.91
+          },
+          "2024": {
+            "n_apost": 31,
+            "n_gano": 9,
+            "hit_pct": 29.03,
+            "yield_pct": -35.23,
+            "ci95_lo": -71.58,
+            "ci95_hi": 2.46
+          }
+        }
+      },
+      "Inglaterra": {
+        "Q4": {
+          "2022": {
+            "n_apost": 19,
+            "n_gano": 10,
+            "hit_pct": 52.63,
+            "yield_pct": 39.92,
+            "ci95_lo": -21.83,
+            "ci95_hi": 100.52
+          },
+          "2023": {
+            "n_apost": 23,
+            "n_gano": 7,
+            "hit_pct": 30.43,
+            "yield_pct": -20.22,
+            "ci95_lo": -66.43,
+            "ci95_hi": 29.82
+          },
+          "2024": {
+            "n_apost": 19,
+            "n_gano": 6,
+            "hit_pct": 31.58,
+            "yield_pct": -18.84,
+            "ci95_lo": -72.89,
+            "ci95_hi": 36.85
+          }
+        }
+      },
+      "Noruega": {
+        "Q1": {
+          "2022": {
+            "n_apost": 0,
+            "n_gano": 0,
+            "hit_pct": 0,
+            "yield_pct": 0,
+            "ci95_lo": null,
+            "ci95_hi": null
+          },
+          "2023": {
+            "n_apost": 0,
+            "n_gano": 0,
+            "hit_pct": 0,
+            "yield_pct": 0,
+            "ci95_lo": null,
+            "ci95_hi": null
+          },
+          "2024": {
+            "n_apost": 0,
+            "n_gano": 0,
+            "hit_pct": 0,
+            "yield_pct": 0,
+            "ci95_lo": null,
+            "ci95_hi": null
+          }
+        }
+      },
+      "Turquia": {
+        "Q4": {
+          "2022": {
+            "n_apost": 22,
+            "n_gano": 7,
+            "hit_pct": 31.82,
+            "yield_pct": -16.05,
+            "ci95_lo": -64.86,
+            "ci95_hi": 36.09
+          },
+          "2023": {
+            "n_apost": 12,
+            "n_gano": 2,
+            "hit_pct": 16.67,
+            "yield_pct": -54.58,
+            "ci95_lo": -100.0,
+            "ci95_hi": 12.33
+          },
+          "2024": {
+            "n_apost": 20,
+            "n_gano": 9,
+            "hit_pct": 45.0,
+            "yield_pct": 16.6,
+            "ci95_lo": -37.35,
+            "ci95_hi": 74.8
+          }
+        }
+      }
+    },
+    "combo_M1_M2_por_año": {
+      "TOP-5 + n_acum<60 (todos los bins)": {
+        "2022": {
+          "n_apost": 315,
+          "n_gano": 115,
+          "hit_pct": 36.51,
+          "yield_pct": 4.33,
+          "ci95_lo": -11.39,
+          "ci95_hi": 19.76
+        },
+        "2023": {
+          "n_apost": 411,
+          "n_gano": 152,
+          "hit_pct": 36.98,
+          "yield_pct": 3.97,
+          "ci95_lo": -9.76,
+          "ci95_hi": 17.75
+        },
+        "2024": {
+          "n_apost": 262,
+          "n_gano": 110,
+          "hit_pct": 41.98,
+          "yield_pct": 24.37,
+          "ci95_lo": 5.73,
+          "ci95_hi": 44.66
+        }
+      },
+      "TOP-5 + n_acum<60 + bins ∈ 2026 subset": {
+        "2022": {
+          "n_apost": 120,
+          "n_gano": 50,
+          "hit_pct": 41.67,
+          "yield_pct": 18.08,
+          "ci95_lo": -7.26,
+          "ci95_hi": 43.25
+        },
+        "2023": {
+          "n_apost": 159,
+          "n_gano": 53,
+          "hit_pct": 33.33,
+          "yield_pct": -7.63,
+          "ci95_lo": -28.43,
+          "ci95_hi": 14.1
+        },
+        "2024": {
+          "n_apost": 99,
+          "n_gano": 43,
+          "hit_pct": 43.43,
+          "yield_pct": 30.23,
+          "ci95_lo": -0.24,
+          "ci95_hi": 63.55
+        }
+      }
+    },
+    "in_sample_2026_M1_M2": {
+      "n": 89,
+      "hit_pct": 61.8,
+      "yield_pct": 58.9,
+      "stake": 4054381.14,
+      "pl": 2387902.88
+    }
+  }
+}

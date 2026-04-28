@@ -1,8 +1,11 @@
-# Beads pendientes — Snapshot 2026-04-28
+# Beads pendientes — Snapshot 2026-04-28 (actualizado)
 
-> Inventario humanamente legible de los 13 beads abiertos del proyecto.
+> Inventario humanamente legible de los 18 beads abiertos del proyecto.
 > Cada bead explica QUÉ es, POR QUÉ existe, DÓNDE está parado, y qué EVENTO o
 > ACCIÓN lo desbloquea.
+>
+> **Última actualización:** 2026-04-28 — agregados 5 beads nuevos al final del
+> documento (`adepor-a1v`, `adepor-4f9`, `adepor-9ah`, `adepor-z0e`, `adepor-p4e`).
 
 ## Estado del proyecto al cierre del día
 
@@ -216,6 +219,154 @@ Quedan pendientes los otros dos layers:
 
 ---
 
+---
+
+## Beads nuevos creados 2026-04-28 (post-audit findings)
+
+### `adepor-a1v` — Construir proxies de pos_backward (calidad estructural)
+
+**Qué es.** Hallazgo del audit forward-vs-backward: pos_local FINAL de la temp
+(backward) tiene MÁS poder predictivo que pos forward (runtime). Yields
+significativos: TOP-3 backward 2024 +47.8% [+7.2, +87.4] ★, TOP-6 backward
+2023 +40.6% [+9.2, +73.8] ★, |div|>5 +24.3% [+2.6, +46.8] ★.
+
+**Por qué importa.** El motor V0 está captando calidad ESTRUCTURAL del equipo
+que el bookie subestima. pos_backward NO es usable runtime (info post-partido)
+pero sirve como AUDIT que confirma la señal.
+
+**Estado.** Bead creado hoy. Script `analisis/proxy_pos_backward_correlacion.py`
+preparado pero no ejecutado. Test: ¿xG_v13 ya correlaciona con pos_backward?
+Si Pearson r < −0.3 cross-temp → V13 ya capta señal → bead cierra.
+
+**Trigger.** Ejecutar script + interpretar correlación.
+
+**Acción esperada.** Si V13 correlaciona → cerrar bead (ya tenemos el proxy).
+Si NO → construir feature explícito 'calidad_estructural_proxy' y agregarlo
+a V13 next iteration.
+
+---
+
+### `adepor-4f9` — Filtro M.4 candidato: bloquear partidos parejos en tabla
+
+**Qué es.** Hallazgo audit posición OOS 2024 N=2,656: yield es **direccional
+negativo** en partidos parejos en tabla (`|diff_pos| ≤ 3`):
+
+| diff_pos | N_apost | Yield% | CI95 |
+|---|---|---|---|
+| L<<V (mismatch local mejor) | 144 | +18.9 | [−9.4, +48.2] |
+| L~V (parejos) | 213 | **−14.0** | [−32.1, +4.9] casi sig |
+| L>>V (mismatch local peor) | 19 | +23.2 | [−27.9, +75.2] |
+| TOP-vs-TOP | 59 | **−25.5** | [−58.4, +9.4] |
+
+**Por qué importa.** El motor V0 sufre cuando los equipos están en niveles
+similares en tabla. Mejor performance con mismatch claro de calidad.
+
+**Estado.** Direccional pero NO sig sobre N actual. Requiere validación
+N≥200 picks operativos post-implementación.
+
+**Trigger.** Acumular N≥200 picks operativos con feature `diff_pos_pre_partido`
+poblada. Probable ETA 2-3 meses.
+
+**Acción esperada.** A/B walk-forward por temp. Si M.4 mejora yield agregado
+con CI95_lo > 0 → PROPOSAL: MANIFESTO CHANGE para activar M.4 (extender §M).
+
+---
+
+### `adepor-9ah` — TRIGGER M.3 selectivo Brasil Q4
+
+**Qué es.** Brasil Q4 (cierre Brasileirão, oct-dic) es el **único (liga, bin)
+con yield negativo CONSISTENTE en los 3 años OOS**:
+
+| temp | N | Yield% | Sig |
+|---|---|---|---|
+| 2022 | 35 | −4.9 | no sig |
+| 2023 | 42 | −17.9 | no sig |
+| 2024 | 48 | **−35.7** | **★ SIG NEG** |
+
+Otros (liga, bin) son inestables cross-año (Argentina Q3, Inglaterra Q4,
+Turquía Q4 flipean entre años). Brasil Q4 es la excepción.
+
+**Por qué importa.** Único candidato sólido para M.3 selectivo per-liga.
+Cuando lleguen picks Brasil 2026 Q4, podemos confirmar y activar.
+
+**Estado.** Brasil 2026 in-sample tiene SOLO Q1 (Brasileirão recién arrancando,
+49 picks). Q4 llegará oct-dic 2026.
+
+**Trigger.** N≥10 picks Brasil 2026 Q4 liquidados (~octubre 2026).
+
+**Acción esperada.** Si yield Brasil 2026 Q4 < 0 → confirmar patrón y proponer
+`filtro_picks_v51_m3_per_liga_bin = {"Brasil": [3]}` extensión M.3 selectivo.
+
+**Caso alternativo:** si yield Brasil 2026 Q4 > 0 (régimen 2026 favorable
+persiste), DESCARTAR. Confirmaría que el régimen 2026 es estructuralmente
+distinto a OOS.
+
+---
+
+### `adepor-z0e` — BUG/DATA: Mojibake en historial_equipos_stats
+
+**Qué es.** Equipos con encoding doble-convertido (mojibake) crean DUPLICADOS:
+
+```
+'Instituto (Cordoba)' (correcto?)
+'Instituto (c�rdoba)' (mojibake con char reemplazo)
+'Instituto (cordoba)' (sin acento)
+```
+
+**Por qué importa.**
+- EMAs fragmentadas: `Instituto (Cordoba)` y `Instituto (c�rdoba)` calculados
+  como equipos distintos.
+- Posiciones tabla duplicadas: equipo aparece con N partidos dividido entre
+  variantes.
+- V13 lookup falla cuando partido tiene una variante y EMA está en otra.
+- M.2 (n_acum<60) falsos negativos en equipos veteranos con encoding alterno.
+
+**Estado.** No fix. Bead histórico `adepor-86` documentó mojibake en
+`cache_espn/*.json` y aplicó fix a 27 archivos cache, pero `historial_equipos_stats`
+acumuló las EMAs antes del fix → persiste.
+
+**Trigger.** Manual cuando se priorice (no urgente, no rompe motor).
+
+**Acción esperada.**
+1. Detectar clusters via fuzzy match (Levenshtein < 2 + normalización).
+2. Plan migración: nombre canónico por cluster, actualizar todas las tablas.
+3. Snapshot DB obligatorio antes.
+4. Verificar `gestor_nombres v5.0` para prevenir reincidencia.
+
+---
+
+### `adepor-p4e` — INVESTIGATION: ¿caída Q3 Argentina 2023 = copas internacionales?
+
+**Qué es.** Hipótesis del usuario: el yield V0 cae brutal en Argentina Q3 2023
+(−45.7% sig neg) puede explicarse por equipos jugando Libertadores/Sudamericana
+en paralelo, llegando cansados a partidos liga local.
+
+**Por qué importa.**
+- Argentina Q3 2022: +37.8% sig POS
+- Argentina Q3 2023: **−45.7% sig NEG** ★ caída cross-temp
+- Argentina Q3 2024: +22.4%
+
+Q3 = mid-temp (~50-75% del año). 2023 cayó en agosto-septiembre 2023.
+**Libertadores 2023 fase final agosto-noviembre 2023** = conjunción temporal
+consistente con la hipótesis.
+
+10-12 equipos argentinos participaron en copas 2023 (≈50% de la liga).
+
+**Estado.** Hipótesis no testada. Requiere data de copas internacionales
+(scraping nuevo o lookup hardcoded por equipo×fecha).
+
+**Trigger.** Cuando se obtenga calendario copas 2022/2023/2024.
+
+**Acción esperada.**
+1. Para cada partido Argentina LPF 2023: clasificar si el local jugó copa
+   <=7 días antes.
+2. Yield V0 con vs sin feature 'local cansado'.
+3. Si confirma → feature `days_since_copa_local` a V13 next iteration o
+   filtro M.5 candidato 'no apostar local cansado'.
+4. Si refuta → otra explicación del 2023 tóxico.
+
+---
+
 ## Resumen de prioridades operativas
 
 ### Esperando triggers (no acción inmediata)
@@ -234,6 +385,11 @@ Quedan pendientes los otros dos layers:
 | `adepor-dex` | Brier rolling > 0.220 | observabilidad | OBS |
 | `adepor-tqm` | post `adepor-edk` | indefinido | BACKLOG |
 | `adepor-s7m` | manual | indefinido | METHODOLOGY |
+| **`adepor-a1v`** | manual (script ya escrito) | inmediata | INFRA |
+| **`adepor-4f9`** Filtro M.4 | N≥200 picks operativos con diff_pos | ~2-3 meses | INFRA |
+| **`adepor-9ah`** Brasil Q4 | N≥10 picks Brasil 2026 Q4 | ~oct 2026 | TRIGGER |
+| **`adepor-z0e`** Mojibake | manual cuando se priorice | indefinido | BUG |
+| **`adepor-p4e`** Copas Q3 Arg | data copas 2022-2024 obtenida | indefinido | INVESTIGATION |
 
 ### Sin trigger inmediato accionable
 

@@ -1,0 +1,370 @@
+{
+  "loto_results": {
+    "2022": {
+      "Argentina": {
+        "n_test": 242,
+        "v0": {
+          "brier": 0.6505,
+          "n_apost": 127,
+          "n_gano": 47,
+          "hit_pct": 37.01,
+          "yield_pct": 11.19,
+          "ci95_lo": -14.68,
+          "ci95_hi": 35.67
+        },
+        "v13": {
+          "brier": 0.6565,
+          "n_apost": 106,
+          "n_gano": 39,
+          "hit_pct": 36.79,
+          "yield_pct": 6.05,
+          "ci95_lo": -20.35,
+          "ci95_hi": 37.11,
+          "best": {
+            "feat": "F5_ratio",
+            "reg": "NNLS"
+          }
+        }
+      },
+      "Francia": {
+        "n_test": 136,
+        "v0": {
+          "brier": 0.649,
+          "n_apost": 12,
+          "n_gano": 6,
+          "hit_pct": 50.0,
+          "yield_pct": 46.33,
+          "ci95_lo": -32.59,
+          "ci95_hi": 130.89
+        },
+        "v13": {
+          "brier": 0.6362,
+          "n_apost": 62,
+          "n_gano": 23,
+          "hit_pct": 37.1,
+          "yield_pct": 0.27,
+          "ci95_lo": -34.05,
+          "ci95_hi": 31.89,
+          "best": {
+            "feat": "F4_disc",
+            "reg": "RIDGE"
+          }
+        }
+      },
+      "Inglaterra": {
+        "n_test": 60,
+        "v0": {
+          "brier": 0.667,
+          "n_apost": 6,
+          "n_gano": 2,
+          "hit_pct": 33.33,
+          "yield_pct": -8.68,
+          "ci95_lo": -100.0,
+          "ci95_hi": 83.62
+        },
+        "v13": {
+          "brier": 0.6672,
+          "n_apost": 27,
+          "n_gano": 10,
+          "hit_pct": 37.04,
+          "yield_pct": 26.74,
+          "ci95_lo": -45.54,
+          "ci95_hi": 114.21,
+          "best": {
+            "feat": "F5_ratio",
+            "reg": "NNLS"
+          }
+        }
+      },
+      "Italia": {
+        "n_test": 209,
+        "v0": {
+          "brier": 0.6432,
+          "n_apost": 13,
+          "n_gano": 4,
+          "hit_pct": 30.77,
+          "yield_pct": -5.0,
+          "ci95_lo": -76.92,
+          "ci95_hi": 77.8
+        },
+        "v13": {
+          "brier": 0.6533,
+          "n_apost": 92,
+          "n_gano": 27,
+          "hit_pct": 29.35,
+          "yield_pct": -25.45,
+          "ci95_lo": -48.9,
+          "ci95_hi": 0.5,
+          "best": {
+            "feat": "F2_pos",
+            "reg": "RIDGE"
+          }
+        }
+      },
+      "GLOBAL": {
+        "v0": {
+          "brier": 0.6493,
+          "n_apost": 158,
+          "n_gano": 59,
+          "hit_pct": 37.34,
+          "yield_pct": 11.78,
+          "ci95_lo": -11.65,
+          "ci95_hi": 33.85
+        },
+        "v13": {
+          "brier": 0.6522,
+          "n_apost": 287,
+          "n_gano": 99,
+          "hit_pct": 34.49,
+          "yield_pct": -3.35,
+          "ci95_lo": -19.63,
+          "ci95_hi": 13.18
+        }
+      }
+    },
+    "2023": {
+      "Argentina": {
+        "n_test": 304,
+        "v0": {
+          "brier": 0.6401,
+          "n_apost": 169,
+          "n_gano": 63,
+          "hit_pct": 37.28,
+          "yield_pct": 8.18,
+          "ci95_lo": -15.89,
+          "ci95_hi": 30.6
+        },
+        "v13": {
+          "brier": 0.6358,
+          "n_apost": 138,
+          "n_gano": 53,
+          "hit_pct": 38.41,
+          "yield_pct": 18.29,
+          "ci95_lo": -8.38,
+          "ci95_hi": 43.33,
+          "best": {
+            "feat": "F5_ratio",
+            "reg": "NNLS"
+          }
+        }
+      },
+      "Francia": {
+        "n_test": 130,
+        "v0": {
+          "brier": 0.635,
+          "n_apost": 33,
+          "n_gano": 15,
+          "hit_pct": 45.45,
+          "yield_pct": 26.73,
+          "ci95_lo": -19.09,
+          "ci95_hi": 75.1
+        },
+        "v13": {
+          "brier": 0.6382,
+          "n_apost": 31,
+          "n_gano": 13,
+          "hit_pct": 41.94,
+          "yield_pct": 16.39,
+          "ci95_lo": -30.7,
+          "ci95_hi": 70.97,
+          "best": {
+            "feat": "F4_disc",
+            "reg": "RIDGE"
+          }
+        }
+      },
+      "Inglaterra": {
+        "n_test": 87,
+        "v0": {
+          "brier": 0.6111,
+          "n_apost": 13,
+          "n_gano": 3,
+          "hit_pct": 23.08,
+          "yield_pct": -7.85,
+          "ci95_lo": -100.0,
+          "ci95_hi": 96.93
+        },
+        "v13": {
+          "brier": 0.6271,
+          "n_apost": 15,
+          "n_gano": 2,
+          "hit_pct": 13.33,
+          "yield_pct": 8.07,
+          "ci95_lo": -100.0,
+          "ci95_hi": 192.8,
+          "best": {
+            "feat": "F5_ratio",
+            "reg": "NNLS"
+          }
+        }
+      },
+      "Italia": {
+        "n_test": 226,
+        "v0": {
+          "brier": 0.657,
+          "n_apost": 51,
+          "n_gano": 14,
+          "hit_pct": 27.45,
+          "yield_pct": -26.94,
+          "ci95_lo": -53.51,
+          "ci95_hi": 8.97
+        },
+        "v13": {
+          "brier": 0.6511,
+          "n_apost": 82,
+          "n_gano": 21,
+          "hit_pct": 25.61,
+          "yield_pct": -23.19,
+          "ci95_lo": -52.58,
+          "ci95_hi": 8.86,
+          "best": {
+            "feat": "F2_pos",
+            "reg": "RIDGE"
+          }
+        }
+      },
+      "GLOBAL": {
+        "v0": {
+          "brier": 0.641,
+          "n_apost": 266,
+          "n_gano": 95,
+          "hit_pct": 35.71,
+          "yield_pct": 2.97,
+          "ci95_lo": -14.77,
+          "ci95_hi": 19.24
+        },
+        "v13": {
+          "brier": 0.6398,
+          "n_apost": 266,
+          "n_gano": 89,
+          "hit_pct": 33.46,
+          "yield_pct": 4.7,
+          "ci95_lo": -15.51,
+          "ci95_hi": 24.3
+        }
+      }
+    },
+    "2024": {
+      "Argentina": {
+        "n_test": 332,
+        "v0": {
+          "brier": 0.6476,
+          "n_apost": 174,
+          "n_gano": 68,
+          "hit_pct": 39.08,
+          "yield_pct": 18.04,
+          "ci95_lo": -6.65,
+          "ci95_hi": 41.85
+        },
+        "v13": {
+          "brier": 0.6417,
+          "n_apost": 125,
+          "n_gano": 41,
+          "hit_pct": 32.8,
+          "yield_pct": 2.27,
+          "ci95_lo": -20.98,
+          "ci95_hi": 28.92,
+          "best": {
+            "feat": "F5_ratio",
+            "reg": "NNLS"
+          }
+        }
+      },
+      "Francia": {
+        "n_test": 110,
+        "v0": {
+          "brier": 0.6306,
+          "n_apost": 24,
+          "n_gano": 7,
+          "hit_pct": 29.17,
+          "yield_pct": -25.19,
+          "ci95_lo": -71.87,
+          "ci95_hi": 25.56
+        },
+        "v13": {
+          "brier": 0.6254,
+          "n_apost": 38,
+          "n_gano": 16,
+          "hit_pct": 42.11,
+          "yield_pct": 29.37,
+          "ci95_lo": -21.47,
+          "ci95_hi": 78.61,
+          "best": {
+            "feat": "F4_disc",
+            "reg": "RIDGE"
+          }
+        }
+      },
+      "Inglaterra": {
+        "n_test": 72,
+        "v0": {
+          "brier": 0.6258,
+          "n_apost": 12,
+          "n_gano": 3,
+          "hit_pct": 25.0,
+          "yield_pct": -35.5,
+          "ci95_lo": -100.0,
+          "ci95_hi": 29.0
+        },
+        "v13": {
+          "brier": 0.6302,
+          "n_apost": 20,
+          "n_gano": 7,
+          "hit_pct": 35.0,
+          "yield_pct": 0.45,
+          "ci95_lo": -59.2,
+          "ci95_hi": 66.51,
+          "best": {
+            "feat": "F5_ratio",
+            "reg": "NNLS"
+          }
+        }
+      },
+      "Italia": {
+        "n_test": 227,
+        "v0": {
+          "brier": 0.6343,
+          "n_apost": 42,
+          "n_gano": 15,
+          "hit_pct": 35.71,
+          "yield_pct": -7.95,
+          "ci95_lo": -48.28,
+          "ci95_hi": 30.22
+        },
+        "v13": {
+          "brier": 0.6326,
+          "n_apost": 52,
+          "n_gano": 20,
+          "hit_pct": 38.46,
+          "yield_pct": 3.66,
+          "ci95_lo": -34.87,
+          "ci95_hi": 40.87,
+          "best": {
+            "feat": "F2_pos",
+            "reg": "RIDGE"
+          }
+        }
+      },
+      "GLOBAL": {
+        "v0": {
+          "brier": 0.6389,
+          "n_apost": 252,
+          "n_gano": 93,
+          "hit_pct": 36.9,
+          "yield_pct": 7.05,
+          "ci95_lo": -11.27,
+          "ci95_hi": 26.08
+        },
+        "v13": {
+          "brier": 0.6354,
+          "n_apost": 235,
+          "n_gano": 84,
+          "hit_pct": 35.74,
+          "yield_pct": 6.82,
+          "ci95_lo": -12.82,
+          "ci95_hi": 27.65
+        }
+      }
+    }
+  }
+}

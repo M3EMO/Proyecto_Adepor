@@ -957,31 +957,50 @@ def _get_momento_bin_4(liga, fecha_str, conn):
     Calcula pct_temp = (fecha - temp_min) / (temp_max - temp_min) y lo
     discretiza en cuartos {0=Q1_arr, 1=Q2_ini, 2=Q3_mit, 3=Q4_cie}.
 
-    temp_min/temp_max derivados desde historial_equipos_stats por (liga,
-    año del partido). Si la temp en curso aun no llego al maximo (motor
-    en vivo), se usa fecha_str como temp_max efectivo (extiende rango).
+    FUENTE DE TEMP_MIN/MAX (V5.1.1 — bug fix 2026-04-28):
+      Lee de tabla liga_calendario_temp (calendario individual por liga,
+      por ano, no template). Antes derivaba de rango observado en
+      historial_equipos_stats lo cual rompia para temps en curso.
 
-    Si N partidos en la liga+temp < 10 -> insuficiente data, retorna None.
-    Si retorna None, el filtro M.3 NO bloquea (fail-safe).
+    Resolucion del 'temp del calendario':
+      EUR top (ago-may): temp = ano de cierre. Ej: Premier 25-26 -> temp=2026.
+      LATAM anual: temp = ano del torneo. Ej: Brasileirao 2026 -> temp=2026.
+      Argentina semestral (Apertura): temp = ano del Apertura.
+
+    Si liga+temp no calibrada en liga_calendario_temp -> None (fail-safe,
+    M.3 no bloquea).
     """
     try:
         cur = conn.cursor()
-        año = fecha_str[:4]
-        r = cur.execute("""
-            SELECT MIN(fecha), MAX(fecha), COUNT(*) FROM historial_equipos_stats
-            WHERE liga = ? AND substr(fecha, 1, 4) = ?
-        """, (liga, año)).fetchone()
-        if not r or r[2] is None or r[2] < 10:
-            return None
-        f_min, f_max, _ = r[0], r[1], r[2]
-        if not f_min or not f_max:
-            return None
-        # Si fecha_str > f_max, extender el rango (motor en vivo)
-        f_max_efectivo = f_max if fecha_str <= f_max else fecha_str
-        # Conversion via SQLite julianday (mas robusto que parseo manual)
-        r_pct = cur.execute("""
-            SELECT julianday(?) - julianday(?), julianday(?) - julianday(?)
-        """, (fecha_str, f_min, f_max_efectivo, f_min)).fetchone()
+        # Ano del partido como temp candidato. Si fecha es 2025-09-15 (Premier
+        # 25-26), ano=2025 pero temp del motor seria 2026 (cierre). Probamos
+        # temp=ano y temp=ano+1 (caso EUR ago-may con fecha en mitad-temp pre-cierre).
+        ano = int(fecha_str[:4])
+        # Probar primero temp=ano (caso LATAM y EUR-cierre primer semestre del ano)
+        # Si fecha cae fuera del rango, probar temp=ano+1.
+        temp_candidatas = [ano, ano + 1]
+        f_min = f_max = None
+        temp_usada = None
+        for temp in temp_candidatas:
+            r = cur.execute("""
+                SELECT fecha_inicio, fecha_fin FROM liga_calendario_temp
+                WHERE liga = ? AND temp = ?
+            """, (liga, temp)).fetchone()
+            if not r:
+                continue
+            if r[0] <= fecha_str <= r[1]:
+                f_min, f_max, temp_usada = r[0], r[1], temp
+                break
+            # Si no esta dentro del rango pero es el candidato, lo guardamos como fallback
+            if f_min is None:
+                f_min, f_max, temp_usada = r[0], r[1], temp
+        if f_min is None or f_max is None:
+            return None  # liga sin calendario o fecha fuera de cualquier temp
+        # Calcular pct
+        r_pct = cur.execute(
+            "SELECT julianday(?) - julianday(?), julianday(?) - julianday(?)",
+            (fecha_str, f_min, f_max, f_min)
+        ).fetchone()
         delta_partido, delta_temp = r_pct[0], r_pct[1]
         if delta_temp is None or delta_temp <= 0:
             return None

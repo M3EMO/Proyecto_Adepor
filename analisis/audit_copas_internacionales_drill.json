@@ -1,0 +1,169 @@
+{
+  "fecha": "2026-04-28",
+  "res_copa": {
+    "Champions League": {
+      "n": 161,
+      "hit_pct": 47.2,
+      "brier": 0.6257,
+      "real_dist": {
+        "1": 82,
+        "X": 32,
+        "2": 47
+      },
+      "pred_dist": {
+        "1": 77,
+        "X": 0,
+        "2": 84
+      }
+    },
+    "Europa League": {
+      "n": 59,
+      "hit_pct": 28.81,
+      "brier": 0.7033,
+      "real_dist": {
+        "1": 29,
+        "X": 20,
+        "2": 10
+      },
+      "pred_dist": {
+        "1": 28,
+        "X": 0,
+        "2": 31
+      }
+    },
+    "Conference League": {
+      "n": 6,
+      "hit_pct": 50.0,
+      "brier": 0.6738,
+      "real_dist": {
+        "1": 3,
+        "X": 1,
+        "2": 2
+      },
+      "pred_dist": {
+        "1": 3,
+        "X": 0,
+        "2": 3
+      }
+    },
+    "Libertadores": {
+      "n": 90,
+      "hit_pct": 35.56,
+      "brier": 0.6785,
+      "real_dist": {
+        "1": 38,
+        "X": 27,
+        "2": 25
+      },
+      "pred_dist": {
+        "1": 50,
+        "X": 0,
+        "2": 40
+      }
+    },
+    "Sudamericana": {
+      "n": 65,
+      "hit_pct": 40.0,
+      "brier": 0.6556,
+      "real_dist": {
+        "1": 29,
+        "X": 19,
+        "2": 17
+      },
+      "pred_dist": {
+        "1": 31,
+        "X": 0,
+        "2": 34
+      }
+    }
+  },
+  "res_fase": {
+    "Champions League/grupos": {
+      "n": 49,
+      "hit_pct": 42.86,
+      "real_X_pct": 26.53
+    },
+    "Champions League/eliminat": {
+      "n": 112,
+      "hit_pct": 49.11,
+      "real_X_pct": 16.96
+    },
+    "Europa League/grupos": {
+      "n": 7,
+      "hit_pct": 28.57,
+      "real_X_pct": 28.57
+    },
+    "Europa League/eliminat": {
+      "n": 52,
+      "hit_pct": 28.85,
+      "real_X_pct": 34.62
+    },
+    "Conference League/eliminat": {
+      "n": 6,
+      "hit_pct": 50.0,
+      "real_X_pct": 16.67
+    },
+    "Libertadores/grupos": {
+      "n": 41,
+      "hit_pct": 29.27,
+      "real_X_pct": 17.07
+    },
+    "Libertadores/eliminat": {
+      "n": 49,
+      "hit_pct": 40.82,
+      "real_X_pct": 40.82
+    },
+    "Sudamericana/grupos": {
+      "n": 31,
+      "hit_pct": 35.48,
+      "real_X_pct": 35.48
+    },
+    "Sudamericana/eliminat": {
+      "n": 34,
+      "hit_pct": 44.12,
+      "real_X_pct": 23.53
+    }
+  },
+  "res_pred": {
+    "Champions League/1": {
+      "n": 77,
+      "hit_pct": 57.14
+    },
+    "Champions League/2": {
+      "n": 84,
+      "hit_pct": 38.1
+    },
+    "Europa League/1": {
+      "n": 28,
+      "hit_pct": 42.86
+    },
+    "Europa League/2": {
+      "n": 31,
+      "hit_pct": 16.13
+    },
+    "Conference League/1": {
+      "n": 3,
+      "hit_pct": 66.67
+    },
+    "Conference League/2": {
+      "n": 3,
+      "hit_pct": 33.33
+    },
+    "Libertadores/1": {
+      "n": 50,
+      "hit_pct": 40.0
+    },
+    "Libertadores/2": {
+      "n": 40,
+      "hit_pct": 30.0
+    },
+    "Sudamericana/1": {
+      "n": 31,
+      "hit_pct": 51.61
+    },
+    "Sudamericana/2": {
+      "n": 34,
+      "hit_pct": 29.41
+    }
+  }
+}

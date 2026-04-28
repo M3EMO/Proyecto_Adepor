@@ -1,407 +1,301 @@
-# Beads pendientes — Snapshot 2026-04-28 (actualizado)
+# Beads pendientes — Snapshot 2026-04-28 (cierre sesión V5.2 + Track C)
 
-> Inventario humanamente legible de los 18 beads abiertos del proyecto.
+> Inventario humanamente legible de los 30 beads abiertos del proyecto al cierre
+> de sesión 2026-04-28 (V5.2 aplicado + Track C 3 sub-líneas cerradas).
+>
 > Cada bead explica QUÉ es, POR QUÉ existe, DÓNDE está parado, y qué EVENTO o
 > ACCIÓN lo desbloquea.
->
-> **Última actualización:** 2026-04-28 — agregados 5 beads nuevos al final del
-> documento (`adepor-a1v`, `adepor-4f9`, `adepor-9ah`, `adepor-z0e`, `adepor-p4e`).
 
 ## Estado del proyecto al cierre del día
 
-- **Manifesto:** V5.1.2 (commit `e433783` — M.3 OFF en config)
+- **Manifesto:** **V5.2** (Layer 3 H4 X-rescue per-liga, infraestructura ON, JSON config vacío)
+- **SHA-256:** `471c1c00b927baad59cd13688bd5db142550a1aadbc45980a2b6d76862c4ab6c` (locked)
 - **Filtros activos:** M.1 (TOP-5 ligas) + M.2 (n_acum<60). M.3 desactivado.
 - **V13 SHADOW:** Argentina F1 NNLS, Francia F2 NNLS, Italia F2 RIDGE, Inglaterra F5 NNLS.
-- **Posiciones:** tabla `posiciones_tabla_snapshot` viva, hook incremental al pipeline.
-- **Calendario:** `liga_calendario_temp` poblada con 80 entradas por (liga, temp).
+- **Layer 2 V12:** Turquía standalone (`arch_decision_per_liga = {"Turquia": "V12"}`)
+- **Layer 3 H4 X-rescue:** infraestructura ready, `h4_x_rescue_threshold = '{}'` (inactivo)
+  - Activación recomendada via SQL UPDATE: `{"Argentina": 0.35, "Italia": 0.35, "Inglaterra": 0.35, "Alemania": 0.35}`
+- **Tablas nuevas:** `partidos_no_liga` (8,742 OOS 2022-2024 via API-Football + 192 in-sample 2026 via Wikipedia parcial)
+- **View nueva:** `v_partidos_unificado` (UNION liga + no-liga)
+
+## Resumen sesión 2026-04-28
+
+### Cambios aplicados al motor
+
+- **V5.2 Layer 3 H4 X-rescue per-liga**: bead `adepor-tyb` aprobado tras audit Opción D
+  (walk-forward por temp + multidim cross-equipo). Filtro doble validado SIG: NOT (pos_local=TOP3)
+  AND NOT (gap_local≤14 AND gap_visita≤14). Δ +0.426 [+0.07, +0.78] *** sobre N=160 OOS.
+- Helpers nuevos: `_get_pos_local_forward`, `_get_gap_dias_no_liga` en `motor_calculadora.py`.
+- Snapshot pre-cambio: `snapshots/fondo_quant_20260428_171414_pre_V5.2_layer3_h4.db`.
+
+### Track C (mejorar predicción) — 3 sub-líneas cerradas SIN promotion
+
+- **Sub-1 cold-start n_acum≤10**: M.2 OK. Argentina 0-4 +74.4% agregado era artefacto Riestra 2024 + concentración en pocos equipos por temp. Drilling cross-temp + per-equipo refutó robustez.
+- **Sub-3 calibración isotónica**: empeora yield consistentemente cross-liga + cross-temp + in-sample 2026 (todas TOP-5 V5.1 caen −19 a −29pp). Confirma paradoja Brier-Yield brutalmente.
+- **Sub-4 Skellam V7**: V7 ≈ V0 en hit rate y Brier sobre N=8,157 OOS drilling cross-equipo. NO supera V0 en ningún subset.
+
+### Beads cerrados
+
+- `adepor-a1v` — V13 captura calidad estructural (r=−0.622 cross-liga). NO requiere feature explícito.
+- `adepor-tyb` — Layer 3 H4 X-rescue per-liga aplicado.
+- `adepor-edk` — PROPOSAL madre Layer 1+2+3 cerrada (Layer 2 aplicado, Layer 1 vetado, Layer 3 reformulado en `adepor-tyb`).
+- `adepor-5y0.1` — Schema `partidos_no_liga` + view + indices + tests.
+- `adepor-0bb`, `adepor-qea` — DECISION-LOGS archivados (Fase 3/4 canceladas; ENET descartado V13).
 
 ---
 
 ## Prioridad P1 — Decisiones grandes pendientes
 
-### `adepor-edk` — PROPOSAL: Layer 1 (filtro liga) + Layer 3 (H4 X-rescue)
-
-**Qué es.** PROPOSAL madre de la cual ya se aprobó y aplicó:
-- ✅ **Layer 2** (V12 standalone Turquía): commit `37a30e1`, en producción.
-
-Quedan pendientes los otros dos layers:
-- **Layer 1**: filtro selectivo por liga `{Turquía, Italia, Francia, Inglaterra}`. Yield Drop_DE_ES H4 +5.7% sig.
-- **Layer 3**: H4 X-rescue threshold=0.35 sobre subset filtrado. Yield +5.7% sig sobre OOS Pinnacle 2024.
-
-**Por qué importa.** Es la única política con CI95 que excluye 0 sobre N=1.806 picks. El Layer 1 propone {TUR, ITA, FRA, ING}, distinto al filtro V5.1 actual {ARG, BRA, ING, NOR, TUR}.
-
-**Estado.** Layer 2 ya aplicado. Layers 1+3 quedan en evaluación porque V5.1 (bead `adepor-ptk`, ya cerrado) usó otro filtro liga (basado en in-sample real). Hay que decidir si los layers 1/3 se descartan o se unifican con V5.1.
-
-**Trigger.** Decisión humana. Posibles caminos:
-- Cerrar como "obsoleto por V5.1" (filtro ptk gana en in-sample real).
-- Reformular Layer 3 (H4 X-rescue) como bead separado si quiere validarse.
+(Ninguno hoy — `adepor-edk` cerrado tras aplicación V5.2)
 
 ---
 
 ## Prioridad P2 — Investigaciones / propuestas activas
 
-### `adepor-09s` — Detector de régimen 2022/2023/2024
+### `adepor-5y0` — EPIC Calendario completo equipos (liga + copas nac. + int.)
 
-**Qué es.** Investigación crítica sobre por qué V4.7 (desactivar HG+Fix5) cambia drásticamente entre años:
-- 2022: Δyield V4.7 = +11.13pp [−6.4, +28.4] (favorable)
-- 2023: Δyield V4.7 = **−15.69pp** [−24.9, −6.5] sig neg ★ (tóxico)
-- 2024: Δyield V4.7 = −1.6pp (neutro)
+**Qué es.** Epic para construir tabla `partidos_no_liga` con copas nacionales + internacionales (UEFA + Conmebol). Permite calcular `gap_dias_desde_ultimo_partido` por (equipo, fecha) considerando todas competiciones.
 
-**Por qué importa.** Cualquier cambio al motor (V4.7, M.3, V13) tiene efectos opuestos según el régimen. Sin un detector, no podemos aplicar políticas adaptativas.
+**Estado.** Sub-1 (schema) cerrado. Sub-2-7 abiertos:
+- `adepor-5y0.2` — Poblar 2026 ARG (Libertadores + Sudamericana + Copa Argentina). Wikipedia parcial hecho (Libertadores + Sudamericana 192 partidos). Copa Argentina layout distinto, parser pending.
+- `adepor-5y0.3` — Poblar 2026 ING (Champions + Europa + Conference + FA + EFL).
+- `adepor-5y0.4` — Poblar OOS 2024 (cumplido vía API-Football, ~3,000 partidos).
+- `adepor-5y0.5` — Poblar OOS 2022 + 2023 (cumplido vía API-Football, ~5,700 partidos).
+- `adepor-5y0.6` — Cruzar X-rescue picks con calendario + análisis cansancio mid-week.
+- `adepor-5y0.7` — Refinar `adepor-tyb` con feature `gap_dias_local`/`gap_dias_visita` (post sub-6).
 
-**Estado.** Plan refinado en findings 2026-04-28:
-- Fase 1 (caracterización 2022/2023/2024): **CERRADA** (`adepor-bix`). Hallazgo: features estructurales NO separan régimen 2023; solo yield_v0_unitario lo hace (p=0.034).
-- Fase 2 (clasificador): pendiente.
-- Plan refinado tras audit M.3 in-sample 2026: M.3 condicional por liga vía `yield_rolling(liga, 30d) < baseline−2σ` sostenido 14d → activar M.3 esa liga.
-
-**Trigger.** N≥600 picks in-sample post-2026-03-16 (~3-4 semanas más, hoy ~358).
-
-**Acción esperada.** Cuando se cumpla trigger, implementar Opción A (Brier/yield rolling) en `motor_adaptativo.py`.
+**Trigger.** Manual — depende de scraping Wikipedia para Copa Argentina + Copa do Brasil 2026.
 
 ---
 
-### `adepor-6rv` — PROPOSAL: V4.7 desactivar HALLAZGO_G y Fix #5
+### `adepor-9uq` — INVESTIGATION M.2 universal vs régimen 2026
 
-**Qué es.** PROPOSAL para desactivar dos correcciones del motor (HG y Fix #5) que en algunos regímenes mejoran y en otros destruyen yield.
+**Qué es.** Hallazgo accidental durante Track C Sub-1: bucket `n_acum_l ≥60` in-sample 2026 yield = +43.1% [-3.1, +91.6] borderline sobre N=64 picks. **Opuesto al OOS** (−13.7% sig neg).
 
-**Por qué importa.** Bead `adepor-09s` documenta que V4.7 es:
-- Tóxico en 2023 (régimen sig neg)
-- Favorable en 2022
-- Neutro en 2024
+Por liga in-sample 2026:
+- Argentina ≥60: +6.6% (8/37) — neutral
+- **Brasil ≥60: yield +120% [+23.0, +227.0] *** SIG POS** sobre N=22, hit_X 60%
+- Inglaterra ≥60: +81.8% (11/33) borderline
 
-**Estado.** Bloqueado por `adepor-09s` (necesita predictor de régimen para activación selectiva).
+**Por qué importa.** El filtro M.2 actual (`n_acum_max=60`) está BLOQUEANDO esos 64 picks. Si la inversión se mantiene, M.2 universal está drenando yield en 2026.
 
-**Trigger.** Cuando `adepor-09s` Fase 2 cierre, evaluar V4.7 condicional por régimen. Si régimen "tóxico" detectado en una liga → desactivar HG+Fix5 esa liga.
+**Estado.** Esperando N≥200 picks ≥60 in-sample 2026 (~6-8 sem más).
 
-**Acción esperada.** PROPOSAL: MANIFESTO CHANGE para V4.7 condicional. Snapshot DB + bump SHA.
+**Trigger.** N≥200 + audit mensual (`adepor-j4e`) confirme yield_rolling sostenido CI95_lo > 0 sig por liga.
 
----
-
-### `adepor-d7h` — SHADOW V6+V7: xG recalibrado + Skellam
-
-**Qué es.** Infraestructura SHADOW que loguea V6 (Poisson DC + xG OLS recalibrado) y V7 (Skellam + xG OLS) en cada corrida del motor productivo. NO afectan picks operativos.
-
-**Por qué importa.** V6 y V7 son arquitecturas alternativas. Si en N≥80 picks SHADOW V6/V7 superan a V0 en yield + Brier, candidato a promoción.
-
-**Estado.** Activo. Logging continuo en `picks_shadow_arquitecturas`. Conjunto V13 (bead `adepor-3ip` cerrado) también se loggea.
-
-**Trigger.** N≥80 picks SHADOW liquidados.
-
-**Acción esperada.** Audit V6/V7 vs V0 con N=80. Si yield V6 > V0 con CI95_lo > 0 → PROPOSAL para promover V6.
+**Acción esperada.** PROPOSAL relajar M.2 a 80 universal O M.2 condicional por liga JSON (análogo Layer 3).
 
 ---
 
-### `adepor-dex` — Cautela Argentina por regime shift
+### `adepor-hxd` — PROPOSAL: M.3 condicional por liga vía yield_rolling 30d
 
-**Qué es.** Observabilidad alerta. Brier rolling Argentina last 50 = 0.206 (baseline 0.196, threshold 0.220). El motor está marginalmente peor calibrado en Argentina pero sin trigger para acción.
+**Qué es.** Aplicar M.3 (excluir momento_bin_4=Q4) selectivamente por liga: activar solo si `yield_rolling(liga, 30d) < baseline_liga - 2σ` sostenido 14d. Resuelve conflicto V5.1.2 (M.3 OFF) sin perder señal OOS 2024.
 
-**Por qué importa.** Argentina es la única liga LIVE 1X2 hoy (TOP-5 V5.1). Si Brier sigue subiendo → considerar Kelly cap reducido per-liga.
+**Estado.** Bloqueado por `adepor-09s` Fase 2 (necesita detector régimen).
 
-**Estado.** Anotado con mitigación V5.1 §M.3 (ahora desactivada en V5.1.2). Re-evaluar cuando N≥30 picks adicionales.
-
-**Trigger.** Brier rolling Argentina cruza 0.220 sostenido por >7 días.
-
-**Acción esperada.** Si trigger: PROPOSAL Kelly cap 1.5% Argentina temporal scoped (no global).
+**Trigger.** N≥600 in-sample post-2026-03-16 (~3-4 semanas más).
 
 ---
 
-### `adepor-1fd` — TRIGGER hit_rate cuando N≥30 con xg_*_corto
+### `adepor-9hh` — INFRA Extender `posiciones_tabla_snapshot` a 3-formatos
 
-**Qué es.** Trigger automático: cuando se acumulen ≥30 picks reales con la columna `xg_local_corto`/`xg_visita_corto` calculada (xG con ventana corta ~5 partidos), recomputar `hit_rate_shadow_vs_actual` para evaluar si xG corto mejora prediction.
+**Qué es.** Hoy solo Argentina tiene 3 formatos (anual + apertura + clausura). México, Brasil (estados), Colombia tienen formato apertura/clausura — replicar hook incremental.
 
-**Por qué importa.** xG corto vs xG largo (EMA estándar) es debate empírico abierto. Si N≥30 muestra xG_corto > xG_largo en hit, considerar promoción.
+**Estado.** Open. Long-running multi-session.
 
-**Estado.** Esperando que se llenen los 30 picks con `xg_*_corto` poblado. Hoy N parcial (motor empezó a llenar la columna recientemente).
-
-**Trigger.** N≥30 picks reales con `xg_*_corto IS NOT NULL`.
-
-**Acción esperada.** Recomputar hit cross-cohorte (xg_corto vs xg_largo). Si Δhit > 5pp con CI95_lo > 0 → PROPOSAL.
+**Trigger.** Necesidad manual cuando V13 quiera aplicar pos_local en ligas no-anuales.
 
 ---
 
-### `adepor-hm9` — TRIGGER auditar CLV (Closing Line Value)
+### `adepor-4tb` — EPIC Yield copas EUR domésticas (Copa Rey + FA + Coppa Italia)
 
-**Qué es.** Trigger: cuando se acumulen ≥30 picks con `clv_pct` calculado (diferencia entre cuota tomada y cuota de cierre Pinnacle), auditar si CLV positivo correlaciona con yield positivo.
+**Qué es.** Audit hit rate sobre `partidos_no_liga` reveló copas EUR domésticas SUPERAN liga: Copa Rey 61.5%, FA 57.4%, Coppa 56.9%. Yield estimado +5-12pp.
 
-**Por qué importa.** CLV positivo (tomar cuota antes de que el bookie la baje) es indicador clásico de "value betting". Si CLV correlaciona con yield → confirma que el motor identifica valor real.
+**Estado.** **BLOQUEADO** — API-Football free tier NO soporta `/odds` (devuelve 0 sin error).
 
-**Estado.** `clv_pct` se calcula en `partidos_backtest`. Esperando acumular N=30.
-
-**Trigger.** N≥30 picks con `clv_pct IS NOT NULL`.
-
-**Acción esperada.** Análisis correlación CLV → yield. Si Pearson r > 0.20 sig → confirma value betting.
-
----
-
-### `adepor-334` — Reevaluar rho in-sample cuando N>100 por liga
-
-**Qué es.** Trigger: cuando cada liga TOP-5 acumule N>100 partidos liquidados in-sample 2026, recalibrar `rho_calculado` per-liga vía MLE Dixon-Coles sobre datos in-sample (no históricos).
-
-**Por qué importa.** Los `rho_calculado` actuales se derivaron de OOS 2022-2024. Si el régimen 2026 tiene tau distinto (% empates cambiado), recalibrar mejora calibración.
-
-**Estado.** Argentina tiene 83 liquidados, Brasil 71, Inglaterra 38 (no llega a 100). Esperar.
-
-**Trigger.** N>100 partidos liquidados por cada liga TOP-5.
-
-**Acción esperada.** Re-correr `py -m src.nucleo.calibrar_rho` con flag in-sample. Comparar rhos in-sample vs históricos. Si difieren significativamente → bead PROPOSAL para actualizar `ligas_stats.rho_calculado`.
+**Trigger.** Una de:
+1. Upgrade API-Football Pro plan (~$19/mes)
+2. Construir scraper oddsportal.com (high effort)
+3. Datos cuotas históricas alternativos
 
 ---
 
-### `adepor-tqm` — BACKLOG V5.0 follow-ups
+### `adepor-8je` — INFRA Apostar Champions League pred=1 (favoritos locales)
 
-**Qué es.** Lista de mejoras menores derivadas del análisis V5.0 Turquía V12: optimizar performance del lookup V12, validar V12 sobre temps recientes, monitorear drift V12.
+**Qué es.** Audit reveló Champions League pred=1: hit 57.1% N=77, yield estimado +5.6%.
 
-**Por qué importa.** V5.0 está en producción (Turquía V12). Mantenimiento longitudinal.
-
-**Estado.** BACKLOG, no urgente.
-
-**Trigger.** Post-promoción de futuras ligas a V12 (cuando `adepor-d7h` o equivalente apruebe).
-
-**Acción esperada.** Cleanup tareas: optimizar `_calcular_probs_v12_lr`, agregar audit V12 vs V0 mensual, etc.
+**Estado.** **BLOQUEADO** — mismo motivo `adepor-4tb` (API Pro requerido).
 
 ---
 
-## Prioridad P3 — Triggers / metodología
+### `adepor-4ic` — META Mejorar predicción general (multi-line scoping)
 
-### `adepor-23w` — TRIGGER A/B altitud cuando equipos_altitud completo
+**Qué es.** Bead meta para tracking de iniciativas que mejoran accuracy predictiva. NO se cierra — se actualiza cuando una sub-línea concreta se abre.
 
-**Qué es.** Trigger: re-evaluar piloto altitud (afecta yield ligas LATAM con estadios sobre 2.000 m.s.n.m.) cuando la tabla `equipos_altitud` esté completa Y se acumulen N≥30 picks con altitud aplicada.
+**Sub-líneas exploradas en sesión 2026-04-28:**
+- Sub-1 cold-start n_acum≤10: cerrada SIN acción
+- Sub-3 calibración isotónica: cerrada SIN acción (paradoja Brier-Yield confirmada)
+- Sub-4 Skellam V7 promoción: cerrada SIN promotion
 
-**Por qué importa.** Bolivia (La Paz, Sucre) tiene estadios a >3.000m. Local con altitud puede tener ventaja estructural. Análisis A/B previo (`adepor-altitud-ab`) cerró con N insuficiente.
-
-**Estado.** Esperando completar `equipos_altitud` (probablemente parcial).
-
-**Trigger.** Tabla completa + N≥30 picks afectados.
-
-**Acción esperada.** Re-correr piloto. Si efecto altitud sig pos → PROPOSAL Kelly boost local en altitud.
-
----
-
-### `adepor-57p` — TRIGGER 6 arquitecturas SHADOW cuando N≥80
-
-**Qué es.** Trigger gemelo de `adepor-d7h`: cuando N≥80 picks SHADOW se acumulen, evaluar las 6 arquitecturas paralelas (V0_actual, V1_no_fix5, V2_no_hg, V3_puro, V4_hg_sel, Skellam, V6, V7, V12, V13).
-
-**Por qué importa.** Validación cruzada multi-arquitectura. Si alguna domina V0 con CI95_lo>0, candidato promoción.
-
-**Estado.** Logging activo en `picks_shadow_arquitecturas`.
-
-**Trigger.** N≥80 picks SHADOW liquidados.
-
-**Acción esperada.** Audit comparativo. Promover ganador via PROPOSAL: MANIFESTO CHANGE.
+**Sub-líneas pendientes:**
+- Sub-2 modelo separado para copa (3-5 sesiones, bloqueado yields)
+- Sub-5 features V13 incrementales (2-3 sesiones)
+- Sub-6 modelo isotónico per-liga selectivo (revisitar si España específicamente — única liga donde isotónica mejoró)
 
 ---
 
-### `adepor-j4e` — TRIGGER OOS-por-temp + in-sample mensual
+### `adepor-09s` — INFRA Detector régimen 2022/2023/2024
 
-**Qué es.** Trigger recurrente: cada cierre de mes, re-correr análisis OOS-por-temp + in-sample para detectar drifts emergentes (V4.7, M.3, filtros liga, V13).
-
-**Por qué importa.** Sistema de monitoreo continuo. Sin esto, los drifts pueden acumularse silenciosamente.
-
-**Estado.** Recurrente (no se cierra). Se ejecuta cada fin de mes.
-
-**Trigger.** Cierre de mes calendario.
-
-**Acción esperada.** Mensual: ejecutar suite de scripts (`yield_por_temp_v47_y_fix6.py`, `audit_M1_M2_M3_por_año_full.py`, etc.) y anotar resultados en este bead.
+(sin cambio respecto inventario previo) Plan Fase 2 esperando N≥600 in-sample post-2026-03-16.
 
 ---
 
-### `adepor-s7m` — METHODOLOGY: ventana móvil 2-temp en calibrar_rho
+### `adepor-6rv` — PROPOSAL: V4.7 desactivar HG + Fix #5
 
-**Qué es.** Mejora metodológica de `calibrar_rho.py`: en lugar de usar todas las temps históricas con peso uniforme, aplicar ventana móvil de últimas 2 temps O decay exponencial (α=0.7 → temp más reciente pesa 0.7, temp anterior 0.3).
-
-**Por qué importa.** Si el régimen cambia (ej. 2023 tóxico → 2024 neutro), las temps viejas contaminan el rho calibrado. Decay temporal hace que el rho reaccione más rápido a cambios.
-
-**Estado.** No implementado, propuesto como mejora.
-
-**Trigger.** No tiene trigger automático. Implementación manual cuando se decida.
-
-**Acción esperada.** Modificar `calibrar_rho.py` con flag `--decay 0.7`. A/B sobre OOS 2024 con ventana móvil vs uniforme. Si Brier mejora con CI95_lo > 0 → adoptar.
+(sin cambio) Bloqueado por `adepor-09s`.
 
 ---
 
----
+### `adepor-d7h` — SHADOW V6+V7
 
-## Beads nuevos creados 2026-04-28 (post-audit findings)
+**Sub-V7 cerrado direccionalmente** vía notes 2026-04-28 (audit_v7_skellam_drill: V7 ≈ V0 sobre N=8,157 OOS, ningún subset supera). V6 sigue como SHADOW input para V13.
 
-### `adepor-a1v` — Construir proxies de pos_backward (calidad estructural)
-
-**Qué es.** Hallazgo del audit forward-vs-backward: pos_local FINAL de la temp
-(backward) tiene MÁS poder predictivo que pos forward (runtime). Yields
-significativos: TOP-3 backward 2024 +47.8% [+7.2, +87.4] ★, TOP-6 backward
-2023 +40.6% [+9.2, +73.8] ★, |div|>5 +24.3% [+2.6, +46.8] ★.
-
-**Por qué importa.** El motor V0 está captando calidad ESTRUCTURAL del equipo
-que el bookie subestima. pos_backward NO es usable runtime (info post-partido)
-pero sirve como AUDIT que confirma la señal.
-
-**Estado.** Bead creado hoy. Script `analisis/proxy_pos_backward_correlacion.py`
-preparado pero no ejecutado. Test: ¿xG_v13 ya correlaciona con pos_backward?
-Si Pearson r < −0.3 cross-temp → V13 ya capta señal → bead cierra.
-
-**Trigger.** Ejecutar script + interpretar correlación.
-
-**Acción esperada.** Si V13 correlaciona → cerrar bead (ya tenemos el proxy).
-Si NO → construir feature explícito 'calidad_estructural_proxy' y agregarlo
-a V13 next iteration.
+**Trigger restante.** N≥80 picks SHADOW liquidados oficial (~3 sem más). Probable conclusión NO cambia.
 
 ---
 
-### `adepor-4f9` — Filtro M.4 candidato: bloquear partidos parejos en tabla
+### `adepor-1fd` — TRIGGER xg_corto N≥30
 
-**Qué es.** Hallazgo audit posición OOS 2024 N=2,656: yield es **direccional
-negativo** en partidos parejos en tabla (`|diff_pos| ≤ 3`):
+(sin cambio) Esperando.
 
-| diff_pos | N_apost | Yield% | CI95 |
-|---|---|---|---|
-| L<<V (mismatch local mejor) | 144 | +18.9 | [−9.4, +48.2] |
-| L~V (parejos) | 213 | **−14.0** | [−32.1, +4.9] casi sig |
-| L>>V (mismatch local peor) | 19 | +23.2 | [−27.9, +75.2] |
-| TOP-vs-TOP | 59 | **−25.5** | [−58.4, +9.4] |
+---
 
-**Por qué importa.** El motor V0 sufre cuando los equipos están en niveles
-similares en tabla. Mejor performance con mismatch claro de calidad.
+### `adepor-hm9` — TRIGGER CLV N≥30
 
-**Estado.** Direccional pero NO sig sobre N actual. Requiere validación
-N≥200 picks operativos post-implementación.
+(sin cambio) Esperando.
 
-**Trigger.** Acumular N≥200 picks operativos con feature `diff_pos_pre_partido`
-poblada. Probable ETA 2-3 meses.
+---
 
-**Acción esperada.** A/B walk-forward por temp. Si M.4 mejora yield agregado
-con CI95_lo > 0 → PROPOSAL: MANIFESTO CHANGE para activar M.4 (extender §M).
+### `adepor-334` — TRIGGER rho in-sample N>100/liga
+
+(sin cambio) Esperando.
+
+---
+
+### `adepor-4f9` — INFRA Filtro M.4 candidato (parejos diff_pos≤3)
+
+(sin cambio) Esperando N≥200 validación.
 
 ---
 
 ### `adepor-9ah` — TRIGGER M.3 selectivo Brasil Q4
 
-**Qué es.** Brasil Q4 (cierre Brasileirão, oct-dic) es el **único (liga, bin)
-con yield negativo CONSISTENTE en los 3 años OOS**:
-
-| temp | N | Yield% | Sig |
-|---|---|---|---|
-| 2022 | 35 | −4.9 | no sig |
-| 2023 | 42 | −17.9 | no sig |
-| 2024 | 48 | **−35.7** | **★ SIG NEG** |
-
-Otros (liga, bin) son inestables cross-año (Argentina Q3, Inglaterra Q4,
-Turquía Q4 flipean entre años). Brasil Q4 es la excepción.
-
-**Por qué importa.** Único candidato sólido para M.3 selectivo per-liga.
-Cuando lleguen picks Brasil 2026 Q4, podemos confirmar y activar.
-
-**Estado.** Brasil 2026 in-sample tiene SOLO Q1 (Brasileirão recién arrancando,
-49 picks). Q4 llegará oct-dic 2026.
-
-**Trigger.** N≥10 picks Brasil 2026 Q4 liquidados (~octubre 2026).
-
-**Acción esperada.** Si yield Brasil 2026 Q4 < 0 → confirmar patrón y proponer
-`filtro_picks_v51_m3_per_liga_bin = {"Brasil": [3]}` extensión M.3 selectivo.
-
-**Caso alternativo:** si yield Brasil 2026 Q4 > 0 (régimen 2026 favorable
-persiste), DESCARTAR. Confirmaría que el régimen 2026 es estructuralmente
-distinto a OOS.
+(sin cambio) Esperando picks 2026 Q4.
 
 ---
 
-### `adepor-z0e` — BUG/DATA: Mojibake en historial_equipos_stats
+### `adepor-p4e` — INVESTIGATION Caída Q3 Argentina 2023 copas internacionales
 
-**Qué es.** Equipos con encoding doble-convertido (mojibake) crean DUPLICADOS:
+**Estado.** Bead todavía relevante. Hipótesis NO refutada por audit cansancio mid-week (Sub-X-rescue): hipótesis original (cansancio → empate) fue REFUTADA pero se identificó filtro INVERSO útil (NOT ambos cansados ≤14d) que ya está en V5.2 §N.
 
-```
-'Instituto (Cordoba)' (correcto?)
-'Instituto (c�rdoba)' (mojibake con char reemplazo)
-'Instituto (cordoba)' (sin acento)
-```
-
-**Por qué importa.**
-- EMAs fragmentadas: `Instituto (Cordoba)` y `Instituto (c�rdoba)` calculados
-  como equipos distintos.
-- Posiciones tabla duplicadas: equipo aparece con N partidos dividido entre
-  variantes.
-- V13 lookup falla cuando partido tiene una variante y EMA está en otra.
-- M.2 (n_acum<60) falsos negativos en equipos veteranos con encoding alterno.
-
-**Estado.** No fix. Bead histórico `adepor-86` documentó mojibake en
-`cache_espn/*.json` y aplicó fix a 27 archivos cache, pero `historial_equipos_stats`
-acumuló las EMAs antes del fix → persiste.
-
-**Trigger.** Manual cuando se priorice (no urgente, no rompe motor).
-
-**Acción esperada.**
-1. Detectar clusters via fuzzy match (Levenshtein < 2 + normalización).
-2. Plan migración: nombre canónico por cluster, actualizar todas las tablas.
-3. Snapshot DB obligatorio antes.
-4. Verificar `gestor_nombres v5.0` para prevenir reincidencia.
+**Trigger restante.** Análisis específico Q3 ARG 2023 con tabla `partidos_no_liga` cuando esté completa para ARG (sub-bead `adepor-5y0.2`).
 
 ---
 
-### `adepor-p4e` — INVESTIGATION: ¿caída Q3 Argentina 2023 = copas internacionales?
+### `adepor-dex` — Cautela operativa Argentina
 
-**Qué es.** Hipótesis del usuario: el yield V0 cae brutal en Argentina Q3 2023
-(−45.7% sig neg) puede explicarse por equipos jugando Libertadores/Sudamericana
-en paralelo, llegando cansados a partidos liga local.
+(sin cambio) Observabilidad.
 
-**Por qué importa.**
-- Argentina Q3 2022: +37.8% sig POS
-- Argentina Q3 2023: **−45.7% sig NEG** ★ caída cross-temp
-- Argentina Q3 2024: +22.4%
+---
 
-Q3 = mid-temp (~50-75% del año). 2023 cayó en agosto-septiembre 2023.
-**Libertadores 2023 fase final agosto-noviembre 2023** = conjunción temporal
-consistente con la hipótesis.
+### `adepor-tqm` — BACKLOG V5.0 follow-ups
 
-10-12 equipos argentinos participaron en copas 2023 (≈50% de la liga).
+(sin cambio) Bajo urgencia.
 
-**Estado.** Hipótesis no testada. Requiere data de copas internacionales
-(scraping nuevo o lookup hardcoded por equipo×fecha).
+---
 
-**Trigger.** Cuando se obtenga calendario copas 2022/2023/2024.
+### `adepor-z0e` — BUG Mojibake `historial_equipos_stats`
 
-**Acción esperada.**
-1. Para cada partido Argentina LPF 2023: clasificar si el local jugó copa
-   <=7 días antes.
-2. Yield V0 con vs sin feature 'local cansado'.
-3. Si confirma → feature `days_since_copa_local` a V13 next iteration o
-   filtro M.5 candidato 'no apostar local cansado'.
-4. Si refuta → otra explicación del 2023 tóxico.
+(sin cambio) Pendiente debugging.
+
+---
+
+## Prioridad P3 — Triggers / metodología
+
+### `adepor-23w` — TRIGGER A/B altitud
+### `adepor-57p` — TRIGGER 6 arquitecturas SHADOW
+### `adepor-6g5` — TRIGGER V13 promoción argmax por liga (N≥200 SHADOW)
+### `adepor-j4e` — TRIGGER OOS-por-temp + in-sample mensual
+### `adepor-s7m` — METHODOLOGY ventana móvil 2-temp en calibrar_rho
+
+(sin cambios respecto inventario previo)
 
 ---
 
 ## Resumen de prioridades operativas
 
+### Activación recomendada V5.2 (decisión usuario)
+
+```sql
+UPDATE config_motor_valores
+SET valor_texto = '{"Argentina": 0.35, "Italia": 0.35, "Inglaterra": 0.35, "Alemania": 0.35}'
+WHERE clave = 'h4_x_rescue_threshold' AND scope = 'global';
+```
+
+Operacionalmente solo Argentina + Inglaterra impactan picks LIVE V5.1 (M.1 filtra ITA/ALE).
+
 ### Esperando triggers (no acción inmediata)
 
 | Bead | Trigger | ETA | Tipo |
 |---|---|---|---|
-| `adepor-edk` Layers 1/3 | Decisión usuario | inmediata | PROPOSAL |
-| `adepor-09s` Fase 2 | N≥600 in-sample | ~3-4 sem | INFRA crítica |
-| `adepor-d7h` / `adepor-57p` | N≥80 SHADOW | continuo | TRIGGER |
+| `adepor-09s` Fase 2 | N≥600 in-sample | ~3 sem | INFRA crítica |
+| `adepor-9uq` M.2 vs 2026 | N≥200 picks ≥60 in-sample | ~6-8 sem | INVESTIGATION |
+| `adepor-hxd` M.3 condicional | depende `adepor-09s` | ~3-6 sem | PROPOSAL |
+| `adepor-d7h` / `adepor-57p` | N≥80 SHADOW | ~3 sem | TRIGGER (probable cierre direccional) |
 | `adepor-1fd` | N≥30 xg_corto | ~2-3 sem | TRIGGER |
 | `adepor-hm9` | N≥30 CLV | ~2-3 sem | TRIGGER |
-| `adepor-334` | N>100 por liga | ~2-3 meses | TRIGGER |
+| `adepor-334` | N>100/liga | ~2-3 meses | TRIGGER |
+| `adepor-4f9` | N≥200 picks | ~6-8 sem | INFRA |
+| `adepor-9ah` | picks 2026 Q4 | ~junio (post Apertura) | TRIGGER |
 | `adepor-23w` | tabla altitud + N≥30 | varios meses | TRIGGER |
+| `adepor-6g5` | N≥200 SHADOW V13 | ~3-6 meses | TRIGGER promoción |
 | `adepor-j4e` | fin de mes | mensual | TRIGGER recurrente |
-| `adepor-6rv` | depende de `adepor-09s` | ~3-6 sem | PROPOSAL |
+| `adepor-6rv` | depende `adepor-09s` | ~3-6 sem | PROPOSAL |
 | `adepor-dex` | Brier rolling > 0.220 | observabilidad | OBS |
-| `adepor-tqm` | post `adepor-edk` | indefinido | BACKLOG |
+| `adepor-tqm` | post-V5.2 | indefinido | BACKLOG |
 | `adepor-s7m` | manual | indefinido | METHODOLOGY |
-| **`adepor-a1v`** | manual (script ya escrito) | inmediata | INFRA |
-| **`adepor-4f9`** Filtro M.4 | N≥200 picks operativos con diff_pos | ~2-3 meses | INFRA |
-| **`adepor-9ah`** Brasil Q4 | N≥10 picks Brasil 2026 Q4 | ~oct 2026 | TRIGGER |
-| **`adepor-z0e`** Mojibake | manual cuando se priorice | indefinido | BUG |
-| **`adepor-p4e`** Copas Q3 Arg | data copas 2022-2024 obtenida | indefinido | INVESTIGATION |
 
-### Sin trigger inmediato accionable
+### Bloqueados por API Pro
 
-Los 13 beads restantes esperan eventos (acumulación N, decisiones, fin de mes). **No hay work activo bloqueado** salvo el de Fase 2 que necesita más datos in-sample.
+| Bead | Trigger desbloqueo |
+|---|---|
+| `adepor-4tb` | Upgrade API Pro O scraper alternativo |
+| `adepor-8je` | Idem |
+
+### Trabajo sub-bead activo (Epic `adepor-5y0`)
+
+| Sub-bead | Estado | Próximo paso |
+|---|---|---|
+| 5y0.1 schema | ✓ closed | — |
+| 5y0.2 ARG 2026 | open | Wikipedia Copa Argentina parser pending |
+| 5y0.3 ING 2026 | open | Wikipedia + API hybrid |
+| 5y0.4 OOS 2024 | open (data cumplida) | Cierre formal |
+| 5y0.5 OOS 22/23 | open (data cumplida) | Cierre formal |
+| 5y0.6 cruce X-rescue | open | Post-sub-2,3 |
+| 5y0.7 refinar tyb | open | Post-sub-6 |
 
 ### Próxima ventana de acción esperada
 
-**Mediados de mayo 2026** (~3 semanas):
-- N in-sample alcanzará ~600 → `adepor-09s` Fase 2 ejecutable.
-- N in-sample EUR top en cierre temporada (Premier 25-26 termina 24 may) → último bin Q4 EUR hasta agosto.
-- Argentina cierre Apertura jun 22 → primer dato Q4 Argentina post fix-calendario.
+**Mediados-fines de mayo 2026** (~3 semanas):
+- N in-sample alcanzará ~600 → `adepor-09s` Fase 2 ejecutable
+- N in-sample EUR top en cierre temporada (Premier 25-26 termina 24 may) → último bin Q4 EUR
+- Argentina cierre Apertura jun 22 → primer dato Q4 Argentina post fix-calendario
+- N≥200 picks ≥60 in-sample → `adepor-9uq` decidible
+
+**Junio 2026:**
+- Picks 2026 Q4 LATAM disponibles → `adepor-9ah` decidible
+- Cierre Argentina Apertura → `adepor-p4e` analizable con calendario completo
 
 **Agosto 2026:**
-- Premier 26-27 arranque → primeros picks EUR Q1 2026-27.
-- Re-test M.3 NEW en EUR top con sample diversificado.
+- Premier 26-27 arranque → primeros picks EUR Q1 2026-27
+- Re-test M.3 NEW en EUR top con sample diversificado

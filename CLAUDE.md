@@ -87,8 +87,8 @@ FLOOR_PROB_MIN, MAX_KELLY_PCT_*, etc.)** se debe:
 El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreated`.
 
 **Estado actual (2026-04-28):**
-- **Versión:** V5.1.2 (M.3 desactivado vía config tras audit in-sample)
-- **SHA-256:** `85667803ab6ca16985ad110fca13dec43827662f84589e75f8ea8385c0b4a6af`
+- **Versión:** V5.2 (Layer 3 H4 X-rescue per-liga, infraestructura ON, JSON config vacío)
+- **SHA-256:** `471c1c00b927baad59cd13688bd5db142550a1aadbc45980a2b6d76862c4ab6c`
 - **Locked:** `configuracion.manifesto_locked = 'true'`
 - **Layers vigentes:**
   - V5.0 §L Layer 2: `arch_decision_per_liga = {"Turquia": "V12"}`. V12 standalone activo
@@ -97,10 +97,24 @@ El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreat
     - **M.1** `apostar_solo_si_liga_in {Argentina, Brasil, Inglaterra, Noruega, Turquía}` ✓ ACTIVO
     - **M.2** `apostar_solo_si n_acum_l < 60` ✓ ACTIVO (calibrado en 2024 sig)
     - **M.3** `apostar_solo_si momento_bin_4 != 3` ✗ DESACTIVADO en V5.1.2
+  - **V5.2 §N Layer 3 H4 X-rescue per-liga**: `h4_x_rescue_threshold = '{}'` (default vacío,
+    INACTIVO). Override de argmax a 'X' (vía override de probs a V12) si liga ∈ JSON Y
+    argmax_v12=='X' Y P_v12(X) > thresh[liga] Y NOT (pos_local TOP3) Y NOT (gap_local≤14
+    AND gap_visita≤14). Activación recomendada via SQL UPDATE: `{"Argentina": 0.35,
+    "Italia": 0.35, "Inglaterra": 0.35, "Alemania": 0.35}`. Validación OOS 2022-2024
+    N=160 con filtro doble: Δ +0.426 [+0.07, +0.78] *** SIG POS.
 - **V5.1.2 cambio (2026-04-28):** `filtro_picks_v51.excluir_q4=false` en config. Audit in-sample
   reveló que M.3 NEW (calendario fix) bloquea Inglaterra Q4 +70.7% y Turquía Q4 +50.8% que
   hoy están dando dinero. Calibración OOS 2024 (Q4 −16.1% sig) NO transfiere a régimen 2026.
   M.3 condicional por régimen pendiente (`adepor-09s` Fase 2).
+- **V5.2 cambio (2026-04-28):** Bump V5.1.2 → V5.2 con nueva sección §N (Layer 3 H4 X-rescue).
+  Bead `adepor-tyb` aprobado tras audit Opción D extendido (walk-forward por temp + multidim).
+  Infraestructura ready, JSON empty. Activación liga-por-liga vía SQL post-merge.
+  Doc: `docs/findings_layer3_walkforward.md`. Audit: `analisis/audit_yield_F2_walkforward_por_temp.{py,json}`,
+  `analisis/audit_yield_F2_x_rescue_population.{py,json}`, `analisis/audit_x_rescue_multidim.{py,json}`.
+  Helpers nuevos: `_get_pos_local_forward`, `_get_gap_dias_no_liga` en motor_calculadora.py.
+  Tabla nueva: `partidos_no_liga` (8,742 OOS 2022-2024 via API-Football + 192 in-sample 2026
+  via Wikipedia parcial), view `v_partidos_unificado` (UNION liga + no-liga).
 - **V13 SHADOW puro:** Argentina F1_off NNLS, Francia F2_pos NNLS, Italia F2_pos RIDGE,
   Inglaterra F5_ratio NNLS. NO afecta picks. Validación N≥200 SHADOW para promoción.
 - **Calendario individual:** tabla `liga_calendario_temp` (80 filas) con fechas reales
@@ -237,7 +251,7 @@ NO afecta motor productivo (V0 sigue decidiendo argmax). Solo actualiza V12 SHAD
 
 Estos artefactos están checked-in y son la "memoria operativa" del proyecto. Lectura obligatoria antes de proponer cambios estructurales:
 
-- `Reglas_IA.txt` — Manifiesto matemático/arquitectural (versión actual V5.1.2; §M.3 desactivado vía config)
+- `Reglas_IA.txt` — Manifiesto matemático/arquitectural (versión actual V5.2; §N Layer 3 H4 X-rescue infraestructura ON, JSON empty)
 - `docs/beads_pendientes_2026-04-28.md` — inventario humano de los 13 beads abiertos con explicación de cada uno
 - `docs/findings_n_acum_drift.md` — investigación M.2 (n_acum) drift, validación dual OOS+real
 - `docs/findings_v13_grid_search.md` — grid search V13 (4 reg × 6 feat × 8 ligas), BEST por liga

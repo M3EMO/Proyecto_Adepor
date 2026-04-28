@@ -1,0 +1,80 @@
+{
+  "fecha": "2026-04-28T14:09:57.553570",
+  "correlaciones": {
+    "Argentina": {
+      "2023": {
+        "n_equipos": 9,
+        "r_xg_v13": -0.0186,
+        "r_ema_sots": -0.2667,
+        "r_ema_shot_pct": -0.0162,
+        "r_diff_sots": 0.406
+      }
+    },
+    "Inglaterra": {
+      "2022": {
+        "n_equipos": 9,
+        "r_xg_v13": -0.2756,
+        "r_ema_sots": -0.7302,
+        "r_ema_shot_pct": 0.1974,
+        "r_diff_sots": 0.096
+      },
+      "2023": {
+        "n_equipos": 10,
+        "r_xg_v13": -0.7891,
+        "r_ema_sots": -0.9371,
+        "r_ema_shot_pct": -0.4329,
+        "r_diff_sots": -0.0463
+      },
+      "2024": {
+        "n_equipos": 9,
+        "r_xg_v13": -0.9156,
+        "r_ema_sots": -0.8167,
+        "r_ema_shot_pct": -0.3079,
+        "r_diff_sots": -0.6003
+      }
+    },
+    "Italia": {
+      "2022": {
+        "n_equipos": 9,
+        "r_xg_v13": -0.7105,
+        "r_ema_sots": -0.7134,
+        "r_ema_shot_pct": -0.477,
+        "r_diff_sots": -0.5922
+      },
+      "2024": {
+        "n_equipos": 10,
+        "r_xg_v13": -0.825,
+        "r_ema_sots": -0.8017,
+        "r_ema_shot_pct": -0.6204,
+        "r_diff_sots": -0.3932
+      }
+    },
+    "Francia": {
+      "2022": {
+        "n_equipos": 13,
+        "r_xg_v13": -0.7471,
+        "r_ema_sots": -0.742,
+        "r_ema_shot_pct": -0.2459,
+        "r_diff_sots": -0.1288
+      },
+      "2023": {
+        "n_equipos": 12,
+        "r_xg_v13": -0.7548,
+        "r_ema_sots": -0.8127,
+        "r_ema_shot_pct": 0.129,
+        "r_diff_sots": 0.3737
+      },
+      "2024": {
+        "n_equipos": 11,
+        "r_xg_v13": -0.5653,
+        "r_ema_sots": -0.6215,
+        "r_ema_shot_pct": -0.2475,
+        "r_diff_sots": 0.6803
+      }
+    }
+  },
+  "veredicto": {
+    "avg_r_v13": -0.622,
+    "interpretacion": "V13 captura calidad estructural - bead a1v puede cerrar"
+  }
+}

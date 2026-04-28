@@ -1,0 +1,1512 @@
+{
+  "fecha": "2026-04-28",
+  "bead": "adepor-edk Opcion D",
+  "h4_threshold": 0.35,
+  "descripcion": "Walk-forward year-by-year + in-sample 2026, threshold FIJO",
+  "tests": {
+    "test_2022": {
+      "warmup_temps": [
+        2021
+      ],
+      "test_temp": 2022,
+      "agregado": {
+        "V0": {
+          "n": 1544,
+          "hit": 0.5194,
+          "yield": 0.0314,
+          "ci_low": -0.025,
+          "ci_high": 0.0843,
+          "sig_95": false
+        },
+        "V12": {
+          "n": 1544,
+          "hit": 0.5123,
+          "yield": 0.0252,
+          "ci_low": -0.0294,
+          "ci_high": 0.0778,
+          "sig_95": false
+        },
+        "H4_035": {
+          "n": 1544,
+          "hit": 0.5188,
+          "yield": 0.0316,
+          "ci_low": -0.0251,
+          "ci_high": 0.0842,
+          "sig_95": false
+        },
+        "L2": {
+          "n": 1544,
+          "hit": 0.5175,
+          "yield": 0.0303,
+          "ci_low": -0.0264,
+          "ci_high": 0.083,
+          "sig_95": false
+        },
+        "L2_L3": {
+          "n": 1544,
+          "hit": 0.5168,
+          "yield": 0.0305,
+          "ci_low": -0.0281,
+          "ci_high": 0.084,
+          "sig_95": false
+        },
+        "_meta": {
+          "n_total": 1544,
+          "n_x_rescue": 17,
+          "pct_x_rescue": 1.1
+        }
+      },
+      "por_liga": {
+        "Alemania": {
+          "V0": {
+            "n": 240,
+            "hit": 0.5292,
+            "yield": 0.0956,
+            "ci_low": -0.062,
+            "ci_high": 0.2484,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 240,
+            "hit": 0.5208,
+            "yield": 0.115,
+            "ci_low": -0.0414,
+            "ci_high": 0.2818,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 240,
+            "hit": 0.5292,
+            "yield": 0.0956,
+            "ci_low": -0.062,
+            "ci_high": 0.2484,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 240,
+            "hit": 0.5292,
+            "yield": 0.0956,
+            "ci_low": -0.062,
+            "ci_high": 0.2484,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 240,
+            "hit": 0.5292,
+            "yield": 0.0956,
+            "ci_low": -0.062,
+            "ci_high": 0.2484,
+            "sig_95": false
+          }
+        },
+        "Inglaterra": {
+          "V0": {
+            "n": 272,
+            "hit": 0.5184,
+            "yield": -0.0003,
+            "ci_low": -0.1315,
+            "ci_high": 0.128,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 272,
+            "hit": 0.5184,
+            "yield": -0.0018,
+            "ci_low": -0.127,
+            "ci_high": 0.1198,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 272,
+            "hit": 0.5184,
+            "yield": 0.0032,
+            "ci_low": -0.1231,
+            "ci_high": 0.13,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 272,
+            "hit": 0.5184,
+            "yield": -0.0003,
+            "ci_low": -0.1315,
+            "ci_high": 0.128,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 272,
+            "hit": 0.5184,
+            "yield": 0.0032,
+            "ci_low": -0.1231,
+            "ci_high": 0.13,
+            "sig_95": false
+          }
+        },
+        "Francia": {
+          "V0": {
+            "n": 272,
+            "hit": 0.5257,
+            "yield": 0.028,
+            "ci_low": -0.1063,
+            "ci_high": 0.1619,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 272,
+            "hit": 0.5257,
+            "yield": 0.0248,
+            "ci_low": -0.1013,
+            "ci_high": 0.1591,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 272,
+            "hit": 0.5257,
+            "yield": 0.028,
+            "ci_low": -0.1063,
+            "ci_high": 0.1619,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 272,
+            "hit": 0.5257,
+            "yield": 0.028,
+            "ci_low": -0.1063,
+            "ci_high": 0.1619,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 272,
+            "hit": 0.5257,
+            "yield": 0.028,
+            "ci_low": -0.1063,
+            "ci_high": 0.1619,
+            "sig_95": false
+          }
+        },
+        "Turquia": {
+          "V0": {
+            "n": 216,
+            "hit": 0.4907,
+            "yield": -0.0431,
+            "ci_low": -0.1813,
+            "ci_high": 0.1067,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 216,
+            "hit": 0.4769,
+            "yield": -0.0506,
+            "ci_low": -0.1859,
+            "ci_high": 0.0963,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 216,
+            "hit": 0.4907,
+            "yield": -0.0431,
+            "ci_low": -0.1813,
+            "ci_high": 0.1067,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 216,
+            "hit": 0.4769,
+            "yield": -0.0506,
+            "ci_low": -0.1859,
+            "ci_high": 0.0963,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 216,
+            "hit": 0.4769,
+            "yield": -0.0506,
+            "ci_low": -0.1859,
+            "ci_high": 0.0963,
+            "sig_95": false
+          }
+        },
+        "Espana": {
+          "V0": {
+            "n": 272,
+            "hit": 0.4963,
+            "yield": 0.0102,
+            "ci_low": -0.1297,
+            "ci_high": 0.1466,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 272,
+            "hit": 0.5074,
+            "yield": 0.0219,
+            "ci_low": -0.1097,
+            "ci_high": 0.1536,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 272,
+            "hit": 0.5,
+            "yield": 0.0278,
+            "ci_low": -0.1069,
+            "ci_high": 0.1619,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 272,
+            "hit": 0.4963,
+            "yield": 0.0102,
+            "ci_low": -0.1297,
+            "ci_high": 0.1466,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 272,
+            "hit": 0.5,
+            "yield": 0.0278,
+            "ci_low": -0.1069,
+            "ci_high": 0.1619,
+            "sig_95": false
+          }
+        },
+        "Italia": {
+          "V0": {
+            "n": 272,
+            "hit": 0.5515,
+            "yield": 0.09,
+            "ci_low": -0.0329,
+            "ci_high": 0.2279,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 272,
+            "hit": 0.5184,
+            "yield": 0.0369,
+            "ci_low": -0.0958,
+            "ci_high": 0.1713,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 272,
+            "hit": 0.5441,
+            "yield": 0.07,
+            "ci_low": -0.0561,
+            "ci_high": 0.1988,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 272,
+            "hit": 0.5515,
+            "yield": 0.09,
+            "ci_low": -0.0329,
+            "ci_high": 0.2279,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 272,
+            "hit": 0.5441,
+            "yield": 0.07,
+            "ci_low": -0.0561,
+            "ci_high": 0.1988,
+            "sig_95": false
+          }
+        }
+      }
+    },
+    "test_2023": {
+      "warmup_temps": [
+        2021,
+        2022
+      ],
+      "test_temp": 2023,
+      "agregado": {
+        "V0": {
+          "n": 2264,
+          "hit": 0.4991,
+          "yield": -0.0338,
+          "ci_low": -0.0754,
+          "ci_high": 0.0114,
+          "sig_95": false
+        },
+        "V12": {
+          "n": 2264,
+          "hit": 0.4943,
+          "yield": -0.022,
+          "ci_low": -0.0699,
+          "ci_high": 0.0201,
+          "sig_95": false
+        },
+        "H4_035": {
+          "n": 2264,
+          "hit": 0.4973,
+          "yield": -0.029,
+          "ci_low": -0.0729,
+          "ci_high": 0.0155,
+          "sig_95": false
+        },
+        "L2": {
+          "n": 2264,
+          "hit": 0.4965,
+          "yield": -0.0416,
+          "ci_low": -0.0831,
+          "ci_high": 0.0051,
+          "sig_95": false
+        },
+        "L2_L3": {
+          "n": 2264,
+          "hit": 0.4947,
+          "yield": -0.0368,
+          "ci_low": -0.0801,
+          "ci_high": 0.0085,
+          "sig_95": false
+        },
+        "_meta": {
+          "n_total": 2264,
+          "n_x_rescue": 66,
+          "pct_x_rescue": 2.92
+        }
+      },
+      "por_liga": {
+        "Argentina": {
+          "V0": {
+            "n": 268,
+            "hit": 0.444,
+            "yield": -0.0439,
+            "ci_low": -0.1778,
+            "ci_high": 0.0871,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 268,
+            "hit": 0.444,
+            "yield": 0.0646,
+            "ci_low": -0.081,
+            "ci_high": 0.2241,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 268,
+            "hit": 0.4328,
+            "yield": -0.0155,
+            "ci_low": -0.1536,
+            "ci_high": 0.1316,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 268,
+            "hit": 0.444,
+            "yield": -0.0439,
+            "ci_low": -0.1778,
+            "ci_high": 0.0871,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 268,
+            "hit": 0.4328,
+            "yield": -0.0155,
+            "ci_low": -0.1536,
+            "ci_high": 0.1316,
+            "sig_95": false
+          }
+        },
+        "Brasil": {
+          "V0": {
+            "n": 189,
+            "hit": 0.4709,
+            "yield": -0.0384,
+            "ci_low": -0.1858,
+            "ci_high": 0.124,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 189,
+            "hit": 0.4497,
+            "yield": -0.0645,
+            "ci_low": -0.2269,
+            "ci_high": 0.104,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 189,
+            "hit": 0.4656,
+            "yield": -0.058,
+            "ci_low": -0.2004,
+            "ci_high": 0.1043,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 189,
+            "hit": 0.4709,
+            "yield": -0.0384,
+            "ci_low": -0.1858,
+            "ci_high": 0.124,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 189,
+            "hit": 0.4656,
+            "yield": -0.058,
+            "ci_low": -0.2004,
+            "ci_high": 0.1043,
+            "sig_95": false
+          }
+        },
+        "Espana": {
+          "V0": {
+            "n": 342,
+            "hit": 0.4883,
+            "yield": -0.0737,
+            "ci_low": -0.1815,
+            "ci_high": 0.0348,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 342,
+            "hit": 0.5117,
+            "yield": -0.0054,
+            "ci_low": -0.117,
+            "ci_high": 0.1139,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 342,
+            "hit": 0.4883,
+            "yield": -0.0691,
+            "ci_low": -0.1784,
+            "ci_high": 0.0409,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 342,
+            "hit": 0.4883,
+            "yield": -0.0737,
+            "ci_low": -0.1815,
+            "ci_high": 0.0348,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 342,
+            "hit": 0.4883,
+            "yield": -0.0691,
+            "ci_low": -0.1784,
+            "ci_high": 0.0409,
+            "sig_95": false
+          }
+        },
+        "Francia": {
+          "V0": {
+            "n": 272,
+            "hit": 0.4596,
+            "yield": -0.0838,
+            "ci_low": -0.211,
+            "ci_high": 0.0445,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 272,
+            "hit": 0.4816,
+            "yield": -0.0239,
+            "ci_low": -0.1588,
+            "ci_high": 0.1075,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 272,
+            "hit": 0.4596,
+            "yield": -0.0838,
+            "ci_low": -0.211,
+            "ci_high": 0.0445,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 272,
+            "hit": 0.4596,
+            "yield": -0.0838,
+            "ci_low": -0.211,
+            "ci_high": 0.0445,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 272,
+            "hit": 0.4596,
+            "yield": -0.0838,
+            "ci_low": -0.211,
+            "ci_high": 0.0445,
+            "sig_95": false
+          }
+        },
+        "Inglaterra": {
+          "V0": {
+            "n": 306,
+            "hit": 0.5654,
+            "yield": 0.0599,
+            "ci_low": -0.058,
+            "ci_high": 0.1858,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 306,
+            "hit": 0.5458,
+            "yield": 0.004,
+            "ci_low": -0.1122,
+            "ci_high": 0.1141,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 306,
+            "hit": 0.5588,
+            "yield": 0.0463,
+            "ci_low": -0.0692,
+            "ci_high": 0.1734,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 306,
+            "hit": 0.5654,
+            "yield": 0.0599,
+            "ci_low": -0.058,
+            "ci_high": 0.1858,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 306,
+            "hit": 0.5588,
+            "yield": 0.0463,
+            "ci_low": -0.0692,
+            "ci_high": 0.1734,
+            "sig_95": false
+          }
+        },
+        "Turquia": {
+          "V0": {
+            "n": 305,
+            "hit": 0.5311,
+            "yield": 0.0049,
+            "ci_low": -0.1059,
+            "ci_high": 0.1232,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 305,
+            "hit": 0.5115,
+            "yield": -0.0532,
+            "ci_low": -0.1678,
+            "ci_high": 0.0698,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 305,
+            "hit": 0.5311,
+            "yield": 0.0049,
+            "ci_low": -0.1059,
+            "ci_high": 0.1232,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 305,
+            "hit": 0.5115,
+            "yield": -0.0532,
+            "ci_low": -0.1678,
+            "ci_high": 0.0698,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 305,
+            "hit": 0.5115,
+            "yield": -0.0532,
+            "ci_low": -0.1678,
+            "ci_high": 0.0698,
+            "sig_95": false
+          }
+        },
+        "Alemania": {
+          "V0": {
+            "n": 240,
+            "hit": 0.5458,
+            "yield": 0.0045,
+            "ci_low": -0.1112,
+            "ci_high": 0.1348,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 240,
+            "hit": 0.5292,
+            "yield": 0.0047,
+            "ci_low": -0.1217,
+            "ci_high": 0.1411,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 240,
+            "hit": 0.55,
+            "yield": 0.0246,
+            "ci_low": -0.0935,
+            "ci_high": 0.1568,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 240,
+            "hit": 0.5458,
+            "yield": 0.0045,
+            "ci_low": -0.1112,
+            "ci_high": 0.1348,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 240,
+            "hit": 0.55,
+            "yield": 0.0246,
+            "ci_low": -0.0935,
+            "ci_high": 0.1568,
+            "sig_95": false
+          }
+        },
+        "Italia": {
+          "V0": {
+            "n": 342,
+            "hit": 0.4795,
+            "yield": -0.0887,
+            "ci_low": -0.1911,
+            "ci_high": 0.0276,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 342,
+            "hit": 0.4649,
+            "yield": -0.0954,
+            "ci_low": -0.2026,
+            "ci_high": 0.0215,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 342,
+            "hit": 0.4825,
+            "yield": -0.0752,
+            "ci_low": -0.1803,
+            "ci_high": 0.0382,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 342,
+            "hit": 0.4795,
+            "yield": -0.0887,
+            "ci_low": -0.1911,
+            "ci_high": 0.0276,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 342,
+            "hit": 0.4825,
+            "yield": -0.0752,
+            "ci_low": -0.1803,
+            "ci_high": 0.0382,
+            "sig_95": false
+          }
+        }
+      }
+    },
+    "test_2024": {
+      "warmup_temps": [
+        2021,
+        2022,
+        2023
+      ],
+      "test_temp": 2024,
+      "agregado": {
+        "V0": {
+          "n": 2348,
+          "hit": 0.5119,
+          "yield": -0.0025,
+          "ci_low": -0.0463,
+          "ci_high": 0.0428,
+          "sig_95": false
+        },
+        "V12": {
+          "n": 2348,
+          "hit": 0.5077,
+          "yield": 0.0074,
+          "ci_low": -0.0388,
+          "ci_high": 0.0529,
+          "sig_95": false
+        },
+        "H4_035": {
+          "n": 2348,
+          "hit": 0.5102,
+          "yield": 0.0097,
+          "ci_low": -0.0358,
+          "ci_high": 0.0542,
+          "sig_95": false
+        },
+        "L2": {
+          "n": 2348,
+          "hit": 0.5128,
+          "yield": -0.0,
+          "ci_low": -0.0424,
+          "ci_high": 0.0463,
+          "sig_95": false
+        },
+        "L2_L3": {
+          "n": 2348,
+          "hit": 0.5111,
+          "yield": 0.0122,
+          "ci_low": -0.0339,
+          "ci_high": 0.0567,
+          "sig_95": false
+        },
+        "_meta": {
+          "n_total": 2348,
+          "n_x_rescue": 98,
+          "pct_x_rescue": 4.17
+        }
+      },
+      "por_liga": {
+        "Brasil": {
+          "V0": {
+            "n": 263,
+            "hit": 0.5019,
+            "yield": 0.0274,
+            "ci_low": -0.1033,
+            "ci_high": 0.1595,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 263,
+            "hit": 0.4677,
+            "yield": -0.0412,
+            "ci_low": -0.1702,
+            "ci_high": 0.0937,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 263,
+            "hit": 0.5019,
+            "yield": 0.036,
+            "ci_low": -0.0995,
+            "ci_high": 0.1722,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 263,
+            "hit": 0.5019,
+            "yield": 0.0274,
+            "ci_low": -0.1033,
+            "ci_high": 0.1595,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 263,
+            "hit": 0.5019,
+            "yield": 0.036,
+            "ci_low": -0.0995,
+            "ci_high": 0.1722,
+            "sig_95": false
+          }
+        },
+        "Argentina": {
+          "V0": {
+            "n": 279,
+            "hit": 0.4301,
+            "yield": -0.0292,
+            "ci_low": -0.1746,
+            "ci_high": 0.1144,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 279,
+            "hit": 0.4158,
+            "yield": -0.0099,
+            "ci_low": -0.1653,
+            "ci_high": 0.1542,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 279,
+            "hit": 0.4122,
+            "yield": -0.0254,
+            "ci_low": -0.1768,
+            "ci_high": 0.1288,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 279,
+            "hit": 0.4301,
+            "yield": -0.0292,
+            "ci_low": -0.1746,
+            "ci_high": 0.1144,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 279,
+            "hit": 0.4122,
+            "yield": -0.0254,
+            "ci_low": -0.1768,
+            "ci_high": 0.1288,
+            "sig_95": false
+          }
+        },
+        "Turquia": {
+          "V0": {
+            "n": 271,
+            "hit": 0.5867,
+            "yield": 0.095,
+            "ci_low": -0.0252,
+            "ci_high": 0.2231,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 271,
+            "hit": 0.5941,
+            "yield": 0.1163,
+            "ci_low": 0.0026,
+            "ci_high": 0.2417,
+            "sig_95": true
+          },
+          "H4_035": {
+            "n": 271,
+            "hit": 0.5867,
+            "yield": 0.095,
+            "ci_low": -0.0252,
+            "ci_high": 0.2231,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 271,
+            "hit": 0.5941,
+            "yield": 0.1163,
+            "ci_low": 0.0026,
+            "ci_high": 0.2417,
+            "sig_95": true
+          },
+          "L2_L3": {
+            "n": 271,
+            "hit": 0.5941,
+            "yield": 0.1163,
+            "ci_low": 0.0026,
+            "ci_high": 0.2417,
+            "sig_95": true
+          }
+        },
+        "Espana": {
+          "V0": {
+            "n": 342,
+            "hit": 0.4854,
+            "yield": -0.0912,
+            "ci_low": -0.1977,
+            "ci_high": 0.0155,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 342,
+            "hit": 0.4971,
+            "yield": -0.0698,
+            "ci_low": -0.1815,
+            "ci_high": 0.0442,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 342,
+            "hit": 0.4825,
+            "yield": -0.0993,
+            "ci_low": -0.204,
+            "ci_high": 0.0087,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 342,
+            "hit": 0.4854,
+            "yield": -0.0912,
+            "ci_low": -0.1977,
+            "ci_high": 0.0155,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 342,
+            "hit": 0.4825,
+            "yield": -0.0993,
+            "ci_low": -0.204,
+            "ci_high": 0.0087,
+            "sig_95": false
+          }
+        },
+        "Francia": {
+          "V0": {
+            "n": 306,
+            "hit": 0.549,
+            "yield": 0.0485,
+            "ci_low": -0.0781,
+            "ci_high": 0.1692,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 306,
+            "hit": 0.5523,
+            "yield": 0.0771,
+            "ci_low": -0.054,
+            "ci_high": 0.2071,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 306,
+            "hit": 0.549,
+            "yield": 0.0485,
+            "ci_low": -0.0781,
+            "ci_high": 0.1692,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 306,
+            "hit": 0.549,
+            "yield": 0.0485,
+            "ci_low": -0.0781,
+            "ci_high": 0.1692,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 306,
+            "hit": 0.549,
+            "yield": 0.0485,
+            "ci_low": -0.0781,
+            "ci_high": 0.1692,
+            "sig_95": false
+          }
+        },
+        "Inglaterra": {
+          "V0": {
+            "n": 342,
+            "hit": 0.5205,
+            "yield": -0.0088,
+            "ci_low": -0.118,
+            "ci_high": 0.1061,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 342,
+            "hit": 0.5146,
+            "yield": 0.0148,
+            "ci_low": -0.0997,
+            "ci_high": 0.1422,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 342,
+            "hit": 0.5088,
+            "yield": 0.0116,
+            "ci_low": -0.1106,
+            "ci_high": 0.1432,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 342,
+            "hit": 0.5205,
+            "yield": -0.0088,
+            "ci_low": -0.118,
+            "ci_high": 0.1061,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 342,
+            "hit": 0.5088,
+            "yield": 0.0116,
+            "ci_low": -0.1106,
+            "ci_high": 0.1432,
+            "sig_95": false
+          }
+        },
+        "Italia": {
+          "V0": {
+            "n": 306,
+            "hit": 0.5458,
+            "yield": 0.0383,
+            "ci_low": -0.0775,
+            "ci_high": 0.154,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 306,
+            "hit": 0.5327,
+            "yield": 0.0489,
+            "ci_low": -0.0742,
+            "ci_high": 0.1695,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 306,
+            "hit": 0.5588,
+            "yield": 0.0824,
+            "ci_low": -0.0429,
+            "ci_high": 0.2025,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 306,
+            "hit": 0.5458,
+            "yield": 0.0383,
+            "ci_low": -0.0775,
+            "ci_high": 0.154,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 306,
+            "hit": 0.5588,
+            "yield": 0.0824,
+            "ci_low": -0.0429,
+            "ci_high": 0.2025,
+            "sig_95": false
+          }
+        },
+        "Alemania": {
+          "V0": {
+            "n": 239,
+            "hit": 0.4686,
+            "yield": -0.0962,
+            "ci_low": -0.2275,
+            "ci_high": 0.0418,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 239,
+            "hit": 0.477,
+            "yield": -0.0847,
+            "ci_low": -0.2123,
+            "ci_high": 0.0559,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 239,
+            "hit": 0.477,
+            "yield": -0.0645,
+            "ci_low": -0.1965,
+            "ci_high": 0.0824,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 239,
+            "hit": 0.4686,
+            "yield": -0.0962,
+            "ci_low": -0.2275,
+            "ci_high": 0.0418,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 239,
+            "hit": 0.477,
+            "yield": -0.0645,
+            "ci_low": -0.1965,
+            "ci_high": 0.0824,
+            "sig_95": false
+          }
+        }
+      }
+    },
+    "in_sample_2026": {
+      "warmup_temps": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "agregado": {
+        "V0": {
+          "n": 129,
+          "hit": 0.4884,
+          "yield": 0.0971,
+          "ci_low": -0.133,
+          "ci_high": 0.3347,
+          "sig_95": false
+        },
+        "V12": {
+          "n": 129,
+          "hit": 0.4729,
+          "yield": 0.061,
+          "ci_low": -0.1642,
+          "ci_high": 0.2936,
+          "sig_95": false
+        },
+        "H4_035": {
+          "n": 129,
+          "hit": 0.5116,
+          "yield": 0.1599,
+          "ci_low": -0.0821,
+          "ci_high": 0.3979,
+          "sig_95": false
+        },
+        "L2": {
+          "n": 129,
+          "hit": 0.4884,
+          "yield": 0.0971,
+          "ci_low": -0.133,
+          "ci_high": 0.3347,
+          "sig_95": false
+        },
+        "L2_L3": {
+          "n": 129,
+          "hit": 0.5116,
+          "yield": 0.1599,
+          "ci_low": -0.0821,
+          "ci_high": 0.3979,
+          "sig_95": false
+        },
+        "_meta": {
+          "n_total": 129,
+          "n_x_rescue": 10,
+          "pct_x_rescue": 7.75
+        }
+      },
+      "por_liga": {
+        "Argentina": {
+          "V0": {
+            "n": 50,
+            "hit": 0.38,
+            "yield": -0.0912,
+            "ci_low": -0.4422,
+            "ci_high": 0.2668,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 50,
+            "hit": 0.44,
+            "yield": 0.145,
+            "ci_low": -0.2508,
+            "ci_high": 0.5212,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 50,
+            "hit": 0.46,
+            "yield": 0.1356,
+            "ci_low": -0.2414,
+            "ci_high": 0.517,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 50,
+            "hit": 0.38,
+            "yield": -0.0912,
+            "ci_low": -0.4422,
+            "ci_high": 0.2668,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 50,
+            "hit": 0.46,
+            "yield": 0.1356,
+            "ci_low": -0.2414,
+            "ci_high": 0.517,
+            "sig_95": false
+          }
+        },
+        "Inglaterra": {
+          "V0": {
+            "n": 8,
+            "hit": 0.625,
+            "yield": 0.38,
+            "ci_low": -0.4325,
+            "ci_high": 1.2712,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 8,
+            "hit": 0.5,
+            "yield": 0.0425,
+            "ci_low": -0.6325,
+            "ci_high": 0.91,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 8,
+            "hit": 0.625,
+            "yield": 0.38,
+            "ci_low": -0.4325,
+            "ci_high": 1.2712,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 8,
+            "hit": 0.625,
+            "yield": 0.38,
+            "ci_low": -0.4325,
+            "ci_high": 1.2712,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 8,
+            "hit": 0.625,
+            "yield": 0.38,
+            "ci_low": -0.4325,
+            "ci_high": 1.2712,
+            "sig_95": false
+          }
+        },
+        "Brasil": {
+          "V0": {
+            "n": 39,
+            "hit": 0.5385,
+            "yield": 0.2062,
+            "ci_low": -0.1949,
+            "ci_high": 0.67,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 39,
+            "hit": 0.4615,
+            "yield": -0.0841,
+            "ci_low": -0.4179,
+            "ci_high": 0.2869,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 39,
+            "hit": 0.5128,
+            "yield": 0.1233,
+            "ci_low": -0.2859,
+            "ci_high": 0.5864,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 39,
+            "hit": 0.5385,
+            "yield": 0.2062,
+            "ci_low": -0.1949,
+            "ci_high": 0.67,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 39,
+            "hit": 0.5128,
+            "yield": 0.1233,
+            "ci_low": -0.2859,
+            "ci_high": 0.5864,
+            "sig_95": false
+          }
+        },
+        "Turquia": {
+          "V0": {
+            "n": 15,
+            "hit": 0.6,
+            "yield": 0.382,
+            "ci_low": -0.2767,
+            "ci_high": 1.07,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 15,
+            "hit": 0.6,
+            "yield": 0.382,
+            "ci_low": -0.2767,
+            "ci_high": 1.07,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 15,
+            "hit": 0.6,
+            "yield": 0.382,
+            "ci_low": -0.2767,
+            "ci_high": 1.07,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 15,
+            "hit": 0.6,
+            "yield": 0.382,
+            "ci_low": -0.2767,
+            "ci_high": 1.07,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 15,
+            "hit": 0.6,
+            "yield": 0.382,
+            "ci_low": -0.2767,
+            "ci_high": 1.07,
+            "sig_95": false
+          }
+        },
+        "Espana": {
+          "V0": {
+            "n": 7,
+            "hit": 0.8571,
+            "yield": 0.7686,
+            "ci_low": 0.1357,
+            "ci_high": 1.3143,
+            "sig_95": true
+          },
+          "V12": {
+            "n": 7,
+            "hit": 0.7143,
+            "yield": 0.42,
+            "ci_low": -0.2971,
+            "ci_high": 1.1229,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 7,
+            "hit": 0.8571,
+            "yield": 0.7686,
+            "ci_low": 0.1357,
+            "ci_high": 1.3143,
+            "sig_95": true
+          },
+          "L2": {
+            "n": 7,
+            "hit": 0.8571,
+            "yield": 0.7686,
+            "ci_low": 0.1357,
+            "ci_high": 1.3143,
+            "sig_95": true
+          },
+          "L2_L3": {
+            "n": 7,
+            "hit": 0.8571,
+            "yield": 0.7686,
+            "ci_low": 0.1357,
+            "ci_high": 1.3143,
+            "sig_95": true
+          }
+        },
+        "Italia": {
+          "V0": {
+            "n": 6,
+            "hit": 0.3333,
+            "yield": -0.4667,
+            "ci_low": -1.0,
+            "ci_high": 0.1367,
+            "sig_95": false
+          },
+          "V12": {
+            "n": 6,
+            "hit": 0.3333,
+            "yield": -0.4667,
+            "ci_low": -1.0,
+            "ci_high": 0.1367,
+            "sig_95": false
+          },
+          "H4_035": {
+            "n": 6,
+            "hit": 0.3333,
+            "yield": -0.4667,
+            "ci_low": -1.0,
+            "ci_high": 0.1367,
+            "sig_95": false
+          },
+          "L2": {
+            "n": 6,
+            "hit": 0.3333,
+            "yield": -0.4667,
+            "ci_low": -1.0,
+            "ci_high": 0.1367,
+            "sig_95": false
+          },
+          "L2_L3": {
+            "n": 6,
+            "hit": 0.3333,
+            "yield": -0.4667,
+            "ci_low": -1.0,
+            "ci_high": 0.1367,
+            "sig_95": false
+          }
+        },
+        "Francia": {
+          "V0": {
+            "n": 3,
+            "hit": 0.0,
+            "yield": -1.0,
+            "ci_low": -1.0,
+            "ci_high": -1.0,
+            "sig_95": true
+          },
+          "V12": {
+            "n": 3,
+            "hit": 0.0,
+            "yield": -1.0,
+            "ci_low": -1.0,
+            "ci_high": -1.0,
+            "sig_95": true
+          },
+          "H4_035": {
+            "n": 3,
+            "hit": 0.0,
+            "yield": -1.0,
+            "ci_low": -1.0,
+            "ci_high": -1.0,
+            "sig_95": true
+          },
+          "L2": {
+            "n": 3,
+            "hit": 0.0,
+            "yield": -1.0,
+            "ci_low": -1.0,
+            "ci_high": -1.0,
+            "sig_95": true
+          },
+          "L2_L3": {
+            "n": 3,
+            "hit": 0.0,
+            "yield": -1.0,
+            "ci_low": -1.0,
+            "ci_high": -1.0,
+            "sig_95": true
+          }
+        },
+        "Alemania": {
+          "V0": {
+            "n": 1,
+            "hit": 1.0,
+            "yield": 0.69,
+            "ci_low": 0.69,
+            "ci_high": 0.69,
+            "sig_95": true
+          },
+          "V12": {
+            "n": 1,
+            "hit": 1.0,
+            "yield": 0.69,
+            "ci_low": 0.69,
+            "ci_high": 0.69,
+            "sig_95": true
+          },
+          "H4_035": {
+            "n": 1,
+            "hit": 1.0,
+            "yield": 0.69,
+            "ci_low": 0.69,
+            "ci_high": 0.69,
+            "sig_95": true
+          },
+          "L2": {
+            "n": 1,
+            "hit": 1.0,
+            "yield": 0.69,
+            "ci_low": 0.69,
+            "ci_high": 0.69,
+            "sig_95": true
+          },
+          "L2_L3": {
+            "n": 1,
+            "hit": 1.0,
+            "yield": 0.69,
+            "ci_low": 0.69,
+            "ci_high": 0.69,
+            "sig_95": true
+          }
+        }
+      }
+    }
+  },
+  "veredicto": "H4_ROBUSTO_CROSS_TEMP — todas las ventanas mejoran sobre V0. Aplicable.",
+  "deltas_h4_vs_v0": [
+    {
+      "window": "test_2022",
+      "delta": 0.00020000000000000573
+    },
+    {
+      "window": "test_2023",
+      "delta": 0.004799999999999995
+    },
+    {
+      "window": "test_2024",
+      "delta": 0.0122
+    },
+    {
+      "window": "in_sample_2026",
+      "delta": 0.06279999999999998
+    }
+  ]
+}

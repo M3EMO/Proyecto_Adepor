@@ -1006,6 +1006,58 @@ def _get_momento_bin_4(liga, fecha_str, conn):
         return None
 
 
+def _get_pos_local_forward(liga, equipo_norm, fecha_str, conn):
+    """[V5.2 §N — bd-adepor-tyb] Posicion forward del equipo al partido.
+
+    Lookup en posiciones_tabla_snapshot el snapshot mas reciente ANTERIOR a fecha_str
+    para (liga, equipo_norm). Forward = posicion AL momento del partido (lo que ve el bookie).
+
+    Para Argentina prefiere formato='anual'; para EUR top usa formato='liga'.
+    Si retorna None, el filtro Layer 3 NO bloquea (fail-safe — pasa el override).
+    """
+    try:
+        cur = conn.cursor()
+        # Argentina: prefer 'anual' for stable global rank; EUR: 'liga'
+        formato_pref = "'anual'" if liga == 'Argentina' else "'liga'"
+        r = cur.execute(f"""
+            SELECT posicion FROM posiciones_tabla_snapshot
+            WHERE liga = ? AND equipo = ? AND fecha_snapshot < ?
+              AND formato IN ({formato_pref}, 'anual', 'liga')
+            ORDER BY fecha_snapshot DESC LIMIT 1
+        """, (liga, equipo_norm, fecha_str)).fetchone()
+        if r and r[0] is not None:
+            return int(r[0])
+        return None
+    except Exception:
+        return None
+
+
+def _get_gap_dias_no_liga(equipo_norm, fecha_str, conn):
+    """[V5.2 §N — bd-adepor-tyb] Dias desde ultimo partido NO-LIGA del equipo.
+
+    Lookup en v_partidos_unificado (UNION partidos_historico_externo + partidos_no_liga)
+    el partido mas reciente ANTERIOR a fecha_str donde equipo participe Y competicion_tipo
+    NO sea 'liga'. Devuelve dias int o None si no hay tal partido.
+
+    None significa: o el equipo no juega copas o partidos_no_liga no tiene cobertura
+    para esa fecha. Fail-safe: filtro Layer 3 NO bloquea con None (pasa el override).
+    """
+    try:
+        cur = conn.cursor()
+        r = cur.execute("""
+            SELECT julianday(?) - julianday(fecha)
+            FROM v_partidos_unificado
+            WHERE (equipo_local = ? OR equipo_visita = ?)
+              AND fecha < ? AND competicion_tipo != 'liga'
+            ORDER BY fecha DESC LIMIT 1
+        """, (fecha_str, equipo_norm, equipo_norm, fecha_str)).fetchone()
+        if r and r[0] is not None:
+            return int(r[0])
+        return None
+    except Exception:
+        return None
+
+
 def _get_xg_v6_para_partido(loc_norm, vis_norm, conn):
     """[SHADOW V6 — adepor-d7h] Lookup EMAs V6 shadow y compone xG por partido.
 
@@ -1789,6 +1841,66 @@ def main():
                           f"V12=({p1:.3f},{px:.3f},{p2:.3f})")
         except Exception as _e_arch:
             print(f"   [ARCH-V5.0-FAIL] {pais}: {_e_arch}, fallback V0")
+
+        # --- LAYER 3 V5.2 [MANIFESTO-CHANGE-APPROVED:bd-adepor-tyb]: H4 X-rescue per-liga ---
+        # Override argmax a 'X' (via override de probs a V12) si:
+        #   - liga in h4_x_rescue_threshold JSON
+        #   - argmax_v12 == 'X' AND P_v12(X) > thresh[liga]
+        #   - NOT (pos_local_forward in TOP3)
+        #   - NOT (gap_local_no_liga<=14 AND gap_visita_no_liga<=14)  (filtro inverso cansancio)
+        # No aplica si Layer 2 V12 ya activo (Turquia) — V12 ya substituyo probs.
+        # Default config: empty {} -> NO aplica para ninguna liga (statu quo V5.1.2).
+        # Activacion via SQL UPDATE config_motor_valores SET valor_texto = ...
+        try:
+            import json as _json_h4
+            _h4_thresh_json = get_param('h4_x_rescue_threshold', scope='global', default='{}')
+            _h4_thresh_map = _json_h4.loads(_h4_thresh_json) if _h4_thresh_json else {}
+            _h4_thresh_liga = _h4_thresh_map.get(pais)
+            _layer2_aplicado = _arch_map.get(pais) == 'V12'
+
+            if _h4_thresh_liga and not _layer2_aplicado:
+                xg6_l_h4, xg6_v_h4 = _get_xg_v6_para_partido(loc_norm, vis_norm, conn)
+                if xg6_l_h4 is not None and xg6_v_h4 is not None:
+                    _conn_h4 = sqlite3.connect(DB_NAME)
+                    try:
+                        p1_v12_h4, px_v12_h4, p2_v12_h4 = _calcular_probs_v12_lr(
+                            xg6_l_h4, xg6_v_h4, loc_norm, vis_norm, pais, fecha_str, _conn_h4)
+                    finally:
+                        _conn_h4.close()
+
+                    p_max_v12 = max(p1_v12_h4, px_v12_h4, p2_v12_h4)
+                    argmax_v12 = ('X' if px_v12_h4 == p_max_v12 else
+                                  ('1' if p1_v12_h4 >= p2_v12_h4 else '2'))
+
+                    if argmax_v12 == 'X' and px_v12_h4 > _h4_thresh_liga:
+                        # Filtros inversos validados via audit (delta +0.426 [+0.07,+0.78] N=160 sig)
+                        pos_local_now = _get_pos_local_forward(pais, loc_norm, fecha_str, conn)
+                        gap_l_no_liga = _get_gap_dias_no_liga(loc_norm, fecha_str, conn)
+                        gap_v_no_liga = _get_gap_dias_no_liga(vis_norm, fecha_str, conn)
+
+                        local_es_top3 = (pos_local_now is not None and pos_local_now <= 3)
+                        ambos_cansados = (
+                            gap_l_no_liga is not None and gap_l_no_liga <= 14 and
+                            gap_v_no_liga is not None and gap_v_no_liga <= 14)
+
+                        razones_skip = []
+                        if local_es_top3: razones_skip.append(f"local_TOP3(pos={pos_local_now})")
+                        if ambos_cansados: razones_skip.append(f"ambos_cansados(gap_l={gap_l_no_liga}d,gap_v={gap_v_no_liga}d)")
+
+                        if not razones_skip:
+                            p1_v0_pre_h4, px_v0_pre_h4, p2_v0_pre_h4 = p1, px, p2
+                            p1, px, p2 = p1_v12_h4, px_v12_h4, p2_v12_h4
+                            print(f"   [LAYER3-H4-V5.2] {local} vs {visita} ({pais}) | "
+                                  f"P_v12(X)={px_v12_h4:.3f}>{_h4_thresh_liga} | "
+                                  f"pos_l={pos_local_now} gap_l={gap_l_no_liga}d gap_v={gap_v_no_liga}d | "
+                                  f"V0=({p1_v0_pre_h4:.3f},{px_v0_pre_h4:.3f},{p2_v0_pre_h4:.3f}) -> "
+                                  f"V12=({p1:.3f},{px:.3f},{p2:.3f})")
+                        else:
+                            print(f"   [LAYER3-H4-SKIP] {local} vs {visita} ({pais}) | "
+                                  f"P_v12(X)={px_v12_h4:.3f} pasa thresh pero filtros bloquean: "
+                                  f"{','.join(razones_skip)}")
+        except Exception as _e_h4:
+            print(f"   [LAYER3-H4-FAIL] {pais}: {_e_h4}, fallback V0/Layer2")
 
         # --- SHADOW: Log de incertidumbre ---
         # Umbral re-calibrado 2026-04-22: antes 0.15 (disparaba siempre), ahora 1.40

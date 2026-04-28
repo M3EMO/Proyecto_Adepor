@@ -484,3 +484,102 @@ M. FILTRO DE PICKS APOSTABLES — TRIPLE FILTRO (V5.1, bd-adepor-ptk APPROVED 20
   NO modifica xG, EMA, probs, cuotas, Kelly, ni Manifesto §IV (caminos).
   Solo decide SI un pick generado pasa a operativo. Reversion completa via
   config_motor_valores.
+
+N. H4 X-RESCUE PER-LIGA (V5.2, bd-adepor-tyb APPROVED 2026-04-28)
+  Override del argmax 1X2 a 'X' (vía override de probs a V12) para liga específicas
+  cuando V12 detecta empate con probabilidad superior a un umbral, condicionado por
+  filtros inversos validados estadísticamente.
+
+  Default global: NO aplica (h4_x_rescue_threshold = '{}' vacío). Statu quo V5.1.2
+  preservado mientras la activación se haga via SQL UPDATE explícito en config.
+
+  REGLA DE ACTIVACION:
+    Para una liga L, Layer 3 H4 X-rescue se aplica si TODAS las condiciones:
+    1. liga L está en h4_x_rescue_threshold[L] como umbral float ∈ [0.30, 0.50]
+    2. Layer 2 (arch_decision_per_liga[L] == 'V12') NO está activo (excluye Turquia)
+    3. argmax_v12 == 'X' AND P_v12(X) > h4_x_rescue_threshold[L]
+    4. NOT (pos_local_forward(L, equipo_local, fecha) IN [1, 2, 3])
+       — excluye locales TOP3 — yield destruido en este bucket: -0.240 en audit OOS
+    5. NOT (gap_dias_no_liga(local) <= 14 AND gap_dias_no_liga(visita) <= 14)
+       — filtro inverso "ambos cansados" — yield destruido: -1.407 sig neg en N=11
+
+    Si las 5 condiciones se cumplen: reemplazar (p1, px, p2) por (p1_v12, px_v12, p2_v12).
+    argmax automaticamente pasa a 'X'.
+
+  IMPLEMENTACION (motor_calculadora.py post Layer 2):
+    1. Cargar h4_x_rescue_threshold JSON desde config_motor_valores (scope=global)
+    2. Si liga ∈ JSON Y Layer 2 NO activo:
+       a. Calcular V12 probs vía _calcular_probs_v12_lr (mismo motor SHADOW V12)
+       b. Verificar argmax_v12 == 'X' AND P_v12(X) > thresh[liga]
+       c. Verificar pos_local_forward via _get_pos_local_forward NOT TOP3
+       d. Verificar NOT ambos cansados via _get_gap_dias_no_liga
+       e. Si pasa: override (p1, px, p2) ← V12 probs
+       f. Logging [LAYER3-H4-V5.2] o [LAYER3-H4-SKIP] con razon
+
+    Falla silenciosa: si V12 weights faltan, xG_v6 no resuelve, helpers retornan None
+    para pos o gap → fail-safe (None NO bloquea, pero tambien NO hay efecto neto si
+    no se cumple condicion 3).
+
+  EVIDENCIA EMPIRICA (audit walk-forward por temp + multidim 2026-04-28):
+    OOS 2022-2024 N=160 con filtro doble (NOT TOP3 + NOT ambos cansados):
+      Yield H4 = +0.140, Yield V0 = -0.286, Δ = +0.426 [+0.07, +0.78] *** SIG POS
+
+    Comparativa filtros (referencia OOS):
+      | Filtro                                  | N   | Δ H4-V0 | CI95              | Sig |
+      | TODOS                                    | 191 | +0.250  | [-0.07, +0.58]    | NO  |
+      | NOT (local=TOP3)                         | 171 | +0.308  | [-0.02, +0.67]    | NO  |
+      | NOT (local=TOP3) AND NOT (ambos<=14d)    | 160 | +0.426  | [+0.07, +0.78]    | *** |
+      | NOT (cualquier=TOP3) AND NOT (ambos<=14d)| 144 | +0.395  | [+0.01, +0.78]    | *** |
+
+    Caracterizacion poblacion (191 picks):
+      - Local SIN cansancio 14d (N=154): hit_X 35.1%, Δ +0.424 [+0.05, +0.76] *** sig pos
+      - AMBOS cansancio 14d (N=11): hit_X 9.1%, Δ -1.407 [-2.42, -0.23] *** sig NEG
+      - Local TOP3 (N=20): hit_X 15.0%, Δ -0.240 (negativo)
+      - Local BOT (N=12): hit_X 41.7%, Δ +1.021 (mejor bucket)
+
+    Por liga (delta sin cansancio):
+      Italia +0.843 (N=17), Argentina +0.196 (N=75), Inglaterra +0.323 (N=6),
+      Alemania mixto N chico, Brasil/Espana NO calibradas.
+
+    Validacion in-sample 2026 (N=10, parcial):
+      Direccional consistente: hit X 40%, Δ aprox +0.334.
+
+  CONFIG OPERATIVO (estado V5.2 default):
+    INSERT INTO config_motor_valores (clave, scope, valor_texto, tipo)
+    VALUES ('h4_x_rescue_threshold', 'global', '{}', 'json');
+
+    Activacion recomendada (post-merge, decision usuario):
+      UPDATE config_motor_valores SET valor_texto = '{"Argentina": 0.35,
+        "Italia": 0.35, "Inglaterra": 0.35, "Alemania": 0.35}'
+      WHERE clave = 'h4_x_rescue_threshold' AND scope = 'global';
+
+    Notas operativas:
+      - Italia/Alemania listadas pero NO LIVE V5.1 (M.1 las filtra). Quedan ready
+        si entran a TOP-5 LIVE en futuro.
+      - Argentina/Inglaterra son LIVE V5.1 → impactan picks operativos hoy.
+      - Brasil EXCLUIDO: signo flippea cross-temp con N chico (-3.72 → +2.27 → -3.23).
+      - Espana EXCLUIDO: unico drag observado (-2.76 OOS 2024, fuera universo V5.1).
+      - Turquia EXCLUIDO: Layer 2 V12 standalone ya activo, no necesita override.
+      - Francia EXCLUIDO: sin X-picks suficientes (N=0 en audit).
+
+  REGLA DE PROMOCION:
+    Para agregar una liga al JSON h4_x_rescue_threshold:
+    - Acumular N >= 200 picks reales (post-aplicacion) para esa liga con
+      sub-condicion "argmax_v12 == 'X' AND P_v12(X) > 0.35" detectada
+    - Yield H4 vs V0 con CI95_lo > 0
+    - Bead PROPOSAL con label approved-by-lead
+
+  REGLA DE REVERSION (auto + manual):
+    AUTO: si yield_rolling_30d(H4 picks_liga) < yield_rolling_30d(V0 picks_liga)
+    sostenido por 14 dias en la misma liga, alerta operativa que dispara
+    revisión humana. La auto-desactivacion NO es parte del Manifesto V5.2 inicial
+    — se evalua post N>=50 picks operativos para definir trigger preciso.
+
+    MANUAL: si en N>=50 picks operativos por liga el yield agregado del motor
+    cae > 5pp respecto a baseline pre-V5.2, remover esa liga del JSON via
+    SQL UPDATE config_motor_valores. Reversion no requiere bump SHA.
+
+  ALCANCE: override de argmax 1X2 (capa de decision pre-evaluar_mercado_1x2),
+  scoped por liga via config. NO toca xG, EMA, Bayesiano, Hallazgo G, Fix #5,
+  ni filtros V5.1 §M (M.1/M.2/M.3 siguen aplicando POST-override).
+  Reversion: SQL UPDATE simple para quitar liga del JSON, sin bump SHA.

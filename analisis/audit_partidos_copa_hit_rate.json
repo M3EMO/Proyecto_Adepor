@@ -1,0 +1,102 @@
+{
+  "fecha": "2026-04-28",
+  "n_copa_total": 903,
+  "n_copa_predichos": 715,
+  "hit_rate_copa": 44.06,
+  "brier_copa": 0.6378,
+  "hit_rate_liga_referencia": 50.02,
+  "por_competicion": {
+    "Libertadores": {
+      "n": 90,
+      "hit": 32,
+      "pct": 35.56
+    },
+    "Copa do Brasil": {
+      "n": 72,
+      "hit": 26,
+      "pct": 36.11
+    },
+    "Sudamericana": {
+      "n": 65,
+      "hit": 26,
+      "pct": 40.0
+    },
+    "Copa Argentina": {
+      "n": 27,
+      "hit": 9,
+      "pct": 33.33
+    },
+    "Champions League": {
+      "n": 161,
+      "hit": 76,
+      "pct": 47.2
+    },
+    "Europa League": {
+      "n": 59,
+      "hit": 17,
+      "pct": 28.81
+    },
+    "Coppa Italia": {
+      "n": 58,
+      "hit": 33,
+      "pct": 56.9
+    },
+    "EFL Cup": {
+      "n": 49,
+      "hit": 25,
+      "pct": 51.02
+    },
+    "Copa del Rey": {
+      "n": 39,
+      "hit": 24,
+      "pct": 61.54
+    },
+    "FA Cup": {
+      "n": 47,
+      "hit": 27,
+      "pct": 57.45
+    }
+  },
+  "por_liga_local": {
+    "Chile": {
+      "n": 21,
+      "hit": 6,
+      "pct": 28.57
+    },
+    "Brasil": {
+      "n": 146,
+      "hit": 59,
+      "pct": 40.41
+    },
+    "Argentina": {
+      "n": 77,
+      "hit": 25,
+      "pct": 32.47
+    },
+    "Inglaterra": {
+      "n": 149,
+      "hit": 71,
+      "pct": 47.65
+    },
+    "Francia": {
+      "n": 49,
+      "hit": 19,
+      "pct": 38.78
+    },
+    "Italia": {
+      "n": 106,
+      "hit": 52,
+      "pct": 49.06
+    },
+    "Alemania": {
+      "n": 55,
+      "hit": 26,
+      "pct": 47.27
+    },
+    "Espana": {
+      "n": 88,
+      "hit": 46,
+      "pct": 52.27
+    }
+  }
+}

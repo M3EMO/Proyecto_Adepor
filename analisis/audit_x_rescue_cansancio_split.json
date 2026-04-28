@@ -1,0 +1,266 @@
+{
+  "fecha": "2026-04-28",
+  "n_total": 191,
+  "splits": {
+    "TODOS": {
+      "n": 191,
+      "yield_h4": 0.0427,
+      "yield_v0": -0.2076,
+      "delta": 0.2503,
+      "hit_x_pct": 31.41,
+      "ci95_lo": -0.0705,
+      "ci95_hi": 0.5793
+    },
+    "local cansancio <=72h": {
+      "n": 11,
+      "yield_h4": -0.1364,
+      "yield_v0": 0.26,
+      "delta": -0.3964,
+      "hit_x_pct": 18.18,
+      "ci95_lo": -1.9114,
+      "ci95_hi": 1.1586
+    },
+    "local cansancio <=96h": {
+      "n": 16,
+      "yield_h4": -0.4062,
+      "yield_v0": 0.3275,
+      "delta": -0.7338,
+      "hit_x_pct": 12.5,
+      "ci95_lo": -1.8746,
+      "ci95_hi": 0.4853
+    },
+    "local cansancio <=7d": {
+      "n": 22,
+      "yield_h4": -0.4309,
+      "yield_v0": 0.2723,
+      "delta": -0.7032,
+      "hit_x_pct": 13.64,
+      "ci95_lo": -1.6124,
+      "ci95_hi": 0.2574
+    },
+    "local cansancio <=14d": {
+      "n": 37,
+      "yield_h4": -0.3568,
+      "yield_v0": 0.1143,
+      "delta": -0.4711,
+      "hit_x_pct": 16.22,
+      "ci95_lo": -1.1751,
+      "ci95_hi": 0.2866
+    },
+    "local SIN cansancio 14d": {
+      "n": 154,
+      "yield_h4": 0.1386,
+      "yield_v0": -0.285,
+      "delta": 0.4236,
+      "hit_x_pct": 35.06,
+      "ci95_lo": 0.0473,
+      "ci95_hi": 0.762
+    },
+    "visita cansancio <=72h": {
+      "n": 11,
+      "yield_h4": -0.1536,
+      "yield_v0": 0.16,
+      "delta": -0.3136,
+      "hit_x_pct": 27.27,
+      "ci95_lo": -1.6955,
+      "ci95_hi": 1.241
+    },
+    "visita cansancio <=96h": {
+      "n": 20,
+      "yield_h4": 0.131,
+      "yield_v0": -0.0835,
+      "delta": 0.2145,
+      "hit_x_pct": 35.0,
+      "ci95_lo": -0.8711,
+      "ci95_hi": 1.2027
+    },
+    "visita cansancio <=14d": {
+      "n": 52,
+      "yield_h4": 0.0985,
+      "yield_v0": -0.2029,
+      "delta": 0.3013,
+      "hit_x_pct": 32.69,
+      "ci95_lo": -0.3285,
+      "ci95_hi": 0.9675
+    },
+    "cualquiera <=72h": {
+      "n": 18,
+      "yield_h4": 0.045,
+      "yield_v0": -0.0867,
+      "delta": 0.1317,
+      "hit_x_pct": 27.78,
+      "ci95_lo": -0.998,
+      "ci95_hi": 1.3194
+    },
+    "cualquiera <=96h": {
+      "n": 31,
+      "yield_h4": 0.0361,
+      "yield_v0": -0.0519,
+      "delta": 0.0881,
+      "hit_x_pct": 29.03,
+      "ci95_lo": -0.7403,
+      "ci95_hi": 0.9744
+    },
+    "cualquiera <=14d": {
+      "n": 78,
+      "yield_h4": -0.0074,
+      "yield_v0": -0.1833,
+      "delta": 0.1759,
+      "hit_x_pct": 28.21,
+      "ci95_lo": -0.3087,
+      "ci95_hi": 0.7394
+    },
+    "NINGUNO <=14d": {
+      "n": 113,
+      "yield_h4": 0.0773,
+      "yield_v0": -0.2244,
+      "delta": 0.3017,
+      "hit_x_pct": 33.63,
+      "ci95_lo": -0.1231,
+      "ci95_hi": 0.7656
+    },
+    "AMBOS <=14d": {
+      "n": 11,
+      "yield_h4": -0.6818,
+      "yield_v0": 0.7255,
+      "delta": -1.4073,
+      "hit_x_pct": 9.09,
+      "ci95_lo": -2.4211,
+      "ci95_hi": -0.2324
+    }
+  },
+  "por_liga": {
+    "Alemania": {
+      "cansados": {
+        "n": 2,
+        "yield_h4": 1.42,
+        "yield_v0": -1.0,
+        "delta": 2.42,
+        "hit_x_pct": 50.0,
+        "ci95_lo": 0.0,
+        "ci95_hi": 4.84
+      },
+      "descansados": {
+        "n": 3,
+        "yield_h4": 1.5267,
+        "yield_v0": -1.0,
+        "delta": 2.5267,
+        "hit_x_pct": 66.67,
+        "ci95_lo": 0.0,
+        "ci95_hi": 3.85
+      }
+    },
+    "Argentina": {
+      "cansados": {
+        "n": 40,
+        "yield_h4": -0.0925,
+        "yield_v0": -0.2265,
+        "delta": 0.134,
+        "hit_x_pct": 30.0,
+        "ci95_lo": -0.4639,
+        "ci95_hi": 0.7913
+      },
+      "descansados": {
+        "n": 75,
+        "yield_h4": -0.0177,
+        "yield_v0": -0.2132,
+        "delta": 0.1955,
+        "hit_x_pct": 32.0,
+        "ci95_lo": -0.3072,
+        "ci95_hi": 0.6922
+      }
+    },
+    "Brasil": {
+      "cansados": {
+        "n": 6,
+        "yield_h4": 0.02,
+        "yield_v0": 0.2617,
+        "delta": -0.2417,
+        "hit_x_pct": 33.33,
+        "ci95_lo": -2.0141,
+        "ci95_hi": 2.0042
+      },
+      "descansados": {
+        "n": 2,
+        "yield_h4": -1.0,
+        "yield_v0": 0.615,
+        "delta": -1.615,
+        "hit_x_pct": 0.0,
+        "ci95_lo": -3.23,
+        "ci95_hi": 0.0
+      }
+    },
+    "Espana": {
+      "cansados": {
+        "n": 9,
+        "yield_h4": -0.1767,
+        "yield_v0": -0.71,
+        "delta": 0.5333,
+        "hit_x_pct": 22.22,
+        "ci95_lo": -0.58,
+        "ci95_hi": 1.7544
+      },
+      "descansados": {
+        "n": 10,
+        "yield_h4": -0.326,
+        "yield_v0": -0.207,
+        "delta": -0.119,
+        "hit_x_pct": 20.0,
+        "ci95_lo": -1.3364,
+        "ci95_hi": 1.1242
+      }
+    },
+    "Inglaterra": {
+      "cansados": {
+        "n": 16,
+        "yield_h4": 0.19,
+        "yield_v0": 0.075,
+        "delta": 0.115,
+        "hit_x_pct": 25.0,
+        "ci95_lo": -1.2241,
+        "ci95_hi": 1.4096
+      },
+      "descansados": {
+        "n": 6,
+        "yield_h4": 0.4583,
+        "yield_v0": 0.135,
+        "delta": 0.3233,
+        "hit_x_pct": 33.33,
+        "ci95_lo": -1.8283,
+        "ci95_hi": 2.5983
+      }
+    },
+    "Italia": {
+      "cansados": {
+        "n": 5,
+        "yield_h4": -0.258,
+        "yield_v0": 0.076,
+        "delta": -0.334,
+        "hit_x_pct": 20.0,
+        "ci95_lo": -2.152,
+        "ci95_hi": 1.79
+      },
+      "descansados": {
+        "n": 17,
+        "yield_h4": 0.47,
+        "yield_v0": -0.3729,
+        "delta": 0.8429,
+        "hit_x_pct": 47.06,
+        "ci95_lo": -0.2848,
+        "ci95_hi": 1.9583
+      }
+    }
+  },
+  "distribucion_competicion_local_cansado": {
+    "Champions League": 1,
+    "Copa del Rey": 4,
+    "Conference League": 6,
+    "Sudamericana": 9,
+    "Copa Argentina": 5,
+    "Libertadores": 4,
+    "Coppa Italia": 1,
+    "Europa League": 1,
+    "EFL Cup": 1,
+    "FA Cup": 5
+  }
+}

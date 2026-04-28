@@ -1,0 +1,51 @@
+{
+  "fecha": "2026-04-28",
+  "cobertura": {
+    "local_matched": 188,
+    "visita_matched": 187,
+    "total_picks": 191,
+    "pct_local": 98.43,
+    "pct_visita": 97.91
+  },
+  "cansancio_proxy": {
+    "local_con_copa_14d": 37,
+    "visita_con_copa_14d": 52,
+    "local_copa_72h": 11,
+    "local_copa_96h": 16,
+    "visita_copa_72h": 11
+  },
+  "top_locales_no_match": [
+    {
+      "liga": "Argentina",
+      "eq": "Sarmiento (junin)",
+      "n": 2
+    },
+    {
+      "liga": "Brasil",
+      "eq": "Vitoria",
+      "n": 1
+    }
+  ],
+  "top_visitas_no_match": [
+    {
+      "liga": "Argentina",
+      "eq": "Sarmiento (junin)",
+      "n": 1
+    },
+    {
+      "liga": "Brasil",
+      "eq": "Sao Paulo",
+      "n": 1
+    },
+    {
+      "liga": "Argentina",
+      "eq": "Gimnasia la Plata",
+      "n": 1
+    },
+    {
+      "liga": "Brasil",
+      "eq": "Atlético-mg",
+      "n": 1
+    }
+  ]
+}

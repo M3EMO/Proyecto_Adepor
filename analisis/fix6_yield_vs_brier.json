@@ -1,0 +1,224 @@
+{
+  "n_total": 7867,
+  "filtros": {
+    "margen_min": 0.05,
+    "ev_min": 0.03,
+    "kelly_cap": 0.025
+  },
+  "fuente_probs": "walk_forward_sistema_real (HG+Fix5 aplicado)",
+  "fuente_cuotas": "cuotas_externas_historico.psch/pscd/psca (Pinnacle closing 2022-2024)",
+  "ligas": [
+    "Alemania",
+    "Argentina",
+    "Brasil",
+    "Espana",
+    "Francia",
+    "Inglaterra",
+    "Italia",
+    "Turquia"
+  ],
+  "escenarios": {
+    "A. Sistema actual (HG+Fix5)": {
+      "n_predicciones": 7867,
+      "n_apost": 2002,
+      "n_gano": 703,
+      "stake": 50.03474282316863,
+      "profit": 0.3336186784602385,
+      "yield_pct": 0.6667740446659318,
+      "hit_pct": 35.11488511488511,
+      "brier_avg": 0.6284860584088974,
+      "yield_ci95_lo": -5.597998956519863,
+      "yield_ci95_hi": 7.0962967531325365,
+      "yield_boot_mean": 0.7849593128105607,
+      "yield_boot_std": 3.254223429900084
+    },
+    "B. + Fix #6 v1 (sin shrink)": {
+      "n_predicciones": 7867,
+      "n_apost": 3672,
+      "n_gano": 1474,
+      "stake": 91.78818045989523,
+      "profit": -0.6234772643178332,
+      "yield_pct": -0.6792565896763229,
+      "hit_pct": 40.14161220043573,
+      "brier_avg": 0.6252903883182007,
+      "yield_ci95_lo": -4.60811477695467,
+      "yield_ci95_hi": 3.7171719692982843,
+      "yield_boot_mean": -0.5924122899079353,
+      "yield_boot_std": 2.0953537705149374
+    },
+    "C. + Fix #6 v2 (shrink 50%)": {
+      "n_predicciones": 7867,
+      "n_apost": 2489,
+      "n_gano": 887,
+      "stake": 62.19477450281456,
+      "profit": -0.9164035329425843,
+      "yield_pct": -1.473441362668038,
+      "hit_pct": 35.63680192848533,
+      "brier_avg": 0.6235621866536406,
+      "yield_ci95_lo": -6.895913765311538,
+      "yield_ci95_hi": 4.147030501465383,
+      "yield_boot_mean": -1.3564404558074419,
+      "yield_boot_std": 2.775627481284822
+    },
+    "D. + Fix #6 v3 (selectivo)": {
+      "n_predicciones": 7867,
+      "n_apost": 2043,
+      "n_gano": 712,
+      "stake": 51.05955569980898,
+      "profit": -0.13194419818014227,
+      "yield_pct": -0.25841235077694946,
+      "hit_pct": 34.850709740577585,
+      "brier_avg": 0.6281139040684678,
+      "yield_ci95_lo": -6.480329336189472,
+      "yield_ci95_hi": 6.153216195145546,
+      "yield_boot_mean": -0.14526552121412373,
+      "yield_boot_std": 3.2118604806001283
+    }
+  },
+  "per_liga_baseline_vs_v2": {
+    "Alemania": {
+      "baseline": {
+        "n_pred": 878,
+        "n_apost": 193,
+        "n_gano": 62,
+        "yield_pct": -1.8916030808911213,
+        "hit_pct": 32.12435233160622,
+        "brier_avg": 0.6279611210679399
+      },
+      "fix6_v2": {
+        "n_pred": 878,
+        "n_apost": 235,
+        "n_gano": 83,
+        "yield_pct": 0.8357108416903621,
+        "hit_pct": 35.319148936170215,
+        "brier_avg": 0.621997313060827
+      }
+    },
+    "Argentina": {
+      "baseline": {
+        "n_pred": 907,
+        "n_apost": 486,
+        "n_gano": 185,
+        "yield_pct": 14.088436137739244,
+        "hit_pct": 38.065843621399175,
+        "brier_avg": 0.6456866273542495
+      },
+      "fix6_v2": {
+        "n_pred": 907,
+        "n_apost": 548,
+        "n_gano": 210,
+        "yield_pct": 11.394160583941558,
+        "hit_pct": 38.32116788321168,
+        "brier_avg": 0.6445906640375149
+      }
+    },
+    "Brasil": {
+      "baseline": {
+        "n_pred": 855,
+        "n_apost": 421,
+        "n_gano": 151,
+        "yield_pct": -5.021377672208984,
+        "hit_pct": 35.86698337292161,
+        "brier_avg": 0.6336631883140735
+      },
+      "fix6_v2": {
+        "n_pred": 855,
+        "n_apost": 484,
+        "n_gano": 187,
+        "yield_pct": -2.6342975206611334,
+        "hit_pct": 38.63636363636363,
+        "brier_avg": 0.6329931233217226
+      }
+    },
+    "Espana": {
+      "baseline": {
+        "n_pred": 1098,
+        "n_apost": 204,
+        "n_gano": 53,
+        "yield_pct": -25.93627450980389,
+        "hit_pct": 25.98039215686275,
+        "brier_avg": 0.6298838804212409
+      },
+      "fix6_v2": {
+        "n_pred": 1098,
+        "n_apost": 289,
+        "n_gano": 81,
+        "yield_pct": -22.215158268343828,
+        "hit_pct": 28.027681660899656,
+        "brier_avg": 0.6252254418338051
+      }
+    },
+    "Francia": {
+      "baseline": {
+        "n_pred": 952,
+        "n_apost": 150,
+        "n_gano": 59,
+        "yield_pct": 15.149924561279901,
+        "hit_pct": 39.33333333333333,
+        "brier_avg": 0.6272695098458865
+      },
+      "fix6_v2": {
+        "n_pred": 952,
+        "n_apost": 200,
+        "n_gano": 73,
+        "yield_pct": 4.49261264503912,
+        "hit_pct": 36.5,
+        "brier_avg": 0.623030457792827
+      }
+    },
+    "Inglaterra": {
+      "baseline": {
+        "n_pred": 1098,
+        "n_apost": 214,
+        "n_gano": 76,
+        "yield_pct": 6.301791528594045,
+        "hit_pct": 35.51401869158878,
+        "brier_avg": 0.617317469914584
+      },
+      "fix6_v2": {
+        "n_pred": 1098,
+        "n_apost": 262,
+        "n_gano": 93,
+        "yield_pct": 2.6488549618320585,
+        "hit_pct": 35.49618320610687,
+        "brier_avg": 0.6104860085880676
+      }
+    },
+    "Italia": {
+      "baseline": {
+        "n_pred": 1092,
+        "n_apost": 162,
+        "n_gano": 51,
+        "yield_pct": -10.067901234567945,
+        "hit_pct": 31.48148148148148,
+        "brier_avg": 0.6339209810819758
+      },
+      "fix6_v2": {
+        "n_pred": 1092,
+        "n_apost": 245,
+        "n_gano": 73,
+        "yield_pct": -15.620971743167154,
+        "hit_pct": 29.795918367346943,
+        "brier_avg": 0.6279000130309804
+      }
+    },
+    "Turquia": {
+      "baseline": {
+        "n_pred": 987,
+        "n_apost": 172,
+        "n_gano": 66,
+        "yield_pct": 1.565645783135401,
+        "hit_pct": 38.372093023255815,
+        "brier_avg": 0.6146917860210501
+      },
+      "fix6_v2": {
+        "n_pred": 987,
+        "n_apost": 226,
+        "n_gano": 87,
+        "yield_pct": -0.8117556409230824,
+        "hit_pct": 38.49557522123894,
+        "brier_avg": 0.6058705635287444
+      }
+    }
+  }
+}

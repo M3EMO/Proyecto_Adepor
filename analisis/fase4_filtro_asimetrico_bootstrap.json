@@ -1,0 +1,19 @@
+{
+  "ratio_cut": 0.55,
+  "n_acum_min": 10,
+  "n_total": 3117,
+  "n_apost_base": 1081,
+  "n_apost_filt": 1039,
+  "n_blocked": 42,
+  "yield_base_pct": 1.3233867056864568,
+  "yield_filt_pct": 2.336570580771476,
+  "delta_yield_pp": 1.013183875085019,
+  "ci95": [
+    -0.28453714719262935,
+    2.3002176215867554
+  ],
+  "p_delta_positive": 0.9325,
+  "B": 2000,
+  "seed": 42,
+  "significativo": false
+}

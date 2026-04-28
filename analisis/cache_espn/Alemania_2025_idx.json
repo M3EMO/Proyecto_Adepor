@@ -1,0 +1,1838 @@
+[
+ {
+  "fecha": "2025-08-22",
+  "ht": "Bayern Munich",
+  "at": "RB Leipzig",
+  "evt_id": "746718"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746719"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "1. FC Union Berlin",
+  "at": "VfB Stuttgart",
+  "evt_id": "746720"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Mainz",
+  "at": "FC Cologne",
+  "evt_id": "746721"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Bayer Leverkusen",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746722"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Borussia Mönchengladbach",
+  "at": "Hamburg SV",
+  "evt_id": "746723"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Eintracht Frankfurt",
+  "at": "Werder Bremen",
+  "evt_id": "746724"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "St. Pauli",
+  "at": "Borussia Dortmund",
+  "evt_id": "746725"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "SC Freiburg",
+  "at": "FC Augsburg",
+  "evt_id": "746726"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "FC Cologne",
+  "at": "SC Freiburg",
+  "evt_id": "746727"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Borussia Dortmund",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746728"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "FC Augsburg",
+  "at": "Bayern Munich",
+  "evt_id": "746729"
+ },
+ {
+  "fecha": "2025-08-29",
+  "ht": "Hamburg SV",
+  "at": "St. Pauli",
+  "evt_id": "746730"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "RB Leipzig",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746731"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Werder Bremen",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746732"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "TSG Hoffenheim",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746733"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "VfB Stuttgart",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746734"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "VfL Wolfsburg",
+  "at": "Mainz",
+  "evt_id": "746735"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "Borussia Dortmund",
+  "evt_id": "746736"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "1. FC Union Berlin",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746737"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Mainz",
+  "at": "RB Leipzig",
+  "evt_id": "746738"
+ },
+ {
+  "fecha": "2025-09-12",
+  "ht": "Bayer Leverkusen",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746739"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Borussia Mönchengladbach",
+  "at": "Werder Bremen",
+  "evt_id": "746740"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Bayern Munich",
+  "at": "Hamburg SV",
+  "evt_id": "746741"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "St. Pauli",
+  "at": "FC Augsburg",
+  "evt_id": "746742"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "SC Freiburg",
+  "at": "VfB Stuttgart",
+  "evt_id": "746743"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "VfL Wolfsburg",
+  "at": "FC Cologne",
+  "evt_id": "746744"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Bayer Leverkusen",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746745"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Borussia Dortmund",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746746"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Eintracht Frankfurt",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746747"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "FC Augsburg",
+  "at": "Mainz",
+  "evt_id": "746748"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Hamburg SV",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746749"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "RB Leipzig",
+  "at": "FC Cologne",
+  "evt_id": "746750"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Werder Bremen",
+  "at": "SC Freiburg",
+  "evt_id": "746751"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "TSG Hoffenheim",
+  "at": "Bayern Munich",
+  "evt_id": "746752"
+ },
+ {
+  "fecha": "2025-09-19",
+  "ht": "VfB Stuttgart",
+  "at": "St. Pauli",
+  "evt_id": "746753"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "FC Augsburg",
+  "evt_id": "746754"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "FC Cologne",
+  "at": "VfB Stuttgart",
+  "evt_id": "746755"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "1. FC Union Berlin",
+  "at": "Hamburg SV",
+  "evt_id": "746756"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Mainz",
+  "at": "Borussia Dortmund",
+  "evt_id": "746757"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "SC Freiburg",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746758"
+ },
+ {
+  "fecha": "2025-09-26",
+  "ht": "Bayern Munich",
+  "at": "Werder Bremen",
+  "evt_id": "746759"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "St. Pauli",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746760"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "VfL Wolfsburg",
+  "at": "RB Leipzig",
+  "evt_id": "746761"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Borussia Mönchengladbach",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746762"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Eintracht Frankfurt",
+  "at": "Bayern Munich",
+  "evt_id": "746763"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Borussia Mönchengladbach",
+  "at": "SC Freiburg",
+  "evt_id": "746764"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Borussia Dortmund",
+  "at": "RB Leipzig",
+  "evt_id": "746765"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Bayer Leverkusen",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746766"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "FC Augsburg",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746767"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Hamburg SV",
+  "at": "Mainz",
+  "evt_id": "746768"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Werder Bremen",
+  "at": "St. Pauli",
+  "evt_id": "746769"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "VfB Stuttgart",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746770"
+ },
+ {
+  "fecha": "2025-10-03",
+  "ht": "TSG Hoffenheim",
+  "at": "FC Cologne",
+  "evt_id": "746771"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "St. Pauli",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746772"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "RB Leipzig",
+  "at": "Hamburg SV",
+  "evt_id": "746773"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "SC Freiburg",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746774"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "VfL Wolfsburg",
+  "at": "VfB Stuttgart",
+  "evt_id": "746775"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Bayern Munich",
+  "at": "Borussia Dortmund",
+  "evt_id": "746776"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "Werder Bremen",
+  "evt_id": "746777"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Mainz",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746778"
+ },
+ {
+  "fecha": "2025-10-17",
+  "ht": "1. FC Union Berlin",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746779"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "FC Cologne",
+  "at": "FC Augsburg",
+  "evt_id": "746780"
+ },
+ {
+  "fecha": "2025-10-24",
+  "ht": "Werder Bremen",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746781"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Hamburg SV",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746782"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "FC Augsburg",
+  "at": "RB Leipzig",
+  "evt_id": "746783"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Eintracht Frankfurt",
+  "at": "St. Pauli",
+  "evt_id": "746784"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Borussia Mönchengladbach",
+  "at": "Bayern Munich",
+  "evt_id": "746785"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Bayer Leverkusen",
+  "at": "SC Freiburg",
+  "evt_id": "746786"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Borussia Dortmund",
+  "at": "FC Cologne",
+  "evt_id": "746787"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "VfB Stuttgart",
+  "at": "Mainz",
+  "evt_id": "746788"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "TSG Hoffenheim",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746789"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Mainz",
+  "at": "Werder Bremen",
+  "evt_id": "746790"
+ },
+ {
+  "fecha": "2025-10-31",
+  "ht": "FC Augsburg",
+  "at": "Borussia Dortmund",
+  "evt_id": "746791"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Bayern Munich",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746792"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "St. Pauli",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746793"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "1. FC Union Berlin",
+  "at": "SC Freiburg",
+  "evt_id": "746794"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "VfL Wolfsburg",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746795"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "FC Cologne",
+  "at": "Hamburg SV",
+  "evt_id": "746796"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746797"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "RB Leipzig",
+  "at": "VfB Stuttgart",
+  "evt_id": "746798"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Bayer Leverkusen",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746799"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Borussia Mönchengladbach",
+  "at": "FC Cologne",
+  "evt_id": "746800"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Eintracht Frankfurt",
+  "at": "Mainz",
+  "evt_id": "746801"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "VfB Stuttgart",
+  "at": "FC Augsburg",
+  "evt_id": "746802"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "SC Freiburg",
+  "at": "St. Pauli",
+  "evt_id": "746803"
+ },
+ {
+  "fecha": "2025-11-07",
+  "ht": "Werder Bremen",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746804"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "TSG Hoffenheim",
+  "at": "RB Leipzig",
+  "evt_id": "746805"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "1. FC Union Berlin",
+  "at": "Bayern Munich",
+  "evt_id": "746806"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Hamburg SV",
+  "at": "Borussia Dortmund",
+  "evt_id": "746807"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746808"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "FC Cologne",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746809"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "VfL Wolfsburg",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746810"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "RB Leipzig",
+  "at": "Werder Bremen",
+  "evt_id": "746811"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "St. Pauli",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746812"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Bayern Munich",
+  "at": "SC Freiburg",
+  "evt_id": "746813"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "FC Augsburg",
+  "at": "Hamburg SV",
+  "evt_id": "746814"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Borussia Dortmund",
+  "at": "VfB Stuttgart",
+  "evt_id": "746815"
+ },
+ {
+  "fecha": "2025-11-21",
+  "ht": "Mainz",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746816"
+ },
+ {
+  "fecha": "2025-11-28",
+  "ht": "Borussia Mönchengladbach",
+  "at": "RB Leipzig",
+  "evt_id": "746817"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Bayern Munich",
+  "at": "St. Pauli",
+  "evt_id": "746818"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "SC Freiburg",
+  "at": "Mainz",
+  "evt_id": "746819"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Werder Bremen",
+  "at": "FC Cologne",
+  "evt_id": "746820"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "TSG Hoffenheim",
+  "at": "FC Augsburg",
+  "evt_id": "746821"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Eintracht Frankfurt",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746822"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "1. FC Union Berlin",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746823"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Bayer Leverkusen",
+  "at": "Borussia Dortmund",
+  "evt_id": "746824"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Hamburg SV",
+  "at": "VfB Stuttgart",
+  "evt_id": "746825"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Hamburg SV",
+  "at": "Werder Bremen",
+  "evt_id": "746826"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "VfL Wolfsburg",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746827"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "VfB Stuttgart",
+  "at": "Bayern Munich",
+  "evt_id": "746828"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "RB Leipzig",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746829"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "SC Freiburg",
+  "evt_id": "746830"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Borussia Dortmund",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746831"
+ },
+ {
+  "fecha": "2025-12-05",
+  "ht": "Mainz",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746832"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "FC Cologne",
+  "at": "St. Pauli",
+  "evt_id": "746833"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "FC Augsburg",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746834"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "St. Pauli",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746835"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Borussia Mönchengladbach",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746836"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Bayer Leverkusen",
+  "at": "FC Cologne",
+  "evt_id": "746837"
+ },
+ {
+  "fecha": "2025-12-12",
+  "ht": "1. FC Union Berlin",
+  "at": "RB Leipzig",
+  "evt_id": "746838"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "TSG Hoffenheim",
+  "at": "Hamburg SV",
+  "evt_id": "746839"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Bayern Munich",
+  "at": "Mainz",
+  "evt_id": "746840"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Eintracht Frankfurt",
+  "at": "FC Augsburg",
+  "evt_id": "746841"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "SC Freiburg",
+  "at": "Borussia Dortmund",
+  "evt_id": "746842"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Werder Bremen",
+  "at": "VfB Stuttgart",
+  "evt_id": "746843"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "VfB Stuttgart",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746844"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "RB Leipzig",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746845"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "Bayern Munich",
+  "evt_id": "746846"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "FC Cologne",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746847"
+ },
+ {
+  "fecha": "2025-12-19",
+  "ht": "Borussia Dortmund",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746848"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Mainz",
+  "at": "St. Pauli",
+  "evt_id": "746849"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "VfL Wolfsburg",
+  "at": "SC Freiburg",
+  "evt_id": "746850"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "FC Augsburg",
+  "at": "Werder Bremen",
+  "evt_id": "746851"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Hamburg SV",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746852"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "FC Cologne",
+  "evt_id": "746853"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "SC Freiburg",
+  "at": "Hamburg SV",
+  "evt_id": "746854"
+ },
+ {
+  "fecha": "2026-01-27",
+  "ht": "Werder Bremen",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746855"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "1. FC Union Berlin",
+  "at": "Mainz",
+  "evt_id": "746856"
+ },
+ {
+  "fecha": "2026-01-27",
+  "ht": "St. Pauli",
+  "at": "RB Leipzig",
+  "evt_id": "746857"
+ },
+ {
+  "fecha": "2026-01-11",
+  "ht": "Bayern Munich",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746858"
+ },
+ {
+  "fecha": "2026-01-09",
+  "ht": "Eintracht Frankfurt",
+  "at": "Borussia Dortmund",
+  "evt_id": "746859"
+ },
+ {
+  "fecha": "2026-01-11",
+  "ht": "Borussia Mönchengladbach",
+  "at": "FC Augsburg",
+  "evt_id": "746860"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "Bayer Leverkusen",
+  "at": "VfB Stuttgart",
+  "evt_id": "746861"
+ },
+ {
+  "fecha": "2026-01-14",
+  "ht": "TSG Hoffenheim",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746862"
+ },
+ {
+  "fecha": "2026-01-13",
+  "ht": "VfB Stuttgart",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746863"
+ },
+ {
+  "fecha": "2026-01-14",
+  "ht": "FC Cologne",
+  "at": "Bayern Munich",
+  "evt_id": "746864"
+ },
+ {
+  "fecha": "2026-01-14",
+  "ht": "RB Leipzig",
+  "at": "SC Freiburg",
+  "evt_id": "746865"
+ },
+ {
+  "fecha": "2026-03-04",
+  "ht": "Hamburg SV",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746866"
+ },
+ {
+  "fecha": "2026-01-15",
+  "ht": "FC Augsburg",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746867"
+ },
+ {
+  "fecha": "2026-01-13",
+  "ht": "Borussia Dortmund",
+  "at": "Werder Bremen",
+  "evt_id": "746868"
+ },
+ {
+  "fecha": "2026-01-13",
+  "ht": "Mainz",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746869"
+ },
+ {
+  "fecha": "2026-01-14",
+  "ht": "VfL Wolfsburg",
+  "at": "St. Pauli",
+  "evt_id": "746870"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "VfL Wolfsburg",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746871"
+ },
+ {
+  "fecha": "2026-01-16",
+  "ht": "Werder Bremen",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746872"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "TSG Hoffenheim",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746873"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "VfB Stuttgart",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746874"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "RB Leipzig",
+  "at": "Bayern Munich",
+  "evt_id": "746875"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Hamburg SV",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746876"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "FC Augsburg",
+  "at": "SC Freiburg",
+  "evt_id": "746877"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Borussia Dortmund",
+  "at": "St. Pauli",
+  "evt_id": "746878"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "FC Cologne",
+  "at": "Mainz",
+  "evt_id": "746879"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Bayern Munich",
+  "at": "FC Augsburg",
+  "evt_id": "746880"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Eintracht Frankfurt",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746881"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Borussia Mönchengladbach",
+  "at": "VfB Stuttgart",
+  "evt_id": "746882"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Bayer Leverkusen",
+  "at": "Werder Bremen",
+  "evt_id": "746883"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "St. Pauli",
+  "at": "Hamburg SV",
+  "evt_id": "746884"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "RB Leipzig",
+  "evt_id": "746885"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "1. FC Union Berlin",
+  "at": "Borussia Dortmund",
+  "evt_id": "746886"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "SC Freiburg",
+  "at": "FC Cologne",
+  "evt_id": "746887"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Mainz",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746888"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Borussia Dortmund",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746889"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Eintracht Frankfurt",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746890"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "FC Augsburg",
+  "at": "St. Pauli",
+  "evt_id": "746891"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "VfB Stuttgart",
+  "at": "SC Freiburg",
+  "evt_id": "746892"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "RB Leipzig",
+  "at": "Mainz",
+  "evt_id": "746893"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "FC Cologne",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746894"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Hamburg SV",
+  "at": "Bayern Munich",
+  "evt_id": "746895"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Werder Bremen",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746896"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "TSG Hoffenheim",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746897"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "Hamburg SV",
+  "evt_id": "746898"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "FC Cologne",
+  "at": "RB Leipzig",
+  "evt_id": "746899"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "1. FC Union Berlin",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746900"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "VfL Wolfsburg",
+  "at": "Borussia Dortmund",
+  "evt_id": "746901"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Mainz",
+  "at": "FC Augsburg",
+  "evt_id": "746902"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Bayern Munich",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746903"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "St. Pauli",
+  "at": "VfB Stuttgart",
+  "evt_id": "746904"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "SC Freiburg",
+  "at": "Werder Bremen",
+  "evt_id": "746905"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Borussia Mönchengladbach",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746906"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Bayer Leverkusen",
+  "at": "St. Pauli",
+  "evt_id": "746907"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Borussia Dortmund",
+  "at": "Mainz",
+  "evt_id": "746908"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Eintracht Frankfurt",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746909"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "FC Augsburg",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746910"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Hamburg SV",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746911"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "RB Leipzig",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746912"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Werder Bremen",
+  "at": "Bayern Munich",
+  "evt_id": "746913"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "TSG Hoffenheim",
+  "at": "SC Freiburg",
+  "evt_id": "746914"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "VfB Stuttgart",
+  "at": "FC Cologne",
+  "evt_id": "746915"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "VfB Stuttgart",
+  "evt_id": "746916"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "FC Cologne",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746917"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "1. FC Union Berlin",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746918"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Mainz",
+  "at": "Hamburg SV",
+  "evt_id": "746919"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Bayern Munich",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746920"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "St. Pauli",
+  "at": "Werder Bremen",
+  "evt_id": "746921"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "RB Leipzig",
+  "at": "Borussia Dortmund",
+  "evt_id": "746922"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "SC Freiburg",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746923"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "VfL Wolfsburg",
+  "at": "FC Augsburg",
+  "evt_id": "746924"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Bayer Leverkusen",
+  "at": "Mainz",
+  "evt_id": "746925"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Borussia Dortmund",
+  "at": "Bayern Munich",
+  "evt_id": "746926"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Borussia Mönchengladbach",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746927"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Eintracht Frankfurt",
+  "at": "SC Freiburg",
+  "evt_id": "746928"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "FC Augsburg",
+  "at": "FC Cologne",
+  "evt_id": "746929"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Hamburg SV",
+  "at": "RB Leipzig",
+  "evt_id": "746930"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Werder Bremen",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746931"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "TSG Hoffenheim",
+  "at": "St. Pauli",
+  "evt_id": "746932"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "VfB Stuttgart",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746933"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "SC Freiburg",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746934"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "Bayern Munich",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746935"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Mainz",
+  "at": "VfB Stuttgart",
+  "evt_id": "746936"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "1. FC Union Berlin",
+  "at": "Werder Bremen",
+  "evt_id": "746937"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "FC Cologne",
+  "at": "Borussia Dortmund",
+  "evt_id": "746938"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746939"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "VfL Wolfsburg",
+  "at": "Hamburg SV",
+  "evt_id": "746940"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "St. Pauli",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746941"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "RB Leipzig",
+  "at": "FC Augsburg",
+  "evt_id": "746942"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Eintracht Frankfurt",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746943"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Borussia Mönchengladbach",
+  "at": "St. Pauli",
+  "evt_id": "746944"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "SC Freiburg",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746945"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Werder Bremen",
+  "at": "Mainz",
+  "evt_id": "746946"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "TSG Hoffenheim",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746947"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "VfB Stuttgart",
+  "at": "RB Leipzig",
+  "evt_id": "746948"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Hamburg SV",
+  "at": "FC Cologne",
+  "evt_id": "746949"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Bayer Leverkusen",
+  "at": "Bayern Munich",
+  "evt_id": "746950"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Borussia Dortmund",
+  "at": "FC Augsburg",
+  "evt_id": "746951"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746952"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "FC Augsburg",
+  "at": "VfB Stuttgart",
+  "evt_id": "746953"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Bayern Munich",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746954"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "St. Pauli",
+  "at": "SC Freiburg",
+  "evt_id": "746955"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "RB Leipzig",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746956"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Borussia Dortmund",
+  "at": "Hamburg SV",
+  "evt_id": "746957"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Mainz",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746958"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "FC Cologne",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746959"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "VfL Wolfsburg",
+  "at": "Werder Bremen",
+  "evt_id": "746960"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "1. FC Union Berlin",
+  "at": "St. Pauli",
+  "evt_id": "746961"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Bayer Leverkusen",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746962"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Borussia Mönchengladbach",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746963"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "VfB Stuttgart",
+  "at": "Borussia Dortmund",
+  "evt_id": "746964"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Eintracht Frankfurt",
+  "at": "FC Cologne",
+  "evt_id": "746965"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "SC Freiburg",
+  "at": "Bayern Munich",
+  "evt_id": "746966"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Werder Bremen",
+  "at": "RB Leipzig",
+  "evt_id": "746967"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "TSG Hoffenheim",
+  "at": "Mainz",
+  "evt_id": "746968"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Hamburg SV",
+  "at": "FC Augsburg",
+  "evt_id": "746969"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746970"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "FC Cologne",
+  "at": "Werder Bremen",
+  "evt_id": "746971"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Mainz",
+  "at": "SC Freiburg",
+  "evt_id": "746972"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Borussia Dortmund",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746973"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "FC Augsburg",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746974"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "St. Pauli",
+  "at": "Bayern Munich",
+  "evt_id": "746975"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "RB Leipzig",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746976"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "VfB Stuttgart",
+  "at": "Hamburg SV",
+  "evt_id": "746977"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "VfL Wolfsburg",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746978"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "1. FC Union Berlin",
+  "at": "VfL Wolfsburg",
+  "evt_id": "746979"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Bayer Leverkusen",
+  "at": "FC Augsburg",
+  "evt_id": "746980"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Borussia Mönchengladbach",
+  "at": "Mainz",
+  "evt_id": "746981"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Eintracht Frankfurt",
+  "at": "RB Leipzig",
+  "evt_id": "746982"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Bayern Munich",
+  "at": "VfB Stuttgart",
+  "evt_id": "746983"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "St. Pauli",
+  "at": "FC Cologne",
+  "evt_id": "746984"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "SC Freiburg",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "746985"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Werder Bremen",
+  "at": "Hamburg SV",
+  "evt_id": "746986"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "TSG Hoffenheim",
+  "at": "Borussia Dortmund",
+  "evt_id": "746987"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "St. Pauli",
+  "evt_id": "746988"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "FC Cologne",
+  "at": "Bayer Leverkusen",
+  "evt_id": "746989"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Mainz",
+  "at": "Bayern Munich",
+  "evt_id": "746990"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Borussia Dortmund",
+  "at": "SC Freiburg",
+  "evt_id": "746991"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "FC Augsburg",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "746992"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Hamburg SV",
+  "at": "TSG Hoffenheim",
+  "evt_id": "746993"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "RB Leipzig",
+  "at": "1. FC Union Berlin",
+  "evt_id": "746994"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "VfB Stuttgart",
+  "at": "Werder Bremen",
+  "evt_id": "746995"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "VfL Wolfsburg",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "746996"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "1. FC Union Berlin",
+  "at": "FC Cologne",
+  "evt_id": "746997"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Bayer Leverkusen",
+  "at": "RB Leipzig",
+  "evt_id": "746998"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Borussia Mönchengladbach",
+  "at": "Borussia Dortmund",
+  "evt_id": "746999"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Eintracht Frankfurt",
+  "at": "Hamburg SV",
+  "evt_id": "747000"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Bayern Munich",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "747001"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "St. Pauli",
+  "at": "Mainz",
+  "evt_id": "747002"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "SC Freiburg",
+  "at": "VfL Wolfsburg",
+  "evt_id": "747003"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Werder Bremen",
+  "at": "FC Augsburg",
+  "evt_id": "747004"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "TSG Hoffenheim",
+  "at": "VfB Stuttgart",
+  "evt_id": "747005"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "FC Cologne",
+  "at": "1. FC Heidenheim 1846",
+  "evt_id": "747006"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Mainz",
+  "at": "1. FC Union Berlin",
+  "evt_id": "747007"
+ },
+ {
+  "fecha": "2026-05-08",
+  "ht": "Borussia Dortmund",
+  "at": "Eintracht Frankfurt",
+  "evt_id": "747008"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "FC Augsburg",
+  "at": "Borussia Mönchengladbach",
+  "evt_id": "747009"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Hamburg SV",
+  "at": "SC Freiburg",
+  "evt_id": "747010"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "RB Leipzig",
+  "at": "St. Pauli",
+  "evt_id": "747011"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "TSG Hoffenheim",
+  "at": "Werder Bremen",
+  "evt_id": "747012"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "VfB Stuttgart",
+  "at": "Bayer Leverkusen",
+  "evt_id": "747013"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "VfL Wolfsburg",
+  "at": "Bayern Munich",
+  "evt_id": "747014"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "1. FC Heidenheim 1846",
+  "at": "Mainz",
+  "evt_id": "747015"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "1. FC Union Berlin",
+  "at": "FC Augsburg",
+  "evt_id": "747016"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Bayer Leverkusen",
+  "at": "Hamburg SV",
+  "evt_id": "747017"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Borussia Mönchengladbach",
+  "at": "TSG Hoffenheim",
+  "evt_id": "747018"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "SC Freiburg",
+  "at": "RB Leipzig",
+  "evt_id": "747019"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Bayern Munich",
+  "at": "FC Cologne",
+  "evt_id": "747020"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "St. Pauli",
+  "at": "VfL Wolfsburg",
+  "evt_id": "747021"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Werder Bremen",
+  "at": "Borussia Dortmund",
+  "evt_id": "747022"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Eintracht Frankfurt",
+  "at": "VfB Stuttgart",
+  "evt_id": "747023"
+ }
+]

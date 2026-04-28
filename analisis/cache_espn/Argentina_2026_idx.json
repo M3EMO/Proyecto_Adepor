@@ -1,0 +1,1442 @@
+[
+ {
+  "fecha": "2026-01-22",
+  "ht": "Aldosivi",
+  "at": "Defensa y Justicia",
+  "evt_id": "762774"
+ },
+ {
+  "fecha": "2026-01-26",
+  "ht": "Argentinos Juniors",
+  "at": "Sarmiento (Junín)",
+  "evt_id": "762775"
+ },
+ {
+  "fecha": "2026-01-22",
+  "ht": "Banfield",
+  "at": "Huracán",
+  "evt_id": "762776"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Barracas Central",
+  "at": "River Plate",
+  "evt_id": "762777"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Boca Juniors",
+  "at": "Deportivo Riestra",
+  "evt_id": "762778"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "Central Córdoba (Santiago del Estero)",
+  "at": "Gimnasia (Mendoza)",
+  "evt_id": "762779"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Gimnasia La Plata",
+  "at": "Racing Club",
+  "evt_id": "762780"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "Independiente",
+  "at": "Estudiantes de La Plata",
+  "evt_id": "762781"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Independiente Rivadavia",
+  "at": "Atlético Tucumán",
+  "evt_id": "762782"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "Instituto (Córdoba)",
+  "at": "Vélez Sarsfield",
+  "evt_id": "762783"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Rosario Central",
+  "at": "Belgrano (Córdoba)",
+  "evt_id": "762784"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "San Lorenzo",
+  "at": "Lanús",
+  "evt_id": "762785"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Talleres (Córdoba)",
+  "at": "Newell's Old Boys",
+  "evt_id": "762786"
+ },
+ {
+  "fecha": "2026-01-26",
+  "ht": "Tigre",
+  "at": "Estudiantes de Río Cuarto",
+  "evt_id": "762787"
+ },
+ {
+  "fecha": "2026-01-22",
+  "ht": "Unión (Santa Fe)",
+  "at": "Platense",
+  "evt_id": "762788"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Aldosivi",
+  "at": "Barracas Central",
+  "evt_id": "762789"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Sarmiento (Junín)",
+  "at": "Banfield",
+  "evt_id": "762790"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "Belgrano (Córdoba)",
+  "at": "Tigre",
+  "evt_id": "762791"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "Deportivo Riestra",
+  "at": "Defensa y Justicia",
+  "evt_id": "762792"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Estudiantes de Río Cuarto",
+  "at": "Argentinos Juniors",
+  "evt_id": "762793"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "Estudiantes de La Plata",
+  "at": "Boca Juniors",
+  "evt_id": "762794"
+ },
+ {
+  "fecha": "2026-01-27",
+  "ht": "Gimnasia (Mendoza)",
+  "at": "San Lorenzo",
+  "evt_id": "762795"
+ },
+ {
+  "fecha": "2026-01-27",
+  "ht": "Huracán",
+  "at": "Independiente Rivadavia",
+  "evt_id": "762796"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "Lanús",
+  "at": "Unión (Santa Fe)",
+  "evt_id": "762797"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Newell's Old Boys",
+  "at": "Independiente",
+  "evt_id": "762798"
+ },
+ {
+  "fecha": "2026-01-26",
+  "ht": "Platense",
+  "at": "Instituto (Córdoba)",
+  "evt_id": "762799"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Racing Club",
+  "at": "Rosario Central",
+  "evt_id": "762800"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "River Plate",
+  "at": "Gimnasia La Plata",
+  "evt_id": "762801"
+ },
+ {
+  "fecha": "2026-01-27",
+  "ht": "Vélez Sarsfield",
+  "at": "Talleres (Córdoba)",
+  "evt_id": "762802"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Atlético Tucumán",
+  "at": "Central Córdoba (Santiago del Estero)",
+  "evt_id": "762803"
+ },
+ {
+  "fecha": "2026-02-03",
+  "ht": "Argentinos Juniors",
+  "at": "Belgrano (Córdoba)",
+  "evt_id": "762804"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Talleres (Córdoba)",
+  "at": "Platense",
+  "evt_id": "762805"
+ },
+ {
+  "fecha": "2026-02-03",
+  "ht": "Banfield",
+  "at": "Estudiantes de Río Cuarto",
+  "evt_id": "762806"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Barracas Central",
+  "at": "Deportivo Riestra",
+  "evt_id": "762807"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Boca Juniors",
+  "at": "Newell's Old Boys",
+  "evt_id": "762808"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Defensa y Justicia",
+  "at": "Estudiantes de La Plata",
+  "evt_id": "762809"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Gimnasia La Plata",
+  "at": "Aldosivi",
+  "evt_id": "762810"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Independiente",
+  "at": "Vélez Sarsfield",
+  "evt_id": "762811"
+ },
+ {
+  "fecha": "2026-02-04",
+  "ht": "Independiente Rivadavia",
+  "at": "Sarmiento (Junín)",
+  "evt_id": "762812"
+ },
+ {
+  "fecha": "2026-02-04",
+  "ht": "Instituto (Córdoba)",
+  "at": "Lanús",
+  "evt_id": "762813"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Rosario Central",
+  "at": "River Plate",
+  "evt_id": "762814"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "San Lorenzo",
+  "at": "Central Córdoba (Santiago del Estero)",
+  "evt_id": "762815"
+ },
+ {
+  "fecha": "2026-02-03",
+  "ht": "Unión (Santa Fe)",
+  "at": "Gimnasia (Mendoza)",
+  "evt_id": "762816"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Tigre",
+  "at": "Racing Club",
+  "evt_id": "762817"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Atlético Tucumán",
+  "at": "Huracán",
+  "evt_id": "762818"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Aldosivi",
+  "at": "Rosario Central",
+  "evt_id": "762819"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Barracas Central",
+  "at": "Gimnasia La Plata",
+  "evt_id": "762820"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Belgrano (Córdoba)",
+  "at": "Banfield",
+  "evt_id": "762821"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Central Córdoba (Santiago del Estero)",
+  "at": "Unión (Santa Fe)",
+  "evt_id": "762822"
+ },
+ {
+  "fecha": "2026-02-10",
+  "ht": "Estudiantes de Río Cuarto",
+  "at": "Independiente Rivadavia",
+  "evt_id": "762823"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Estudiantes de La Plata",
+  "at": "Deportivo Riestra",
+  "evt_id": "762824"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Gimnasia (Mendoza)",
+  "at": "Instituto (Córdoba)",
+  "evt_id": "762825"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Huracán",
+  "at": "San Lorenzo",
+  "evt_id": "762826"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Lanús",
+  "at": "Talleres (Córdoba)",
+  "evt_id": "762827"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Newell's Old Boys",
+  "at": "Defensa y Justicia",
+  "evt_id": "762828"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Platense",
+  "at": "Independiente",
+  "evt_id": "762829"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Racing Club",
+  "at": "Argentinos Juniors",
+  "evt_id": "762830"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "River Plate",
+  "at": "Tigre",
+  "evt_id": "762831"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Sarmiento (Junín)",
+  "at": "Atlético Tucumán",
+  "evt_id": "762832"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Vélez Sarsfield",
+  "at": "Boca Juniors",
+  "evt_id": "762833"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Argentinos Juniors",
+  "at": "River Plate",
+  "evt_id": "762834"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Atlético Tucumán",
+  "at": "Estudiantes de Río Cuarto",
+  "evt_id": "762835"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Banfield",
+  "at": "Racing Club",
+  "evt_id": "762836"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Boca Juniors",
+  "at": "Platense",
+  "evt_id": "762837"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Defensa y Justicia",
+  "at": "Vélez Sarsfield",
+  "evt_id": "762838"
+ },
+ {
+  "fecha": "2026-02-16",
+  "ht": "Deportivo Riestra",
+  "at": "Newell's Old Boys",
+  "evt_id": "762839"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Gimnasia La Plata",
+  "at": "Estudiantes de La Plata",
+  "evt_id": "762840"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Huracán",
+  "at": "Sarmiento (Junín)",
+  "evt_id": "762841"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Independiente",
+  "at": "Lanús",
+  "evt_id": "762842"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Independiente Rivadavia",
+  "at": "Belgrano (Córdoba)",
+  "evt_id": "762843"
+ },
+ {
+  "fecha": "2026-02-16",
+  "ht": "Instituto (Córdoba)",
+  "at": "Central Córdoba (Santiago del Estero)",
+  "evt_id": "762844"
+ },
+ {
+  "fecha": "2026-02-16",
+  "ht": "Rosario Central",
+  "at": "Barracas Central",
+  "evt_id": "762845"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Talleres (Córdoba)",
+  "at": "Gimnasia (Mendoza)",
+  "evt_id": "762846"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "Tigre",
+  "at": "Aldosivi",
+  "evt_id": "762847"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Unión (Santa Fe)",
+  "at": "San Lorenzo",
+  "evt_id": "762848"
+ },
+ {
+  "fecha": "2026-03-27",
+  "ht": "Argentinos Juniors",
+  "at": "Lanús",
+  "evt_id": "762849"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Unión (Santa Fe)",
+  "at": "Aldosivi",
+  "evt_id": "762850"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Boca Juniors",
+  "at": "Racing Club",
+  "evt_id": "762851"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Central Córdoba (Santiago del Estero)",
+  "at": "Tigre",
+  "evt_id": "762852"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Defensa y Justicia",
+  "at": "Belgrano (Córdoba)",
+  "evt_id": "762853"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Deportivo Riestra",
+  "at": "Huracán",
+  "evt_id": "762854"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Estudiantes de La Plata",
+  "at": "Sarmiento (Junín)",
+  "evt_id": "762855"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Gimnasia (Mendoza)",
+  "at": "Gimnasia La Plata",
+  "evt_id": "762856"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Independiente Rivadavia",
+  "at": "Independiente",
+  "evt_id": "762857"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Instituto (Córdoba)",
+  "at": "Atlético Tucumán",
+  "evt_id": "762858"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Platense",
+  "at": "Barracas Central",
+  "evt_id": "762859"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Rosario Central",
+  "at": "Talleres (Córdoba)",
+  "evt_id": "762860"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "San Lorenzo",
+  "at": "Estudiantes de Río Cuarto",
+  "evt_id": "762861"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Vélez Sarsfield",
+  "at": "River Plate",
+  "evt_id": "762862"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Banfield",
+  "at": "Newell's Old Boys",
+  "evt_id": "762863"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Newell's Old Boys",
+  "at": "Estudiantes de La Plata",
+  "evt_id": "762864"
+ },
+ {
+  "fecha": "2026-02-24",
+  "ht": "Platense",
+  "at": "Defensa y Justicia",
+  "evt_id": "762865"
+ },
+ {
+  "fecha": "2026-02-26",
+  "ht": "Racing Club",
+  "at": "Independiente Rivadavia",
+  "evt_id": "762866"
+ },
+ {
+  "fecha": "2026-02-26",
+  "ht": "River Plate",
+  "at": "Banfield",
+  "evt_id": "762867"
+ },
+ {
+  "fecha": "2026-02-24",
+  "ht": "San Lorenzo",
+  "at": "Instituto (Córdoba)",
+  "evt_id": "762868"
+ },
+ {
+  "fecha": "2026-02-26",
+  "ht": "Sarmiento (Junín)",
+  "at": "Unión (Santa Fe)",
+  "evt_id": "762869"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Vélez Sarsfield",
+  "at": "Deportivo Riestra",
+  "evt_id": "762870"
+ },
+ {
+  "fecha": "2026-03-31",
+  "ht": "Aldosivi",
+  "at": "Argentinos Juniors",
+  "evt_id": "762871"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Barracas Central",
+  "at": "Tigre",
+  "evt_id": "762872"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Belgrano (Córdoba)",
+  "at": "Atlético Tucumán",
+  "evt_id": "762873"
+ },
+ {
+  "fecha": "2026-02-24",
+  "ht": "Central Córdoba (Santiago del Estero)",
+  "at": "Talleres (Córdoba)",
+  "evt_id": "762874"
+ },
+ {
+  "fecha": "2026-02-26",
+  "ht": "Estudiantes de Río Cuarto",
+  "at": "Huracán",
+  "evt_id": "762875"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Gimnasia La Plata",
+  "at": "Rosario Central",
+  "evt_id": "762876"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Gimnasia (Mendoza)",
+  "at": "Independiente",
+  "evt_id": "762877"
+ },
+ {
+  "fecha": "2026-03-05",
+  "ht": "Lanús",
+  "at": "Boca Juniors",
+  "evt_id": "762878"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Argentinos Juniors",
+  "at": "Barracas Central",
+  "evt_id": "762879"
+ },
+ {
+  "fecha": "2026-03-04",
+  "ht": "Atlético Tucumán",
+  "at": "Racing Club",
+  "evt_id": "762880"
+ },
+ {
+  "fecha": "2026-03-03",
+  "ht": "Banfield",
+  "at": "Aldosivi",
+  "evt_id": "762881"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Boca Juniors",
+  "at": "Gimnasia (Mendoza)",
+  "evt_id": "762882"
+ },
+ {
+  "fecha": "2026-03-02",
+  "ht": "Defensa y Justicia",
+  "at": "Lanús",
+  "evt_id": "762883"
+ },
+ {
+  "fecha": "2026-03-02",
+  "ht": "Deportivo Riestra",
+  "at": "Platense",
+  "evt_id": "762884"
+ },
+ {
+  "fecha": "2026-03-02",
+  "ht": "Estudiantes de La Plata",
+  "at": "Vélez Sarsfield",
+  "evt_id": "762885"
+ },
+ {
+  "fecha": "2026-03-03",
+  "ht": "Huracán",
+  "at": "Belgrano (Córdoba)",
+  "evt_id": "762886"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Independiente",
+  "at": "Central Córdoba (Santiago del Estero)",
+  "evt_id": "762887"
+ },
+ {
+  "fecha": "2026-03-03",
+  "ht": "Independiente Rivadavia",
+  "at": "River Plate",
+  "evt_id": "762888"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Instituto (Córdoba)",
+  "at": "Unión (Santa Fe)",
+  "evt_id": "762889"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Newell's Old Boys",
+  "at": "Rosario Central",
+  "evt_id": "762890"
+ },
+ {
+  "fecha": "2026-03-03",
+  "ht": "Sarmiento (Junín)",
+  "at": "Estudiantes de Río Cuarto",
+  "evt_id": "762891"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Talleres (Córdoba)",
+  "at": "San Lorenzo",
+  "evt_id": "762892"
+ },
+ {
+  "fecha": "2026-03-02",
+  "ht": "Tigre",
+  "at": "Gimnasia La Plata",
+  "evt_id": "762893"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Gimnasia La Plata",
+  "at": "Argentinos Juniors",
+  "evt_id": "762894"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Gimnasia (Mendoza)",
+  "at": "Defensa y Justicia",
+  "evt_id": "762895"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Lanús",
+  "at": "Deportivo Riestra",
+  "evt_id": "762896"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Platense",
+  "at": "Estudiantes de La Plata",
+  "evt_id": "762897"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Racing Club",
+  "at": "Huracán",
+  "evt_id": "762898"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "River Plate",
+  "at": "Atlético Tucumán",
+  "evt_id": "762899"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Rosario Central",
+  "at": "Tigre",
+  "evt_id": "762900"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "San Lorenzo",
+  "at": "Independiente",
+  "evt_id": "762901"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Unión (Santa Fe)",
+  "at": "Talleres (Córdoba)",
+  "evt_id": "762902"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Vélez Sarsfield",
+  "at": "Newell's Old Boys",
+  "evt_id": "762903"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Aldosivi",
+  "at": "Independiente Rivadavia",
+  "evt_id": "762904"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Barracas Central",
+  "at": "Banfield",
+  "evt_id": "762905"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Belgrano (Córdoba)",
+  "at": "Sarmiento (Junín)",
+  "evt_id": "762906"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Central Córdoba (Santiago del Estero)",
+  "at": "Boca Juniors",
+  "evt_id": "762907"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Estudiantes de Río Cuarto",
+  "at": "Instituto (Córdoba)",
+  "evt_id": "762908"
+ },
+ {
+  "fecha": "2026-03-11",
+  "ht": "Argentinos Juniors",
+  "at": "Rosario Central",
+  "evt_id": "762909"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Deportivo Riestra",
+  "at": "Gimnasia (Mendoza)",
+  "evt_id": "762910"
+ },
+ {
+  "fecha": "2026-03-11",
+  "ht": "Banfield",
+  "at": "Gimnasia La Plata",
+  "evt_id": "762911"
+ },
+ {
+  "fecha": "2026-03-11",
+  "ht": "Boca Juniors",
+  "at": "San Lorenzo",
+  "evt_id": "762912"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Defensa y Justicia",
+  "at": "Central Córdoba (Santiago del Estero)",
+  "evt_id": "762913"
+ },
+ {
+  "fecha": "2026-03-10",
+  "ht": "Tigre",
+  "at": "Vélez Sarsfield",
+  "evt_id": "762914"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Estudiantes de Río Cuarto",
+  "at": "Belgrano (Córdoba)",
+  "evt_id": "762915"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Estudiantes de La Plata",
+  "at": "Lanús",
+  "evt_id": "762916"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Huracán",
+  "at": "River Plate",
+  "evt_id": "762917"
+ },
+ {
+  "fecha": "2026-03-10",
+  "ht": "Independiente",
+  "at": "Unión (Santa Fe)",
+  "evt_id": "762918"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Independiente Rivadavia",
+  "at": "Barracas Central",
+  "evt_id": "762919"
+ },
+ {
+  "fecha": "2026-03-11",
+  "ht": "Newell's Old Boys",
+  "at": "Platense",
+  "evt_id": "762920"
+ },
+ {
+  "fecha": "2026-03-11",
+  "ht": "Sarmiento (Junín)",
+  "at": "Racing Club",
+  "evt_id": "762921"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Talleres (Córdoba)",
+  "at": "Instituto (Córdoba)",
+  "evt_id": "762922"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Atlético Tucumán",
+  "at": "Aldosivi",
+  "evt_id": "762923"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Aldosivi",
+  "at": "Huracán",
+  "evt_id": "762924"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Barracas Central",
+  "at": "Atlético Tucumán",
+  "evt_id": "762925"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Belgrano (Córdoba)",
+  "at": "Talleres (Córdoba)",
+  "evt_id": "762926"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Central Córdoba (Santiago del Estero)",
+  "at": "Deportivo Riestra",
+  "evt_id": "762927"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Gimnasia La Plata",
+  "at": "Independiente Rivadavia",
+  "evt_id": "762928"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Gimnasia (Mendoza)",
+  "at": "Estudiantes de La Plata",
+  "evt_id": "762929"
+ },
+ {
+  "fecha": "2026-03-17",
+  "ht": "Instituto (Córdoba)",
+  "at": "Independiente",
+  "evt_id": "762930"
+ },
+ {
+  "fecha": "2026-03-17",
+  "ht": "Lanús",
+  "at": "Newell's Old Boys",
+  "evt_id": "762931"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Platense",
+  "at": "Vélez Sarsfield",
+  "evt_id": "762932"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Racing Club",
+  "at": "Estudiantes de Río Cuarto",
+  "evt_id": "762933"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "River Plate",
+  "at": "Sarmiento (Junín)",
+  "evt_id": "762934"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Rosario Central",
+  "at": "Banfield",
+  "evt_id": "762935"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "San Lorenzo",
+  "at": "Defensa y Justicia",
+  "evt_id": "762936"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Tigre",
+  "at": "Argentinos Juniors",
+  "evt_id": "762937"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Unión (Santa Fe)",
+  "at": "Boca Juniors",
+  "evt_id": "762938"
+ },
+ {
+  "fecha": "2026-03-23",
+  "ht": "Argentinos Juniors",
+  "at": "Platense",
+  "evt_id": "762939"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Atlético Tucumán",
+  "at": "Gimnasia La Plata",
+  "evt_id": "762940"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Banfield",
+  "at": "Tigre",
+  "evt_id": "762941"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Belgrano (Córdoba)",
+  "at": "Racing Club",
+  "evt_id": "762942"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Boca Juniors",
+  "at": "Instituto (Córdoba)",
+  "evt_id": "762943"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Defensa y Justicia",
+  "at": "Unión (Santa Fe)",
+  "evt_id": "762944"
+ },
+ {
+  "fecha": "2026-03-25",
+  "ht": "Deportivo Riestra",
+  "at": "San Lorenzo",
+  "evt_id": "762945"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Estudiantes de Río Cuarto",
+  "at": "River Plate",
+  "evt_id": "762946"
+ },
+ {
+  "fecha": "2026-03-23",
+  "ht": "Estudiantes de La Plata",
+  "at": "Central Córdoba (Santiago del Estero)",
+  "evt_id": "762947"
+ },
+ {
+  "fecha": "2026-03-24",
+  "ht": "Huracán",
+  "at": "Barracas Central",
+  "evt_id": "762948"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Independiente",
+  "at": "Talleres (Córdoba)",
+  "evt_id": "762949"
+ },
+ {
+  "fecha": "2026-03-23",
+  "ht": "Independiente Rivadavia",
+  "at": "Rosario Central",
+  "evt_id": "762950"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Newell's Old Boys",
+  "at": "Gimnasia (Mendoza)",
+  "evt_id": "762951"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Sarmiento (Junín)",
+  "at": "Aldosivi",
+  "evt_id": "762952"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Vélez Sarsfield",
+  "at": "Lanús",
+  "evt_id": "762953"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Central Córdoba (Santiago del Estero)",
+  "at": "Newell's Old Boys",
+  "evt_id": "762954"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Barracas Central",
+  "at": "Sarmiento (Junín)",
+  "evt_id": "762955"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Gimnasia (Mendoza)",
+  "at": "Vélez Sarsfield",
+  "evt_id": "762956"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Independiente",
+  "at": "Racing Club",
+  "evt_id": "762957"
+ },
+ {
+  "fecha": "2026-04-07",
+  "ht": "Instituto (Córdoba)",
+  "at": "Defensa y Justicia",
+  "evt_id": "762958"
+ },
+ {
+  "fecha": "2026-04-01",
+  "ht": "Lanús",
+  "at": "Platense",
+  "evt_id": "762959"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "River Plate",
+  "at": "Belgrano (Córdoba)",
+  "evt_id": "762960"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Rosario Central",
+  "at": "Atlético Tucumán",
+  "evt_id": "762961"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "San Lorenzo",
+  "at": "Estudiantes de La Plata",
+  "evt_id": "762962"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Talleres (Córdoba)",
+  "at": "Boca Juniors",
+  "evt_id": "762963"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Tigre",
+  "at": "Independiente Rivadavia",
+  "evt_id": "762964"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Unión (Santa Fe)",
+  "at": "Deportivo Riestra",
+  "evt_id": "762965"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Argentinos Juniors",
+  "at": "Banfield",
+  "evt_id": "762966"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Aldosivi",
+  "at": "Estudiantes de Río Cuarto",
+  "evt_id": "762967"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Gimnasia La Plata",
+  "at": "Huracán",
+  "evt_id": "762968"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Belgrano (Córdoba)",
+  "at": "Aldosivi",
+  "evt_id": "762969"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Boca Juniors",
+  "at": "Independiente",
+  "evt_id": "762970"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Defensa y Justicia",
+  "at": "Talleres (Córdoba)",
+  "evt_id": "762971"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Deportivo Riestra",
+  "at": "Instituto (Córdoba)",
+  "evt_id": "762972"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Estudiantes de Río Cuarto",
+  "at": "Barracas Central",
+  "evt_id": "762973"
+ },
+ {
+  "fecha": "2026-04-14",
+  "ht": "Vélez Sarsfield",
+  "at": "Central Córdoba (Santiago del Estero)",
+  "evt_id": "762974"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Sarmiento (Junín)",
+  "at": "Gimnasia La Plata",
+  "evt_id": "762975"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Racing Club",
+  "at": "River Plate",
+  "evt_id": "762976"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Platense",
+  "at": "Gimnasia (Mendoza)",
+  "evt_id": "762977"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Newell's Old Boys",
+  "at": "San Lorenzo",
+  "evt_id": "762978"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Lanús",
+  "at": "Banfield",
+  "evt_id": "762979"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Independiente Rivadavia",
+  "at": "Argentinos Juniors",
+  "evt_id": "762980"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Estudiantes de La Plata",
+  "at": "Unión (Santa Fe)",
+  "evt_id": "762981"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Atlético Tucumán",
+  "at": "Tigre",
+  "evt_id": "762982"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Huracán",
+  "at": "Rosario Central",
+  "evt_id": "762983"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Unión (Santa Fe)",
+  "at": "Newell's Old Boys",
+  "evt_id": "762984"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Tigre",
+  "at": "Huracán",
+  "evt_id": "762985"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Aldosivi",
+  "at": "Racing Club",
+  "evt_id": "762986"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Argentinos Juniors",
+  "at": "Atlético Tucumán",
+  "evt_id": "762987"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Banfield",
+  "at": "Independiente Rivadavia",
+  "evt_id": "762988"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Barracas Central",
+  "at": "Belgrano (Córdoba)",
+  "evt_id": "762989"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Central Córdoba (Santiago del Estero)",
+  "at": "Platense",
+  "evt_id": "762990"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Gimnasia La Plata",
+  "at": "Estudiantes de Río Cuarto",
+  "evt_id": "762991"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Gimnasia (Mendoza)",
+  "at": "Lanús",
+  "evt_id": "762992"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Independiente",
+  "at": "Defensa y Justicia",
+  "evt_id": "762993"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Instituto (Córdoba)",
+  "at": "Estudiantes de La Plata",
+  "evt_id": "762994"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "River Plate",
+  "at": "Boca Juniors",
+  "evt_id": "762995"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Rosario Central",
+  "at": "Sarmiento (Junín)",
+  "evt_id": "762996"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "San Lorenzo",
+  "at": "Vélez Sarsfield",
+  "evt_id": "762997"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Talleres (Córdoba)",
+  "at": "Deportivo Riestra",
+  "evt_id": "762998"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Atlético Tucumán",
+  "at": "Banfield",
+  "evt_id": "762999"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Belgrano (Córdoba)",
+  "at": "Gimnasia La Plata",
+  "evt_id": "763000"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "River Plate",
+  "at": "Aldosivi",
+  "evt_id": "763001"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Sarmiento (Junín)",
+  "at": "Tigre",
+  "evt_id": "763002"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Vélez Sarsfield",
+  "at": "Unión (Santa Fe)",
+  "evt_id": "763003"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Newell's Old Boys",
+  "at": "Instituto (Córdoba)",
+  "evt_id": "763004"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Lanús",
+  "at": "Central Córdoba (Santiago del Estero)",
+  "evt_id": "763005"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Independiente Rivadavia",
+  "at": "Gimnasia (Mendoza)",
+  "evt_id": "763006"
+ },
+ {
+  "fecha": "2026-04-28",
+  "ht": "Huracán",
+  "at": "Argentinos Juniors",
+  "evt_id": "763007"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Estudiantes de La Plata",
+  "at": "Talleres (Córdoba)",
+  "evt_id": "763008"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Estudiantes de Río Cuarto",
+  "at": "Rosario Central",
+  "evt_id": "763009"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Deportivo Riestra",
+  "at": "Independiente",
+  "evt_id": "763010"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Defensa y Justicia",
+  "at": "Boca Juniors",
+  "evt_id": "763011"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Platense",
+  "at": "San Lorenzo",
+  "evt_id": "763012"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Racing Club",
+  "at": "Barracas Central",
+  "evt_id": "763013"
+ }
+]

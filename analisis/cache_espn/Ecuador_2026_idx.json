@@ -1,0 +1,1442 @@
+[
+ {
+  "fecha": "2026-02-21",
+  "ht": "Aucas",
+  "at": "Mushuc Runa",
+  "evt_id": "401859486"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Barcelona SC",
+  "at": "Técnico Universitario",
+  "evt_id": "401859487"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Delfín",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859488"
+ },
+ {
+  "fecha": "2026-04-09",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Emelec",
+  "evt_id": "401859489"
+ },
+ {
+  "fecha": "2026-02-24",
+  "ht": "Libertad (Ecuador)",
+  "at": "Manta F.C.",
+  "evt_id": "401859490"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Orense",
+  "at": "Liga de Quito",
+  "evt_id": "401859491"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Independiente del Valle",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859492"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Guayaquil City FC",
+  "at": "Aucas",
+  "evt_id": "401859493"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Emelec",
+  "at": "Delfín",
+  "evt_id": "401859494"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Técnico Universitario",
+  "at": "Orense",
+  "evt_id": "401859495"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Mushuc Runa",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859496"
+ },
+ {
+  "fecha": "2026-03-03",
+  "ht": "Manta F.C.",
+  "at": "Independiente del Valle",
+  "evt_id": "401859497"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Liga de Quito",
+  "at": "Macará",
+  "evt_id": "401859498"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Deportivo Cuenca",
+  "at": "Barcelona SC",
+  "evt_id": "401859499"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Aucas",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859500"
+ },
+ {
+  "fecha": "2026-03-10",
+  "ht": "Orense",
+  "at": "Manta F.C.",
+  "evt_id": "401859501"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Macará",
+  "at": "Técnico Universitario",
+  "evt_id": "401859502"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Libertad (Ecuador)",
+  "at": "Liga de Quito",
+  "evt_id": "401859503"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Independiente del Valle",
+  "at": "Mushuc Runa",
+  "evt_id": "401859504"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Delfín",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859505"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Barcelona SC",
+  "at": "Emelec",
+  "evt_id": "401859506"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Emelec",
+  "at": "Orense",
+  "evt_id": "401859507"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Delfín",
+  "at": "Manta F.C.",
+  "evt_id": "401859508"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Guayaquil City FC",
+  "at": "Barcelona SC",
+  "evt_id": "401859509"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Técnico Universitario",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859510"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Mushuc Runa",
+  "at": "Macará",
+  "evt_id": "401859511"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Liga de Quito",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859512"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Independiente del Valle",
+  "at": "Aucas",
+  "evt_id": "401859513"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Aucas",
+  "at": "Técnico Universitario",
+  "evt_id": "401859514"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "Emelec",
+  "at": "Independiente del Valle",
+  "evt_id": "401859515"
+ },
+ {
+  "fecha": "2026-03-17",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859516"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Orense",
+  "at": "Mushuc Runa",
+  "evt_id": "401859517"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Manta F.C.",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859518"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Macará",
+  "at": "Delfín",
+  "evt_id": "401859519"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Libertad (Ecuador)",
+  "at": "Barcelona SC",
+  "evt_id": "401859520"
+ },
+ {
+  "fecha": "2026-03-24",
+  "ht": "Aucas",
+  "at": "Orense",
+  "evt_id": "401859521"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Deportivo Cuenca",
+  "at": "Macará",
+  "evt_id": "401859522"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Liga de Quito",
+  "at": "Manta F.C.",
+  "evt_id": "401859523"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Mushuc Runa",
+  "at": "Emelec",
+  "evt_id": "401859524"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Delfín",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859525"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Barcelona SC",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859526"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Técnico Universitario",
+  "at": "Independiente del Valle",
+  "evt_id": "401859527"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Liga de Quito",
+  "at": "Barcelona SC",
+  "evt_id": "401859528"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Independiente del Valle",
+  "at": "Orense",
+  "evt_id": "401859529"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859530"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Manta F.C.",
+  "at": "Técnico Universitario",
+  "evt_id": "401859531"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Macará",
+  "at": "Aucas",
+  "evt_id": "401859532"
+ },
+ {
+  "fecha": "2026-04-07",
+  "ht": "Libertad (Ecuador)",
+  "at": "Mushuc Runa",
+  "evt_id": "401859533"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Emelec",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859534"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Aucas",
+  "at": "Emelec",
+  "evt_id": "401859535"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Orense",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859536"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Mushuc Runa",
+  "at": "Manta F.C.",
+  "evt_id": "401859537"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Guayaquil City FC",
+  "at": "Macará",
+  "evt_id": "401859538"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Deportivo Cuenca",
+  "at": "Independiente del Valle",
+  "evt_id": "401859539"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Delfín",
+  "at": "Liga de Quito",
+  "evt_id": "401859540"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Técnico Universitario",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859541"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Independiente del Valle",
+  "at": "Liga de Quito",
+  "evt_id": "401859542"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Emelec",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859543"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Macará",
+  "at": "Barcelona SC",
+  "evt_id": "401859544"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859545"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Orense",
+  "at": "Delfín",
+  "evt_id": "401859546"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Mushuc Runa",
+  "at": "Técnico Universitario",
+  "evt_id": "401859547"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Manta F.C.",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859548"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Barcelona SC",
+  "at": "Mushuc Runa",
+  "evt_id": "401859549"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Delfín",
+  "at": "Independiente del Valle",
+  "evt_id": "401859550"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Macará",
+  "evt_id": "401859551"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Técnico Universitario",
+  "at": "Emelec",
+  "evt_id": "401859552"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Libertad (Ecuador)",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859553"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Liga de Quito",
+  "at": "Aucas",
+  "evt_id": "401859554"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Deportivo Cuenca",
+  "at": "Orense",
+  "evt_id": "401859555"
+ },
+ {
+  "fecha": "2026-04-28",
+  "ht": "Aucas",
+  "at": "Delfín",
+  "evt_id": "401859556"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Macará",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859557"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Manta F.C.",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859558"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Mushuc Runa",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859559"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Guayaquil City FC",
+  "at": "Técnico Universitario",
+  "evt_id": "401859560"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Emelec",
+  "at": "Liga de Quito",
+  "evt_id": "401859561"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Orense",
+  "at": "Barcelona SC",
+  "evt_id": "401859562"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Macará",
+  "at": "Orense",
+  "evt_id": "401859563"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Libertad (Ecuador)",
+  "at": "Aucas",
+  "evt_id": "401859564"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Liga de Quito",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859565"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Deportivo Cuenca",
+  "at": "Técnico Universitario",
+  "evt_id": "401859566"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Delfín",
+  "at": "Mushuc Runa",
+  "evt_id": "401859567"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Barcelona SC",
+  "at": "Manta F.C.",
+  "evt_id": "401859568"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Independiente del Valle",
+  "evt_id": "401859569"
+ },
+ {
+  "fecha": "2026-05-12",
+  "ht": "Mushuc Runa",
+  "at": "Liga de Quito",
+  "evt_id": "401859570"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Manta F.C.",
+  "at": "Macará",
+  "evt_id": "401859571"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Independiente del Valle",
+  "at": "Barcelona SC",
+  "evt_id": "401859572"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Guayaquil City FC",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859573"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Emelec",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859574"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Aucas",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859575"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Técnico Universitario",
+  "at": "Delfín",
+  "evt_id": "401859576"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Barcelona SC",
+  "at": "Aucas",
+  "evt_id": "401859577"
+ },
+ {
+  "fecha": "2026-05-19",
+  "ht": "Guayaquil City FC",
+  "at": "Orense",
+  "evt_id": "401859578"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Delfín",
+  "evt_id": "401859579"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Manta F.C.",
+  "at": "Emelec",
+  "evt_id": "401859580"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Macará",
+  "at": "Independiente del Valle",
+  "evt_id": "401859581"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Libertad (Ecuador)",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859582"
+ },
+ {
+  "fecha": "2026-05-15",
+  "ht": "Liga de Quito",
+  "at": "Técnico Universitario",
+  "evt_id": "401859583"
+ },
+ {
+  "fecha": "2026-05-26",
+  "ht": "Aucas",
+  "at": "Manta F.C.",
+  "evt_id": "401859584"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Orense",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859585"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Mushuc Runa",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859586"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Independiente del Valle",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859587"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Emelec",
+  "at": "Macará",
+  "evt_id": "401859588"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Deportivo Cuenca",
+  "at": "Liga de Quito",
+  "evt_id": "401859589"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Delfín",
+  "at": "Barcelona SC",
+  "evt_id": "401859590"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "Deportivo Cuenca",
+  "at": "Delfín",
+  "evt_id": "401859591"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "Emelec",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859592"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "Guayaquil City FC",
+  "at": "Independiente del Valle",
+  "evt_id": "401859593"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Liga de Quito",
+  "at": "Orense",
+  "evt_id": "401859594"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Manta F.C.",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859595"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "Mushuc Runa",
+  "at": "Aucas",
+  "evt_id": "401859596"
+ },
+ {
+  "fecha": "2026-06-02",
+  "ht": "Técnico Universitario",
+  "at": "Barcelona SC",
+  "evt_id": "401859597"
+ },
+ {
+  "fecha": "2026-07-01",
+  "ht": "Orense",
+  "at": "Técnico Universitario",
+  "evt_id": "401859598"
+ },
+ {
+  "fecha": "2026-07-01",
+  "ht": "Macará",
+  "at": "Liga de Quito",
+  "evt_id": "401859599"
+ },
+ {
+  "fecha": "2026-07-01",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Mushuc Runa",
+  "evt_id": "401859600"
+ },
+ {
+  "fecha": "2026-07-01",
+  "ht": "Aucas",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859601"
+ },
+ {
+  "fecha": "2026-07-01",
+  "ht": "Barcelona SC",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859602"
+ },
+ {
+  "fecha": "2026-07-01",
+  "ht": "Delfín",
+  "at": "Emelec",
+  "evt_id": "401859603"
+ },
+ {
+  "fecha": "2026-07-01",
+  "ht": "Independiente del Valle",
+  "at": "Manta F.C.",
+  "evt_id": "401859604"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Deportivo Cuenca",
+  "at": "Aucas",
+  "evt_id": "401859605"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Mushuc Runa",
+  "at": "Independiente del Valle",
+  "evt_id": "401859606"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Manta F.C.",
+  "at": "Orense",
+  "evt_id": "401859607"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Liga de Quito",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859608"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Guayaquil City FC",
+  "at": "Delfín",
+  "evt_id": "401859609"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Emelec",
+  "at": "Barcelona SC",
+  "evt_id": "401859610"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Técnico Universitario",
+  "at": "Macará",
+  "evt_id": "401859611"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Orense",
+  "at": "Emelec",
+  "evt_id": "401859612"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Manta F.C.",
+  "at": "Delfín",
+  "evt_id": "401859613"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Macará",
+  "at": "Mushuc Runa",
+  "evt_id": "401859614"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Libertad (Ecuador)",
+  "at": "Técnico Universitario",
+  "evt_id": "401859615"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Barcelona SC",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859616"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Aucas",
+  "at": "Independiente del Valle",
+  "evt_id": "401859617"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Liga de Quito",
+  "evt_id": "401859618"
+ },
+ {
+  "fecha": "2026-07-15",
+  "ht": "Deportivo Cuenca",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859619"
+ },
+ {
+  "fecha": "2026-07-15",
+  "ht": "Delfín",
+  "at": "Macará",
+  "evt_id": "401859620"
+ },
+ {
+  "fecha": "2026-07-15",
+  "ht": "Barcelona SC",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859621"
+ },
+ {
+  "fecha": "2026-07-15",
+  "ht": "Guayaquil City FC",
+  "at": "Manta F.C.",
+  "evt_id": "401859622"
+ },
+ {
+  "fecha": "2026-07-15",
+  "ht": "Independiente del Valle",
+  "at": "Emelec",
+  "evt_id": "401859623"
+ },
+ {
+  "fecha": "2026-07-15",
+  "ht": "Mushuc Runa",
+  "at": "Orense",
+  "evt_id": "401859624"
+ },
+ {
+  "fecha": "2026-07-15",
+  "ht": "Técnico Universitario",
+  "at": "Aucas",
+  "evt_id": "401859625"
+ },
+ {
+  "fecha": "2026-07-19",
+  "ht": "Independiente del Valle",
+  "at": "Técnico Universitario",
+  "evt_id": "401859626"
+ },
+ {
+  "fecha": "2026-07-19",
+  "ht": "Emelec",
+  "at": "Mushuc Runa",
+  "evt_id": "401859627"
+ },
+ {
+  "fecha": "2026-07-19",
+  "ht": "Libertad (Ecuador)",
+  "at": "Delfín",
+  "evt_id": "401859628"
+ },
+ {
+  "fecha": "2026-07-19",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Barcelona SC",
+  "evt_id": "401859629"
+ },
+ {
+  "fecha": "2026-07-19",
+  "ht": "Orense",
+  "at": "Aucas",
+  "evt_id": "401859630"
+ },
+ {
+  "fecha": "2026-07-19",
+  "ht": "Manta F.C.",
+  "at": "Liga de Quito",
+  "evt_id": "401859631"
+ },
+ {
+  "fecha": "2026-07-19",
+  "ht": "Macará",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859632"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Aucas",
+  "at": "Macará",
+  "evt_id": "401859633"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Barcelona SC",
+  "at": "Liga de Quito",
+  "evt_id": "401859634"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Orense",
+  "at": "Independiente del Valle",
+  "evt_id": "401859635"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Mushuc Runa",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859636"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Guayaquil City FC",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859637"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Deportivo Cuenca",
+  "at": "Emelec",
+  "evt_id": "401859638"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Técnico Universitario",
+  "at": "Manta F.C.",
+  "evt_id": "401859639"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Liga de Quito",
+  "at": "Delfín",
+  "evt_id": "401859640"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Independiente del Valle",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859641"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Técnico Universitario",
+  "evt_id": "401859642"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Manta F.C.",
+  "at": "Mushuc Runa",
+  "evt_id": "401859643"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Macará",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859644"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Libertad (Ecuador)",
+  "at": "Orense",
+  "evt_id": "401859645"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Emelec",
+  "at": "Aucas",
+  "evt_id": "401859646"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Libertad (Ecuador)",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859647"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Liga de Quito",
+  "at": "Independiente del Valle",
+  "evt_id": "401859648"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Guayaquil City FC",
+  "at": "Emelec",
+  "evt_id": "401859649"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Deportivo Cuenca",
+  "at": "Manta F.C.",
+  "evt_id": "401859650"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Delfín",
+  "at": "Orense",
+  "evt_id": "401859651"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Barcelona SC",
+  "at": "Macará",
+  "evt_id": "401859652"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Técnico Universitario",
+  "at": "Mushuc Runa",
+  "evt_id": "401859653"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Guayaquil City FC",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859654"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Emelec",
+  "at": "Técnico Universitario",
+  "evt_id": "401859655"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Aucas",
+  "at": "Liga de Quito",
+  "evt_id": "401859656"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Independiente del Valle",
+  "at": "Delfín",
+  "evt_id": "401859657"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Orense",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859658"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Mushuc Runa",
+  "at": "Barcelona SC",
+  "evt_id": "401859659"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Macará",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859660"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Barcelona SC",
+  "at": "Orense",
+  "evt_id": "401859661"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Delfín",
+  "at": "Aucas",
+  "evt_id": "401859662"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Manta F.C.",
+  "evt_id": "401859663"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Técnico Universitario",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859664"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Libertad (Ecuador)",
+  "at": "Macará",
+  "evt_id": "401859665"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Liga de Quito",
+  "at": "Emelec",
+  "evt_id": "401859666"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Deportivo Cuenca",
+  "at": "Mushuc Runa",
+  "evt_id": "401859667"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Aucas",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859668"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Independiente del Valle",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859669"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Manta F.C.",
+  "at": "Barcelona SC",
+  "evt_id": "401859670"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Mushuc Runa",
+  "at": "Delfín",
+  "evt_id": "401859671"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Orense",
+  "at": "Macará",
+  "evt_id": "401859672"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Guayaquil City FC",
+  "at": "Liga de Quito",
+  "evt_id": "401859673"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Técnico Universitario",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859674"
+ },
+ {
+  "fecha": "2026-09-02",
+  "ht": "Deportivo Cuenca",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859675"
+ },
+ {
+  "fecha": "2026-09-02",
+  "ht": "Delfín",
+  "at": "Técnico Universitario",
+  "evt_id": "401859676"
+ },
+ {
+  "fecha": "2026-09-02",
+  "ht": "Barcelona SC",
+  "at": "Independiente del Valle",
+  "evt_id": "401859677"
+ },
+ {
+  "fecha": "2026-09-02",
+  "ht": "Liga de Quito",
+  "at": "Mushuc Runa",
+  "evt_id": "401859678"
+ },
+ {
+  "fecha": "2026-09-02",
+  "ht": "Libertad (Ecuador)",
+  "at": "Emelec",
+  "evt_id": "401859679"
+ },
+ {
+  "fecha": "2026-09-02",
+  "ht": "Macará",
+  "at": "Manta F.C.",
+  "evt_id": "401859680"
+ },
+ {
+  "fecha": "2026-09-02",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Aucas",
+  "evt_id": "401859681"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Deportivo Cuenca",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859682"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Delfín",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859683"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Aucas",
+  "at": "Barcelona SC",
+  "evt_id": "401859684"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Emelec",
+  "at": "Manta F.C.",
+  "evt_id": "401859685"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Técnico Universitario",
+  "at": "Liga de Quito",
+  "evt_id": "401859686"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Orense",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859687"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Independiente del Valle",
+  "at": "Macará",
+  "evt_id": "401859688"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Barcelona SC",
+  "at": "Delfín",
+  "evt_id": "401859689"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Guayaquil City FC",
+  "at": "Mushuc Runa",
+  "evt_id": "401859690"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Liga de Quito",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859691"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Manta F.C.",
+  "at": "Aucas",
+  "evt_id": "401859692"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Macará",
+  "at": "Emelec",
+  "evt_id": "401859693"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Libertad (Ecuador)",
+  "at": "Independiente del Valle",
+  "evt_id": "401859694"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Orense",
+  "evt_id": "401859695"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Macará",
+  "at": "Leones",
+  "evt_id": "401859696"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Leones",
+  "at": "Libertad (Ecuador)",
+  "evt_id": "401859697"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Universidad Católica (Quito)",
+  "at": "Leones",
+  "evt_id": "401859698"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Deportivo Cuenca",
+  "at": "Leones",
+  "evt_id": "401859699"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Leones",
+  "at": "Liga de Quito",
+  "evt_id": "401859700"
+ },
+ {
+  "fecha": "2026-03-23",
+  "ht": "Guayaquil City FC",
+  "at": "Leones",
+  "evt_id": "401859701"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Leones",
+  "at": "Delfín",
+  "evt_id": "401859702"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Barcelona SC",
+  "at": "Leones",
+  "evt_id": "401859703"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Leones",
+  "at": "Aucas",
+  "evt_id": "401859704"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Leones",
+  "at": "Manta F.C.",
+  "evt_id": "401859705"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Independiente del Valle",
+  "at": "Leones",
+  "evt_id": "401859706"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Leones",
+  "at": "Emelec",
+  "evt_id": "401859707"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Orense",
+  "at": "Leones",
+  "evt_id": "401859708"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Leones",
+  "at": "Mushuc Runa",
+  "evt_id": "401859709"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Técnico Universitario",
+  "at": "Leones",
+  "evt_id": "401859710"
+ },
+ {
+  "fecha": "2026-06-01",
+  "ht": "Leones",
+  "at": "Macará",
+  "evt_id": "401859711"
+ },
+ {
+  "fecha": "2026-07-01",
+  "ht": "Libertad (Ecuador)",
+  "at": "Leones",
+  "evt_id": "401859712"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Leones",
+  "at": "Universidad Católica (Quito)",
+  "evt_id": "401859713"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Leones",
+  "at": "Deportivo Cuenca",
+  "evt_id": "401859714"
+ },
+ {
+  "fecha": "2026-07-15",
+  "ht": "Liga de Quito",
+  "at": "Leones",
+  "evt_id": "401859715"
+ },
+ {
+  "fecha": "2026-07-19",
+  "ht": "Leones",
+  "at": "Guayaquil City FC",
+  "evt_id": "401859716"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Delfín",
+  "at": "Leones",
+  "evt_id": "401859717"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Leones",
+  "at": "Barcelona SC",
+  "evt_id": "401859718"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Aucas",
+  "at": "Leones",
+  "evt_id": "401859719"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Manta F.C.",
+  "at": "Leones",
+  "evt_id": "401859720"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Leones",
+  "at": "Independiente del Valle",
+  "evt_id": "401859721"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Emelec",
+  "at": "Leones",
+  "evt_id": "401859722"
+ },
+ {
+  "fecha": "2026-09-02",
+  "ht": "Leones",
+  "at": "Orense",
+  "evt_id": "401859723"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Mushuc Runa",
+  "at": "Leones",
+  "evt_id": "401859724"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Leones",
+  "at": "Técnico Universitario",
+  "evt_id": "401859725"
+ }
+]

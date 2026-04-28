@@ -1,0 +1,920 @@
+[
+ {
+  "fecha": "2026-02-01",
+  "ht": "Alianza Atlético",
+  "at": "Cusco FC",
+  "evt_id": "401850339"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Deportivo Garcilaso",
+  "at": "Sporting Cristal",
+  "evt_id": "401850340"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Universitario",
+  "at": "ADT",
+  "evt_id": "401850341"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Sport Boys",
+  "at": "Los Chankas",
+  "evt_id": "401850342"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Sport Huancayo",
+  "at": "Alianza Lima",
+  "evt_id": "401850343"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "UTC",
+  "at": "Atlético Grau",
+  "evt_id": "401850344"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Melgar",
+  "at": "Cienciano del Cusco",
+  "evt_id": "401850345"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Comerciantes Unidos",
+  "at": "Deportivo Moquegua",
+  "evt_id": "401850356"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Juan Pablo II",
+  "at": "FC Cajamarca",
+  "evt_id": "401850357"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Cienciano del Cusco",
+  "at": "Juan Pablo II",
+  "evt_id": "401857379"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Cusco FC",
+  "at": "Universitario",
+  "evt_id": "401857380"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Deportivo Moquegua",
+  "at": "UTC",
+  "evt_id": "401857381"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Los Chankas",
+  "at": "Alianza Atlético",
+  "evt_id": "401857382"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "FC Cajamarca",
+  "at": "Deportivo Garcilaso",
+  "evt_id": "401857383"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Sporting Cristal",
+  "at": "Melgar",
+  "evt_id": "401857384"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "ADT",
+  "at": "Sport Boys",
+  "evt_id": "401857385"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Alianza Lima",
+  "at": "Comerciantes Unidos",
+  "evt_id": "401857386"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Atlético Grau",
+  "at": "Sport Huancayo",
+  "evt_id": "401857387"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Sport Boys",
+  "at": "Atlético Grau",
+  "evt_id": "401857388"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Melgar",
+  "at": "Deportivo Moquegua",
+  "evt_id": "401857389"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Juan Pablo II",
+  "at": "Sporting Cristal",
+  "evt_id": "401857390"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Deportivo Garcilaso",
+  "at": "ADT",
+  "evt_id": "401857391"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Comerciantes Unidos",
+  "at": "Los Chankas",
+  "evt_id": "401857392"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Alianza Atlético",
+  "at": "Alianza Lima",
+  "evt_id": "401857393"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Sport Huancayo",
+  "at": "FC Cajamarca",
+  "evt_id": "401857394"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Universitario",
+  "at": "Cienciano del Cusco",
+  "evt_id": "401857395"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "UTC",
+  "at": "Cusco FC",
+  "evt_id": "401857396"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "ADT",
+  "at": "UTC",
+  "evt_id": "401857397"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Alianza Lima",
+  "at": "Sport Boys",
+  "evt_id": "401857398"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Sporting Cristal",
+  "at": "Universitario",
+  "evt_id": "401857399"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Los Chankas",
+  "at": "Sport Huancayo",
+  "evt_id": "401857400"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Deportivo Moquegua",
+  "at": "Deportivo Garcilaso",
+  "evt_id": "401857401"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Cusco FC",
+  "at": "Comerciantes Unidos",
+  "evt_id": "401857402"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Cienciano del Cusco",
+  "at": "Alianza Atlético",
+  "evt_id": "401857403"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "FC Cajamarca",
+  "at": "Melgar",
+  "evt_id": "401857404"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Atlético Grau",
+  "at": "Juan Pablo II",
+  "evt_id": "401857405"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Alianza Atlético",
+  "at": "ADT",
+  "evt_id": "401857406"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Sport Huancayo",
+  "at": "Sporting Cristal",
+  "evt_id": "401857407"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "UTC",
+  "at": "Alianza Lima",
+  "evt_id": "401857408"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Sport Boys",
+  "at": "Deportivo Moquegua",
+  "evt_id": "401857409"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Universitario",
+  "at": "FC Cajamarca",
+  "evt_id": "401857410"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Juan Pablo II",
+  "at": "Cusco FC",
+  "evt_id": "401857411"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Deportivo Garcilaso",
+  "at": "Cienciano del Cusco",
+  "evt_id": "401857412"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Comerciantes Unidos",
+  "at": "Atlético Grau",
+  "evt_id": "401857413"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Melgar",
+  "at": "Los Chankas",
+  "evt_id": "401857414"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Cienciano del Cusco",
+  "at": "Sport Boys",
+  "evt_id": "401857415"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "Atlético Grau",
+  "at": "FC Cajamarca",
+  "evt_id": "401857416"
+ },
+ {
+  "fecha": "2026-03-10",
+  "ht": "Alianza Lima",
+  "at": "Melgar",
+  "evt_id": "401857417"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "ADT",
+  "at": "Juan Pablo II",
+  "evt_id": "401857418"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Sporting Cristal",
+  "at": "Alianza Atlético",
+  "evt_id": "401857419"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Cusco FC",
+  "at": "Deportivo Garcilaso",
+  "evt_id": "401857420"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Deportivo Moquegua",
+  "at": "Sport Huancayo",
+  "evt_id": "401857421"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Los Chankas",
+  "at": "Universitario",
+  "evt_id": "401857422"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Comerciantes Unidos",
+  "at": "UTC",
+  "evt_id": "401857423"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Deportivo Garcilaso",
+  "at": "Alianza Lima",
+  "evt_id": "401857424"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Cusco FC",
+  "at": "Cienciano del Cusco",
+  "evt_id": "401857425"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "FC Cajamarca",
+  "at": "Comerciantes Unidos",
+  "evt_id": "401857426"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Alianza Atlético",
+  "at": "Deportivo Moquegua",
+  "evt_id": "401857427"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Juan Pablo II",
+  "at": "Los Chankas",
+  "evt_id": "401857428"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Universitario",
+  "at": "UTC",
+  "evt_id": "401857429"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Sporting Cristal",
+  "at": "Sport Boys",
+  "evt_id": "401857430"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Sport Huancayo",
+  "at": "ADT",
+  "evt_id": "401857431"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Melgar",
+  "at": "Atlético Grau",
+  "evt_id": "401857432"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "ADT",
+  "at": "Melgar",
+  "evt_id": "401857433"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Alianza Lima",
+  "at": "Juan Pablo II",
+  "evt_id": "401857434"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Atlético Grau",
+  "at": "Deportivo Garcilaso",
+  "evt_id": "401857435"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Cienciano del Cusco",
+  "at": "FC Cajamarca",
+  "evt_id": "401857436"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "UTC",
+  "at": "Alianza Atlético",
+  "evt_id": "401857437"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Los Chankas",
+  "at": "Sporting Cristal",
+  "evt_id": "401857438"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Deportivo Moquegua",
+  "at": "Cusco FC",
+  "evt_id": "401857439"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Comerciantes Unidos",
+  "at": "Universitario",
+  "evt_id": "401857440"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Sport Boys",
+  "at": "Sport Huancayo",
+  "evt_id": "401857441"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Alianza Atlético",
+  "at": "Atlético Grau",
+  "evt_id": "401857442"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "FC Cajamarca",
+  "at": "Los Chankas",
+  "evt_id": "401857443"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Cienciano del Cusco",
+  "at": "ADT",
+  "evt_id": "401857444"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Deportivo Garcilaso",
+  "at": "Sport Boys",
+  "evt_id": "401857445"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Juan Pablo II",
+  "at": "UTC",
+  "evt_id": "401857446"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Melgar",
+  "at": "Cusco FC",
+  "evt_id": "401857447"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Sport Huancayo",
+  "at": "Comerciantes Unidos",
+  "evt_id": "401857448"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Sporting Cristal",
+  "at": "Deportivo Moquegua",
+  "evt_id": "401857449"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Universitario",
+  "at": "Alianza Lima",
+  "evt_id": "401857450"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Cusco FC",
+  "at": "FC Cajamarca",
+  "evt_id": "401857451"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Comerciantes Unidos",
+  "at": "Alianza Atlético",
+  "evt_id": "401857452"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Atlético Grau",
+  "at": "Sporting Cristal",
+  "evt_id": "401857453"
+ },
+ {
+  "fecha": "2026-04-14",
+  "ht": "ADT",
+  "at": "Alianza Lima",
+  "evt_id": "401857454"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Universitario",
+  "at": "Deportivo Garcilaso",
+  "evt_id": "401857455"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Los Chankas",
+  "at": "Cienciano del Cusco",
+  "evt_id": "401857456"
+ },
+ {
+  "fecha": "2026-04-15",
+  "ht": "Sport Boys",
+  "at": "Melgar",
+  "evt_id": "401857457"
+ },
+ {
+  "fecha": "2026-04-15",
+  "ht": "UTC",
+  "at": "Sport Huancayo",
+  "evt_id": "401857458"
+ },
+ {
+  "fecha": "2026-04-14",
+  "ht": "Deportivo Moquegua",
+  "at": "Juan Pablo II",
+  "evt_id": "401857459"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Cienciano del Cusco",
+  "at": "Deportivo Moquegua",
+  "evt_id": "401857460"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "FC Cajamarca",
+  "at": "ADT",
+  "evt_id": "401857461"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Alianza Lima",
+  "at": "Cusco FC",
+  "evt_id": "401857462"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Alianza Atlético",
+  "at": "Sport Boys",
+  "evt_id": "401857463"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Juan Pablo II",
+  "at": "Comerciantes Unidos",
+  "evt_id": "401857464"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Sporting Cristal",
+  "at": "UTC",
+  "evt_id": "401857465"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Sport Huancayo",
+  "at": "Deportivo Garcilaso",
+  "evt_id": "401857466"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Melgar",
+  "at": "Universitario",
+  "evt_id": "401857467"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Los Chankas",
+  "at": "Atlético Grau",
+  "evt_id": "401857468"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "ADT",
+  "at": "Los Chankas",
+  "evt_id": "401857469"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Atlético Grau",
+  "at": "Alianza Lima",
+  "evt_id": "401857470"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Comerciantes Unidos",
+  "at": "Sporting Cristal",
+  "evt_id": "401857471"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Cusco FC",
+  "at": "Sport Huancayo",
+  "evt_id": "401857472"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Universitario",
+  "at": "Alianza Atlético",
+  "evt_id": "401857473"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Sport Boys",
+  "at": "Juan Pablo II",
+  "evt_id": "401857474"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Deportivo Moquegua",
+  "at": "FC Cajamarca",
+  "evt_id": "401857475"
+ },
+ {
+  "fecha": "2026-04-28",
+  "ht": "Deportivo Garcilaso",
+  "at": "Melgar",
+  "evt_id": "401857476"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "UTC",
+  "at": "Cienciano del Cusco",
+  "evt_id": "401857477"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "FC Cajamarca",
+  "at": "Sport Boys",
+  "evt_id": "401857478"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Alianza Lima",
+  "at": "Deportivo Moquegua",
+  "evt_id": "401857479"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Sporting Cristal",
+  "at": "Cusco FC",
+  "evt_id": "401857480"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Melgar",
+  "at": "UTC",
+  "evt_id": "401857481"
+ },
+ {
+  "fecha": "2026-05-04",
+  "ht": "Los Chankas",
+  "at": "Deportivo Garcilaso",
+  "evt_id": "401857482"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Juan Pablo II",
+  "at": "Universitario",
+  "evt_id": "401857483"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Cienciano del Cusco",
+  "at": "Comerciantes Unidos",
+  "evt_id": "401857484"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "ADT",
+  "at": "Atlético Grau",
+  "evt_id": "401857485"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Alianza Atlético",
+  "at": "Sport Huancayo",
+  "evt_id": "401857486"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Alianza Lima",
+  "at": "Sporting Cristal",
+  "evt_id": "401857487"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Sport Huancayo",
+  "at": "Juan Pablo II",
+  "evt_id": "401857488"
+ },
+ {
+  "fecha": "2026-05-12",
+  "ht": "Sport Boys",
+  "at": "Universitario",
+  "evt_id": "401857489"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Deportivo Moquegua",
+  "at": "ADT",
+  "evt_id": "401857490"
+ },
+ {
+  "fecha": "2026-05-08",
+  "ht": "UTC",
+  "at": "FC Cajamarca",
+  "evt_id": "401857491"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Cusco FC",
+  "at": "Los Chankas",
+  "evt_id": "401857492"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Comerciantes Unidos",
+  "at": "Melgar",
+  "evt_id": "401857493"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Atlético Grau",
+  "at": "Cienciano del Cusco",
+  "evt_id": "401857494"
+ },
+ {
+  "fecha": "2026-05-11",
+  "ht": "Deportivo Garcilaso",
+  "at": "Alianza Atlético",
+  "evt_id": "401857495"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Deportivo Garcilaso",
+  "at": "UTC",
+  "evt_id": "401857496"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Cienciano del Cusco",
+  "at": "Alianza Lima",
+  "evt_id": "401857497"
+ },
+ {
+  "fecha": "2026-05-15",
+  "ht": "FC Cajamarca",
+  "at": "Sporting Cristal",
+  "evt_id": "401857498"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "ADT",
+  "at": "Comerciantes Unidos",
+  "evt_id": "401857499"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Juan Pablo II",
+  "at": "Alianza Atlético",
+  "evt_id": "401857500"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Universitario",
+  "at": "Atlético Grau",
+  "evt_id": "401857501"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Sport Boys",
+  "at": "Cusco FC",
+  "evt_id": "401857502"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Melgar",
+  "at": "Sport Huancayo",
+  "evt_id": "401857503"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Los Chankas",
+  "at": "Deportivo Moquegua",
+  "evt_id": "401857504"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Alianza Atlético",
+  "at": "FC Cajamarca",
+  "evt_id": "401857505"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Alianza Lima",
+  "at": "Los Chankas",
+  "evt_id": "401857506"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "UTC",
+  "at": "Sport Boys",
+  "evt_id": "401857507"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Sporting Cristal",
+  "at": "ADT",
+  "evt_id": "401857508"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Sport Huancayo",
+  "at": "Cienciano del Cusco",
+  "evt_id": "401857509"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Juan Pablo II",
+  "at": "Melgar",
+  "evt_id": "401857510"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Deportivo Moquegua",
+  "at": "Universitario",
+  "evt_id": "401857511"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Cusco FC",
+  "at": "Atlético Grau",
+  "evt_id": "401857512"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Comerciantes Unidos",
+  "at": "Deportivo Garcilaso",
+  "evt_id": "401857513"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "ADT",
+  "at": "Cusco FC",
+  "evt_id": "401857514"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Deportivo Garcilaso",
+  "at": "Juan Pablo II",
+  "evt_id": "401857515"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Los Chankas",
+  "at": "UTC",
+  "evt_id": "401857516"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Melgar",
+  "at": "Alianza Atlético",
+  "evt_id": "401857517"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Universitario",
+  "at": "Sport Huancayo",
+  "evt_id": "401857518"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Cienciano del Cusco",
+  "at": "Sporting Cristal",
+  "evt_id": "401857519"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "FC Cajamarca",
+  "at": "Alianza Lima",
+  "evt_id": "401857520"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Atlético Grau",
+  "at": "Deportivo Moquegua",
+  "evt_id": "401857521"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Sport Boys",
+  "at": "Comerciantes Unidos",
+  "evt_id": "401857522"
+ }
+]

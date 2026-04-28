@@ -1,0 +1,1442 @@
+[
+ {
+  "fecha": "2026-03-14",
+  "ht": "Hamarkameratene",
+  "at": "Viking FK",
+  "evt_id": "401843275"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Molde",
+  "at": "Rosenborg",
+  "evt_id": "401843276"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Kristiansund BK",
+  "at": "SK Brann",
+  "evt_id": "401843277"
+ },
+ {
+  "fecha": "2026-04-15",
+  "ht": "Sarpsborg FK",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843278"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "KFUM Oslo",
+  "at": "IK Start",
+  "evt_id": "401843279"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Aalesund",
+  "at": "Lillestrom",
+  "evt_id": "401843280"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Vålerenga",
+  "at": "Sandefjord",
+  "evt_id": "401843281"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Tromso",
+  "at": "Fredrikstad",
+  "evt_id": "401843282"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "IK Start",
+  "at": "Aalesund",
+  "evt_id": "401843283"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Viking FK",
+  "at": "Molde",
+  "evt_id": "401843284"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Rosenborg",
+  "at": "Vålerenga",
+  "evt_id": "401843285"
+ },
+ {
+  "fecha": "2026-05-20",
+  "ht": "Lillestrom",
+  "at": "Kristiansund BK",
+  "evt_id": "401843286"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Fredrikstad",
+  "at": "KFUM Oslo",
+  "evt_id": "401843287"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Sandefjord",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843288"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "SK Brann",
+  "at": "Tromso",
+  "evt_id": "401843289"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Bodo/Glimt",
+  "at": "Hamarkameratene",
+  "evt_id": "401843290"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Vålerenga",
+  "at": "Viking FK",
+  "evt_id": "401843291"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Hamarkameratene",
+  "at": "SK Brann",
+  "evt_id": "401843292"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Kristiansund BK",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843293"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Molde",
+  "at": "Lillestrom",
+  "evt_id": "401843294"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Sarpsborg FK",
+  "at": "IK Start",
+  "evt_id": "401843295"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Tromso",
+  "at": "Rosenborg",
+  "evt_id": "401843296"
+ },
+ {
+  "fecha": "2026-04-07",
+  "ht": "Aalesund",
+  "at": "Fredrikstad",
+  "evt_id": "401843297"
+ },
+ {
+  "fecha": "2026-04-07",
+  "ht": "KFUM Oslo",
+  "at": "Sandefjord",
+  "evt_id": "401843298"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Lillestrom",
+  "at": "IK Start",
+  "evt_id": "401843299"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Tromso",
+  "at": "Kristiansund BK",
+  "evt_id": "401843300"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Viking FK",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843301"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Rosenborg",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843302"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Aalesund",
+  "at": "KFUM Oslo",
+  "evt_id": "401843303"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Fredrikstad",
+  "at": "Vålerenga",
+  "evt_id": "401843304"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Molde",
+  "at": "Hamarkameratene",
+  "evt_id": "401843305"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "SK Brann",
+  "at": "Sandefjord",
+  "evt_id": "401843306"
+ },
+ {
+  "fecha": "2026-04-15",
+  "ht": "Tromso",
+  "at": "Lillestrom",
+  "evt_id": "401843307"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Bodo/Glimt",
+  "at": "Aalesund",
+  "evt_id": "401843308"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Sandefjord",
+  "at": "Rosenborg",
+  "evt_id": "401843309"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Viking FK",
+  "at": "SK Brann",
+  "evt_id": "401843310"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Vålerenga",
+  "at": "Lillestrom",
+  "evt_id": "401843311"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Hamarkameratene",
+  "at": "KFUM Oslo",
+  "evt_id": "401843312"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Kristiansund BK",
+  "at": "Fredrikstad",
+  "evt_id": "401843313"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Sarpsborg FK",
+  "at": "Tromso",
+  "evt_id": "401843314"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "IK Start",
+  "at": "Molde",
+  "evt_id": "401843315"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Fredrikstad",
+  "at": "Viking FK",
+  "evt_id": "401843316"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Rosenborg",
+  "at": "SK Brann",
+  "evt_id": "401843317"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Molde",
+  "at": "Vålerenga",
+  "evt_id": "401843318"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Aalesund",
+  "at": "Kristiansund BK",
+  "evt_id": "401843319"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Hamarkameratene",
+  "at": "IK Start",
+  "evt_id": "401843320"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "KFUM Oslo",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843321"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Tromso",
+  "at": "Sandefjord",
+  "evt_id": "401843322"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Lillestrom",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843323"
+ },
+ {
+  "fecha": "2026-04-29",
+  "ht": "Tromso",
+  "at": "SK Brann",
+  "evt_id": "401843324"
+ },
+ {
+  "fecha": "2026-04-30",
+  "ht": "Bodo/Glimt",
+  "at": "IK Start",
+  "evt_id": "401843325"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "Viking FK",
+  "at": "Rosenborg",
+  "evt_id": "401843326"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "SK Brann",
+  "at": "Fredrikstad",
+  "evt_id": "401843327"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Lillestrom",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843328"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Kristiansund BK",
+  "at": "Hamarkameratene",
+  "evt_id": "401843329"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Sandefjord",
+  "at": "Aalesund",
+  "evt_id": "401843330"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "IK Start",
+  "at": "Tromso",
+  "evt_id": "401843331"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Vålerenga",
+  "at": "KFUM Oslo",
+  "evt_id": "401843332"
+ },
+ {
+  "fecha": "2026-05-04",
+  "ht": "Bodo/Glimt",
+  "at": "Molde",
+  "evt_id": "401843333"
+ },
+ {
+  "fecha": "2026-05-08",
+  "ht": "Hamarkameratene",
+  "at": "Vålerenga",
+  "evt_id": "401843334"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Sarpsborg FK",
+  "at": "Fredrikstad",
+  "evt_id": "401843335"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Rosenborg",
+  "at": "Lillestrom",
+  "evt_id": "401843336"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "KFUM Oslo",
+  "at": "Viking FK",
+  "evt_id": "401843337"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Sandefjord",
+  "at": "Kristiansund BK",
+  "evt_id": "401843338"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "IK Start",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843339"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Tromso",
+  "at": "Molde",
+  "evt_id": "401843340"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Aalesund",
+  "at": "SK Brann",
+  "evt_id": "401843341"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "SK Brann",
+  "at": "KFUM Oslo",
+  "evt_id": "401843342"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Lillestrom",
+  "at": "Sandefjord",
+  "evt_id": "401843343"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Viking FK",
+  "at": "IK Start",
+  "evt_id": "401843344"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Rosenborg",
+  "at": "Aalesund",
+  "evt_id": "401843345"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Molde",
+  "at": "Kristiansund BK",
+  "evt_id": "401843346"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Fredrikstad",
+  "at": "Hamarkameratene",
+  "evt_id": "401843347"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Bodo/Glimt",
+  "at": "Tromso",
+  "evt_id": "401843348"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Vålerenga",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843349"
+ },
+ {
+  "fecha": "2026-05-25",
+  "ht": "KFUM Oslo",
+  "at": "Rosenborg",
+  "evt_id": "401843350"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Kristiansund BK",
+  "at": "Viking FK",
+  "evt_id": "401843351"
+ },
+ {
+  "fecha": "2026-05-25",
+  "ht": "Sandefjord",
+  "at": "Fredrikstad",
+  "evt_id": "401843352"
+ },
+ {
+  "fecha": "2026-05-25",
+  "ht": "Sarpsborg FK",
+  "at": "Molde",
+  "evt_id": "401843353"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Hamarkameratene",
+  "at": "Lillestrom",
+  "evt_id": "401843354"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Bodo/Glimt",
+  "at": "SK Brann",
+  "evt_id": "401843355"
+ },
+ {
+  "fecha": "2026-05-25",
+  "ht": "IK Start",
+  "at": "Vålerenga",
+  "evt_id": "401843356"
+ },
+ {
+  "fecha": "2026-05-25",
+  "ht": "Tromso",
+  "at": "Aalesund",
+  "evt_id": "401843357"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "Aalesund",
+  "at": "Hamarkameratene",
+  "evt_id": "401843358"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "SK Brann",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843359"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "Fredrikstad",
+  "at": "IK Start",
+  "evt_id": "401843360"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "Molde",
+  "at": "Sandefjord",
+  "evt_id": "401843361"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "Lillestrom",
+  "at": "Viking FK",
+  "evt_id": "401843362"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "Vålerenga",
+  "at": "Kristiansund BK",
+  "evt_id": "401843363"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "KFUM Oslo",
+  "at": "Tromso",
+  "evt_id": "401843364"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "Rosenborg",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843365"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "IK Start",
+  "at": "Sandefjord",
+  "evt_id": "401843366"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Sarpsborg FK",
+  "at": "Aalesund",
+  "evt_id": "401843367"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Molde",
+  "at": "Fredrikstad",
+  "evt_id": "401843368"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Lillestrom",
+  "at": "SK Brann",
+  "evt_id": "401843369"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Kristiansund BK",
+  "at": "KFUM Oslo",
+  "evt_id": "401843370"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Hamarkameratene",
+  "at": "Rosenborg",
+  "evt_id": "401843371"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Bodo/Glimt",
+  "at": "Vålerenga",
+  "evt_id": "401843372"
+ },
+ {
+  "fecha": "2026-07-05",
+  "ht": "Viking FK",
+  "at": "Tromso",
+  "evt_id": "401843373"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Sarpsborg FK",
+  "at": "Viking FK",
+  "evt_id": "401843374"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Sandefjord",
+  "at": "Hamarkameratene",
+  "evt_id": "401843375"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Rosenborg",
+  "at": "Kristiansund BK",
+  "evt_id": "401843376"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "KFUM Oslo",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843377"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Fredrikstad",
+  "at": "Lillestrom",
+  "evt_id": "401843378"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "SK Brann",
+  "at": "IK Start",
+  "evt_id": "401843379"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Aalesund",
+  "at": "Molde",
+  "evt_id": "401843380"
+ },
+ {
+  "fecha": "2026-07-12",
+  "ht": "Tromso",
+  "at": "Vålerenga",
+  "evt_id": "401843381"
+ },
+ {
+  "fecha": "2026-07-18",
+  "ht": "Bodo/Glimt",
+  "at": "Fredrikstad",
+  "evt_id": "401843382"
+ },
+ {
+  "fecha": "2026-07-18",
+  "ht": "Hamarkameratene",
+  "at": "Tromso",
+  "evt_id": "401843383"
+ },
+ {
+  "fecha": "2026-07-18",
+  "ht": "Vålerenga",
+  "at": "Aalesund",
+  "evt_id": "401843384"
+ },
+ {
+  "fecha": "2026-07-18",
+  "ht": "Viking FK",
+  "at": "Sandefjord",
+  "evt_id": "401843385"
+ },
+ {
+  "fecha": "2026-07-18",
+  "ht": "IK Start",
+  "at": "Rosenborg",
+  "evt_id": "401843386"
+ },
+ {
+  "fecha": "2026-07-18",
+  "ht": "Molde",
+  "at": "SK Brann",
+  "evt_id": "401843387"
+ },
+ {
+  "fecha": "2026-07-18",
+  "ht": "Lillestrom",
+  "at": "KFUM Oslo",
+  "evt_id": "401843388"
+ },
+ {
+  "fecha": "2026-07-18",
+  "ht": "Kristiansund BK",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843389"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Sandefjord",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843390"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Rosenborg",
+  "at": "Fredrikstad",
+  "evt_id": "401843391"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Kristiansund BK",
+  "at": "IK Start",
+  "evt_id": "401843392"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "KFUM Oslo",
+  "at": "Molde",
+  "evt_id": "401843393"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "SK Brann",
+  "at": "Vålerenga",
+  "evt_id": "401843394"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Aalesund",
+  "at": "Viking FK",
+  "evt_id": "401843395"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Sarpsborg FK",
+  "at": "Hamarkameratene",
+  "evt_id": "401843396"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Molde",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843397"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "KFUM Oslo",
+  "at": "Kristiansund BK",
+  "evt_id": "401843398"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Fredrikstad",
+  "at": "Sandefjord",
+  "evt_id": "401843399"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "SK Brann",
+  "at": "Rosenborg",
+  "evt_id": "401843400"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Bodo/Glimt",
+  "at": "Lillestrom",
+  "evt_id": "401843401"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Aalesund",
+  "at": "Tromso",
+  "evt_id": "401843402"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "IK Start",
+  "at": "Viking FK",
+  "evt_id": "401843403"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Vålerenga",
+  "at": "Hamarkameratene",
+  "evt_id": "401843404"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Viking FK",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843405"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "IK Start",
+  "at": "Fredrikstad",
+  "evt_id": "401843406"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Sandefjord",
+  "at": "KFUM Oslo",
+  "evt_id": "401843407"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Lillestrom",
+  "at": "Rosenborg",
+  "evt_id": "401843408"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Kristiansund BK",
+  "at": "Molde",
+  "evt_id": "401843409"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Hamarkameratene",
+  "at": "Aalesund",
+  "evt_id": "401843410"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Vålerenga",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843411"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Sarpsborg FK",
+  "at": "Sandefjord",
+  "evt_id": "401843412"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Rosenborg",
+  "at": "Viking FK",
+  "evt_id": "401843413"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Molde",
+  "at": "Tromso",
+  "evt_id": "401843414"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "KFUM Oslo",
+  "at": "Lillestrom",
+  "evt_id": "401843415"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Fredrikstad",
+  "at": "Kristiansund BK",
+  "evt_id": "401843416"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "SK Brann",
+  "at": "Hamarkameratene",
+  "evt_id": "401843417"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Aalesund",
+  "at": "Vålerenga",
+  "evt_id": "401843418"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Viking FK",
+  "at": "Aalesund",
+  "evt_id": "401843419"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Tromso",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843420"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "IK Start",
+  "at": "KFUM Oslo",
+  "evt_id": "401843421"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Sandefjord",
+  "at": "SK Brann",
+  "evt_id": "401843422"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Lillestrom",
+  "at": "Fredrikstad",
+  "evt_id": "401843423"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Hamarkameratene",
+  "at": "Kristiansund BK",
+  "evt_id": "401843424"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Vålerenga",
+  "at": "Molde",
+  "evt_id": "401843425"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Bodo/Glimt",
+  "at": "Rosenborg",
+  "evt_id": "401843426"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Aalesund",
+  "at": "IK Start",
+  "evt_id": "401843427"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "SK Brann",
+  "at": "Lillestrom",
+  "evt_id": "401843428"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Fredrikstad",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843429"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Kristiansund BK",
+  "at": "Tromso",
+  "evt_id": "401843430"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Molde",
+  "at": "KFUM Oslo",
+  "evt_id": "401843431"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Rosenborg",
+  "at": "Hamarkameratene",
+  "evt_id": "401843432"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Sandefjord",
+  "at": "Viking FK",
+  "evt_id": "401843433"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Sarpsborg FK",
+  "at": "Vålerenga",
+  "evt_id": "401843434"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Bodo/Glimt",
+  "at": "Sandefjord",
+  "evt_id": "401843435"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Fredrikstad",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843436"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Viking FK",
+  "at": "Kristiansund BK",
+  "evt_id": "401843437"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "IK Start",
+  "at": "SK Brann",
+  "evt_id": "401843438"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Rosenborg",
+  "at": "Tromso",
+  "evt_id": "401843439"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Lillestrom",
+  "at": "Vålerenga",
+  "evt_id": "401843440"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "KFUM Oslo",
+  "at": "Aalesund",
+  "evt_id": "401843441"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Hamarkameratene",
+  "at": "Molde",
+  "evt_id": "401843442"
+ },
+ {
+  "fecha": "2026-09-20",
+  "ht": "SK Brann",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843443"
+ },
+ {
+  "fecha": "2026-09-20",
+  "ht": "Viking FK",
+  "at": "Lillestrom",
+  "evt_id": "401843444"
+ },
+ {
+  "fecha": "2026-09-20",
+  "ht": "Tromso",
+  "at": "Hamarkameratene",
+  "evt_id": "401843445"
+ },
+ {
+  "fecha": "2026-09-20",
+  "ht": "Sarpsborg FK",
+  "at": "KFUM Oslo",
+  "evt_id": "401843446"
+ },
+ {
+  "fecha": "2026-09-20",
+  "ht": "Sandefjord",
+  "at": "IK Start",
+  "evt_id": "401843447"
+ },
+ {
+  "fecha": "2026-09-20",
+  "ht": "Molde",
+  "at": "Aalesund",
+  "evt_id": "401843448"
+ },
+ {
+  "fecha": "2026-09-20",
+  "ht": "Kristiansund BK",
+  "at": "Rosenborg",
+  "evt_id": "401843449"
+ },
+ {
+  "fecha": "2026-09-20",
+  "ht": "Vålerenga",
+  "at": "Fredrikstad",
+  "evt_id": "401843450"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Rosenborg",
+  "at": "Sandefjord",
+  "evt_id": "401843451"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Lillestrom",
+  "at": "Molde",
+  "evt_id": "401843452"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "KFUM Oslo",
+  "at": "Vålerenga",
+  "evt_id": "401843453"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Fredrikstad",
+  "at": "Tromso",
+  "evt_id": "401843454"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "SK Brann",
+  "at": "Viking FK",
+  "evt_id": "401843455"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Bodo/Glimt",
+  "at": "Kristiansund BK",
+  "evt_id": "401843456"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Aalesund",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843457"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "IK Start",
+  "at": "Hamarkameratene",
+  "evt_id": "401843458"
+ },
+ {
+  "fecha": "2026-10-18",
+  "ht": "Viking FK",
+  "at": "Fredrikstad",
+  "evt_id": "401843459"
+ },
+ {
+  "fecha": "2026-10-18",
+  "ht": "Tromso",
+  "at": "KFUM Oslo",
+  "evt_id": "401843460"
+ },
+ {
+  "fecha": "2026-10-18",
+  "ht": "Sarpsborg FK",
+  "at": "Rosenborg",
+  "evt_id": "401843461"
+ },
+ {
+  "fecha": "2026-10-18",
+  "ht": "Sandefjord",
+  "at": "Lillestrom",
+  "evt_id": "401843462"
+ },
+ {
+  "fecha": "2026-10-18",
+  "ht": "Molde",
+  "at": "IK Start",
+  "evt_id": "401843463"
+ },
+ {
+  "fecha": "2026-10-18",
+  "ht": "Kristiansund BK",
+  "at": "Aalesund",
+  "evt_id": "401843464"
+ },
+ {
+  "fecha": "2026-10-18",
+  "ht": "Hamarkameratene",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843465"
+ },
+ {
+  "fecha": "2026-10-18",
+  "ht": "Vålerenga",
+  "at": "SK Brann",
+  "evt_id": "401843466"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Aalesund",
+  "at": "Sandefjord",
+  "evt_id": "401843467"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Bodo/Glimt",
+  "at": "Viking FK",
+  "evt_id": "401843468"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Vålerenga",
+  "at": "Tromso",
+  "evt_id": "401843469"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "IK Start",
+  "at": "Lillestrom",
+  "evt_id": "401843470"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Sarpsborg FK",
+  "at": "Kristiansund BK",
+  "evt_id": "401843471"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "KFUM Oslo",
+  "at": "Hamarkameratene",
+  "evt_id": "401843472"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Fredrikstad",
+  "at": "Rosenborg",
+  "evt_id": "401843473"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "SK Brann",
+  "at": "Molde",
+  "evt_id": "401843474"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Fredrikstad",
+  "at": "SK Brann",
+  "evt_id": "401843475"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Tromso",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843476"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Sandefjord",
+  "at": "Molde",
+  "evt_id": "401843477"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Rosenborg",
+  "at": "IK Start",
+  "evt_id": "401843478"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Lillestrom",
+  "at": "Aalesund",
+  "evt_id": "401843479"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Kristiansund BK",
+  "at": "Vålerenga",
+  "evt_id": "401843480"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Hamarkameratene",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843481"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Viking FK",
+  "at": "KFUM Oslo",
+  "evt_id": "401843482"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Tromso",
+  "at": "Viking FK",
+  "evt_id": "401843483"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Sarpsborg FK",
+  "at": "Lillestrom",
+  "evt_id": "401843484"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Vålerenga",
+  "at": "IK Start",
+  "evt_id": "401843485"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Molde",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843486"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Kristiansund BK",
+  "at": "Sandefjord",
+  "evt_id": "401843487"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "KFUM Oslo",
+  "at": "SK Brann",
+  "evt_id": "401843488"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Hamarkameratene",
+  "at": "Fredrikstad",
+  "evt_id": "401843489"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Aalesund",
+  "at": "Rosenborg",
+  "evt_id": "401843490"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "IK Start",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843491"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Bodo/Glimt",
+  "at": "KFUM Oslo",
+  "evt_id": "401843492"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Viking FK",
+  "at": "Vålerenga",
+  "evt_id": "401843493"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "SK Brann",
+  "at": "Kristiansund BK",
+  "evt_id": "401843494"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Fredrikstad",
+  "at": "Aalesund",
+  "evt_id": "401843495"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Lillestrom",
+  "at": "Hamarkameratene",
+  "evt_id": "401843496"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Rosenborg",
+  "at": "Molde",
+  "evt_id": "401843497"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Sandefjord",
+  "at": "Tromso",
+  "evt_id": "401843498"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Tromso",
+  "at": "IK Start",
+  "evt_id": "401843499"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Vålerenga",
+  "at": "Rosenborg",
+  "evt_id": "401843500"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Sarpsborg FK",
+  "at": "SK Brann",
+  "evt_id": "401843501"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Molde",
+  "at": "Viking FK",
+  "evt_id": "401843502"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Kristiansund BK",
+  "at": "Lillestrom",
+  "evt_id": "401843503"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "KFUM Oslo",
+  "at": "Fredrikstad",
+  "evt_id": "401843504"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Hamarkameratene",
+  "at": "Sandefjord",
+  "evt_id": "401843505"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Aalesund",
+  "at": "Bodo/Glimt",
+  "evt_id": "401843506"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Bodo/Glimt",
+  "at": "Sarpsborg FK",
+  "evt_id": "401843507"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "SK Brann",
+  "at": "Aalesund",
+  "evt_id": "401843508"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Fredrikstad",
+  "at": "Molde",
+  "evt_id": "401843509"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Viking FK",
+  "at": "Hamarkameratene",
+  "evt_id": "401843510"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Rosenborg",
+  "at": "KFUM Oslo",
+  "evt_id": "401843511"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Sandefjord",
+  "at": "Vålerenga",
+  "evt_id": "401843512"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "IK Start",
+  "at": "Kristiansund BK",
+  "evt_id": "401843513"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Lillestrom",
+  "at": "Tromso",
+  "evt_id": "401843514"
+ }
+]

@@ -1,0 +1,548 @@
+[
+ {
+  "fecha": "2026-01-31",
+  "ht": "Deportivo Rayo Zuliano",
+  "at": "Zamora",
+  "evt_id": "401850385"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Estudiantes de Mérida",
+  "at": "Caracas FC",
+  "evt_id": "401850386"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "Deportivo Táchira",
+  "at": "Academia Anzoátegui",
+  "evt_id": "401850387"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Deportivo La Guaira",
+  "at": "Monagas SC",
+  "evt_id": "401850388"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Carabobo",
+  "at": "Portuguesa",
+  "evt_id": "401850389"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Academia Puerto Cabello",
+  "at": "Metropolitanos FC",
+  "evt_id": "401850390"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Universidad Central",
+  "at": "Trujillanos",
+  "evt_id": "401850391"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Academia Anzoátegui",
+  "at": "Deportivo Rayo Zuliano",
+  "evt_id": "401850392"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Caracas FC",
+  "at": "Academia Puerto Cabello",
+  "evt_id": "401850393"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Metropolitanos FC",
+  "at": "Deportivo La Guaira",
+  "evt_id": "401850394"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Monagas SC",
+  "at": "Universidad Central",
+  "evt_id": "401850395"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Portuguesa",
+  "at": "Deportivo Táchira",
+  "evt_id": "401850396"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Trujillanos",
+  "at": "Carabobo",
+  "evt_id": "401850397"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Zamora",
+  "at": "Estudiantes de Mérida",
+  "evt_id": "401850398"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Portuguesa",
+  "at": "Academia Anzoátegui",
+  "evt_id": "401850399"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Estudiantes de Mérida",
+  "at": "Deportivo Rayo Zuliano",
+  "evt_id": "401850400"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Deportivo Táchira",
+  "at": "Trujillanos",
+  "evt_id": "401850401"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Deportivo La Guaira",
+  "at": "Caracas FC",
+  "evt_id": "401850402"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Carabobo",
+  "at": "Monagas SC",
+  "evt_id": "401850403"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Academia Puerto Cabello",
+  "at": "Zamora",
+  "evt_id": "401850404"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Universidad Central",
+  "at": "Metropolitanos FC",
+  "evt_id": "401850405"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Metropolitanos FC",
+  "at": "Carabobo",
+  "evt_id": "401850406"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Caracas FC",
+  "at": "Universidad Central",
+  "evt_id": "401850407"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Academia Anzoátegui",
+  "at": "Estudiantes de Mérida",
+  "evt_id": "401850408"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Monagas SC",
+  "at": "Deportivo Táchira",
+  "evt_id": "401850410"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Deportivo Rayo Zuliano",
+  "at": "Academia Puerto Cabello",
+  "evt_id": "401850412"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Trujillanos",
+  "at": "Portuguesa",
+  "evt_id": "401850414"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Zamora",
+  "at": "Deportivo La Guaira",
+  "evt_id": "401850415"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Deportivo La Guaira",
+  "at": "Deportivo Rayo Zuliano",
+  "evt_id": "401850417"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Carabobo",
+  "at": "Caracas FC",
+  "evt_id": "401850419"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Academia Puerto Cabello",
+  "at": "Estudiantes de Mérida",
+  "evt_id": "401850421"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Deportivo Táchira",
+  "at": "Metropolitanos FC",
+  "evt_id": "401850423"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Universidad Central",
+  "at": "Zamora",
+  "evt_id": "401850425"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Trujillanos",
+  "at": "Academia Anzoátegui",
+  "evt_id": "401850427"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Portuguesa",
+  "at": "Monagas SC",
+  "evt_id": "401850429"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Academia Anzoátegui",
+  "at": "Academia Puerto Cabello",
+  "evt_id": "401850431"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Caracas FC",
+  "at": "Deportivo Táchira",
+  "evt_id": "401850433"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "Estudiantes de Mérida",
+  "at": "Deportivo La Guaira",
+  "evt_id": "401850435"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Deportivo Rayo Zuliano",
+  "at": "Universidad Central",
+  "evt_id": "401850436"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Monagas SC",
+  "at": "Trujillanos",
+  "evt_id": "401850438"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Metropolitanos FC",
+  "at": "Portuguesa",
+  "evt_id": "401850440"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Zamora",
+  "at": "Carabobo",
+  "evt_id": "401850442"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Carabobo",
+  "at": "Deportivo Rayo Zuliano",
+  "evt_id": "401850444"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Deportivo La Guaira",
+  "at": "Academia Puerto Cabello",
+  "evt_id": "401850446"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Deportivo Táchira",
+  "at": "Zamora",
+  "evt_id": "401850447"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Monagas SC",
+  "at": "Academia Anzoátegui",
+  "evt_id": "401850449"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Portuguesa",
+  "at": "Caracas FC",
+  "evt_id": "401850451"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Trujillanos",
+  "at": "Metropolitanos FC",
+  "evt_id": "401850453"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Universidad Central",
+  "at": "Estudiantes de Mérida",
+  "evt_id": "401850454"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Deportivo Rayo Zuliano",
+  "at": "Deportivo Táchira",
+  "evt_id": "401850456"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Metropolitanos FC",
+  "at": "Monagas SC",
+  "evt_id": "401850458"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Estudiantes de Mérida",
+  "at": "Carabobo",
+  "evt_id": "401850460"
+ },
+ {
+  "fecha": "2026-03-17",
+  "ht": "Caracas FC",
+  "at": "Trujillanos",
+  "evt_id": "401850462"
+ },
+ {
+  "fecha": "2026-03-17",
+  "ht": "Academia Anzoátegui",
+  "at": "Deportivo La Guaira",
+  "evt_id": "401850464"
+ },
+ {
+  "fecha": "2026-03-17",
+  "ht": "Academia Puerto Cabello",
+  "at": "Universidad Central",
+  "evt_id": "401850466"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Zamora",
+  "at": "Portuguesa",
+  "evt_id": "401850468"
+ },
+ {
+  "fecha": "2026-03-23",
+  "ht": "Carabobo",
+  "at": "Academia Puerto Cabello",
+  "evt_id": "401850470"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Deportivo Táchira",
+  "at": "Estudiantes de Mérida",
+  "evt_id": "401850472"
+ },
+ {
+  "fecha": "2026-03-23",
+  "ht": "Metropolitanos FC",
+  "at": "Academia Anzoátegui",
+  "evt_id": "401850474"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Monagas SC",
+  "at": "Caracas FC",
+  "evt_id": "401850475"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Portuguesa",
+  "at": "Deportivo Rayo Zuliano",
+  "evt_id": "401850478"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Trujillanos",
+  "at": "Zamora",
+  "evt_id": "401850479"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Universidad Central",
+  "at": "Deportivo La Guaira",
+  "evt_id": "401850481"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Deportivo Rayo Zuliano",
+  "at": "Trujillanos",
+  "evt_id": "401850483"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Estudiantes de Mérida",
+  "at": "Portuguesa",
+  "evt_id": "401850485"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Deportivo La Guaira",
+  "at": "Carabobo",
+  "evt_id": "401850487"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Caracas FC",
+  "at": "Metropolitanos FC",
+  "evt_id": "401850489"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Academia Anzoátegui",
+  "at": "Universidad Central",
+  "evt_id": "401850491"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Academia Puerto Cabello",
+  "at": "Deportivo Táchira",
+  "evt_id": "401850493"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Zamora",
+  "at": "Monagas SC",
+  "evt_id": "401850494"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "Deportivo Táchira",
+  "at": "Deportivo La Guaira",
+  "evt_id": "401850497"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Caracas FC",
+  "at": "Academia Anzoátegui",
+  "evt_id": "401850498"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Carabobo",
+  "at": "Universidad Central",
+  "evt_id": "401850500"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Metropolitanos FC",
+  "at": "Zamora",
+  "evt_id": "401850502"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Monagas SC",
+  "at": "Deportivo Rayo Zuliano",
+  "evt_id": "401850504"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Portuguesa",
+  "at": "Academia Puerto Cabello",
+  "evt_id": "401850506"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Trujillanos",
+  "at": "Estudiantes de Mérida",
+  "evt_id": "401850507"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Deportivo La Guaira",
+  "at": "Portuguesa",
+  "evt_id": "401850509"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Carabobo",
+  "at": "Academia Anzoátegui",
+  "evt_id": "401850511"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Academia Puerto Cabello",
+  "at": "Trujillanos",
+  "evt_id": "401850513"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Estudiantes de Mérida",
+  "at": "Monagas SC",
+  "evt_id": "401850515"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Zamora",
+  "at": "Caracas FC",
+  "evt_id": "401850517"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Universidad Central",
+  "at": "Deportivo Táchira",
+  "evt_id": "401850519"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Deportivo Rayo Zuliano",
+  "at": "Metropolitanos FC",
+  "evt_id": "401850520"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Academia Anzoátegui",
+  "at": "Zamora",
+  "evt_id": "401850522"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Caracas FC",
+  "at": "Deportivo Rayo Zuliano",
+  "evt_id": "401850524"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Deportivo Táchira",
+  "at": "Carabobo",
+  "evt_id": "401850526"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Portuguesa",
+  "at": "Universidad Central",
+  "evt_id": "401850528"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Monagas SC",
+  "at": "Academia Puerto Cabello",
+  "evt_id": "401850530"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Metropolitanos FC",
+  "at": "Estudiantes de Mérida",
+  "evt_id": "401850532"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Trujillanos",
+  "at": "Deportivo La Guaira",
+  "evt_id": "401850534"
+ }
+]

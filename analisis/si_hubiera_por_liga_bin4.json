@@ -1,0 +1,587 @@
+{
+  "fmin": "2026-03-16",
+  "fmax": "2026-04-26",
+  "n_total": 358,
+  "n_bins": 4,
+  "ligas": {
+    "Alemania": {
+      "n": 10,
+      "hit_pct": 40.0,
+      "yield_pct": -30.5,
+      "ci95_lo": -85.2,
+      "ci95_hi": 29.614999999999917,
+      "quartiles": {
+        "Q4": {
+          "n": 10,
+          "n_gano": 4,
+          "hit_pct": 40.0,
+          "yield_pct": -30.5,
+          "sum_pl_unit": -3.05,
+          "brier_avg": 0.657225895081969,
+          "n_brier": 10,
+          "ci95_lo": -85.2,
+          "ci95_hi": 29.614999999999917
+        }
+      },
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS"
+    },
+    "Argentina": {
+      "n": 55,
+      "hit_pct": 67.27272727272727,
+      "yield_pct": 72.70909090909092,
+      "ci95_lo": 32.052727272727275,
+      "ci95_hi": 113.82772727272727,
+      "quartiles": {
+        "Q1": {
+          "n": 15,
+          "n_gano": 14,
+          "hit_pct": 93.33333333333333,
+          "yield_pct": 131.26666666666665,
+          "sum_pl_unit": 19.69,
+          "brier_avg": 0.5261814757423031,
+          "n_brier": 15,
+          "ci95_lo": 73.72666666666667,
+          "ci95_hi": 188.37833333333325
+        },
+        "Q2": {
+          "n": 10,
+          "n_gano": 6,
+          "hit_pct": 60.0,
+          "yield_pct": 86.39999999999999,
+          "sum_pl_unit": 8.639999999999999,
+          "brier_avg": 0.5650106667542427,
+          "n_brier": 10,
+          "ci95_lo": -27.60000000000001,
+          "ci95_hi": 215.95749999999995
+        },
+        "Q3": {
+          "n": 9,
+          "n_gano": 7,
+          "hit_pct": 77.77777777777779,
+          "yield_pct": 87.0,
+          "sum_pl_unit": 7.83,
+          "brier_avg": 0.49200081911899995,
+          "n_brier": 9,
+          "ci95_lo": 4.422222222222225,
+          "ci95_hi": 167.2388888888888
+        },
+        "Q4": {
+          "n": 21,
+          "n_gano": 10,
+          "hit_pct": 47.61904761904761,
+          "yield_pct": 18.23809523809524,
+          "sum_pl_unit": 3.83,
+          "brier_avg": 0.6320116615125694,
+          "n_brier": 21,
+          "ci95_lo": -39.19523809523809,
+          "ci95_hi": 79.80357142857133
+        }
+      },
+      "etiqueta": "ESTABLE_POSITIVA"
+    },
+    "Bolivia": {
+      "n": 21,
+      "hit_pct": 61.904761904761905,
+      "yield_pct": -4.42857142857143,
+      "ci95_lo": -36.66666666666667,
+      "ci95_hi": 27.217857142857124,
+      "quartiles": {
+        "Q4": {
+          "n": 21,
+          "n_gano": 13,
+          "hit_pct": 61.904761904761905,
+          "yield_pct": -4.42857142857143,
+          "sum_pl_unit": -0.9300000000000002,
+          "brier_avg": 0.5842524519035688,
+          "n_brier": 21,
+          "ci95_lo": -36.66666666666667,
+          "ci95_hi": 27.217857142857124
+        }
+      },
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS"
+    },
+    "Brasil": {
+      "n": 58,
+      "hit_pct": 56.896551724137936,
+      "yield_pct": 55.568965517241374,
+      "ci95_lo": 13.068965517241375,
+      "ci95_hi": 102.77112068965515,
+      "quartiles": {
+        "Q1": {
+          "n": 9,
+          "n_gano": 4,
+          "hit_pct": 44.44444444444444,
+          "yield_pct": 6.8888888888888875,
+          "sum_pl_unit": 0.6199999999999999,
+          "brier_avg": 0.6428320684754445,
+          "n_brier": 9,
+          "ci95_lo": -80.22222222222221,
+          "ci95_hi": 97.73611111111103
+        },
+        "Q2": {
+          "n": 20,
+          "n_gano": 14,
+          "hit_pct": 70.0,
+          "yield_pct": 158.7,
+          "sum_pl_unit": 31.74,
+          "brier_avg": 0.5803607112064803,
+          "n_brier": 20,
+          "ci95_lo": 59.816250000000004,
+          "ci95_hi": 263.77874999999995
+        },
+        "Q3": {
+          "n": 9,
+          "n_gano": 3,
+          "hit_pct": 33.33333333333333,
+          "yield_pct": -26.666666666666668,
+          "sum_pl_unit": -2.4,
+          "brier_avg": 0.7149973417305556,
+          "n_brier": 9,
+          "ci95_lo": -100.0,
+          "ci95_hi": 50.33333333333334
+        },
+        "Q4": {
+          "n": 20,
+          "n_gano": 12,
+          "hit_pct": 60.0,
+          "yield_pct": 11.35,
+          "sum_pl_unit": 2.27,
+          "brier_avg": 0.5735718340041867,
+          "n_brier": 20,
+          "ci95_lo": -33.6125,
+          "ci95_hi": 54.77624999999999
+        }
+      },
+      "etiqueta": "ESTABLE_POSITIVA"
+    },
+    "Chile": {
+      "n": 19,
+      "hit_pct": 47.368421052631575,
+      "yield_pct": 2.368421052631576,
+      "ci95_lo": -49.18815789473684,
+      "ci95_hi": 52.2907894736842,
+      "quartiles": {
+        "Q3": {
+          "n": 1,
+          "n_gano": 0,
+          "hit_pct": 0.0,
+          "yield_pct": -100.0,
+          "sum_pl_unit": -1.0,
+          "brier_avg": 0.48369543126100006,
+          "n_brier": 1,
+          "ci95_lo": -100.0,
+          "ci95_hi": -100.0
+        },
+        "Q4": {
+          "n": 18,
+          "n_gano": 9,
+          "hit_pct": 50.0,
+          "yield_pct": 8.055555555555554,
+          "sum_pl_unit": 1.4499999999999995,
+          "brier_avg": 0.6319373450306872,
+          "n_brier": 18,
+          "ci95_lo": -43.900000000000006,
+          "ci95_hi": 64.69722222222207
+        }
+      },
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS"
+    },
+    "Colombia": {
+      "n": 13,
+      "hit_pct": 69.23076923076923,
+      "yield_pct": 41.92307692307693,
+      "ci95_lo": -15.671153846153846,
+      "ci95_hi": 106.54230769230766,
+      "quartiles": {
+        "Q4": {
+          "n": 13,
+          "n_gano": 9,
+          "hit_pct": 69.23076923076923,
+          "yield_pct": 41.92307692307693,
+          "sum_pl_unit": 5.45,
+          "brier_avg": 0.5666434136915385,
+          "n_brier": 13,
+          "ci95_lo": -15.671153846153846,
+          "ci95_hi": 106.54230769230766
+        }
+      },
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS"
+    },
+    "Ecuador": {
+      "n": 17,
+      "hit_pct": 64.70588235294117,
+      "yield_pct": 38.8235294117647,
+      "ci95_lo": -18.76764705882353,
+      "ci95_hi": 99.35588235294117,
+      "quartiles": {
+        "Q4": {
+          "n": 17,
+          "n_gano": 11,
+          "hit_pct": 64.70588235294117,
+          "yield_pct": 38.8235294117647,
+          "sum_pl_unit": 6.6,
+          "brier_avg": 0.5993237921139412,
+          "n_brier": 17,
+          "ci95_lo": -18.76764705882353,
+          "ci95_hi": 99.35588235294117
+        }
+      },
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS"
+    },
+    "Espana": {
+      "n": 20,
+      "hit_pct": 45.0,
+      "yield_pct": -13.750000000000002,
+      "ci95_lo": -55.705,
+      "ci95_hi": 29.552499999999984,
+      "quartiles": {
+        "Q4": {
+          "n": 20,
+          "n_gano": 9,
+          "hit_pct": 45.0,
+          "yield_pct": -13.750000000000002,
+          "sum_pl_unit": -2.7500000000000004,
+          "brier_avg": 0.6052378188212291,
+          "n_brier": 20,
+          "ci95_lo": -55.705,
+          "ci95_hi": 29.552499999999984
+        }
+      },
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS"
+    },
+    "Francia": {
+      "n": 11,
+      "hit_pct": 63.63636363636363,
+      "yield_pct": 2.1818181818181794,
+      "ci95_lo": -50.95681818181818,
+      "ci95_hi": 48.04772727272725,
+      "quartiles": {
+        "Q4": {
+          "n": 11,
+          "n_gano": 7,
+          "hit_pct": 63.63636363636363,
+          "yield_pct": 2.1818181818181794,
+          "sum_pl_unit": 0.23999999999999977,
+          "brier_avg": 0.6575012023831818,
+          "n_brier": 11,
+          "ci95_lo": -50.95681818181818,
+          "ci95_hi": 48.04772727272725
+        }
+      },
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS"
+    },
+    "Inglaterra": {
+      "n": 34,
+      "hit_pct": 67.64705882352942,
+      "yield_pct": 42.94117647058823,
+      "ci95_lo": 2.8705882352941194,
+      "ci95_hi": 82.85441176470589,
+      "quartiles": {
+        "Q1": {
+          "n": 7,
+          "n_gano": 4,
+          "hit_pct": 57.14285714285714,
+          "yield_pct": 69.28571428571428,
+          "sum_pl_unit": 4.85,
+          "brier_avg": 0.7203602088097142,
+          "n_brier": 7,
+          "ci95_lo": -51.42857142857144,
+          "ci95_hi": 188.94642857142847
+        },
+        "Q3": {
+          "n": 8,
+          "n_gano": 3,
+          "hit_pct": 37.5,
+          "yield_pct": -29.375,
+          "sum_pl_unit": -2.35,
+          "brier_avg": 0.60424358319375,
+          "n_brier": 8,
+          "ci95_lo": -78.75,
+          "ci95_hi": 39.774999999999864
+        },
+        "Q4": {
+          "n": 19,
+          "n_gano": 16,
+          "hit_pct": 84.21052631578947,
+          "yield_pct": 63.68421052631579,
+          "sum_pl_unit": 12.1,
+          "brier_avg": 0.5520866976492631,
+          "n_brier": 19,
+          "ci95_lo": 24.39078947368421,
+          "ci95_hi": 104.32105263157892
+        }
+      },
+      "etiqueta": "INESTABLE"
+    },
+    "Italia": {
+      "n": 8,
+      "hit_pct": 25.0,
+      "yield_pct": -59.5,
+      "ci95_lo": -100.0,
+      "ci95_hi": -7.499999999999996,
+      "quartiles": {
+        "Q4": {
+          "n": 8,
+          "n_gano": 2,
+          "hit_pct": 25.0,
+          "yield_pct": -59.5,
+          "sum_pl_unit": -4.76,
+          "brier_avg": 0.76273340464175,
+          "n_brier": 8,
+          "ci95_lo": -100.0,
+          "ci95_hi": -7.499999999999996
+        }
+      },
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS"
+    },
+    "Noruega": {
+      "n": 29,
+      "hit_pct": 68.96551724137932,
+      "yield_pct": 65.10344827586206,
+      "ci95_lo": 16.813793103448276,
+      "ci95_hi": 116.98362068965515,
+      "quartiles": {
+        "Q1": {
+          "n": 4,
+          "n_gano": 3,
+          "hit_pct": 75.0,
+          "yield_pct": 92.0,
+          "sum_pl_unit": 3.6799999999999997,
+          "brier_avg": 0.590565100415,
+          "n_brier": 4,
+          "ci95_lo": -40.5,
+          "ci95_hi": 202.5
+        },
+        "Q3": {
+          "n": 14,
+          "n_gano": 9,
+          "hit_pct": 64.28571428571429,
+          "yield_pct": 66.07142857142857,
+          "sum_pl_unit": 9.25,
+          "brier_avg": 0.5990944252614285,
+          "n_brier": 14,
+          "ci95_lo": -13.608928571428567,
+          "ci95_hi": 156.07499999999996
+        },
+        "Q4": {
+          "n": 11,
+          "n_gano": 8,
+          "hit_pct": 72.72727272727273,
+          "yield_pct": 54.090909090909086,
+          "sum_pl_unit": 5.95,
+          "brier_avg": 0.5583327517119078,
+          "n_brier": 11,
+          "ci95_lo": -13.28181818181818,
+          "ci95_hi": 119.00000000000001
+        }
+      },
+      "etiqueta": "ESTABLE_POSITIVA"
+    },
+    "Peru": {
+      "n": 10,
+      "hit_pct": 50.0,
+      "yield_pct": -2.5,
+      "ci95_lo": -65.8,
+      "ci95_hi": 67.61999999999989,
+      "quartiles": {
+        "Q4": {
+          "n": 10,
+          "n_gano": 5,
+          "hit_pct": 50.0,
+          "yield_pct": -2.5,
+          "sum_pl_unit": -0.25,
+          "brier_avg": 0.5513935577564,
+          "n_brier": 10,
+          "ci95_lo": -65.8,
+          "ci95_hi": 67.61999999999989
+        }
+      },
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS"
+    },
+    "Turquia": {
+      "n": 47,
+      "hit_pct": 65.95744680851064,
+      "yield_pct": 42.06382978723404,
+      "ci95_lo": 9.817553191489361,
+      "ci95_hi": 74.35159574468085,
+      "quartiles": {
+        "Q1": {
+          "n": 4,
+          "n_gano": 3,
+          "hit_pct": 75.0,
+          "yield_pct": 55.49999999999999,
+          "sum_pl_unit": 2.2199999999999998,
+          "brier_avg": 0.5221415253385,
+          "n_brier": 4,
+          "ci95_lo": -50.75000000000001,
+          "ci95_hi": 123.75
+        },
+        "Q2": {
+          "n": 8,
+          "n_gano": 6,
+          "hit_pct": 75.0,
+          "yield_pct": 97.625,
+          "sum_pl_unit": 7.81,
+          "brier_avg": 0.519015411677625,
+          "n_brier": 8,
+          "ci95_lo": 6.681250000000001,
+          "ci95_hi": 178.38124999999997
+        },
+        "Q3": {
+          "n": 18,
+          "n_gano": 12,
+          "hit_pct": 66.66666666666666,
+          "yield_pct": 33.22222222222222,
+          "sum_pl_unit": 5.9799999999999995,
+          "brier_avg": 0.5813773036554408,
+          "n_brier": 18,
+          "ci95_lo": -17.61388888888889,
+          "ci95_hi": 86.69861111111108
+        },
+        "Q4": {
+          "n": 17,
+          "n_gano": 10,
+          "hit_pct": 58.82352941176471,
+          "yield_pct": 22.11764705882353,
+          "sum_pl_unit": 3.76,
+          "brier_avg": 0.5463389085407647,
+          "n_brier": 17,
+          "ci95_lo": -30.358823529411765,
+          "ci95_hi": 77.06470588235291
+        }
+      },
+      "etiqueta": "ESTABLE_POSITIVA"
+    },
+    "Uruguay": {
+      "n": 6,
+      "hit_pct": 33.33333333333333,
+      "yield_pct": -3.999999999999996,
+      "ci95_lo": -100.0,
+      "ci95_hi": 105.0,
+      "quartiles": {},
+      "etiqueta": "RUIDO_N_CHICO"
+    }
+  },
+  "recomendaciones": {
+    "Alemania": {
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS",
+      "recomendacion": "OBSERVAR",
+      "n": 10,
+      "yield_pct": -30.5,
+      "ci95_lo": -85.2,
+      "ci95_hi": 29.614999999999917
+    },
+    "Argentina": {
+      "etiqueta": "ESTABLE_POSITIVA",
+      "recomendacion": "APOSTAR (yield consistente positivo cross-Q)",
+      "n": 55,
+      "yield_pct": 72.70909090909092,
+      "ci95_lo": 32.052727272727275,
+      "ci95_hi": 113.82772727272727
+    },
+    "Bolivia": {
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS",
+      "recomendacion": "OBSERVAR",
+      "n": 21,
+      "yield_pct": -4.42857142857143,
+      "ci95_lo": -36.66666666666667,
+      "ci95_hi": 27.217857142857124
+    },
+    "Brasil": {
+      "etiqueta": "ESTABLE_POSITIVA",
+      "recomendacion": "APOSTAR (yield consistente positivo cross-Q)",
+      "n": 58,
+      "yield_pct": 55.568965517241374,
+      "ci95_lo": 13.068965517241375,
+      "ci95_hi": 102.77112068965515
+    },
+    "Chile": {
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS",
+      "recomendacion": "OBSERVAR",
+      "n": 19,
+      "yield_pct": 2.368421052631576,
+      "ci95_lo": -49.18815789473684,
+      "ci95_hi": 52.2907894736842
+    },
+    "Colombia": {
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS",
+      "recomendacion": "OBSERVAR",
+      "n": 13,
+      "yield_pct": 41.92307692307693,
+      "ci95_lo": -15.671153846153846,
+      "ci95_hi": 106.54230769230766
+    },
+    "Ecuador": {
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS",
+      "recomendacion": "OBSERVAR",
+      "n": 17,
+      "yield_pct": 38.8235294117647,
+      "ci95_lo": -18.76764705882353,
+      "ci95_hi": 99.35588235294117
+    },
+    "Espana": {
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS",
+      "recomendacion": "OBSERVAR",
+      "n": 20,
+      "yield_pct": -13.750000000000002,
+      "ci95_lo": -55.705,
+      "ci95_hi": 29.552499999999984
+    },
+    "Francia": {
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS",
+      "recomendacion": "OBSERVAR",
+      "n": 11,
+      "yield_pct": 2.1818181818181794,
+      "ci95_lo": -50.95681818181818,
+      "ci95_hi": 48.04772727272725
+    },
+    "Inglaterra": {
+      "etiqueta": "INESTABLE",
+      "recomendacion": "APOSTAR pero conservador (yield neto pos pero variable)",
+      "n": 34,
+      "yield_pct": 42.94117647058823,
+      "ci95_lo": 2.8705882352941194,
+      "ci95_hi": 82.85441176470589
+    },
+    "Italia": {
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS",
+      "recomendacion": "OBSERVAR",
+      "n": 8,
+      "yield_pct": -59.5,
+      "ci95_lo": -100.0,
+      "ci95_hi": -7.499999999999996
+    },
+    "Noruega": {
+      "etiqueta": "ESTABLE_POSITIVA",
+      "recomendacion": "APOSTAR (yield consistente positivo cross-Q)",
+      "n": 29,
+      "yield_pct": 65.10344827586206,
+      "ci95_lo": 16.813793103448276,
+      "ci95_hi": 116.98362068965515
+    },
+    "Peru": {
+      "etiqueta": "RUIDO_BINS_INCOMPLETOS",
+      "recomendacion": "OBSERVAR",
+      "n": 10,
+      "yield_pct": -2.5,
+      "ci95_lo": -65.8,
+      "ci95_hi": 67.61999999999989
+    },
+    "Turquia": {
+      "etiqueta": "ESTABLE_POSITIVA",
+      "recomendacion": "APOSTAR (yield consistente positivo cross-Q)",
+      "n": 47,
+      "yield_pct": 42.06382978723404,
+      "ci95_lo": 9.817553191489361,
+      "ci95_hi": 74.35159574468085
+    },
+    "Uruguay": {
+      "etiqueta": "RUIDO_N_CHICO",
+      "recomendacion": "OBSERVAR (N=6<12, esperar mas data)",
+      "n": 6,
+      "yield_pct": -3.999999999999996,
+      "ci95_lo": -100.0,
+      "ci95_hi": 105.0
+    }
+  }
+}

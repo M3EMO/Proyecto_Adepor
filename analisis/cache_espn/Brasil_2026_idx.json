@@ -1,0 +1,2282 @@
+[
+ {
+  "fecha": "2026-01-28",
+  "ht": "Atlético-MG",
+  "at": "Palmeiras",
+  "evt_id": "401840808"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Botafogo",
+  "at": "Cruzeiro",
+  "evt_id": "401840809"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Chapecoense",
+  "at": "Santos",
+  "evt_id": "401840810"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Corinthians",
+  "at": "Bahia",
+  "evt_id": "401840811"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Vitória",
+  "at": "Remo",
+  "evt_id": "401840812"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Fluminense",
+  "at": "Grêmio",
+  "evt_id": "401840813"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Internacional",
+  "at": "Athletico Paranaense",
+  "evt_id": "401840814"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "Mirassol",
+  "at": "Vasco da Gama",
+  "evt_id": "401840975"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "São Paulo",
+  "at": "Flamengo",
+  "evt_id": "401840976"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Coritiba",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401840977"
+ },
+ {
+  "fecha": "2026-02-04",
+  "ht": "Flamengo",
+  "at": "Internacional",
+  "evt_id": "401840978"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Cruzeiro",
+  "at": "Coritiba",
+  "evt_id": "401840979"
+ },
+ {
+  "fecha": "2026-02-05",
+  "ht": "Bahia",
+  "at": "Fluminense",
+  "evt_id": "401840980"
+ },
+ {
+  "fecha": "2026-02-19",
+  "ht": "Athletico Paranaense",
+  "at": "Corinthians",
+  "evt_id": "401840981"
+ },
+ {
+  "fecha": "2026-02-05",
+  "ht": "Vasco da Gama",
+  "at": "Chapecoense",
+  "evt_id": "401840982"
+ },
+ {
+  "fecha": "2026-02-05",
+  "ht": "Palmeiras",
+  "at": "Vitória",
+  "evt_id": "401840983"
+ },
+ {
+  "fecha": "2026-02-04",
+  "ht": "Red Bull Bragantino",
+  "at": "Atlético-MG",
+  "evt_id": "401840984"
+ },
+ {
+  "fecha": "2026-02-04",
+  "ht": "Remo",
+  "at": "Mirassol",
+  "evt_id": "401840985"
+ },
+ {
+  "fecha": "2026-02-04",
+  "ht": "Santos",
+  "at": "São Paulo",
+  "evt_id": "401840986"
+ },
+ {
+  "fecha": "2026-02-05",
+  "ht": "Grêmio",
+  "at": "Botafogo",
+  "evt_id": "401840987"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "Corinthians",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401840988"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Chapecoense",
+  "at": "Coritiba",
+  "evt_id": "401840989"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Atlético-MG",
+  "at": "Remo",
+  "evt_id": "401840990"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "Athletico Paranaense",
+  "at": "Santos",
+  "evt_id": "401840991"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "Fluminense",
+  "at": "Botafogo",
+  "evt_id": "401840992"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Vitória",
+  "at": "Flamengo",
+  "evt_id": "401840993"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "Vasco da Gama",
+  "at": "Bahia",
+  "evt_id": "401840994"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "São Paulo",
+  "at": "Grêmio",
+  "evt_id": "401840995"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Mirassol",
+  "at": "Cruzeiro",
+  "evt_id": "401840996"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Internacional",
+  "at": "Palmeiras",
+  "evt_id": "401840997"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Bahia",
+  "at": "Chapecoense",
+  "evt_id": "401840998"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Botafogo",
+  "at": "Vitória",
+  "evt_id": "401840999"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Coritiba",
+  "at": "São Paulo",
+  "evt_id": "401841000"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Cruzeiro",
+  "at": "Corinthians",
+  "evt_id": "401841001"
+ },
+ {
+  "fecha": "2026-02-26",
+  "ht": "Santos",
+  "at": "Vasco da Gama",
+  "evt_id": "401841002"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Red Bull Bragantino",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841003"
+ },
+ {
+  "fecha": "2026-02-26",
+  "ht": "Palmeiras",
+  "at": "Fluminense",
+  "evt_id": "401841004"
+ },
+ {
+  "fecha": "2026-02-26",
+  "ht": "Grêmio",
+  "at": "Atlético-MG",
+  "evt_id": "401841005"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Flamengo",
+  "at": "Mirassol",
+  "evt_id": "401841006"
+ },
+ {
+  "fecha": "2026-02-25",
+  "ht": "Remo",
+  "at": "Internacional",
+  "evt_id": "401841007"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "São Paulo",
+  "at": "Chapecoense",
+  "evt_id": "401841008"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Remo",
+  "at": "Fluminense",
+  "evt_id": "401841009"
+ },
+ {
+  "fecha": "2026-03-11",
+  "ht": "Mirassol",
+  "at": "Santos",
+  "evt_id": "401841010"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Grêmio",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841011"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Vasco da Gama",
+  "at": "Palmeiras",
+  "evt_id": "401841012"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Corinthians",
+  "at": "Coritiba",
+  "evt_id": "401841013"
+ },
+ {
+  "fecha": "2026-03-11",
+  "ht": "Bahia",
+  "at": "Vitória",
+  "evt_id": "401841014"
+ },
+ {
+  "fecha": "2026-03-11",
+  "ht": "Atlético-MG",
+  "at": "Internacional",
+  "evt_id": "401841015"
+ },
+ {
+  "fecha": "2026-03-29",
+  "ht": "Athletico Paranaense",
+  "at": "Botafogo",
+  "evt_id": "401841016"
+ },
+ {
+  "fecha": "2026-03-12",
+  "ht": "Flamengo",
+  "at": "Cruzeiro",
+  "evt_id": "401841017"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Santos",
+  "at": "Corinthians",
+  "evt_id": "401841018"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Red Bull Bragantino",
+  "at": "São Paulo",
+  "evt_id": "401841019"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Palmeiras",
+  "at": "Mirassol",
+  "evt_id": "401841020"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Internacional",
+  "at": "Bahia",
+  "evt_id": "401841021"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Fluminense",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841022"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Cruzeiro",
+  "at": "Vasco da Gama",
+  "evt_id": "401841023"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Coritiba",
+  "at": "Remo",
+  "evt_id": "401841024"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Chapecoense",
+  "at": "Grêmio",
+  "evt_id": "401841025"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Botafogo",
+  "at": "Flamengo",
+  "evt_id": "401841026"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Vitória",
+  "at": "Atlético-MG",
+  "evt_id": "401841027"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Athletico Paranaense",
+  "at": "Cruzeiro",
+  "evt_id": "401841028"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Atlético-MG",
+  "at": "São Paulo",
+  "evt_id": "401841029"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Vasco da Gama",
+  "at": "Fluminense",
+  "evt_id": "401841030"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Santos",
+  "at": "Internacional",
+  "evt_id": "401841031"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Palmeiras",
+  "at": "Botafogo",
+  "evt_id": "401841032"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Mirassol",
+  "at": "Coritiba",
+  "evt_id": "401841033"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Grêmio",
+  "at": "Vitória",
+  "evt_id": "401841034"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Flamengo",
+  "at": "Remo",
+  "evt_id": "401841035"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "Chapecoense",
+  "at": "Corinthians",
+  "evt_id": "401841036"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Bahia",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841037"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Athletico Paranaense",
+  "at": "Coritiba",
+  "evt_id": "401841038"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Vasco da Gama",
+  "at": "Grêmio",
+  "evt_id": "401841039"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "São Paulo",
+  "at": "Palmeiras",
+  "evt_id": "401841040"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Remo",
+  "at": "Bahia",
+  "evt_id": "401841041"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Vitória",
+  "at": "Mirassol",
+  "evt_id": "401841042"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Internacional",
+  "at": "Chapecoense",
+  "evt_id": "401841043"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Fluminense",
+  "at": "Atlético-MG",
+  "evt_id": "401841044"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Cruzeiro",
+  "at": "Santos",
+  "evt_id": "401841045"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Corinthians",
+  "at": "Flamengo",
+  "evt_id": "401841046"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Red Bull Bragantino",
+  "at": "Botafogo",
+  "evt_id": "401841047"
+ },
+ {
+  "fecha": "2026-04-01",
+  "ht": "Coritiba",
+  "at": "Vasco da Gama",
+  "evt_id": "401841048"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Chapecoense",
+  "at": "Atlético-MG",
+  "evt_id": "401841049"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Santos",
+  "at": "Remo",
+  "evt_id": "401841050"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Red Bull Bragantino",
+  "at": "Flamengo",
+  "evt_id": "401841051"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Palmeiras",
+  "at": "Grêmio",
+  "evt_id": "401841052"
+ },
+ {
+  "fecha": "2026-04-01",
+  "ht": "Internacional",
+  "at": "São Paulo",
+  "evt_id": "401841053"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Fluminense",
+  "at": "Corinthians",
+  "evt_id": "401841054"
+ },
+ {
+  "fecha": "2026-04-01",
+  "ht": "Cruzeiro",
+  "at": "Vitória",
+  "evt_id": "401841055"
+ },
+ {
+  "fecha": "2026-04-01",
+  "ht": "Bahia",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841056"
+ },
+ {
+  "fecha": "2026-04-01",
+  "ht": "Botafogo",
+  "at": "Mirassol",
+  "evt_id": "401841057"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Atlético-MG",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841058"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "São Paulo",
+  "at": "Cruzeiro",
+  "evt_id": "401841059"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Mirassol",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841060"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Grêmio",
+  "at": "Remo",
+  "evt_id": "401841061"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Vasco da Gama",
+  "at": "Botafogo",
+  "evt_id": "401841062"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Coritiba",
+  "at": "Fluminense",
+  "evt_id": "401841063"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Corinthians",
+  "at": "Internacional",
+  "evt_id": "401841064"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Chapecoense",
+  "at": "Vitória",
+  "evt_id": "401841065"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Bahia",
+  "at": "Palmeiras",
+  "evt_id": "401841066"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Flamengo",
+  "at": "Santos",
+  "evt_id": "401841067"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Cruzeiro",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841068"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Corinthians",
+  "at": "Palmeiras",
+  "evt_id": "401841069"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Botafogo",
+  "at": "Coritiba",
+  "evt_id": "401841070"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Athletico Paranaense",
+  "at": "Chapecoense",
+  "evt_id": "401841071"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Fluminense",
+  "at": "Flamengo",
+  "evt_id": "401841072"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Vitória",
+  "at": "São Paulo",
+  "evt_id": "401841073"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Santos",
+  "at": "Atlético-MG",
+  "evt_id": "401841074"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Remo",
+  "at": "Vasco da Gama",
+  "evt_id": "401841075"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Mirassol",
+  "at": "Bahia",
+  "evt_id": "401841076"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Internacional",
+  "at": "Grêmio",
+  "evt_id": "401841077"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Chapecoense",
+  "at": "Botafogo",
+  "evt_id": "401841078"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Coritiba",
+  "at": "Atlético-MG",
+  "evt_id": "401841079"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Vitória",
+  "at": "Corinthians",
+  "evt_id": "401841080"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Vasco da Gama",
+  "at": "São Paulo",
+  "evt_id": "401841081"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Santos",
+  "at": "Fluminense",
+  "evt_id": "401841082"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Red Bull Bragantino",
+  "at": "Remo",
+  "evt_id": "401841083"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Palmeiras",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841084"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Internacional",
+  "at": "Mirassol",
+  "evt_id": "401841085"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Flamengo",
+  "at": "Bahia",
+  "evt_id": "401841086"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Cruzeiro",
+  "at": "Grêmio",
+  "evt_id": "401841087"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Athletico Paranaense",
+  "at": "Vitória",
+  "evt_id": "401841088"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Corinthians",
+  "at": "Vasco da Gama",
+  "evt_id": "401841089"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Fluminense",
+  "at": "Chapecoense",
+  "evt_id": "401841090"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Grêmio",
+  "at": "Coritiba",
+  "evt_id": "401841091"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "São Paulo",
+  "at": "Mirassol",
+  "evt_id": "401841092"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Remo",
+  "at": "Cruzeiro",
+  "evt_id": "401841093"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Botafogo",
+  "at": "Internacional",
+  "evt_id": "401841094"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Bahia",
+  "at": "Santos",
+  "evt_id": "401841095"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Atlético-MG",
+  "at": "Flamengo",
+  "evt_id": "401841096"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Red Bull Bragantino",
+  "at": "Palmeiras",
+  "evt_id": "401841097"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Cruzeiro",
+  "at": "Atlético-MG",
+  "evt_id": "401841098"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Chapecoense",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841099"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Vitória",
+  "at": "Coritiba",
+  "evt_id": "401841100"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "São Paulo",
+  "at": "Bahia",
+  "evt_id": "401841101"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Palmeiras",
+  "at": "Santos",
+  "evt_id": "401841102"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Mirassol",
+  "at": "Corinthians",
+  "evt_id": "401841103"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Internacional",
+  "at": "Fluminense",
+  "evt_id": "401841104"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Flamengo",
+  "at": "Vasco da Gama",
+  "evt_id": "401841105"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Athletico Paranaense",
+  "at": "Grêmio",
+  "evt_id": "401841106"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Botafogo",
+  "at": "Remo",
+  "evt_id": "401841107"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Atlético-MG",
+  "at": "Botafogo",
+  "evt_id": "401841108"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Santos",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841109"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Remo",
+  "at": "Palmeiras",
+  "evt_id": "401841110"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Mirassol",
+  "at": "Chapecoense",
+  "evt_id": "401841111"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Vasco da Gama",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841112"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Fluminense",
+  "at": "Vitória",
+  "evt_id": "401841113"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Coritiba",
+  "at": "Internacional",
+  "evt_id": "401841114"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Corinthians",
+  "at": "São Paulo",
+  "evt_id": "401841115"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Bahia",
+  "at": "Cruzeiro",
+  "evt_id": "401841116"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Grêmio",
+  "at": "Flamengo",
+  "evt_id": "401841117"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Botafogo",
+  "at": "Corinthians",
+  "evt_id": "401841118"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Bahia",
+  "at": "Grêmio",
+  "evt_id": "401841119"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Atlético-MG",
+  "at": "Mirassol",
+  "evt_id": "401841120"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Athletico Paranaense",
+  "at": "Flamengo",
+  "evt_id": "401841121"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Chapecoense",
+  "at": "Remo",
+  "evt_id": "401841122"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Santos",
+  "at": "Coritiba",
+  "evt_id": "401841123"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Red Bull Bragantino",
+  "at": "Vitória",
+  "evt_id": "401841124"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Palmeiras",
+  "at": "Cruzeiro",
+  "evt_id": "401841125"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Internacional",
+  "at": "Vasco da Gama",
+  "evt_id": "401841126"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Fluminense",
+  "at": "São Paulo",
+  "evt_id": "401841127"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Corinthians",
+  "at": "Atlético-MG",
+  "evt_id": "401841128"
+ },
+ {
+  "fecha": "2026-05-25",
+  "ht": "Coritiba",
+  "at": "Bahia",
+  "evt_id": "401841129"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Vitória",
+  "at": "Internacional",
+  "evt_id": "401841130"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Vasco da Gama",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841131"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "São Paulo",
+  "at": "Botafogo",
+  "evt_id": "401841132"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Remo",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841133"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Mirassol",
+  "at": "Fluminense",
+  "evt_id": "401841134"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Grêmio",
+  "at": "Santos",
+  "evt_id": "401841135"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Flamengo",
+  "at": "Palmeiras",
+  "evt_id": "401841136"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Cruzeiro",
+  "at": "Chapecoense",
+  "evt_id": "401841137"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Athletico Paranaense",
+  "at": "Mirassol",
+  "evt_id": "401841138"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Grêmio",
+  "at": "Corinthians",
+  "evt_id": "401841139"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Palmeiras",
+  "at": "Chapecoense",
+  "evt_id": "401841140"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Red Bull Bragantino",
+  "at": "Internacional",
+  "evt_id": "401841141"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Vasco da Gama",
+  "at": "Atlético-MG",
+  "evt_id": "401841142"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Santos",
+  "at": "Vitória",
+  "evt_id": "401841143"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Flamengo",
+  "at": "Coritiba",
+  "evt_id": "401841144"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Cruzeiro",
+  "at": "Fluminense",
+  "evt_id": "401841145"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Bahia",
+  "at": "Botafogo",
+  "evt_id": "401841146"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Remo",
+  "at": "São Paulo",
+  "evt_id": "401841147"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "Atlético-MG",
+  "at": "Bahia",
+  "evt_id": "401841148"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "Botafogo",
+  "at": "Santos",
+  "evt_id": "401841149"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "Chapecoense",
+  "at": "Flamengo",
+  "evt_id": "401841150"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "Corinthians",
+  "at": "Remo",
+  "evt_id": "401841151"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "Coritiba",
+  "at": "Palmeiras",
+  "evt_id": "401841152"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "Fluminense",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841153"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "Internacional",
+  "at": "Cruzeiro",
+  "evt_id": "401841154"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "Mirassol",
+  "at": "Grêmio",
+  "evt_id": "401841155"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "São Paulo",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841156"
+ },
+ {
+  "fecha": "2026-07-22",
+  "ht": "Vitória",
+  "at": "Vasco da Gama",
+  "evt_id": "401841157"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Athletico Paranaense",
+  "at": "Internacional",
+  "evt_id": "401841158"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Bahia",
+  "at": "Corinthians",
+  "evt_id": "401841159"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Vasco da Gama",
+  "at": "Mirassol",
+  "evt_id": "401841160"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Santos",
+  "at": "Chapecoense",
+  "evt_id": "401841161"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Remo",
+  "at": "Vitória",
+  "evt_id": "401841162"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Red Bull Bragantino",
+  "at": "Coritiba",
+  "evt_id": "401841163"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Palmeiras",
+  "at": "Atlético-MG",
+  "evt_id": "401841164"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Grêmio",
+  "at": "Fluminense",
+  "evt_id": "401841165"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Flamengo",
+  "at": "São Paulo",
+  "evt_id": "401841166"
+ },
+ {
+  "fecha": "2026-07-25",
+  "ht": "Cruzeiro",
+  "at": "Botafogo",
+  "evt_id": "401841167"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "Atlético-MG",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841168"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "São Paulo",
+  "at": "Santos",
+  "evt_id": "401841169"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "Mirassol",
+  "at": "Remo",
+  "evt_id": "401841170"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "Internacional",
+  "at": "Flamengo",
+  "evt_id": "401841171"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "Vitória",
+  "at": "Palmeiras",
+  "evt_id": "401841172"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "Coritiba",
+  "at": "Cruzeiro",
+  "evt_id": "401841173"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "Corinthians",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841174"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "Chapecoense",
+  "at": "Vasco da Gama",
+  "evt_id": "401841175"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "Botafogo",
+  "at": "Grêmio",
+  "evt_id": "401841176"
+ },
+ {
+  "fecha": "2026-07-29",
+  "ht": "Fluminense",
+  "at": "Bahia",
+  "evt_id": "401841177"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Remo",
+  "at": "Atlético-MG",
+  "evt_id": "401841178"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Red Bull Bragantino",
+  "at": "Corinthians",
+  "evt_id": "401841179"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Palmeiras",
+  "at": "Internacional",
+  "evt_id": "401841180"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Grêmio",
+  "at": "São Paulo",
+  "evt_id": "401841181"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Santos",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841182"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Cruzeiro",
+  "at": "Mirassol",
+  "evt_id": "401841183"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Coritiba",
+  "at": "Chapecoense",
+  "evt_id": "401841184"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Botafogo",
+  "at": "Fluminense",
+  "evt_id": "401841185"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Bahia",
+  "at": "Vasco da Gama",
+  "evt_id": "401841186"
+ },
+ {
+  "fecha": "2026-08-08",
+  "ht": "Flamengo",
+  "at": "Vitória",
+  "evt_id": "401841187"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "Vasco da Gama",
+  "at": "Santos",
+  "evt_id": "401841188"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "São Paulo",
+  "at": "Coritiba",
+  "evt_id": "401841189"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "Mirassol",
+  "at": "Flamengo",
+  "evt_id": "401841190"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "Internacional",
+  "at": "Remo",
+  "evt_id": "401841191"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "Fluminense",
+  "at": "Palmeiras",
+  "evt_id": "401841192"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "Corinthians",
+  "at": "Cruzeiro",
+  "evt_id": "401841193"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "Chapecoense",
+  "at": "Bahia",
+  "evt_id": "401841194"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "Atlético-MG",
+  "at": "Grêmio",
+  "evt_id": "401841195"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "Athletico Paranaense",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841196"
+ },
+ {
+  "fecha": "2026-08-15",
+  "ht": "Vitória",
+  "at": "Botafogo",
+  "evt_id": "401841197"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Botafogo",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841198"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Chapecoense",
+  "at": "São Paulo",
+  "evt_id": "401841199"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Vitória",
+  "at": "Bahia",
+  "evt_id": "401841200"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Santos",
+  "at": "Mirassol",
+  "evt_id": "401841201"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Red Bull Bragantino",
+  "at": "Grêmio",
+  "evt_id": "401841202"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Palmeiras",
+  "at": "Vasco da Gama",
+  "evt_id": "401841203"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Internacional",
+  "at": "Atlético-MG",
+  "evt_id": "401841204"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Fluminense",
+  "at": "Remo",
+  "evt_id": "401841205"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Cruzeiro",
+  "at": "Flamengo",
+  "evt_id": "401841206"
+ },
+ {
+  "fecha": "2026-08-22",
+  "ht": "Coritiba",
+  "at": "Corinthians",
+  "evt_id": "401841207"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "Athletico Paranaense",
+  "at": "Fluminense",
+  "evt_id": "401841208"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "São Paulo",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841209"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "Remo",
+  "at": "Coritiba",
+  "evt_id": "401841210"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "Mirassol",
+  "at": "Palmeiras",
+  "evt_id": "401841211"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "Vasco da Gama",
+  "at": "Cruzeiro",
+  "evt_id": "401841212"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "Flamengo",
+  "at": "Botafogo",
+  "evt_id": "401841213"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "Corinthians",
+  "at": "Santos",
+  "evt_id": "401841214"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "Bahia",
+  "at": "Internacional",
+  "evt_id": "401841215"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "Atlético-MG",
+  "at": "Vitória",
+  "evt_id": "401841216"
+ },
+ {
+  "fecha": "2026-08-29",
+  "ht": "Grêmio",
+  "at": "Chapecoense",
+  "evt_id": "401841217"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "Cruzeiro",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841218"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "Coritiba",
+  "at": "Mirassol",
+  "evt_id": "401841219"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "Corinthians",
+  "at": "Chapecoense",
+  "evt_id": "401841220"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "Botafogo",
+  "at": "Palmeiras",
+  "evt_id": "401841221"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "Vitória",
+  "at": "Grêmio",
+  "evt_id": "401841222"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "Internacional",
+  "at": "Santos",
+  "evt_id": "401841223"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "Red Bull Bragantino",
+  "at": "Bahia",
+  "evt_id": "401841224"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "Remo",
+  "at": "Flamengo",
+  "evt_id": "401841225"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "São Paulo",
+  "at": "Atlético-MG",
+  "evt_id": "401841226"
+ },
+ {
+  "fecha": "2026-09-05",
+  "ht": "Fluminense",
+  "at": "Vasco da Gama",
+  "evt_id": "401841227"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Chapecoense",
+  "at": "Internacional",
+  "evt_id": "401841228"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Botafogo",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841229"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Bahia",
+  "at": "Remo",
+  "evt_id": "401841230"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Atlético-MG",
+  "at": "Fluminense",
+  "evt_id": "401841231"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Coritiba",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841232"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Santos",
+  "at": "Cruzeiro",
+  "evt_id": "401841233"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Palmeiras",
+  "at": "São Paulo",
+  "evt_id": "401841234"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Mirassol",
+  "at": "Vitória",
+  "evt_id": "401841235"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Grêmio",
+  "at": "Vasco da Gama",
+  "evt_id": "401841236"
+ },
+ {
+  "fecha": "2026-09-12",
+  "ht": "Flamengo",
+  "at": "Corinthians",
+  "evt_id": "401841237"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "Athletico Paranaense",
+  "at": "Bahia",
+  "evt_id": "401841238"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "Atlético-MG",
+  "at": "Chapecoense",
+  "evt_id": "401841239"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "Corinthians",
+  "at": "Fluminense",
+  "evt_id": "401841240"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "Flamengo",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841241"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "Vitória",
+  "at": "Cruzeiro",
+  "evt_id": "401841242"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "São Paulo",
+  "at": "Internacional",
+  "evt_id": "401841243"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "Remo",
+  "at": "Santos",
+  "evt_id": "401841244"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "Mirassol",
+  "at": "Botafogo",
+  "evt_id": "401841245"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "Grêmio",
+  "at": "Palmeiras",
+  "evt_id": "401841246"
+ },
+ {
+  "fecha": "2026-09-19",
+  "ht": "Vasco da Gama",
+  "at": "Coritiba",
+  "evt_id": "401841247"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Fluminense",
+  "at": "Coritiba",
+  "evt_id": "401841248"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Cruzeiro",
+  "at": "São Paulo",
+  "evt_id": "401841249"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Vitória",
+  "at": "Chapecoense",
+  "evt_id": "401841250"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Santos",
+  "at": "Flamengo",
+  "evt_id": "401841251"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Remo",
+  "at": "Grêmio",
+  "evt_id": "401841252"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Red Bull Bragantino",
+  "at": "Mirassol",
+  "evt_id": "401841253"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Palmeiras",
+  "at": "Bahia",
+  "evt_id": "401841254"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Internacional",
+  "at": "Corinthians",
+  "evt_id": "401841255"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Athletico Paranaense",
+  "at": "Atlético-MG",
+  "evt_id": "401841256"
+ },
+ {
+  "fecha": "2026-10-07",
+  "ht": "Botafogo",
+  "at": "Vasco da Gama",
+  "evt_id": "401841257"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "Atlético-MG",
+  "at": "Santos",
+  "evt_id": "401841258"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "São Paulo",
+  "at": "Vitória",
+  "evt_id": "401841259"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "Red Bull Bragantino",
+  "at": "Cruzeiro",
+  "evt_id": "401841260"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "Palmeiras",
+  "at": "Corinthians",
+  "evt_id": "401841261"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "Vasco da Gama",
+  "at": "Remo",
+  "evt_id": "401841262"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "Flamengo",
+  "at": "Fluminense",
+  "evt_id": "401841263"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "Coritiba",
+  "at": "Botafogo",
+  "evt_id": "401841264"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "Chapecoense",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841265"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "Bahia",
+  "at": "Mirassol",
+  "evt_id": "401841266"
+ },
+ {
+  "fecha": "2026-10-10",
+  "ht": "Grêmio",
+  "at": "Internacional",
+  "evt_id": "401841267"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "Botafogo",
+  "at": "Chapecoense",
+  "evt_id": "401841268"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "Bahia",
+  "at": "Flamengo",
+  "evt_id": "401841269"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "Atlético-MG",
+  "at": "Coritiba",
+  "evt_id": "401841270"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "Athletico Paranaense",
+  "at": "Palmeiras",
+  "evt_id": "401841271"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "Corinthians",
+  "at": "Vitória",
+  "evt_id": "401841272"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "São Paulo",
+  "at": "Vasco da Gama",
+  "evt_id": "401841273"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "Remo",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841274"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "Mirassol",
+  "at": "Internacional",
+  "evt_id": "401841275"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "Grêmio",
+  "at": "Cruzeiro",
+  "evt_id": "401841276"
+ },
+ {
+  "fecha": "2026-10-17",
+  "ht": "Fluminense",
+  "at": "Santos",
+  "evt_id": "401841277"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Chapecoense",
+  "at": "Fluminense",
+  "evt_id": "401841278"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Coritiba",
+  "at": "Grêmio",
+  "evt_id": "401841279"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Vitória",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841280"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Vasco da Gama",
+  "at": "Corinthians",
+  "evt_id": "401841281"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Santos",
+  "at": "Bahia",
+  "evt_id": "401841282"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Palmeiras",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841283"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Mirassol",
+  "at": "São Paulo",
+  "evt_id": "401841284"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Internacional",
+  "at": "Botafogo",
+  "evt_id": "401841285"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Flamengo",
+  "at": "Atlético-MG",
+  "evt_id": "401841286"
+ },
+ {
+  "fecha": "2026-10-24",
+  "ht": "Cruzeiro",
+  "at": "Remo",
+  "evt_id": "401841287"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Atlético-MG",
+  "at": "Cruzeiro",
+  "evt_id": "401841288"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Fluminense",
+  "at": "Internacional",
+  "evt_id": "401841289"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Grêmio",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841290"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Red Bull Bragantino",
+  "at": "Chapecoense",
+  "evt_id": "401841291"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Vasco da Gama",
+  "at": "Flamengo",
+  "evt_id": "401841292"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Santos",
+  "at": "Palmeiras",
+  "evt_id": "401841293"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Coritiba",
+  "at": "Vitória",
+  "evt_id": "401841294"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Corinthians",
+  "at": "Mirassol",
+  "evt_id": "401841295"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Bahia",
+  "at": "São Paulo",
+  "evt_id": "401841296"
+ },
+ {
+  "fecha": "2026-10-28",
+  "ht": "Remo",
+  "at": "Botafogo",
+  "evt_id": "401841297"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "São Paulo",
+  "at": "Corinthians",
+  "evt_id": "401841298"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "Red Bull Bragantino",
+  "at": "Santos",
+  "evt_id": "401841299"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "Palmeiras",
+  "at": "Remo",
+  "evt_id": "401841300"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "Internacional",
+  "at": "Coritiba",
+  "evt_id": "401841301"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "Vitória",
+  "at": "Fluminense",
+  "evt_id": "401841302"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "Cruzeiro",
+  "at": "Bahia",
+  "evt_id": "401841303"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "Chapecoense",
+  "at": "Mirassol",
+  "evt_id": "401841304"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "Botafogo",
+  "at": "Atlético-MG",
+  "evt_id": "401841305"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "Athletico Paranaense",
+  "at": "Vasco da Gama",
+  "evt_id": "401841306"
+ },
+ {
+  "fecha": "2026-11-04",
+  "ht": "Flamengo",
+  "at": "Grêmio",
+  "evt_id": "401841307"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "Vasco da Gama",
+  "at": "Internacional",
+  "evt_id": "401841308"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "São Paulo",
+  "at": "Fluminense",
+  "evt_id": "401841309"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "Remo",
+  "at": "Chapecoense",
+  "evt_id": "401841310"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "Mirassol",
+  "at": "Atlético-MG",
+  "evt_id": "401841311"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "Grêmio",
+  "at": "Bahia",
+  "evt_id": "401841312"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "Flamengo",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841313"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "Cruzeiro",
+  "at": "Palmeiras",
+  "evt_id": "401841314"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "Coritiba",
+  "at": "Santos",
+  "evt_id": "401841315"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "Corinthians",
+  "at": "Botafogo",
+  "evt_id": "401841316"
+ },
+ {
+  "fecha": "2026-11-18",
+  "ht": "Vitória",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841317"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Athletico Paranaense",
+  "at": "Remo",
+  "evt_id": "401841318"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Atlético-MG",
+  "at": "Corinthians",
+  "evt_id": "401841319"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Santos",
+  "at": "Grêmio",
+  "evt_id": "401841320"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Red Bull Bragantino",
+  "at": "Vasco da Gama",
+  "evt_id": "401841321"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Palmeiras",
+  "at": "Flamengo",
+  "evt_id": "401841322"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Internacional",
+  "at": "Vitória",
+  "evt_id": "401841323"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Fluminense",
+  "at": "Mirassol",
+  "evt_id": "401841324"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Chapecoense",
+  "at": "Cruzeiro",
+  "evt_id": "401841325"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Botafogo",
+  "at": "São Paulo",
+  "evt_id": "401841326"
+ },
+ {
+  "fecha": "2026-11-21",
+  "ht": "Bahia",
+  "at": "Coritiba",
+  "evt_id": "401841327"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "Atlético-MG",
+  "at": "Vasco da Gama",
+  "evt_id": "401841328"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "São Paulo",
+  "at": "Remo",
+  "evt_id": "401841329"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "Mirassol",
+  "at": "Athletico Paranaense",
+  "evt_id": "401841330"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "Internacional",
+  "at": "Red Bull Bragantino",
+  "evt_id": "401841331"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "Vitória",
+  "at": "Santos",
+  "evt_id": "401841332"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "Coritiba",
+  "at": "Flamengo",
+  "evt_id": "401841333"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "Corinthians",
+  "at": "Grêmio",
+  "evt_id": "401841334"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "Chapecoense",
+  "at": "Palmeiras",
+  "evt_id": "401841335"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "Botafogo",
+  "at": "Bahia",
+  "evt_id": "401841336"
+ },
+ {
+  "fecha": "2026-11-28",
+  "ht": "Fluminense",
+  "at": "Cruzeiro",
+  "evt_id": "401841337"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Athletico Paranaense",
+  "at": "São Paulo",
+  "evt_id": "401841338"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Bahia",
+  "at": "Atlético-MG",
+  "evt_id": "401841339"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Cruzeiro",
+  "at": "Internacional",
+  "evt_id": "401841340"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Flamengo",
+  "at": "Chapecoense",
+  "evt_id": "401841341"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Vasco da Gama",
+  "at": "Vitória",
+  "evt_id": "401841342"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Palmeiras",
+  "at": "Coritiba",
+  "evt_id": "401841343"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Red Bull Bragantino",
+  "at": "Fluminense",
+  "evt_id": "401841344"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Remo",
+  "at": "Corinthians",
+  "evt_id": "401841345"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Santos",
+  "at": "Botafogo",
+  "evt_id": "401841346"
+ },
+ {
+  "fecha": "2026-12-02",
+  "ht": "Grêmio",
+  "at": "Mirassol",
+  "evt_id": "401841347"
+ }
+]

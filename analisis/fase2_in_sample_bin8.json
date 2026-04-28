@@ -1,0 +1,413 @@
+{
+  "n_total": 358,
+  "n_bins": 8,
+  "n_con_bin": 358,
+  "n_con_pos": 246,
+  "filtro": "in_sample",
+  "por_momento_bin": {
+    "O1": {
+      "unit": {
+        "n": 34,
+        "n_gano": 24,
+        "hit_pct": 70.58823529411765,
+        "yield_pct": 64.52941176470588
+      },
+      "real": {
+        "n": 22,
+        "n_gano": 13,
+        "hit_pct": 59.09090909090909,
+        "yield_pct": -27.176820701517467,
+        "stake": 473020.01,
+        "pl": -128551.79999999999
+      }
+    },
+    "O2": {
+      "unit": {
+        "n": 25,
+        "n_gano": 13,
+        "hit_pct": 52.0,
+        "yield_pct": 18.24
+      },
+      "real": {
+        "n": 18,
+        "n_gano": 7,
+        "hit_pct": 38.88888888888889,
+        "yield_pct": -23.234584249071844,
+        "stake": 1091200.33,
+        "pl": -253535.86
+      }
+    },
+    "O3": {
+      "unit": {
+        "n": 25,
+        "n_gano": 16,
+        "hit_pct": 64.0,
+        "yield_pct": 106.47999999999999
+      },
+      "real": {
+        "n": 19,
+        "n_gano": 11,
+        "hit_pct": 57.89473684210527,
+        "yield_pct": 20.14842733520371,
+        "stake": 875786.12,
+        "pl": 176457.12999999998
+      }
+    },
+    "O4": {
+      "unit": {
+        "n": 67,
+        "n_gano": 38,
+        "hit_pct": 56.71641791044776,
+        "yield_pct": 37.985074626865675
+      },
+      "real": {
+        "n": 48,
+        "n_gano": 25,
+        "hit_pct": 52.083333333333336,
+        "yield_pct": 28.891715581818577,
+        "stake": 2464788.42,
+        "pl": 712119.6599999999
+      }
+    },
+    "O5": {
+      "unit": {
+        "n": 80,
+        "n_gano": 49,
+        "hit_pct": 61.25000000000001,
+        "yield_pct": 25.2625
+      },
+      "real": {
+        "n": 44,
+        "n_gano": 24,
+        "hit_pct": 54.54545454545454,
+        "yield_pct": 35.26283317954677,
+        "stake": 2828357.14,
+        "pl": 997358.86
+      }
+    },
+    "O6": {
+      "unit": {
+        "n": 68,
+        "n_gano": 40,
+        "hit_pct": 58.82352941176471,
+        "yield_pct": 20.397058823529413
+      },
+      "real": {
+        "n": 41,
+        "n_gano": 21,
+        "hit_pct": 51.21951219512195,
+        "yield_pct": 17.894852842431337,
+        "stake": 2806616.43,
+        "pl": 502239.88
+      }
+    },
+    "O7": {
+      "unit": {
+        "n": 40,
+        "n_gano": 26,
+        "hit_pct": 65.0,
+        "yield_pct": 25.424999999999997
+      },
+      "real": {
+        "n": 23,
+        "n_gano": 11,
+        "hit_pct": 47.82608695652174,
+        "yield_pct": 9.466947798765037,
+        "stake": 1910442.35,
+        "pl": 180860.58000000005
+      }
+    },
+    "O8": {
+      "unit": {
+        "n": 19,
+        "n_gano": 9,
+        "hit_pct": 47.368421052631575,
+        "yield_pct": 17.94736842105263
+      },
+      "real": {
+        "n": 13,
+        "n_gano": 5,
+        "hit_pct": 38.46153846153847,
+        "yield_pct": 17.62632404861391,
+        "stake": 1142536.41,
+        "pl": 201387.16999999998
+      }
+    }
+  },
+  "por_diff_pos": {
+    "vis_mucho_mejor": {
+      "unit": {
+        "n": 78,
+        "n_gano": 45,
+        "hit_pct": 57.692307692307686,
+        "yield_pct": 43.82051282051282
+      },
+      "real": {
+        "n": 56,
+        "n_gano": 26,
+        "hit_pct": 46.42857142857143,
+        "yield_pct": 28.452197447537163,
+        "stake": 3603739.05,
+        "pl": 1025342.95
+      },
+      "ci95_lo_unit": 11.696474358974358,
+      "ci95_hi_unit": 80.43685897435893,
+      "sig_unit": "+"
+    },
+    "vis_mejor": {
+      "unit": {
+        "n": 52,
+        "n_gano": 31,
+        "hit_pct": 59.61538461538461,
+        "yield_pct": 20.653846153846153
+      },
+      "real": {
+        "n": 32,
+        "n_gano": 18,
+        "hit_pct": 56.25,
+        "yield_pct": 22.404247558121742,
+        "stake": 2080992.36,
+        "pl": 466230.68000000005
+      },
+      "ci95_lo_unit": -7.674999999999999,
+      "ci95_hi_unit": 48.443269230769225,
+      "sig_unit": "0"
+    },
+    "loc_mejor": {
+      "unit": {
+        "n": 52,
+        "n_gano": 31,
+        "hit_pct": 59.61538461538461,
+        "yield_pct": 37.05769230769231
+      },
+      "real": {
+        "n": 33,
+        "n_gano": 16,
+        "hit_pct": 48.484848484848484,
+        "yield_pct": 35.62819739527192,
+        "stake": 2413918.0,
+        "pl": 860035.47
+      },
+      "ci95_lo_unit": -2.481730769230769,
+      "ci95_hi_unit": 77.93749999999993,
+      "sig_unit": "0"
+    },
+    "loc_mucho_mejor": {
+      "unit": {
+        "n": 64,
+        "n_gano": 43,
+        "hit_pct": 67.1875,
+        "yield_pct": 52.328125
+      },
+      "real": {
+        "n": 32,
+        "n_gano": 18,
+        "hit_pct": 56.25,
+        "yield_pct": 29.060497767403636,
+        "stake": 1737757.02,
+        "pl": 505000.83999999997
+      },
+      "ci95_lo_unit": 18.319921875000002,
+      "ci95_hi_unit": 90.72343749999997,
+      "sig_unit": "+"
+    }
+  },
+  "cross_bin_x_diff_pos": {
+    "O1": {
+      "vis_mucho_mejor": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "vis_mejor": {
+        "n": 1,
+        "yield_pct": null
+      },
+      "igual": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "loc_mejor": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "loc_mucho_mejor": {
+        "n": 0,
+        "yield_pct": null
+      }
+    },
+    "O2": {
+      "vis_mucho_mejor": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "vis_mejor": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "igual": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "loc_mejor": {
+        "n": 2,
+        "yield_pct": null
+      },
+      "loc_mucho_mejor": {
+        "n": 1,
+        "yield_pct": null
+      }
+    },
+    "O3": {
+      "vis_mucho_mejor": {
+        "n": 9,
+        "yield_pct": 115.88888888888889,
+        "hit_pct": 55.55555555555556
+      },
+      "vis_mejor": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "igual": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "loc_mejor": {
+        "n": 3,
+        "yield_pct": null
+      },
+      "loc_mucho_mejor": {
+        "n": 5,
+        "yield_pct": 313.8,
+        "hit_pct": 80.0
+      }
+    },
+    "O4": {
+      "vis_mucho_mejor": {
+        "n": 14,
+        "yield_pct": 55.57142857142857,
+        "hit_pct": 57.14285714285714
+      },
+      "vis_mejor": {
+        "n": 8,
+        "yield_pct": 33.625,
+        "hit_pct": 62.5
+      },
+      "igual": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "loc_mejor": {
+        "n": 5,
+        "yield_pct": 113.20000000000002,
+        "hit_pct": 80.0
+      },
+      "loc_mucho_mejor": {
+        "n": 9,
+        "yield_pct": 83.1111111111111,
+        "hit_pct": 66.66666666666666
+      }
+    },
+    "O5": {
+      "vis_mucho_mejor": {
+        "n": 16,
+        "yield_pct": 63.1875,
+        "hit_pct": 75.0
+      },
+      "vis_mejor": {
+        "n": 16,
+        "yield_pct": 17.0,
+        "hit_pct": 62.5
+      },
+      "igual": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "loc_mejor": {
+        "n": 11,
+        "yield_pct": 49.45454545454545,
+        "hit_pct": 54.54545454545454
+      },
+      "loc_mucho_mejor": {
+        "n": 19,
+        "yield_pct": 12.263157894736842,
+        "hit_pct": 57.89473684210527
+      }
+    },
+    "O6": {
+      "vis_mucho_mejor": {
+        "n": 23,
+        "yield_pct": 23.73913043478261,
+        "hit_pct": 56.52173913043478
+      },
+      "vis_mejor": {
+        "n": 14,
+        "yield_pct": -3.4285714285714266,
+        "hit_pct": 42.857142857142854
+      },
+      "igual": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "loc_mejor": {
+        "n": 13,
+        "yield_pct": 15.692307692307688,
+        "hit_pct": 61.53846153846154
+      },
+      "loc_mucho_mejor": {
+        "n": 18,
+        "yield_pct": 38.05555555555556,
+        "hit_pct": 72.22222222222221
+      }
+    },
+    "O7": {
+      "vis_mucho_mejor": {
+        "n": 10,
+        "yield_pct": 23.799999999999997,
+        "hit_pct": 60.0
+      },
+      "vis_mejor": {
+        "n": 12,
+        "yield_pct": 50.25000000000001,
+        "hit_pct": 75.0
+      },
+      "igual": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "loc_mejor": {
+        "n": 10,
+        "yield_pct": 4.200000000000002,
+        "hit_pct": 50.0
+      },
+      "loc_mucho_mejor": {
+        "n": 8,
+        "yield_pct": 16.75,
+        "hit_pct": 75.0
+      }
+    },
+    "O8": {
+      "vis_mucho_mejor": {
+        "n": 6,
+        "yield_pct": -33.00000000000001,
+        "hit_pct": 16.666666666666664
+      },
+      "vis_mejor": {
+        "n": 1,
+        "yield_pct": null
+      },
+      "igual": {
+        "n": 0,
+        "yield_pct": null
+      },
+      "loc_mejor": {
+        "n": 8,
+        "yield_pct": 89.875,
+        "hit_pct": 75.0
+      },
+      "loc_mucho_mejor": {
+        "n": 4,
+        "yield_pct": null
+      }
+    }
+  }
+}

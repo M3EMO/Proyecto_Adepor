@@ -1,0 +1,285 @@
+{
+  "n_total": 376,
+  "fecha_desde": "2026-03-16",
+  "filtros": {
+    "margen_min": 0.05,
+    "ev_min": 0.03,
+    "kelly_cap": 0.025,
+    "n_bootstrap": 2000
+  },
+  "freq_real_local_por_liga": {
+    "Alemania": 0.4411764705882353,
+    "Argentina": 0.4435626102292769,
+    "Bolivia": 0.5226039783001808,
+    "Brasil": 0.4614035087719298,
+    "Chile": 0.44027777777777777,
+    "Colombia": 0.4745762711864407,
+    "Ecuador": 0.5138888888888888,
+    "Espana": 0.4493421052631579,
+    "Francia": 0.42857142857142855,
+    "Inglaterra": 0.4453947368421053,
+    "Italia": 0.4072368421052632,
+    "Peru": 0.5353535353535354,
+    "Turquia": 0.46537396121883656,
+    "Uruguay": 0.37222222222222223,
+    "Venezuela": 0.4134078212290503
+  },
+  "global": {
+    "A": {
+      "yield": 48.58108108108109,
+      "hit": 46.62162162162162,
+      "n_apost": 148,
+      "brier": 0.6157187413889289
+    },
+    "B": {
+      "yield": 163.30164275267066,
+      "hit": 70.0,
+      "n_apost": 30,
+      "brier": 0.6222818422749307
+    },
+    "C": {
+      "yield": 36.18424296655343,
+      "hit": 38.333333333333336,
+      "n_apost": 120,
+      "brier": 0.6233916676826071
+    },
+    "D": {
+      "yield": 208.12499999999997,
+      "hit": 79.16666666666666,
+      "n_apost": 24,
+      "brier": 0.6283667166189556
+    }
+  },
+  "paired_global": {
+    "BvsA": {
+      "delta_yield_obs": 114.72056167158956,
+      "delta_yield_mean_boot": 114.9918028447236,
+      "delta_yield_ci95_lo": 54.09053465618043,
+      "delta_yield_ci95_hi": 180.47630620154933,
+      "p_delta_negativo": 0.001,
+      "p_delta_positivo": 0.999
+    },
+    "CvsA": {
+      "delta_yield_obs": -12.396838114527661,
+      "delta_yield_mean_boot": -12.519533893092168,
+      "delta_yield_ci95_lo": -37.15704697001367,
+      "delta_yield_ci95_hi": 13.004376278445253,
+      "p_delta_negativo": 0.8425,
+      "p_delta_positivo": 0.1575
+    },
+    "DvsA": {
+      "delta_yield_obs": 159.54391891891888,
+      "delta_yield_mean_boot": 159.60737416354328,
+      "delta_yield_ci95_lo": 92.50556759482873,
+      "delta_yield_ci95_hi": 232.99141781712675,
+      "p_delta_negativo": 0.0,
+      "p_delta_positivo": 1.0
+    }
+  },
+  "per_liga": {
+    "Argentina": {
+      "n": 78,
+      "yield_A": 91.78260869565216,
+      "yield_D": 260.0,
+      "yield_B": 260.0,
+      "yield_C": 49.558751248686534,
+      "n_apost_A": 23,
+      "n_apost_D": 4,
+      "paired_DvsA": {
+        "delta_yield_obs": 168.21739130434784,
+        "delta_yield_mean_boot": 163.26981467630202,
+        "delta_yield_ci95_lo": 43.30144230769227,
+        "delta_yield_ci95_hi": 338.8799999999996,
+        "p_delta_negativo": 0.0165,
+        "p_delta_positivo": 0.9835
+      }
+    },
+    "Bolivia": {
+      "n": 15,
+      "yield_A": -100.0,
+      "yield_D": 0.0,
+      "yield_B": -100.0,
+      "yield_C": -100.0,
+      "n_apost_A": 2,
+      "n_apost_D": 0,
+      "paired_DvsA": {
+        "delta_yield_obs": 100.0,
+        "delta_yield_mean_boot": 87.0,
+        "delta_yield_ci95_lo": 0.0,
+        "delta_yield_ci95_hi": 100.0,
+        "p_delta_negativo": 0.0,
+        "p_delta_positivo": 0.87
+      }
+    },
+    "Brasil": {
+      "n": 63,
+      "yield_A": 86.28571428571428,
+      "yield_D": 269.5,
+      "yield_B": 269.5,
+      "yield_C": 67.37037037037037,
+      "n_apost_A": 35,
+      "n_apost_D": 10,
+      "paired_DvsA": {
+        "delta_yield_obs": 183.21428571428572,
+        "delta_yield_mean_boot": 181.33534292137617,
+        "delta_yield_ci95_lo": 68.61627331002329,
+        "delta_yield_ci95_hi": 314.6113888888889,
+        "p_delta_negativo": 0.001,
+        "p_delta_positivo": 0.999
+      }
+    },
+    "Chile": {
+      "n": 17,
+      "yield_A": -19.66666666666667,
+      "yield_D": 0.0,
+      "yield_B": 0.0,
+      "yield_C": -56.42844315450737,
+      "n_apost_A": 6,
+      "n_apost_D": 0,
+      "paired_DvsA": {
+        "delta_yield_obs": 19.66666666666667,
+        "delta_yield_mean_boot": 19.680659451659455,
+        "delta_yield_ci95_lo": -86.5095238095238,
+        "delta_yield_ci95_hi": 100.0,
+        "p_delta_negativo": 0.336,
+        "p_delta_positivo": 0.664
+      }
+    },
+    "Colombia": {
+      "n": 12,
+      "yield_A": -35.99999999999999,
+      "yield_D": 0.0,
+      "yield_B": 0.0,
+      "yield_C": 270.0,
+      "n_apost_A": 4,
+      "n_apost_D": 0,
+      "paired_DvsA": {
+        "delta_yield_obs": 35.99999999999999,
+        "delta_yield_mean_boot": 35.06650793650793,
+        "delta_yield_ci95_lo": -156.00000000000003,
+        "delta_yield_ci95_hi": 100.0,
+        "p_delta_negativo": 0.2705,
+        "p_delta_positivo": 0.724
+      }
+    },
+    "Ecuador": {
+      "n": 13,
+      "yield_A": -100.0,
+      "yield_D": 0.0,
+      "yield_B": -100.0,
+      "yield_C": -100.0,
+      "n_apost_A": 4,
+      "n_apost_D": 0,
+      "paired_DvsA": {
+        "delta_yield_obs": 100.0,
+        "delta_yield_mean_boot": 99.3,
+        "delta_yield_ci95_lo": 100.0,
+        "delta_yield_ci95_hi": 100.0,
+        "p_delta_negativo": 0.0,
+        "p_delta_positivo": 0.993
+      }
+    },
+    "Espana": {
+      "n": 19,
+      "yield_A": -26.599999999999994,
+      "yield_D": -8.33333333333333,
+      "yield_B": 29.75,
+      "yield_C": -25.85714285714286,
+      "n_apost_A": 10,
+      "n_apost_D": 3,
+      "paired_DvsA": {
+        "delta_yield_obs": 18.266666666666666,
+        "delta_yield_mean_boot": 16.04124560647686,
+        "delta_yield_ci95_lo": -97.6690909090909,
+        "delta_yield_ci95_hi": 192.5208333333332,
+        "p_delta_negativo": 0.4105,
+        "p_delta_positivo": 0.542
+      }
+    },
+    "Francia": {
+      "n": 10,
+      "yield_A": 0.0,
+      "yield_D": 0.0,
+      "yield_B": 0.0,
+      "yield_C": -100.0,
+      "n_apost_A": 0,
+      "n_apost_D": 0,
+      "paired_DvsA": {
+        "delta_yield_obs": 0.0,
+        "delta_yield_mean_boot": 0.0,
+        "delta_yield_ci95_lo": 0.0,
+        "delta_yield_ci95_hi": 0.0,
+        "p_delta_negativo": 0.0,
+        "p_delta_positivo": 0.0
+      }
+    },
+    "Inglaterra": {
+      "n": 38,
+      "yield_A": 62.7142857142857,
+      "yield_D": 0.0,
+      "yield_B": 0.0,
+      "yield_C": 70.66666666666667,
+      "n_apost_A": 14,
+      "n_apost_D": 0,
+      "paired_DvsA": {
+        "delta_yield_obs": -62.7142857142857,
+        "delta_yield_mean_boot": -62.07754578562449,
+        "delta_yield_ci95_lo": -138.5461538461538,
+        "delta_yield_ci95_hi": 12.251249999999994,
+        "p_delta_negativo": 0.9405,
+        "p_delta_positivo": 0.0595
+      }
+    },
+    "Noruega": {
+      "n": 40,
+      "yield_A": 76.57894736842104,
+      "yield_D": 213.0,
+      "yield_B": 213.0,
+      "yield_C": 213.0,
+      "n_apost_A": 19,
+      "n_apost_D": 2,
+      "paired_DvsA": {
+        "delta_yield_obs": 136.42105263157896,
+        "delta_yield_mean_boot": 109.78461435698615,
+        "delta_yield_ci95_lo": -91.70714285714286,
+        "delta_yield_ci95_hi": 226.2820833333333,
+        "p_delta_negativo": 0.114,
+        "p_delta_positivo": 0.886
+      }
+    },
+    "Peru": {
+      "n": 10,
+      "yield_A": 52.0,
+      "yield_D": 204.0,
+      "yield_B": 204.0,
+      "yield_C": 52.0,
+      "n_apost_A": 2,
+      "n_apost_D": 1,
+      "paired_DvsA": {
+        "delta_yield_obs": 152.0,
+        "delta_yield_mean_boot": 84.6760761904762,
+        "delta_yield_ci95_lo": 0.0,
+        "delta_yield_ci95_hi": 228.0,
+        "p_delta_negativo": 0.0,
+        "p_delta_positivo": 0.6355
+      }
+    },
+    "Turquia": {
+      "n": 36,
+      "yield_A": 75.66666666666664,
+      "yield_D": 251.66666666666666,
+      "yield_B": 162.99964674190994,
+      "yield_C": 49.06037990530094,
+      "n_apost_A": 18,
+      "n_apost_D": 3,
+      "paired_DvsA": {
+        "delta_yield_obs": 176.0,
+        "delta_yield_mean_boot": 163.81589601372752,
+        "delta_yield_ci95_lo": -30.413749999999993,
+        "delta_yield_ci95_hi": 283.290909090909,
+        "p_delta_negativo": 0.035,
+        "p_delta_positivo": 0.965
+      }
+    }
+  }
+}

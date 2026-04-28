@@ -1,0 +1,6088 @@
+{
+  "n_total": 57,
+  "n_bins": 12,
+  "stats": {
+    "posesion": {
+      "label": "posesion",
+      "h_key": "h_pos",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        43.64,
+        50.580000000000005,
+        56.2,
+        67.04
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 12,
+          "n_gano": 7,
+          "hit_pct": 58.333333333333336,
+          "yield_pct": 79.58333333333333
+        },
+        "Q2": {
+          "n": 11,
+          "n_gano": 7,
+          "hit_pct": 63.63636363636363,
+          "yield_pct": 110.72727272727272
+        },
+        "Q3": {
+          "n": 12,
+          "n_gano": 7,
+          "hit_pct": 58.333333333333336,
+          "yield_pct": 54.25
+        },
+        "Q4": {
+          "n": 10,
+          "n_gano": 7,
+          "hit_pct": 70.0,
+          "yield_pct": 46.6
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 9,
+          "hit_pct": 75.0,
+          "yield_pct": 42.416666666666664
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": 167.33333333333331,
+            "hit_pct": 100.0
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 4,
+            "yield_pct": 78.5,
+            "hit_pct": 75.0
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 25.666666666666664,
+            "hit_pct": 33.33333333333333
+          },
+          "Q3": {
+            "n": 4,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "pases_total": {
+      "label": "pases_total",
+      "h_key": "h_passes",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        307.6,
+        366.6,
+        445.20000000000005,
+        524.8
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 12,
+          "n_gano": 9,
+          "hit_pct": 75.0,
+          "yield_pct": 136.41666666666669
+        },
+        "Q2": {
+          "n": 11,
+          "n_gano": 8,
+          "hit_pct": 72.72727272727273,
+          "yield_pct": 144.54545454545456
+        },
+        "Q3": {
+          "n": 11,
+          "n_gano": 4,
+          "hit_pct": 36.36363636363637,
+          "yield_pct": -22.909090909090903
+        },
+        "Q4": {
+          "n": 11,
+          "n_gano": 9,
+          "hit_pct": 81.81818181818183,
+          "yield_pct": 76.27272727272728
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 7,
+          "hit_pct": 58.333333333333336,
+          "yield_pct": -1.2499999999999991
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 174.33333333333331,
+            "hit_pct": 66.66666666666666
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": 59.33333333333333,
+            "hit_pct": 100.0
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": 67.0,
+            "hit_pct": 66.66666666666666
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 25.666666666666664,
+            "hit_pct": 33.33333333333333
+          },
+          "Q3": {
+            "n": 4,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 3,
+            "yield_pct": -57.666666666666664,
+            "hit_pct": 33.33333333333333
+          }
+        }
+      }
+    },
+    "pass_pct": {
+      "label": "pass_pct",
+      "h_key": "h_pass_pct",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        0.7,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 18,
+          "n_gano": 13,
+          "hit_pct": 72.22222222222221,
+          "yield_pct": 140.1111111111111
+        },
+        "Q2": {
+          "n": 31,
+          "n_gano": 18,
+          "hit_pct": 58.06451612903226,
+          "yield_pct": 35.064516129032256
+        },
+        "Q5": {
+          "n": 8,
+          "n_gano": 6,
+          "hit_pct": 75.0,
+          "yield_pct": 23.75
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 129.66666666666666,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 4,
+            "yield_pct": 28.000000000000004,
+            "hit_pct": 50.0
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 11.66666666666667,
+            "hit_pct": 66.66666666666666
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 5,
+            "yield_pct": 77.6,
+            "hit_pct": 80.0
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 83.66666666666667,
+            "hit_pct": 66.66666666666666
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 5,
+            "yield_pct": 75.4,
+            "hit_pct": 80.0
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": 55.8,
+            "hit_pct": 40.0
+          },
+          "Q2": {
+            "n": 5,
+            "yield_pct": -61.40000000000001,
+            "hit_pct": 20.0
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 3,
+            "yield_pct": -57.666666666666664,
+            "hit_pct": 33.33333333333333
+          }
+        }
+      }
+    },
+    "crosses_total": {
+      "label": "crosses_total",
+      "h_key": "h_crosses",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        15.0,
+        18.0,
+        22.0,
+        24.800000000000004
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 15,
+          "n_gano": 10,
+          "hit_pct": 66.66666666666666,
+          "yield_pct": 112.66666666666664
+        },
+        "Q2": {
+          "n": 10,
+          "n_gano": 7,
+          "hit_pct": 70.0,
+          "yield_pct": 69.10000000000001
+        },
+        "Q3": {
+          "n": 10,
+          "n_gano": 7,
+          "hit_pct": 70.0,
+          "yield_pct": 67.0
+        },
+        "Q4": {
+          "n": 10,
+          "n_gano": 5,
+          "hit_pct": 50.0,
+          "yield_pct": -7.399999999999999
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 8,
+          "hit_pct": 66.66666666666666,
+          "yield_pct": 68.5
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": 72.24999999999999,
+            "hit_pct": 75.0
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 76.99999999999999,
+            "hit_pct": 66.66666666666666
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": 94.74999999999999,
+            "hit_pct": 50.0
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 4,
+            "yield_pct": -68.25,
+            "hit_pct": 25.0
+          },
+          "Q5": {
+            "n": 3,
+            "yield_pct": -35.66666666666667,
+            "hit_pct": 33.33333333333333
+          }
+        }
+      }
+    },
+    "cross_pct": {
+      "label": "cross_pct",
+      "h_key": "h_cross_pct",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        0.1200000000000001,
+        0.2,
+        0.3,
+        0.3
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 12,
+          "n_gano": 9,
+          "hit_pct": 75.0,
+          "yield_pct": 129.75
+        },
+        "Q2": {
+          "n": 21,
+          "n_gano": 16,
+          "hit_pct": 76.19047619047619,
+          "yield_pct": 83.71428571428572
+        },
+        "Q3": {
+          "n": 16,
+          "n_gano": 6,
+          "hit_pct": 37.5,
+          "yield_pct": 8.562499999999996
+        },
+        "Q5": {
+          "n": 8,
+          "n_gano": 6,
+          "hit_pct": 75.0,
+          "yield_pct": 43.375
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 4,
+            "yield_pct": 136.0,
+            "hit_pct": 100.0
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 141.33333333333331,
+            "hit_pct": 100.0
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 76.00000000000001,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 25.666666666666664,
+            "hit_pct": 33.33333333333333
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 7,
+            "yield_pct": -24.428571428571434,
+            "hit_pct": 28.57142857142857
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "longballs_total": {
+      "label": "longballs_total",
+      "h_key": "h_longballs",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        49.0,
+        54.400000000000006,
+        62.0,
+        66.80000000000001
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 15,
+          "n_gano": 9,
+          "hit_pct": 60.0,
+          "yield_pct": 9.066666666666666
+        },
+        "Q2": {
+          "n": 8,
+          "n_gano": 4,
+          "hit_pct": 50.0,
+          "yield_pct": 38.5
+        },
+        "Q3": {
+          "n": 13,
+          "n_gano": 10,
+          "hit_pct": 76.92307692307693,
+          "yield_pct": 130.07692307692307
+        },
+        "Q4": {
+          "n": 9,
+          "n_gano": 5,
+          "hit_pct": 55.55555555555556,
+          "yield_pct": 30.33333333333333
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 9,
+          "hit_pct": 75.0,
+          "yield_pct": 115.91666666666667
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": 93.33333333333333,
+            "hit_pct": 100.0
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": 200.99999999999997,
+            "hit_pct": 100.0
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": -35.66666666666667,
+            "hit_pct": 33.33333333333333
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 4,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "longball_pct": {
+      "label": "longball_pct",
+      "h_key": "h_longball_pct",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        0.4,
+        0.4,
+        0.5,
+        0.6
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 24,
+          "n_gano": 14,
+          "hit_pct": 58.333333333333336,
+          "yield_pct": 78.58333333333333
+        },
+        "Q3": {
+          "n": 20,
+          "n_gano": 14,
+          "hit_pct": 70.0,
+          "yield_pct": 76.0
+        },
+        "Q4": {
+          "n": 9,
+          "n_gano": 7,
+          "hit_pct": 77.77777777777779,
+          "yield_pct": 54.55555555555556
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 5,
+            "yield_pct": 82.2,
+            "hit_pct": 80.0
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": 51.33333333333333,
+            "hit_pct": 66.66666666666666
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": 152.2,
+            "hit_pct": 80.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 8,
+            "yield_pct": -2.6250000000000053,
+            "hit_pct": 25.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "shots_total": {
+      "label": "shots_total",
+      "h_key": "hs",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        10.0,
+        12.0,
+        15.0,
+        19.800000000000004
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 16,
+          "n_gano": 11,
+          "hit_pct": 68.75,
+          "yield_pct": 122.49999999999999
+        },
+        "Q2": {
+          "n": 8,
+          "n_gano": 3,
+          "hit_pct": 37.5,
+          "yield_pct": 14.250000000000002
+        },
+        "Q3": {
+          "n": 12,
+          "n_gano": 6,
+          "hit_pct": 50.0,
+          "yield_pct": 15.333333333333336
+        },
+        "Q4": {
+          "n": 9,
+          "n_gano": 8,
+          "hit_pct": 88.88888888888889,
+          "yield_pct": 148.55555555555554
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 9,
+          "hit_pct": 75.0,
+          "yield_pct": 17.0
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 42.0,
+            "hit_pct": 66.66666666666666
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 188.33333333333334,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 225.33333333333334,
+            "hit_pct": 66.66666666666666
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 4,
+            "yield_pct": 123.75,
+            "hit_pct": 100.0
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": 94.74999999999999,
+            "hit_pct": 50.0
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 4,
+            "yield_pct": -20.0,
+            "hit_pct": 50.0
+          }
+        }
+      }
+    },
+    "shots_on_target": {
+      "label": "shots_on_target",
+      "h_key": "hst",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        3.0,
+        4.0,
+        5.0,
+        6.800000000000004
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 19,
+          "n_gano": 9,
+          "hit_pct": 47.368421052631575,
+          "yield_pct": 39.26315789473684
+        },
+        "Q2": {
+          "n": 11,
+          "n_gano": 9,
+          "hit_pct": 81.81818181818183,
+          "yield_pct": 151.90909090909093
+        },
+        "Q3": {
+          "n": 7,
+          "n_gano": 3,
+          "hit_pct": 42.857142857142854,
+          "yield_pct": 0.14285714285713982
+        },
+        "Q4": {
+          "n": 8,
+          "n_gano": 6,
+          "hit_pct": 75.0,
+          "yield_pct": 61.25000000000001
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 10,
+          "hit_pct": 83.33333333333334,
+          "yield_pct": 74.25
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": 13.599999999999998,
+            "hit_pct": 60.0
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 51.33333333333333,
+            "hit_pct": 66.66666666666666
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 3,
+            "yield_pct": 155.66666666666666,
+            "hit_pct": 100.0
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": 67.66666666666667,
+            "hit_pct": 100.0
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 159.66666666666666,
+            "hit_pct": 66.66666666666666
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": -57.666666666666664,
+            "hit_pct": 33.33333333333333
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "shot_pct": {
+      "label": "shot_pct",
+      "h_key": "h_shot_pct",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        0.2,
+        0.3,
+        0.4,
+        0.5
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 15,
+          "n_gano": 6,
+          "hit_pct": 40.0,
+          "yield_pct": -8.799999999999999
+        },
+        "Q2": {
+          "n": 17,
+          "n_gano": 11,
+          "hit_pct": 64.70588235294117,
+          "yield_pct": 55.99999999999999
+        },
+        "Q3": {
+          "n": 12,
+          "n_gano": 10,
+          "hit_pct": 83.33333333333334,
+          "yield_pct": 114.5
+        },
+        "Q4": {
+          "n": 10,
+          "n_gano": 7,
+          "hit_pct": 70.0,
+          "yield_pct": 89.3
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 3,
+            "yield_pct": 142.33333333333331,
+            "hit_pct": 100.0
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": 17.0,
+            "hit_pct": 66.66666666666666
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q2": {
+            "n": 5,
+            "yield_pct": -74.6,
+            "hit_pct": 20.0
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "blocks": {
+      "label": "blocks",
+      "h_key": "h_blocks",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        1.200000000000001,
+        2.0,
+        4.0,
+        6.0
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 12,
+          "n_gano": 9,
+          "hit_pct": 75.0,
+          "yield_pct": 125.50000000000001
+        },
+        "Q2": {
+          "n": 12,
+          "n_gano": 6,
+          "hit_pct": 50.0,
+          "yield_pct": 64.49999999999999
+        },
+        "Q3": {
+          "n": 13,
+          "n_gano": 7,
+          "hit_pct": 53.84615384615385,
+          "yield_pct": 24.15384615384615
+        },
+        "Q4": {
+          "n": 10,
+          "n_gano": 8,
+          "hit_pct": 80.0,
+          "yield_pct": 68.2
+        },
+        "Q5": {
+          "n": 10,
+          "n_gano": 7,
+          "hit_pct": 70.0,
+          "yield_pct": 52.300000000000004
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 42.0,
+            "hit_pct": 66.66666666666666
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": 46.0,
+            "hit_pct": 66.66666666666666
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 3,
+            "yield_pct": 67.0,
+            "hit_pct": 66.66666666666666
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 4,
+            "yield_pct": 0.49999999999998934,
+            "hit_pct": 25.0
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 3,
+            "yield_pct": -57.666666666666664,
+            "hit_pct": 33.33333333333333
+          }
+        }
+      }
+    },
+    "corners": {
+      "label": "corners",
+      "h_key": "hc",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        3.0,
+        4.0,
+        5.0,
+        7.0
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 17,
+          "n_gano": 9,
+          "hit_pct": 52.94117647058824,
+          "yield_pct": 55.11764705882353
+        },
+        "Q2": {
+          "n": 11,
+          "n_gano": 7,
+          "hit_pct": 63.63636363636363,
+          "yield_pct": 56.00000000000001
+        },
+        "Q3": {
+          "n": 8,
+          "n_gano": 5,
+          "hit_pct": 62.5,
+          "yield_pct": 40.875
+        },
+        "Q4": {
+          "n": 11,
+          "n_gano": 9,
+          "hit_pct": 81.81818181818183,
+          "yield_pct": 146.0909090909091
+        },
+        "Q5": {
+          "n": 10,
+          "n_gano": 7,
+          "hit_pct": 70.0,
+          "yield_pct": 31.2
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": 66.19999999999999,
+            "hit_pct": 80.0
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": 133.33333333333331,
+            "hit_pct": 100.0
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 6,
+            "yield_pct": 29.83333333333333,
+            "hit_pct": 33.33333333333333
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 4,
+            "yield_pct": -20.0,
+            "hit_pct": 50.0
+          }
+        }
+      }
+    },
+    "fouls": {
+      "label": "fouls",
+      "h_key": "h_fouls",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        8.0,
+        10.400000000000002,
+        12.0,
+        14.800000000000004
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 14,
+          "n_gano": 9,
+          "hit_pct": 64.28571428571429,
+          "yield_pct": 48.642857142857146
+        },
+        "Q2": {
+          "n": 9,
+          "n_gano": 7,
+          "hit_pct": 77.77777777777779,
+          "yield_pct": 89.0
+        },
+        "Q3": {
+          "n": 14,
+          "n_gano": 8,
+          "hit_pct": 57.14285714285714,
+          "yield_pct": 50.642857142857146
+        },
+        "Q4": {
+          "n": 8,
+          "n_gano": 5,
+          "hit_pct": 62.5,
+          "yield_pct": 63.5
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 8,
+          "hit_pct": 66.66666666666666,
+          "yield_pct": 91.66666666666666
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 165.33333333333334,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": 5.666666666666664,
+            "hit_pct": 66.66666666666666
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 164.33333333333334,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 17.0,
+            "hit_pct": 66.66666666666666
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 6,
+            "yield_pct": -16.0,
+            "hit_pct": 33.33333333333333
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 4,
+            "yield_pct": 0.49999999999998934,
+            "hit_pct": 25.0
+          }
+        }
+      }
+    },
+    "yellow": {
+      "label": "yellow",
+      "h_key": "h_yellow",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        1.0,
+        1.4000000000000021,
+        2.0,
+        3.0
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 23,
+          "n_gano": 13,
+          "hit_pct": 56.52173913043478,
+          "yield_pct": 51.13043478260869
+        },
+        "Q3": {
+          "n": 20,
+          "n_gano": 15,
+          "hit_pct": 75.0,
+          "yield_pct": 67.8
+        },
+        "Q4": {
+          "n": 6,
+          "n_gano": 3,
+          "hit_pct": 50.0,
+          "yield_pct": 52.66666666666667
+        },
+        "Q5": {
+          "n": 8,
+          "n_gano": 6,
+          "hit_pct": 75.0,
+          "yield_pct": 118.875
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": 134.5,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": 227.0,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": 11.66666666666667,
+            "hit_pct": 66.66666666666666
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 4,
+            "yield_pct": 221.74999999999997,
+            "hit_pct": 100.0
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": 82.0,
+            "hit_pct": 100.0
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 6,
+            "yield_pct": 16.166666666666664,
+            "hit_pct": 50.0
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "red": {
+      "label": "red",
+      "h_key": "h_red",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 49,
+          "n_gano": 32,
+          "hit_pct": 65.3061224489796,
+          "yield_pct": 55.326530612244895
+        },
+        "Q5": {
+          "n": 8,
+          "n_gano": 5,
+          "hit_pct": 62.5,
+          "yield_pct": 136.0
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 7,
+            "yield_pct": 43.71428571428571,
+            "hit_pct": 71.42857142857143
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 151.66666666666666,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": 52.5,
+            "hit_pct": 75.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 6,
+            "yield_pct": 141.83333333333331,
+            "hit_pct": 83.33333333333334
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": 116.25000000000001,
+            "hit_pct": 75.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 122.0,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 6,
+            "yield_pct": 74.50000000000001,
+            "hit_pct": 83.33333333333334
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 9,
+            "yield_pct": -19.777777777777782,
+            "hit_pct": 33.33333333333333
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 4,
+            "yield_pct": -5.75,
+            "hit_pct": 25.0
+          }
+        }
+      }
+    },
+    "offsides": {
+      "label": "offsides",
+      "h_key": "h_offsides",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 18,
+          "n_gano": 11,
+          "hit_pct": 61.111111111111114,
+          "yield_pct": 45.22222222222222
+        },
+        "Q2": {
+          "n": 18,
+          "n_gano": 11,
+          "hit_pct": 61.111111111111114,
+          "yield_pct": 47.83333333333333
+        },
+        "Q4": {
+          "n": 13,
+          "n_gano": 9,
+          "hit_pct": 69.23076923076923,
+          "yield_pct": 101.61538461538461
+        },
+        "Q5": {
+          "n": 8,
+          "n_gano": 6,
+          "hit_pct": 75.0,
+          "yield_pct": 100.37499999999999
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 4,
+            "yield_pct": 99.0,
+            "hit_pct": 75.0
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": 160.25,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": 83.66666666666667,
+            "hit_pct": 66.66666666666666
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": -74.6,
+            "hit_pct": 20.0
+          },
+          "Q2": {
+            "n": 4,
+            "yield_pct": 48.749999999999986,
+            "hit_pct": 50.0
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 4,
+            "yield_pct": -5.75,
+            "hit_pct": 25.0
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "saves": {
+      "label": "saves",
+      "h_key": "h_saves",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        1.0,
+        1.0,
+        2.0,
+        3.0
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 25,
+          "n_gano": 17,
+          "hit_pct": 68.0,
+          "yield_pct": 62.12
+        },
+        "Q3": {
+          "n": 11,
+          "n_gano": 7,
+          "hit_pct": 63.63636363636363,
+          "yield_pct": 101.9090909090909
+        },
+        "Q4": {
+          "n": 11,
+          "n_gano": 5,
+          "hit_pct": 45.45454545454545,
+          "yield_pct": -20.909090909090907
+        },
+        "Q5": {
+          "n": 10,
+          "n_gano": 8,
+          "hit_pct": 80.0,
+          "yield_pct": 135.5
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": 33.0,
+            "hit_pct": 66.66666666666666
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 3,
+            "yield_pct": 190.0,
+            "hit_pct": 100.0
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 11.66666666666667,
+            "hit_pct": 66.66666666666666
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 83.66666666666667,
+            "hit_pct": 66.66666666666666
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": 39.6,
+            "hit_pct": 80.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": -36.0,
+            "hit_pct": 40.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 4,
+            "yield_pct": 94.74999999999999,
+            "hit_pct": 50.0
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "tackles": {
+      "label": "tackles",
+      "h_key": "h_tackles",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        12.0,
+        15.0,
+        17.0,
+        20.800000000000004
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 13,
+          "n_gano": 9,
+          "hit_pct": 69.23076923076923,
+          "yield_pct": 69.76923076923077
+        },
+        "Q2": {
+          "n": 14,
+          "n_gano": 9,
+          "hit_pct": 64.28571428571429,
+          "yield_pct": 70.07142857142857
+        },
+        "Q3": {
+          "n": 12,
+          "n_gano": 9,
+          "hit_pct": 75.0,
+          "yield_pct": 105.75000000000001
+        },
+        "Q4": {
+          "n": 6,
+          "n_gano": 3,
+          "hit_pct": 50.0,
+          "yield_pct": 26.0
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 7,
+          "hit_pct": 58.333333333333336,
+          "yield_pct": 40.5
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": 188.33333333333334,
+            "hit_pct": 100.0
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": 0.8000000000000007,
+            "hit_pct": 40.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 4,
+            "yield_pct": -51.75000000000001,
+            "hit_pct": 25.0
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 3,
+            "yield_pct": 33.999999999999986,
+            "hit_pct": 33.33333333333333
+          }
+        }
+      }
+    },
+    "tackle_pct": {
+      "label": "tackle_pct",
+      "h_key": "h_tackle_pct",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        0.5,
+        0.6,
+        0.6,
+        0.8
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 14,
+          "n_gano": 8,
+          "hit_pct": 57.14285714285714,
+          "yield_pct": 56.99999999999999
+        },
+        "Q2": {
+          "n": 21,
+          "n_gano": 15,
+          "hit_pct": 71.42857142857143,
+          "yield_pct": 99.04761904761905
+        },
+        "Q4": {
+          "n": 20,
+          "n_gano": 13,
+          "hit_pct": 65.0,
+          "yield_pct": 44.1
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 4,
+            "yield_pct": -0.2500000000000002,
+            "hit_pct": 50.0
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 92.33333333333333,
+            "hit_pct": 66.66666666666666
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": 127.33333333333334,
+            "hit_pct": 100.0
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 4,
+            "yield_pct": -68.25,
+            "hit_pct": 25.0
+          },
+          "Q2": {
+            "n": 6,
+            "yield_pct": -0.8333333333333415,
+            "hit_pct": 33.33333333333333
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        }
+      }
+    },
+    "interceptions": {
+      "label": "interceptions",
+      "h_key": "h_interceptions",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        7.0,
+        8.0,
+        10.0,
+        11.800000000000004
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 18,
+          "n_gano": 14,
+          "hit_pct": 77.77777777777779,
+          "yield_pct": 101.44444444444443
+        },
+        "Q2": {
+          "n": 6,
+          "n_gano": 6,
+          "hit_pct": 100.0,
+          "yield_pct": 154.83333333333334
+        },
+        "Q3": {
+          "n": 14,
+          "n_gano": 8,
+          "hit_pct": 57.14285714285714,
+          "yield_pct": 27.642857142857142
+        },
+        "Q4": {
+          "n": 7,
+          "n_gano": 5,
+          "hit_pct": 71.42857142857143,
+          "yield_pct": 75.57142857142857
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 4,
+          "hit_pct": 33.33333333333333,
+          "yield_pct": 10.666666666666664
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": 72.8,
+            "hit_pct": 80.0
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 3,
+            "yield_pct": 206.66666666666663,
+            "hit_pct": 100.0
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 5,
+            "yield_pct": 5.799999999999992,
+            "hit_pct": 40.0
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 4,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          }
+        }
+      }
+    },
+    "clearance": {
+      "label": "clearance",
+      "h_key": "h_clearance",
+      "n_bins": 12,
+      "cuts_quintiles": [
+        13.200000000000001,
+        18.800000000000004,
+        23.0,
+        27.800000000000004
+      ],
+      "n_obs": 57,
+      "agregado_quintiles": {
+        "Q1": {
+          "n": 12,
+          "n_gano": 7,
+          "hit_pct": 58.333333333333336,
+          "yield_pct": 85.5
+        },
+        "Q2": {
+          "n": 11,
+          "n_gano": 7,
+          "hit_pct": 63.63636363636363,
+          "yield_pct": 20.63636363636364
+        },
+        "Q3": {
+          "n": 12,
+          "n_gano": 6,
+          "hit_pct": 50.0,
+          "yield_pct": 11.000000000000004
+        },
+        "Q4": {
+          "n": 10,
+          "n_gano": 5,
+          "hit_pct": 50.0,
+          "yield_pct": -5.999999999999998
+        },
+        "Q5": {
+          "n": 12,
+          "n_gano": 12,
+          "hit_pct": 100.0,
+          "yield_pct": 206.16666666666666
+        }
+      },
+      "cross_bin_x_quintil": {
+        "bin1": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 3,
+            "yield_pct": -54.666666666666664,
+            "hit_pct": 33.33333333333333
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin2": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 3,
+            "yield_pct": 188.33333333333334,
+            "hit_pct": 100.0
+          }
+        },
+        "bin3": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin5": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin6": {
+          "Q1": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin7": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin8": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin9": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        },
+        "bin10": {
+          "Q1": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 1,
+            "yield_pct": null
+          }
+        },
+        "bin11": {
+          "Q1": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q4": {
+            "n": 0,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 0,
+            "yield_pct": null
+          }
+        },
+        "bin12": {
+          "Q1": {
+            "n": 5,
+            "yield_pct": -36.0,
+            "hit_pct": 40.0
+          },
+          "Q2": {
+            "n": 1,
+            "yield_pct": null
+          },
+          "Q3": {
+            "n": 3,
+            "yield_pct": -100.0,
+            "hit_pct": 0.0
+          },
+          "Q4": {
+            "n": 2,
+            "yield_pct": null
+          },
+          "Q5": {
+            "n": 2,
+            "yield_pct": null
+          }
+        }
+      }
+    }
+  }
+}

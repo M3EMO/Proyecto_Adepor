@@ -1,0 +1,2282 @@
+[
+ {
+  "fecha": "2025-08-16",
+  "ht": "Valencia",
+  "at": "Real Sociedad",
+  "evt_id": "748144"
+ },
+ {
+  "fecha": "2025-08-19",
+  "ht": "Real Madrid",
+  "at": "Osasuna",
+  "evt_id": "748145"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Espanyol",
+  "at": "Atlético Madrid",
+  "evt_id": "748146"
+ },
+ {
+  "fecha": "2025-08-18",
+  "ht": "Elche",
+  "at": "Real Betis",
+  "evt_id": "748147"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Celta Vigo",
+  "at": "Getafe",
+  "evt_id": "748148"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Athletic Club",
+  "at": "Sevilla",
+  "evt_id": "748149"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Alavés",
+  "at": "Levante",
+  "evt_id": "748150"
+ },
+ {
+  "fecha": "2025-08-15",
+  "ht": "Villarreal",
+  "at": "Real Oviedo",
+  "evt_id": "748151"
+ },
+ {
+  "fecha": "2025-08-15",
+  "ht": "Girona",
+  "at": "Rayo Vallecano",
+  "evt_id": "748152"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Mallorca",
+  "at": "Barcelona",
+  "evt_id": "748153"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Mallorca",
+  "at": "Celta Vigo",
+  "evt_id": "748154"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Real Oviedo",
+  "at": "Real Madrid",
+  "evt_id": "748155"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Real Sociedad",
+  "at": "Espanyol",
+  "evt_id": "748156"
+ },
+ {
+  "fecha": "2025-08-25",
+  "ht": "Sevilla",
+  "at": "Getafe",
+  "evt_id": "748157"
+ },
+ {
+  "fecha": "2025-08-22",
+  "ht": "Real Betis",
+  "at": "Alavés",
+  "evt_id": "748158"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Osasuna",
+  "at": "Valencia",
+  "evt_id": "748159"
+ },
+ {
+  "fecha": "2025-08-25",
+  "ht": "Athletic Club",
+  "at": "Rayo Vallecano",
+  "evt_id": "748160"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Atlético Madrid",
+  "at": "Elche",
+  "evt_id": "748161"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Levante",
+  "at": "Barcelona",
+  "evt_id": "748162"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Villarreal",
+  "at": "Girona",
+  "evt_id": "748163"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Girona",
+  "at": "Sevilla",
+  "evt_id": "748164"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Rayo Vallecano",
+  "at": "Barcelona",
+  "evt_id": "748165"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Real Betis",
+  "at": "Athletic Club",
+  "evt_id": "748166"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Real Madrid",
+  "at": "Mallorca",
+  "evt_id": "748167"
+ },
+ {
+  "fecha": "2025-08-29",
+  "ht": "Valencia",
+  "at": "Getafe",
+  "evt_id": "748168"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Espanyol",
+  "at": "Osasuna",
+  "evt_id": "748169"
+ },
+ {
+  "fecha": "2025-08-29",
+  "ht": "Elche",
+  "at": "Levante",
+  "evt_id": "748170"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Celta Vigo",
+  "at": "Villarreal",
+  "evt_id": "748171"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Alavés",
+  "at": "Atlético Madrid",
+  "evt_id": "748172"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Real Oviedo",
+  "at": "Real Sociedad",
+  "evt_id": "748173"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Getafe",
+  "at": "Real Oviedo",
+  "evt_id": "748174"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Levante",
+  "at": "Real Betis",
+  "evt_id": "748175"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Osasuna",
+  "at": "Rayo Vallecano",
+  "evt_id": "748176"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Real Sociedad",
+  "at": "Real Madrid",
+  "evt_id": "748177"
+ },
+ {
+  "fecha": "2025-09-15",
+  "ht": "Espanyol",
+  "at": "Mallorca",
+  "evt_id": "748178"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Celta Vigo",
+  "at": "Girona",
+  "evt_id": "748179"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Barcelona",
+  "at": "Valencia",
+  "evt_id": "748180"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Atlético Madrid",
+  "at": "Villarreal",
+  "evt_id": "748181"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Athletic Club",
+  "at": "Alavés",
+  "evt_id": "748182"
+ },
+ {
+  "fecha": "2025-09-12",
+  "ht": "Sevilla",
+  "at": "Elche",
+  "evt_id": "748183"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Rayo Vallecano",
+  "at": "Celta Vigo",
+  "evt_id": "748184"
+ },
+ {
+  "fecha": "2025-09-19",
+  "ht": "Real Betis",
+  "at": "Real Sociedad",
+  "evt_id": "748185"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Real Madrid",
+  "at": "Espanyol",
+  "evt_id": "748186"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Valencia",
+  "at": "Athletic Club",
+  "evt_id": "748187"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Mallorca",
+  "at": "Atlético Madrid",
+  "evt_id": "748188"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Villarreal",
+  "at": "Osasuna",
+  "evt_id": "748189"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Alavés",
+  "at": "Sevilla",
+  "evt_id": "748190"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Barcelona",
+  "at": "Getafe",
+  "evt_id": "748191"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Elche",
+  "at": "Real Oviedo",
+  "evt_id": "748192"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Girona",
+  "at": "Levante",
+  "evt_id": "748193"
+ },
+ {
+  "fecha": "2025-09-23",
+  "ht": "Athletic Club",
+  "at": "Girona",
+  "evt_id": "748194"
+ },
+ {
+  "fecha": "2025-09-24",
+  "ht": "Atlético Madrid",
+  "at": "Rayo Vallecano",
+  "evt_id": "748195"
+ },
+ {
+  "fecha": "2025-09-23",
+  "ht": "Sevilla",
+  "at": "Villarreal",
+  "evt_id": "748196"
+ },
+ {
+  "fecha": "2025-09-24",
+  "ht": "Real Sociedad",
+  "at": "Mallorca",
+  "evt_id": "748197"
+ },
+ {
+  "fecha": "2025-08-27",
+  "ht": "Celta Vigo",
+  "at": "Real Betis",
+  "evt_id": "748198"
+ },
+ {
+  "fecha": "2025-09-24",
+  "ht": "Getafe",
+  "at": "Alavés",
+  "evt_id": "748199"
+ },
+ {
+  "fecha": "2025-09-23",
+  "ht": "Levante",
+  "at": "Real Madrid",
+  "evt_id": "748200"
+ },
+ {
+  "fecha": "2025-09-25",
+  "ht": "Osasuna",
+  "at": "Elche",
+  "evt_id": "748201"
+ },
+ {
+  "fecha": "2025-09-25",
+  "ht": "Real Oviedo",
+  "at": "Barcelona",
+  "evt_id": "748202"
+ },
+ {
+  "fecha": "2025-09-23",
+  "ht": "Espanyol",
+  "at": "Valencia",
+  "evt_id": "748203"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Villarreal",
+  "at": "Athletic Club",
+  "evt_id": "748204"
+ },
+ {
+  "fecha": "2025-09-26",
+  "ht": "Girona",
+  "at": "Espanyol",
+  "evt_id": "748205"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Getafe",
+  "at": "Levante",
+  "evt_id": "748206"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Elche",
+  "at": "Celta Vigo",
+  "evt_id": "748207"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Barcelona",
+  "at": "Real Sociedad",
+  "evt_id": "748208"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Mallorca",
+  "at": "Alavés",
+  "evt_id": "748209"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Atlético Madrid",
+  "at": "Real Madrid",
+  "evt_id": "748210"
+ },
+ {
+  "fecha": "2025-09-30",
+  "ht": "Valencia",
+  "at": "Real Oviedo",
+  "evt_id": "748211"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Real Betis",
+  "at": "Osasuna",
+  "evt_id": "748212"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Rayo Vallecano",
+  "at": "Sevilla",
+  "evt_id": "748213"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Real Madrid",
+  "at": "Villarreal",
+  "evt_id": "748214"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Sevilla",
+  "at": "Barcelona",
+  "evt_id": "748215"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Real Oviedo",
+  "at": "Levante",
+  "evt_id": "748216"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Real Sociedad",
+  "at": "Rayo Vallecano",
+  "evt_id": "748217"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Alavés",
+  "at": "Elche",
+  "evt_id": "748218"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Girona",
+  "at": "Valencia",
+  "evt_id": "748219"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Espanyol",
+  "at": "Real Betis",
+  "evt_id": "748220"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Celta Vigo",
+  "at": "Atlético Madrid",
+  "evt_id": "748221"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Athletic Club",
+  "at": "Mallorca",
+  "evt_id": "748222"
+ },
+ {
+  "fecha": "2025-10-03",
+  "ht": "Osasuna",
+  "at": "Getafe",
+  "evt_id": "748223"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Atlético Madrid",
+  "at": "Osasuna",
+  "evt_id": "748224"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Villarreal",
+  "at": "Real Betis",
+  "evt_id": "748225"
+ },
+ {
+  "fecha": "2025-10-20",
+  "ht": "Alavés",
+  "at": "Valencia",
+  "evt_id": "748226"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Sevilla",
+  "at": "Mallorca",
+  "evt_id": "748227"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Barcelona",
+  "at": "Girona",
+  "evt_id": "748228"
+ },
+ {
+  "fecha": "2025-10-17",
+  "ht": "Real Oviedo",
+  "at": "Espanyol",
+  "evt_id": "748229"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Levante",
+  "at": "Rayo Vallecano",
+  "evt_id": "748230"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Getafe",
+  "at": "Real Madrid",
+  "evt_id": "748231"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Elche",
+  "at": "Athletic Club",
+  "evt_id": "748232"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Celta Vigo",
+  "at": "Real Sociedad",
+  "evt_id": "748233"
+ },
+ {
+  "fecha": "2025-10-24",
+  "ht": "Real Sociedad",
+  "at": "Sevilla",
+  "evt_id": "748234"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Valencia",
+  "at": "Villarreal",
+  "evt_id": "748235"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Real Madrid",
+  "at": "Barcelona",
+  "evt_id": "748236"
+ },
+ {
+  "fecha": "2025-10-27",
+  "ht": "Real Betis",
+  "at": "Atlético Madrid",
+  "evt_id": "748237"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Rayo Vallecano",
+  "at": "Alavés",
+  "evt_id": "748238"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Girona",
+  "at": "Real Oviedo",
+  "evt_id": "748239"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Mallorca",
+  "at": "Levante",
+  "evt_id": "748240"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Osasuna",
+  "at": "Celta Vigo",
+  "evt_id": "748241"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Athletic Club",
+  "at": "Getafe",
+  "evt_id": "748242"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Espanyol",
+  "at": "Elche",
+  "evt_id": "748243"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Levante",
+  "at": "Celta Vigo",
+  "evt_id": "748244"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Atlético Madrid",
+  "at": "Sevilla",
+  "evt_id": "748245"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Alavés",
+  "at": "Espanyol",
+  "evt_id": "748246"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Barcelona",
+  "at": "Elche",
+  "evt_id": "748247"
+ },
+ {
+  "fecha": "2025-10-31",
+  "ht": "Getafe",
+  "at": "Girona",
+  "evt_id": "748248"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Villarreal",
+  "at": "Rayo Vallecano",
+  "evt_id": "748249"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Real Betis",
+  "at": "Mallorca",
+  "evt_id": "748250"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Real Madrid",
+  "at": "Valencia",
+  "evt_id": "748251"
+ },
+ {
+  "fecha": "2025-11-03",
+  "ht": "Real Oviedo",
+  "at": "Osasuna",
+  "evt_id": "748252"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Real Sociedad",
+  "at": "Athletic Club",
+  "evt_id": "748253"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Rayo Vallecano",
+  "at": "Real Madrid",
+  "evt_id": "748254"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Sevilla",
+  "at": "Osasuna",
+  "evt_id": "748255"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Mallorca",
+  "at": "Getafe",
+  "evt_id": "748256"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Girona",
+  "at": "Alavés",
+  "evt_id": "748257"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Valencia",
+  "at": "Real Betis",
+  "evt_id": "748258"
+ },
+ {
+  "fecha": "2025-11-07",
+  "ht": "Elche",
+  "at": "Real Sociedad",
+  "evt_id": "748259"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Celta Vigo",
+  "at": "Barcelona",
+  "evt_id": "748260"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Atlético Madrid",
+  "at": "Levante",
+  "evt_id": "748261"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Athletic Club",
+  "at": "Real Oviedo",
+  "evt_id": "748262"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Espanyol",
+  "at": "Villarreal",
+  "evt_id": "748263"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Getafe",
+  "at": "Atlético Madrid",
+  "evt_id": "748264"
+ },
+ {
+  "fecha": "2025-11-24",
+  "ht": "Espanyol",
+  "at": "Sevilla",
+  "evt_id": "748265"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Elche",
+  "at": "Real Madrid",
+  "evt_id": "748266"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Osasuna",
+  "at": "Real Sociedad",
+  "evt_id": "748267"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Real Betis",
+  "at": "Girona",
+  "evt_id": "748268"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Real Oviedo",
+  "at": "Rayo Vallecano",
+  "evt_id": "748269"
+ },
+ {
+  "fecha": "2025-11-21",
+  "ht": "Valencia",
+  "at": "Levante",
+  "evt_id": "748270"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Villarreal",
+  "at": "Mallorca",
+  "evt_id": "748271"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Barcelona",
+  "at": "Athletic Club",
+  "evt_id": "748272"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Alavés",
+  "at": "Celta Vigo",
+  "evt_id": "748273"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Real Sociedad",
+  "at": "Villarreal",
+  "evt_id": "748274"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Atlético Madrid",
+  "at": "Real Oviedo",
+  "evt_id": "748275"
+ },
+ {
+  "fecha": "2025-12-01",
+  "ht": "Rayo Vallecano",
+  "at": "Valencia",
+  "evt_id": "748276"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Mallorca",
+  "at": "Osasuna",
+  "evt_id": "748277"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Levante",
+  "at": "Athletic Club",
+  "evt_id": "748278"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Girona",
+  "at": "Real Madrid",
+  "evt_id": "748279"
+ },
+ {
+  "fecha": "2025-11-28",
+  "ht": "Getafe",
+  "at": "Elche",
+  "evt_id": "748280"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Celta Vigo",
+  "at": "Espanyol",
+  "evt_id": "748281"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Barcelona",
+  "at": "Alavés",
+  "evt_id": "748282"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Sevilla",
+  "at": "Real Betis",
+  "evt_id": "748283"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Espanyol",
+  "at": "Rayo Vallecano",
+  "evt_id": "748284"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Elche",
+  "at": "Girona",
+  "evt_id": "748285"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Athletic Club",
+  "at": "Atlético Madrid",
+  "evt_id": "748286"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Alavés",
+  "at": "Real Sociedad",
+  "evt_id": "748287"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Villarreal",
+  "at": "Getafe",
+  "evt_id": "748288"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Real Betis",
+  "at": "Barcelona",
+  "evt_id": "748289"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Real Madrid",
+  "at": "Celta Vigo",
+  "evt_id": "748290"
+ },
+ {
+  "fecha": "2025-12-05",
+  "ht": "Real Oviedo",
+  "at": "Mallorca",
+  "evt_id": "748291"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Valencia",
+  "at": "Sevilla",
+  "evt_id": "748292"
+ },
+ {
+  "fecha": "2025-12-08",
+  "ht": "Osasuna",
+  "at": "Levante",
+  "evt_id": "748293"
+ },
+ {
+  "fecha": "2025-12-12",
+  "ht": "Real Sociedad",
+  "at": "Girona",
+  "evt_id": "748294"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Sevilla",
+  "at": "Real Oviedo",
+  "evt_id": "748295"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Atlético Madrid",
+  "at": "Valencia",
+  "evt_id": "748296"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Alavés",
+  "at": "Real Madrid",
+  "evt_id": "748297"
+ },
+ {
+  "fecha": "2025-12-15",
+  "ht": "Rayo Vallecano",
+  "at": "Real Betis",
+  "evt_id": "748298"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Barcelona",
+  "at": "Osasuna",
+  "evt_id": "748299"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Celta Vigo",
+  "at": "Athletic Club",
+  "evt_id": "748300"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Getafe",
+  "at": "Espanyol",
+  "evt_id": "748301"
+ },
+ {
+  "fecha": "2026-02-18",
+  "ht": "Levante",
+  "at": "Villarreal",
+  "evt_id": "748302"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Mallorca",
+  "at": "Elche",
+  "evt_id": "748303"
+ },
+ {
+  "fecha": "2025-12-22",
+  "ht": "Athletic Club",
+  "at": "Espanyol",
+  "evt_id": "748304"
+ },
+ {
+  "fecha": "2025-12-19",
+  "ht": "Valencia",
+  "at": "Mallorca",
+  "evt_id": "748305"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Real Oviedo",
+  "at": "Celta Vigo",
+  "evt_id": "748306"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Real Madrid",
+  "at": "Sevilla",
+  "evt_id": "748307"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Real Betis",
+  "at": "Getafe",
+  "evt_id": "748308"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Girona",
+  "at": "Atlético Madrid",
+  "evt_id": "748309"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Levante",
+  "at": "Real Sociedad",
+  "evt_id": "748310"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Osasuna",
+  "at": "Alavés",
+  "evt_id": "748311"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Villarreal",
+  "at": "Barcelona",
+  "evt_id": "748312"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Elche",
+  "at": "Rayo Vallecano",
+  "evt_id": "748313"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Real Sociedad",
+  "at": "Atlético Madrid",
+  "evt_id": "748314"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Real Madrid",
+  "at": "Real Betis",
+  "evt_id": "748315"
+ },
+ {
+  "fecha": "2026-01-02",
+  "ht": "Rayo Vallecano",
+  "at": "Getafe",
+  "evt_id": "748316"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Osasuna",
+  "at": "Athletic Club",
+  "evt_id": "748317"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Mallorca",
+  "at": "Girona",
+  "evt_id": "748318"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Espanyol",
+  "at": "Barcelona",
+  "evt_id": "748319"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Elche",
+  "at": "Villarreal",
+  "evt_id": "748320"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Celta Vigo",
+  "at": "Valencia",
+  "evt_id": "748321"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Alavés",
+  "at": "Real Oviedo",
+  "evt_id": "748322"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Sevilla",
+  "at": "Levante",
+  "evt_id": "748323"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "Valencia",
+  "at": "Elche",
+  "evt_id": "748324"
+ },
+ {
+  "fecha": "2026-01-12",
+  "ht": "Sevilla",
+  "at": "Celta Vigo",
+  "evt_id": "748325"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "Real Oviedo",
+  "at": "Real Betis",
+  "evt_id": "748326"
+ },
+ {
+  "fecha": "2026-01-11",
+  "ht": "Rayo Vallecano",
+  "at": "Mallorca",
+  "evt_id": "748327"
+ },
+ {
+  "fecha": "2026-01-11",
+  "ht": "Levante",
+  "at": "Espanyol",
+  "evt_id": "748328"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "Girona",
+  "at": "Osasuna",
+  "evt_id": "748329"
+ },
+ {
+  "fecha": "2026-01-09",
+  "ht": "Getafe",
+  "at": "Real Sociedad",
+  "evt_id": "748330"
+ },
+ {
+  "fecha": "2025-12-02",
+  "ht": "Barcelona",
+  "at": "Atlético Madrid",
+  "evt_id": "748331"
+ },
+ {
+  "fecha": "2025-12-03",
+  "ht": "Athletic Club",
+  "at": "Real Madrid",
+  "evt_id": "748332"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "Villarreal",
+  "at": "Alavés",
+  "evt_id": "748333"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Atlético Madrid",
+  "at": "Alavés",
+  "evt_id": "748334"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Celta Vigo",
+  "at": "Rayo Vallecano",
+  "evt_id": "748335"
+ },
+ {
+  "fecha": "2026-01-19",
+  "ht": "Elche",
+  "at": "Sevilla",
+  "evt_id": "748336"
+ },
+ {
+  "fecha": "2026-01-16",
+  "ht": "Espanyol",
+  "at": "Girona",
+  "evt_id": "748337"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Getafe",
+  "at": "Valencia",
+  "evt_id": "748338"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Mallorca",
+  "at": "Athletic Club",
+  "evt_id": "748339"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Osasuna",
+  "at": "Real Oviedo",
+  "evt_id": "748340"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Real Betis",
+  "at": "Villarreal",
+  "evt_id": "748341"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Real Madrid",
+  "at": "Levante",
+  "evt_id": "748342"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Real Sociedad",
+  "at": "Barcelona",
+  "evt_id": "748343"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Alavés",
+  "at": "Real Betis",
+  "evt_id": "748344"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Atlético Madrid",
+  "at": "Mallorca",
+  "evt_id": "748345"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Barcelona",
+  "at": "Real Oviedo",
+  "evt_id": "748346"
+ },
+ {
+  "fecha": "2026-01-26",
+  "ht": "Girona",
+  "at": "Getafe",
+  "evt_id": "748347"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Rayo Vallecano",
+  "at": "Osasuna",
+  "evt_id": "748348"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Villarreal",
+  "at": "Real Madrid",
+  "evt_id": "748349"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Real Sociedad",
+  "at": "Celta Vigo",
+  "evt_id": "748350"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Sevilla",
+  "at": "Athletic Club",
+  "evt_id": "748351"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Valencia",
+  "at": "Espanyol",
+  "evt_id": "748352"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "Levante",
+  "at": "Elche",
+  "evt_id": "748353"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Elche",
+  "at": "Barcelona",
+  "evt_id": "748354"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Espanyol",
+  "at": "Alavés",
+  "evt_id": "748355"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Real Madrid",
+  "at": "Rayo Vallecano",
+  "evt_id": "748356"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Levante",
+  "at": "Atlético Madrid",
+  "evt_id": "748357"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Athletic Club",
+  "at": "Real Sociedad",
+  "evt_id": "748358"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Osasuna",
+  "at": "Villarreal",
+  "evt_id": "748359"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Real Betis",
+  "at": "Valencia",
+  "evt_id": "748360"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Getafe",
+  "at": "Celta Vigo",
+  "evt_id": "748361"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Real Oviedo",
+  "at": "Girona",
+  "evt_id": "748362"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Mallorca",
+  "at": "Sevilla",
+  "evt_id": "748363"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Valencia",
+  "at": "Real Madrid",
+  "evt_id": "748364"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Sevilla",
+  "at": "Girona",
+  "evt_id": "748365"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Real Sociedad",
+  "at": "Elche",
+  "evt_id": "748366"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Alavés",
+  "at": "Getafe",
+  "evt_id": "748367"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Villarreal",
+  "at": "Espanyol",
+  "evt_id": "748368"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Atlético Madrid",
+  "at": "Real Betis",
+  "evt_id": "748369"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Barcelona",
+  "at": "Mallorca",
+  "evt_id": "748370"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Celta Vigo",
+  "at": "Osasuna",
+  "evt_id": "748371"
+ },
+ {
+  "fecha": "2026-03-04",
+  "ht": "Rayo Vallecano",
+  "at": "Real Oviedo",
+  "evt_id": "748372"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Athletic Club",
+  "at": "Levante",
+  "evt_id": "748373"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Sevilla",
+  "at": "Alavés",
+  "evt_id": "748374"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Real Oviedo",
+  "at": "Athletic Club",
+  "evt_id": "748375"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Elche",
+  "at": "Osasuna",
+  "evt_id": "748376"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Espanyol",
+  "at": "Celta Vigo",
+  "evt_id": "748377"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Getafe",
+  "at": "Villarreal",
+  "evt_id": "748378"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Mallorca",
+  "at": "Real Betis",
+  "evt_id": "748379"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Levante",
+  "at": "Valencia",
+  "evt_id": "748380"
+ },
+ {
+  "fecha": "2026-02-16",
+  "ht": "Girona",
+  "at": "Barcelona",
+  "evt_id": "748381"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Rayo Vallecano",
+  "at": "Atlético Madrid",
+  "evt_id": "748382"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Real Madrid",
+  "at": "Real Sociedad",
+  "evt_id": "748383"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Getafe",
+  "at": "Sevilla",
+  "evt_id": "748384"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Real Sociedad",
+  "at": "Real Oviedo",
+  "evt_id": "748385"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Real Betis",
+  "at": "Rayo Vallecano",
+  "evt_id": "748386"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Osasuna",
+  "at": "Real Madrid",
+  "evt_id": "748387"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Athletic Club",
+  "at": "Elche",
+  "evt_id": "748388"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Villarreal",
+  "at": "Valencia",
+  "evt_id": "748389"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Atlético Madrid",
+  "at": "Espanyol",
+  "evt_id": "748390"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Barcelona",
+  "at": "Levante",
+  "evt_id": "748391"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Celta Vigo",
+  "at": "Mallorca",
+  "evt_id": "748392"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Alavés",
+  "at": "Girona",
+  "evt_id": "748393"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Real Oviedo",
+  "at": "Atlético Madrid",
+  "evt_id": "748394"
+ },
+ {
+  "fecha": "2026-03-02",
+  "ht": "Real Madrid",
+  "at": "Getafe",
+  "evt_id": "748395"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Real Betis",
+  "at": "Sevilla",
+  "evt_id": "748396"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Rayo Vallecano",
+  "at": "Athletic Club",
+  "evt_id": "748397"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Valencia",
+  "at": "Osasuna",
+  "evt_id": "748398"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Levante",
+  "at": "Alavés",
+  "evt_id": "748399"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Girona",
+  "at": "Celta Vigo",
+  "evt_id": "748400"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Elche",
+  "at": "Espanyol",
+  "evt_id": "748401"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Barcelona",
+  "at": "Villarreal",
+  "evt_id": "748402"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Mallorca",
+  "at": "Real Sociedad",
+  "evt_id": "748403"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Valencia",
+  "at": "Alavés",
+  "evt_id": "748404"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Sevilla",
+  "at": "Rayo Vallecano",
+  "evt_id": "748405"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Osasuna",
+  "at": "Mallorca",
+  "evt_id": "748406"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Levante",
+  "at": "Girona",
+  "evt_id": "748407"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Villarreal",
+  "at": "Elche",
+  "evt_id": "748408"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Athletic Club",
+  "at": "Barcelona",
+  "evt_id": "748409"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Atlético Madrid",
+  "at": "Real Sociedad",
+  "evt_id": "748410"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "Celta Vigo",
+  "at": "Real Madrid",
+  "evt_id": "748411"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Espanyol",
+  "at": "Real Oviedo",
+  "evt_id": "748412"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Getafe",
+  "at": "Real Betis",
+  "evt_id": "748413"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Girona",
+  "at": "Athletic Club",
+  "evt_id": "748414"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Barcelona",
+  "at": "Sevilla",
+  "evt_id": "748415"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Rayo Vallecano",
+  "at": "Levante",
+  "evt_id": "748416"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Real Betis",
+  "at": "Celta Vigo",
+  "evt_id": "748417"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Real Madrid",
+  "at": "Elche",
+  "evt_id": "748418"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Real Oviedo",
+  "at": "Valencia",
+  "evt_id": "748419"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Real Sociedad",
+  "at": "Osasuna",
+  "evt_id": "748420"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Mallorca",
+  "at": "Espanyol",
+  "evt_id": "748421"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Alavés",
+  "at": "Villarreal",
+  "evt_id": "748422"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Atlético Madrid",
+  "at": "Getafe",
+  "evt_id": "748423"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Athletic Club",
+  "at": "Real Betis",
+  "evt_id": "748424"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Espanyol",
+  "at": "Getafe",
+  "evt_id": "748425"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Levante",
+  "at": "Real Oviedo",
+  "evt_id": "748426"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Osasuna",
+  "at": "Girona",
+  "evt_id": "748427"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Sevilla",
+  "at": "Valencia",
+  "evt_id": "748428"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "Villarreal",
+  "at": "Real Sociedad",
+  "evt_id": "748429"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Elche",
+  "at": "Mallorca",
+  "evt_id": "748430"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Celta Vigo",
+  "at": "Alavés",
+  "evt_id": "748431"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Barcelona",
+  "at": "Rayo Vallecano",
+  "evt_id": "748432"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Real Madrid",
+  "at": "Atlético Madrid",
+  "evt_id": "748433"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Atlético Madrid",
+  "at": "Barcelona",
+  "evt_id": "748434"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Getafe",
+  "at": "Athletic Club",
+  "evt_id": "748435"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Girona",
+  "at": "Villarreal",
+  "evt_id": "748436"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Mallorca",
+  "at": "Real Madrid",
+  "evt_id": "748437"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Alavés",
+  "at": "Osasuna",
+  "evt_id": "748438"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Real Betis",
+  "at": "Espanyol",
+  "evt_id": "748439"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Valencia",
+  "at": "Celta Vigo",
+  "evt_id": "748440"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Real Oviedo",
+  "at": "Sevilla",
+  "evt_id": "748441"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Real Sociedad",
+  "at": "Levante",
+  "evt_id": "748442"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Rayo Vallecano",
+  "at": "Elche",
+  "evt_id": "748443"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Osasuna",
+  "at": "Real Betis",
+  "evt_id": "748444"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Mallorca",
+  "at": "Rayo Vallecano",
+  "evt_id": "748445"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Levante",
+  "at": "Getafe",
+  "evt_id": "748446"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Elche",
+  "at": "Valencia",
+  "evt_id": "748447"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Celta Vigo",
+  "at": "Real Oviedo",
+  "evt_id": "748448"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Barcelona",
+  "at": "Espanyol",
+  "evt_id": "748449"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Sevilla",
+  "at": "Atlético Madrid",
+  "evt_id": "748450"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Athletic Club",
+  "at": "Villarreal",
+  "evt_id": "748451"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Real Sociedad",
+  "at": "Alavés",
+  "evt_id": "748452"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "Real Madrid",
+  "at": "Girona",
+  "evt_id": "748453"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Valencia",
+  "at": "Girona",
+  "evt_id": "748454"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Alavés",
+  "at": "Mallorca",
+  "evt_id": "748455"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Real Oviedo",
+  "at": "Elche",
+  "evt_id": "748456"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Real Betis",
+  "at": "Real Madrid",
+  "evt_id": "748457"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Rayo Vallecano",
+  "at": "Real Sociedad",
+  "evt_id": "748458"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Osasuna",
+  "at": "Sevilla",
+  "evt_id": "748459"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Getafe",
+  "at": "Barcelona",
+  "evt_id": "748460"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Espanyol",
+  "at": "Levante",
+  "evt_id": "748461"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Atlético Madrid",
+  "at": "Athletic Club",
+  "evt_id": "748462"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Villarreal",
+  "at": "Celta Vigo",
+  "evt_id": "748463"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Real Oviedo",
+  "at": "Villarreal",
+  "evt_id": "748464"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Barcelona",
+  "at": "Celta Vigo",
+  "evt_id": "748465"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Elche",
+  "at": "Atlético Madrid",
+  "evt_id": "748466"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Girona",
+  "at": "Real Betis",
+  "evt_id": "748467"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Mallorca",
+  "at": "Valencia",
+  "evt_id": "748468"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Athletic Club",
+  "at": "Osasuna",
+  "evt_id": "748469"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Rayo Vallecano",
+  "at": "Espanyol",
+  "evt_id": "748470"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Real Madrid",
+  "at": "Alavés",
+  "evt_id": "748471"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Real Sociedad",
+  "at": "Getafe",
+  "evt_id": "748472"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Levante",
+  "at": "Sevilla",
+  "evt_id": "748473"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Getafe",
+  "at": "Rayo Vallecano",
+  "evt_id": "748474"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Espanyol",
+  "at": "Real Madrid",
+  "evt_id": "748475"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "Girona",
+  "at": "Mallorca",
+  "evt_id": "748476"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Villarreal",
+  "at": "Levante",
+  "evt_id": "748477"
+ },
+ {
+  "fecha": "2026-05-04",
+  "ht": "Sevilla",
+  "at": "Real Sociedad",
+  "evt_id": "748478"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Real Betis",
+  "at": "Real Oviedo",
+  "evt_id": "748479"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Osasuna",
+  "at": "Barcelona",
+  "evt_id": "748480"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Valencia",
+  "at": "Atlético Madrid",
+  "evt_id": "748481"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Alavés",
+  "at": "Athletic Club",
+  "evt_id": "748482"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Celta Vigo",
+  "at": "Elche",
+  "evt_id": "748483"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Barcelona",
+  "at": "Real Madrid",
+  "evt_id": "748484"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Real Sociedad",
+  "at": "Real Betis",
+  "evt_id": "748485"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Sevilla",
+  "at": "Espanyol",
+  "evt_id": "748486"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Atlético Madrid",
+  "at": "Celta Vigo",
+  "evt_id": "748487"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Athletic Club",
+  "at": "Valencia",
+  "evt_id": "748488"
+ },
+ {
+  "fecha": "2026-05-11",
+  "ht": "Rayo Vallecano",
+  "at": "Girona",
+  "evt_id": "748489"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Mallorca",
+  "at": "Villarreal",
+  "evt_id": "748490"
+ },
+ {
+  "fecha": "2026-05-08",
+  "ht": "Levante",
+  "at": "Osasuna",
+  "evt_id": "748491"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Elche",
+  "at": "Alavés",
+  "evt_id": "748492"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Real Oviedo",
+  "at": "Getafe",
+  "evt_id": "748493"
+ },
+ {
+  "fecha": "2026-05-12",
+  "ht": "Osasuna",
+  "at": "Atlético Madrid",
+  "evt_id": "748494"
+ },
+ {
+  "fecha": "2026-05-14",
+  "ht": "Girona",
+  "at": "Real Sociedad",
+  "evt_id": "748495"
+ },
+ {
+  "fecha": "2026-05-13",
+  "ht": "Getafe",
+  "at": "Mallorca",
+  "evt_id": "748496"
+ },
+ {
+  "fecha": "2026-05-13",
+  "ht": "Espanyol",
+  "at": "Athletic Club",
+  "evt_id": "748497"
+ },
+ {
+  "fecha": "2026-05-13",
+  "ht": "Alavés",
+  "at": "Barcelona",
+  "evt_id": "748498"
+ },
+ {
+  "fecha": "2026-05-12",
+  "ht": "Real Betis",
+  "at": "Elche",
+  "evt_id": "748499"
+ },
+ {
+  "fecha": "2026-05-12",
+  "ht": "Celta Vigo",
+  "at": "Levante",
+  "evt_id": "748500"
+ },
+ {
+  "fecha": "2026-05-13",
+  "ht": "Villarreal",
+  "at": "Sevilla",
+  "evt_id": "748501"
+ },
+ {
+  "fecha": "2026-05-14",
+  "ht": "Valencia",
+  "at": "Rayo Vallecano",
+  "evt_id": "748502"
+ },
+ {
+  "fecha": "2026-05-14",
+  "ht": "Real Madrid",
+  "at": "Real Oviedo",
+  "evt_id": "748503"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Sevilla",
+  "at": "Real Madrid",
+  "evt_id": "748504"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Real Sociedad",
+  "at": "Valencia",
+  "evt_id": "748505"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Athletic Club",
+  "at": "Celta Vigo",
+  "evt_id": "748506"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Elche",
+  "at": "Getafe",
+  "evt_id": "748507"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Barcelona",
+  "at": "Real Betis",
+  "evt_id": "748508"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Atlético Madrid",
+  "at": "Girona",
+  "evt_id": "748509"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Levante",
+  "at": "Mallorca",
+  "evt_id": "748510"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Osasuna",
+  "at": "Espanyol",
+  "evt_id": "748511"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Rayo Vallecano",
+  "at": "Villarreal",
+  "evt_id": "748512"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Real Oviedo",
+  "at": "Alavés",
+  "evt_id": "748513"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Real Madrid",
+  "at": "Athletic Club",
+  "evt_id": "748514"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Villarreal",
+  "at": "Atlético Madrid",
+  "evt_id": "748515"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Espanyol",
+  "at": "Real Sociedad",
+  "evt_id": "748516"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Celta Vigo",
+  "at": "Sevilla",
+  "evt_id": "748517"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Getafe",
+  "at": "Osasuna",
+  "evt_id": "748518"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Valencia",
+  "at": "Barcelona",
+  "evt_id": "748519"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Girona",
+  "at": "Elche",
+  "evt_id": "748520"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Mallorca",
+  "at": "Real Oviedo",
+  "evt_id": "748521"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Real Betis",
+  "at": "Levante",
+  "evt_id": "748522"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Alavés",
+  "at": "Rayo Vallecano",
+  "evt_id": "748523"
+ }
+]

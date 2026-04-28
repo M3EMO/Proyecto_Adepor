@@ -1,0 +1,1442 @@
+[
+ {
+  "fecha": "2026-01-30",
+  "ht": "Universidad de Chile",
+  "at": "Audax Italiano",
+  "evt_id": "401850409"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Palestino",
+  "at": "Ñublense",
+  "evt_id": "401850411"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "La Serena",
+  "at": "Universidad Católica",
+  "evt_id": "401850413"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Everton CD",
+  "at": "Unión La Calera",
+  "evt_id": "401850416"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Deportes Limache",
+  "at": "Colo Colo",
+  "evt_id": "401850418"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Deportes Concepcion",
+  "at": "O'Higgins",
+  "evt_id": "401850420"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Cobresal",
+  "at": "Huachipato",
+  "evt_id": "401850422"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Universidad de Concepción",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850424"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Unión La Calera",
+  "at": "Cobresal",
+  "evt_id": "401850426"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Universidad Católica",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850428"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "O'Higgins",
+  "at": "La Serena",
+  "evt_id": "401850430"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Huachipato",
+  "at": "Universidad de Chile",
+  "evt_id": "401850432"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Coquimbo Unido",
+  "at": "Palestino",
+  "evt_id": "401850434"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Colo Colo",
+  "at": "Everton CD",
+  "evt_id": "401850437"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Audax Italiano",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850439"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Ñublense",
+  "at": "Deportes Limache",
+  "evt_id": "401850441"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Cobresal",
+  "at": "Universidad Católica",
+  "evt_id": "401850443"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Colo Colo",
+  "at": "Unión La Calera",
+  "evt_id": "401850445"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Ñublense",
+  "at": "Audax Italiano",
+  "evt_id": "401850448"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Universidad de Concepción",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850450"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Palestino",
+  "at": "Universidad de Chile",
+  "evt_id": "401850452"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "La Serena",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850455"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Everton CD",
+  "at": "Huachipato",
+  "evt_id": "401850457"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Deportes Limache",
+  "at": "O'Higgins",
+  "evt_id": "401850459"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Audax Italiano",
+  "at": "Everton CD",
+  "evt_id": "401850461"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Universidad de Chile",
+  "at": "Deportes Limache",
+  "evt_id": "401850463"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Universidad Católica",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850465"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "O'Higgins",
+  "at": "Colo Colo",
+  "evt_id": "401850467"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "La Serena",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850469"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Huachipato",
+  "at": "Palestino",
+  "evt_id": "401850471"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Deportes Concepcion",
+  "at": "Cobresal",
+  "evt_id": "401850473"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Unión La Calera",
+  "at": "Ñublense",
+  "evt_id": "401850476"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Coquimbo Unido",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850477"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Colo Colo",
+  "at": "Universidad de Chile",
+  "evt_id": "401850480"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Cobresal",
+  "at": "La Serena",
+  "evt_id": "401850482"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Deportes Limache",
+  "at": "Huachipato",
+  "evt_id": "401850484"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Palestino",
+  "at": "O'Higgins",
+  "evt_id": "401850486"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Universidad de Concepción",
+  "at": "Everton CD",
+  "evt_id": "401850488"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Unión La Calera",
+  "at": "Audax Italiano",
+  "evt_id": "401850490"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Ñublense",
+  "at": "Universidad Católica",
+  "evt_id": "401850492"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Everton CD",
+  "at": "Deportes Limache",
+  "evt_id": "401850495"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "Deportes Concepcion",
+  "at": "Ñublense",
+  "evt_id": "401850496"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Audax Italiano",
+  "at": "Colo Colo",
+  "evt_id": "401850499"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Huachipato",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850501"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Universidad de Chile",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850503"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Palestino",
+  "at": "Cobresal",
+  "evt_id": "401850505"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "O'Higgins",
+  "at": "Universidad Católica",
+  "evt_id": "401850508"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "La Serena",
+  "at": "Unión La Calera",
+  "evt_id": "401850510"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Audax Italiano",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850512"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Cobresal",
+  "at": "Deportes Limache",
+  "evt_id": "401850514"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Colo Colo",
+  "at": "Huachipato",
+  "evt_id": "401850516"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Unión La Calera",
+  "at": "O'Higgins",
+  "evt_id": "401850518"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Universidad de Concepción",
+  "at": "Palestino",
+  "evt_id": "401850521"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Universidad Católica",
+  "at": "Everton CD",
+  "evt_id": "401850523"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Coquimbo Unido",
+  "at": "Universidad de Chile",
+  "evt_id": "401850525"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Ñublense",
+  "at": "La Serena",
+  "evt_id": "401850527"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Universidad Católica",
+  "at": "Palestino",
+  "evt_id": "401850529"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "O'Higgins",
+  "at": "Audax Italiano",
+  "evt_id": "401850531"
+ },
+ {
+  "fecha": "2026-04-07",
+  "ht": "Huachipato",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850533"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Everton CD",
+  "at": "Ñublense",
+  "evt_id": "401850535"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Deportes Limache",
+  "at": "Unión La Calera",
+  "evt_id": "401850536"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Deportes Concepcion",
+  "at": "Colo Colo",
+  "evt_id": "401850537"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Coquimbo Unido",
+  "at": "Cobresal",
+  "evt_id": "401850538"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Universidad de Chile",
+  "at": "La Serena",
+  "evt_id": "401850539"
+ },
+ {
+  "fecha": "2026-04-14",
+  "ht": "Unión La Calera",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850540"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Universidad de Concepción",
+  "at": "Cobresal",
+  "evt_id": "401850541"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Palestino",
+  "at": "Deportes Limache",
+  "evt_id": "401850542"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "O'Higgins",
+  "at": "Huachipato",
+  "evt_id": "401850543"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "La Serena",
+  "at": "Everton CD",
+  "evt_id": "401850544"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Colo Colo",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850545"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Audax Italiano",
+  "at": "Universidad Católica",
+  "evt_id": "401850546"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Ñublense",
+  "at": "Universidad de Chile",
+  "evt_id": "401850547"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Cobresal",
+  "at": "O'Higgins",
+  "evt_id": "401850548"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Colo Colo",
+  "at": "Palestino",
+  "evt_id": "401850549"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Universidad Católica",
+  "at": "Unión La Calera",
+  "evt_id": "401850550"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Huachipato",
+  "at": "Audax Italiano",
+  "evt_id": "401850551"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Everton CD",
+  "at": "Universidad de Chile",
+  "evt_id": "401850552"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Deportes Limache",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850553"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Deportes Concepcion",
+  "at": "La Serena",
+  "evt_id": "401850554"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Coquimbo Unido",
+  "at": "Ñublense",
+  "evt_id": "401850555"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Audax Italiano",
+  "at": "Deportes Limache",
+  "evt_id": "401850556"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Unión La Calera",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850557"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Universidad de Concepción",
+  "at": "Colo Colo",
+  "evt_id": "401850558"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Universidad de Chile",
+  "at": "Universidad Católica",
+  "evt_id": "401850559"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Palestino",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850560"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "La Serena",
+  "at": "Huachipato",
+  "evt_id": "401850561"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Everton CD",
+  "at": "Cobresal",
+  "evt_id": "401850562"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Ñublense",
+  "at": "O'Higgins",
+  "evt_id": "401850563"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Coquimbo Unido",
+  "at": "Audax Italiano",
+  "evt_id": "401850564"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Colo Colo",
+  "at": "Ñublense",
+  "evt_id": "401850565"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Cobresal",
+  "at": "Universidad de Chile",
+  "evt_id": "401850566"
+ },
+ {
+  "fecha": "2026-05-18",
+  "ht": "Deportes Concepcion",
+  "at": "Everton CD",
+  "evt_id": "401850567"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Deportes Limache",
+  "at": "Universidad Católica",
+  "evt_id": "401850568"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Huachipato",
+  "at": "Unión La Calera",
+  "evt_id": "401850569"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "O'Higgins",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850570"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Palestino",
+  "at": "La Serena",
+  "evt_id": "401850571"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Everton CD",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850572"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Deportes Concepcion",
+  "at": "Huachipato",
+  "evt_id": "401850573"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Audax Italiano",
+  "at": "Cobresal",
+  "evt_id": "401850574"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "La Serena",
+  "at": "Deportes Limache",
+  "evt_id": "401850575"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Ñublense",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850576"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Unión La Calera",
+  "at": "Palestino",
+  "evt_id": "401850577"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Universidad de Chile",
+  "at": "O'Higgins",
+  "evt_id": "401850578"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Universidad Católica",
+  "at": "Colo Colo",
+  "evt_id": "401850579"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "Cobresal",
+  "at": "Ñublense",
+  "evt_id": "401850580"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "Deportes Limache",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850581"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "Huachipato",
+  "at": "Universidad Católica",
+  "evt_id": "401850582"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Universidad de Chile",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850583"
+ },
+ {
+  "fecha": "2026-06-01",
+  "ht": "Palestino",
+  "at": "Audax Italiano",
+  "evt_id": "401850584"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "O'Higgins",
+  "at": "Everton CD",
+  "evt_id": "401850585"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "La Serena",
+  "at": "Colo Colo",
+  "evt_id": "401850586"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Universidad de Concepción",
+  "at": "Unión La Calera",
+  "evt_id": "401850587"
+ },
+ {
+  "fecha": "2026-06-13",
+  "ht": "Audax Italiano",
+  "at": "La Serena",
+  "evt_id": "401850588"
+ },
+ {
+  "fecha": "2026-06-13",
+  "ht": "Colo Colo",
+  "at": "Cobresal",
+  "evt_id": "401850589"
+ },
+ {
+  "fecha": "2026-06-15",
+  "ht": "Coquimbo Unido",
+  "at": "O'Higgins",
+  "evt_id": "401850590"
+ },
+ {
+  "fecha": "2026-06-14",
+  "ht": "Ñublense",
+  "at": "Huachipato",
+  "evt_id": "401850591"
+ },
+ {
+  "fecha": "2026-06-13",
+  "ht": "Everton CD",
+  "at": "Palestino",
+  "evt_id": "401850592"
+ },
+ {
+  "fecha": "2026-06-14",
+  "ht": "Universidad Católica",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850593"
+ },
+ {
+  "fecha": "2026-06-14",
+  "ht": "Unión La Calera",
+  "at": "Universidad de Chile",
+  "evt_id": "401850594"
+ },
+ {
+  "fecha": "2026-06-14",
+  "ht": "Deportes Concepcion",
+  "at": "Deportes Limache",
+  "evt_id": "401850595"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Audax Italiano",
+  "at": "Universidad de Chile",
+  "evt_id": "401850596"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Colo Colo",
+  "at": "Deportes Limache",
+  "evt_id": "401850597"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Coquimbo Unido",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850598"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Huachipato",
+  "at": "Cobresal",
+  "evt_id": "401850599"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "O'Higgins",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850600"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Universidad Católica",
+  "at": "La Serena",
+  "evt_id": "401850601"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Unión La Calera",
+  "at": "Everton CD",
+  "evt_id": "401850602"
+ },
+ {
+  "fecha": "2026-07-26",
+  "ht": "Ñublense",
+  "at": "Palestino",
+  "evt_id": "401850603"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Deportes Limache",
+  "at": "Ñublense",
+  "evt_id": "401850604"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Deportes Concepcion",
+  "at": "Universidad Católica",
+  "evt_id": "401850605"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Universidad de Concepción",
+  "at": "Audax Italiano",
+  "evt_id": "401850606"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Universidad de Chile",
+  "at": "Huachipato",
+  "evt_id": "401850607"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Palestino",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850608"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "La Serena",
+  "at": "O'Higgins",
+  "evt_id": "401850609"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Everton CD",
+  "at": "Colo Colo",
+  "evt_id": "401850610"
+ },
+ {
+  "fecha": "2026-08-02",
+  "ht": "Cobresal",
+  "at": "Unión La Calera",
+  "evt_id": "401850611"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Audax Italiano",
+  "at": "Ñublense",
+  "evt_id": "401850612"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Universidad de Chile",
+  "at": "Palestino",
+  "evt_id": "401850613"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Universidad Católica",
+  "at": "Cobresal",
+  "evt_id": "401850614"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "O'Higgins",
+  "at": "Deportes Limache",
+  "evt_id": "401850615"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Huachipato",
+  "at": "Everton CD",
+  "evt_id": "401850616"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Deportes Concepcion",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850617"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Coquimbo Unido",
+  "at": "La Serena",
+  "evt_id": "401850618"
+ },
+ {
+  "fecha": "2026-08-09",
+  "ht": "Unión La Calera",
+  "at": "Colo Colo",
+  "evt_id": "401850619"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Coquimbo Unido",
+  "at": "Universidad Católica",
+  "evt_id": "401850620"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Colo Colo",
+  "at": "O'Higgins",
+  "evt_id": "401850621"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Cobresal",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850622"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Deportes Limache",
+  "at": "Universidad de Chile",
+  "evt_id": "401850623"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Ñublense",
+  "at": "Unión La Calera",
+  "evt_id": "401850624"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Universidad de Concepción",
+  "at": "La Serena",
+  "evt_id": "401850625"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Palestino",
+  "at": "Huachipato",
+  "evt_id": "401850626"
+ },
+ {
+  "fecha": "2026-08-16",
+  "ht": "Everton CD",
+  "at": "Audax Italiano",
+  "evt_id": "401850627"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Audax Italiano",
+  "at": "Unión La Calera",
+  "evt_id": "401850628"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Deportes Concepcion",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850629"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Universidad de Chile",
+  "at": "Colo Colo",
+  "evt_id": "401850630"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Universidad Católica",
+  "at": "Ñublense",
+  "evt_id": "401850631"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "O'Higgins",
+  "at": "Palestino",
+  "evt_id": "401850632"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "La Serena",
+  "at": "Cobresal",
+  "evt_id": "401850633"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Huachipato",
+  "at": "Deportes Limache",
+  "evt_id": "401850634"
+ },
+ {
+  "fecha": "2026-08-23",
+  "ht": "Everton CD",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850635"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Cobresal",
+  "at": "Palestino",
+  "evt_id": "401850636"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Deportes Limache",
+  "at": "Everton CD",
+  "evt_id": "401850637"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Universidad Católica",
+  "at": "O'Higgins",
+  "evt_id": "401850638"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Universidad de Concepción",
+  "at": "Universidad de Chile",
+  "evt_id": "401850639"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Unión La Calera",
+  "at": "La Serena",
+  "evt_id": "401850640"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Coquimbo Unido",
+  "at": "Huachipato",
+  "evt_id": "401850641"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Colo Colo",
+  "at": "Audax Italiano",
+  "evt_id": "401850642"
+ },
+ {
+  "fecha": "2026-08-30",
+  "ht": "Ñublense",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850643"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Deportes Concepcion",
+  "at": "Audax Italiano",
+  "evt_id": "401850644"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Deportes Limache",
+  "at": "Cobresal",
+  "evt_id": "401850645"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Universidad de Chile",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850646"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Palestino",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850647"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "O'Higgins",
+  "at": "Unión La Calera",
+  "evt_id": "401850648"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "La Serena",
+  "at": "Ñublense",
+  "evt_id": "401850649"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Huachipato",
+  "at": "Colo Colo",
+  "evt_id": "401850650"
+ },
+ {
+  "fecha": "2026-09-06",
+  "ht": "Everton CD",
+  "at": "Universidad Católica",
+  "evt_id": "401850651"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Audax Italiano",
+  "at": "O'Higgins",
+  "evt_id": "401850652"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Unión La Calera",
+  "at": "Deportes Limache",
+  "evt_id": "401850653"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Universidad de Concepción",
+  "at": "Huachipato",
+  "evt_id": "401850654"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Palestino",
+  "at": "Universidad Católica",
+  "evt_id": "401850655"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "La Serena",
+  "at": "Universidad de Chile",
+  "evt_id": "401850656"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Colo Colo",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850657"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Cobresal",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850658"
+ },
+ {
+  "fecha": "2026-09-13",
+  "ht": "Ñublense",
+  "at": "Everton CD",
+  "evt_id": "401850659"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Cobresal",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850660"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Coquimbo Unido",
+  "at": "Colo Colo",
+  "evt_id": "401850661"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Universidad de Chile",
+  "at": "Ñublense",
+  "evt_id": "401850662"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Universidad Católica",
+  "at": "Audax Italiano",
+  "evt_id": "401850663"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Huachipato",
+  "at": "O'Higgins",
+  "evt_id": "401850664"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Everton CD",
+  "at": "La Serena",
+  "evt_id": "401850665"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Deportes Limache",
+  "at": "Palestino",
+  "evt_id": "401850666"
+ },
+ {
+  "fecha": "2026-10-11",
+  "ht": "Deportes Concepcion",
+  "at": "Unión La Calera",
+  "evt_id": "401850667"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Audax Italiano",
+  "at": "Huachipato",
+  "evt_id": "401850668"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Unión La Calera",
+  "at": "Universidad Católica",
+  "evt_id": "401850669"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Universidad de Concepción",
+  "at": "Deportes Limache",
+  "evt_id": "401850670"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Universidad de Chile",
+  "at": "Everton CD",
+  "evt_id": "401850671"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Palestino",
+  "at": "Colo Colo",
+  "evt_id": "401850672"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "O'Higgins",
+  "at": "Cobresal",
+  "evt_id": "401850673"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "La Serena",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850674"
+ },
+ {
+  "fecha": "2026-10-25",
+  "ht": "Ñublense",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850675"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "O'Higgins",
+  "at": "Ñublense",
+  "evt_id": "401850676"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Huachipato",
+  "at": "La Serena",
+  "evt_id": "401850677"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Deportes Limache",
+  "at": "Audax Italiano",
+  "evt_id": "401850678"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Deportes Concepcion",
+  "at": "Palestino",
+  "evt_id": "401850679"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Coquimbo Unido",
+  "at": "Unión La Calera",
+  "evt_id": "401850680"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Colo Colo",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850681"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Cobresal",
+  "at": "Everton CD",
+  "evt_id": "401850682"
+ },
+ {
+  "fecha": "2026-11-01",
+  "ht": "Universidad Católica",
+  "at": "Universidad de Chile",
+  "evt_id": "401850683"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Unión La Calera",
+  "at": "Huachipato",
+  "evt_id": "401850684"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Universidad de Concepción",
+  "at": "O'Higgins",
+  "evt_id": "401850685"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Universidad de Chile",
+  "at": "Cobresal",
+  "evt_id": "401850686"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Universidad Católica",
+  "at": "Deportes Limache",
+  "evt_id": "401850687"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "La Serena",
+  "at": "Palestino",
+  "evt_id": "401850688"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Everton CD",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850689"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Audax Italiano",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850690"
+ },
+ {
+  "fecha": "2026-11-08",
+  "ht": "Ñublense",
+  "at": "Colo Colo",
+  "evt_id": "401850691"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Cobresal",
+  "at": "Audax Italiano",
+  "evt_id": "401850692"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Colo Colo",
+  "at": "Universidad Católica",
+  "evt_id": "401850693"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Universidad de Concepción",
+  "at": "Ñublense",
+  "evt_id": "401850694"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Palestino",
+  "at": "Unión La Calera",
+  "evt_id": "401850695"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "O'Higgins",
+  "at": "Universidad de Chile",
+  "evt_id": "401850696"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Huachipato",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850697"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Deportes Limache",
+  "at": "La Serena",
+  "evt_id": "401850698"
+ },
+ {
+  "fecha": "2026-11-22",
+  "ht": "Coquimbo Unido",
+  "at": "Everton CD",
+  "evt_id": "401850699"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Audax Italiano",
+  "at": "Palestino",
+  "evt_id": "401850700"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Unión La Calera",
+  "at": "Universidad de Concepción",
+  "evt_id": "401850701"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Universidad Católica",
+  "at": "Huachipato",
+  "evt_id": "401850702"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Everton CD",
+  "at": "O'Higgins",
+  "evt_id": "401850703"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Deportes Concepcion",
+  "at": "Universidad de Chile",
+  "evt_id": "401850704"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Coquimbo Unido",
+  "at": "Deportes Limache",
+  "evt_id": "401850705"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Colo Colo",
+  "at": "La Serena",
+  "evt_id": "401850706"
+ },
+ {
+  "fecha": "2026-11-29",
+  "ht": "Ñublense",
+  "at": "Cobresal",
+  "evt_id": "401850707"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Cobresal",
+  "at": "Colo Colo",
+  "evt_id": "401850708"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Deportes Limache",
+  "at": "Deportes Concepcion",
+  "evt_id": "401850709"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Huachipato",
+  "at": "Ñublense",
+  "evt_id": "401850710"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Universidad de Concepción",
+  "at": "Universidad Católica",
+  "evt_id": "401850711"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "O'Higgins",
+  "at": "Coquimbo Unido",
+  "evt_id": "401850712"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Palestino",
+  "at": "Everton CD",
+  "evt_id": "401850713"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "Universidad de Chile",
+  "at": "Unión La Calera",
+  "evt_id": "401850714"
+ },
+ {
+  "fecha": "2026-12-06",
+  "ht": "La Serena",
+  "at": "Audax Italiano",
+  "evt_id": "401850715"
+ }
+]

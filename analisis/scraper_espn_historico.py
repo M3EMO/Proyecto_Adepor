@@ -157,6 +157,18 @@ def parse_summary(data):
                     return 0
         return 0
 
+    def get_stat_float(box, name):
+        if not box:
+            return None
+        for s in box.get("statistics", []):
+            if s.get("name") == name:
+                v = s.get("displayValue")
+                try:
+                    return float(v) if v is not None and v != "" else None
+                except (ValueError, TypeError):
+                    return None
+        return None
+
     return {
         "fecha": fecha,
         "ht": ht_name, "at": at_name,
@@ -167,6 +179,21 @@ def parse_summary(data):
         "as": get_stat(away_box, "totalShots"),
         "hc": get_stat(home_box, "wonCorners"),
         "ac": get_stat(away_box, "wonCorners"),
+        # Fase 3: posesion + stats avanzadas
+        "h_pos": get_stat_float(home_box, "possessionPct"),
+        "a_pos": get_stat_float(away_box, "possessionPct"),
+        "h_passes": get_stat(home_box, "totalPasses"),
+        "a_passes": get_stat(away_box, "totalPasses"),
+        "h_pass_pct": get_stat_float(home_box, "passPct"),
+        "a_pass_pct": get_stat_float(away_box, "passPct"),
+        "h_fouls": get_stat(home_box, "foulsCommitted"),
+        "a_fouls": get_stat(away_box, "foulsCommitted"),
+        "h_yellow": get_stat(home_box, "yellowCards"),
+        "a_yellow": get_stat(away_box, "yellowCards"),
+        "h_red": get_stat(home_box, "redCards"),
+        "a_red": get_stat(away_box, "redCards"),
+        "h_offsides": get_stat(home_box, "offsides"),
+        "a_offsides": get_stat(away_box, "offsides"),
     }
 
 

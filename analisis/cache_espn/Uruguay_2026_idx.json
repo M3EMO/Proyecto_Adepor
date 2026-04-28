@@ -1,0 +1,722 @@
+[
+ {
+  "fecha": "2026-02-08",
+  "ht": "Boston River",
+  "at": "Nacional",
+  "evt_id": "401858685"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Cerro",
+  "at": "Danubio",
+  "evt_id": "401858686"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Juventud",
+  "at": "Cerro Largo",
+  "evt_id": "401858687"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Albion FC",
+  "at": "Liverpool",
+  "evt_id": "401858688"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Peñarol",
+  "at": "Montevideo City Torque",
+  "evt_id": "401858689"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Racing (Montevideo)",
+  "at": "Deportivo Maldonado",
+  "evt_id": "401858690"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Montevideo Wanderers",
+  "at": "Defensor Sporting",
+  "evt_id": "401858691"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Progreso",
+  "at": "Central Español Fútbol Club",
+  "evt_id": "401858707"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Cerro Largo",
+  "at": "Montevideo Wanderers",
+  "evt_id": "401859222"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Liverpool",
+  "at": "Defensor Sporting",
+  "evt_id": "401859223"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Deportivo Maldonado",
+  "at": "Progreso",
+  "evt_id": "401859224"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Nacional",
+  "at": "Racing (Montevideo)",
+  "evt_id": "401859225"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Danubio",
+  "at": "Boston River",
+  "evt_id": "401859226"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Central Español Fútbol Club",
+  "at": "Peñarol",
+  "evt_id": "401859227"
+ },
+ {
+  "fecha": "2026-02-16",
+  "ht": "Albion FC",
+  "at": "Cerro",
+  "evt_id": "401859228"
+ },
+ {
+  "fecha": "2026-02-17",
+  "ht": "Montevideo City Torque",
+  "at": "Juventud",
+  "evt_id": "401859229"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Cerro",
+  "at": "Liverpool",
+  "evt_id": "401860830"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Defensor Sporting",
+  "at": "Cerro Largo",
+  "evt_id": "401860831"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Racing (Montevideo)",
+  "at": "Danubio",
+  "evt_id": "401860832"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Boston River",
+  "at": "Albion FC",
+  "evt_id": "401860833"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Progreso",
+  "at": "Nacional",
+  "evt_id": "401860834"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Montevideo Wanderers",
+  "at": "Montevideo City Torque",
+  "evt_id": "401860835"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Juventud",
+  "at": "Central Español Fútbol Club",
+  "evt_id": "401860836"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Peñarol",
+  "at": "Deportivo Maldonado",
+  "evt_id": "401860837"
+ },
+ {
+  "fecha": "2026-02-26",
+  "ht": "Montevideo City Torque",
+  "at": "Defensor Sporting",
+  "evt_id": "401860838"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Cerro",
+  "at": "Boston River",
+  "evt_id": "401860839"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Albion FC",
+  "at": "Racing (Montevideo)",
+  "evt_id": "401860840"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Danubio",
+  "at": "Progreso",
+  "evt_id": "401860841"
+ },
+ {
+  "fecha": "2026-03-02",
+  "ht": "Deportivo Maldonado",
+  "at": "Juventud",
+  "evt_id": "401860842"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Liverpool",
+  "at": "Cerro Largo",
+  "evt_id": "401860843"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Nacional",
+  "at": "Peñarol",
+  "evt_id": "401860844"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Central Español Fútbol Club",
+  "at": "Montevideo Wanderers",
+  "evt_id": "401860845"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Juventud",
+  "at": "Nacional",
+  "evt_id": "401861780"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "Montevideo Wanderers",
+  "at": "Deportivo Maldonado",
+  "evt_id": "401861781"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Peñarol",
+  "at": "Danubio",
+  "evt_id": "401861782"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Progreso",
+  "at": "Albion FC",
+  "evt_id": "401861783"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Racing (Montevideo)",
+  "at": "Cerro",
+  "evt_id": "401861784"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Cerro Largo",
+  "at": "Montevideo City Torque",
+  "evt_id": "401861785"
+ },
+ {
+  "fecha": "2026-03-10",
+  "ht": "Boston River",
+  "at": "Liverpool",
+  "evt_id": "401861786"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Defensor Sporting",
+  "at": "Central Español Fútbol Club",
+  "evt_id": "401861787"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Boston River",
+  "at": "Racing (Montevideo)",
+  "evt_id": "401861788"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Albion FC",
+  "at": "Peñarol",
+  "evt_id": "401861789"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Central Español Fútbol Club",
+  "at": "Cerro Largo",
+  "evt_id": "401861790"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Nacional",
+  "at": "Montevideo Wanderers",
+  "evt_id": "401861791"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Liverpool",
+  "at": "Montevideo City Torque",
+  "evt_id": "401861792"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Deportivo Maldonado",
+  "at": "Defensor Sporting",
+  "evt_id": "401861793"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Danubio",
+  "at": "Juventud",
+  "evt_id": "401861794"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Cerro",
+  "at": "Progreso",
+  "evt_id": "401861795"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "Cerro Largo",
+  "at": "Deportivo Maldonado",
+  "evt_id": "401861796"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Defensor Sporting",
+  "at": "Nacional",
+  "evt_id": "401861797"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Progreso",
+  "at": "Boston River",
+  "evt_id": "401861798"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Peñarol",
+  "at": "Cerro",
+  "evt_id": "401861799"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Montevideo Wanderers",
+  "at": "Danubio",
+  "evt_id": "401861800"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Montevideo City Torque",
+  "at": "Central Español Fútbol Club",
+  "evt_id": "401861801"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Juventud",
+  "at": "Albion FC",
+  "evt_id": "401861802"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Racing (Montevideo)",
+  "at": "Liverpool",
+  "evt_id": "401861803"
+ },
+ {
+  "fecha": "2026-03-25",
+  "ht": "Albion FC",
+  "at": "Montevideo Wanderers",
+  "evt_id": "401861804"
+ },
+ {
+  "fecha": "2026-03-25",
+  "ht": "Boston River",
+  "at": "Peñarol",
+  "evt_id": "401861805"
+ },
+ {
+  "fecha": "2026-03-25",
+  "ht": "Cerro",
+  "at": "Juventud",
+  "evt_id": "401861806"
+ },
+ {
+  "fecha": "2026-03-26",
+  "ht": "Danubio",
+  "at": "Defensor Sporting",
+  "evt_id": "401861807"
+ },
+ {
+  "fecha": "2026-03-24",
+  "ht": "Deportivo Maldonado",
+  "at": "Montevideo City Torque",
+  "evt_id": "401861808"
+ },
+ {
+  "fecha": "2026-03-24",
+  "ht": "Liverpool",
+  "at": "Central Español Fútbol Club",
+  "evt_id": "401861809"
+ },
+ {
+  "fecha": "2026-03-24",
+  "ht": "Nacional",
+  "at": "Cerro Largo",
+  "evt_id": "401861810"
+ },
+ {
+  "fecha": "2026-03-26",
+  "ht": "Racing (Montevideo)",
+  "at": "Progreso",
+  "evt_id": "401861811"
+ },
+ {
+  "fecha": "2026-03-31",
+  "ht": "Central Español Fútbol Club",
+  "at": "Deportivo Maldonado",
+  "evt_id": "401861812"
+ },
+ {
+  "fecha": "2026-03-30",
+  "ht": "Cerro Largo",
+  "at": "Danubio",
+  "evt_id": "401861813"
+ },
+ {
+  "fecha": "2026-03-31",
+  "ht": "Defensor Sporting",
+  "at": "Albion FC",
+  "evt_id": "401861814"
+ },
+ {
+  "fecha": "2026-03-30",
+  "ht": "Juventud",
+  "at": "Boston River",
+  "evt_id": "401861815"
+ },
+ {
+  "fecha": "2026-03-28",
+  "ht": "Montevideo City Torque",
+  "at": "Nacional",
+  "evt_id": "401861816"
+ },
+ {
+  "fecha": "2026-03-28",
+  "ht": "Montevideo Wanderers",
+  "at": "Cerro",
+  "evt_id": "401861817"
+ },
+ {
+  "fecha": "2026-03-29",
+  "ht": "Peñarol",
+  "at": "Racing (Montevideo)",
+  "evt_id": "401861818"
+ },
+ {
+  "fecha": "2026-03-31",
+  "ht": "Progreso",
+  "at": "Liverpool",
+  "evt_id": "401861819"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Cerro",
+  "at": "Defensor Sporting",
+  "evt_id": "401861820"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Boston River",
+  "at": "Montevideo Wanderers",
+  "evt_id": "401861821"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Albion FC",
+  "at": "Cerro Largo",
+  "evt_id": "401861822"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Danubio",
+  "at": "Montevideo City Torque",
+  "evt_id": "401861823"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Racing (Montevideo)",
+  "at": "Juventud",
+  "evt_id": "401861824"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Progreso",
+  "at": "Peñarol",
+  "evt_id": "401861825"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Nacional",
+  "at": "Central Español Fútbol Club",
+  "evt_id": "401861826"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Liverpool",
+  "at": "Deportivo Maldonado",
+  "evt_id": "401861827"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Central Español Fútbol Club",
+  "at": "Danubio",
+  "evt_id": "401861828"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "Cerro Largo",
+  "at": "Cerro",
+  "evt_id": "401861829"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Defensor Sporting",
+  "at": "Boston River",
+  "evt_id": "401861830"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Montevideo Wanderers",
+  "at": "Racing (Montevideo)",
+  "evt_id": "401861831"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Montevideo City Torque",
+  "at": "Albion FC",
+  "evt_id": "401861832"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Juventud",
+  "at": "Progreso",
+  "evt_id": "401861833"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Deportivo Maldonado",
+  "at": "Nacional",
+  "evt_id": "401861834"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Peñarol",
+  "at": "Liverpool",
+  "evt_id": "401861835"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Cerro",
+  "at": "Montevideo City Torque",
+  "evt_id": "401861836"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Boston River",
+  "at": "Cerro Largo",
+  "evt_id": "401861837"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Albion FC",
+  "at": "Central Español Fútbol Club",
+  "evt_id": "401861838"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Danubio",
+  "at": "Deportivo Maldonado",
+  "evt_id": "401861839"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Racing (Montevideo)",
+  "at": "Defensor Sporting",
+  "evt_id": "401861840"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Progreso",
+  "at": "Montevideo Wanderers",
+  "evt_id": "401861841"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Peñarol",
+  "at": "Juventud",
+  "evt_id": "401861842"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Liverpool",
+  "at": "Nacional",
+  "evt_id": "401861843"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Defensor Sporting",
+  "at": "Progreso",
+  "evt_id": "401861844"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Cerro Largo",
+  "at": "Racing (Montevideo)",
+  "evt_id": "401861845"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Central Español Fútbol Club",
+  "at": "Cerro",
+  "evt_id": "401861846"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Deportivo Maldonado",
+  "at": "Albion FC",
+  "evt_id": "401861847"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Juventud",
+  "at": "Liverpool",
+  "evt_id": "401861848"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Montevideo City Torque",
+  "at": "Boston River",
+  "evt_id": "401861849"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Montevideo Wanderers",
+  "at": "Peñarol",
+  "evt_id": "401861850"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Nacional",
+  "at": "Danubio",
+  "evt_id": "401861851"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Cerro",
+  "at": "Deportivo Maldonado",
+  "evt_id": "401861852"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Boston River",
+  "at": "Central Español Fútbol Club",
+  "evt_id": "401861853"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Albion FC",
+  "at": "Nacional",
+  "evt_id": "401861854"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Juventud",
+  "at": "Montevideo Wanderers",
+  "evt_id": "401861855"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Racing (Montevideo)",
+  "at": "Montevideo City Torque",
+  "evt_id": "401861856"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Progreso",
+  "at": "Cerro Largo",
+  "evt_id": "401861857"
+ },
+ {
+  "fecha": "2026-05-04",
+  "ht": "Peñarol",
+  "at": "Defensor Sporting",
+  "evt_id": "401861858"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Liverpool",
+  "at": "Danubio",
+  "evt_id": "401861859"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Central Español Fútbol Club",
+  "at": "Racing (Montevideo)",
+  "evt_id": "401861860"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Cerro Largo",
+  "at": "Peñarol",
+  "evt_id": "401861861"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Danubio",
+  "at": "Albion FC",
+  "evt_id": "401861862"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Defensor Sporting",
+  "at": "Juventud",
+  "evt_id": "401861863"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Deportivo Maldonado",
+  "at": "Boston River",
+  "evt_id": "401861864"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Montevideo City Torque",
+  "at": "Progreso",
+  "evt_id": "401861865"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Montevideo Wanderers",
+  "at": "Liverpool",
+  "evt_id": "401861866"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Nacional",
+  "at": "Cerro",
+  "evt_id": "401861867"
+ }
+]

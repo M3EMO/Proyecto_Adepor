@@ -1,0 +1,1142 @@
+[
+ {
+  "fecha": "2026-01-17",
+  "ht": "América de Cali",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401843147"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Bucaramanga",
+  "at": "Millonarios",
+  "evt_id": "401843148"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Atlético Nacional",
+  "at": "Boyacá Chicó",
+  "evt_id": "401843149"
+ },
+ {
+  "fecha": "2026-01-19",
+  "ht": "Cúcuta Deportivo",
+  "at": "Once Caldas",
+  "evt_id": "401843150"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Atlético Junior",
+  "at": "Deportes Tolima",
+  "evt_id": "401843151"
+ },
+ {
+  "fecha": "2026-01-16",
+  "ht": "Deportivo Pereira",
+  "at": "Llaneros",
+  "evt_id": "401843152"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Fortaleza CEIF",
+  "at": "Alianza FC",
+  "evt_id": "401843153"
+ },
+ {
+  "fecha": "2026-01-19",
+  "ht": "Independiente Santa Fe",
+  "at": "Águilas Doradas",
+  "evt_id": "401843154"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Jaguares de Córdoba",
+  "at": "Deportivo Cali",
+  "evt_id": "401843175"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Deportivo Pasto",
+  "at": "Independiente Medellín",
+  "evt_id": "401843176"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "Internacional de Bogotá",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850718"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Deportes Tolima",
+  "at": "Alianza FC",
+  "evt_id": "401850719"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Deportivo Pereira",
+  "at": "Fortaleza CEIF",
+  "evt_id": "401850720"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Llaneros",
+  "at": "Bucaramanga",
+  "evt_id": "401850721"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Deportivo Cali",
+  "at": "Independiente Medellín",
+  "evt_id": "401850722"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Boyacá Chicó",
+  "at": "América de Cali",
+  "evt_id": "401850723"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Águilas Doradas",
+  "at": "Deportivo Pasto",
+  "evt_id": "401850724"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Millonarios",
+  "at": "Atlético Junior",
+  "evt_id": "401850725"
+ },
+ {
+  "fecha": "2026-01-26",
+  "ht": "Once Caldas",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850726"
+ },
+ {
+  "fecha": "2026-04-07",
+  "ht": "Atlético Nacional",
+  "at": "Jaguares de Córdoba",
+  "evt_id": "401850727"
+ },
+ {
+  "fecha": "2026-01-27",
+  "ht": "Cúcuta Deportivo",
+  "at": "Bucaramanga",
+  "evt_id": "401850728"
+ },
+ {
+  "fecha": "2026-01-27",
+  "ht": "Fortaleza CEIF",
+  "at": "Llaneros",
+  "evt_id": "401850729"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Independiente Medellín",
+  "at": "Deportes Tolima",
+  "evt_id": "401850730"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Alianza FC",
+  "at": "Boyacá Chicó",
+  "evt_id": "401850731"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "Deportivo Pasto",
+  "at": "Millonarios",
+  "evt_id": "401850732"
+ },
+ {
+  "fecha": "2026-01-28",
+  "ht": "Independiente Santa Fe",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850733"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "Águilas Doradas",
+  "at": "Deportivo Cali",
+  "evt_id": "401850734"
+ },
+ {
+  "fecha": "2026-01-29",
+  "ht": "Jaguares de Córdoba",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401850735"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "América de Cali",
+  "at": "Once Caldas",
+  "evt_id": "401850736"
+ },
+ {
+  "fecha": "2026-03-11",
+  "ht": "Atlético Junior",
+  "at": "Atlético Nacional",
+  "evt_id": "401850737"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Cúcuta Deportivo",
+  "at": "Fortaleza CEIF",
+  "evt_id": "401850738"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Boyacá Chicó",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850739"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Millonarios",
+  "at": "Independiente Medellín",
+  "evt_id": "401850740"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Bucaramanga",
+  "at": "Alianza FC",
+  "evt_id": "401850741"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Deportivo Cali",
+  "at": "Deportivo Pasto",
+  "evt_id": "401850742"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Once Caldas",
+  "at": "Jaguares de Córdoba",
+  "evt_id": "401850743"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Llaneros",
+  "at": "Águilas Doradas",
+  "evt_id": "401850744"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Internacional de Bogotá",
+  "at": "Deportes Tolima",
+  "evt_id": "401850745"
+ },
+ {
+  "fecha": "2026-02-03",
+  "ht": "Deportivo Pereira",
+  "at": "Atlético Junior",
+  "evt_id": "401850746"
+ },
+ {
+  "fecha": "2026-02-05",
+  "ht": "Atlético Nacional",
+  "at": "América de Cali",
+  "evt_id": "401850747"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Millonarios",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850748"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Deportivo Pasto",
+  "at": "Bucaramanga",
+  "evt_id": "401850749"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Independiente Medellín",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401850750"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Águilas Doradas",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850751"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Deportes Tolima",
+  "at": "Llaneros",
+  "evt_id": "401850752"
+ },
+ {
+  "fecha": "2026-02-26",
+  "ht": "Independiente Santa Fe",
+  "at": "Atlético Nacional",
+  "evt_id": "401850753"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Atlético Junior",
+  "at": "Boyacá Chicó",
+  "evt_id": "401850754"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Fortaleza CEIF",
+  "at": "América de Cali",
+  "evt_id": "401850755"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Alianza FC",
+  "at": "Once Caldas",
+  "evt_id": "401850756"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Deportivo Cali",
+  "at": "Millonarios",
+  "evt_id": "401850757"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Jaguares de Córdoba",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850758"
+ },
+ {
+  "fecha": "2026-02-10",
+  "ht": "Cúcuta Deportivo",
+  "at": "Independiente Medellín",
+  "evt_id": "401850759"
+ },
+ {
+  "fecha": "2026-02-10",
+  "ht": "Llaneros",
+  "at": "Deportivo Pasto",
+  "evt_id": "401850760"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Bucaramanga",
+  "at": "Deportes Tolima",
+  "evt_id": "401850761"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "Internacional de Bogotá",
+  "at": "Deportivo Cali",
+  "evt_id": "401850762"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Millonarios",
+  "at": "Águilas Doradas",
+  "evt_id": "401850763"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Deportivo Pereira",
+  "at": "Alianza FC",
+  "evt_id": "401850764"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "Boyacá Chicó",
+  "at": "Jaguares de Córdoba",
+  "evt_id": "401850765"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "Once Caldas",
+  "at": "Atlético Junior",
+  "evt_id": "401850766"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Atlético Nacional",
+  "at": "Fortaleza CEIF",
+  "evt_id": "401850767"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "América de Cali",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850768"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Millonarios",
+  "at": "Llaneros",
+  "evt_id": "401850769"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Independiente Medellín",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850770"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Deportivo Pasto",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401850771"
+ },
+ {
+  "fecha": "2026-04-07",
+  "ht": "Águilas Doradas",
+  "at": "Bucaramanga",
+  "evt_id": "401850772"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Deportes Tolima",
+  "at": "Once Caldas",
+  "evt_id": "401850773"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Deportivo Cali",
+  "at": "Atlético Nacional",
+  "evt_id": "401850774"
+ },
+ {
+  "fecha": "2026-02-16",
+  "ht": "Fortaleza CEIF",
+  "at": "Boyacá Chicó",
+  "evt_id": "401850775"
+ },
+ {
+  "fecha": "2026-02-17",
+  "ht": "Jaguares de Córdoba",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850776"
+ },
+ {
+  "fecha": "2026-02-19",
+  "ht": "Atlético Junior",
+  "at": "América de Cali",
+  "evt_id": "401850777"
+ },
+ {
+  "fecha": "2026-02-17",
+  "ht": "Alianza FC",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850778"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Llaneros",
+  "at": "Independiente Medellín",
+  "evt_id": "401850779"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "América de Cali",
+  "at": "Jaguares de Córdoba",
+  "evt_id": "401850780"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Once Caldas",
+  "at": "Fortaleza CEIF",
+  "evt_id": "401850781"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Bucaramanga",
+  "at": "Deportivo Cali",
+  "evt_id": "401850782"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Atlético Nacional",
+  "at": "Alianza FC",
+  "evt_id": "401850783"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Internacional de Bogotá",
+  "at": "Millonarios",
+  "evt_id": "401850784"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Independiente Santa Fe",
+  "at": "Atlético Junior",
+  "evt_id": "401850785"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Boyacá Chicó",
+  "at": "Águilas Doradas",
+  "evt_id": "401850786"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Deportivo Pereira",
+  "at": "Deportivo Pasto",
+  "evt_id": "401850787"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Cúcuta Deportivo",
+  "at": "Deportes Tolima",
+  "evt_id": "401850788"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Jaguares de Córdoba",
+  "at": "Atlético Junior",
+  "evt_id": "401850789"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Once Caldas",
+  "at": "Boyacá Chicó",
+  "evt_id": "401850790"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Alianza FC",
+  "at": "América de Cali",
+  "evt_id": "401850791"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Fortaleza CEIF",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850792"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Independiente Medellín",
+  "at": "Bucaramanga",
+  "evt_id": "401850793"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Deportivo Pasto",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850794"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Águilas Doradas",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401850795"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Deportivo Cali",
+  "at": "Llaneros",
+  "evt_id": "401850796"
+ },
+ {
+  "fecha": "2026-03-02",
+  "ht": "Deportes Tolima",
+  "at": "Atlético Nacional",
+  "evt_id": "401850797"
+ },
+ {
+  "fecha": "2026-03-10",
+  "ht": "Bucaramanga",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850798"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Deportes Tolima",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850799"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Deportivo Cali",
+  "at": "Once Caldas",
+  "evt_id": "401850800"
+ },
+ {
+  "fecha": "2026-03-10",
+  "ht": "Deportivo Pasto",
+  "at": "América de Cali",
+  "evt_id": "401850801"
+ },
+ {
+  "fecha": "2026-03-05",
+  "ht": "Fortaleza CEIF",
+  "at": "Jaguares de Córdoba",
+  "evt_id": "401850802"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Independiente Medellín",
+  "at": "Boyacá Chicó",
+  "evt_id": "401850803"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "Atlético Junior",
+  "at": "Alianza FC",
+  "evt_id": "401850804"
+ },
+ {
+  "fecha": "2026-03-05",
+  "ht": "Llaneros",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401850805"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Millonarios",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850806"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Águilas Doradas",
+  "at": "Atlético Nacional",
+  "evt_id": "401850807"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Once Caldas",
+  "at": "Deportivo Pasto",
+  "evt_id": "401850808"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Atlético Nacional",
+  "at": "Llaneros",
+  "evt_id": "401850809"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Internacional de Bogotá",
+  "at": "Bucaramanga",
+  "evt_id": "401850810"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Cúcuta Deportivo",
+  "at": "Deportivo Cali",
+  "evt_id": "401850811"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Boyacá Chicó",
+  "at": "Millonarios",
+  "evt_id": "401850812"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Independiente Santa Fe",
+  "at": "Alianza FC",
+  "evt_id": "401850813"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Deportivo Pereira",
+  "at": "Águilas Doradas",
+  "evt_id": "401850814"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "América de Cali",
+  "at": "Deportes Tolima",
+  "evt_id": "401850815"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Jaguares de Córdoba",
+  "at": "Independiente Medellín",
+  "evt_id": "401850816"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Atlético Junior",
+  "at": "Fortaleza CEIF",
+  "evt_id": "401850817"
+ },
+ {
+  "fecha": "2026-03-17",
+  "ht": "Llaneros",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850818"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Bucaramanga",
+  "at": "Once Caldas",
+  "evt_id": "401850819"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Millonarios",
+  "at": "Atlético Nacional",
+  "evt_id": "401850820"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Deportivo Pasto",
+  "at": "Boyacá Chicó",
+  "evt_id": "401850821"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Internacional de Bogotá",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850822"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Deportivo Cali",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850823"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Alianza FC",
+  "at": "Jaguares de Córdoba",
+  "evt_id": "401850824"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Deportes Tolima",
+  "at": "Fortaleza CEIF",
+  "evt_id": "401850825"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "Independiente Medellín",
+  "at": "Atlético Junior",
+  "evt_id": "401850826"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "Águilas Doradas",
+  "at": "América de Cali",
+  "evt_id": "401850827"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Once Caldas",
+  "at": "Millonarios",
+  "evt_id": "401850828"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Alianza FC",
+  "at": "Deportivo Cali",
+  "evt_id": "401850829"
+ },
+ {
+  "fecha": "2026-03-24",
+  "ht": "Deportivo Pereira",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850830"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Atlético Nacional",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401850831"
+ },
+ {
+  "fecha": "2026-03-23",
+  "ht": "Boyacá Chicó",
+  "at": "Deportes Tolima",
+  "evt_id": "401850832"
+ },
+ {
+  "fecha": "2026-03-23",
+  "ht": "Independiente Santa Fe",
+  "at": "Independiente Medellín",
+  "evt_id": "401850833"
+ },
+ {
+  "fecha": "2026-03-23",
+  "ht": "Jaguares de Córdoba",
+  "at": "Águilas Doradas",
+  "evt_id": "401850834"
+ },
+ {
+  "fecha": "2026-03-24",
+  "ht": "Atlético Junior",
+  "at": "Bucaramanga",
+  "evt_id": "401850835"
+ },
+ {
+  "fecha": "2026-03-25",
+  "ht": "Fortaleza CEIF",
+  "at": "Deportivo Pasto",
+  "evt_id": "401850836"
+ },
+ {
+  "fecha": "2026-03-26",
+  "ht": "América de Cali",
+  "at": "Llaneros",
+  "evt_id": "401850837"
+ },
+ {
+  "fecha": "2026-03-27",
+  "ht": "Águilas Doradas",
+  "at": "Alianza FC",
+  "evt_id": "401850838"
+ },
+ {
+  "fecha": "2026-03-28",
+  "ht": "Bucaramanga",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850839"
+ },
+ {
+  "fecha": "2026-03-28",
+  "ht": "Cúcuta Deportivo",
+  "at": "Boyacá Chicó",
+  "evt_id": "401850840"
+ },
+ {
+  "fecha": "2026-03-28",
+  "ht": "Deportes Tolima",
+  "at": "Jaguares de Córdoba",
+  "evt_id": "401850841"
+ },
+ {
+  "fecha": "2026-03-29",
+  "ht": "Deportivo Cali",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850842"
+ },
+ {
+  "fecha": "2026-03-29",
+  "ht": "Internacional de Bogotá",
+  "at": "Atlético Junior",
+  "evt_id": "401850843"
+ },
+ {
+  "fecha": "2026-03-29",
+  "ht": "Deportivo Pasto",
+  "at": "Atlético Nacional",
+  "evt_id": "401850844"
+ },
+ {
+  "fecha": "2026-03-30",
+  "ht": "Independiente Medellín",
+  "at": "América de Cali",
+  "evt_id": "401850845"
+ },
+ {
+  "fecha": "2026-03-30",
+  "ht": "Llaneros",
+  "at": "Once Caldas",
+  "evt_id": "401850846"
+ },
+ {
+  "fecha": "2026-03-31",
+  "ht": "Millonarios",
+  "at": "Fortaleza CEIF",
+  "evt_id": "401850847"
+ },
+ {
+  "fecha": "2026-04-01",
+  "ht": "Deportes Tolima",
+  "at": "Águilas Doradas",
+  "evt_id": "401850848"
+ },
+ {
+  "fecha": "2026-04-01",
+  "ht": "Alianza FC",
+  "at": "Deportivo Pasto",
+  "evt_id": "401850849"
+ },
+ {
+  "fecha": "2026-04-01",
+  "ht": "Independiente Santa Fe",
+  "at": "Llaneros",
+  "evt_id": "401850850"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Atlético Nacional",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850851"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Boyacá Chicó",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850852"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "América de Cali",
+  "at": "Bucaramanga",
+  "evt_id": "401850853"
+ },
+ {
+  "fecha": "2026-04-02",
+  "ht": "Jaguares de Córdoba",
+  "at": "Millonarios",
+  "evt_id": "401850854"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Once Caldas",
+  "at": "Independiente Medellín",
+  "evt_id": "401850855"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Fortaleza CEIF",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401850856"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Atlético Junior",
+  "at": "Deportivo Cali",
+  "evt_id": "401850857"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Cúcuta Deportivo",
+  "at": "América de Cali",
+  "evt_id": "401850858"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Millonarios",
+  "at": "Deportes Tolima",
+  "evt_id": "401850859"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Llaneros",
+  "at": "Jaguares de Córdoba",
+  "evt_id": "401850860"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "Deportivo Pereira",
+  "at": "Once Caldas",
+  "evt_id": "401850861"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Deportivo Pasto",
+  "at": "Deportes Tolima",
+  "evt_id": "401850862"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Millonarios",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850863"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Independiente Medellín",
+  "at": "Atlético Nacional",
+  "evt_id": "401850864"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Águilas Doradas",
+  "at": "Atlético Junior",
+  "evt_id": "401850865"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Deportivo Cali",
+  "at": "Fortaleza CEIF",
+  "evt_id": "401850866"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Bucaramanga",
+  "at": "Boyacá Chicó",
+  "evt_id": "401850867"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Internacional de Bogotá",
+  "at": "Alianza FC",
+  "evt_id": "401850868"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Jaguares de Córdoba",
+  "at": "Deportivo Pasto",
+  "evt_id": "401850869"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Boyacá Chicó",
+  "at": "Deportivo Cali",
+  "evt_id": "401850870"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Deportes Tolima",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850871"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Fortaleza CEIF",
+  "at": "Águilas Doradas",
+  "evt_id": "401850872"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Independiente Santa Fe",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850873"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "América de Cali",
+  "at": "Millonarios",
+  "evt_id": "401850874"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Atlético Junior",
+  "at": "Llaneros",
+  "evt_id": "401850875"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Alianza FC",
+  "at": "Independiente Medellín",
+  "evt_id": "401850876"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Once Caldas",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401850877"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Atlético Nacional",
+  "at": "Bucaramanga",
+  "evt_id": "401850878"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Cúcuta Deportivo",
+  "at": "Atlético Junior",
+  "evt_id": "401850879"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Deportivo Pasto",
+  "at": "Independiente Santa Fe",
+  "evt_id": "401850880"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Bucaramanga",
+  "at": "Jaguares de Córdoba",
+  "evt_id": "401850881"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Independiente Medellín",
+  "at": "Fortaleza CEIF",
+  "evt_id": "401850882"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Deportivo Cali",
+  "at": "América de Cali",
+  "evt_id": "401850883"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Deportivo Pereira",
+  "at": "Atlético Nacional",
+  "evt_id": "401850884"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Águilas Doradas",
+  "at": "Once Caldas",
+  "evt_id": "401850885"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Llaneros",
+  "at": "Alianza FC",
+  "evt_id": "401850886"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Internacional de Bogotá",
+  "at": "Boyacá Chicó",
+  "evt_id": "401850887"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Alianza FC",
+  "at": "Millonarios",
+  "evt_id": "401850888"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "América de Cali",
+  "at": "Deportivo Pereira",
+  "evt_id": "401850889"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Boyacá Chicó",
+  "at": "Llaneros",
+  "evt_id": "401850890"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Deportes Tolima",
+  "at": "Deportivo Cali",
+  "evt_id": "401850891"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "Once Caldas",
+  "at": "Atlético Nacional",
+  "evt_id": "401850892"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Independiente Medellín",
+  "at": "Águilas Doradas",
+  "evt_id": "401850893"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Independiente Santa Fe",
+  "at": "Internacional de Bogotá",
+  "evt_id": "401850894"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Jaguares de Córdoba",
+  "at": "Cúcuta Deportivo",
+  "evt_id": "401850895"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Atlético Junior",
+  "at": "Deportivo Pasto",
+  "evt_id": "401850896"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Fortaleza CEIF",
+  "at": "Bucaramanga",
+  "evt_id": "401850897"
+ }
+]

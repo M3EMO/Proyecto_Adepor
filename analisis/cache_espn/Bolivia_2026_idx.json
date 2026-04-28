@@ -1,0 +1,482 @@
+[
+ {
+  "fecha": "2026-04-03",
+  "ht": "Bolívar",
+  "at": "Real Oruro",
+  "evt_id": "401866742"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Independiente Petrolero",
+  "at": "Nacional Potosí",
+  "evt_id": "401866743"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Blooming",
+  "at": "Guabirá",
+  "evt_id": "401866744"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Always Ready",
+  "at": "Real Tomayapo",
+  "evt_id": "401866745"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Real Potosí",
+  "at": "Aurora",
+  "evt_id": "401866746"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "San Antonio Bulo Bulo",
+  "at": "Oriente Petrolero",
+  "evt_id": "401866747"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "GV San José",
+  "at": "ABB",
+  "evt_id": "401866748"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Universitario de Vinto",
+  "at": "The Strongest",
+  "evt_id": "401866749"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Guabirá",
+  "at": "Independiente Petrolero",
+  "evt_id": "401866750"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "ABB",
+  "at": "Bolívar",
+  "evt_id": "401866751"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Nacional Potosí",
+  "at": "Universitario de Vinto",
+  "evt_id": "401866752"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Aurora",
+  "at": "Always Ready",
+  "evt_id": "401866893"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Real Oruro",
+  "at": "Blooming",
+  "evt_id": "401866894"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "The Strongest",
+  "at": "San Antonio Bulo Bulo",
+  "evt_id": "401866895"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Oriente Petrolero",
+  "at": "GV San José",
+  "evt_id": "401866896"
+ },
+ {
+  "fecha": "2026-04-14",
+  "ht": "Real Tomayapo",
+  "at": "Real Potosí",
+  "evt_id": "401866897"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Universitario de Vinto",
+  "at": "ABB",
+  "evt_id": "401866898"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "GV San José",
+  "at": "Aurora",
+  "evt_id": "401866899"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Bolívar",
+  "at": "Independiente Petrolero",
+  "evt_id": "401866900"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Always Ready",
+  "at": "Oriente Petrolero",
+  "evt_id": "401866901"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Real Potosí",
+  "at": "Guabirá",
+  "evt_id": "401866902"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "Blooming",
+  "at": "Nacional Potosí",
+  "evt_id": "401866903"
+ },
+ {
+  "fecha": "2026-04-23",
+  "ht": "San Antonio Bulo Bulo",
+  "at": "Real Oruro",
+  "evt_id": "401866904"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Real Tomayapo",
+  "at": "The Strongest",
+  "evt_id": "401866905"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Independiente Petrolero",
+  "at": "Universitario de Vinto",
+  "evt_id": "401866906"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Nacional Potosí",
+  "at": "GV San José",
+  "evt_id": "401866907"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "ABB",
+  "at": "Blooming",
+  "evt_id": "401866908"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Guabirá",
+  "at": "Always Ready",
+  "evt_id": "401866909"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Real Oruro",
+  "at": "The Strongest",
+  "evt_id": "401866910"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Bolívar",
+  "at": "Real Tomayapo",
+  "evt_id": "401866911"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Oriente Petrolero",
+  "at": "Real Potosí",
+  "evt_id": "401866912"
+ },
+ {
+  "fecha": "2026-04-28",
+  "ht": "Aurora",
+  "at": "San Antonio Bulo Bulo",
+  "evt_id": "401866913"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "San Antonio Bulo Bulo",
+  "at": "Independiente Petrolero",
+  "evt_id": "401866914"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "Real Potosí",
+  "at": "Real Oruro",
+  "evt_id": "401866915"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Always Ready",
+  "at": "Nacional Potosí",
+  "evt_id": "401866916"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Aurora",
+  "at": "Guabirá",
+  "evt_id": "401866917"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Oriente Petrolero",
+  "at": "Real Tomayapo",
+  "evt_id": "401866918"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "GV San José",
+  "at": "Bolívar",
+  "evt_id": "401866919"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "The Strongest",
+  "at": "ABB",
+  "evt_id": "401866920"
+ },
+ {
+  "fecha": "2026-05-05",
+  "ht": "Universitario de Vinto",
+  "at": "Blooming",
+  "evt_id": "401866921"
+ },
+ {
+  "fecha": "2026-05-08",
+  "ht": "Nacional Potosí",
+  "at": "Aurora",
+  "evt_id": "401866922"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Real Oruro",
+  "at": "Universitario de Vinto",
+  "evt_id": "401866923"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Guabirá",
+  "at": "GV San José",
+  "evt_id": "401866924"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Real Tomayapo",
+  "at": "San Antonio Bulo Bulo",
+  "evt_id": "401866925"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Independiente Petrolero",
+  "at": "Always Ready",
+  "evt_id": "401866926"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "The Strongest",
+  "at": "Real Potosí",
+  "evt_id": "401866927"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Blooming",
+  "at": "Bolívar",
+  "evt_id": "401866928"
+ },
+ {
+  "fecha": "2026-05-11",
+  "ht": "ABB",
+  "at": "Oriente Petrolero",
+  "evt_id": "401866929"
+ },
+ {
+  "fecha": "2026-05-12",
+  "ht": "San Antonio Bulo Bulo",
+  "at": "Universitario de Vinto",
+  "evt_id": "401867143"
+ },
+ {
+  "fecha": "2026-05-12",
+  "ht": "GV San José",
+  "at": "Real Tomayapo",
+  "evt_id": "401867144"
+ },
+ {
+  "fecha": "2026-05-13",
+  "ht": "Aurora",
+  "at": "Real Oruro",
+  "evt_id": "401867145"
+ },
+ {
+  "fecha": "2026-05-13",
+  "ht": "Always Ready",
+  "at": "The Strongest",
+  "evt_id": "401867146"
+ },
+ {
+  "fecha": "2026-05-13",
+  "ht": "Independiente Petrolero",
+  "at": "Blooming",
+  "evt_id": "401867147"
+ },
+ {
+  "fecha": "2026-05-14",
+  "ht": "Bolívar",
+  "at": "Nacional Potosí",
+  "evt_id": "401867148"
+ },
+ {
+  "fecha": "2026-05-14",
+  "ht": "Real Potosí",
+  "at": "ABB",
+  "evt_id": "401867149"
+ },
+ {
+  "fecha": "2026-05-15",
+  "ht": "Oriente Petrolero",
+  "at": "Guabirá",
+  "evt_id": "401867150"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Real Tomayapo",
+  "at": "Aurora",
+  "evt_id": "401867151"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Universitario de Vinto",
+  "at": "Bolívar",
+  "evt_id": "401867152"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Real Oruro",
+  "at": "Always Ready",
+  "evt_id": "401867173"
+ },
+ {
+  "fecha": "2026-05-16",
+  "ht": "Blooming",
+  "at": "GV San José",
+  "evt_id": "401867174"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "ABB",
+  "at": "Independiente Petrolero",
+  "evt_id": "401867175"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "The Strongest",
+  "at": "Oriente Petrolero",
+  "evt_id": "401867176"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Guabirá",
+  "at": "Nacional Potosí",
+  "evt_id": "401867177"
+ },
+ {
+  "fecha": "2026-05-18",
+  "ht": "Real Potosí",
+  "at": "San Antonio Bulo Bulo",
+  "evt_id": "401867178"
+ },
+ {
+  "fecha": "2026-05-22",
+  "ht": "San Antonio Bulo Bulo",
+  "at": "ABB",
+  "evt_id": "401867179"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "GV San José",
+  "at": "The Strongest",
+  "evt_id": "401867180"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Always Ready",
+  "at": "Universitario de Vinto",
+  "evt_id": "401867181"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Independiente Petrolero",
+  "at": "Real Potosí",
+  "evt_id": "401867182"
+ },
+ {
+  "fecha": "2026-05-23",
+  "ht": "Blooming",
+  "at": "Real Tomayapo",
+  "evt_id": "401867183"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Nacional Potosí",
+  "at": "Real Oruro",
+  "evt_id": "401867184"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Bolívar",
+  "at": "Guabirá",
+  "evt_id": "401867185"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Aurora",
+  "at": "Oriente Petrolero",
+  "evt_id": "401867186"
+ },
+ {
+  "fecha": "2026-05-29",
+  "ht": "San Antonio Bulo Bulo",
+  "at": "Guabirá",
+  "evt_id": "401867187"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "ABB",
+  "at": "Always Ready",
+  "evt_id": "401867188"
+ },
+ {
+  "fecha": "2026-05-30",
+  "ht": "Real Oruro",
+  "at": "GV San José",
+  "evt_id": "401867189"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "Real Tomayapo",
+  "at": "Independiente Petrolero",
+  "evt_id": "401867190"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "Real Potosí",
+  "at": "Nacional Potosí",
+  "evt_id": "401867191"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "The Strongest",
+  "at": "Bolívar",
+  "evt_id": "401867192"
+ },
+ {
+  "fecha": "2026-05-31",
+  "ht": "Oriente Petrolero",
+  "at": "Blooming",
+  "evt_id": "401867193"
+ },
+ {
+  "fecha": "2026-06-02",
+  "ht": "Universitario de Vinto",
+  "at": "Aurora",
+  "evt_id": "401867194"
+ }
+]

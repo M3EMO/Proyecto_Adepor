@@ -1,0 +1,1838 @@
+[
+ {
+  "fecha": "2025-08-09",
+  "ht": "Antalyaspor",
+  "at": "Kasimpasa",
+  "evt_id": "749918"
+ },
+ {
+  "fecha": "2025-08-10",
+  "ht": "Caykur Rizespor",
+  "at": "Goztepe",
+  "evt_id": "749919"
+ },
+ {
+  "fecha": "2025-08-10",
+  "ht": "Eyupspor",
+  "at": "Konyaspor",
+  "evt_id": "749920"
+ },
+ {
+  "fecha": "2025-08-11",
+  "ht": "Trabzonspor",
+  "at": "Kocaelispor",
+  "evt_id": "749921"
+ },
+ {
+  "fecha": "2025-09-17",
+  "ht": "Fatih Karagümrük",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "749922"
+ },
+ {
+  "fecha": "2025-08-08",
+  "ht": "Gaziantep FK",
+  "at": "Galatasaray",
+  "evt_id": "749923"
+ },
+ {
+  "fecha": "2025-09-24",
+  "ht": "Kayserispor",
+  "at": "Besiktas",
+  "evt_id": "749924"
+ },
+ {
+  "fecha": "2025-08-09",
+  "ht": "Samsunspor",
+  "at": "Genclerbirligi",
+  "evt_id": "749925"
+ },
+ {
+  "fecha": "2025-09-17",
+  "ht": "Fenerbahce",
+  "at": "Alanyaspor",
+  "evt_id": "749926"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Alanyaspor",
+  "at": "Caykur Rizespor",
+  "evt_id": "749927"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Besiktas",
+  "at": "Eyupspor",
+  "evt_id": "749928"
+ },
+ {
+  "fecha": "2025-08-15",
+  "ht": "Galatasaray",
+  "at": "Fatih Karagümrük",
+  "evt_id": "749929"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Genclerbirligi",
+  "at": "Antalyaspor",
+  "evt_id": "749930"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Goztepe",
+  "at": "Fenerbahce",
+  "evt_id": "749931"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Istanbul Basaksehir",
+  "at": "Kayserispor",
+  "evt_id": "749932"
+ },
+ {
+  "fecha": "2025-08-18",
+  "ht": "Kasimpasa",
+  "at": "Trabzonspor",
+  "evt_id": "749933"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Kocaelispor",
+  "at": "Samsunspor",
+  "evt_id": "749934"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Konyaspor",
+  "at": "Gaziantep FK",
+  "evt_id": "749935"
+ },
+ {
+  "fecha": "2025-10-22",
+  "ht": "Caykur Rizespor",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "749936"
+ },
+ {
+  "fecha": "2025-08-25",
+  "ht": "Eyupspor",
+  "at": "Alanyaspor",
+  "evt_id": "749937"
+ },
+ {
+  "fecha": "2025-08-22",
+  "ht": "Fatih Karagümrük",
+  "at": "Goztepe",
+  "evt_id": "749938"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Fenerbahce",
+  "at": "Kocaelispor",
+  "evt_id": "749939"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Gaziantep FK",
+  "at": "Genclerbirligi",
+  "evt_id": "749940"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Kayserispor",
+  "at": "Galatasaray",
+  "evt_id": "749941"
+ },
+ {
+  "fecha": "2025-10-22",
+  "ht": "Konyaspor",
+  "at": "Besiktas",
+  "evt_id": "749942"
+ },
+ {
+  "fecha": "2025-09-17",
+  "ht": "Samsunspor",
+  "at": "Kasimpasa",
+  "evt_id": "749943"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Trabzonspor",
+  "at": "Antalyaspor",
+  "evt_id": "749944"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Alanyaspor",
+  "at": "Besiktas",
+  "evt_id": "749945"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Antalyaspor",
+  "at": "Fatih Karagümrük",
+  "evt_id": "749946"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Galatasaray",
+  "at": "Caykur Rizespor",
+  "evt_id": "749947"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Genclerbirligi",
+  "at": "Fenerbahce",
+  "evt_id": "749948"
+ },
+ {
+  "fecha": "2025-08-29",
+  "ht": "Goztepe",
+  "at": "Konyaspor",
+  "evt_id": "749949"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Istanbul Basaksehir",
+  "at": "Eyupspor",
+  "evt_id": "749950"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Kasimpasa",
+  "at": "Gaziantep FK",
+  "evt_id": "749951"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Kocaelispor",
+  "at": "Kayserispor",
+  "evt_id": "749952"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Trabzonspor",
+  "at": "Samsunspor",
+  "evt_id": "749953"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Besiktas",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "749954"
+ },
+ {
+  "fecha": "2025-09-15",
+  "ht": "Caykur Rizespor",
+  "at": "Genclerbirligi",
+  "evt_id": "749955"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Eyupspor",
+  "at": "Galatasaray",
+  "evt_id": "749956"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Fatih Karagümrük",
+  "at": "Kasimpasa",
+  "evt_id": "749957"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Fenerbahce",
+  "at": "Trabzonspor",
+  "evt_id": "749958"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Gaziantep FK",
+  "at": "Kocaelispor",
+  "evt_id": "749959"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Kayserispor",
+  "at": "Goztepe",
+  "evt_id": "749960"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Konyaspor",
+  "at": "Alanyaspor",
+  "evt_id": "749961"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Samsunspor",
+  "at": "Antalyaspor",
+  "evt_id": "749962"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Antalyaspor",
+  "at": "Kayserispor",
+  "evt_id": "749963"
+ },
+ {
+  "fecha": "2025-09-22",
+  "ht": "Galatasaray",
+  "at": "Konyaspor",
+  "evt_id": "749964"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Genclerbirligi",
+  "at": "Eyupspor",
+  "evt_id": "749965"
+ },
+ {
+  "fecha": "2025-09-19",
+  "ht": "Goztepe",
+  "at": "Besiktas",
+  "evt_id": "749966"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Istanbul Basaksehir",
+  "at": "Alanyaspor",
+  "evt_id": "749967"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Kasimpasa",
+  "at": "Fenerbahce",
+  "evt_id": "749968"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Kocaelispor",
+  "at": "Caykur Rizespor",
+  "evt_id": "749969"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Samsunspor",
+  "at": "Fatih Karagümrük",
+  "evt_id": "749970"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Trabzonspor",
+  "at": "Gaziantep FK",
+  "evt_id": "749971"
+ },
+ {
+  "fecha": "2025-09-26",
+  "ht": "Alanyaspor",
+  "at": "Galatasaray",
+  "evt_id": "749972"
+ },
+ {
+  "fecha": "2025-09-29",
+  "ht": "Besiktas",
+  "at": "Kocaelispor",
+  "evt_id": "749973"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Caykur Rizespor",
+  "at": "Kasimpasa",
+  "evt_id": "749974"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Eyupspor",
+  "at": "Goztepe",
+  "evt_id": "749975"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Kayserispor",
+  "at": "Genclerbirligi",
+  "evt_id": "749976"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Fenerbahce",
+  "at": "Antalyaspor",
+  "evt_id": "749977"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Gaziantep FK",
+  "at": "Samsunspor",
+  "evt_id": "749978"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Konyaspor",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "749979"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Fatih Karagümrük",
+  "at": "Trabzonspor",
+  "evt_id": "749980"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Galatasaray",
+  "at": "Besiktas",
+  "evt_id": "749981"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Genclerbirligi",
+  "at": "Alanyaspor",
+  "evt_id": "749982"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Goztepe",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "749983"
+ },
+ {
+  "fecha": "2025-10-03",
+  "ht": "Antalyaspor",
+  "at": "Caykur Rizespor",
+  "evt_id": "749984"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Fatih Karagümrük",
+  "at": "Gaziantep FK",
+  "evt_id": "749985"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Samsunspor",
+  "at": "Fenerbahce",
+  "evt_id": "749986"
+ },
+ {
+  "fecha": "2025-10-03",
+  "ht": "Trabzonspor",
+  "at": "Kayserispor",
+  "evt_id": "749987"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Kasimpasa",
+  "at": "Konyaspor",
+  "evt_id": "749988"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Kocaelispor",
+  "at": "Eyupspor",
+  "evt_id": "749989"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Alanyaspor",
+  "at": "Goztepe",
+  "evt_id": "749990"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Besiktas",
+  "at": "Genclerbirligi",
+  "evt_id": "749991"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Caykur Rizespor",
+  "at": "Trabzonspor",
+  "evt_id": "749992"
+ },
+ {
+  "fecha": "2025-10-20",
+  "ht": "Eyupspor",
+  "at": "Kasimpasa",
+  "evt_id": "749993"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Fenerbahce",
+  "at": "Fatih Karagümrük",
+  "evt_id": "749994"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Gaziantep FK",
+  "at": "Antalyaspor",
+  "evt_id": "749995"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Istanbul Basaksehir",
+  "at": "Galatasaray",
+  "evt_id": "749996"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Kayserispor",
+  "at": "Samsunspor",
+  "evt_id": "749997"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Konyaspor",
+  "at": "Kocaelispor",
+  "evt_id": "749998"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Antalyaspor",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "749999"
+ },
+ {
+  "fecha": "2025-10-24",
+  "ht": "Fatih Karagümrük",
+  "at": "Kayserispor",
+  "evt_id": "750000"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Galatasaray",
+  "at": "Goztepe",
+  "evt_id": "750001"
+ },
+ {
+  "fecha": "2025-10-27",
+  "ht": "Gaziantep FK",
+  "at": "Fenerbahce",
+  "evt_id": "750002"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Genclerbirligi",
+  "at": "Konyaspor",
+  "evt_id": "750003"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Kasimpasa",
+  "at": "Besiktas",
+  "evt_id": "750004"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Kocaelispor",
+  "at": "Alanyaspor",
+  "evt_id": "750005"
+ },
+ {
+  "fecha": "2025-10-27",
+  "ht": "Samsunspor",
+  "at": "Caykur Rizespor",
+  "evt_id": "750006"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Trabzonspor",
+  "at": "Eyupspor",
+  "evt_id": "750007"
+ },
+ {
+  "fecha": "2025-11-03",
+  "ht": "Alanyaspor",
+  "at": "Gaziantep FK",
+  "evt_id": "750008"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Besiktas",
+  "at": "Fenerbahce",
+  "evt_id": "750009"
+ },
+ {
+  "fecha": "2025-11-03",
+  "ht": "Caykur Rizespor",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750010"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Konyaspor",
+  "at": "Samsunspor",
+  "evt_id": "750011"
+ },
+ {
+  "fecha": "2025-11-03",
+  "ht": "Eyupspor",
+  "at": "Antalyaspor",
+  "evt_id": "750012"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Goztepe",
+  "at": "Genclerbirligi",
+  "evt_id": "750013"
+ },
+ {
+  "fecha": "2025-10-31",
+  "ht": "Istanbul Basaksehir",
+  "at": "Kocaelispor",
+  "evt_id": "750014"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Kayserispor",
+  "at": "Kasimpasa",
+  "evt_id": "750015"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Galatasaray",
+  "at": "Trabzonspor",
+  "evt_id": "750016"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Antalyaspor",
+  "at": "Besiktas",
+  "evt_id": "750017"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Fatih Karagümrük",
+  "at": "Konyaspor",
+  "evt_id": "750018"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Fenerbahce",
+  "at": "Kayserispor",
+  "evt_id": "750019"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Gaziantep FK",
+  "at": "Caykur Rizespor",
+  "evt_id": "750020"
+ },
+ {
+  "fecha": "2025-11-07",
+  "ht": "Genclerbirligi",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750021"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Kasimpasa",
+  "at": "Goztepe",
+  "evt_id": "750022"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Kocaelispor",
+  "at": "Galatasaray",
+  "evt_id": "750023"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Samsunspor",
+  "at": "Eyupspor",
+  "evt_id": "750024"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Trabzonspor",
+  "at": "Alanyaspor",
+  "evt_id": "750025"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Alanyaspor",
+  "at": "Kasimpasa",
+  "evt_id": "750026"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Besiktas",
+  "at": "Samsunspor",
+  "evt_id": "750027"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Caykur Rizespor",
+  "at": "Fenerbahce",
+  "evt_id": "750028"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Eyupspor",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750029"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Galatasaray",
+  "at": "Genclerbirligi",
+  "evt_id": "750030"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Goztepe",
+  "at": "Kocaelispor",
+  "evt_id": "750031"
+ },
+ {
+  "fecha": "2025-11-24",
+  "ht": "Istanbul Basaksehir",
+  "at": "Trabzonspor",
+  "evt_id": "750032"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Kayserispor",
+  "at": "Gaziantep FK",
+  "evt_id": "750033"
+ },
+ {
+  "fecha": "2025-11-24",
+  "ht": "Konyaspor",
+  "at": "Antalyaspor",
+  "evt_id": "750034"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Antalyaspor",
+  "at": "Goztepe",
+  "evt_id": "750035"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Caykur Rizespor",
+  "at": "Kayserispor",
+  "evt_id": "750036"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Fatih Karagümrük",
+  "at": "Besiktas",
+  "evt_id": "750037"
+ },
+ {
+  "fecha": "2025-12-01",
+  "ht": "Fenerbahce",
+  "at": "Galatasaray",
+  "evt_id": "750038"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Gaziantep FK",
+  "at": "Eyupspor",
+  "evt_id": "750039"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Kasimpasa",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750040"
+ },
+ {
+  "fecha": "2025-11-28",
+  "ht": "Kocaelispor",
+  "at": "Genclerbirligi",
+  "evt_id": "750041"
+ },
+ {
+  "fecha": "2025-12-01",
+  "ht": "Samsunspor",
+  "at": "Alanyaspor",
+  "evt_id": "750042"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Trabzonspor",
+  "at": "Konyaspor",
+  "evt_id": "750043"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Genclerbirligi",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750044"
+ },
+ {
+  "fecha": "2025-12-08",
+  "ht": "Besiktas",
+  "at": "Gaziantep FK",
+  "evt_id": "750045"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Istanbul Basaksehir",
+  "at": "Fenerbahce",
+  "evt_id": "750046"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Kocaelispor",
+  "at": "Kasimpasa",
+  "evt_id": "750047"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Konyaspor",
+  "at": "Caykur Rizespor",
+  "evt_id": "750048"
+ },
+ {
+  "fecha": "2025-12-05",
+  "ht": "Galatasaray",
+  "at": "Samsunspor",
+  "evt_id": "750049"
+ },
+ {
+  "fecha": "2025-12-08",
+  "ht": "Alanyaspor",
+  "at": "Antalyaspor",
+  "evt_id": "750050"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Goztepe",
+  "at": "Trabzonspor",
+  "evt_id": "750051"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Eyupspor",
+  "at": "Kayserispor",
+  "evt_id": "750052"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Gaziantep FK",
+  "at": "Goztepe",
+  "evt_id": "750053"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Fatih Karagümrük",
+  "at": "Kocaelispor",
+  "evt_id": "750054"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Kayserispor",
+  "at": "Alanyaspor",
+  "evt_id": "750055"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Samsunspor",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750056"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Trabzonspor",
+  "at": "Besiktas",
+  "evt_id": "750057"
+ },
+ {
+  "fecha": "2025-12-15",
+  "ht": "Fenerbahce",
+  "at": "Konyaspor",
+  "evt_id": "750058"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Caykur Rizespor",
+  "at": "Eyupspor",
+  "evt_id": "750059"
+ },
+ {
+  "fecha": "2025-12-12",
+  "ht": "Kasimpasa",
+  "at": "Genclerbirligi",
+  "evt_id": "750060"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Antalyaspor",
+  "at": "Galatasaray",
+  "evt_id": "750061"
+ },
+ {
+  "fecha": "2025-12-22",
+  "ht": "Genclerbirligi",
+  "at": "Trabzonspor",
+  "evt_id": "750062"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Goztepe",
+  "at": "Samsunspor",
+  "evt_id": "750063"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Alanyaspor",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750064"
+ },
+ {
+  "fecha": "2025-12-19",
+  "ht": "Kocaelispor",
+  "at": "Antalyaspor",
+  "evt_id": "750065"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Eyupspor",
+  "at": "Fenerbahce",
+  "evt_id": "750066"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Besiktas",
+  "at": "Caykur Rizespor",
+  "evt_id": "750067"
+ },
+ {
+  "fecha": "2025-12-22",
+  "ht": "Istanbul Basaksehir",
+  "at": "Gaziantep FK",
+  "evt_id": "750068"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Galatasaray",
+  "at": "Kasimpasa",
+  "evt_id": "750069"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Konyaspor",
+  "at": "Kayserispor",
+  "evt_id": "750070"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Kasimpasa",
+  "at": "Antalyaspor",
+  "evt_id": "750071"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Istanbul Basaksehir",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750072"
+ },
+ {
+  "fecha": "2026-01-19",
+  "ht": "Goztepe",
+  "at": "Caykur Rizespor",
+  "evt_id": "750073"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Genclerbirligi",
+  "at": "Samsunspor",
+  "evt_id": "750074"
+ },
+ {
+  "fecha": "2026-01-19",
+  "ht": "Konyaspor",
+  "at": "Eyupspor",
+  "evt_id": "750075"
+ },
+ {
+  "fecha": "2026-01-19",
+  "ht": "Besiktas",
+  "at": "Kayserispor",
+  "evt_id": "750076"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Alanyaspor",
+  "at": "Fenerbahce",
+  "evt_id": "750077"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Kocaelispor",
+  "at": "Trabzonspor",
+  "evt_id": "750078"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Galatasaray",
+  "at": "Gaziantep FK",
+  "evt_id": "750079"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "Trabzonspor",
+  "at": "Kasimpasa",
+  "evt_id": "750080"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Samsunspor",
+  "at": "Kocaelispor",
+  "evt_id": "750081"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Kayserispor",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750082"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Gaziantep FK",
+  "at": "Konyaspor",
+  "evt_id": "750083"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Antalyaspor",
+  "at": "Genclerbirligi",
+  "evt_id": "750084"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Fatih Karagümrük",
+  "at": "Galatasaray",
+  "evt_id": "750085"
+ },
+ {
+  "fecha": "2026-01-26",
+  "ht": "Eyupspor",
+  "at": "Besiktas",
+  "evt_id": "750086"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Caykur Rizespor",
+  "at": "Alanyaspor",
+  "evt_id": "750087"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Fenerbahce",
+  "at": "Goztepe",
+  "evt_id": "750088"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Kasimpasa",
+  "at": "Samsunspor",
+  "evt_id": "750089"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Istanbul Basaksehir",
+  "at": "Caykur Rizespor",
+  "evt_id": "750090"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Goztepe",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750091"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Genclerbirligi",
+  "at": "Gaziantep FK",
+  "evt_id": "750092"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Kocaelispor",
+  "at": "Fenerbahce",
+  "evt_id": "750093"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Besiktas",
+  "at": "Konyaspor",
+  "evt_id": "750094"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Antalyaspor",
+  "at": "Trabzonspor",
+  "evt_id": "750095"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Alanyaspor",
+  "at": "Eyupspor",
+  "evt_id": "750096"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Galatasaray",
+  "at": "Kayserispor",
+  "evt_id": "750097"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Konyaspor",
+  "at": "Goztepe",
+  "evt_id": "750098"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Kayserispor",
+  "at": "Kocaelispor",
+  "evt_id": "750099"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Gaziantep FK",
+  "at": "Kasimpasa",
+  "evt_id": "750100"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Samsunspor",
+  "at": "Trabzonspor",
+  "evt_id": "750101"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Besiktas",
+  "at": "Alanyaspor",
+  "evt_id": "750102"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Caykur Rizespor",
+  "at": "Galatasaray",
+  "evt_id": "750103"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Eyupspor",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750104"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Fatih Karagümrük",
+  "at": "Antalyaspor",
+  "evt_id": "750105"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Fenerbahce",
+  "at": "Genclerbirligi",
+  "evt_id": "750106"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Genclerbirligi",
+  "at": "Caykur Rizespor",
+  "evt_id": "750107"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Galatasaray",
+  "at": "Eyupspor",
+  "evt_id": "750108"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Istanbul Basaksehir",
+  "at": "Besiktas",
+  "evt_id": "750109"
+ },
+ {
+  "fecha": "2026-02-16",
+  "ht": "Kasimpasa",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750110"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Kocaelispor",
+  "at": "Gaziantep FK",
+  "evt_id": "750111"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Trabzonspor",
+  "at": "Fenerbahce",
+  "evt_id": "750112"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Goztepe",
+  "at": "Kayserispor",
+  "evt_id": "750113"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Alanyaspor",
+  "at": "Konyaspor",
+  "evt_id": "750114"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Antalyaspor",
+  "at": "Samsunspor",
+  "evt_id": "750115"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Alanyaspor",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750116"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Fatih Karagümrük",
+  "at": "Samsunspor",
+  "evt_id": "750117"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Fenerbahce",
+  "at": "Kasimpasa",
+  "evt_id": "750118"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Gaziantep FK",
+  "at": "Trabzonspor",
+  "evt_id": "750119"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Kayserispor",
+  "at": "Antalyaspor",
+  "evt_id": "750120"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Eyupspor",
+  "at": "Genclerbirligi",
+  "evt_id": "750121"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Caykur Rizespor",
+  "at": "Kocaelispor",
+  "evt_id": "750122"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Besiktas",
+  "at": "Goztepe",
+  "evt_id": "750123"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Konyaspor",
+  "at": "Galatasaray",
+  "evt_id": "750124"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Antalyaspor",
+  "at": "Fenerbahce",
+  "evt_id": "750125"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Galatasaray",
+  "at": "Alanyaspor",
+  "evt_id": "750126"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Genclerbirligi",
+  "at": "Kayserispor",
+  "evt_id": "750127"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Trabzonspor",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750128"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Goztepe",
+  "at": "Eyupspor",
+  "evt_id": "750129"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Kasimpasa",
+  "at": "Caykur Rizespor",
+  "evt_id": "750130"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Kocaelispor",
+  "at": "Besiktas",
+  "evt_id": "750131"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Samsunspor",
+  "at": "Gaziantep FK",
+  "evt_id": "750132"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Istanbul Basaksehir",
+  "at": "Konyaspor",
+  "evt_id": "750133"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Alanyaspor",
+  "at": "Genclerbirligi",
+  "evt_id": "750134"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Besiktas",
+  "at": "Galatasaray",
+  "evt_id": "750135"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Caykur Rizespor",
+  "at": "Antalyaspor",
+  "evt_id": "750136"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Eyupspor",
+  "at": "Kocaelispor",
+  "evt_id": "750137"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Fenerbahce",
+  "at": "Samsunspor",
+  "evt_id": "750138"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Gaziantep FK",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750139"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Istanbul Basaksehir",
+  "at": "Goztepe",
+  "evt_id": "750140"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Kayserispor",
+  "at": "Trabzonspor",
+  "evt_id": "750141"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Konyaspor",
+  "at": "Kasimpasa",
+  "evt_id": "750142"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Antalyaspor",
+  "at": "Gaziantep FK",
+  "evt_id": "750143"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Fatih Karagümrük",
+  "at": "Fenerbahce",
+  "evt_id": "750144"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Galatasaray",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750145"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Genclerbirligi",
+  "at": "Besiktas",
+  "evt_id": "750146"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Goztepe",
+  "at": "Alanyaspor",
+  "evt_id": "750147"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Kasimpasa",
+  "at": "Eyupspor",
+  "evt_id": "750148"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Kocaelispor",
+  "at": "Konyaspor",
+  "evt_id": "750149"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Samsunspor",
+  "at": "Kayserispor",
+  "evt_id": "750150"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Trabzonspor",
+  "at": "Caykur Rizespor",
+  "evt_id": "750151"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Alanyaspor",
+  "at": "Kocaelispor",
+  "evt_id": "750152"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Besiktas",
+  "at": "Kasimpasa",
+  "evt_id": "750153"
+ },
+ {
+  "fecha": "2026-04-09",
+  "ht": "Caykur Rizespor",
+  "at": "Samsunspor",
+  "evt_id": "750154"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Eyupspor",
+  "at": "Trabzonspor",
+  "evt_id": "750155"
+ },
+ {
+  "fecha": "2026-03-17",
+  "ht": "Fenerbahce",
+  "at": "Gaziantep FK",
+  "evt_id": "750156"
+ },
+ {
+  "fecha": "2026-04-08",
+  "ht": "Goztepe",
+  "at": "Galatasaray",
+  "evt_id": "750157"
+ },
+ {
+  "fecha": "2026-03-18",
+  "ht": "Istanbul Basaksehir",
+  "at": "Antalyaspor",
+  "evt_id": "750158"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Kayserispor",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750159"
+ },
+ {
+  "fecha": "2026-03-19",
+  "ht": "Konyaspor",
+  "at": "Genclerbirligi",
+  "evt_id": "750160"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Antalyaspor",
+  "at": "Eyupspor",
+  "evt_id": "750161"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Fatih Karagümrük",
+  "at": "Caykur Rizespor",
+  "evt_id": "750162"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Fenerbahce",
+  "at": "Besiktas",
+  "evt_id": "750163"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Trabzonspor",
+  "at": "Galatasaray",
+  "evt_id": "750164"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Gaziantep FK",
+  "at": "Alanyaspor",
+  "evt_id": "750165"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Kasimpasa",
+  "at": "Kayserispor",
+  "evt_id": "750166"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Kocaelispor",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750167"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Samsunspor",
+  "at": "Konyaspor",
+  "evt_id": "750168"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Genclerbirligi",
+  "at": "Goztepe",
+  "evt_id": "750169"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Alanyaspor",
+  "at": "Trabzonspor",
+  "evt_id": "750170"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "Besiktas",
+  "at": "Antalyaspor",
+  "evt_id": "750171"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Caykur Rizespor",
+  "at": "Gaziantep FK",
+  "evt_id": "750172"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Eyupspor",
+  "at": "Samsunspor",
+  "evt_id": "750173"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Galatasaray",
+  "at": "Kocaelispor",
+  "evt_id": "750174"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Goztepe",
+  "at": "Kasimpasa",
+  "evt_id": "750175"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Istanbul Basaksehir",
+  "at": "Genclerbirligi",
+  "evt_id": "750176"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Kayserispor",
+  "at": "Fenerbahce",
+  "evt_id": "750177"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Konyaspor",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750178"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Antalyaspor",
+  "at": "Konyaspor",
+  "evt_id": "750179"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Fatih Karagümrük",
+  "at": "Eyupspor",
+  "evt_id": "750180"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Fenerbahce",
+  "at": "Caykur Rizespor",
+  "evt_id": "750181"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Gaziantep FK",
+  "at": "Kayserispor",
+  "evt_id": "750182"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Genclerbirligi",
+  "at": "Galatasaray",
+  "evt_id": "750183"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Kasimpasa",
+  "at": "Alanyaspor",
+  "evt_id": "750184"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Kocaelispor",
+  "at": "Goztepe",
+  "evt_id": "750185"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Samsunspor",
+  "at": "Besiktas",
+  "evt_id": "750186"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Trabzonspor",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750187"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Alanyaspor",
+  "at": "Samsunspor",
+  "evt_id": "750188"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Besiktas",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750189"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Eyupspor",
+  "at": "Gaziantep FK",
+  "evt_id": "750190"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Galatasaray",
+  "at": "Fenerbahce",
+  "evt_id": "750191"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Genclerbirligi",
+  "at": "Kocaelispor",
+  "evt_id": "750192"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Goztepe",
+  "at": "Antalyaspor",
+  "evt_id": "750193"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Istanbul Basaksehir",
+  "at": "Kasimpasa",
+  "evt_id": "750194"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Kayserispor",
+  "at": "Caykur Rizespor",
+  "evt_id": "750195"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Konyaspor",
+  "at": "Trabzonspor",
+  "evt_id": "750196"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Antalyaspor",
+  "at": "Alanyaspor",
+  "evt_id": "750197"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "Caykur Rizespor",
+  "at": "Konyaspor",
+  "evt_id": "750198"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Fatih Karagümrük",
+  "at": "Genclerbirligi",
+  "evt_id": "750199"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Fenerbahce",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750200"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "Gaziantep FK",
+  "at": "Besiktas",
+  "evt_id": "750201"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Kasimpasa",
+  "at": "Kocaelispor",
+  "evt_id": "750202"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Kayserispor",
+  "at": "Eyupspor",
+  "evt_id": "750203"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Samsunspor",
+  "at": "Galatasaray",
+  "evt_id": "750204"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Trabzonspor",
+  "at": "Goztepe",
+  "evt_id": "750205"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Alanyaspor",
+  "at": "Kayserispor",
+  "evt_id": "750206"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Besiktas",
+  "at": "Trabzonspor",
+  "evt_id": "750207"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Eyupspor",
+  "at": "Caykur Rizespor",
+  "evt_id": "750208"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Galatasaray",
+  "at": "Antalyaspor",
+  "evt_id": "750209"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Genclerbirligi",
+  "at": "Kasimpasa",
+  "evt_id": "750210"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Goztepe",
+  "at": "Gaziantep FK",
+  "evt_id": "750211"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Istanbul Basaksehir",
+  "at": "Samsunspor",
+  "evt_id": "750212"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Kocaelispor",
+  "at": "Fatih Karagümrük",
+  "evt_id": "750213"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Konyaspor",
+  "at": "Fenerbahce",
+  "evt_id": "750214"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Antalyaspor",
+  "at": "Kocaelispor",
+  "evt_id": "750215"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Caykur Rizespor",
+  "at": "Besiktas",
+  "evt_id": "750216"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Fatih Karagümrük",
+  "at": "Alanyaspor",
+  "evt_id": "750217"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Fenerbahce",
+  "at": "Eyupspor",
+  "evt_id": "750218"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Samsunspor",
+  "at": "Goztepe",
+  "evt_id": "750219"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Kasimpasa",
+  "at": "Galatasaray",
+  "evt_id": "750220"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Kayserispor",
+  "at": "Konyaspor",
+  "evt_id": "750221"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Trabzonspor",
+  "at": "Genclerbirligi",
+  "evt_id": "750222"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Gaziantep FK",
+  "at": "Istanbul Basaksehir",
+  "evt_id": "750223"
+ }
+]

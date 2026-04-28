@@ -1,0 +1,1838 @@
+[
+ {
+  "fecha": "2025-08-17",
+  "ht": "Angers",
+  "at": "Paris FC",
+  "evt_id": "746412"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "AJ Auxerre",
+  "at": "Lorient",
+  "evt_id": "746413"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Brest",
+  "at": "Lille",
+  "evt_id": "746414"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Lens",
+  "at": "Lyon",
+  "evt_id": "746415"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Metz",
+  "at": "Strasbourg",
+  "evt_id": "746416"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "AS Monaco",
+  "at": "Le Havre AC",
+  "evt_id": "746417"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Nantes",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746418"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Nice",
+  "at": "Toulouse",
+  "evt_id": "746419"
+ },
+ {
+  "fecha": "2025-08-15",
+  "ht": "Stade Rennais",
+  "at": "Marseille",
+  "evt_id": "746420"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Le Havre AC",
+  "at": "Lens",
+  "evt_id": "746421"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Lille",
+  "at": "AS Monaco",
+  "evt_id": "746422"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Lorient",
+  "at": "Stade Rennais",
+  "evt_id": "746423"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Lyon",
+  "at": "Metz",
+  "evt_id": "746424"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Marseille",
+  "at": "Paris FC",
+  "evt_id": "746425"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Nice",
+  "at": "AJ Auxerre",
+  "evt_id": "746426"
+ },
+ {
+  "fecha": "2025-08-22",
+  "ht": "Paris Saint-Germain",
+  "at": "Angers",
+  "evt_id": "746427"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Strasbourg",
+  "at": "Nantes",
+  "evt_id": "746428"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Toulouse",
+  "at": "Brest",
+  "evt_id": "746429"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Angers",
+  "at": "Stade Rennais",
+  "evt_id": "746430"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Le Havre AC",
+  "at": "Nice",
+  "evt_id": "746431"
+ },
+ {
+  "fecha": "2025-08-29",
+  "ht": "Lens",
+  "at": "Brest",
+  "evt_id": "746432"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Lorient",
+  "at": "Lille",
+  "evt_id": "746433"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Paris FC",
+  "at": "Metz",
+  "evt_id": "746434"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "AS Monaco",
+  "at": "Strasbourg",
+  "evt_id": "746435"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Nantes",
+  "at": "AJ Auxerre",
+  "evt_id": "746436"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Toulouse",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746437"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Lyon",
+  "at": "Marseille",
+  "evt_id": "746438"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "AJ Auxerre",
+  "at": "AS Monaco",
+  "evt_id": "746439"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Brest",
+  "at": "Paris FC",
+  "evt_id": "746440"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Lille",
+  "at": "Toulouse",
+  "evt_id": "746441"
+ },
+ {
+  "fecha": "2025-09-12",
+  "ht": "Marseille",
+  "at": "Lorient",
+  "evt_id": "746442"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Metz",
+  "at": "Angers",
+  "evt_id": "746443"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Nice",
+  "at": "Nantes",
+  "evt_id": "746444"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Paris Saint-Germain",
+  "at": "Lens",
+  "evt_id": "746445"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Stade Rennais",
+  "at": "Lyon",
+  "evt_id": "746446"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Strasbourg",
+  "at": "Le Havre AC",
+  "evt_id": "746447"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "AJ Auxerre",
+  "at": "Toulouse",
+  "evt_id": "746448"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Brest",
+  "at": "Nice",
+  "evt_id": "746449"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Le Havre AC",
+  "at": "Lorient",
+  "evt_id": "746450"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Lens",
+  "at": "Lille",
+  "evt_id": "746451"
+ },
+ {
+  "fecha": "2025-09-19",
+  "ht": "Lyon",
+  "at": "Angers",
+  "evt_id": "746452"
+ },
+ {
+  "fecha": "2025-09-22",
+  "ht": "Marseille",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746453"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "AS Monaco",
+  "at": "Metz",
+  "evt_id": "746454"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Nantes",
+  "at": "Stade Rennais",
+  "evt_id": "746455"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Paris FC",
+  "at": "Strasbourg",
+  "evt_id": "746456"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Angers",
+  "at": "Brest",
+  "evt_id": "746457"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Lille",
+  "at": "Lyon",
+  "evt_id": "746458"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Lorient",
+  "at": "AS Monaco",
+  "evt_id": "746459"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Metz",
+  "at": "Le Havre AC",
+  "evt_id": "746460"
+ },
+ {
+  "fecha": "2025-09-26",
+  "ht": "Strasbourg",
+  "at": "Marseille",
+  "evt_id": "746461"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Paris Saint-Germain",
+  "at": "AJ Auxerre",
+  "evt_id": "746462"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Stade Rennais",
+  "at": "Lens",
+  "evt_id": "746463"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Toulouse",
+  "at": "Nantes",
+  "evt_id": "746464"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Nice",
+  "at": "Paris FC",
+  "evt_id": "746465"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "AJ Auxerre",
+  "at": "Lens",
+  "evt_id": "746466"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Brest",
+  "at": "Nantes",
+  "evt_id": "746467"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Le Havre AC",
+  "at": "Stade Rennais",
+  "evt_id": "746468"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Lille",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746469"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Lyon",
+  "at": "Toulouse",
+  "evt_id": "746470"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Metz",
+  "at": "Marseille",
+  "evt_id": "746471"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "AS Monaco",
+  "at": "Nice",
+  "evt_id": "746472"
+ },
+ {
+  "fecha": "2025-10-03",
+  "ht": "Paris FC",
+  "at": "Lorient",
+  "evt_id": "746473"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Strasbourg",
+  "at": "Angers",
+  "evt_id": "746474"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Lorient",
+  "at": "Brest",
+  "evt_id": "746475"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Lens",
+  "at": "Paris FC",
+  "evt_id": "746476"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Angers",
+  "at": "AS Monaco",
+  "evt_id": "746477"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Marseille",
+  "at": "Le Havre AC",
+  "evt_id": "746478"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Nantes",
+  "at": "Lille",
+  "evt_id": "746479"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Nice",
+  "at": "Lyon",
+  "evt_id": "746480"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Toulouse",
+  "at": "Metz",
+  "evt_id": "746481"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Stade Rennais",
+  "at": "AJ Auxerre",
+  "evt_id": "746482"
+ },
+ {
+  "fecha": "2025-10-17",
+  "ht": "Paris Saint-Germain",
+  "at": "Strasbourg",
+  "evt_id": "746483"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Angers",
+  "at": "Lorient",
+  "evt_id": "746484"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "AJ Auxerre",
+  "at": "Le Havre AC",
+  "evt_id": "746485"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Brest",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746486"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Stade Rennais",
+  "at": "Nice",
+  "evt_id": "746487"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Lens",
+  "at": "Marseille",
+  "evt_id": "746488"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Lyon",
+  "at": "Strasbourg",
+  "evt_id": "746489"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "AS Monaco",
+  "at": "Toulouse",
+  "evt_id": "746490"
+ },
+ {
+  "fecha": "2025-10-24",
+  "ht": "Paris FC",
+  "at": "Nantes",
+  "evt_id": "746491"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Lille",
+  "at": "Metz",
+  "evt_id": "746492"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Le Havre AC",
+  "at": "Brest",
+  "evt_id": "746493"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Lorient",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746494"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Marseille",
+  "at": "Angers",
+  "evt_id": "746495"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Metz",
+  "at": "Lens",
+  "evt_id": "746496"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Nantes",
+  "at": "AS Monaco",
+  "evt_id": "746497"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Nice",
+  "at": "Lille",
+  "evt_id": "746498"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Paris FC",
+  "at": "Lyon",
+  "evt_id": "746499"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Strasbourg",
+  "at": "AJ Auxerre",
+  "evt_id": "746500"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Toulouse",
+  "at": "Stade Rennais",
+  "evt_id": "746501"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "AJ Auxerre",
+  "at": "Marseille",
+  "evt_id": "746502"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Brest",
+  "at": "Lyon",
+  "evt_id": "746503"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Lens",
+  "at": "Lorient",
+  "evt_id": "746504"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Lille",
+  "at": "Angers",
+  "evt_id": "746505"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "AS Monaco",
+  "at": "Paris FC",
+  "evt_id": "746506"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Nantes",
+  "at": "Metz",
+  "evt_id": "746507"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Paris Saint-Germain",
+  "at": "Nice",
+  "evt_id": "746508"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Stade Rennais",
+  "at": "Strasbourg",
+  "evt_id": "746509"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Toulouse",
+  "at": "Le Havre AC",
+  "evt_id": "746510"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Angers",
+  "at": "AJ Auxerre",
+  "evt_id": "746511"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Le Havre AC",
+  "at": "Nantes",
+  "evt_id": "746512"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Strasbourg",
+  "at": "Lille",
+  "evt_id": "746513"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Lyon",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746514"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Lorient",
+  "at": "Toulouse",
+  "evt_id": "746515"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Metz",
+  "at": "Nice",
+  "evt_id": "746516"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "AS Monaco",
+  "at": "Lens",
+  "evt_id": "746517"
+ },
+ {
+  "fecha": "2025-11-07",
+  "ht": "Paris FC",
+  "at": "Stade Rennais",
+  "evt_id": "746518"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Marseille",
+  "at": "Brest",
+  "evt_id": "746519"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Nantes",
+  "at": "Lorient",
+  "evt_id": "746520"
+ },
+ {
+  "fecha": "2025-11-21",
+  "ht": "Nice",
+  "at": "Marseille",
+  "evt_id": "746521"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Paris Saint-Germain",
+  "at": "Le Havre AC",
+  "evt_id": "746522"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Brest",
+  "at": "Metz",
+  "evt_id": "746523"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Toulouse",
+  "at": "Angers",
+  "evt_id": "746524"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Lille",
+  "at": "Paris FC",
+  "evt_id": "746525"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "AJ Auxerre",
+  "at": "Lyon",
+  "evt_id": "746526"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Stade Rennais",
+  "at": "AS Monaco",
+  "evt_id": "746527"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Lens",
+  "at": "Strasbourg",
+  "evt_id": "746528"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Marseille",
+  "at": "Toulouse",
+  "evt_id": "746529"
+ },
+ {
+  "fecha": "2025-11-28",
+  "ht": "Metz",
+  "at": "Stade Rennais",
+  "evt_id": "746530"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Angers",
+  "at": "Lens",
+  "evt_id": "746531"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Paris FC",
+  "at": "AJ Auxerre",
+  "evt_id": "746532"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Lorient",
+  "at": "Nice",
+  "evt_id": "746533"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Le Havre AC",
+  "at": "Lille",
+  "evt_id": "746534"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "AS Monaco",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746535"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Lyon",
+  "at": "Nantes",
+  "evt_id": "746536"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Strasbourg",
+  "at": "Brest",
+  "evt_id": "746537"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "AJ Auxerre",
+  "at": "Metz",
+  "evt_id": "746538"
+ },
+ {
+  "fecha": "2025-12-05",
+  "ht": "Lille",
+  "at": "Marseille",
+  "evt_id": "746539"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Le Havre AC",
+  "at": "Paris FC",
+  "evt_id": "746540"
+ },
+ {
+  "fecha": "2025-12-05",
+  "ht": "Brest",
+  "at": "AS Monaco",
+  "evt_id": "746541"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Lorient",
+  "at": "Lyon",
+  "evt_id": "746542"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Paris Saint-Germain",
+  "at": "Stade Rennais",
+  "evt_id": "746543"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Nice",
+  "at": "Angers",
+  "evt_id": "746544"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Nantes",
+  "at": "Lens",
+  "evt_id": "746545"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Toulouse",
+  "at": "Strasbourg",
+  "evt_id": "746546"
+ },
+ {
+  "fecha": "2025-12-12",
+  "ht": "Angers",
+  "at": "Nantes",
+  "evt_id": "746547"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "AJ Auxerre",
+  "at": "Lille",
+  "evt_id": "746548"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Strasbourg",
+  "at": "Lorient",
+  "evt_id": "746549"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Lyon",
+  "at": "Le Havre AC",
+  "evt_id": "746550"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Lens",
+  "at": "Nice",
+  "evt_id": "746551"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Metz",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746552"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Paris FC",
+  "at": "Toulouse",
+  "evt_id": "746553"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Stade Rennais",
+  "at": "Brest",
+  "evt_id": "746554"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Marseille",
+  "at": "AS Monaco",
+  "evt_id": "746555"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Brest",
+  "at": "AJ Auxerre",
+  "evt_id": "746556"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Le Havre AC",
+  "at": "Angers",
+  "evt_id": "746557"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Lille",
+  "at": "Stade Rennais",
+  "evt_id": "746558"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Lorient",
+  "at": "Metz",
+  "evt_id": "746559"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Marseille",
+  "at": "Nantes",
+  "evt_id": "746560"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "AS Monaco",
+  "at": "Lyon",
+  "evt_id": "746561"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Nice",
+  "at": "Strasbourg",
+  "evt_id": "746562"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Paris Saint-Germain",
+  "at": "Paris FC",
+  "evt_id": "746563"
+ },
+ {
+  "fecha": "2026-01-02",
+  "ht": "Toulouse",
+  "at": "Lens",
+  "evt_id": "746564"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Angers",
+  "at": "Marseille",
+  "evt_id": "746565"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Lens",
+  "at": "AJ Auxerre",
+  "evt_id": "746566"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Lyon",
+  "at": "Brest",
+  "evt_id": "746567"
+ },
+ {
+  "fecha": "2026-01-16",
+  "ht": "AS Monaco",
+  "at": "Lorient",
+  "evt_id": "746568"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Nantes",
+  "at": "Paris FC",
+  "evt_id": "746569"
+ },
+ {
+  "fecha": "2026-01-16",
+  "ht": "Paris Saint-Germain",
+  "at": "Lille",
+  "evt_id": "746570"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Stade Rennais",
+  "at": "Le Havre AC",
+  "evt_id": "746571"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Strasbourg",
+  "at": "Metz",
+  "evt_id": "746572"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Toulouse",
+  "at": "Nice",
+  "evt_id": "746573"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "AJ Auxerre",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746574"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Brest",
+  "at": "Toulouse",
+  "evt_id": "746575"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Le Havre AC",
+  "at": "AS Monaco",
+  "evt_id": "746576"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Lille",
+  "at": "Strasbourg",
+  "evt_id": "746577"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Marseille",
+  "at": "Lens",
+  "evt_id": "746578"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Metz",
+  "at": "Lyon",
+  "evt_id": "746579"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Nantes",
+  "at": "Nice",
+  "evt_id": "746580"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Paris FC",
+  "at": "Angers",
+  "evt_id": "746581"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Stade Rennais",
+  "at": "Lorient",
+  "evt_id": "746582"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Lyon",
+  "at": "Lille",
+  "evt_id": "746583"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "AS Monaco",
+  "at": "Stade Rennais",
+  "evt_id": "746584"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Nice",
+  "at": "Brest",
+  "evt_id": "746585"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Paris FC",
+  "at": "Marseille",
+  "evt_id": "746586"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Lorient",
+  "at": "Nantes",
+  "evt_id": "746587"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Toulouse",
+  "at": "AJ Auxerre",
+  "evt_id": "746588"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Lens",
+  "at": "Le Havre AC",
+  "evt_id": "746589"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Angers",
+  "at": "Metz",
+  "evt_id": "746590"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Strasbourg",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746591"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Angers",
+  "at": "Toulouse",
+  "evt_id": "746592"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "AJ Auxerre",
+  "at": "Paris FC",
+  "evt_id": "746593"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Brest",
+  "at": "Lorient",
+  "evt_id": "746594"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Paris Saint-Germain",
+  "at": "Marseille",
+  "evt_id": "746595"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Lens",
+  "at": "Stade Rennais",
+  "evt_id": "746596"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Metz",
+  "at": "Lille",
+  "evt_id": "746597"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Nantes",
+  "at": "Lyon",
+  "evt_id": "746598"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Nice",
+  "at": "AS Monaco",
+  "evt_id": "746599"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Le Havre AC",
+  "at": "Strasbourg",
+  "evt_id": "746600"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Stade Rennais",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746601"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Paris FC",
+  "at": "Lens",
+  "evt_id": "746602"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Le Havre AC",
+  "at": "Toulouse",
+  "evt_id": "746603"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Lille",
+  "at": "Brest",
+  "evt_id": "746604"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Lorient",
+  "at": "Angers",
+  "evt_id": "746605"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Lyon",
+  "at": "Nice",
+  "evt_id": "746606"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Marseille",
+  "at": "Strasbourg",
+  "evt_id": "746607"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Metz",
+  "at": "AJ Auxerre",
+  "evt_id": "746608"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "AS Monaco",
+  "at": "Nantes",
+  "evt_id": "746609"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Toulouse",
+  "at": "Paris FC",
+  "evt_id": "746610"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Angers",
+  "at": "Lille",
+  "evt_id": "746611"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "AJ Auxerre",
+  "at": "Stade Rennais",
+  "evt_id": "746612"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Brest",
+  "at": "Marseille",
+  "evt_id": "746613"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Lens",
+  "at": "AS Monaco",
+  "evt_id": "746614"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Nantes",
+  "at": "Le Havre AC",
+  "evt_id": "746615"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Nice",
+  "at": "Lorient",
+  "evt_id": "746616"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Paris Saint-Germain",
+  "at": "Metz",
+  "evt_id": "746617"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Strasbourg",
+  "at": "Lyon",
+  "evt_id": "746618"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Le Havre AC",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746619"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Lille",
+  "at": "Nantes",
+  "evt_id": "746620"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Lorient",
+  "at": "AJ Auxerre",
+  "evt_id": "746621"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Strasbourg",
+  "at": "Lens",
+  "evt_id": "746622"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Marseille",
+  "at": "Lyon",
+  "evt_id": "746623"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "AS Monaco",
+  "at": "Angers",
+  "evt_id": "746624"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Paris FC",
+  "at": "Nice",
+  "evt_id": "746625"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Stade Rennais",
+  "at": "Toulouse",
+  "evt_id": "746626"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Metz",
+  "at": "Brest",
+  "evt_id": "746627"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "AJ Auxerre",
+  "at": "Strasbourg",
+  "evt_id": "746628"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Brest",
+  "at": "Le Havre AC",
+  "evt_id": "746629"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Lens",
+  "at": "Metz",
+  "evt_id": "746630"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Lille",
+  "at": "Lorient",
+  "evt_id": "746631"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Lyon",
+  "at": "Paris FC",
+  "evt_id": "746632"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Nantes",
+  "at": "Angers",
+  "evt_id": "746633"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Nice",
+  "at": "Stade Rennais",
+  "evt_id": "746634"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "Paris Saint-Germain",
+  "at": "AS Monaco",
+  "evt_id": "746635"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Toulouse",
+  "at": "Marseille",
+  "evt_id": "746636"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Angers",
+  "at": "Nice",
+  "evt_id": "746637"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Le Havre AC",
+  "at": "Lyon",
+  "evt_id": "746638"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Lorient",
+  "at": "Lens",
+  "evt_id": "746639"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Marseille",
+  "at": "AJ Auxerre",
+  "evt_id": "746640"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Metz",
+  "at": "Toulouse",
+  "evt_id": "746641"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "AS Monaco",
+  "at": "Brest",
+  "evt_id": "746642"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Paris Saint-Germain",
+  "at": "Nantes",
+  "evt_id": "746643"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Stade Rennais",
+  "at": "Lille",
+  "evt_id": "746644"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Strasbourg",
+  "at": "Paris FC",
+  "evt_id": "746645"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "AJ Auxerre",
+  "at": "Brest",
+  "evt_id": "746646"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "Lens",
+  "at": "Angers",
+  "evt_id": "746647"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Lyon",
+  "at": "AS Monaco",
+  "evt_id": "746648"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Marseille",
+  "at": "Lille",
+  "evt_id": "746649"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Nantes",
+  "at": "Strasbourg",
+  "evt_id": "746650"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Nice",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746651"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Paris FC",
+  "at": "Le Havre AC",
+  "evt_id": "746652"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Stade Rennais",
+  "at": "Metz",
+  "evt_id": "746653"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Toulouse",
+  "at": "Lorient",
+  "evt_id": "746654"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Angers",
+  "at": "Lyon",
+  "evt_id": "746655"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Brest",
+  "at": "Stade Rennais",
+  "evt_id": "746656"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Le Havre AC",
+  "at": "AJ Auxerre",
+  "evt_id": "746657"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Strasbourg",
+  "at": "Nice",
+  "evt_id": "746658"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Lille",
+  "at": "Lens",
+  "evt_id": "746659"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Metz",
+  "at": "Nantes",
+  "evt_id": "746660"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "AS Monaco",
+  "at": "Marseille",
+  "evt_id": "746661"
+ },
+ {
+  "fecha": "2026-04-03",
+  "ht": "Paris Saint-Germain",
+  "at": "Toulouse",
+  "evt_id": "746662"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Lorient",
+  "at": "Paris FC",
+  "evt_id": "746663"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "AJ Auxerre",
+  "at": "Nantes",
+  "evt_id": "746664"
+ },
+ {
+  "fecha": "2026-05-13",
+  "ht": "Brest",
+  "at": "Strasbourg",
+  "evt_id": "746665"
+ },
+ {
+  "fecha": "2026-05-13",
+  "ht": "Lens",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746666"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Lyon",
+  "at": "Lorient",
+  "evt_id": "746667"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "Marseille",
+  "at": "Metz",
+  "evt_id": "746668"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Nice",
+  "at": "Le Havre AC",
+  "evt_id": "746669"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "Paris FC",
+  "at": "AS Monaco",
+  "evt_id": "746670"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Stade Rennais",
+  "at": "Angers",
+  "evt_id": "746671"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Toulouse",
+  "at": "Lille",
+  "evt_id": "746672"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Angers",
+  "at": "Le Havre AC",
+  "evt_id": "746673"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Lens",
+  "at": "Toulouse",
+  "evt_id": "746674"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Lille",
+  "at": "Nice",
+  "evt_id": "746675"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Lorient",
+  "at": "Marseille",
+  "evt_id": "746676"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Metz",
+  "at": "Paris FC",
+  "evt_id": "746677"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "AS Monaco",
+  "at": "AJ Auxerre",
+  "evt_id": "746678"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Nantes",
+  "at": "Brest",
+  "evt_id": "746679"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Paris Saint-Germain",
+  "at": "Lyon",
+  "evt_id": "746680"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Strasbourg",
+  "at": "Stade Rennais",
+  "evt_id": "746681"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Angers",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746682"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Brest",
+  "at": "Lens",
+  "evt_id": "746683"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Le Havre AC",
+  "at": "Metz",
+  "evt_id": "746684"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Lorient",
+  "at": "Strasbourg",
+  "evt_id": "746685"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Lyon",
+  "at": "AJ Auxerre",
+  "evt_id": "746686"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Marseille",
+  "at": "Nice",
+  "evt_id": "746687"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Paris FC",
+  "at": "Lille",
+  "evt_id": "746688"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Stade Rennais",
+  "at": "Nantes",
+  "evt_id": "746689"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Toulouse",
+  "at": "AS Monaco",
+  "evt_id": "746690"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Lille",
+  "at": "Le Havre AC",
+  "evt_id": "746691"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Lyon",
+  "at": "Stade Rennais",
+  "evt_id": "746692"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Metz",
+  "at": "AS Monaco",
+  "evt_id": "746693"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Nantes",
+  "at": "Marseille",
+  "evt_id": "746694"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Paris Saint-Germain",
+  "at": "Lorient",
+  "evt_id": "746695"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Strasbourg",
+  "at": "Toulouse",
+  "evt_id": "746696"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Nice",
+  "at": "Lens",
+  "evt_id": "746697"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Paris FC",
+  "at": "Brest",
+  "evt_id": "746698"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "AJ Auxerre",
+  "at": "Angers",
+  "evt_id": "746699"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "AJ Auxerre",
+  "at": "Nice",
+  "evt_id": "746700"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Le Havre AC",
+  "at": "Marseille",
+  "evt_id": "746701"
+ },
+ {
+  "fecha": "2026-05-08",
+  "ht": "Lens",
+  "at": "Nantes",
+  "evt_id": "746702"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "AS Monaco",
+  "at": "Lille",
+  "evt_id": "746703"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Angers",
+  "at": "Strasbourg",
+  "evt_id": "746704"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Paris Saint-Germain",
+  "at": "Brest",
+  "evt_id": "746705"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Stade Rennais",
+  "at": "Paris FC",
+  "evt_id": "746706"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Toulouse",
+  "at": "Lyon",
+  "evt_id": "746707"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Metz",
+  "at": "Lorient",
+  "evt_id": "746708"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Brest",
+  "at": "Angers",
+  "evt_id": "746709"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Lille",
+  "at": "AJ Auxerre",
+  "evt_id": "746710"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Lorient",
+  "at": "Le Havre AC",
+  "evt_id": "746711"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Lyon",
+  "at": "Lens",
+  "evt_id": "746712"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Paris FC",
+  "at": "Paris Saint-Germain",
+  "evt_id": "746713"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Nantes",
+  "at": "Toulouse",
+  "evt_id": "746714"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Nice",
+  "at": "Metz",
+  "evt_id": "746715"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Strasbourg",
+  "at": "AS Monaco",
+  "evt_id": "746716"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Marseille",
+  "at": "Stade Rennais",
+  "evt_id": "746717"
+ }
+]

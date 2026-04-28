@@ -1,0 +1,2282 @@
+[
+ {
+  "fecha": "2025-08-15",
+  "ht": "Liverpool",
+  "at": "AFC Bournemouth",
+  "evt_id": "740596"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Aston Villa",
+  "at": "Newcastle United",
+  "evt_id": "740597"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Brighton & Hove Albion",
+  "at": "Fulham",
+  "evt_id": "740598"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Nottingham Forest",
+  "at": "Brentford",
+  "evt_id": "740599"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Sunderland",
+  "at": "West Ham United",
+  "evt_id": "740600"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Tottenham Hotspur",
+  "at": "Burnley",
+  "evt_id": "740601"
+ },
+ {
+  "fecha": "2025-08-16",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Manchester City",
+  "evt_id": "740602"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Chelsea",
+  "at": "Crystal Palace",
+  "evt_id": "740603"
+ },
+ {
+  "fecha": "2025-08-17",
+  "ht": "Manchester United",
+  "at": "Arsenal",
+  "evt_id": "740604"
+ },
+ {
+  "fecha": "2025-08-18",
+  "ht": "Leeds United",
+  "at": "Everton",
+  "evt_id": "740605"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Arsenal",
+  "at": "Leeds United",
+  "evt_id": "740606"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "AFC Bournemouth",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740607"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Brentford",
+  "at": "Aston Villa",
+  "evt_id": "740608"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Burnley",
+  "at": "Sunderland",
+  "evt_id": "740609"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Crystal Palace",
+  "at": "Nottingham Forest",
+  "evt_id": "740610"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Everton",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740611"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Fulham",
+  "at": "Manchester United",
+  "evt_id": "740612"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Manchester City",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740613"
+ },
+ {
+  "fecha": "2025-08-25",
+  "ht": "Newcastle United",
+  "at": "Liverpool",
+  "evt_id": "740614"
+ },
+ {
+  "fecha": "2025-08-22",
+  "ht": "West Ham United",
+  "at": "Chelsea",
+  "evt_id": "740615"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Aston Villa",
+  "at": "Crystal Palace",
+  "evt_id": "740616"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Brighton & Hove Albion",
+  "at": "Manchester City",
+  "evt_id": "740617"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Chelsea",
+  "at": "Fulham",
+  "evt_id": "740618"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Leeds United",
+  "at": "Newcastle United",
+  "evt_id": "740619"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Tottenham Hotspur",
+  "at": "AFC Bournemouth",
+  "evt_id": "740620"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Manchester United",
+  "at": "Burnley",
+  "evt_id": "740621"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Nottingham Forest",
+  "at": "West Ham United",
+  "evt_id": "740622"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Sunderland",
+  "at": "Brentford",
+  "evt_id": "740623"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Everton",
+  "evt_id": "740624"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Liverpool",
+  "at": "Arsenal",
+  "evt_id": "740625"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "West Ham United",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740626"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Arsenal",
+  "at": "Nottingham Forest",
+  "evt_id": "740627"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Crystal Palace",
+  "at": "Sunderland",
+  "evt_id": "740628"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Newcastle United",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740629"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Manchester City",
+  "at": "Manchester United",
+  "evt_id": "740630"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Fulham",
+  "at": "Leeds United",
+  "evt_id": "740631"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Everton",
+  "at": "Aston Villa",
+  "evt_id": "740632"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Burnley",
+  "at": "Liverpool",
+  "evt_id": "740633"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Brentford",
+  "at": "Chelsea",
+  "evt_id": "740634"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "AFC Bournemouth",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740635"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Brighton & Hove Albion",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740636"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Burnley",
+  "at": "Nottingham Forest",
+  "evt_id": "740637"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "West Ham United",
+  "at": "Crystal Palace",
+  "evt_id": "740638"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Sunderland",
+  "at": "Aston Villa",
+  "evt_id": "740639"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Leeds United",
+  "evt_id": "740640"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Liverpool",
+  "at": "Everton",
+  "evt_id": "740641"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Fulham",
+  "at": "Brentford",
+  "evt_id": "740642"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Arsenal",
+  "at": "Manchester City",
+  "evt_id": "740643"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "AFC Bournemouth",
+  "at": "Newcastle United",
+  "evt_id": "740644"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Manchester United",
+  "at": "Chelsea",
+  "evt_id": "740645"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Tottenham Hotspur",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740646"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Crystal Palace",
+  "at": "Liverpool",
+  "evt_id": "740647"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Chelsea",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740648"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Brentford",
+  "at": "Manchester United",
+  "evt_id": "740649"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Aston Villa",
+  "at": "Fulham",
+  "evt_id": "740650"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Nottingham Forest",
+  "at": "Sunderland",
+  "evt_id": "740651"
+ },
+ {
+  "fecha": "2025-09-29",
+  "ht": "Everton",
+  "at": "West Ham United",
+  "evt_id": "740652"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Newcastle United",
+  "at": "Arsenal",
+  "evt_id": "740653"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Manchester City",
+  "at": "Burnley",
+  "evt_id": "740654"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Leeds United",
+  "at": "AFC Bournemouth",
+  "evt_id": "740655"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Arsenal",
+  "at": "West Ham United",
+  "evt_id": "740656"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Aston Villa",
+  "at": "Burnley",
+  "evt_id": "740657"
+ },
+ {
+  "fecha": "2025-10-03",
+  "ht": "AFC Bournemouth",
+  "at": "Fulham",
+  "evt_id": "740658"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Brentford",
+  "at": "Manchester City",
+  "evt_id": "740659"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Chelsea",
+  "at": "Liverpool",
+  "evt_id": "740660"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Everton",
+  "at": "Crystal Palace",
+  "evt_id": "740661"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Leeds United",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740662"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Manchester United",
+  "at": "Sunderland",
+  "evt_id": "740663"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Newcastle United",
+  "at": "Nottingham Forest",
+  "evt_id": "740664"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740665"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Brighton & Hove Albion",
+  "at": "Newcastle United",
+  "evt_id": "740666"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Burnley",
+  "at": "Leeds United",
+  "evt_id": "740667"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Crystal Palace",
+  "at": "AFC Bournemouth",
+  "evt_id": "740668"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Fulham",
+  "at": "Arsenal",
+  "evt_id": "740669"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Liverpool",
+  "at": "Manchester United",
+  "evt_id": "740670"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Manchester City",
+  "at": "Everton",
+  "evt_id": "740671"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Nottingham Forest",
+  "at": "Chelsea",
+  "evt_id": "740672"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Sunderland",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740673"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Tottenham Hotspur",
+  "at": "Aston Villa",
+  "evt_id": "740674"
+ },
+ {
+  "fecha": "2025-10-20",
+  "ht": "West Ham United",
+  "at": "Brentford",
+  "evt_id": "740675"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Arsenal",
+  "at": "Crystal Palace",
+  "evt_id": "740676"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Aston Villa",
+  "at": "Manchester City",
+  "evt_id": "740677"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "AFC Bournemouth",
+  "at": "Nottingham Forest",
+  "evt_id": "740678"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Brentford",
+  "at": "Liverpool",
+  "evt_id": "740679"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Newcastle United",
+  "at": "Fulham",
+  "evt_id": "740680"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Everton",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740681"
+ },
+ {
+  "fecha": "2025-10-24",
+  "ht": "Leeds United",
+  "at": "West Ham United",
+  "evt_id": "740682"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Manchester United",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740683"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Burnley",
+  "evt_id": "740684"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Chelsea",
+  "at": "Sunderland",
+  "evt_id": "740685"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Brighton & Hove Albion",
+  "at": "Leeds United",
+  "evt_id": "740686"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Burnley",
+  "at": "Arsenal",
+  "evt_id": "740687"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Crystal Palace",
+  "at": "Brentford",
+  "evt_id": "740688"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Fulham",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740689"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Tottenham Hotspur",
+  "at": "Chelsea",
+  "evt_id": "740690"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Manchester City",
+  "at": "AFC Bournemouth",
+  "evt_id": "740691"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Nottingham Forest",
+  "at": "Manchester United",
+  "evt_id": "740692"
+ },
+ {
+  "fecha": "2025-11-03",
+  "ht": "Sunderland",
+  "at": "Everton",
+  "evt_id": "740693"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Liverpool",
+  "at": "Aston Villa",
+  "evt_id": "740694"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "West Ham United",
+  "at": "Newcastle United",
+  "evt_id": "740695"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "West Ham United",
+  "at": "Burnley",
+  "evt_id": "740696"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Aston Villa",
+  "at": "AFC Bournemouth",
+  "evt_id": "740697"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Brentford",
+  "at": "Newcastle United",
+  "evt_id": "740698"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Chelsea",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740699"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Crystal Palace",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740700"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Everton",
+  "at": "Fulham",
+  "evt_id": "740701"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Manchester City",
+  "at": "Liverpool",
+  "evt_id": "740702"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Nottingham Forest",
+  "at": "Leeds United",
+  "evt_id": "740703"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Sunderland",
+  "at": "Arsenal",
+  "evt_id": "740704"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Tottenham Hotspur",
+  "at": "Manchester United",
+  "evt_id": "740705"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Brighton & Hove Albion",
+  "at": "Brentford",
+  "evt_id": "740706"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Burnley",
+  "at": "Chelsea",
+  "evt_id": "740707"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Fulham",
+  "at": "Sunderland",
+  "evt_id": "740708"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Leeds United",
+  "at": "Aston Villa",
+  "evt_id": "740709"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Liverpool",
+  "at": "Nottingham Forest",
+  "evt_id": "740710"
+ },
+ {
+  "fecha": "2025-11-24",
+  "ht": "Manchester United",
+  "at": "Everton",
+  "evt_id": "740711"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Newcastle United",
+  "at": "Manchester City",
+  "evt_id": "740712"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Crystal Palace",
+  "evt_id": "740713"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Arsenal",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740714"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "AFC Bournemouth",
+  "at": "West Ham United",
+  "evt_id": "740715"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Aston Villa",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740716"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Manchester City",
+  "at": "Leeds United",
+  "evt_id": "740717"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Brentford",
+  "at": "Burnley",
+  "evt_id": "740718"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Chelsea",
+  "at": "Arsenal",
+  "evt_id": "740719"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Tottenham Hotspur",
+  "at": "Fulham",
+  "evt_id": "740720"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Everton",
+  "at": "Newcastle United",
+  "evt_id": "740721"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "West Ham United",
+  "at": "Liverpool",
+  "evt_id": "740722"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Nottingham Forest",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740723"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Sunderland",
+  "at": "AFC Bournemouth",
+  "evt_id": "740724"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Crystal Palace",
+  "at": "Manchester United",
+  "evt_id": "740725"
+ },
+ {
+  "fecha": "2025-12-03",
+  "ht": "Burnley",
+  "at": "Crystal Palace",
+  "evt_id": "740726"
+ },
+ {
+  "fecha": "2025-12-03",
+  "ht": "Brighton & Hove Albion",
+  "at": "Aston Villa",
+  "evt_id": "740727"
+ },
+ {
+  "fecha": "2025-12-03",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Nottingham Forest",
+  "evt_id": "740728"
+ },
+ {
+  "fecha": "2025-12-02",
+  "ht": "Newcastle United",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740729"
+ },
+ {
+  "fecha": "2025-12-02",
+  "ht": "Fulham",
+  "at": "Manchester City",
+  "evt_id": "740730"
+ },
+ {
+  "fecha": "2025-12-03",
+  "ht": "Liverpool",
+  "at": "Sunderland",
+  "evt_id": "740731"
+ },
+ {
+  "fecha": "2025-12-03",
+  "ht": "Leeds United",
+  "at": "Chelsea",
+  "evt_id": "740732"
+ },
+ {
+  "fecha": "2025-12-02",
+  "ht": "AFC Bournemouth",
+  "at": "Everton",
+  "evt_id": "740733"
+ },
+ {
+  "fecha": "2025-12-03",
+  "ht": "Arsenal",
+  "at": "Brentford",
+  "evt_id": "740734"
+ },
+ {
+  "fecha": "2025-12-04",
+  "ht": "Manchester United",
+  "at": "West Ham United",
+  "evt_id": "740735"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Manchester City",
+  "at": "Sunderland",
+  "evt_id": "740736"
+ },
+ {
+  "fecha": "2025-12-08",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Manchester United",
+  "evt_id": "740737"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Fulham",
+  "at": "Crystal Palace",
+  "evt_id": "740738"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Everton",
+  "at": "Nottingham Forest",
+  "evt_id": "740739"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Brighton & Hove Albion",
+  "at": "West Ham United",
+  "evt_id": "740740"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Newcastle United",
+  "at": "Burnley",
+  "evt_id": "740741"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Leeds United",
+  "at": "Liverpool",
+  "evt_id": "740742"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "AFC Bournemouth",
+  "at": "Chelsea",
+  "evt_id": "740743"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Tottenham Hotspur",
+  "at": "Brentford",
+  "evt_id": "740744"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Aston Villa",
+  "at": "Arsenal",
+  "evt_id": "740745"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Arsenal",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740746"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Crystal Palace",
+  "at": "Manchester City",
+  "evt_id": "740747"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "West Ham United",
+  "at": "Aston Villa",
+  "evt_id": "740748"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Sunderland",
+  "at": "Newcastle United",
+  "evt_id": "740749"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Chelsea",
+  "at": "Everton",
+  "evt_id": "740750"
+ },
+ {
+  "fecha": "2025-12-15",
+  "ht": "Manchester United",
+  "at": "AFC Bournemouth",
+  "evt_id": "740751"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Liverpool",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740752"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Brentford",
+  "at": "Leeds United",
+  "evt_id": "740753"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Burnley",
+  "at": "Fulham",
+  "evt_id": "740754"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Nottingham Forest",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740755"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Brighton & Hove Albion",
+  "at": "Sunderland",
+  "evt_id": "740756"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Everton",
+  "at": "Arsenal",
+  "evt_id": "740757"
+ },
+ {
+  "fecha": "2025-12-22",
+  "ht": "Fulham",
+  "at": "Nottingham Forest",
+  "evt_id": "740758"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Leeds United",
+  "at": "Crystal Palace",
+  "evt_id": "740759"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Manchester City",
+  "at": "West Ham United",
+  "evt_id": "740760"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Brentford",
+  "evt_id": "740761"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Tottenham Hotspur",
+  "at": "Liverpool",
+  "evt_id": "740762"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Newcastle United",
+  "at": "Chelsea",
+  "evt_id": "740763"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "AFC Bournemouth",
+  "at": "Burnley",
+  "evt_id": "740764"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Aston Villa",
+  "at": "Manchester United",
+  "evt_id": "740765"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Chelsea",
+  "at": "Aston Villa",
+  "evt_id": "740766"
+ },
+ {
+  "fecha": "2025-12-28",
+  "ht": "Sunderland",
+  "at": "Leeds United",
+  "evt_id": "740767"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "West Ham United",
+  "at": "Fulham",
+  "evt_id": "740768"
+ },
+ {
+  "fecha": "2025-12-26",
+  "ht": "Manchester United",
+  "at": "Newcastle United",
+  "evt_id": "740769"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Nottingham Forest",
+  "at": "Manchester City",
+  "evt_id": "740770"
+ },
+ {
+  "fecha": "2025-12-28",
+  "ht": "Crystal Palace",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740771"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Arsenal",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740772"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Burnley",
+  "at": "Everton",
+  "evt_id": "740773"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Brentford",
+  "at": "AFC Bournemouth",
+  "evt_id": "740774"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Liverpool",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740775"
+ },
+ {
+  "fecha": "2025-12-30",
+  "ht": "Arsenal",
+  "at": "Aston Villa",
+  "evt_id": "740776"
+ },
+ {
+  "fecha": "2026-01-01",
+  "ht": "Brentford",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740777"
+ },
+ {
+  "fecha": "2025-12-30",
+  "ht": "Burnley",
+  "at": "Newcastle United",
+  "evt_id": "740778"
+ },
+ {
+  "fecha": "2025-12-30",
+  "ht": "Chelsea",
+  "at": "AFC Bournemouth",
+  "evt_id": "740779"
+ },
+ {
+  "fecha": "2026-01-01",
+  "ht": "Crystal Palace",
+  "at": "Fulham",
+  "evt_id": "740780"
+ },
+ {
+  "fecha": "2026-01-01",
+  "ht": "Liverpool",
+  "at": "Leeds United",
+  "evt_id": "740781"
+ },
+ {
+  "fecha": "2025-12-30",
+  "ht": "Manchester United",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740782"
+ },
+ {
+  "fecha": "2025-12-30",
+  "ht": "Nottingham Forest",
+  "at": "Everton",
+  "evt_id": "740783"
+ },
+ {
+  "fecha": "2026-01-01",
+  "ht": "Sunderland",
+  "at": "Manchester City",
+  "evt_id": "740784"
+ },
+ {
+  "fecha": "2025-12-30",
+  "ht": "West Ham United",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740785"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Tottenham Hotspur",
+  "at": "Sunderland",
+  "evt_id": "740786"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Wolverhampton Wanderers",
+  "at": "West Ham United",
+  "evt_id": "740787"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "AFC Bournemouth",
+  "at": "Arsenal",
+  "evt_id": "740788"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Aston Villa",
+  "at": "Nottingham Forest",
+  "evt_id": "740789"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Fulham",
+  "at": "Liverpool",
+  "evt_id": "740790"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Leeds United",
+  "at": "Manchester United",
+  "evt_id": "740791"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Manchester City",
+  "at": "Chelsea",
+  "evt_id": "740792"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Newcastle United",
+  "at": "Crystal Palace",
+  "evt_id": "740793"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Everton",
+  "at": "Brentford",
+  "evt_id": "740794"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Brighton & Hove Albion",
+  "at": "Burnley",
+  "evt_id": "740795"
+ },
+ {
+  "fecha": "2026-01-08",
+  "ht": "Arsenal",
+  "at": "Liverpool",
+  "evt_id": "740796"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "AFC Bournemouth",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740797"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Brentford",
+  "at": "Sunderland",
+  "evt_id": "740798"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Burnley",
+  "at": "Manchester United",
+  "evt_id": "740799"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Everton",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740800"
+ },
+ {
+  "fecha": "2026-01-06",
+  "ht": "West Ham United",
+  "at": "Nottingham Forest",
+  "evt_id": "740801"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Fulham",
+  "at": "Chelsea",
+  "evt_id": "740802"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Manchester City",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740803"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Newcastle United",
+  "at": "Leeds United",
+  "evt_id": "740804"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Crystal Palace",
+  "at": "Aston Villa",
+  "evt_id": "740805"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Aston Villa",
+  "at": "Everton",
+  "evt_id": "740806"
+ },
+ {
+  "fecha": "2026-01-19",
+  "ht": "Brighton & Hove Albion",
+  "at": "AFC Bournemouth",
+  "evt_id": "740807"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Chelsea",
+  "at": "Brentford",
+  "evt_id": "740808"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Leeds United",
+  "at": "Fulham",
+  "evt_id": "740809"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Liverpool",
+  "at": "Burnley",
+  "evt_id": "740810"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Manchester United",
+  "at": "Manchester City",
+  "evt_id": "740811"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Nottingham Forest",
+  "at": "Arsenal",
+  "evt_id": "740812"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Sunderland",
+  "at": "Crystal Palace",
+  "evt_id": "740813"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Tottenham Hotspur",
+  "at": "West Ham United",
+  "evt_id": "740814"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Newcastle United",
+  "evt_id": "740815"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Arsenal",
+  "at": "Manchester United",
+  "evt_id": "740816"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "AFC Bournemouth",
+  "at": "Liverpool",
+  "evt_id": "740817"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Brentford",
+  "at": "Nottingham Forest",
+  "evt_id": "740818"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Burnley",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740819"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Crystal Palace",
+  "at": "Chelsea",
+  "evt_id": "740820"
+ },
+ {
+  "fecha": "2026-01-26",
+  "ht": "Everton",
+  "at": "Leeds United",
+  "evt_id": "740821"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Fulham",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740822"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Manchester City",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740823"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Newcastle United",
+  "at": "Aston Villa",
+  "evt_id": "740824"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "West Ham United",
+  "at": "Sunderland",
+  "evt_id": "740825"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Aston Villa",
+  "at": "Brentford",
+  "evt_id": "740826"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Wolverhampton Wanderers",
+  "at": "AFC Bournemouth",
+  "evt_id": "740827"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Tottenham Hotspur",
+  "at": "Manchester City",
+  "evt_id": "740828"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Leeds United",
+  "at": "Arsenal",
+  "evt_id": "740829"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Sunderland",
+  "at": "Burnley",
+  "evt_id": "740830"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Brighton & Hove Albion",
+  "at": "Everton",
+  "evt_id": "740831"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Nottingham Forest",
+  "at": "Crystal Palace",
+  "evt_id": "740832"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Manchester United",
+  "at": "Fulham",
+  "evt_id": "740833"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Liverpool",
+  "at": "Newcastle United",
+  "evt_id": "740834"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Chelsea",
+  "at": "West Ham United",
+  "evt_id": "740835"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Arsenal",
+  "at": "Sunderland",
+  "evt_id": "740836"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "AFC Bournemouth",
+  "at": "Aston Villa",
+  "evt_id": "740837"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Brighton & Hove Albion",
+  "at": "Crystal Palace",
+  "evt_id": "740838"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Burnley",
+  "at": "West Ham United",
+  "evt_id": "740839"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Chelsea",
+  "evt_id": "740840"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Leeds United",
+  "at": "Nottingham Forest",
+  "evt_id": "740841"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Fulham",
+  "at": "Everton",
+  "evt_id": "740842"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Manchester United",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740843"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Newcastle United",
+  "at": "Brentford",
+  "evt_id": "740844"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Liverpool",
+  "at": "Manchester City",
+  "evt_id": "740845"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Aston Villa",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740846"
+ },
+ {
+  "fecha": "2026-02-12",
+  "ht": "Brentford",
+  "at": "Arsenal",
+  "evt_id": "740847"
+ },
+ {
+  "fecha": "2026-02-10",
+  "ht": "Chelsea",
+  "at": "Leeds United",
+  "evt_id": "740848"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Manchester City",
+  "at": "Fulham",
+  "evt_id": "740849"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Nottingham Forest",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740850"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Crystal Palace",
+  "at": "Burnley",
+  "evt_id": "740851"
+ },
+ {
+  "fecha": "2026-02-10",
+  "ht": "Everton",
+  "at": "AFC Bournemouth",
+  "evt_id": "740852"
+ },
+ {
+  "fecha": "2026-02-11",
+  "ht": "Sunderland",
+  "at": "Liverpool",
+  "evt_id": "740853"
+ },
+ {
+  "fecha": "2026-02-10",
+  "ht": "Tottenham Hotspur",
+  "at": "Newcastle United",
+  "evt_id": "740854"
+ },
+ {
+  "fecha": "2026-02-10",
+  "ht": "West Ham United",
+  "at": "Manchester United",
+  "evt_id": "740855"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Everton",
+  "at": "Manchester United",
+  "evt_id": "740856"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Manchester City",
+  "at": "Newcastle United",
+  "evt_id": "740857"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Brentford",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740858"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Sunderland",
+  "at": "Fulham",
+  "evt_id": "740859"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Crystal Palace",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740860"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "West Ham United",
+  "at": "AFC Bournemouth",
+  "evt_id": "740861"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Aston Villa",
+  "at": "Leeds United",
+  "evt_id": "740862"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Nottingham Forest",
+  "at": "Liverpool",
+  "evt_id": "740863"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Chelsea",
+  "at": "Burnley",
+  "evt_id": "740864"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Tottenham Hotspur",
+  "at": "Arsenal",
+  "evt_id": "740865"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Brighton & Hove Albion",
+  "at": "Nottingham Forest",
+  "evt_id": "740866"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Burnley",
+  "at": "Brentford",
+  "evt_id": "740867"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Aston Villa",
+  "evt_id": "740868"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Leeds United",
+  "at": "Manchester City",
+  "evt_id": "740869"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Fulham",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740870"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Arsenal",
+  "at": "Chelsea",
+  "evt_id": "740871"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Liverpool",
+  "at": "West Ham United",
+  "evt_id": "740872"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "AFC Bournemouth",
+  "at": "Sunderland",
+  "evt_id": "740873"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Newcastle United",
+  "at": "Everton",
+  "evt_id": "740874"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Manchester United",
+  "at": "Crystal Palace",
+  "evt_id": "740875"
+ },
+ {
+  "fecha": "2026-03-04",
+  "ht": "Aston Villa",
+  "at": "Chelsea",
+  "evt_id": "740876"
+ },
+ {
+  "fecha": "2026-03-03",
+  "ht": "AFC Bournemouth",
+  "at": "Brentford",
+  "evt_id": "740877"
+ },
+ {
+  "fecha": "2026-03-04",
+  "ht": "Brighton & Hove Albion",
+  "at": "Arsenal",
+  "evt_id": "740878"
+ },
+ {
+  "fecha": "2026-03-03",
+  "ht": "Everton",
+  "at": "Burnley",
+  "evt_id": "740879"
+ },
+ {
+  "fecha": "2026-03-04",
+  "ht": "Fulham",
+  "at": "West Ham United",
+  "evt_id": "740880"
+ },
+ {
+  "fecha": "2026-03-03",
+  "ht": "Leeds United",
+  "at": "Sunderland",
+  "evt_id": "740881"
+ },
+ {
+  "fecha": "2026-03-04",
+  "ht": "Manchester City",
+  "at": "Nottingham Forest",
+  "evt_id": "740882"
+ },
+ {
+  "fecha": "2026-03-04",
+  "ht": "Newcastle United",
+  "at": "Manchester United",
+  "evt_id": "740883"
+ },
+ {
+  "fecha": "2026-03-05",
+  "ht": "Tottenham Hotspur",
+  "at": "Crystal Palace",
+  "evt_id": "740884"
+ },
+ {
+  "fecha": "2026-03-03",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Liverpool",
+  "evt_id": "740885"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Arsenal",
+  "at": "Everton",
+  "evt_id": "740886"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Brentford",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740887"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Burnley",
+  "at": "AFC Bournemouth",
+  "evt_id": "740888"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Chelsea",
+  "at": "Newcastle United",
+  "evt_id": "740889"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Crystal Palace",
+  "at": "Leeds United",
+  "evt_id": "740890"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Liverpool",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740891"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Manchester United",
+  "at": "Aston Villa",
+  "evt_id": "740892"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Nottingham Forest",
+  "at": "Fulham",
+  "evt_id": "740893"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Sunderland",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740894"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "West Ham United",
+  "at": "Manchester City",
+  "evt_id": "740895"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Aston Villa",
+  "at": "West Ham United",
+  "evt_id": "740896"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "AFC Bournemouth",
+  "at": "Manchester United",
+  "evt_id": "740897"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Brighton & Hove Albion",
+  "at": "Liverpool",
+  "evt_id": "740898"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Everton",
+  "at": "Chelsea",
+  "evt_id": "740899"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Leeds United",
+  "at": "Brentford",
+  "evt_id": "740900"
+ },
+ {
+  "fecha": "2026-02-18",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Arsenal",
+  "evt_id": "740901"
+ },
+ {
+  "fecha": "2026-05-22",
+  "ht": "Manchester City",
+  "at": "Crystal Palace",
+  "evt_id": "740902"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Newcastle United",
+  "at": "Sunderland",
+  "evt_id": "740903"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Tottenham Hotspur",
+  "at": "Nottingham Forest",
+  "evt_id": "740904"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Fulham",
+  "at": "Burnley",
+  "evt_id": "740905"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Brentford",
+  "at": "Everton",
+  "evt_id": "740906"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Burnley",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740907"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Arsenal",
+  "at": "AFC Bournemouth",
+  "evt_id": "740908"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Chelsea",
+  "at": "Manchester City",
+  "evt_id": "740909"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Crystal Palace",
+  "at": "Newcastle United",
+  "evt_id": "740910"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Liverpool",
+  "at": "Fulham",
+  "evt_id": "740911"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Manchester United",
+  "at": "Leeds United",
+  "evt_id": "740912"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "West Ham United",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740913"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Nottingham Forest",
+  "at": "Aston Villa",
+  "evt_id": "740914"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Sunderland",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740915"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Manchester City",
+  "at": "Arsenal",
+  "evt_id": "740916"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Nottingham Forest",
+  "at": "Burnley",
+  "evt_id": "740917"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Newcastle United",
+  "at": "AFC Bournemouth",
+  "evt_id": "740918"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Aston Villa",
+  "at": "Sunderland",
+  "evt_id": "740919"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Tottenham Hotspur",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740920"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Brentford",
+  "at": "Fulham",
+  "evt_id": "740921"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Chelsea",
+  "at": "Manchester United",
+  "evt_id": "740922"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Crystal Palace",
+  "at": "West Ham United",
+  "evt_id": "740923"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Leeds United",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740924"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Everton",
+  "at": "Liverpool",
+  "evt_id": "740925"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "AFC Bournemouth",
+  "at": "Leeds United",
+  "evt_id": "740926"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Liverpool",
+  "at": "Crystal Palace",
+  "evt_id": "740927"
+ },
+ {
+  "fecha": "2026-04-21",
+  "ht": "Brighton & Hove Albion",
+  "at": "Chelsea",
+  "evt_id": "740928"
+ },
+ {
+  "fecha": "2026-04-22",
+  "ht": "Burnley",
+  "at": "Manchester City",
+  "evt_id": "740929"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "West Ham United",
+  "at": "Everton",
+  "evt_id": "740930"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Arsenal",
+  "at": "Newcastle United",
+  "evt_id": "740931"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Manchester United",
+  "at": "Brentford",
+  "evt_id": "740932"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Sunderland",
+  "at": "Nottingham Forest",
+  "evt_id": "740933"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740934"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Fulham",
+  "at": "Aston Villa",
+  "evt_id": "740935"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Arsenal",
+  "at": "Fulham",
+  "evt_id": "740936"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Aston Villa",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740937"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "AFC Bournemouth",
+  "at": "Crystal Palace",
+  "evt_id": "740938"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Brentford",
+  "at": "West Ham United",
+  "evt_id": "740939"
+ },
+ {
+  "fecha": "2026-05-04",
+  "ht": "Chelsea",
+  "at": "Nottingham Forest",
+  "evt_id": "740940"
+ },
+ {
+  "fecha": "2026-05-04",
+  "ht": "Everton",
+  "at": "Manchester City",
+  "evt_id": "740941"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "Leeds United",
+  "at": "Burnley",
+  "evt_id": "740942"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Manchester United",
+  "at": "Liverpool",
+  "evt_id": "740943"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Newcastle United",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740944"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Sunderland",
+  "evt_id": "740945"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Brighton & Hove Albion",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740946"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Burnley",
+  "at": "Aston Villa",
+  "evt_id": "740947"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Crystal Palace",
+  "at": "Everton",
+  "evt_id": "740948"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Fulham",
+  "at": "AFC Bournemouth",
+  "evt_id": "740949"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Liverpool",
+  "at": "Chelsea",
+  "evt_id": "740950"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Manchester City",
+  "at": "Brentford",
+  "evt_id": "740951"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Nottingham Forest",
+  "at": "Newcastle United",
+  "evt_id": "740952"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Sunderland",
+  "at": "Manchester United",
+  "evt_id": "740953"
+ },
+ {
+  "fecha": "2026-05-11",
+  "ht": "Tottenham Hotspur",
+  "at": "Leeds United",
+  "evt_id": "740954"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "West Ham United",
+  "at": "Arsenal",
+  "evt_id": "740955"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Arsenal",
+  "at": "Burnley",
+  "evt_id": "740956"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Aston Villa",
+  "at": "Liverpool",
+  "evt_id": "740957"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "AFC Bournemouth",
+  "at": "Manchester City",
+  "evt_id": "740958"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Brentford",
+  "at": "Crystal Palace",
+  "evt_id": "740959"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Chelsea",
+  "at": "Tottenham Hotspur",
+  "evt_id": "740960"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Everton",
+  "at": "Sunderland",
+  "evt_id": "740961"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Leeds United",
+  "at": "Brighton & Hove Albion",
+  "evt_id": "740962"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Manchester United",
+  "at": "Nottingham Forest",
+  "evt_id": "740963"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Newcastle United",
+  "at": "West Ham United",
+  "evt_id": "740964"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Wolverhampton Wanderers",
+  "at": "Fulham",
+  "evt_id": "740965"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Brighton & Hove Albion",
+  "at": "Manchester United",
+  "evt_id": "740966"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Burnley",
+  "at": "Wolverhampton Wanderers",
+  "evt_id": "740967"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Crystal Palace",
+  "at": "Arsenal",
+  "evt_id": "740968"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Fulham",
+  "at": "Newcastle United",
+  "evt_id": "740969"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Manchester City",
+  "at": "Aston Villa",
+  "evt_id": "740970"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "West Ham United",
+  "at": "Leeds United",
+  "evt_id": "740971"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Nottingham Forest",
+  "at": "AFC Bournemouth",
+  "evt_id": "740972"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Sunderland",
+  "at": "Chelsea",
+  "evt_id": "740973"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Tottenham Hotspur",
+  "at": "Everton",
+  "evt_id": "740974"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Liverpool",
+  "at": "Brentford",
+  "evt_id": "740975"
+ }
+]

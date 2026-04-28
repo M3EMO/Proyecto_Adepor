@@ -1,0 +1,2282 @@
+[
+ {
+  "fecha": "2025-08-23",
+  "ht": "Sassuolo",
+  "at": "Napoli",
+  "evt_id": "736784"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "AS Roma",
+  "at": "Bologna",
+  "evt_id": "736785"
+ },
+ {
+  "fecha": "2025-08-25",
+  "ht": "Udinese",
+  "at": "Hellas Verona",
+  "evt_id": "736786"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Atalanta",
+  "at": "Pisa",
+  "evt_id": "736787"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Cagliari",
+  "at": "Fiorentina",
+  "evt_id": "736788"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Como",
+  "at": "Lazio",
+  "evt_id": "736789"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "Genoa",
+  "at": "Lecce",
+  "evt_id": "736790"
+ },
+ {
+  "fecha": "2025-08-25",
+  "ht": "Internazionale",
+  "at": "Torino",
+  "evt_id": "736791"
+ },
+ {
+  "fecha": "2025-08-24",
+  "ht": "Juventus",
+  "at": "Parma",
+  "evt_id": "736792"
+ },
+ {
+  "fecha": "2025-08-23",
+  "ht": "AC Milan",
+  "at": "Cremonese",
+  "evt_id": "736793"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Bologna",
+  "at": "Como",
+  "evt_id": "736794"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Pisa",
+  "at": "AS Roma",
+  "evt_id": "736795"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Parma",
+  "at": "Atalanta",
+  "evt_id": "736796"
+ },
+ {
+  "fecha": "2025-08-30",
+  "ht": "Napoli",
+  "at": "Cagliari",
+  "evt_id": "736797"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Torino",
+  "at": "Fiorentina",
+  "evt_id": "736798"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Lazio",
+  "at": "Hellas Verona",
+  "evt_id": "736799"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Internazionale",
+  "at": "Udinese",
+  "evt_id": "736800"
+ },
+ {
+  "fecha": "2025-08-31",
+  "ht": "Genoa",
+  "at": "Juventus",
+  "evt_id": "736801"
+ },
+ {
+  "fecha": "2025-08-29",
+  "ht": "Cremonese",
+  "at": "Sassuolo",
+  "evt_id": "736802"
+ },
+ {
+  "fecha": "2025-08-29",
+  "ht": "Lecce",
+  "at": "AC Milan",
+  "evt_id": "736803"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "AS Roma",
+  "at": "Torino",
+  "evt_id": "736804"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Pisa",
+  "at": "Udinese",
+  "evt_id": "736805"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "AC Milan",
+  "at": "Bologna",
+  "evt_id": "736806"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Juventus",
+  "at": "Internazionale",
+  "evt_id": "736807"
+ },
+ {
+  "fecha": "2025-09-15",
+  "ht": "Hellas Verona",
+  "at": "Cremonese",
+  "evt_id": "736808"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Fiorentina",
+  "at": "Napoli",
+  "evt_id": "736809"
+ },
+ {
+  "fecha": "2025-09-15",
+  "ht": "Como",
+  "at": "Genoa",
+  "evt_id": "736810"
+ },
+ {
+  "fecha": "2025-09-13",
+  "ht": "Cagliari",
+  "at": "Parma",
+  "evt_id": "736811"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Atalanta",
+  "at": "Lecce",
+  "evt_id": "736812"
+ },
+ {
+  "fecha": "2025-09-14",
+  "ht": "Sassuolo",
+  "at": "Lazio",
+  "evt_id": "736813"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Hellas Verona",
+  "at": "Juventus",
+  "evt_id": "736814"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Fiorentina",
+  "at": "Como",
+  "evt_id": "736815"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Cremonese",
+  "at": "Parma",
+  "evt_id": "736816"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Bologna",
+  "at": "Genoa",
+  "evt_id": "736817"
+ },
+ {
+  "fecha": "2025-09-20",
+  "ht": "Udinese",
+  "at": "AC Milan",
+  "evt_id": "736818"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Lazio",
+  "at": "AS Roma",
+  "evt_id": "736819"
+ },
+ {
+  "fecha": "2025-09-19",
+  "ht": "Lecce",
+  "at": "Cagliari",
+  "evt_id": "736820"
+ },
+ {
+  "fecha": "2025-09-22",
+  "ht": "Napoli",
+  "at": "Pisa",
+  "evt_id": "736821"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Torino",
+  "at": "Atalanta",
+  "evt_id": "736822"
+ },
+ {
+  "fecha": "2025-09-21",
+  "ht": "Internazionale",
+  "at": "Sassuolo",
+  "evt_id": "736823"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Juventus",
+  "at": "Atalanta",
+  "evt_id": "736824"
+ },
+ {
+  "fecha": "2025-09-29",
+  "ht": "Genoa",
+  "at": "Lazio",
+  "evt_id": "736825"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Como",
+  "at": "Cremonese",
+  "evt_id": "736826"
+ },
+ {
+  "fecha": "2025-09-27",
+  "ht": "Cagliari",
+  "at": "Internazionale",
+  "evt_id": "736827"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Lecce",
+  "at": "Bologna",
+  "evt_id": "736828"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Sassuolo",
+  "at": "Udinese",
+  "evt_id": "736829"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "AS Roma",
+  "at": "Hellas Verona",
+  "evt_id": "736830"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "Pisa",
+  "at": "Fiorentina",
+  "evt_id": "736831"
+ },
+ {
+  "fecha": "2025-09-29",
+  "ht": "Parma",
+  "at": "Torino",
+  "evt_id": "736832"
+ },
+ {
+  "fecha": "2025-09-28",
+  "ht": "AC Milan",
+  "at": "Napoli",
+  "evt_id": "736833"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Atalanta",
+  "at": "Como",
+  "evt_id": "736834"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Bologna",
+  "at": "Pisa",
+  "evt_id": "736835"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Fiorentina",
+  "at": "AS Roma",
+  "evt_id": "736836"
+ },
+ {
+  "fecha": "2025-10-03",
+  "ht": "Hellas Verona",
+  "at": "Sassuolo",
+  "evt_id": "736837"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Udinese",
+  "at": "Cagliari",
+  "evt_id": "736838"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Napoli",
+  "at": "Genoa",
+  "evt_id": "736839"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Lazio",
+  "at": "Torino",
+  "evt_id": "736840"
+ },
+ {
+  "fecha": "2025-10-05",
+  "ht": "Juventus",
+  "at": "AC Milan",
+  "evt_id": "736841"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Internazionale",
+  "at": "Cremonese",
+  "evt_id": "736842"
+ },
+ {
+  "fecha": "2025-10-04",
+  "ht": "Parma",
+  "at": "Lecce",
+  "evt_id": "736843"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Genoa",
+  "at": "Parma",
+  "evt_id": "736844"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Lecce",
+  "at": "Sassuolo",
+  "evt_id": "736845"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "AC Milan",
+  "at": "Fiorentina",
+  "evt_id": "736846"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Pisa",
+  "at": "Hellas Verona",
+  "evt_id": "736847"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "AS Roma",
+  "at": "Internazionale",
+  "evt_id": "736848"
+ },
+ {
+  "fecha": "2025-10-18",
+  "ht": "Torino",
+  "at": "Napoli",
+  "evt_id": "736849"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Atalanta",
+  "at": "Lazio",
+  "evt_id": "736850"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Cagliari",
+  "at": "Bologna",
+  "evt_id": "736851"
+ },
+ {
+  "fecha": "2025-10-19",
+  "ht": "Como",
+  "at": "Juventus",
+  "evt_id": "736852"
+ },
+ {
+  "fecha": "2025-10-20",
+  "ht": "Cremonese",
+  "at": "Udinese",
+  "evt_id": "736853"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Cremonese",
+  "at": "Atalanta",
+  "evt_id": "736854"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Fiorentina",
+  "at": "Bologna",
+  "evt_id": "736855"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Udinese",
+  "at": "Lecce",
+  "evt_id": "736856"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Torino",
+  "at": "Genoa",
+  "evt_id": "736857"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Sassuolo",
+  "at": "AS Roma",
+  "evt_id": "736858"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Parma",
+  "at": "Como",
+  "evt_id": "736859"
+ },
+ {
+  "fecha": "2025-10-25",
+  "ht": "Napoli",
+  "at": "Internazionale",
+  "evt_id": "736860"
+ },
+ {
+  "fecha": "2025-10-24",
+  "ht": "AC Milan",
+  "at": "Pisa",
+  "evt_id": "736861"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Lazio",
+  "at": "Juventus",
+  "evt_id": "736862"
+ },
+ {
+  "fecha": "2025-10-26",
+  "ht": "Hellas Verona",
+  "at": "Cagliari",
+  "evt_id": "736863"
+ },
+ {
+  "fecha": "2025-10-28",
+  "ht": "Atalanta",
+  "at": "AC Milan",
+  "evt_id": "736864"
+ },
+ {
+  "fecha": "2025-10-30",
+  "ht": "Pisa",
+  "at": "Lazio",
+  "evt_id": "736865"
+ },
+ {
+  "fecha": "2025-10-28",
+  "ht": "Lecce",
+  "at": "Napoli",
+  "evt_id": "736866"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Juventus",
+  "at": "Udinese",
+  "evt_id": "736867"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "AS Roma",
+  "at": "Parma",
+  "evt_id": "736868"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Genoa",
+  "at": "Cremonese",
+  "evt_id": "736869"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Como",
+  "at": "Hellas Verona",
+  "evt_id": "736870"
+ },
+ {
+  "fecha": "2025-10-30",
+  "ht": "Cagliari",
+  "at": "Sassuolo",
+  "evt_id": "736871"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Bologna",
+  "at": "Torino",
+  "evt_id": "736872"
+ },
+ {
+  "fecha": "2025-10-29",
+  "ht": "Internazionale",
+  "at": "Fiorentina",
+  "evt_id": "736873"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Parma",
+  "at": "Bologna",
+  "evt_id": "736874"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Napoli",
+  "at": "Como",
+  "evt_id": "736875"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "AC Milan",
+  "at": "AS Roma",
+  "evt_id": "736876"
+ },
+ {
+  "fecha": "2025-11-03",
+  "ht": "Lazio",
+  "at": "Cagliari",
+  "evt_id": "736877"
+ },
+ {
+  "fecha": "2025-11-03",
+  "ht": "Sassuolo",
+  "at": "Genoa",
+  "evt_id": "736878"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Fiorentina",
+  "at": "Lecce",
+  "evt_id": "736879"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Cremonese",
+  "at": "Juventus",
+  "evt_id": "736880"
+ },
+ {
+  "fecha": "2025-11-01",
+  "ht": "Udinese",
+  "at": "Atalanta",
+  "evt_id": "736881"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Torino",
+  "at": "Pisa",
+  "evt_id": "736882"
+ },
+ {
+  "fecha": "2025-11-02",
+  "ht": "Hellas Verona",
+  "at": "Internazionale",
+  "evt_id": "736883"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Como",
+  "at": "Cagliari",
+  "evt_id": "736884"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "AS Roma",
+  "at": "Udinese",
+  "evt_id": "736885"
+ },
+ {
+  "fecha": "2025-11-07",
+  "ht": "Pisa",
+  "at": "Cremonese",
+  "evt_id": "736886"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Parma",
+  "at": "AC Milan",
+  "evt_id": "736887"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Lecce",
+  "at": "Hellas Verona",
+  "evt_id": "736888"
+ },
+ {
+  "fecha": "2025-11-08",
+  "ht": "Juventus",
+  "at": "Torino",
+  "evt_id": "736889"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Internazionale",
+  "at": "Lazio",
+  "evt_id": "736890"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Genoa",
+  "at": "Fiorentina",
+  "evt_id": "736891"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Bologna",
+  "at": "Napoli",
+  "evt_id": "736892"
+ },
+ {
+  "fecha": "2025-11-09",
+  "ht": "Atalanta",
+  "at": "Sassuolo",
+  "evt_id": "736893"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Internazionale",
+  "at": "AC Milan",
+  "evt_id": "736894"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Hellas Verona",
+  "at": "Parma",
+  "evt_id": "736895"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Fiorentina",
+  "at": "Juventus",
+  "evt_id": "736896"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Cremonese",
+  "at": "AS Roma",
+  "evt_id": "736897"
+ },
+ {
+  "fecha": "2025-11-24",
+  "ht": "Torino",
+  "at": "Como",
+  "evt_id": "736898"
+ },
+ {
+  "fecha": "2025-11-24",
+  "ht": "Sassuolo",
+  "at": "Pisa",
+  "evt_id": "736899"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Napoli",
+  "at": "Atalanta",
+  "evt_id": "736900"
+ },
+ {
+  "fecha": "2025-11-23",
+  "ht": "Lazio",
+  "at": "Lecce",
+  "evt_id": "736901"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Udinese",
+  "at": "Bologna",
+  "evt_id": "736902"
+ },
+ {
+  "fecha": "2025-11-22",
+  "ht": "Cagliari",
+  "at": "Genoa",
+  "evt_id": "736903"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "AC Milan",
+  "at": "Lazio",
+  "evt_id": "736904"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Lecce",
+  "at": "Torino",
+  "evt_id": "736905"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Juventus",
+  "at": "Cagliari",
+  "evt_id": "736906"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Genoa",
+  "at": "Hellas Verona",
+  "evt_id": "736907"
+ },
+ {
+  "fecha": "2025-11-28",
+  "ht": "Como",
+  "at": "Sassuolo",
+  "evt_id": "736908"
+ },
+ {
+  "fecha": "2025-12-01",
+  "ht": "Bologna",
+  "at": "Cremonese",
+  "evt_id": "736909"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Atalanta",
+  "at": "Fiorentina",
+  "evt_id": "736910"
+ },
+ {
+  "fecha": "2025-11-29",
+  "ht": "Parma",
+  "at": "Udinese",
+  "evt_id": "736911"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "Pisa",
+  "at": "Internazionale",
+  "evt_id": "736912"
+ },
+ {
+  "fecha": "2025-11-30",
+  "ht": "AS Roma",
+  "at": "Napoli",
+  "evt_id": "736913"
+ },
+ {
+  "fecha": "2025-12-08",
+  "ht": "Torino",
+  "at": "AC Milan",
+  "evt_id": "736914"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Sassuolo",
+  "at": "Fiorentina",
+  "evt_id": "736915"
+ },
+ {
+  "fecha": "2025-12-08",
+  "ht": "Pisa",
+  "at": "Parma",
+  "evt_id": "736916"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Napoli",
+  "at": "Juventus",
+  "evt_id": "736917"
+ },
+ {
+  "fecha": "2025-12-08",
+  "ht": "Udinese",
+  "at": "Genoa",
+  "evt_id": "736918"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Internazionale",
+  "at": "Como",
+  "evt_id": "736919"
+ },
+ {
+  "fecha": "2025-12-06",
+  "ht": "Hellas Verona",
+  "at": "Atalanta",
+  "evt_id": "736920"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Cremonese",
+  "at": "Lecce",
+  "evt_id": "736921"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Cagliari",
+  "at": "AS Roma",
+  "evt_id": "736922"
+ },
+ {
+  "fecha": "2025-12-07",
+  "ht": "Lazio",
+  "at": "Bologna",
+  "evt_id": "736923"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Torino",
+  "at": "Cremonese",
+  "evt_id": "736924"
+ },
+ {
+  "fecha": "2025-12-15",
+  "ht": "AS Roma",
+  "at": "Como",
+  "evt_id": "736925"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Parma",
+  "at": "Lazio",
+  "evt_id": "736926"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "AC Milan",
+  "at": "Sassuolo",
+  "evt_id": "736927"
+ },
+ {
+  "fecha": "2025-12-12",
+  "ht": "Lecce",
+  "at": "Pisa",
+  "evt_id": "736928"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Genoa",
+  "at": "Internazionale",
+  "evt_id": "736929"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Fiorentina",
+  "at": "Hellas Verona",
+  "evt_id": "736930"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Bologna",
+  "at": "Juventus",
+  "evt_id": "736931"
+ },
+ {
+  "fecha": "2025-12-13",
+  "ht": "Atalanta",
+  "at": "Cagliari",
+  "evt_id": "736932"
+ },
+ {
+  "fecha": "2025-12-14",
+  "ht": "Udinese",
+  "at": "Napoli",
+  "evt_id": "736933"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Cagliari",
+  "at": "Pisa",
+  "evt_id": "736934"
+ },
+ {
+  "fecha": "2026-01-15",
+  "ht": "Como",
+  "at": "AC Milan",
+  "evt_id": "736935"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Sassuolo",
+  "at": "Torino",
+  "evt_id": "736936"
+ },
+ {
+  "fecha": "2026-01-14",
+  "ht": "Napoli",
+  "at": "Parma",
+  "evt_id": "736937"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Lazio",
+  "at": "Cremonese",
+  "evt_id": "736938"
+ },
+ {
+  "fecha": "2025-12-20",
+  "ht": "Juventus",
+  "at": "AS Roma",
+  "evt_id": "736939"
+ },
+ {
+  "fecha": "2026-01-14",
+  "ht": "Internazionale",
+  "at": "Lecce",
+  "evt_id": "736940"
+ },
+ {
+  "fecha": "2026-01-15",
+  "ht": "Hellas Verona",
+  "at": "Bologna",
+  "evt_id": "736941"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Genoa",
+  "at": "Atalanta",
+  "evt_id": "736942"
+ },
+ {
+  "fecha": "2025-12-21",
+  "ht": "Fiorentina",
+  "at": "Udinese",
+  "evt_id": "736943"
+ },
+ {
+  "fecha": "2025-12-28",
+  "ht": "Atalanta",
+  "at": "Internazionale",
+  "evt_id": "736944"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Torino",
+  "at": "Cagliari",
+  "evt_id": "736945"
+ },
+ {
+  "fecha": "2025-12-29",
+  "ht": "AS Roma",
+  "at": "Genoa",
+  "evt_id": "736946"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Pisa",
+  "at": "Juventus",
+  "evt_id": "736947"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Udinese",
+  "at": "Lazio",
+  "evt_id": "736948"
+ },
+ {
+  "fecha": "2025-12-28",
+  "ht": "AC Milan",
+  "at": "Hellas Verona",
+  "evt_id": "736949"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Lecce",
+  "at": "Como",
+  "evt_id": "736950"
+ },
+ {
+  "fecha": "2025-12-28",
+  "ht": "Cremonese",
+  "at": "Napoli",
+  "evt_id": "736951"
+ },
+ {
+  "fecha": "2025-12-28",
+  "ht": "Bologna",
+  "at": "Sassuolo",
+  "evt_id": "736952"
+ },
+ {
+  "fecha": "2025-12-27",
+  "ht": "Parma",
+  "at": "Fiorentina",
+  "evt_id": "736953"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Atalanta",
+  "at": "AS Roma",
+  "evt_id": "736954"
+ },
+ {
+  "fecha": "2026-01-02",
+  "ht": "Cagliari",
+  "at": "AC Milan",
+  "evt_id": "736955"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Como",
+  "at": "Udinese",
+  "evt_id": "736956"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Fiorentina",
+  "at": "Cremonese",
+  "evt_id": "736957"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Sassuolo",
+  "at": "Parma",
+  "evt_id": "736958"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Hellas Verona",
+  "at": "Torino",
+  "evt_id": "736959"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Internazionale",
+  "at": "Bologna",
+  "evt_id": "736960"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Juventus",
+  "at": "Lecce",
+  "evt_id": "736961"
+ },
+ {
+  "fecha": "2026-01-04",
+  "ht": "Lazio",
+  "at": "Napoli",
+  "evt_id": "736962"
+ },
+ {
+  "fecha": "2026-01-03",
+  "ht": "Genoa",
+  "at": "Pisa",
+  "evt_id": "736963"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Bologna",
+  "at": "Atalanta",
+  "evt_id": "736964"
+ },
+ {
+  "fecha": "2026-01-08",
+  "ht": "Cremonese",
+  "at": "Cagliari",
+  "evt_id": "736965"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Lazio",
+  "at": "Fiorentina",
+  "evt_id": "736966"
+ },
+ {
+  "fecha": "2026-01-06",
+  "ht": "Lecce",
+  "at": "AS Roma",
+  "evt_id": "736967"
+ },
+ {
+  "fecha": "2026-01-08",
+  "ht": "AC Milan",
+  "at": "Genoa",
+  "evt_id": "736968"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Napoli",
+  "at": "Hellas Verona",
+  "evt_id": "736969"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Parma",
+  "at": "Internazionale",
+  "evt_id": "736970"
+ },
+ {
+  "fecha": "2026-01-06",
+  "ht": "Pisa",
+  "at": "Como",
+  "evt_id": "736971"
+ },
+ {
+  "fecha": "2026-01-06",
+  "ht": "Sassuolo",
+  "at": "Juventus",
+  "evt_id": "736972"
+ },
+ {
+  "fecha": "2026-01-07",
+  "ht": "Torino",
+  "at": "Udinese",
+  "evt_id": "736973"
+ },
+ {
+  "fecha": "2026-01-12",
+  "ht": "Genoa",
+  "at": "Cagliari",
+  "evt_id": "736974"
+ },
+ {
+  "fecha": "2026-01-11",
+  "ht": "Fiorentina",
+  "at": "AC Milan",
+  "evt_id": "736975"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "Como",
+  "at": "Bologna",
+  "evt_id": "736976"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "Atalanta",
+  "at": "Torino",
+  "evt_id": "736977"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "Udinese",
+  "at": "Pisa",
+  "evt_id": "736978"
+ },
+ {
+  "fecha": "2026-01-11",
+  "ht": "Internazionale",
+  "at": "Napoli",
+  "evt_id": "736979"
+ },
+ {
+  "fecha": "2026-01-12",
+  "ht": "Juventus",
+  "at": "Cremonese",
+  "evt_id": "736980"
+ },
+ {
+  "fecha": "2026-01-11",
+  "ht": "Lecce",
+  "at": "Parma",
+  "evt_id": "736981"
+ },
+ {
+  "fecha": "2026-01-10",
+  "ht": "AS Roma",
+  "at": "Sassuolo",
+  "evt_id": "736982"
+ },
+ {
+  "fecha": "2026-01-11",
+  "ht": "Hellas Verona",
+  "at": "Lazio",
+  "evt_id": "736983"
+ },
+ {
+  "fecha": "2026-01-19",
+  "ht": "Lazio",
+  "at": "Como",
+  "evt_id": "736984"
+ },
+ {
+  "fecha": "2026-01-19",
+  "ht": "Cremonese",
+  "at": "Hellas Verona",
+  "evt_id": "736985"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Cagliari",
+  "at": "Juventus",
+  "evt_id": "736986"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Bologna",
+  "at": "Fiorentina",
+  "evt_id": "736987"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "AC Milan",
+  "at": "Lecce",
+  "evt_id": "736988"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Udinese",
+  "at": "Internazionale",
+  "evt_id": "736989"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Torino",
+  "at": "AS Roma",
+  "evt_id": "736990"
+ },
+ {
+  "fecha": "2026-01-16",
+  "ht": "Pisa",
+  "at": "Atalanta",
+  "evt_id": "736991"
+ },
+ {
+  "fecha": "2026-01-18",
+  "ht": "Parma",
+  "at": "Genoa",
+  "evt_id": "736992"
+ },
+ {
+  "fecha": "2026-01-17",
+  "ht": "Napoli",
+  "at": "Sassuolo",
+  "evt_id": "736993"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Atalanta",
+  "at": "Parma",
+  "evt_id": "736994"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Como",
+  "at": "Torino",
+  "evt_id": "736995"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Fiorentina",
+  "at": "Cagliari",
+  "evt_id": "736996"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Genoa",
+  "at": "Bologna",
+  "evt_id": "736997"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Sassuolo",
+  "at": "Cremonese",
+  "evt_id": "736998"
+ },
+ {
+  "fecha": "2026-01-24",
+  "ht": "Lecce",
+  "at": "Lazio",
+  "evt_id": "736999"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "Juventus",
+  "at": "Napoli",
+  "evt_id": "737000"
+ },
+ {
+  "fecha": "2026-01-23",
+  "ht": "Internazionale",
+  "at": "Pisa",
+  "evt_id": "737001"
+ },
+ {
+  "fecha": "2026-01-26",
+  "ht": "Hellas Verona",
+  "at": "Udinese",
+  "evt_id": "737002"
+ },
+ {
+  "fecha": "2026-01-25",
+  "ht": "AS Roma",
+  "at": "AC Milan",
+  "evt_id": "737003"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Torino",
+  "at": "Lecce",
+  "evt_id": "737004"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Pisa",
+  "at": "Sassuolo",
+  "evt_id": "737005"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Parma",
+  "at": "Juventus",
+  "evt_id": "737006"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Napoli",
+  "at": "Fiorentina",
+  "evt_id": "737007"
+ },
+ {
+  "fecha": "2026-02-02",
+  "ht": "Udinese",
+  "at": "AS Roma",
+  "evt_id": "737008"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Cremonese",
+  "at": "Internazionale",
+  "evt_id": "737009"
+ },
+ {
+  "fecha": "2026-02-01",
+  "ht": "Como",
+  "at": "Atalanta",
+  "evt_id": "737010"
+ },
+ {
+  "fecha": "2026-01-31",
+  "ht": "Cagliari",
+  "at": "Hellas Verona",
+  "evt_id": "737011"
+ },
+ {
+  "fecha": "2026-02-03",
+  "ht": "Bologna",
+  "at": "AC Milan",
+  "evt_id": "737012"
+ },
+ {
+  "fecha": "2026-01-30",
+  "ht": "Lazio",
+  "at": "Genoa",
+  "evt_id": "737013"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "AS Roma",
+  "at": "Cagliari",
+  "evt_id": "737014"
+ },
+ {
+  "fecha": "2026-02-18",
+  "ht": "AC Milan",
+  "at": "Como",
+  "evt_id": "737015"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Lecce",
+  "at": "Udinese",
+  "evt_id": "737016"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Juventus",
+  "at": "Lazio",
+  "evt_id": "737017"
+ },
+ {
+  "fecha": "2026-02-06",
+  "ht": "Hellas Verona",
+  "at": "Pisa",
+  "evt_id": "737018"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Genoa",
+  "at": "Napoli",
+  "evt_id": "737019"
+ },
+ {
+  "fecha": "2026-02-07",
+  "ht": "Fiorentina",
+  "at": "Torino",
+  "evt_id": "737020"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Bologna",
+  "at": "Parma",
+  "evt_id": "737021"
+ },
+ {
+  "fecha": "2026-02-09",
+  "ht": "Atalanta",
+  "at": "Cremonese",
+  "evt_id": "737022"
+ },
+ {
+  "fecha": "2026-02-08",
+  "ht": "Sassuolo",
+  "at": "Internazionale",
+  "evt_id": "737023"
+ },
+ {
+  "fecha": "2026-02-16",
+  "ht": "Cagliari",
+  "at": "Lecce",
+  "evt_id": "737024"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Como",
+  "at": "Fiorentina",
+  "evt_id": "737025"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Udinese",
+  "at": "Sassuolo",
+  "evt_id": "737026"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Torino",
+  "at": "Bologna",
+  "evt_id": "737027"
+ },
+ {
+  "fecha": "2026-02-13",
+  "ht": "Pisa",
+  "at": "AC Milan",
+  "evt_id": "737028"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Parma",
+  "at": "Hellas Verona",
+  "evt_id": "737029"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Napoli",
+  "at": "AS Roma",
+  "evt_id": "737030"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Lazio",
+  "at": "Atalanta",
+  "evt_id": "737031"
+ },
+ {
+  "fecha": "2026-02-14",
+  "ht": "Internazionale",
+  "at": "Juventus",
+  "evt_id": "737032"
+ },
+ {
+  "fecha": "2026-02-15",
+  "ht": "Cremonese",
+  "at": "Genoa",
+  "evt_id": "737033"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Atalanta",
+  "at": "Napoli",
+  "evt_id": "737034"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "AS Roma",
+  "at": "Cremonese",
+  "evt_id": "737035"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "AC Milan",
+  "at": "Parma",
+  "evt_id": "737036"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Lecce",
+  "at": "Internazionale",
+  "evt_id": "737037"
+ },
+ {
+  "fecha": "2026-02-20",
+  "ht": "Sassuolo",
+  "at": "Hellas Verona",
+  "evt_id": "737038"
+ },
+ {
+  "fecha": "2026-02-22",
+  "ht": "Genoa",
+  "at": "Torino",
+  "evt_id": "737039"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Fiorentina",
+  "at": "Pisa",
+  "evt_id": "737040"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Cagliari",
+  "at": "Lazio",
+  "evt_id": "737041"
+ },
+ {
+  "fecha": "2026-02-23",
+  "ht": "Bologna",
+  "at": "Udinese",
+  "evt_id": "737042"
+ },
+ {
+  "fecha": "2026-02-21",
+  "ht": "Juventus",
+  "at": "Como",
+  "evt_id": "737043"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Torino",
+  "at": "Lazio",
+  "evt_id": "737044"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Sassuolo",
+  "at": "Atalanta",
+  "evt_id": "737045"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "AS Roma",
+  "at": "Juventus",
+  "evt_id": "737046"
+ },
+ {
+  "fecha": "2026-03-02",
+  "ht": "Pisa",
+  "at": "Bologna",
+  "evt_id": "737047"
+ },
+ {
+  "fecha": "2026-03-02",
+  "ht": "Udinese",
+  "at": "Fiorentina",
+  "evt_id": "737048"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Internazionale",
+  "at": "Genoa",
+  "evt_id": "737049"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Hellas Verona",
+  "at": "Napoli",
+  "evt_id": "737050"
+ },
+ {
+  "fecha": "2026-03-01",
+  "ht": "Cremonese",
+  "at": "AC Milan",
+  "evt_id": "737051"
+ },
+ {
+  "fecha": "2026-02-28",
+  "ht": "Como",
+  "at": "Lecce",
+  "evt_id": "737052"
+ },
+ {
+  "fecha": "2026-02-27",
+  "ht": "Parma",
+  "at": "Cagliari",
+  "evt_id": "737053"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "AC Milan",
+  "at": "Internazionale",
+  "evt_id": "737054"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Lecce",
+  "at": "Cremonese",
+  "evt_id": "737055"
+ },
+ {
+  "fecha": "2026-03-09",
+  "ht": "Lazio",
+  "at": "Sassuolo",
+  "evt_id": "737056"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Juventus",
+  "at": "Pisa",
+  "evt_id": "737057"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Genoa",
+  "at": "AS Roma",
+  "evt_id": "737058"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Fiorentina",
+  "at": "Parma",
+  "evt_id": "737059"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Cagliari",
+  "at": "Como",
+  "evt_id": "737060"
+ },
+ {
+  "fecha": "2026-03-08",
+  "ht": "Bologna",
+  "at": "Hellas Verona",
+  "evt_id": "737061"
+ },
+ {
+  "fecha": "2026-03-07",
+  "ht": "Atalanta",
+  "at": "Udinese",
+  "evt_id": "737062"
+ },
+ {
+  "fecha": "2026-03-06",
+  "ht": "Napoli",
+  "at": "Torino",
+  "evt_id": "737063"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Como",
+  "at": "AS Roma",
+  "evt_id": "737064"
+ },
+ {
+  "fecha": "2026-03-16",
+  "ht": "Cremonese",
+  "at": "Fiorentina",
+  "evt_id": "737065"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Udinese",
+  "at": "Juventus",
+  "evt_id": "737066"
+ },
+ {
+  "fecha": "2026-03-13",
+  "ht": "Torino",
+  "at": "Parma",
+  "evt_id": "737067"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Sassuolo",
+  "at": "Bologna",
+  "evt_id": "737068"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Pisa",
+  "at": "Cagliari",
+  "evt_id": "737069"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Napoli",
+  "at": "Lecce",
+  "evt_id": "737070"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Lazio",
+  "at": "AC Milan",
+  "evt_id": "737071"
+ },
+ {
+  "fecha": "2026-03-14",
+  "ht": "Internazionale",
+  "at": "Atalanta",
+  "evt_id": "737072"
+ },
+ {
+  "fecha": "2026-03-15",
+  "ht": "Hellas Verona",
+  "at": "Genoa",
+  "evt_id": "737073"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Atalanta",
+  "at": "Hellas Verona",
+  "evt_id": "737074"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Parma",
+  "at": "Cremonese",
+  "evt_id": "737075"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "AC Milan",
+  "at": "Torino",
+  "evt_id": "737076"
+ },
+ {
+  "fecha": "2026-03-21",
+  "ht": "Juventus",
+  "at": "Sassuolo",
+  "evt_id": "737077"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "AS Roma",
+  "at": "Lecce",
+  "evt_id": "737078"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Fiorentina",
+  "at": "Internazionale",
+  "evt_id": "737079"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Como",
+  "at": "Pisa",
+  "evt_id": "737080"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "Cagliari",
+  "at": "Napoli",
+  "evt_id": "737081"
+ },
+ {
+  "fecha": "2026-03-22",
+  "ht": "Bologna",
+  "at": "Lazio",
+  "evt_id": "737082"
+ },
+ {
+  "fecha": "2026-03-20",
+  "ht": "Genoa",
+  "at": "Udinese",
+  "evt_id": "737083"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Sassuolo",
+  "at": "Cagliari",
+  "evt_id": "737084"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Pisa",
+  "at": "Torino",
+  "evt_id": "737085"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Napoli",
+  "at": "AC Milan",
+  "evt_id": "737086"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Lecce",
+  "at": "Atalanta",
+  "evt_id": "737087"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Udinese",
+  "at": "Como",
+  "evt_id": "737088"
+ },
+ {
+  "fecha": "2026-04-06",
+  "ht": "Juventus",
+  "at": "Genoa",
+  "evt_id": "737089"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Internazionale",
+  "at": "AS Roma",
+  "evt_id": "737090"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Hellas Verona",
+  "at": "Fiorentina",
+  "evt_id": "737091"
+ },
+ {
+  "fecha": "2026-04-05",
+  "ht": "Cremonese",
+  "at": "Bologna",
+  "evt_id": "737092"
+ },
+ {
+  "fecha": "2026-04-04",
+  "ht": "Lazio",
+  "at": "Parma",
+  "evt_id": "737093"
+ },
+ {
+  "fecha": "2026-04-10",
+  "ht": "AS Roma",
+  "at": "Pisa",
+  "evt_id": "737094"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Parma",
+  "at": "Napoli",
+  "evt_id": "737095"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "AC Milan",
+  "at": "Udinese",
+  "evt_id": "737096"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Genoa",
+  "at": "Sassuolo",
+  "evt_id": "737097"
+ },
+ {
+  "fecha": "2026-04-13",
+  "ht": "Fiorentina",
+  "at": "Lazio",
+  "evt_id": "737098"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Como",
+  "at": "Internazionale",
+  "evt_id": "737099"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Cagliari",
+  "at": "Cremonese",
+  "evt_id": "737100"
+ },
+ {
+  "fecha": "2026-04-12",
+  "ht": "Bologna",
+  "at": "Lecce",
+  "evt_id": "737101"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Atalanta",
+  "at": "Juventus",
+  "evt_id": "737102"
+ },
+ {
+  "fecha": "2026-04-11",
+  "ht": "Torino",
+  "at": "Hellas Verona",
+  "evt_id": "737103"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Cremonese",
+  "at": "Torino",
+  "evt_id": "737104"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Hellas Verona",
+  "at": "AC Milan",
+  "evt_id": "737105"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Udinese",
+  "at": "Parma",
+  "evt_id": "737106"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Sassuolo",
+  "at": "Como",
+  "evt_id": "737107"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "AS Roma",
+  "at": "Atalanta",
+  "evt_id": "737108"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Pisa",
+  "at": "Genoa",
+  "evt_id": "737109"
+ },
+ {
+  "fecha": "2026-04-18",
+  "ht": "Napoli",
+  "at": "Lazio",
+  "evt_id": "737110"
+ },
+ {
+  "fecha": "2026-04-20",
+  "ht": "Lecce",
+  "at": "Fiorentina",
+  "evt_id": "737111"
+ },
+ {
+  "fecha": "2026-04-19",
+  "ht": "Juventus",
+  "at": "Bologna",
+  "evt_id": "737112"
+ },
+ {
+  "fecha": "2026-04-17",
+  "ht": "Internazionale",
+  "at": "Cagliari",
+  "evt_id": "737113"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Bologna",
+  "at": "AS Roma",
+  "evt_id": "737114"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Parma",
+  "at": "Pisa",
+  "evt_id": "737115"
+ },
+ {
+  "fecha": "2026-04-24",
+  "ht": "Napoli",
+  "at": "Cremonese",
+  "evt_id": "737116"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "AC Milan",
+  "at": "Juventus",
+  "evt_id": "737117"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Torino",
+  "at": "Internazionale",
+  "evt_id": "737118"
+ },
+ {
+  "fecha": "2026-04-25",
+  "ht": "Hellas Verona",
+  "at": "Lecce",
+  "evt_id": "737119"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Genoa",
+  "at": "Como",
+  "evt_id": "737120"
+ },
+ {
+  "fecha": "2026-04-26",
+  "ht": "Fiorentina",
+  "at": "Sassuolo",
+  "evt_id": "737121"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Cagliari",
+  "at": "Atalanta",
+  "evt_id": "737122"
+ },
+ {
+  "fecha": "2026-04-27",
+  "ht": "Lazio",
+  "at": "Udinese",
+  "evt_id": "737123"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Sassuolo",
+  "at": "AC Milan",
+  "evt_id": "737124"
+ },
+ {
+  "fecha": "2026-05-04",
+  "ht": "AS Roma",
+  "at": "Fiorentina",
+  "evt_id": "737125"
+ },
+ {
+  "fecha": "2026-05-01",
+  "ht": "Pisa",
+  "at": "Lecce",
+  "evt_id": "737126"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Juventus",
+  "at": "Hellas Verona",
+  "evt_id": "737127"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Udinese",
+  "at": "Torino",
+  "evt_id": "737128"
+ },
+ {
+  "fecha": "2026-05-04",
+  "ht": "Cremonese",
+  "at": "Lazio",
+  "evt_id": "737129"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Como",
+  "at": "Napoli",
+  "evt_id": "737130"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Bologna",
+  "at": "Cagliari",
+  "evt_id": "737131"
+ },
+ {
+  "fecha": "2026-05-02",
+  "ht": "Atalanta",
+  "at": "Genoa",
+  "evt_id": "737132"
+ },
+ {
+  "fecha": "2026-05-03",
+  "ht": "Internazionale",
+  "at": "Parma",
+  "evt_id": "737133"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Parma",
+  "at": "AS Roma",
+  "evt_id": "737134"
+ },
+ {
+  "fecha": "2026-05-11",
+  "ht": "Napoli",
+  "at": "Bologna",
+  "evt_id": "737135"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "AC Milan",
+  "at": "Atalanta",
+  "evt_id": "737136"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Lecce",
+  "at": "Juventus",
+  "evt_id": "737137"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Lazio",
+  "at": "Internazionale",
+  "evt_id": "737138"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Hellas Verona",
+  "at": "Como",
+  "evt_id": "737139"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Fiorentina",
+  "at": "Genoa",
+  "evt_id": "737140"
+ },
+ {
+  "fecha": "2026-05-10",
+  "ht": "Cremonese",
+  "at": "Pisa",
+  "evt_id": "737141"
+ },
+ {
+  "fecha": "2026-05-09",
+  "ht": "Cagliari",
+  "at": "Udinese",
+  "evt_id": "737142"
+ },
+ {
+  "fecha": "2026-05-08",
+  "ht": "Torino",
+  "at": "Sassuolo",
+  "evt_id": "737143"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Atalanta",
+  "at": "Bologna",
+  "evt_id": "737144"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Cagliari",
+  "at": "Torino",
+  "evt_id": "737145"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Udinese",
+  "at": "Cremonese",
+  "evt_id": "737146"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Sassuolo",
+  "at": "Lecce",
+  "evt_id": "737147"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "AS Roma",
+  "at": "Lazio",
+  "evt_id": "737148"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Pisa",
+  "at": "Napoli",
+  "evt_id": "737149"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Juventus",
+  "at": "Fiorentina",
+  "evt_id": "737150"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Internazionale",
+  "at": "Hellas Verona",
+  "evt_id": "737151"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Genoa",
+  "at": "AC Milan",
+  "evt_id": "737152"
+ },
+ {
+  "fecha": "2026-05-17",
+  "ht": "Como",
+  "at": "Parma",
+  "evt_id": "737153"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Bologna",
+  "at": "Internazionale",
+  "evt_id": "737154"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Parma",
+  "at": "Sassuolo",
+  "evt_id": "737155"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Napoli",
+  "at": "Udinese",
+  "evt_id": "737156"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "AC Milan",
+  "at": "Cagliari",
+  "evt_id": "737157"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Torino",
+  "at": "Juventus",
+  "evt_id": "737158"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Lazio",
+  "at": "Pisa",
+  "evt_id": "737159"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Hellas Verona",
+  "at": "AS Roma",
+  "evt_id": "737160"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Fiorentina",
+  "at": "Atalanta",
+  "evt_id": "737161"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Cremonese",
+  "at": "Como",
+  "evt_id": "737162"
+ },
+ {
+  "fecha": "2026-05-24",
+  "ht": "Lecce",
+  "at": "Genoa",
+  "evt_id": "737163"
+ }
+]

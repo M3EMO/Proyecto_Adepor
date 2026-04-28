@@ -218,6 +218,88 @@ def fit_nnls(X, y, max_iter=2000, lr=0.001):
     return float(intercept), coefs
 
 
+def _soft_threshold(z, gamma):
+    """Soft thresholding operator: S(z, gamma) = sign(z) * max(|z| - gamma, 0)."""
+    return np.sign(z) * np.maximum(np.abs(z) - gamma, 0.0)
+
+
+def fit_elasticnet(X, y, lam, alpha, max_iter=1000, tol=1e-6):
+    """ElasticNet via coordinate descent.
+
+    Objective:
+      min (1/(2n)) ||y - X b||^2 + lam * (alpha * ||b||_1 + (1-alpha)/2 * ||b||^2)
+
+    alpha ∈ [0, 1]: 1 = Lasso puro, 0 = Ridge puro, intermedio = ElasticNet.
+    Implementacion estandar de coordinate descent con soft thresholding.
+    """
+    Xz, mu, sd = _standardize(X)
+    y_mu = y.mean()
+    y_c = y - y_mu
+    n, p = Xz.shape
+
+    # Pre-compute norms columnas
+    col_norms_sq = np.sum(Xz ** 2, axis=0)  # n * 1 cada columna estandarizada
+    # Si col_norms_sq es 0 (columna constante), el coef queda 0
+    safe_norms = np.where(col_norms_sq == 0, 1.0, col_norms_sq)
+
+    b = np.zeros(p)
+    Xb = np.zeros(n)
+    for it in range(max_iter):
+        b_old = b.copy()
+        for j in range(p):
+            if col_norms_sq[j] == 0:
+                continue
+            # Residuo parcial sin coordenada j
+            r_partial = y_c - Xb + Xz[:, j] * b[j]
+            # OLS partial estimate
+            rho_j = Xz[:, j] @ r_partial / n
+            # Soft thresholding
+            num = _soft_threshold(rho_j, lam * alpha)
+            den = (col_norms_sq[j] / n) + lam * (1 - alpha)
+            b_new_j = num / den if den > 0 else 0.0
+            # Actualizar Xb incremental
+            Xb += Xz[:, j] * (b_new_j - b[j])
+            b[j] = b_new_j
+        if np.max(np.abs(b - b_old)) < tol:
+            break
+
+    coefs = b / sd
+    intercept = y_mu - mu @ coefs
+    return float(intercept), coefs
+
+
+def cv_elasticnet(X, y, lambdas, alphas, n_folds=N_FOLDS_CV, seed=42):
+    """K-fold CV para seleccionar (lambda, alpha) optimo por MSE."""
+    n = len(X)
+    if n < n_folds * 2:
+        return lambdas[len(lambdas) // 2], alphas[len(alphas) // 2]
+    rng = np.random.default_rng(seed)
+    idx = np.arange(n)
+    rng.shuffle(idx)
+    folds = np.array_split(idx, n_folds)
+    best_lam = lambdas[0]
+    best_alpha = alphas[0]
+    best_mse = np.inf
+    for lam in lambdas:
+        for a in alphas:
+            mses = []
+            for k in range(n_folds):
+                test_idx = folds[k]
+                train_idx = np.concatenate([folds[j] for j in range(n_folds) if j != k])
+                ic, cf = fit_elasticnet(X[train_idx], y[train_idx], lam, a, max_iter=300)
+                if ic is None:
+                    continue
+                preds = X[test_idx] @ cf + ic
+                mses.append(float(np.mean((preds - y[test_idx]) ** 2)))
+            if mses:
+                mse_avg = float(np.mean(mses))
+                if mse_avg < best_mse:
+                    best_mse = mse_avg
+                    best_lam = lam
+                    best_alpha = a
+    return best_lam, best_alpha
+
+
 def cv_ridge(X, y, lambdas, n_folds=N_FOLDS_CV, seed=42):
     n = len(X)
     if n < n_folds * 2:
@@ -352,6 +434,13 @@ def evaluar_variante(rows_liga, feature_set, reg_method, target_local=True):
         lam = cv_ridge(X_train, y_train, LAMBDAS_RIDGE)
         ic, cf = fit_ridge(X_train, y_train, lam)
         meta = {"reg": "RIDGE", "lambda": lam}
+    elif reg_method == "ENET":
+        # ElasticNet: grid (lam, alpha) via CV
+        lam, alpha = cv_elasticnet(X_train, y_train,
+                                    lambdas=[0.001, 0.01, 0.1, 1.0],
+                                    alphas=[0.1, 0.3, 0.5, 0.7, 0.9])
+        ic, cf = fit_elasticnet(X_train, y_train, lam, alpha, max_iter=1000)
+        meta = {"reg": "ENET", "lambda": lam, "alpha": alpha}
     else:
         return None
 
@@ -419,7 +508,7 @@ def main():
     payload = {
         "fecha": datetime.now().isoformat(),
         "feature_sets": {k: [a for _, _, a in v] for k, v in FEATURE_SETS.items()},
-        "regs": ["OLS", "NNLS", "RIDGE"],
+        "regs": ["OLS", "NNLS", "RIDGE", "ENET"],
         "n_total": len(rows),
         "resultados": defaultdict(dict),
     }
@@ -433,7 +522,7 @@ def main():
             continue
         for fset_name, feature_set in FEATURE_SETS.items():
             payload["resultados"][liga][fset_name] = {}
-            for reg in ["OLS", "NNLS", "RIDGE"]:
+            for reg in ["OLS", "NNLS", "RIDGE", "ENET"]:
                 payload["resultados"][liga][fset_name][reg] = {}
                 cal_local = evaluar_variante(rows_liga, feature_set, reg, target_local=True)
                 cal_visita = evaluar_variante(rows_liga, feature_set, reg, target_local=False)

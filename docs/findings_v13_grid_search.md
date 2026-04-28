@@ -25,6 +25,7 @@ evaluadas. Hallazgos:
 | OLS | Sin regularización | Interpretable | Singular en colinealidad, overfit |
 | **NNLS** | Coefs ≥ 0, projected gradient | **Sparse, conservador, mejor yield** | Rígido (no permite coefs negativos) |
 | RIDGE | L2 con λ ∈ {0.01, 0.1, 1, 10, 100}, CV 5-fold | Suave, todos coefs no-cero | Mejor Brier pero peor yield |
+| ENET | L1+L2 mix, coordinate descent + soft thresholding | Sparse + suavidad, α∈{0.1..0.9} | NO supera a NNLS en yield ni a Ridge en Brier |
 
 ### Feature sets
 
@@ -113,8 +114,12 @@ Trigger N≥200 picks SHADOW liquidados con yield V13 > V0 CI95_lo > 0 → consi
 
 ### Lo que NO hace este grid
 
-- **NO testea ElasticNet** (mezcla L1+L2): scipy/sklearn no instalado, implementación
-  manual no priorizada.
+- **ElasticNet AÑADIDO 2026-04-28**: implementado coordinate descent + soft thresholding.
+  CV grid (lambda × alpha). Resultado: ENET aparece 4 veces en top-10 yield pero NO
+  supera a NNLS en ninguna liga TOP. Argentina F1 ENET +3.7 (vs NNLS +8.3). Francia F2
+  ENET +13.2 (vs NNLS +20.3). En Italia degrada (F2 RIDGE +3.7 → F2 ENET -17.5).
+  Conclusión: ENET es menos selectivo (más picks apostados) pero peor yield. Mantener
+  NNLS/RIDGE como BEST.
 - **NO testea Alquimia B** (LR multinomial sobre features): ya existe V12 con esa
   arquitectura sobre xG legacy.
 - **NO testea Alquimia C** (xG ridge + piecewise post-hoc): se agregaría como capa

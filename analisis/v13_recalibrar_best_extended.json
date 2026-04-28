@@ -1,0 +1,61 @@
+{
+  "fecha": "2026-04-28T10:53:39.374839",
+  "best_by_liga": {
+    "Argentina": {
+      "liga": "Argentina",
+      "feat": "F5_ratio",
+      "reg": "NNLS",
+      "brier": 0.6426,
+      "n_oos": 332,
+      "n_apost": 101,
+      "n_gano": 38,
+      "hit_pct": 37.62,
+      "yield_pct": 18.66,
+      "ci95_lo": -12.83,
+      "ci95_hi": 50.39,
+      "r2_l": 0.0021
+    },
+    "Francia": {
+      "liga": "Francia",
+      "feat": "F4_disc",
+      "reg": "RIDGE",
+      "brier": 0.6254,
+      "n_oos": 110,
+      "n_apost": 38,
+      "n_gano": 16,
+      "hit_pct": 42.11,
+      "yield_pct": 29.37,
+      "ci95_lo": -21.47,
+      "ci95_hi": 78.61,
+      "r2_l": 0.0732
+    },
+    "Inglaterra": {
+      "liga": "Inglaterra",
+      "feat": "F5_ratio",
+      "reg": "NNLS",
+      "brier": 0.6302,
+      "n_oos": 72,
+      "n_apost": 20,
+      "n_gano": 7,
+      "hit_pct": 35.0,
+      "yield_pct": 0.45,
+      "ci95_lo": -59.2,
+      "ci95_hi": 66.51,
+      "r2_l": -0.0248
+    },
+    "Italia": {
+      "liga": "Italia",
+      "feat": "F2_pos",
+      "reg": "RIDGE",
+      "brier": 0.6326,
+      "n_oos": 227,
+      "n_apost": 52,
+      "n_gano": 20,
+      "hit_pct": 38.46,
+      "yield_pct": 3.66,
+      "ci95_lo": -34.87,
+      "ci95_hi": 40.87,
+      "r2_l": 0.0852
+    }
+  }
+}

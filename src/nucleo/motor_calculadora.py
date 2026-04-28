@@ -738,28 +738,73 @@ def _cargar_v13_coefs():
 
 _V13_COEFS = _cargar_v13_coefs()
 
-# Feature set definitions (deben coincidir con analisis/v13_grid_search.py).
-# Orden CRITICO: el coefs_json persistido tiene los aliases en este orden.
+# Feature sets V13 (deben coincidir con analisis/v13_grid_search_extended.py).
+# Cada feature_set es una lista de feature names. _calcular_xg_v13 las traduce
+# a valores via _V13_FEATURE_VALUE.
 _V13_FEATURE_SETS = {
-    "F1_off": [
-        ("ataque", "ema_l_sots"), ("ataque", "ema_l_shot_pct"),
-        ("ataque", "ema_l_corners"),
-        ("defensa", "ema_c_sots"), ("defensa", "ema_c_shot_pct"),
-    ],
-    "F2_pos": [
-        ("ataque", "ema_l_sots"), ("ataque", "ema_l_shot_pct"),
-        ("ataque", "ema_l_pos"), ("ataque", "ema_l_pass_pct"),
-        ("ataque", "ema_l_corners"),
-        ("defensa", "ema_c_sots"), ("defensa", "ema_c_shot_pct"),
-    ],
-    "F3_def": [
-        ("ataque", "ema_l_sots"), ("ataque", "ema_l_shot_pct"),
-        ("ataque", "ema_l_pos"), ("ataque", "ema_l_pass_pct"),
-        ("ataque", "ema_l_corners"),
-        ("defensa", "ema_c_sots"), ("defensa", "ema_c_shot_pct"),
-        ("defensa", "ema_c_tackles"), ("defensa", "ema_c_blocks"),
-    ],
+    "F1_off": ["atk_sots", "atk_shot_pct", "atk_corners",
+               "def_sots_c", "def_shot_pct_c"],
+    "F2_pos": ["atk_sots", "atk_shot_pct", "atk_pos", "atk_pass_pct", "atk_corners",
+               "def_sots_c", "def_shot_pct_c"],
+    "F3_def": ["atk_sots", "atk_shot_pct", "atk_pos", "atk_pass_pct", "atk_corners",
+               "def_sots_c", "def_shot_pct_c", "def_tackles_c", "def_blocks_c"],
+    "F4_disc": ["atk_sots", "atk_shot_pct", "atk_pos", "atk_pass_pct", "atk_corners",
+                "atk_yellow", "atk_red", "atk_fouls",
+                "def_sots_c", "def_shot_pct_c"],
+    "F5_ratio": ["atk_sots_per_shot", "atk_pressure", "atk_set_piece",
+                 "atk_red_card_rate", "def_solidez"],
+    "F6_full": ["atk_sots", "atk_shot_pct", "atk_pos", "atk_pass_pct", "atk_corners",
+                "atk_yellow", "atk_red", "atk_fouls",
+                "atk_sots_per_shot", "atk_pressure", "atk_red_card_rate",
+                "def_sots_c", "def_shot_pct_c", "def_solidez"],
 }
+
+
+def _v13_feat_value(name, ema_atk, ema_def):
+    """Computa el valor de un feature por nombre. Devuelve None si dato falta."""
+    try:
+        # Crudas atk (lookup en ema_l_* del atacante)
+        if name == "atk_sots":      return ema_atk["ema_l_sots"]
+        if name == "atk_shot_pct":  return ema_atk["ema_l_shot_pct"]
+        if name == "atk_pos":       return ema_atk["ema_l_pos"]
+        if name == "atk_pass_pct":  return ema_atk["ema_l_pass_pct"]
+        if name == "atk_corners":   return ema_atk["ema_l_corners"]
+        if name == "atk_yellow":    return ema_atk["ema_l_yellow"]
+        if name == "atk_red":       return ema_atk["ema_l_red"]
+        if name == "atk_fouls":     return ema_atk["ema_l_fouls"]
+        if name == "atk_shots":     return ema_atk["ema_l_shots"]
+        # Crudas def (lookup en ema_c_* del defensor)
+        if name == "def_sots_c":    return ema_def["ema_c_sots"]
+        if name == "def_shot_pct_c":return ema_def["ema_c_shot_pct"]
+        if name == "def_tackles_c": return ema_def["ema_c_tackles"]
+        if name == "def_blocks_c":  return ema_def["ema_c_blocks"]
+        if name == "def_yellow_c":  return ema_def["ema_c_yellow"]
+        # Ratios derivados
+        if name == "atk_sots_per_shot":
+            sh = ema_atk.get("ema_l_shots")
+            if sh is None or sh == 0: return 0.4
+            return float(ema_atk["ema_l_sots"]) / float(sh)
+        if name == "atk_pressure":
+            return float(ema_atk["ema_l_pos"]) * float(ema_atk["ema_l_shot_pct"]) / 100.0
+        if name == "atk_set_piece":
+            return float(ema_atk["ema_l_corners"])
+        if name == "atk_red_card_rate":
+            f = ema_atk.get("ema_l_fouls")
+            if f is None or f == 0: return 0.0
+            return float(ema_atk["ema_l_red"]) / float(f)
+        if name == "def_solidez":
+            return float(ema_def["ema_c_tackles"]) + float(ema_def["ema_c_blocks"])
+        return None
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+# Columnas EMA necesarias para F1-F6 (full set para lookup unico)
+_V13_EMA_COLS = [
+    "ema_l_sots", "ema_l_shot_pct", "ema_l_pos", "ema_l_pass_pct", "ema_l_corners",
+    "ema_l_yellow", "ema_l_red", "ema_l_fouls", "ema_l_shots",
+    "ema_c_sots", "ema_c_shot_pct", "ema_c_tackles", "ema_c_blocks", "ema_c_yellow",
+]
 
 
 def _calcular_xg_v13(liga, equipo_attaque, equipo_defensa, fecha_str, conn,
@@ -767,6 +812,9 @@ def _calcular_xg_v13(liga, equipo_attaque, equipo_defensa, fecha_str, conn,
     """[V13 SHADOW] Calcula xG con la BEST variant calibrada para esa liga.
 
     Cada liga tiene su propio (metodo, feature_set) elegido del grid search.
+    Soporta F1_off, F2_pos, F3_def, F4_disc, F5_ratio, F6_full con sus formulas
+    de ratios derivados (definidas en _v13_feat_value).
+
     Si liga no elegible o EMAs faltan, devuelve None.
     """
     cf_liga = _V13_COEFS.get(liga)
@@ -776,66 +824,39 @@ def _calcular_xg_v13(liga, equipo_attaque, equipo_defensa, fecha_str, conn,
     cf = cf_liga.get(target)
     if not cf:
         return None
-    fset = _V13_FEATURE_SETS.get(cf.get("feature_set"))
-    if not fset:
+    fset_names = _V13_FEATURE_SETS.get(cf.get("feature_set"))
+    if not fset_names:
         return None
     try:
         cur = conn.cursor()
-        # Lookup EMA del atacante (full row F3 schema, leemos todos los campos)
-        r_atk = cur.execute("""
-            SELECT ema_l_sots, ema_l_shot_pct, ema_l_pos, ema_l_pass_pct,
-                   ema_l_corners, ema_c_sots, ema_c_shot_pct,
-                   ema_c_tackles, ema_c_blocks
+        cols_sql = ", ".join(_V13_EMA_COLS)
+        r_atk = cur.execute(f"""
+            SELECT {cols_sql}
             FROM historial_equipos_stats
             WHERE liga=? AND equipo=? AND fecha < ? AND n_acum >= 5
             ORDER BY fecha DESC LIMIT 1
         """, (liga, equipo_attaque, fecha_str)).fetchone()
-        r_def = cur.execute("""
-            SELECT ema_l_sots, ema_l_shot_pct, ema_l_pos, ema_l_pass_pct,
-                   ema_l_corners, ema_c_sots, ema_c_shot_pct,
-                   ema_c_tackles, ema_c_blocks
+        r_def = cur.execute(f"""
+            SELECT {cols_sql}
             FROM historial_equipos_stats
             WHERE liga=? AND equipo=? AND fecha < ? AND n_acum >= 5
             ORDER BY fecha DESC LIMIT 1
         """, (liga, equipo_defensa, fecha_str)).fetchone()
         if not r_atk or not r_def:
             return None
-        if any(v is None for v in r_atk) or any(v is None for v in r_def):
-            return None
-
-        # Mapping nombres EMA -> indice en r_atk/r_def
-        EMA_IDX = {
-            "ema_l_sots": 0, "ema_l_shot_pct": 1, "ema_l_pos": 2,
-            "ema_l_pass_pct": 3, "ema_l_corners": 4,
-            "ema_c_sots": 5, "ema_c_shot_pct": 6,
-            "ema_c_tackles": 7, "ema_c_blocks": 8,
-        }
-
-        # Construir feature vector segun feature_set de la liga
-        feats = []
-        feat_aliases = []
-        for tipo, col_ema in fset:
-            idx = EMA_IDX.get(col_ema)
-            if idx is None:
-                return None
-            if tipo == "ataque":
-                feats.append(r_atk[idx])
-            else:
-                feats.append(r_def[idx])
-            # Construir alias para el dict coefs
-            if tipo == "ataque":
-                alias = col_ema.replace("ema_l_", "atk_")
-            else:
-                alias = col_ema.replace("ema_c_", "def_") + "_c"
-                # Fix: def_sots_c, def_shot_pct_c, def_tackles_c, def_blocks_c
-                # El _c ya es parte del schema: def_sots_c (no def_sots_c_c)
-                if alias.endswith("_c_c"):
-                    alias = alias[:-2]
-            feat_aliases.append(alias)
-
-        # Aplicar coefs
+        # Construir dicts EMA con nombres
+        ema_atk = dict(zip(_V13_EMA_COLS, r_atk))
+        ema_def = dict(zip(_V13_EMA_COLS, r_def))
+        # Si alguna columna critica para el feature set es None, fallar
         coefs_dict = cf["coefs"]
-        coefs_arr = [coefs_dict.get(a, 0.0) for a in feat_aliases]
+        feats = []
+        for name in fset_names:
+            v = _v13_feat_value(name, ema_atk, ema_def)
+            if v is None:
+                return None
+            feats.append(float(v))
+        # Aplicar coefs
+        coefs_arr = [coefs_dict.get(name, 0.0) for name in fset_names]
         pred = cf["intercept"] + sum(f * c for f, c in zip(feats, coefs_arr))
         return max(0.10, float(pred))
     except Exception:

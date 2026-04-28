@@ -47,6 +47,7 @@ MOTORES_DIARIOS = [
     {"archivo": "scripts/evaluar_pretest.py", "desc": "1.6. Pretest Monitor (auto-flip LIVE/PRETEST por liga)", "critico": False, "interactivo": False},
     {"archivo": "motor_arbitro.py",          "desc": "2. El Inquisidor (Auditoria Arbitral y Tarjetas)",       "critico": False, "interactivo": False},
     {"archivo": "motor_data.py",             "desc": "3. Regresion Bayesiana (Actualizacion de Poderio)",      "critico": True,  "interactivo": False},
+    {"archivo": "-m src.persistencia.actualizar_posiciones", "desc": "3.2. Actualizador Posiciones (incremental, hook post-liquidados)", "critico": False, "interactivo": False},
     {"archivo": "motor_adaptativo.py",       "desc": "3.5. Motor Adaptativo (Online SGD V12 + Auto-audit + Drift)", "critico": False, "interactivo": False},
 
     # --- FASE 2: HORIZONTE FUTURO ---

@@ -698,35 +698,38 @@ def _calcular_probs_skellam(xg_l, xg_v, max_goals=10):
 
 
 def _cargar_v13_coefs():
-    """[V13 SHADOW — bd-adepor-3ip] Carga coefs ridge por liga al import.
+    """[V13 SHADOW — bd-adepor-3ip] Carga BEST variant por liga al import.
 
-    Devuelve dict[liga][target] = {intercept, coefs (FEATURE_NAMES->valor), r2_oos}.
-    Solo incluye ligas con R2_oos >= 0.05 (umbral elegibilidad).
+    Post grid search 2026-04-28: cada liga tiene un (metodo, feature_set) distinto.
+    Solo se incluyen ligas con yield_oos > 0 y N_apost >= 10 en el audit OOS.
 
-    Si tabla v13_coef_por_liga no existe o está vacía, devuelve {} (V13 desactivado).
+    Devuelve dict[liga][target] = {intercept, coefs_dict, r2_oos, metodo, feature_set}.
+    Si tabla vacía o sin variants validas, devuelve {} (V13 desactivado).
     """
     try:
         import json as _json_v13
         _conn = sqlite3.connect(DB_NAME)
         _cur = _conn.cursor()
+        # MAX(calibrado_en) por (liga, target) -> ultima calibracion (que post recalibrar es la BEST).
         _rows = _cur.execute("""
-            SELECT liga, target, intercept, coefs_json, r2_oos
+            SELECT liga, target, intercept, coefs_json, r2_oos, metodo, feature_set
             FROM v13_coef_por_liga
             WHERE (liga, target, calibrado_en) IN (
                 SELECT liga, target, MAX(calibrado_en)
                 FROM v13_coef_por_liga
                 GROUP BY liga, target
             )
+            AND metodo IS NOT NULL
         """).fetchall()
         _conn.close()
         _out = {}
-        for liga, target, intercept, coefs_json, r2 in _rows:
-            if r2 is None or r2 < 0.05:
-                continue
+        for liga, target, intercept, coefs_json, r2, metodo, feature_set in _rows:
             _out.setdefault(liga, {})[target] = {
                 "intercept": float(intercept),
                 "coefs": _json_v13.loads(coefs_json),
-                "r2_oos": float(r2),
+                "r2_oos": float(r2) if r2 is not None else None,
+                "metodo": metodo,
+                "feature_set": feature_set,
             }
         return _out
     except Exception:
@@ -734,21 +737,37 @@ def _cargar_v13_coefs():
 
 
 _V13_COEFS = _cargar_v13_coefs()
-_V13_FEATURE_NAMES = [
-    "atk_sots", "atk_shot_pct", "atk_pos", "atk_pass_pct", "atk_corners",
-    "def_sots_c", "def_shot_pct_c",
-]
+
+# Feature set definitions (deben coincidir con analisis/v13_grid_search.py).
+# Orden CRITICO: el coefs_json persistido tiene los aliases en este orden.
+_V13_FEATURE_SETS = {
+    "F1_off": [
+        ("ataque", "ema_l_sots"), ("ataque", "ema_l_shot_pct"),
+        ("ataque", "ema_l_corners"),
+        ("defensa", "ema_c_sots"), ("defensa", "ema_c_shot_pct"),
+    ],
+    "F2_pos": [
+        ("ataque", "ema_l_sots"), ("ataque", "ema_l_shot_pct"),
+        ("ataque", "ema_l_pos"), ("ataque", "ema_l_pass_pct"),
+        ("ataque", "ema_l_corners"),
+        ("defensa", "ema_c_sots"), ("defensa", "ema_c_shot_pct"),
+    ],
+    "F3_def": [
+        ("ataque", "ema_l_sots"), ("ataque", "ema_l_shot_pct"),
+        ("ataque", "ema_l_pos"), ("ataque", "ema_l_pass_pct"),
+        ("ataque", "ema_l_corners"),
+        ("defensa", "ema_c_sots"), ("defensa", "ema_c_shot_pct"),
+        ("defensa", "ema_c_tackles"), ("defensa", "ema_c_blocks"),
+    ],
+}
 
 
 def _calcular_xg_v13(liga, equipo_attaque, equipo_defensa, fecha_str, conn,
                       target_local=True):
-    """[V13 SHADOW] Calcula xG para 'equipo_attaque' contra 'equipo_defensa'.
+    """[V13 SHADOW] Calcula xG con la BEST variant calibrada para esa liga.
 
-    Si target_local=True: ataque del local en su rol home + defensa del visita
-    en su rol away. Si target_local=False: viceversa (ataque del visita + defensa
-    del local).
-
-    Devuelve xG predicho (float >= 0.10) o None si liga no elegible o EMAs faltan.
+    Cada liga tiene su propio (metodo, feature_set) elegido del grid search.
+    Si liga no elegible o EMAs faltan, devuelve None.
     """
     cf_liga = _V13_COEFS.get(liga)
     if not cf_liga:
@@ -757,23 +776,24 @@ def _calcular_xg_v13(liga, equipo_attaque, equipo_defensa, fecha_str, conn,
     cf = cf_liga.get(target)
     if not cf:
         return None
+    fset = _V13_FEATURE_SETS.get(cf.get("feature_set"))
+    if not fset:
+        return None
     try:
         cur = conn.cursor()
-        # EMA del atacante (en su rol home si target_local; away si no)
-        # Como el script de calibracion usa ema_l del equipo en rol home, mantenemos
-        # esa convencion aqui: ataque siempre lee ema_l (la 'ema en casa') del equipo.
-        # Si target_local=True, ataque=local jugando en casa; si False, ataque=visita
-        # pero usamos su EMA tambien (su 'ema_l' representa su rendimiento general
-        # que ya esta calibrado por el ridge contra goles reales).
+        # Lookup EMA del atacante (full row F3 schema, leemos todos los campos)
         r_atk = cur.execute("""
             SELECT ema_l_sots, ema_l_shot_pct, ema_l_pos, ema_l_pass_pct,
-                   ema_l_corners, ema_c_sots, ema_c_shot_pct
+                   ema_l_corners, ema_c_sots, ema_c_shot_pct,
+                   ema_c_tackles, ema_c_blocks
             FROM historial_equipos_stats
             WHERE liga=? AND equipo=? AND fecha < ? AND n_acum >= 5
             ORDER BY fecha DESC LIMIT 1
         """, (liga, equipo_attaque, fecha_str)).fetchone()
         r_def = cur.execute("""
-            SELECT ema_c_sots, ema_c_shot_pct
+            SELECT ema_l_sots, ema_l_shot_pct, ema_l_pos, ema_l_pass_pct,
+                   ema_l_corners, ema_c_sots, ema_c_shot_pct,
+                   ema_c_tackles, ema_c_blocks
             FROM historial_equipos_stats
             WHERE liga=? AND equipo=? AND fecha < ? AND n_acum >= 5
             ORDER BY fecha DESC LIMIT 1
@@ -782,12 +802,40 @@ def _calcular_xg_v13(liga, equipo_attaque, equipo_defensa, fecha_str, conn,
             return None
         if any(v is None for v in r_atk) or any(v is None for v in r_def):
             return None
-        # Vector de features siguiendo FEATURE_NAMES order
-        # atk_sots, atk_shot_pct, atk_pos, atk_pass_pct, atk_corners,
-        # def_sots_c, def_shot_pct_c
-        feats = [r_atk[0], r_atk[1], r_atk[2], r_atk[3], r_atk[4],
-                 r_def[0], r_def[1]]
-        coefs_arr = [cf["coefs"][n] for n in _V13_FEATURE_NAMES]
+
+        # Mapping nombres EMA -> indice en r_atk/r_def
+        EMA_IDX = {
+            "ema_l_sots": 0, "ema_l_shot_pct": 1, "ema_l_pos": 2,
+            "ema_l_pass_pct": 3, "ema_l_corners": 4,
+            "ema_c_sots": 5, "ema_c_shot_pct": 6,
+            "ema_c_tackles": 7, "ema_c_blocks": 8,
+        }
+
+        # Construir feature vector segun feature_set de la liga
+        feats = []
+        feat_aliases = []
+        for tipo, col_ema in fset:
+            idx = EMA_IDX.get(col_ema)
+            if idx is None:
+                return None
+            if tipo == "ataque":
+                feats.append(r_atk[idx])
+            else:
+                feats.append(r_def[idx])
+            # Construir alias para el dict coefs
+            if tipo == "ataque":
+                alias = col_ema.replace("ema_l_", "atk_")
+            else:
+                alias = col_ema.replace("ema_c_", "def_") + "_c"
+                # Fix: def_sots_c, def_shot_pct_c, def_tackles_c, def_blocks_c
+                # El _c ya es parte del schema: def_sots_c (no def_sots_c_c)
+                if alias.endswith("_c_c"):
+                    alias = alias[:-2]
+            feat_aliases.append(alias)
+
+        # Aplicar coefs
+        coefs_dict = cf["coefs"]
+        coefs_arr = [coefs_dict.get(a, 0.0) for a in feat_aliases]
         pred = cf["intercept"] + sum(f * c for f, c in zip(feats, coefs_arr))
         return max(0.10, float(pred))
     except Exception:

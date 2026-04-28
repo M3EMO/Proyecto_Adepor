@@ -1,0 +1,198 @@
+{
+  "fecha": "2026-04-28T10:35:48.179686",
+  "elecciones": {
+    "Argentina": {
+      "feat": "F1_off",
+      "reg": "NNLS",
+      "yield": 8.33,
+      "ci_lo": -20.66,
+      "n_apost": 107,
+      "brier": 0.6427,
+      "local": {
+        "reg": "NNLS",
+        "n_train": 676,
+        "n_test": 368,
+        "intercept": 0.5939339247755946,
+        "coefs": [
+          0.15969386433584387,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "feature_aliases": [
+          "atk_sots",
+          "atk_shot_pct",
+          "atk_corners",
+          "def_sots_c",
+          "def_shot_pct_c"
+        ],
+        "mse_test": 1.1401,
+        "r2_oos": 0.0224,
+        "naive_mse": 1.1662,
+        "mse_gain": 0.0261,
+        "mean_pred": 1.196
+      },
+      "visita": {
+        "reg": "NNLS",
+        "n_train": 676,
+        "n_test": 368,
+        "intercept": 0.29826267196534084,
+        "coefs": [
+          0.07169631614906438,
+          0.0,
+          0.06812239019625507,
+          0.0,
+          0.0
+        ],
+        "feature_aliases": [
+          "atk_sots",
+          "atk_shot_pct",
+          "atk_corners",
+          "def_sots_c",
+          "def_shot_pct_c"
+        ],
+        "mse_test": 0.9363,
+        "r2_oos": -0.0108,
+        "naive_mse": 0.9312,
+        "mse_gain": -0.0051,
+        "mean_pred": 0.878
+      }
+    },
+    "Francia": {
+      "feat": "F2_pos",
+      "reg": "NNLS",
+      "yield": 20.28,
+      "ci_lo": -30.17,
+      "n_apost": 36,
+      "brier": 0.6304,
+      "local": {
+        "reg": "NNLS",
+        "n_train": 266,
+        "n_test": 110,
+        "intercept": 0.2085616910590522,
+        "coefs": [
+          0.0,
+          0.0,
+          0.023756138539876685,
+          0.0,
+          0.02665103498996575,
+          0.0,
+          0.0
+        ],
+        "feature_aliases": [
+          "atk_sots",
+          "atk_shot_pct",
+          "atk_pos",
+          "atk_pass_pct",
+          "atk_corners",
+          "def_sots_c",
+          "def_shot_pct_c"
+        ],
+        "mse_test": 1.3371,
+        "r2_oos": 0.0541,
+        "naive_mse": 1.4142,
+        "mse_gain": 0.0771,
+        "mean_pred": 1.486
+      },
+      "visita": {
+        "reg": "NNLS",
+        "n_train": 266,
+        "n_test": 110,
+        "intercept": 0.7879500422420813,
+        "coefs": [
+          0.09257563095852378,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "feature_aliases": [
+          "atk_sots",
+          "atk_shot_pct",
+          "atk_pos",
+          "atk_pass_pct",
+          "atk_corners",
+          "def_sots_c",
+          "def_shot_pct_c"
+        ],
+        "mse_test": 1.3787,
+        "r2_oos": 0.0067,
+        "naive_mse": 1.3965,
+        "mse_gain": 0.0178,
+        "mean_pred": 1.197
+      }
+    },
+    "Italia": {
+      "feat": "F2_pos",
+      "reg": "RIDGE",
+      "yield": 3.66,
+      "ci_lo": -34.87,
+      "n_apost": 52,
+      "brier": 0.6326,
+      "local": {
+        "reg": "RIDGE",
+        "lambda": 10.0,
+        "n_train": 435,
+        "n_test": 227,
+        "intercept": 0.856279985147924,
+        "coefs": [
+          0.23514703212508214,
+          -1.2221378481726997,
+          0.007895421830102617,
+          0.12277717703632256,
+          -0.10617517149854522,
+          -0.1178732545673946,
+          1.5551085101172382
+        ],
+        "feature_aliases": [
+          "atk_sots",
+          "atk_shot_pct",
+          "atk_pos",
+          "atk_pass_pct",
+          "atk_corners",
+          "def_sots_c",
+          "def_shot_pct_c"
+        ],
+        "mse_test": 1.0403,
+        "r2_oos": 0.0852,
+        "naive_mse": 1.1494,
+        "mse_gain": 0.1091,
+        "mean_pred": 1.401
+      },
+      "visita": {
+        "reg": "RIDGE",
+        "lambda": 100.0,
+        "n_train": 435,
+        "n_test": 227,
+        "intercept": 0.9670159481661986,
+        "coefs": [
+          0.11257900664022269,
+          0.2514203925293924,
+          0.0037730828883069615,
+          -0.45278361681130724,
+          0.014963047490299308,
+          -0.07397505137035204,
+          0.2718636414047789
+        ],
+        "feature_aliases": [
+          "atk_sots",
+          "atk_shot_pct",
+          "atk_pos",
+          "atk_pass_pct",
+          "atk_corners",
+          "def_sots_c",
+          "def_shot_pct_c"
+        ],
+        "mse_test": 1.1728,
+        "r2_oos": 0.0269,
+        "naive_mse": 1.2053,
+        "mse_gain": 0.0324,
+        "mean_pred": 1.181
+      }
+    }
+  },
+  "n_ligas_calibradas": 3
+}

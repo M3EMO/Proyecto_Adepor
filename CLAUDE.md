@@ -86,9 +86,9 @@ FLOOR_PROB_MIN, MAX_KELLY_PCT_*, etc.)** se debe:
 
 El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreated`.
 
-**Estado actual (2026-04-28):**
-- **Versión:** V5.2 (Layer 3 H4 X-rescue per-liga, infraestructura ON, JSON config vacío)
-- **SHA-256:** `471c1c00b927baad59cd13688bd5db142550a1aadbc45980a2b6d76862c4ab6c`
+**Estado actual (2026-04-28 post-sesión 2):**
+- **Versión:** V5.2 (Layer 3 H4 X-rescue per-liga, **ACTIVO**) + bug-fix helpers (decision-log adepor-0og)
+- **SHA-256:** `471c1c00b927baad59cd13688bd5db142550a1aadbc45980a2b6d76862c4ab6c` (sin cambios — fix interno no toca manifesto)
 - **Locked:** `configuracion.manifesto_locked = 'true'`
 - **Layers vigentes:**
   - V5.0 §L Layer 2: `arch_decision_per_liga = {"Turquia": "V12"}`. V12 standalone activo
@@ -97,12 +97,13 @@ El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreat
     - **M.1** `apostar_solo_si_liga_in {Argentina, Brasil, Inglaterra, Noruega, Turquía}` ✓ ACTIVO
     - **M.2** `apostar_solo_si n_acum_l < 60` ✓ ACTIVO (calibrado en 2024 sig)
     - **M.3** `apostar_solo_si momento_bin_4 != 3` ✗ DESACTIVADO en V5.1.2
-  - **V5.2 §N Layer 3 H4 X-rescue per-liga**: `h4_x_rescue_threshold = '{}'` (default vacío,
-    INACTIVO). Override de argmax a 'X' (vía override de probs a V12) si liga ∈ JSON Y
-    argmax_v12=='X' Y P_v12(X) > thresh[liga] Y NOT (pos_local TOP3) Y NOT (gap_local≤14
-    AND gap_visita≤14). Activación recomendada via SQL UPDATE: `{"Argentina": 0.35,
-    "Italia": 0.35, "Inglaterra": 0.35, "Alemania": 0.35}`. Validación OOS 2022-2024
-    N=160 con filtro doble: Δ +0.426 [+0.07, +0.78] *** SIG POS.
+  - **V5.2 §N Layer 3 H4 X-rescue per-liga**: `h4_x_rescue_threshold = '{"Argentina":0.35,"Italia":0.35,"Inglaterra":0.35,"Alemania":0.35}'`
+    ✓ **ACTIVO LIVE 2026-04-28 18:51 ARS**. Operativamente solo ARG+ING impactan picks LIVE
+    (M.1 filtra ITA/ALE — listadas para activación futura). Validación OOS 2022-2024
+    N=160 con filtro doble: Δ +0.426 [+0.07, +0.78] *** SIG POS. Backtest contrafáctico
+    in-sample 2026 N=6: V0 yield +1.175 vs X yield -0.525, Δ -1.700 (CI95 amplio, no
+    concluyente, pero alineado con `adepor-9uq` régimen 2026 vs OOS).
+    Auditoría longitudinal vía `picks_shadow_layer3_log` + `analisis/audit_layer3_monthly.py`.
 - **V5.1.2 cambio (2026-04-28):** `filtro_picks_v51.excluir_q4=false` en config. Audit in-sample
   reveló que M.3 NEW (calendario fix) bloquea Inglaterra Q4 +70.7% y Turquía Q4 +50.8% que
   hoy están dando dinero. Calibración OOS 2024 (Q4 −16.1% sig) NO transfiere a régimen 2026.
@@ -115,6 +116,20 @@ El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreat
   Helpers nuevos: `_get_pos_local_forward`, `_get_gap_dias_no_liga` en motor_calculadora.py.
   Tabla nueva: `partidos_no_liga` (8,742 OOS 2022-2024 via API-Football + 192 in-sample 2026
   via Wikipedia parcial), view `v_partidos_unificado` (UNION liga + no-liga).
+- **V5.2 sesión 2 (2026-04-28 PM):** Layer 3 ACTIVO live. Bug fix Layer 3 helpers
+  (decision-log `adepor-0og`): los helpers usaban `WHERE equipo=?` con `loc_norm` (lower+sin
+  acentos) pero las tablas almacenaban display name → lookup retornaba None 100% → filtros
+  inversos no funcionaban. Fix: ALTER TABLE ADD `equipo_norm` a `posiciones_tabla_snapshot`,
+  `ht_norm`/`at_norm` a `partidos_historico_externo`, `equipo_local_norm`/`equipo_visita_norm`
+  a `partidos_no_liga`; backfill 32k+14k+8k filas; 5 índices nuevos; `v_partidos_unificado`
+  recreada con cols norm. Sanity post-fix: 7 APLICA + 6 SKIP_TOP3 + 2 SKIP_CANSADOS sobre
+  184 partidos. Logging activo en `picks_shadow_layer3_log` (PK `id_partido`+`fecha_evaluacion`).
+  Mojibake fix `adepor-z0e` aplicado (regla B-corregida: acento+uppercase canónicos): 755 UPDATEs,
+  0 DELETEs, 0 clusters residuales. Follow-up `adepor-qqb`: popular `_norm` en INSERT path
+  scrapers (sin esto, datos nuevos no son lookable). Scripts nuevos: `analisis/sanity_layer3.py`,
+  `analisis/fixture_layer3_upcoming.py`, `analisis/audit_layer3_monthly.py`,
+  `analisis/backtest_layer3_contrafactual.py`, `analisis/diagnostic_mojibake_equipos.py`,
+  `analisis/fix_mojibake_equipos.py`.
 - **V13 SHADOW puro:** Argentina F1_off NNLS, Francia F2_pos NNLS, Italia F2_pos RIDGE,
   Inglaterra F5_ratio NNLS. NO afecta picks. Validación N≥200 SHADOW para promoción.
 - **Calendario individual:** tabla `liga_calendario_temp` (80 filas) con fechas reales

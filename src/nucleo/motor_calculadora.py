@@ -1014,6 +1014,9 @@ def _get_pos_local_forward(liga, equipo_norm, fecha_str, conn):
 
     Para Argentina prefiere formato='anual'; para EUR top usa formato='liga'.
     Si retorna None, el filtro Layer 3 NO bloquea (fail-safe — pasa el override).
+
+    [FIX 2026-04-28] Query por equipo_norm (no display) — antes lookup fallaba por
+    mismatch normalizar_extremo('River Plate')='riverplate' vs equipo='River Plate'.
     """
     try:
         cur = conn.cursor()
@@ -1021,7 +1024,7 @@ def _get_pos_local_forward(liga, equipo_norm, fecha_str, conn):
         formato_pref = "'anual'" if liga == 'Argentina' else "'liga'"
         r = cur.execute(f"""
             SELECT posicion FROM posiciones_tabla_snapshot
-            WHERE liga = ? AND equipo = ? AND fecha_snapshot < ?
+            WHERE liga = ? AND equipo_norm = ? AND fecha_snapshot < ?
               AND formato IN ({formato_pref}, 'anual', 'liga')
             ORDER BY fecha_snapshot DESC LIMIT 1
         """, (liga, equipo_norm, fecha_str)).fetchone()
@@ -1041,13 +1044,17 @@ def _get_gap_dias_no_liga(equipo_norm, fecha_str, conn):
 
     None significa: o el equipo no juega copas o partidos_no_liga no tiene cobertura
     para esa fecha. Fail-safe: filtro Layer 3 NO bloquea con None (pasa el override).
+
+    [FIX 2026-04-28] Query por equipo_local_norm/equipo_visita_norm (cols agregadas
+    a partidos_no_liga + partidos_historico_externo + view) — antes lookup fallaba por
+    mismatch normalizar_extremo('River Plate')='riverplate' vs columnas con display name.
     """
     try:
         cur = conn.cursor()
         r = cur.execute("""
             SELECT julianday(?) - julianday(fecha)
             FROM v_partidos_unificado
-            WHERE (equipo_local = ? OR equipo_visita = ?)
+            WHERE (equipo_local_norm = ? OR equipo_visita_norm = ?)
               AND fecha < ? AND competicion_tipo != 'liga'
             ORDER BY fecha DESC LIMIT 1
         """, (fecha_str, equipo_norm, equipo_norm, fecha_str)).fetchone()
@@ -1285,6 +1292,38 @@ def _log_shadow_v6_v7(id_partido, xg_v6_l, xg_v6_v, rho, liga=None,
         conn.close()
     except Exception:
         pass  # Falla silenciosa: shadow no rompe motor
+
+
+def _log_layer3(conn, id_partido, fecha_partido, pais, local, visita, branch,
+                px_v12, thresh_liga, p1_v12, p2_v12,
+                pos_local, gap_l, gap_v,
+                p1_v0_pre, px_v0_pre, p2_v0_pre, aplicado):
+    """[V5.2 §N — bd-adepor-tyb] Log Layer 3 H4 X-rescue para auditoria longitudinal.
+
+    Inserta en picks_shadow_layer3_log cada vez que el motor evalua un partido
+    cuyo argmax_v12 == 'X' AND P_v12(X) > thresh[liga], independiente de si el
+    override se aplico (branch=APLICA[_CON_NULL]) o filtros bloquearon
+    (branch=SKIP_TOP3 / SKIP_CANSADOS / SKIP_AMBOS).
+
+    No-op silencioso si tabla no existe. Ver schema en migracion 2026-04-28.
+    """
+    try:
+        from datetime import datetime as _dt
+        ts = _dt.now().isoformat()
+        conn.execute("""
+            INSERT OR REPLACE INTO picks_shadow_layer3_log
+            (id_partido, fecha_evaluacion, fecha_partido, pais, local, visita, branch,
+             px_v12, thresh_liga, p1_v12, px_v12_full, p2_v12,
+             pos_local, gap_l_no_liga, gap_v_no_liga,
+             p1_v0_pre, px_v0_pre, p2_v0_pre, aplicado_produccion, timestamp)
+            VALUES (?,?,?,?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?, ?, ?)
+        """, (id_partido, ts, fecha_partido, pais, local, visita, branch,
+              px_v12, thresh_liga, p1_v12, px_v12, p2_v12,
+              pos_local, gap_l, gap_v,
+              p1_v0_pre, px_v0_pre, p2_v0_pre, int(bool(aplicado)), ts))
+    except Exception as _e:
+        # Fail-safe: nunca rompe motor si logging falla
+        print(f"   [LAYER3-LOG-FAIL] {_e}")
 
 
 def _log_shadow_arquitecturas(id_partido, pais, fecha_partido, xg_l, xg_v, rho,
@@ -1887,8 +1926,23 @@ def main():
                         if local_es_top3: razones_skip.append(f"local_TOP3(pos={pos_local_now})")
                         if ambos_cansados: razones_skip.append(f"ambos_cansados(gap_l={gap_l_no_liga}d,gap_v={gap_v_no_liga}d)")
 
+                        # Determinar branch para logging
                         if not razones_skip:
-                            p1_v0_pre_h4, px_v0_pre_h4, p2_v0_pre_h4 = p1, px, p2
+                            tiene_null = (pos_local_now is None or
+                                          gap_l_no_liga is None or gap_v_no_liga is None)
+                            _branch_h4 = 'APLICA_CON_NULL' if tiene_null else 'APLICA'
+                        elif local_es_top3 and ambos_cansados:
+                            _branch_h4 = 'SKIP_AMBOS'
+                        elif local_es_top3:
+                            _branch_h4 = 'SKIP_TOP3'
+                        else:
+                            _branch_h4 = 'SKIP_CANSADOS'
+
+                        # Snapshot pre-override (V0 o Layer2 si Turquia, pero Layer 2 ya
+                        # fue excluido arriba con _layer2_aplicado check)
+                        p1_v0_pre_h4, px_v0_pre_h4, p2_v0_pre_h4 = p1, px, p2
+
+                        if not razones_skip:
                             p1, px, p2 = p1_v12_h4, px_v12_h4, p2_v12_h4
                             print(f"   [LAYER3-H4-V5.2] {local} vs {visita} ({pais}) | "
                                   f"P_v12(X)={px_v12_h4:.3f}>{_h4_thresh_liga} | "
@@ -1899,6 +1953,14 @@ def main():
                             print(f"   [LAYER3-H4-SKIP] {local} vs {visita} ({pais}) | "
                                   f"P_v12(X)={px_v12_h4:.3f} pasa thresh pero filtros bloquean: "
                                   f"{','.join(razones_skip)}")
+
+                        # Log a picks_shadow_layer3_log para auditoria
+                        _log_layer3(conn, id_partido, fecha_str, pais, local, visita,
+                                    _branch_h4, px_v12_h4, _h4_thresh_liga,
+                                    p1_v12_h4, p2_v12_h4,
+                                    pos_local_now, gap_l_no_liga, gap_v_no_liga,
+                                    p1_v0_pre_h4, px_v0_pre_h4, p2_v0_pre_h4,
+                                    aplicado=(not razones_skip))
         except Exception as _e_h4:
             print(f"   [LAYER3-H4-FAIL] {pais}: {_e_h4}, fallback V0/Layer2")
 

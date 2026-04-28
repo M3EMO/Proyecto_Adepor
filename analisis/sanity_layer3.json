@@ -1,0 +1,313 @@
+{
+  "config_layer3": {
+    "Argentina": 0.35,
+    "Italia": 0.35,
+    "Inglaterra": 0.35,
+    "Alemania": 0.35
+  },
+  "config_layer2": {
+    "Turquia": "V12"
+  },
+  "n_partidos": 184,
+  "counts_global": {
+    "NO_X": 154,
+    "NO_THRESH": 2,
+    "APLICA": 7,
+    "SKIP_TOP3": 6,
+    "APLICA_CON_NULL": 2,
+    "SKIP_CANSADOS": 2,
+    "XG_V6_FAIL": 11
+  },
+  "counts_por_liga": {
+    "Argentina": {
+      "NO_X": 83,
+      "NO_THRESH": 2,
+      "APLICA": 6,
+      "SKIP_TOP3": 5,
+      "APLICA_CON_NULL": 2,
+      "SKIP_CANSADOS": 2
+    },
+    "Inglaterra": {
+      "NO_X": 47
+    },
+    "Italia": {
+      "NO_X": 14,
+      "XG_V6_FAIL": 3,
+      "APLICA": 1,
+      "SKIP_TOP3": 1
+    },
+    "Alemania": {
+      "NO_X": 10,
+      "XG_V6_FAIL": 8
+    }
+  },
+  "lookup_nulls": {
+    "gap_l_NULL": 2,
+    "gap_v_NULL": 1
+  },
+  "ejemplos": {
+    "APLICA": [
+      {
+        "id": "2026-03-22estudiantesderiocuartoriverplate",
+        "fecha": "2026-03-22 00:00",
+        "pais": "Argentina",
+        "local": "Estudiantes de Río Cuarto",
+        "visita": "River Plate",
+        "px_v12": 0.435,
+        "thresh": 0.35,
+        "pos_local": 6,
+        "gap_l": 683,
+        "gap_v": 508,
+        "pick_motor": "[PASAR] Riesgo/Beneficio",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-04-12estudiantesderiocuartobarracascentral",
+        "fecha": "2026-04-11 21:45",
+        "pais": "Argentina",
+        "local": "Estudiantes de Río Cuarto",
+        "visita": "Barracas Central",
+        "px_v12": 0.457,
+        "thresh": 0.35,
+        "pos_local": 9,
+        "gap_l": 703,
+        "gap_v": 4,
+        "pick_motor": "[PASAR] Margen Predictivo Insuficiente (<5%)",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-04-20banfieldindependienterivadavia",
+        "fecha": "2026-04-20 17:15",
+        "pais": "Argentina",
+        "local": "Banfield",
+        "visita": "Independiente Rivadavia",
+        "px_v12": 0.363,
+        "thresh": 0.35,
+        "pos_local": 8,
+        "gap_l": 613,
+        "gap_v": 5,
+        "pick_motor": "[PASAR] Floor Prob (40%<40%)",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-04-24estudiantesderiocuartorosariocentral",
+        "fecha": "2026-04-24 19:15",
+        "pais": "Argentina",
+        "local": "Estudiantes de Río Cuarto",
+        "visita": "Rosario Central",
+        "px_v12": 0.386,
+        "thresh": 0.35,
+        "pos_local": 9,
+        "gap_l": 716,
+        "gap_v": 9,
+        "pick_motor": "[PERDIDA] LOCAL",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-04-25sarmientojunintigre",
+        "fecha": "2026-04-25 19:15",
+        "pais": "Argentina",
+        "local": "Sarmiento (Junín)",
+        "visita": "Tigre",
+        "px_v12": 0.383,
+        "thresh": 0.35,
+        "pos_local": 4,
+        "gap_l": 788,
+        "gap_v": 9,
+        "pick_motor": "[GANADA] LOCAL",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-05-02udinesetorino",
+        "fecha": "2026-05-02 10:00",
+        "pais": "Italia",
+        "local": "Udinese",
+        "visita": "Torino",
+        "px_v12": 0.372,
+        "thresh": 0.35,
+        "pos_local": 4,
+        "gap_l": 499,
+        "gap_v": 585,
+        "pick_motor": "[PASAR] Liga No Apostable (V5.1)",
+        "estado": "Calculado",
+        "resultado": null
+      },
+      {
+        "id": "2026-05-03estudiantesderiocuartoinstitutocordoba",
+        "fecha": "2026-05-03 15:00",
+        "pais": "Argentina",
+        "local": "Estudiantes de Río Cuarto",
+        "visita": "Instituto (Córdoba)",
+        "px_v12": 0.451,
+        "thresh": 0.35,
+        "pos_local": 9,
+        "gap_l": 725,
+        "gap_v": 760,
+        "pick_motor": "[APOSTAR] LOCAL",
+        "estado": "Calculado",
+        "resultado": null
+      }
+    ],
+    "SKIP_TOP3": [
+      {
+        "id": "2026-03-25deportivoriestrasanlorenzo",
+        "fecha": "2026-03-25 00:00",
+        "pais": "Argentina",
+        "local": "Deportivo Riestra",
+        "visita": "San Lorenzo",
+        "px_v12": 0.393,
+        "thresh": 0.35,
+        "pos_local": 1,
+        "gap_l": 678,
+        "gap_v": 581,
+        "pick_motor": "[PASAR] Floor Prob (39%<40%)",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-04-02barracascentralsarmientojunin",
+        "fecha": "2026-04-02 00:00",
+        "pais": "Argentina",
+        "local": "Barracas Central",
+        "visita": "Sarmiento (Junín)",
+        "px_v12": 0.355,
+        "thresh": 0.35,
+        "pos_local": 1,
+        "gap_l": 588,
+        "gap_v": 765,
+        "pick_motor": "[PERDIDA] LOCAL",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-04-12newellsoldboyssanlorenzo",
+        "fecha": "2026-04-12 15:00",
+        "pais": "Argentina",
+        "local": "Newell's Old Boys",
+        "visita": "San Lorenzo",
+        "px_v12": 0.373,
+        "thresh": 0.35,
+        "pos_local": 3,
+        "gap_l": 599,
+        "gap_v": 4,
+        "pick_motor": "[PASAR] Floor Prob (39%<40%)",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-04-13sarmientojuningimnasialaplata",
+        "fecha": "2026-04-13 16:30",
+        "pais": "Argentina",
+        "local": "Sarmiento (Junín)",
+        "visita": "Gimnasia La Plata",
+        "px_v12": 0.39,
+        "thresh": 0.35,
+        "pos_local": 3,
+        "gap_l": 776,
+        "gap_v": null,
+        "pick_motor": "[GANADA] VISITA",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-04-23defensayjusticiabocajuniors",
+        "fecha": "2026-04-23 20:00",
+        "pais": "Argentina",
+        "local": "Defensa y Justicia",
+        "visita": "Boca Juniors",
+        "px_v12": 0.352,
+        "thresh": 0.35,
+        "pos_local": 2,
+        "gap_l": 693,
+        "gap_v": 9,
+        "pick_motor": "[PERDIDA] LOCAL",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-05-02comonapoli",
+        "fecha": "2026-05-02 13:00",
+        "pais": "Italia",
+        "local": "Como",
+        "visita": "Napoli",
+        "px_v12": 0.366,
+        "thresh": 0.35,
+        "pos_local": 3,
+        "gap_l": 629,
+        "gap_v": 513,
+        "pick_motor": "[PASAR] Liga No Apostable (V5.1)",
+        "estado": "Calculado",
+        "resultado": null
+      }
+    ],
+    "APLICA_CON_NULL": [
+      {
+        "id": "2026-04-05gimnasialaplatahuracan",
+        "fecha": "2026-04-05 15:30",
+        "pais": "Argentina",
+        "local": "Gimnasia La Plata",
+        "visita": "Huracán",
+        "px_v12": 0.353,
+        "thresh": 0.35,
+        "pos_local": 6,
+        "gap_l": null,
+        "gap_v": 527,
+        "pick_motor": "[PASAR] Sin Cuotas",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-04-18gimnasialaplataestudiantesderiocuarto",
+        "fecha": "2026-04-18 15:00",
+        "pais": "Argentina",
+        "local": "Gimnasia La Plata",
+        "visita": "Estudiantes de Río Cuarto",
+        "px_v12": 0.415,
+        "thresh": 0.35,
+        "pos_local": 6,
+        "gap_l": null,
+        "gap_v": 710,
+        "pick_motor": "[PASAR] Margen Predictivo Insuficiente (<5%)",
+        "estado": "Liquidado",
+        "resultado": null
+      }
+    ],
+    "SKIP_CANSADOS": [
+      {
+        "id": "2026-04-25platensesanlorenzo",
+        "fecha": "2026-04-24 21:30",
+        "pais": "Argentina",
+        "local": "Platense",
+        "visita": "San Lorenzo",
+        "px_v12": 0.398,
+        "thresh": 0.35,
+        "pos_local": 8,
+        "gap_l": 8,
+        "gap_v": 8,
+        "pick_motor": "[PERDIDA] LOCAL",
+        "estado": "Liquidado",
+        "resultado": null
+      },
+      {
+        "id": "2026-05-03rosariocentraltigre",
+        "fecha": "2026-05-03 16:00",
+        "pais": "Argentina",
+        "local": "Rosario Central",
+        "visita": "Tigre",
+        "px_v12": 0.381,
+        "thresh": 0.35,
+        "pos_local": 5,
+        "gap_l": 5,
+        "gap_v": 3,
+        "pick_motor": "[PASAR] Floor Prob (31%<40%)",
+        "estado": "Calculado",
+        "resultado": null
+      }
+    ]
+  }
+}

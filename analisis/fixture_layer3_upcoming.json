@@ -1,0 +1,107 @@
+{
+  "config": {
+    "Argentina": 0.35,
+    "Italia": 0.35,
+    "Inglaterra": 0.35,
+    "Alemania": 0.35
+  },
+  "fecha_corrida": "2026-04-28T20:00:58.163234",
+  "n_partidos_evaluados": 40,
+  "counts": {
+    "XG_V6_FAIL": 11,
+    "NO_X": 25,
+    "APLICA": 2,
+    "SKIP_TOP3": 1,
+    "SKIP_CANSADOS": 1
+  },
+  "counts_por_liga": {
+    "Italia": {
+      "XG_V6_FAIL": 3,
+      "APLICA": 1,
+      "SKIP_TOP3": 1,
+      "NO_X": 3
+    },
+    "Inglaterra": {
+      "NO_X": 8
+    },
+    "Alemania": {
+      "XG_V6_FAIL": 8,
+      "NO_X": 1
+    },
+    "Argentina": {
+      "NO_X": 13,
+      "APLICA": 1,
+      "SKIP_CANSADOS": 1
+    }
+  },
+  "overrides_predichos": [
+    {
+      "id": "2026-05-02udinesetorino",
+      "fecha": "2026-05-02 10:00",
+      "pais": "Italia",
+      "local": "Udinese",
+      "visita": "Torino",
+      "px_v12": 0.372,
+      "thresh": 0.35,
+      "pos_local": 4,
+      "gap_l": 499,
+      "gap_v": 585,
+      "p1_v12": 0.312,
+      "p2_v12": 0.316,
+      "cuota_x": 3.26,
+      "estado": "Calculado"
+    },
+    {
+      "id": "2026-05-03estudiantesderiocuartoinstitutocordoba",
+      "fecha": "2026-05-03 15:00",
+      "pais": "Argentina",
+      "local": "Estudiantes de Rio Cuarto",
+      "visita": "Instituto (córdoba)",
+      "px_v12": 0.451,
+      "thresh": 0.35,
+      "pos_local": 9,
+      "gap_l": 725,
+      "gap_v": 760,
+      "p1_v12": 0.234,
+      "p2_v12": 0.315,
+      "cuota_x": 3.01,
+      "estado": "Calculado"
+    }
+  ],
+  "skips_predichos": [
+    {
+      "branch": "SKIP_TOP3",
+      "id": "2026-05-02comonapoli",
+      "fecha": "2026-05-02 13:00",
+      "pais": "Italia",
+      "local": "Como",
+      "visita": "Napoli",
+      "px_v12": 0.366,
+      "thresh": 0.35,
+      "pos_local": 3,
+      "gap_l": 629,
+      "gap_v": 513,
+      "p1_v12": 0.319,
+      "p2_v12": 0.315,
+      "cuota_x": 3.32,
+      "estado": "Calculado"
+    },
+    {
+      "branch": "SKIP_CANSADOS",
+      "id": "2026-05-03rosariocentraltigre",
+      "fecha": "2026-05-03 16:00",
+      "pais": "Argentina",
+      "local": "Rosario Central",
+      "visita": "Tigre",
+      "px_v12": 0.381,
+      "thresh": 0.35,
+      "pos_local": 5,
+      "gap_l": 5,
+      "gap_v": 3,
+      "p1_v12": 0.315,
+      "p2_v12": 0.304,
+      "cuota_x": 3.13,
+      "estado": "Calculado"
+    }
+  ]
+}

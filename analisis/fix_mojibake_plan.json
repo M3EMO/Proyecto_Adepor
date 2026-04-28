@@ -1,0 +1,1250 @@
+{
+  "apply": true,
+  "snapshot": "snapshots/fondo_quant_20260428_200510_pre_z0e_fix.db",
+  "regla": "Opcion B: acento siempre canonico",
+  "clusters_globales": [
+    {
+      "liga": "Argentina",
+      "canonico": "Atlético Tucumán",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Atlético Tucumán",
+          "n_total": 242
+        },
+        {
+          "nombre": "Atletico Tucuman",
+          "n_total": 20
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Belgrano (Córdoba)",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Belgrano (Córdoba)",
+          "n_total": 158
+        },
+        {
+          "nombre": "Belgrano (cordoba)",
+          "n_total": 16
+        },
+        {
+          "nombre": "Belgrano (córdoba)",
+          "n_total": 3
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Central Córdoba (Santiago del Estero)",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Central Córdoba (Santiago del Estero)",
+          "n_total": 239
+        },
+        {
+          "nombre": "Central Córdoba (santiago del Estero)",
+          "n_total": 24
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Estudiantes de La Plata",
+      "regla_aplicada": "ascii_uppercase_N",
+      "variantes": [
+        {
+          "nombre": "Estudiantes de La Plata",
+          "n_total": 239
+        },
+        {
+          "nombre": "Estudiantes de la Plata",
+          "n_total": 24
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Estudiantes de Río Cuarto",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Estudiantes de Rio Cuarto",
+          "n_total": 20
+        },
+        {
+          "nombre": "Estudiantes de Río Cuarto",
+          "n_total": 3
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Gimnasia La Plata",
+      "regla_aplicada": "ascii_uppercase_N",
+      "variantes": [
+        {
+          "nombre": "Gimnasia La Plata",
+          "n_total": 239
+        },
+        {
+          "nombre": "Gimnasia la Plata",
+          "n_total": 20
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Huracán",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Huracán",
+          "n_total": 243
+        },
+        {
+          "nombre": "Huracan",
+          "n_total": 19
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Instituto (Córdoba)",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Instituto (Córdoba)",
+          "n_total": 159
+        },
+        {
+          "nombre": "Instituto (córdoba)",
+          "n_total": 24
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Lanús",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Lanús",
+          "n_total": 248
+        },
+        {
+          "nombre": "Lanus",
+          "n_total": 20
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Sarmiento (Junín)",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Sarmiento (Junín)",
+          "n_total": 240
+        },
+        {
+          "nombre": "Sarmiento (junin)",
+          "n_total": 16
+        },
+        {
+          "nombre": "Sarmiento (junín)",
+          "n_total": 3
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Talleres (Córdoba)",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Talleres (Córdoba)",
+          "n_total": 240
+        },
+        {
+          "nombre": "Talleres (córdoba)",
+          "n_total": 20
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Unión (Santa Fe)",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Unión (Santa Fe)",
+          "n_total": 240
+        },
+        {
+          "nombre": "Union (santa Fe)",
+          "n_total": 15
+        },
+        {
+          "nombre": "Unión (santa Fe)",
+          "n_total": 3
+        }
+      ]
+    },
+    {
+      "liga": "Argentina",
+      "canonico": "Vélez Sarsfield",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Vélez Sarsfield",
+          "n_total": 243
+        },
+        {
+          "nombre": "Velez Sarsfield",
+          "n_total": 15
+        }
+      ]
+    },
+    {
+      "liga": "Brasil",
+      "canonico": "Atlético-MG",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Atlético-MG",
+          "n_total": 227
+        },
+        {
+          "nombre": "Atlético-mg",
+          "n_total": 21
+        }
+      ]
+    },
+    {
+      "liga": "Brasil",
+      "canonico": "Grêmio",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Grêmio",
+          "n_total": 154
+        },
+        {
+          "nombre": "Gremio",
+          "n_total": 18
+        }
+      ]
+    },
+    {
+      "liga": "Brasil",
+      "canonico": "São Paulo",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "São Paulo",
+          "n_total": 233
+        },
+        {
+          "nombre": "Sao Paulo",
+          "n_total": 15
+        }
+      ]
+    },
+    {
+      "liga": "Brasil",
+      "canonico": "Vitória",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Vitória",
+          "n_total": 81
+        },
+        {
+          "nombre": "Vitoria",
+          "n_total": 12
+        }
+      ]
+    },
+    {
+      "liga": "Espana",
+      "canonico": "Alavés",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Alaves",
+          "n_total": 114
+        },
+        {
+          "nombre": "Alavés",
+          "n_total": 82
+        }
+      ]
+    },
+    {
+      "liga": "Espana",
+      "canonico": "Almería",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Almeria",
+          "n_total": 76
+        },
+        {
+          "nombre": "Almería",
+          "n_total": 74
+        }
+      ]
+    },
+    {
+      "liga": "Espana",
+      "canonico": "Cádiz",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Cadiz",
+          "n_total": 114
+        },
+        {
+          "nombre": "Cádiz",
+          "n_total": 75
+        }
+      ]
+    },
+    {
+      "liga": "Espana",
+      "canonico": "Leganés",
+      "regla_aplicada": "acento_mayor_N",
+      "variantes": [
+        {
+          "nombre": "Leganes",
+          "n_total": 38
+        },
+        {
+          "nombre": "Leganés",
+          "n_total": 37
+        }
+      ]
+    },
+    {
+      "liga": "Noruega",
+      "canonico": "Bodo/Glimt",
+      "regla_aplicada": "ascii_uppercase_N",
+      "variantes": [
+        {
+          "nombre": "Bodo/Glimt",
+          "n_total": 16
+        },
+        {
+          "nombre": "Bodo/glimt",
+          "n_total": 15
+        }
+      ]
+    },
+    {
+      "liga": "Noruega",
+      "canonico": "KFUM Oslo",
+      "regla_aplicada": "ascii_uppercase_N",
+      "variantes": [
+        {
+          "nombre": "KFUM Oslo",
+          "n_total": 17
+        },
+        {
+          "nombre": "Kfum Oslo",
+          "n_total": 13
+        }
+      ]
+    },
+    {
+      "liga": "Noruega",
+      "canonico": "Kristiansund BK",
+      "regla_aplicada": "ascii_uppercase_N",
+      "variantes": [
+        {
+          "nombre": "Kristiansund BK",
+          "n_total": 15
+        },
+        {
+          "nombre": "Kristiansund bk",
+          "n_total": 12
+        }
+      ]
+    },
+    {
+      "liga": "Noruega",
+      "canonico": "Sarpsborg FK",
+      "regla_aplicada": "ascii_uppercase_N",
+      "variantes": [
+        {
+          "nombre": "Sarpsborg fk",
+          "n_total": 17
+        },
+        {
+          "nombre": "Sarpsborg FK",
+          "n_total": 16
+        }
+      ]
+    },
+    {
+      "liga": "Noruega",
+      "canonico": "SK Brann",
+      "regla_aplicada": "ascii_uppercase_N",
+      "variantes": [
+        {
+          "nombre": "SK Brann",
+          "n_total": 16
+        },
+        {
+          "nombre": "Sk Brann",
+          "n_total": 14
+        }
+      ]
+    },
+    {
+      "liga": "Noruega",
+      "canonico": "Viking FK",
+      "regla_aplicada": "ascii_uppercase_N",
+      "variantes": [
+        {
+          "nombre": "Viking FK",
+          "n_total": 17
+        },
+        {
+          "nombre": "Viking fk",
+          "n_total": 14
+        }
+      ]
+    }
+  ],
+  "plans": {
+    "posiciones_tabla_snapshot": [
+      {
+        "liga": "Argentina",
+        "canonico": "Atlético Tucumán",
+        "minoritario": "Atletico Tucuman",
+        "n_filas_min": 10,
+        "n_delete_conflict": 0,
+        "n_update_ok": 10
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Belgrano (Córdoba)",
+        "minoritario": "Belgrano (cordoba)",
+        "n_filas_min": 8,
+        "n_delete_conflict": 0,
+        "n_update_ok": 8
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Belgrano (Córdoba)",
+        "minoritario": "Belgrano (córdoba)",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Central Córdoba (Santiago del Estero)",
+        "minoritario": "Central Córdoba (santiago del Estero)",
+        "n_filas_min": 12,
+        "n_delete_conflict": 0,
+        "n_update_ok": 12
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Estudiantes de La Plata",
+        "minoritario": "Estudiantes de la Plata",
+        "n_filas_min": 12,
+        "n_delete_conflict": 0,
+        "n_update_ok": 12
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Estudiantes de Río Cuarto",
+        "minoritario": "Estudiantes de Rio Cuarto",
+        "n_filas_min": 10,
+        "n_delete_conflict": 0,
+        "n_update_ok": 10
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Gimnasia La Plata",
+        "minoritario": "Gimnasia la Plata",
+        "n_filas_min": 10,
+        "n_delete_conflict": 0,
+        "n_update_ok": 10
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Huracán",
+        "minoritario": "Huracan",
+        "n_filas_min": 10,
+        "n_delete_conflict": 0,
+        "n_update_ok": 10
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Instituto (Córdoba)",
+        "minoritario": "Instituto (córdoba)",
+        "n_filas_min": 12,
+        "n_delete_conflict": 0,
+        "n_update_ok": 12
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Lanús",
+        "minoritario": "Lanus",
+        "n_filas_min": 10,
+        "n_delete_conflict": 0,
+        "n_update_ok": 10
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Sarmiento (Junín)",
+        "minoritario": "Sarmiento (junin)",
+        "n_filas_min": 8,
+        "n_delete_conflict": 0,
+        "n_update_ok": 8
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Sarmiento (Junín)",
+        "minoritario": "Sarmiento (junín)",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Talleres (Córdoba)",
+        "minoritario": "Talleres (córdoba)",
+        "n_filas_min": 10,
+        "n_delete_conflict": 0,
+        "n_update_ok": 10
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Unión (Santa Fe)",
+        "minoritario": "Union (santa Fe)",
+        "n_filas_min": 8,
+        "n_delete_conflict": 0,
+        "n_update_ok": 8
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Unión (Santa Fe)",
+        "minoritario": "Unión (santa Fe)",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Vélez Sarsfield",
+        "minoritario": "Velez Sarsfield",
+        "n_filas_min": 8,
+        "n_delete_conflict": 0,
+        "n_update_ok": 8
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Atlético-MG",
+        "minoritario": "Atlético-mg",
+        "n_filas_min": 7,
+        "n_delete_conflict": 0,
+        "n_update_ok": 7
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Grêmio",
+        "minoritario": "Gremio",
+        "n_filas_min": 6,
+        "n_delete_conflict": 0,
+        "n_update_ok": 6
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "São Paulo",
+        "minoritario": "Sao Paulo",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Vitória",
+        "minoritario": "Vitoria",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Espana",
+        "canonico": "Alavés",
+        "minoritario": "Alaves",
+        "n_filas_min": 114,
+        "n_delete_conflict": 0,
+        "n_update_ok": 114
+      },
+      {
+        "liga": "Espana",
+        "canonico": "Almería",
+        "minoritario": "Almeria",
+        "n_filas_min": 76,
+        "n_delete_conflict": 0,
+        "n_update_ok": 76
+      },
+      {
+        "liga": "Espana",
+        "canonico": "Cádiz",
+        "minoritario": "Cadiz",
+        "n_filas_min": 114,
+        "n_delete_conflict": 0,
+        "n_update_ok": 114
+      },
+      {
+        "liga": "Espana",
+        "canonico": "Leganés",
+        "minoritario": "Leganes",
+        "n_filas_min": 38,
+        "n_delete_conflict": 0,
+        "n_update_ok": 38
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Bodo/Glimt",
+        "minoritario": "Bodo/glimt",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "KFUM Oslo",
+        "minoritario": "Kfum Oslo",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Kristiansund BK",
+        "minoritario": "Kristiansund bk",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Sarpsborg FK",
+        "minoritario": "Sarpsborg fk",
+        "n_filas_min": 6,
+        "n_delete_conflict": 0,
+        "n_update_ok": 6
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "SK Brann",
+        "minoritario": "Sk Brann",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Viking FK",
+        "minoritario": "Viking fk",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      }
+    ],
+    "historial_equipos_stats": [
+      {
+        "liga": "Argentina",
+        "canonico": "Atlético Tucumán",
+        "minoritario": "Atletico Tucuman",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Belgrano (Córdoba)",
+        "minoritario": "Belgrano (cordoba)",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Central Córdoba (Santiago del Estero)",
+        "minoritario": "Central Córdoba (santiago del Estero)",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Estudiantes de La Plata",
+        "minoritario": "Estudiantes de la Plata",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Estudiantes de Río Cuarto",
+        "minoritario": "Estudiantes de Rio Cuarto",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Gimnasia La Plata",
+        "minoritario": "Gimnasia la Plata",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Huracán",
+        "minoritario": "Huracan",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Instituto (Córdoba)",
+        "minoritario": "Instituto (córdoba)",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Lanús",
+        "minoritario": "Lanus",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Sarmiento (Junín)",
+        "minoritario": "Sarmiento (junin)",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Talleres (Córdoba)",
+        "minoritario": "Talleres (córdoba)",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Unión (Santa Fe)",
+        "minoritario": "Union (santa Fe)",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Vélez Sarsfield",
+        "minoritario": "Velez Sarsfield",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Atlético-MG",
+        "minoritario": "Atlético-mg",
+        "n_filas_min": 6,
+        "n_delete_conflict": 0,
+        "n_update_ok": 6
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Grêmio",
+        "minoritario": "Gremio",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "São Paulo",
+        "minoritario": "Sao Paulo",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Vitória",
+        "minoritario": "Vitoria",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Bodo/Glimt",
+        "minoritario": "Bodo/glimt",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "KFUM Oslo",
+        "minoritario": "Kfum Oslo",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Kristiansund BK",
+        "minoritario": "Kristiansund bk",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Sarpsborg FK",
+        "minoritario": "Sarpsborg fk",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "SK Brann",
+        "minoritario": "Sk Brann",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Viking FK",
+        "minoritario": "Viking fk",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      }
+    ],
+    "partidos_backtest [local]": [
+      {
+        "liga": "Argentina",
+        "canonico": "Atlético Tucumán",
+        "minoritario": "Atletico Tucuman",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Belgrano (Córdoba)",
+        "minoritario": "Belgrano (cordoba)",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Belgrano (Córdoba)",
+        "minoritario": "Belgrano (córdoba)",
+        "n_filas_min": 1,
+        "n_delete_conflict": 0,
+        "n_update_ok": 1
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Central Córdoba (Santiago del Estero)",
+        "minoritario": "Central Córdoba (santiago del Estero)",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Estudiantes de La Plata",
+        "minoritario": "Estudiantes de la Plata",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Estudiantes de Río Cuarto",
+        "minoritario": "Estudiantes de Rio Cuarto",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Gimnasia La Plata",
+        "minoritario": "Gimnasia la Plata",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Huracán",
+        "minoritario": "Huracan",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Instituto (Córdoba)",
+        "minoritario": "Instituto (córdoba)",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Lanús",
+        "minoritario": "Lanus",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Sarmiento (Junín)",
+        "minoritario": "Sarmiento (junin)",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Sarmiento (Junín)",
+        "minoritario": "Sarmiento (junín)",
+        "n_filas_min": 1,
+        "n_delete_conflict": 0,
+        "n_update_ok": 1
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Talleres (Córdoba)",
+        "minoritario": "Talleres (córdoba)",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Unión (Santa Fe)",
+        "minoritario": "Union (santa Fe)",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Vélez Sarsfield",
+        "minoritario": "Velez Sarsfield",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Atlético-MG",
+        "minoritario": "Atlético-mg",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Grêmio",
+        "minoritario": "Gremio",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "São Paulo",
+        "minoritario": "Sao Paulo",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Vitória",
+        "minoritario": "Vitoria",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Bodo/Glimt",
+        "minoritario": "Bodo/glimt",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "KFUM Oslo",
+        "minoritario": "Kfum Oslo",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Kristiansund BK",
+        "minoritario": "Kristiansund bk",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Sarpsborg FK",
+        "minoritario": "Sarpsborg fk",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "SK Brann",
+        "minoritario": "Sk Brann",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Viking FK",
+        "minoritario": "Viking fk",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      }
+    ],
+    "partidos_backtest [visita]": [
+      {
+        "liga": "Argentina",
+        "canonico": "Atlético Tucumán",
+        "minoritario": "Atletico Tucuman",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Belgrano (Córdoba)",
+        "minoritario": "Belgrano (cordoba)",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Central Córdoba (Santiago del Estero)",
+        "minoritario": "Central Córdoba (santiago del Estero)",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Estudiantes de La Plata",
+        "minoritario": "Estudiantes de la Plata",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Estudiantes de Río Cuarto",
+        "minoritario": "Estudiantes de Rio Cuarto",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Gimnasia La Plata",
+        "minoritario": "Gimnasia la Plata",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Huracán",
+        "minoritario": "Huracan",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Instituto (Córdoba)",
+        "minoritario": "Instituto (córdoba)",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Lanús",
+        "minoritario": "Lanus",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Sarmiento (Junín)",
+        "minoritario": "Sarmiento (junin)",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Talleres (Córdoba)",
+        "minoritario": "Talleres (córdoba)",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Unión (Santa Fe)",
+        "minoritario": "Union (santa Fe)",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Unión (Santa Fe)",
+        "minoritario": "Unión (santa Fe)",
+        "n_filas_min": 1,
+        "n_delete_conflict": 0,
+        "n_update_ok": 1
+      },
+      {
+        "liga": "Argentina",
+        "canonico": "Vélez Sarsfield",
+        "minoritario": "Velez Sarsfield",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Atlético-MG",
+        "minoritario": "Atlético-mg",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Grêmio",
+        "minoritario": "Gremio",
+        "n_filas_min": 5,
+        "n_delete_conflict": 0,
+        "n_update_ok": 5
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "São Paulo",
+        "minoritario": "Sao Paulo",
+        "n_filas_min": 3,
+        "n_delete_conflict": 0,
+        "n_update_ok": 3
+      },
+      {
+        "liga": "Brasil",
+        "canonico": "Vitória",
+        "minoritario": "Vitoria",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Bodo/Glimt",
+        "minoritario": "Bodo/glimt",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "KFUM Oslo",
+        "minoritario": "Kfum Oslo",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Kristiansund BK",
+        "minoritario": "Kristiansund bk",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Sarpsborg FK",
+        "minoritario": "Sarpsborg fk",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "SK Brann",
+        "minoritario": "Sk Brann",
+        "n_filas_min": 4,
+        "n_delete_conflict": 0,
+        "n_update_ok": 4
+      },
+      {
+        "liga": "Noruega",
+        "canonico": "Viking FK",
+        "minoritario": "Viking fk",
+        "n_filas_min": 2,
+        "n_delete_conflict": 0,
+        "n_update_ok": 2
+      }
+    ]
+  }
+}

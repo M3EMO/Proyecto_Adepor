@@ -1,0 +1,881 @@
+{
+  "metodo": "fuzzy clustering por (liga, NFKD-lower-sin_acentos)",
+  "tablas": {
+    "historial_equipos_stats": {
+      "n_clusters_con_duplicados": 22,
+      "n_filas_afectadas_total": 1431,
+      "clusters_por_liga": {
+        "Argentina": [
+          {
+            "canonico_tentativo": "Lanús",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Lanús",
+                "n_filas": 82
+              },
+              {
+                "nombre": "Lanus",
+                "n_filas": 4
+              }
+            ],
+            "total_filas": 86
+          },
+          {
+            "canonico_tentativo": "Atlético Tucumán",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Atlético Tucumán",
+                "n_filas": 81
+              },
+              {
+                "nombre": "Atletico Tucuman",
+                "n_filas": 4
+              }
+            ],
+            "total_filas": 85
+          },
+          {
+            "canonico_tentativo": "Central Córdoba (Santiago del Estero)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Central Córdoba (Santiago del Estero)",
+                "n_filas": 80
+              },
+              {
+                "nombre": "Central Córdoba (santiago del Estero)",
+                "n_filas": 5
+              }
+            ],
+            "total_filas": 85
+          },
+          {
+            "canonico_tentativo": "Estudiantes de La Plata",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Estudiantes de La Plata",
+                "n_filas": 80
+              },
+              {
+                "nombre": "Estudiantes de la Plata",
+                "n_filas": 5
+              }
+            ],
+            "total_filas": 85
+          },
+          {
+            "canonico_tentativo": "Gimnasia La Plata",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Gimnasia La Plata",
+                "n_filas": 80
+              },
+              {
+                "nombre": "Gimnasia la Plata",
+                "n_filas": 4
+              }
+            ],
+            "total_filas": 84
+          },
+          {
+            "canonico_tentativo": "Huracán",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Huracán",
+                "n_filas": 81
+              },
+              {
+                "nombre": "Huracan",
+                "n_filas": 3
+              }
+            ],
+            "total_filas": 84
+          },
+          {
+            "canonico_tentativo": "Talleres (Córdoba)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Talleres (Córdoba)",
+                "n_filas": 80
+              },
+              {
+                "nombre": "Talleres (córdoba)",
+                "n_filas": 4
+              }
+            ],
+            "total_filas": 84
+          },
+          {
+            "canonico_tentativo": "Sarmiento (Junín)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Sarmiento (Junín)",
+                "n_filas": 80
+              },
+              {
+                "nombre": "Sarmiento (junin)",
+                "n_filas": 3
+              }
+            ],
+            "total_filas": 83
+          },
+          {
+            "canonico_tentativo": "Vélez Sarsfield",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Vélez Sarsfield",
+                "n_filas": 81
+              },
+              {
+                "nombre": "Velez Sarsfield",
+                "n_filas": 2
+              }
+            ],
+            "total_filas": 83
+          },
+          {
+            "canonico_tentativo": "Unión (Santa Fe)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Unión (Santa Fe)",
+                "n_filas": 80
+              },
+              {
+                "nombre": "Union (santa Fe)",
+                "n_filas": 2
+              }
+            ],
+            "total_filas": 82
+          },
+          {
+            "canonico_tentativo": "Instituto (Córdoba)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Instituto (Córdoba)",
+                "n_filas": 53
+              },
+              {
+                "nombre": "Instituto (córdoba)",
+                "n_filas": 5
+              }
+            ],
+            "total_filas": 58
+          },
+          {
+            "canonico_tentativo": "Belgrano (Córdoba)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Belgrano (Córdoba)",
+                "n_filas": 53
+              },
+              {
+                "nombre": "Belgrano (cordoba)",
+                "n_filas": 3
+              }
+            ],
+            "total_filas": 56
+          }
+        ],
+        "Brasil": [
+          {
+            "canonico_tentativo": "Atlético-MG",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Atlético-MG",
+                "n_filas": 113
+              },
+              {
+                "nombre": "Atlético-mg",
+                "n_filas": 6
+              }
+            ],
+            "total_filas": 119
+          },
+          {
+            "canonico_tentativo": "São Paulo",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "São Paulo",
+                "n_filas": 115
+              },
+              {
+                "nombre": "Sao Paulo",
+                "n_filas": 4
+              }
+            ],
+            "total_filas": 119
+          },
+          {
+            "canonico_tentativo": "Grêmio",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Grêmio",
+                "n_filas": 76
+              },
+              {
+                "nombre": "Gremio",
+                "n_filas": 5
+              }
+            ],
+            "total_filas": 81
+          },
+          {
+            "canonico_tentativo": "Vitória",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Vitória",
+                "n_filas": 39
+              },
+              {
+                "nombre": "Vitoria",
+                "n_filas": 3
+              }
+            ],
+            "total_filas": 42
+          }
+        ],
+        "Noruega": [
+          {
+            "canonico_tentativo": "Bodo/Glimt",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Bodo/Glimt",
+                "n_filas": 16
+              },
+              {
+                "nombre": "Bodo/glimt",
+                "n_filas": 4
+              }
+            ],
+            "total_filas": 20
+          },
+          {
+            "canonico_tentativo": "Sarpsborg FK",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Sarpsborg FK",
+                "n_filas": 16
+              },
+              {
+                "nombre": "Sarpsborg fk",
+                "n_filas": 4
+              }
+            ],
+            "total_filas": 20
+          },
+          {
+            "canonico_tentativo": "Viking FK",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Viking FK",
+                "n_filas": 17
+              },
+              {
+                "nombre": "Viking fk",
+                "n_filas": 3
+              }
+            ],
+            "total_filas": 20
+          },
+          {
+            "canonico_tentativo": "KFUM Oslo",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "KFUM Oslo",
+                "n_filas": 17
+              },
+              {
+                "nombre": "Kfum Oslo",
+                "n_filas": 2
+              }
+            ],
+            "total_filas": 19
+          },
+          {
+            "canonico_tentativo": "Kristiansund BK",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Kristiansund BK",
+                "n_filas": 15
+              },
+              {
+                "nombre": "Kristiansund bk",
+                "n_filas": 3
+              }
+            ],
+            "total_filas": 18
+          },
+          {
+            "canonico_tentativo": "SK Brann",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "SK Brann",
+                "n_filas": 16
+              },
+              {
+                "nombre": "Sk Brann",
+                "n_filas": 2
+              }
+            ],
+            "total_filas": 18
+          }
+        ]
+      }
+    },
+    "posiciones_tabla_snapshot": {
+      "n_clusters_con_duplicados": 18,
+      "n_filas_afectadas_total": 2435,
+      "clusters_por_liga": {
+        "Argentina": [
+          {
+            "canonico_tentativo": "Lanús",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Lanús",
+                "n_filas": 164
+              },
+              {
+                "nombre": "Lanus",
+                "n_filas": 10
+              }
+            ],
+            "total_filas": 174
+          },
+          {
+            "canonico_tentativo": "Central Córdoba (Santiago del Estero)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Central Córdoba (Santiago del Estero)",
+                "n_filas": 159
+              },
+              {
+                "nombre": "Central Córdoba (santiago del Estero)",
+                "n_filas": 12
+              }
+            ],
+            "total_filas": 171
+          },
+          {
+            "canonico_tentativo": "Estudiantes de La Plata",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Estudiantes de La Plata",
+                "n_filas": 159
+              },
+              {
+                "nombre": "Estudiantes de la Plata",
+                "n_filas": 12
+              }
+            ],
+            "total_filas": 171
+          },
+          {
+            "canonico_tentativo": "Huracán",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Huracán",
+                "n_filas": 161
+              },
+              {
+                "nombre": "Huracan",
+                "n_filas": 10
+              }
+            ],
+            "total_filas": 171
+          },
+          {
+            "canonico_tentativo": "Atlético Tucumán",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Atlético Tucumán",
+                "n_filas": 160
+              },
+              {
+                "nombre": "Atletico Tucuman",
+                "n_filas": 10
+              }
+            ],
+            "total_filas": 170
+          },
+          {
+            "canonico_tentativo": "Sarmiento (Junín)",
+            "n_variantes": 3,
+            "variantes": [
+              {
+                "nombre": "Sarmiento (Junín)",
+                "n_filas": 160
+              },
+              {
+                "nombre": "Sarmiento (junin)",
+                "n_filas": 8
+              },
+              {
+                "nombre": "Sarmiento (junín)",
+                "n_filas": 2
+              }
+            ],
+            "total_filas": 170
+          },
+          {
+            "canonico_tentativo": "Talleres (Córdoba)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Talleres (Córdoba)",
+                "n_filas": 160
+              },
+              {
+                "nombre": "Talleres (córdoba)",
+                "n_filas": 10
+              }
+            ],
+            "total_filas": 170
+          },
+          {
+            "canonico_tentativo": "Unión (Santa Fe)",
+            "n_variantes": 3,
+            "variantes": [
+              {
+                "nombre": "Unión (Santa Fe)",
+                "n_filas": 160
+              },
+              {
+                "nombre": "Union (santa Fe)",
+                "n_filas": 8
+              },
+              {
+                "nombre": "Unión (santa Fe)",
+                "n_filas": 2
+              }
+            ],
+            "total_filas": 170
+          },
+          {
+            "canonico_tentativo": "Gimnasia La Plata",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Gimnasia La Plata",
+                "n_filas": 159
+              },
+              {
+                "nombre": "Gimnasia la Plata",
+                "n_filas": 10
+              }
+            ],
+            "total_filas": 169
+          },
+          {
+            "canonico_tentativo": "Vélez Sarsfield",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Vélez Sarsfield",
+                "n_filas": 161
+              },
+              {
+                "nombre": "Velez Sarsfield",
+                "n_filas": 8
+              }
+            ],
+            "total_filas": 169
+          },
+          {
+            "canonico_tentativo": "Instituto (Córdoba)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Instituto (Córdoba)",
+                "n_filas": 106
+              },
+              {
+                "nombre": "Instituto (córdoba)",
+                "n_filas": 12
+              }
+            ],
+            "total_filas": 118
+          },
+          {
+            "canonico_tentativo": "Belgrano (Córdoba)",
+            "n_variantes": 3,
+            "variantes": [
+              {
+                "nombre": "Belgrano (Córdoba)",
+                "n_filas": 105
+              },
+              {
+                "nombre": "Belgrano (cordoba)",
+                "n_filas": 8
+              },
+              {
+                "nombre": "Belgrano (córdoba)",
+                "n_filas": 2
+              }
+            ],
+            "total_filas": 115
+          },
+          {
+            "canonico_tentativo": "Estudiantes de Rio Cuarto",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Estudiantes de Rio Cuarto",
+                "n_filas": 10
+              },
+              {
+                "nombre": "Estudiantes de Río Cuarto",
+                "n_filas": 2
+              }
+            ],
+            "total_filas": 12
+          }
+        ],
+        "Brasil": [
+          {
+            "canonico_tentativo": "Atlético-MG",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Atlético-MG",
+                "n_filas": 114
+              },
+              {
+                "nombre": "Atlético-mg",
+                "n_filas": 7
+              }
+            ],
+            "total_filas": 121
+          },
+          {
+            "canonico_tentativo": "São Paulo",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "São Paulo",
+                "n_filas": 116
+              },
+              {
+                "nombre": "Sao Paulo",
+                "n_filas": 5
+              }
+            ],
+            "total_filas": 121
+          },
+          {
+            "canonico_tentativo": "Grêmio",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Grêmio",
+                "n_filas": 77
+              },
+              {
+                "nombre": "Gremio",
+                "n_filas": 6
+              }
+            ],
+            "total_filas": 83
+          },
+          {
+            "canonico_tentativo": "Vitória",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Vitória",
+                "n_filas": 40
+              },
+              {
+                "nombre": "Vitoria",
+                "n_filas": 4
+              }
+            ],
+            "total_filas": 44
+          }
+        ],
+        "Espana": [
+          {
+            "canonico_tentativo": "Alaves",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Alaves",
+                "n_filas": 114
+              },
+              {
+                "nombre": "Alavés",
+                "n_filas": 2
+              }
+            ],
+            "total_filas": 116
+          }
+        ]
+      }
+    },
+    "historial_equipos_v6_shadow": {
+      "n_clusters_con_duplicados": 0,
+      "n_filas_afectadas_total": 0,
+      "clusters_por_liga": {}
+    },
+    "historial_equipos": {
+      "n_clusters_con_duplicados": 0,
+      "n_filas_afectadas_total": 0,
+      "clusters_por_liga": {}
+    },
+    "partidos_backtest [local]": {
+      "n_clusters_con_duplicados": 9,
+      "n_filas_afectadas_total": 34,
+      "clusters_por_liga": {
+        "Argentina": [
+          {
+            "canonico_tentativo": "Lanus",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Lanus",
+                "n_filas": 4
+              },
+              {
+                "nombre": "Lanús",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 5
+          },
+          {
+            "canonico_tentativo": "Belgrano (cordoba)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Belgrano (cordoba)",
+                "n_filas": 3
+              },
+              {
+                "nombre": "Belgrano (córdoba)",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 4
+          },
+          {
+            "canonico_tentativo": "Estudiantes de Rio Cuarto",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Estudiantes de Rio Cuarto",
+                "n_filas": 3
+              },
+              {
+                "nombre": "Estudiantes de Río Cuarto",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 4
+          },
+          {
+            "canonico_tentativo": "Velez Sarsfield",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Velez Sarsfield",
+                "n_filas": 3
+              },
+              {
+                "nombre": "Vélez Sarsfield",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 4
+          },
+          {
+            "canonico_tentativo": "Atletico Tucuman",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Atletico Tucuman",
+                "n_filas": 2
+              },
+              {
+                "nombre": "Atlético Tucumán",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 3
+          },
+          {
+            "canonico_tentativo": "Huracan",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Huracan",
+                "n_filas": 2
+              },
+              {
+                "nombre": "Huracán",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 3
+          },
+          {
+            "canonico_tentativo": "Sarmiento (junin)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Sarmiento (junin)",
+                "n_filas": 2
+              },
+              {
+                "nombre": "Sarmiento (junín)",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 3
+          }
+        ],
+        "Brasil": [
+          {
+            "canonico_tentativo": "Sao Paulo",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Sao Paulo",
+                "n_filas": 3
+              },
+              {
+                "nombre": "São Paulo",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 4
+          },
+          {
+            "canonico_tentativo": "Vitoria",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Vitoria",
+                "n_filas": 3
+              },
+              {
+                "nombre": "Vitória",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 4
+          }
+        ]
+      }
+    },
+    "partidos_backtest [visita]": {
+      "n_clusters_con_duplicados": 5,
+      "n_filas_afectadas_total": 19,
+      "clusters_por_liga": {
+        "Argentina": [
+          {
+            "canonico_tentativo": "Lanus",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Lanus",
+                "n_filas": 2
+              },
+              {
+                "nombre": "Lanús",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 3
+          },
+          {
+            "canonico_tentativo": "Union (santa Fe)",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Union (santa Fe)",
+                "n_filas": 2
+              },
+              {
+                "nombre": "Unión (santa Fe)",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 3
+          }
+        ],
+        "Brasil": [
+          {
+            "canonico_tentativo": "Gremio",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Gremio",
+                "n_filas": 5
+              },
+              {
+                "nombre": "Grêmio",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 6
+          },
+          {
+            "canonico_tentativo": "Sao Paulo",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Sao Paulo",
+                "n_filas": 3
+              },
+              {
+                "nombre": "São Paulo",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 4
+          },
+          {
+            "canonico_tentativo": "Vitoria",
+            "n_variantes": 2,
+            "variantes": [
+              {
+                "nombre": "Vitoria",
+                "n_filas": 2
+              },
+              {
+                "nombre": "Vitória",
+                "n_filas": 1
+              }
+            ],
+            "total_filas": 3
+          }
+        ]
+      }
+    }
+  }
+}

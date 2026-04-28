@@ -1,0 +1,13 @@
+{
+  "fecha_corrida": "2026-04-28T20:03:14.434672",
+  "ventana_dias": 30,
+  "fecha_corte": "2026-03-29",
+  "counts_por_branch": {},
+  "n_total": 0,
+  "n_aplica_liquidados": 0,
+  "yield_v0": null,
+  "yield_x_override": null,
+  "delta_yield": null,
+  "brier_v0_avg": null,
+  "brier_v12_avg": null
+}

@@ -86,13 +86,28 @@ FLOOR_PROB_MIN, MAX_KELLY_PCT_*, etc.)** se debe:
 
 El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreated`.
 
-**Estado actual (2026-04-26):**
-- **Versión:** V5.0 (Layer 2 adepor-edk: V12 standalone en Turquía)
-- **SHA-256:** `6609ee919e81b0613f28424dcfa37e7a4e1aabff0bf0361b531cd06451acb32e`
+**Estado actual (2026-04-28):**
+- **Versión:** V5.1.2 (M.3 desactivado vía config tras audit in-sample)
+- **SHA-256:** `85667803ab6ca16985ad110fca13dec43827662f84589e75f8ea8385c0b4a6af`
 - **Locked:** `configuracion.manifesto_locked = 'true'`
-- **Cambio V5.0:** nueva §L "Arquitectura de Decisión por Liga". Override
-  `arch_decision_per_liga = '{"Turquia": "V12"}'` (config_motor_valores). Otras 15 ligas
-  mantienen V0 default. H4 X-rescue (Layer 3 propuesto) queda en SHADOW, no aplicado.
+- **Layers vigentes:**
+  - V5.0 §L Layer 2: `arch_decision_per_liga = {"Turquia": "V12"}`. V12 standalone activo
+    para argmax 1X2 SOLO en Turquía. Otras 15 ligas → V0.
+  - V5.1 §M filtro de picks apostables triple:
+    - **M.1** `apostar_solo_si_liga_in {Argentina, Brasil, Inglaterra, Noruega, Turquía}` ✓ ACTIVO
+    - **M.2** `apostar_solo_si n_acum_l < 60` ✓ ACTIVO (calibrado en 2024 sig)
+    - **M.3** `apostar_solo_si momento_bin_4 != 3` ✗ DESACTIVADO en V5.1.2
+- **V5.1.2 cambio (2026-04-28):** `filtro_picks_v51.excluir_q4=false` en config. Audit in-sample
+  reveló que M.3 NEW (calendario fix) bloquea Inglaterra Q4 +70.7% y Turquía Q4 +50.8% que
+  hoy están dando dinero. Calibración OOS 2024 (Q4 −16.1% sig) NO transfiere a régimen 2026.
+  M.3 condicional por régimen pendiente (`adepor-09s` Fase 2).
+- **V13 SHADOW puro:** Argentina F1_off NNLS, Francia F2_pos NNLS, Italia F2_pos RIDGE,
+  Inglaterra F5_ratio NNLS. NO afecta picks. Validación N≥200 SHADOW para promoción.
+- **Calendario individual:** tabla `liga_calendario_temp` (80 filas) con fechas reales
+  inicio/fin por (liga, temp). Reemplaza método "rango observado" para `momento_bin_4`.
+- **Posiciones snapshots:** `posiciones_tabla_snapshot` con 3 formatos paralelos para
+  Argentina (anual, apertura, clausura). Hook incremental al pipeline.
+- **Beads pendientes:** ver `docs/beads_pendientes_2026-04-28.md` (13 abiertos).
 - **Validación rápida:** `py -c "import sqlite3; print(sqlite3.connect('fondo_quant.db').execute(\"SELECT valor FROM configuracion WHERE clave='manifesto_sha256'\").fetchone()[0])"`
 
 ### Multi-Agent Team (experimental)
@@ -149,12 +164,16 @@ filtros/motores/históricos por inspección de archivos.
 |---|---|---|
 | `motor_filtros_activos` | 19 | Inventario de los 19 filtros activos del motor (origen, parámetro, estado). Único punto de verdad |
 | `pipeline_motores` | 14 | Documentación de los 14 motores del pipeline (nombre, frecuencia, responsabilidad, dependencias) |
-| `config_motor_valores` | 200+ | Parámetros operativos del motor (FLOOR_PROB, MARGEN, EV-min, Kelly cap, OLS V6, LR V12, V12b1/b2/b3, anchor batch — scope universal o por liga) |
+| `config_motor_valores` | 200+ | Parámetros operativos del motor (FLOOR_PROB, MARGEN, EV-min, Kelly cap, filtro_picks_v51, OLS V6, LR V12, V12b1/b2/b3, anchor batch — scope universal o por liga) |
 | `predicciones_walkforward` | 23.268 | Predicciones walk-forward persistidas para calibración futura sin re-scraping |
 | `partidos_historico_externo` | 14.489 | Stats crudas legacy (incluye faltas/tarjetas) — fuente para A/B de features alternativos |
 | `xg_calibration_history` | 25 | Log iterativo de calibraciones xG (cada iter persiste OLS coef + R² + comentario) |
 | `margen_optimo_per_liga` | 15 ligas | Thresholds de margen derivados por liga (display + análisis) |
 | `historial_equipos_v6_shadow` | 402 equipos | EMA xG OLS recalibrado por equipo (V6 SHADOW input para V7/V12) |
+| `historial_equipos_stats` | 19.154 snapshots | EMA stats avanzadas por (liga, equipo, fecha) — sots, shot_pct, pos, pass_pct, corners, yellow, red, fouls, tackles, blocks. Input para V13 SHADOW + filtro M.2 (n_acum) |
+| `liga_calendario_temp` | 80 | Calendario individual por (liga, temp): fecha_inicio + fecha_fin del torneo. Reemplaza método "rango observado" para `momento_bin_4` |
+| `posiciones_tabla_snapshot` | crece | Ranking acumulado por (liga, temp, formato, fecha, equipo) sin look-ahead. Argentina con 3 formatos paralelos (anual + apertura + clausura). Hook incremental al pipeline |
+| `v13_coef_por_liga` | 8+ | Coeficientes V13 SHADOW (NNLS/RIDGE) calibrados por (liga, target). Argentina F1_off NNLS, Francia F2_pos NNLS, Italia F2_pos RIDGE, Inglaterra F5_ratio NNLS |
 | `online_sgd_log` | crece | Log diagnóstico de cada SGD step del motor adaptativo (grad, weight, brier, dW, reverted) |
 | `drift_alerts` | crece | Alertas de drift Brier rolling 30d vs baseline+2σ (motor adaptativo) |
 
@@ -186,8 +205,9 @@ pagar el costo de revertir cambios mal calibrados.
 - **V0** = Poisson DC + xG legacy (motor producción actual)
 - **V6** = Poisson DC + xG OLS recalibrado
 - **V7** = Skellam + xG OLS (sin tau DC)
-- **V12** = LR multinomial (xG + H2H + varianza + mes), per-liga + global pool
+- **V12** = LR multinomial (xG + H2H + varianza + mes), per-liga + global pool. Activo en argmax SOLO en Turquía (V5.0 §L Layer 2).
 - **V12b1/b2/b3** = LR pool global ridge=0.1 con/sin H2H + class_weights (persistidas en config como referencia, no logueadas rutinariamente)
+- **V13** = Poisson DC + xG ridge regularizado (5-7 features) por liga. BEST por liga: Argentina F1_off NNLS, Francia F2_pos NNLS, Italia F2_pos RIDGE, Inglaterra F5_ratio NNLS. SHADOW puro hasta N≥200 picks.
 
 **Hallazgos OOS 2026-04-26** (test 2024 N=2,768):
 - V0 raw GANA hit (0.488) y Brier (0.6182) en OOS estricto
@@ -217,7 +237,12 @@ NO afecta motor productivo (V0 sigue decidiendo argmax). Solo actualiza V12 SHAD
 
 Estos artefactos están checked-in y son la "memoria operativa" del proyecto. Lectura obligatoria antes de proponer cambios estructurales:
 
-- `Reglas_IA.txt` — Manifiesto matemático/arquitectural (versión actual V5.0)
+- `Reglas_IA.txt` — Manifiesto matemático/arquitectural (versión actual V5.1.2; §M.3 desactivado vía config)
+- `docs/beads_pendientes_2026-04-28.md` — inventario humano de los 13 beads abiertos con explicación de cada uno
+- `docs/findings_n_acum_drift.md` — investigación M.2 (n_acum) drift, validación dual OOS+real
+- `docs/findings_v13_grid_search.md` — grid search V13 (4 reg × 6 feat × 8 ligas), BEST por liga
+- `docs/findings_audit_posicion_y_M3.md` — audit posición tabla + recalibración M.3 con calendario fix
+- `docs/regime_profiles_2022_2023_2024.md` — caracterización Fase 1 predictor de régimen
 - `docs/pipeline_overview.md` — spec discoverable del pipeline (qué motor hace qué, en qué orden, con qué inputs/outputs)
 - `docs/xg_calibration_history.md` — log iterativo de cómo se ha calibrado el xG histórico
 - `docs/ml_adaptativo_plan.md` — plan 3 capas (L1 EMA+rho, L2 online SGD V12, L3 drift detector). Estado: F1+F2+F3 implementados.

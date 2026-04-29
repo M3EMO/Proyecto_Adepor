@@ -27,7 +27,8 @@ SUFIJOS_RUIDO = {"pr", "mg", "rj", "sp", "rs", "go", "ba", "fc", "jrs", "united"
 
 # Cutoff del fuzzy. Con scope por liga ya es seguro bajarlo, pero mantengo 0.92
 # para compatibilidad con el comportamiento previo.
-AUTO_LEARN_CUTOFF = 0.92
+AUTO_LEARN_CUTOFF = 0.95  # [bug-critico fuzzy 2026-04-28] subido de 0.92 a 0.95
+                          # para evitar Rangers->Angers (sim=0.923) y similares.
 
 # Claves reservadas del JSON (no son ligas).
 _CLAVES_META = {"_meta", "_huerfanos"}
@@ -175,6 +176,14 @@ def obtener_nombre_estandar(nombre_crudo, liga=None, modo_interactivo=True):
     if not ligas_contexto:
         ligas_contexto = [k for k in dic.keys() if k not in _CLAVES_META]
 
+    # [SAFETY 2026-04-28 — bug-critico fuzzy] Detectar fallback global cuando liga
+    # is None O liga no esta registrada en el diccionario ni en _meta.ligas_por_copa.
+    # Sin scope acotado, fuzzy match es demasiado promiscuo (Rangers->Angers, etc).
+    copas_meta = dic.get('_meta', {}).get('ligas_por_copa', {})
+    es_fallback_global = (
+        liga is None or
+        (liga not in dic and liga not in copas_meta and liga not in _CLAVES_META)
+    )
     scope = _sub_dict_merge(dic, ligas_contexto)
 
     # FASE 1: busqueda directa + raiz
@@ -201,26 +210,40 @@ def obtener_nombre_estandar(nombre_crudo, liga=None, modo_interactivo=True):
                 guardar_diccionario(dic)
             return valor_oficial
 
-    # FASE 3: fuzzy scoped
-    matches = difflib.get_close_matches(
-        nombre_limpio,
-        [limpiar_texto(v) for v in valores_oficiales_unicos],
-        n=1, cutoff=AUTO_LEARN_CUTOFF
-    )
+    # FASE 3: fuzzy scoped — SOLO si scope esta acotado.
+    # En fallback global (liga desconocida o None) saltamos fuzzy para evitar
+    # matches cross-country (Rangers->Angers, etc).
+    if es_fallback_global:
+        matches = []
+    else:
+        matches = difflib.get_close_matches(
+            nombre_limpio,
+            [limpiar_texto(v) for v in valores_oficiales_unicos],
+            n=1, cutoff=AUTO_LEARN_CUTOFF
+        )
     if matches:
         candidato_oficial = next(
             (v for v in valores_oficiales_unicos if limpiar_texto(v) == matches[0]),
             None
         )
         if candidato_oficial:
+            # [SAFETY 2026-04-28 — bug-critico fuzzy cross-country] Si el oficial
+            # pertenece a una liga distinta a las contexto, RECHAZAR el fuzzy match.
+            # Casos historicos envenenados: 'rangers'->Angers, 'hatayspor'->Antalyaspor,
+            # 'independientemedellin'->Independiente del Valle (cross Colombia/Ecuador).
             liga_destino = _liga_de_nombre_oficial(dic, candidato_oficial, ligas_contexto)
-            if liga_destino:
+            if not liga_destino:
+                # Cross-country fuzzy match -> NO persistir + caer a modo interactivo/crudo
+                if modo_interactivo:
+                    print(f"[FUZZY-REJECT] '{nombre_crudo}' fuzzy-matched a '{candidato_oficial}' "
+                          f"pero pertenece a otra(s) liga(s) que {ligas_contexto}. Saltando.")
+            else:
                 dic.setdefault(liga_destino, {})[nombre_limpio] = candidato_oficial
                 guardar_diccionario(dic)
-            if modo_interactivo:
-                print(f"[APRENDIZAJE AUTOMATICO] ({liga_destino or liga or 'global'}) "
-                      f"'{nombre_crudo}' -> '{candidato_oficial}'")
-            return candidato_oficial
+                if modo_interactivo:
+                    print(f"[APRENDIZAJE AUTOMATICO] ({liga_destino}) "
+                          f"'{nombre_crudo}' -> '{candidato_oficial}'")
+                return candidato_oficial
 
     # FASE 4: intervencion manual (solo si modo interactivo)
     if not modo_interactivo:

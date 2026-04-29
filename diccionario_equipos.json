@@ -337,23 +337,88 @@
         "Venezuela",
         "Paraguay"
       ],
-      "Champions": [
+      "Champions League": [
+        "Inglaterra",
         "Espana",
         "Italia",
         "Alemania",
         "Francia",
-        "Inglaterra",
         "Turquia",
         "Noruega"
       ],
-      "EuropaLeague": [
+      "Europa League": [
+        "Inglaterra",
         "Espana",
         "Italia",
         "Alemania",
         "Francia",
-        "Inglaterra",
         "Turquia",
         "Noruega"
+      ],
+      "Conference League": [
+        "Inglaterra",
+        "Espana",
+        "Italia",
+        "Alemania",
+        "Francia",
+        "Turquia",
+        "Noruega"
+      ],
+      "FA Cup": [
+        "Inglaterra"
+      ],
+      "EFL Cup": [
+        "Inglaterra"
+      ],
+      "Copa del Rey": [
+        "Espana"
+      ],
+      "Coppa Italia": [
+        "Italia"
+      ],
+      "Coupe de France": [
+        "Francia"
+      ],
+      "DFB Pokal": [
+        "Alemania"
+      ],
+      "Copa Argentina": [
+        "Argentina"
+      ],
+      "Copa do Brasil": [
+        "Brasil"
+      ],
+      "Recopa Sudamericana": [
+        "Argentina",
+        "Brasil",
+        "Uruguay",
+        "Chile",
+        "Ecuador",
+        "Peru",
+        "Bolivia",
+        "Colombia",
+        "Venezuela",
+        "Paraguay"
+      ],
+      "Concacaf Champions Cup": [],
+      "FIFA Club World Cup": [
+        "Inglaterra",
+        "Espana",
+        "Italia",
+        "Alemania",
+        "Francia",
+        "Turquia",
+        "Noruega",
+        "Argentina",
+        "Brasil",
+        "Uruguay",
+        "Chile",
+        "Ecuador",
+        "Peru",
+        "Bolivia",
+        "Colombia",
+        "Venezuela",
+        "Paraguay"
       ]
     },
     "notas": "Dict anidado por liga domestica. Equipos con mismo nombre en varias ligas se listan en todas. Copas iteran sobre ligas_por_copa[copa]."
@@ -387,7 +452,6 @@
     "aldosivi": "Aldosivi",
     "aldosivimardelplata": "Aldosivi",
     "argentinosjuniors": "Argentinos Juniors",
-    "atleticohuracan": "Atletico Tucuman",
     "atleticotucuman": "Atletico Tucuman",
     "banfield": "Banfield",
     "barracascentral": "Barracas Central",
@@ -400,7 +464,6 @@
     "centralcordobasantiagodelestero": "Central Córdoba (santiago del Estero)",
     "clubbelgrano": "Belgrano (cordoba)",
     "defensayjusticia": "Defensa y Justicia",
-    "deportivopereira": "Deportivo Riestra",
     "deportivoriestra": "Deportivo Riestra",
     "estudiantes": "Estudiantes de la Plata",
     "estudiantesdelaplata": "Estudiantes de la Plata",
@@ -482,7 +545,9 @@
     "santos": "Santos",
     "saopaulo": "Sao Paulo",
     "vascodagama": "Vasco da Gama",
-    "vitoria": "Vitoria"
+    "vitoria": "Vitoria",
+    "botafogosp": "Botafogo",
+    "corinthian": "Corinthians"
   },
   "Chile": {
     "aitaliano": "Audax Italiano",
@@ -501,8 +566,6 @@
     "ohiggins": "O'Higgins",
     "palestino": "Palestino",
     "unionlacalera": "Unión La Calera",
-    "universidadcatolica": "Universidad Católica (Quito)",
-    "universidadcatolicachi": "Universidad Católica (Quito)",
     "universidadcatolicaquito": "Universidad Católica (Quito)",
     "universidaddechile": "Universidad de Chile",
     "universidaddeconcepcion": "Universidad de Concepción",
@@ -518,16 +581,13 @@
     "bucaramanga": "Bucaramanga",
     "cucutadeportivo": "Cúcuta Deportivo",
     "deporteslimache": "Deportes Limache",
-    "deportestolima": "Deportes Limache",
     "deportivocali": "Deportivo Cali",
     "deportivopasto": "Deportivo Pasto",
-    "deportivopereira": "Deportivo Riestra",
     "deportivoriestra": "Deportivo Riestra",
     "fortaleza": "Fortaleza CEIF",
     "fortalezaceif": "Fortaleza CEIF",
     "fortalezafc": "Fortaleza CEIF",
     "independientedelvalle": "Independiente del Valle",
-    "independientemedellin": "Independiente del Valle",
     "independientesantafe": "Independiente Santa Fe",
     "internacionaldebogota": "Internacional de Bogotá",
     "jaguaresdecordoba": "Jaguares de Córdoba",
@@ -544,7 +604,6 @@
     "emelec": "Emelec",
     "guayaquilcityfc": "Guayaquil City FC",
     "independientedelvalle": "Independiente del Valle",
-    "independientemedellin": "Independiente del Valle",
     "leones": "Leones",
     "libertadecuador": "Libertad (Ecuador)",
     "ligadequito": "Liga de Quito",
@@ -581,7 +640,8 @@
     "realsociedad": "Real Sociedad",
     "sevilla": "Sevilla",
     "valencia": "Valencia",
-    "villarreal": "Villarreal"
+    "villarreal": "Villarreal",
+    "atleticodemadrid": "Atlético Madrid"
   },
   "Francia": {
     "ajauxerre": "AJ Auxerre",
@@ -628,7 +688,8 @@
     "sunderland": "Sunderland",
     "tottenhamhotspur": "Tottenham Hotspur",
     "westhamunited": "West Ham United",
-    "wolverhamptonwanderers": "Wolverhampton Wanderers"
+    "wolverhamptonwanderers": "Wolverhampton Wanderers",
+    "bournemouthfc": "AFC Bournemouth"
   },
   "Italia": {
     "acmilan": "AC Milan",
@@ -651,7 +712,8 @@
     "pisa": "Pisa",
     "sassuolo": "Sassuolo",
     "torino": "Torino",
-    "udinese": "Udinese"
+    "udinese": "Udinese",
+    "atlanta": "Atalanta"
   },
   "Noruega": {
     "aalesund": "Aalesund",
@@ -682,9 +744,7 @@
     "adt": "ADT",
     "alianzaatletico": "Alianza Atlético",
     "alianzalima": "Alianza Lima",
-    "atleticograu": "Atlético-mg",
     "atleticomg": "Atlético-mg",
-    "atleticomineiro": "Atlético-mg",
     "ciencianodelcusco": "Cienciano del Cusco",
     "comerciantesunidos": "Comerciantes Unidos",
     "cusco": "Cusco FC",
@@ -716,7 +776,6 @@
     "genclerbirligi": "Genclerbirligi",
     "genclerbirligisk": "Genclerbirligi",
     "goztepe": "Goztepe",
-    "hatayspor": "Antalyaspor",
     "istanbulbasaksehir": "Istanbul Basaksehir",
     "istanbulbasaksehirfk": "Istanbul Basaksehir",
     "kasimpasa": "Kasimpasa",
@@ -770,7 +829,8 @@
     "zamora": "Zamora",
     "zamorafc": "Zamora",
     "deportivotachirafc": "Deportivo Táchira",
-    "estudiantesdemeridafc": "Estudiantes de Mérida"
+    "estudiantesdemeridafc": "Estudiantes de Mérida",
+    "portuguesarj": "Portuguesa"
   },
   "_huerfanos": {
     "talleres": "Talleres"

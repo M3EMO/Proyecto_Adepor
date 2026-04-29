@@ -1,32 +1,60 @@
-# Beads pendientes — Snapshot 2026-04-28 (cierre sesión V5.2 + Track C)
+# Beads pendientes — Snapshot 2026-04-28 NOCHE (cierre sesión 4)
 
-> Inventario humanamente legible de los 30 beads abiertos del proyecto al cierre
-> de sesión 2026-04-28 (V5.2 aplicado + Track C 3 sub-líneas cerradas).
+> Inventario humanamente legible de los beads del proyecto al cierre del día
+> 2026-04-28 (4 sesiones consecutivas: V5.2 + Track C + Layer 3 fix + audit profundo + V14 + ClubElo + copas pipeline).
 >
 > Cada bead explica QUÉ es, POR QUÉ existe, DÓNDE está parado, y qué EVENTO o
 > ACCIÓN lo desbloquea.
 
-## Estado del proyecto al cierre del día
+## Estado del proyecto al cierre del día (NOCHE)
 
-- **Manifesto:** **V5.2** (Layer 3 H4 X-rescue per-liga, infraestructura ON, JSON config vacío)
-- **SHA-256:** `471c1c00b927baad59cd13688bd5db142550a1aadbc45980a2b6d76862c4ab6c` (locked)
+- **Manifesto:** **V5.2** (Layer 3 H4 X-rescue per-liga, **ACTIVO LIVE** desde 18:51)
+- **SHA-256:** `471c1c00b927baad59cd13688bd5db142550a1aadbc45980a2b6d76862c4ab6c` (locked, sin cambios)
 - **Filtros activos:** M.1 (TOP-5 ligas) + M.2 (n_acum<60). M.3 desactivado.
 - **V13 SHADOW:** Argentina F1 NNLS, Francia F2 NNLS, Italia F2 RIDGE, Inglaterra F5 NNLS.
 - **Layer 2 V12:** Turquía standalone (`arch_decision_per_liga = {"Turquia": "V12"}`)
-- **Layer 3 H4 X-rescue:** infraestructura ready, `h4_x_rescue_threshold = '{}'` (inactivo)
-  - Activación recomendada via SQL UPDATE: `{"Argentina": 0.35, "Italia": 0.35, "Inglaterra": 0.35, "Alemania": 0.35}`
-- **Tablas nuevas:** `partidos_no_liga` (8,742 OOS 2022-2024 via API-Football + 192 in-sample 2026 via Wikipedia parcial)
-- **View nueva:** `v_partidos_unificado` (UNION liga + no-liga)
+- **Layer 3 H4 X-rescue ACTIVO:** `h4_x_rescue_threshold = {"Argentina": 0.35, "Italia": 0.35, "Inglaterra": 0.35, "Alemania": 0.35}`
+- **Tabla Elo nueva:** `equipo_nivel_elo` (~40k filas, K-factor por competición)
+- **Tabla ClubElo nueva:** `clubelo_ratings` (1,889 filas, 3 snapshots cross-validation)
+- **Tabla shadow Layer 3:** `picks_shadow_layer3_log` (logging real-time decisiones Layer 3)
+- **Tabla copas:** `partidos_no_liga` (~10k+ filas post-ESPN scraping; 1,251 nuevos partidos 2025 batch)
+- **View:** `v_partidos_unificado` recreada con cols `_norm` (UNION liga + no-liga)
+- **Coefs V14 persistidos:** `config_motor_valores.lr_v14_weights` (LogReg multinomial calibrado)
 
-## Resumen sesión 2026-04-28
+## Resumen sesiones 2026-04-28 (4 consecutivas)
 
-### Cambios aplicados al motor
+### Sesión 1 (mañana) — V5.2 + Track C
+- **V5.2 Layer 3 H4 X-rescue per-liga**: bead `adepor-tyb` aprobado tras audit Opción D.
+  Δ +0.426 [+0.07, +0.78] *** sobre N=160 OOS. Helpers nuevos.
+- Track C: 3 sub-líneas cerradas SIN promotion (cold-start n_acum, isotonic calib, Skellam V7).
 
-- **V5.2 Layer 3 H4 X-rescue per-liga**: bead `adepor-tyb` aprobado tras audit Opción D
-  (walk-forward por temp + multidim cross-equipo). Filtro doble validado SIG: NOT (pos_local=TOP3)
-  AND NOT (gap_local≤14 AND gap_visita≤14). Δ +0.426 [+0.07, +0.78] *** sobre N=160 OOS.
-- Helpers nuevos: `_get_pos_local_forward`, `_get_gap_dias_no_liga` en `motor_calculadora.py`.
-- Snapshot pre-cambio: `snapshots/fondo_quant_20260428_171414_pre_V5.2_layer3_h4.db`.
+### Sesión 2 (tarde) — Layer 3 ACTIVO + bug helpers + Mojibake
+- **Layer 3 ACTIVADO LIVE 18:51 ARS** con thresh ARG/ITA/ING/ALE = 0.35.
+- **Bug crítico Layer 3 helpers descubierto** (`adepor-0og` decision-log): query por `equipo` display
+  pero parámetro `loc_norm` → 100% lookup fail → filtros NO bloqueaban.
+- **Fix:** ALTER TABLE add `equipo_norm` cols + 5 indices + view recreada + helpers refactored.
+- Mojibake fix `adepor-z0e` aplicado: 755 UPDATEs cleanup.
+
+### Sesión 3 (noche temprana) — F1+F2+F3 estructurales
+- **F1 INSERT consistency:** 4 scripts con `gestor_nombres` + popular `_norm`.
+- **F2 schema partidos_no_liga:** 7 cols nuevas (liga_local, competicion_formato, series 2-leg, agregados).
+- **F3 Motor copa research:** 18 fuentes peer-reviewed. Tabla `equipo_nivel_elo` (39k filas).
+  Backtest standalone 49.5% global, copa internacional 53.0% (mejor año 2025: 54.1%).
+
+### Sesión 4 (NOCHE) — Audit profundo + V14 + ClubElo + copas pipeline
+- **Bug fuzzy gestor_nombres descubierto + corregido:** envenenamiento cross-country (Rangers→Angers, etc.).
+  AUTO_LEARN_CUTOFF 0.92→0.95 + safety checks + 11 aliases envenenados eliminados.
+- **Audit profundo:** docs/papers/entity_resolution_sports.md (Stoerts 2024 + 15 fuentes).
+  Whitelist canonicalización: 788 filas unificadas. **Top-25 Elo coherente** (PSG 2004.6).
+  COPA_INT 2025 hit 57.1%→58.9% (+1.8pp).
+- **ClubElo CSV ingesta** (`adepor-04p` CLOSED): 1,889 filas. Cross-validation:
+  corr GER 0.925, TUR 0.965, ESP 0.881, ITA 0.876, ENG 0.780. Bias -75 a -178 EUR.
+- **Motor copa V14 calibrado** (`adepor-141`): LogReg multinomial. Test N=152, hit 54.6%, **Brier 0.2925** (mejor que Elo solo 0.3329 y xG solo 0.3588).
+- **ESPN scraper bulk:** 16 copas, 439 partidos feb-abr 2026 + 1,251 partidos 2025.
+- **Copas al pipeline LIVE (parcial):** `LIGAS_ESPN` += 14 copas. Pendiente integración full.
+- **Investigación predicciones por liga (no generalizar):** docs/papers/predicciones_por_liga.md
+  con 15 fuentes. Bundesliga EPV>xG, Italia tactical/Layer 3 relevante, Premier features defensivos
+  rolling 3-match, LATAM estilos distintos (NO generalizar EUR).
 
 ### Track C (mejorar predicción) — 3 sub-líneas cerradas SIN promotion
 

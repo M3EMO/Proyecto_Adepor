@@ -1,0 +1,252 @@
+{
+  "convencion": "IS=2026, OOS=2022-2025 (decision usuario 2026-04-29)",
+  "summary_per_cell": {
+    "Conference League": {
+      "tipo": "copa_internacional",
+      "first_year_g_t": 2.5594594594594593,
+      "last_year_g_t": 2.6551724137931036,
+      "delta_abs": 0.09571295433364435,
+      "delta_pct": 3.739576885263824
+    },
+    "Champions League": {
+      "tipo": "copa_internacional",
+      "first_year_g_t": 2.9513513513513514,
+      "last_year_g_t": 3.675324675324675,
+      "delta_abs": 0.7239733239733237,
+      "delta_pct": 24.530231673088807
+    },
+    "Europa League": {
+      "tipo": "copa_internacional",
+      "first_year_g_t": 2.669230769230769,
+      "last_year_g_t": 2.723684210526316,
+      "delta_abs": 0.054453441295546856,
+      "delta_pct": 2.040042469285617
+    },
+    "Libertadores": {
+      "tipo": "copa_internacional",
+      "first_year_g_t": 2.464516129032258,
+      "last_year_g_t": 2.044943820224719,
+      "delta_abs": -0.4195723088075387,
+      "delta_pct": -17.024530854756154
+    },
+    "Sudamericana": {
+      "tipo": "copa_internacional",
+      "first_year_g_t": 2.515923566878981,
+      "last_year_g_t": 1.868421052631579,
+      "delta_abs": -0.647502514247402,
+      "delta_pct": -25.73617588274484
+    },
+    "FIFA Club World Cup": {
+      "tipo": "copa_internacional",
+      "first_year_g_t": 3.09375,
+      "last_year_g_t": 3.09375,
+      "delta_abs": 0.0,
+      "delta_pct": null
+    },
+    "FA Cup": {
+      "tipo": "copa_nacional",
+      "first_year_g_t": 3.2484624846248464,
+      "last_year_g_t": 2.8666666666666667,
+      "delta_abs": -0.38179581795817974,
+      "delta_pct": -11.753123816736089
+    },
+    "Coupe de France": {
+      "tipo": "copa_nacional",
+      "first_year_g_t": 2.787878787878788,
+      "last_year_g_t": 3.158536585365854,
+      "delta_abs": 0.37065779748706573,
+      "delta_pct": 13.295334040296922
+    },
+    "Copa do Brasil": {
+      "tipo": "copa_nacional",
+      "first_year_g_t": 2.30327868852459,
+      "last_year_g_t": 2.118181818181818,
+      "delta_abs": -0.18509687034277178,
+      "delta_pct": -8.03623422840504
+    },
+    "Copa del Rey": {
+      "tipo": "copa_nacional",
+      "first_year_g_t": 2.774193548387097,
+      "last_year_g_t": 3.3417721518987342,
+      "delta_abs": 0.5675786035116372,
+      "delta_pct": 20.459228731233434
+    },
+    "Türkiye Kupası": {
+      "tipo": "copa_nacional",
+      "first_year_g_t": 3.265151515151515,
+      "last_year_g_t": 3.2093023255813953,
+      "delta_abs": -0.05584918957011986,
+      "delta_pct": -1.7104624183888215
+    },
+    "EFL Cup": {
+      "tipo": "copa_nacional",
+      "first_year_g_t": 2.630952380952381,
+      "last_year_g_t": 2.774193548387097,
+      "delta_abs": 0.14324116743471604,
+      "delta_pct": 5.44446066267699
+    },
+    "Copa Argentina": {
+      "tipo": "copa_nacional",
+      "first_year_g_t": 2.4838709677419355,
+      "last_year_g_t": 2.5,
+      "delta_abs": 0.016129032258064502,
+      "delta_pct": 0.6493506493506488
+    },
+    "DFB Pokal": {
+      "tipo": "copa_nacional",
+      "first_year_g_t": 3.9583333333333335,
+      "last_year_g_t": 3.3692307692307693,
+      "delta_abs": -0.5891025641025642,
+      "delta_pct": -14.882591093117412
+    },
+    "Coppa Italia": {
+      "tipo": "copa_nacional",
+      "first_year_g_t": 3.7857142857142856,
+      "last_year_g_t": 2.3255813953488373,
+      "delta_abs": -1.4601328903654482,
+      "delta_pct": -38.569548047389205
+    }
+  },
+  "bias_dict_recent_vs_train": {
+    "Conference League": {
+      "tipo": "copa_internacional",
+      "g_t_train": 2.772,
+      "g_t_recent": 2.565,
+      "n_train": 1196,
+      "n_recent": 317,
+      "bias_factor": 0.9253,
+      "p_value": 0.0424,
+      "significancia": "*"
+    },
+    "Champions League": {
+      "tipo": "copa_internacional",
+      "g_t_train": 2.984,
+      "g_t_recent": 3.381,
+      "n_train": 626,
+      "n_recent": 360,
+      "bias_factor": 1.1329,
+      "p_value": 0.0009,
+      "significancia": "***"
+    },
+    "Europa League": {
+      "tipo": "copa_internacional",
+      "g_t_train": 2.855,
+      "g_t_recent": 2.807,
+      "n_train": 538,
+      "n_recent": 410,
+      "bias_factor": 0.9833,
+      "p_value": 0.6652,
+      "significancia": ""
+    },
+    "Libertadores": {
+      "tipo": "copa_internacional",
+      "g_t_train": 2.447,
+      "g_t_recent": 2.258,
+      "n_train": 465,
+      "n_recent": 244,
+      "bias_factor": 0.9227,
+      "p_value": 0.1165,
+      "significancia": ""
+    },
+    "Sudamericana": {
+      "tipo": "copa_internacional",
+      "g_t_train": 2.516,
+      "g_t_recent": 2.219,
+      "n_train": 471,
+      "n_recent": 233,
+      "bias_factor": 0.8819,
+      "p_value": 0.0148,
+      "significancia": "*"
+    },
+    "FA Cup": {
+      "tipo": "copa_nacional",
+      "g_t_train": 3.286,
+      "g_t_recent": 3.0,
+      "n_train": 2574,
+      "n_recent": 184,
+      "bias_factor": 0.9129,
+      "p_value": 0.0308,
+      "significancia": "*"
+    },
+    "Coupe de France": {
+      "tipo": "copa_nacional",
+      "g_t_train": 3.002,
+      "g_t_recent": 3.159,
+      "n_train": 560,
+      "n_recent": 82,
+      "bias_factor": 1.0522,
+      "p_value": 0.4543,
+      "significancia": ""
+    },
+    "Copa do Brasil": {
+      "tipo": "copa_nacional",
+      "g_t_train": 2.328,
+      "g_t_recent": 2.267,
+      "n_train": 366,
+      "n_recent": 232,
+      "bias_factor": 0.974,
+      "p_value": 0.6331,
+      "significancia": ""
+    },
+    "Copa del Rey": {
+      "tipo": "copa_nacional",
+      "g_t_train": 2.89,
+      "g_t_recent": 3.342,
+      "n_train": 345,
+      "n_recent": 158,
+      "bias_factor": 1.1564,
+      "p_value": 0.0085,
+      "significancia": "**"
+    },
+    "Türkiye Kupası": {
+      "tipo": "copa_nacional",
+      "g_t_train": 3.222,
+      "g_t_recent": 3.209,
+      "n_train": 445,
+      "n_recent": 43,
+      "bias_factor": 0.9959,
+      "p_value": 0.9633,
+      "significancia": ""
+    },
+    "EFL Cup": {
+      "tipo": "copa_nacional",
+      "g_t_train": 2.934,
+      "g_t_recent": 2.774,
+      "n_train": 274,
+      "n_recent": 93,
+      "bias_factor": 0.9454,
+      "p_value": 0.4265,
+      "significancia": ""
+    },
+    "Copa Argentina": {
+      "tipo": "copa_nacional",
+      "g_t_train": 2.367,
+      "g_t_recent": 2.376,
+      "n_train": 188,
+      "n_recent": 93,
+      "bias_factor": 1.0039,
+      "p_value": 0.9619,
+      "significancia": ""
+    },
+    "DFB Pokal": {
+      "tipo": "copa_nacional",
+      "g_t_train": 3.764,
+      "g_t_recent": 3.369,
+      "n_train": 182,
+      "n_recent": 65,
+      "bias_factor": 0.8952,
+      "p_value": 0.1429,
+      "significancia": ""
+    },
+    "Coppa Italia": {
+      "tipo": "copa_nacional",
+      "g_t_train": 3.198,
+      "g_t_recent": 2.326,
+      "n_train": 126,
+      "n_recent": 43,
+      "bias_factor": 0.7271,
+      "p_value": 0.002,
+      "significancia": "**"
+    }
+  }
+}

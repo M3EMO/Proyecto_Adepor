@@ -1,0 +1,150 @@
+{
+  "sweep": [
+    {
+      "margen_mercado": 0.04,
+      "n_partidos_test": 1812,
+      "n_picks": 208,
+      "tasa_picks_pct": 11.48,
+      "stake_total": 1456000.0,
+      "stake_promedio": 7000.0,
+      "stake_pct_bankroll": 2.5,
+      "pnl_total": 686448.3,
+      "yield_bruto_pct": 47.15,
+      "hit_rate_picks": 0.587,
+      "n_hits": 122,
+      "by_comp_tipo": {
+        "copa_nacional": {
+          "n": 208,
+          "stake": 1456000.0,
+          "pnl": 686448.3,
+          "hits": 122,
+          "yield": 0.4715,
+          "hit_rate": 0.587
+        }
+      }
+    },
+    {
+      "margen_mercado": 0.05,
+      "n_partidos_test": 1812,
+      "n_picks": 203,
+      "tasa_picks_pct": 11.2,
+      "stake_total": 1421000.0,
+      "stake_promedio": 7000.0,
+      "stake_pct_bankroll": 2.5,
+      "pnl_total": 660772.7,
+      "yield_bruto_pct": 46.5,
+      "hit_rate_picks": 0.581,
+      "n_hits": 118,
+      "by_comp_tipo": {
+        "copa_nacional": {
+          "n": 203,
+          "stake": 1421000.0,
+          "pnl": 660772.7,
+          "hits": 118,
+          "yield": 0.465,
+          "hit_rate": 0.581
+        }
+      }
+    },
+    {
+      "margen_mercado": 0.06,
+      "n_partidos_test": 1812,
+      "n_picks": 199,
+      "tasa_picks_pct": 10.98,
+      "stake_total": 1393000.0,
+      "stake_promedio": 7000.0,
+      "stake_pct_bankroll": 2.5,
+      "pnl_total": 637834.87,
+      "yield_bruto_pct": 45.79,
+      "hit_rate_picks": 0.578,
+      "n_hits": 115,
+      "by_comp_tipo": {
+        "copa_nacional": {
+          "n": 199,
+          "stake": 1393000.0,
+          "pnl": 637834.87,
+          "hits": 115,
+          "yield": 0.4579,
+          "hit_rate": 0.578
+        }
+      }
+    },
+    {
+      "margen_mercado": 0.07,
+      "n_partidos_test": 1812,
+      "n_picks": 196,
+      "tasa_picks_pct": 10.82,
+      "stake_total": 1372000.0,
+      "stake_promedio": 7000.0,
+      "stake_pct_bankroll": 2.5,
+      "pnl_total": 608122.09,
+      "yield_bruto_pct": 44.32,
+      "hit_rate_picks": 0.571,
+      "n_hits": 112,
+      "by_comp_tipo": {
+        "copa_nacional": {
+          "n": 196,
+          "stake": 1372000.0,
+          "pnl": 608122.09,
+          "hits": 112,
+          "yield": 0.4432,
+          "hit_rate": 0.571
+        }
+      }
+    },
+    {
+      "margen_mercado": 0.08,
+      "n_partidos_test": 1812,
+      "n_picks": 195,
+      "tasa_picks_pct": 10.76,
+      "stake_total": 1365000.0,
+      "stake_promedio": 7000.0,
+      "stake_pct_bankroll": 2.5,
+      "pnl_total": 596787.67,
+      "yield_bruto_pct": 43.72,
+      "hit_rate_picks": 0.574,
+      "n_hits": 112,
+      "by_comp_tipo": {
+        "copa_nacional": {
+          "n": 195,
+          "stake": 1365000.0,
+          "pnl": 596787.67,
+          "hits": 112,
+          "yield": 0.4372,
+          "hit_rate": 0.574
+        }
+      }
+    },
+    {
+      "margen_mercado": 0.1,
+      "n_partidos_test": 1812,
+      "n_picks": 188,
+      "tasa_picks_pct": 10.38,
+      "stake_total": 1316000.0,
+      "stake_promedio": 7000.0,
+      "stake_pct_bankroll": 2.5,
+      "pnl_total": 533732.3,
+      "yield_bruto_pct": 40.56,
+      "hit_rate_picks": 0.559,
+      "n_hits": 105,
+      "by_comp_tipo": {
+        "copa_nacional": {
+          "n": 188,
+          "stake": 1316000.0,
+          "pnl": 533732.3,
+          "hits": 105,
+          "yield": 0.4056,
+          "hit_rate": 0.559
+        }
+      }
+    }
+  ],
+  "params": {
+    "floor_prob_min": 0.4,
+    "margen_predictivo_1x2": 0.05,
+    "umbral_ev_1x2": 0.03,
+    "fraccion_kelly": 0.5,
+    "max_kelly_pct": 0.025,
+    "bankroll": 280000.0
+  }
+}

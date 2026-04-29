@@ -145,6 +145,37 @@ El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreat
     knockout 50, final 60). Cold-start regularization K*0.5 cuando n<30 (Tandfonline 2025).
     Backtest desglosado: hit standalone 49.5% global, copa internacional 53.0% (mejor), Turquía 53.3%,
     Argentina 43.2% (peor de los grandes — coherente con `adepor-09s` régimen). 2025 OOS 54.1% (mejor año).
+- **V5.2 sesión 4 (2026-04-28 NOCHE, audit profundo + V14 + ClubElo + copas pipeline):**
+  - **Bug fuzzy `gestor_nombres` descubierto + corregido (BUG-CRITICO P1):** auto-aprendizaje persistía
+    mappings cross-country (Rangers→Angers, Hatayspor→Antalyaspor, Independiente Medellín→del Valle).
+    Patches: AUTO_LEARN_CUTOFF 0.92→0.95, safety check cross-country en FASE 3, bloqueo fuzzy en
+    fallback global. 11 aliases envenenados eliminados.
+  - **Audit profundo diccionario (cierra `adepor-a7p` + `adepor-g4s`):** docs/papers/entity_resolution_sports.md
+    con 16 fuentes (Stoerts 2024 PMC, Wikipedia ER, Beat the Bookie 2023). 4 deletes adicionales.
+    `_meta.ligas_por_copa` enriquecido con 14 copas. Whitelist canonicalización: 788 filas unificadas
+    (PSG/parissg→Paris Saint-Germain, mancity→Manchester City, athmadrid→Atlético Madrid, AFC Bournemouth, etc.).
+    Re-Elo top-25 mucho más coherente (PSG 2004.6, Bayern 1971.9, duplicados eliminados).
+    **Backtest COPA_INT 2025: hit 57.1%→58.9%, Brier 0.2013→0.1986**.
+  - **ClubElo CSV ingesta (cierra `adepor-04p`):** tabla `clubelo_ratings` (1,889 filas, 3 snapshots
+    2024/2025/2026). Cross-validation 154 pares: corr GER 0.925, TUR 0.965, ESP 0.881, ITA 0.876,
+    ENG 0.780. **Bias EUR -75 a -178** → bead nuevo `[F3 sub-K]` para recalibrar K-factor 30→50.
+    `delta_elo` (no elo absoluto) recomendado en V14: bias se cancela en diferencia.
+  - **Motor copa V14 calibrado (`adepor-141` in-progress):** docs/papers/motor_copa_v14_proposal.md
+    con 6 fuentes (Hvattum-Arntzen 2010, ML chapter arXiv 2403.07669). LogReg multinomial 1X2 sobre
+    [xg_l, xg_v, delta_xg, delta_elo, dummies copa, log1p(n)]. Train 881, Test 152. **Test: hit 54.6%,
+    Brier 0.2925** vs Elo solo 0.3329 vs xG solo 0.3588 → V14 mejor calibración. Coefs persistidos en
+    `config_motor_valores.lr_v14_weights`.
+  - **ESPN copas scraping bulk:** `scripts/scraper_copas_espn.py` cubre 16 copas
+    (UCL/UEL/UECL/Libertadores/Sudamericana/Recopa/CWC/CCL/FA Cup/EFL Cup/Coppa/Copa del Rey/
+    DFB Pokal/Coupe de France/Copa Argentina/Copa do Brasil). Bug-fix `state=='post'` (no STATUS_FINAL).
+    439 partidos feb-abr 2026 + **1,251 partidos 2025** llenando gaps Libertadores/Sudamericana 2025.
+  - **Copas al pipeline LIVE (parcial — F2-sub-15 OPEN P2):** `LIGAS_ESPN` += 14 copas con slugs
+    ESPN. `MAPA_LIGAS_ODDS` paralelo (None para copas sin cuotas). **Pendiente:** motor_fixture run
+    real + Excel hojas update + dedup vs partidos_no_liga.
+  - **Investigación predicciones POR LIGA (no generalizar):** docs/papers/predicciones_por_liga.md
+    con 15 fuentes específicas por liga. Findings: Bundesliga EPV>xG pre-match (Frontiers 2025);
+    Italia tactical/low-scoring (Layer 3 X-rescue muy relevante); Premier requiere features defensivos
+    rolling 3-match (VAEP/VDEP); LATAM estilos distintos (ACM 2025) → NO generalizar features EUR.
   - **Process gate fundamentación académica (decisión usuario 2026-04-28):** toda decisión técnica
     nueva debe estar fundamentada en investigación (Semantic Scholar / arXiv / WebSearch) + persistida
     en `docs/papers/<topic>.md` + referenciada en código con `[REF: docs/papers/...]`.

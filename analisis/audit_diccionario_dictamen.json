@@ -1,0 +1,628 @@
+{
+  "KEEP": [
+    {
+      "liga_persistida": "Alemania",
+      "alias": "augsburg",
+      "oficial": "FC Augsburg",
+      "razon": "diff solo en tokens no-discriminantes (FC/AFC/Real/etc.)"
+    },
+    {
+      "liga_persistida": "Inglaterra",
+      "alias": "bournemouth",
+      "oficial": "AFC Bournemouth",
+      "razon": "diff solo en tokens no-discriminantes (FC/AFC/Real/etc.)"
+    },
+    {
+      "liga_persistida": "Peru",
+      "alias": "cusco",
+      "oficial": "Cusco FC",
+      "razon": "diff solo en tokens no-discriminantes (FC/AFC/Real/etc.)"
+    }
+  ],
+  "DELETE_cross_country": [
+    {
+      "liga_persistida": "Chile",
+      "alias": "universidadcatolicaquito",
+      "oficial": "Universidad Católica (Quito)",
+      "razon": "oficial pertenece a {'Ecuador'} != Chile"
+    },
+    {
+      "liga_persistida": "Peru",
+      "alias": "atleticomg",
+      "oficial": "Atlético-mg",
+      "razon": "oficial pertenece a {'Brasil'} != Peru"
+    }
+  ],
+  "DELETE_disc_conflict": [
+    {
+      "liga_persistida": "Alemania",
+      "alias": "1fcunionberlin",
+      "oficial": "1. FC Union Berlin",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Alemania",
+      "alias": "hamburgersv",
+      "oficial": "Hamburg SV",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Alemania",
+      "alias": "unionberlin",
+      "oficial": "1. FC Union Berlin",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "belgrano",
+      "oficial": "Belgrano (cordoba)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "belgranocordoba",
+      "oficial": "Belgrano (cordoba)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "belgranodecordoba",
+      "oficial": "Belgrano (cordoba)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "centralcordoba",
+      "oficial": "Central Córdoba (santiago del Estero)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "centralcordobasantiagodelestero",
+      "oficial": "Central Córdoba (santiago del Estero)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "clubbelgrano",
+      "oficial": "Belgrano (cordoba)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "institutocordoba",
+      "oficial": "Instituto (córdoba)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "institutodecordoba",
+      "oficial": "Instituto (córdoba)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "sarmientodejunin",
+      "oficial": "Sarmiento (junin)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "sarmientojunin",
+      "oficial": "Sarmiento (junin)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "tallerescordoba",
+      "oficial": "Talleres (córdoba)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "athletico-pr",
+      "oficial": "Athletico Paranaense",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "atleticograu",
+      "oficial": "Atlético-mg",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "atleticomg",
+      "oficial": "Atlético-mg",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "atleticomineiro",
+      "oficial": "Atlético-mg",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Ecuador",
+      "alias": "universidadcatolica",
+      "oficial": "Universidad Católica (Quito)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Ecuador",
+      "alias": "universidadcatolicachi",
+      "oficial": "Universidad Católica (Quito)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Ecuador",
+      "alias": "universidadcatolicaquito",
+      "oficial": "Universidad Católica (Quito)",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Inglaterra",
+      "alias": "brightonandhovealbion",
+      "oficial": "Brighton & Hove Albion",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    },
+    {
+      "liga_persistida": "Inglaterra",
+      "alias": "brightonhovealbion",
+      "oficial": "Brighton & Hove Albion",
+      "razon": "discriminadores distintos (sufijos region/identidad)"
+    }
+  ],
+  "INVESTIGATE": [
+    {
+      "liga_persistida": "Alemania",
+      "alias": "1fcheidenheim",
+      "oficial": "1. FC Heidenheim 1846",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Alemania",
+      "alias": "1fcheidenheim1846",
+      "oficial": "1. FC Heidenheim 1846",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Alemania",
+      "alias": "fcstpauli",
+      "oficial": "St. Pauli",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Alemania",
+      "alias": "stpauli",
+      "oficial": "St. Pauli",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "aldosivimardelplata",
+      "oficial": "Aldosivi",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "catigreba",
+      "oficial": "Tigre",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "estudiantes",
+      "oficial": "Estudiantes de la Plata",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "gimnasia",
+      "oficial": "Gimnasia la Plata",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "gimnasialaplatacordoba",
+      "oficial": "Gimnasia la Plata",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "gimnasiayesgrimalaplata",
+      "oficial": "Gimnasia la Plata",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "gimnasiaylp",
+      "oficial": "Gimnasia la Plata",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "newells",
+      "oficial": "Newell's Old Boys",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "newellsoldboys",
+      "oficial": "Newell's Old Boys",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "unionsantafe",
+      "oficial": "Union (santa Fe)",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "velezsarsfieldba",
+      "oficial": "Velez Sarsfield",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Bolivia",
+      "alias": "gualbertovillarroelsj",
+      "oficial": "GV San José",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "athleticoparanaensepr",
+      "oficial": "Athletico Paranaense",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "athleticopr",
+      "oficial": "Athletico Paranaense",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "atleticoparanaense",
+      "oficial": "Athletico Paranaense",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "botafogofr",
+      "oficial": "Botafogo",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "botafogorj",
+      "oficial": "Botafogo",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "bragantinosp",
+      "oficial": "Red Bull Bragantino",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "clubathleticoparanaense",
+      "oficial": "Athletico Paranaense",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "clubatleticoparanaense",
+      "oficial": "Athletico Paranaense",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "botafogosp",
+      "oficial": "Botafogo",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "corinthian",
+      "oficial": "Corinthians",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Chile",
+      "alias": "aitaliano",
+      "oficial": "Audax Italiano",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Chile",
+      "alias": "deportestolima",
+      "oficial": "Deportes Limache",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Chile",
+      "alias": "evertoncd",
+      "oficial": "Everton",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Chile",
+      "alias": "ohiggins",
+      "oficial": "O'Higgins",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Chile",
+      "alias": "dlaserena",
+      "oficial": "La Serena",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Colombia",
+      "alias": "fortaleza",
+      "oficial": "Fortaleza CEIF",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Colombia",
+      "alias": "fortalezafc",
+      "oficial": "Fortaleza CEIF",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Ecuador",
+      "alias": "delfinsc",
+      "oficial": "Delfín",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Ecuador",
+      "alias": "libertadecuador",
+      "oficial": "Libertad (Ecuador)",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Ecuador",
+      "alias": "mantafc",
+      "oficial": "Manta F.C.",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Ecuador",
+      "alias": "mushucrunasc",
+      "oficial": "Mushuc Runa",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Ecuador",
+      "alias": "orensesc",
+      "oficial": "Orense",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Espana",
+      "alias": "caosasuna",
+      "oficial": "Osasuna",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Espana",
+      "alias": "elchecf",
+      "oficial": "Elche",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Espana",
+      "alias": "atleticodemadrid",
+      "oficial": "Atlético Madrid",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Francia",
+      "alias": "auxerre",
+      "oficial": "AJ Auxerre",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Francia",
+      "alias": "lehavre",
+      "oficial": "Le Havre AC",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Francia",
+      "alias": "parissaintgermain",
+      "oficial": "Paris Saint-Germain",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Inglaterra",
+      "alias": "evertoncd",
+      "oficial": "Everton",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Inglaterra",
+      "alias": "bournemouthfc",
+      "oficial": "AFC Bournemouth",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Italia",
+      "alias": "internazionale",
+      "oficial": "Inter",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Italia",
+      "alias": "atlanta",
+      "oficial": "Atalanta",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Noruega",
+      "alias": "bodglimt",
+      "oficial": "Bodo/glimt",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Noruega",
+      "alias": "bodoglimt",
+      "oficial": "Bodo/glimt",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Noruega",
+      "alias": "fredrikstadfk",
+      "oficial": "Fredrikstad",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Noruega",
+      "alias": "hamarkameratene",
+      "oficial": "Hamkam",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Noruega",
+      "alias": "hamkamhamar",
+      "oficial": "Hamkam",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Noruega",
+      "alias": "ikstartkristiansand",
+      "oficial": "Ik Start",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Noruega",
+      "alias": "kfum",
+      "oficial": "Kfum Oslo",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Noruega",
+      "alias": "sarpsborgfotballklubb",
+      "oficial": "Sarpsborg fk",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "basaksehir",
+      "oficial": "Istanbul Basaksehir",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "besiktasjk",
+      "oficial": "Besiktas",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "genclerbirligisk",
+      "oficial": "Genclerbirligi",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "istanbulbasaksehirfk",
+      "oficial": "Istanbul Basaksehir",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "kasimpasask",
+      "oficial": "Kasimpasa",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "kocaeli",
+      "oficial": "Kocaelispor",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "rizespor",
+      "oficial": "Caykur Rizespor",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "torkukonyaspor",
+      "oficial": "Konyaspor",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Uruguay",
+      "alias": "elnacional",
+      "oficial": "Nacional",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Uruguay",
+      "alias": "juventude",
+      "oficial": "Juventud",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Uruguay",
+      "alias": "racingmontevideo",
+      "oficial": "Racing (Montevideo)",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Venezuela",
+      "alias": "carabobofc",
+      "oficial": "Carabobo",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Venezuela",
+      "alias": "portuguesafc",
+      "oficial": "Portuguesa",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Venezuela",
+      "alias": "trujillanosfc",
+      "oficial": "Trujillanos",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Venezuela",
+      "alias": "zamorafc",
+      "oficial": "Zamora",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Venezuela",
+      "alias": "deportivotachirafc",
+      "oficial": "Deportivo Táchira",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Venezuela",
+      "alias": "estudiantesdemeridafc",
+      "oficial": "Estudiantes de Mérida",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    },
+    {
+      "liga_persistida": "Venezuela",
+      "alias": "portuguesarj",
+      "oficial": "Portuguesa",
+      "razon": "no clasifica en KEEP/DELETE auto - review humano"
+    }
+  ],
+  "_summary": {
+    "KEEP": 3,
+    "DELETE_cross_country": 2,
+    "DELETE_disc_conflict": 23,
+    "INVESTIGATE": 74
+  }
+}

@@ -33,6 +33,24 @@ LIGAS_ESPN = {
     "ita.1": "Italia",    # Serie A
     "ger.1": "Alemania",  # Bundesliga
     "fra.1": "Francia",   # Ligue 1
+    # COPAS — agregadas 2026-04-28 (F2 sub-15) para integrar pipeline LIVE.
+    # Slugs ESPN validados via sports.core.api.espn.com/v2/sports/soccer/leagues.
+    # NOMBRE INTERNO debe coincidir con dic._meta.ligas_por_copa[k] para que
+    # gestor_nombres resuelva equipos cross-source consistentemente.
+    "uefa.champions": "Champions League",        # UCL
+    "uefa.europa": "Europa League",               # UEL
+    "uefa.europa.conf": "Conference League",      # UECL
+    "conmebol.libertadores": "Libertadores",      # Conmebol
+    "conmebol.sudamericana": "Sudamericana",
+    "eng.fa": "FA Cup",                           # Copa nacional
+    "eng.league_cup": "EFL Cup",
+    "esp.copa_del_rey": "Copa del Rey",
+    "ita.coppa_italia": "Coppa Italia",
+    "fra.coupe_de_france": "Coupe de France",
+    "ger.dfb_pokal": "DFB Pokal",
+    "arg.copa": "Copa Argentina",
+    "bra.copa_do_brazil": "Copa do Brasil",
+    "conmebol.recopa": "Recopa Sudamericana",
 }
 
 # --- Mapeo nombre interno -> sport key de The-Odds-API ---
@@ -54,6 +72,23 @@ MAPA_LIGAS_ODDS = {
     "Italia":    "soccer_italy_serie_a",         # Serie A — verified active 2026-04-21
     "Alemania":  "soccer_germany_bundesliga",    # Bundesliga — verified active 2026-04-21
     "Francia":   "soccer_france_ligue_one",      # Ligue 1 — verified active 2026-04-21
+    # COPAS — F2 sub-15 (2026-04-28). The-Odds-API tiene cobertura PARCIAL para
+    # algunas copas EUR top. Por ahora None para copas; cuotas via API-Football
+    # Pro plan (bloqueado adepor-4tb) o scraper alternativo (oddsportal).
+    "Champions League":      "soccer_uefa_champs_league",
+    "Europa League":         "soccer_uefa_europa_league",
+    "Conference League":     "soccer_uefa_europa_conference_league",
+    "Libertadores":          None,  # Sin cobertura confiable
+    "Sudamericana":          None,
+    "FA Cup":                "soccer_fa_cup",
+    "EFL Cup":               None,
+    "Copa del Rey":          None,
+    "Coppa Italia":          None,
+    "Coupe de France":       None,
+    "DFB Pokal":             None,
+    "Copa Argentina":        None,
+    "Copa do Brasil":        None,
+    "Recopa Sudamericana":   None,
 }
 
 # --- Mapeo nombre interno -> ID de liga en API-Football ---

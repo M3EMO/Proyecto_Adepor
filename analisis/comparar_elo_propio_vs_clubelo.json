@@ -1,0 +1,1299 @@
+{
+  "n_pairs": 154,
+  "pairs": [
+    {
+      "adepor_norm": "arsenal",
+      "clubelo_name": "Arsenal",
+      "country": "ENG",
+      "elo_adepor": 1859.8,
+      "elo_clubelo": 2046.9,
+      "diff": -187.1
+    },
+    {
+      "adepor_norm": "bayernmunich",
+      "clubelo_name": "Bayern",
+      "country": "GER",
+      "elo_adepor": 1971.9,
+      "elo_clubelo": 2022.0,
+      "diff": -50.1
+    },
+    {
+      "adepor_norm": "parissaintgermain",
+      "clubelo_name": "Paris SG",
+      "country": "FRA",
+      "elo_adepor": 2004.6,
+      "elo_clubelo": 1970.2,
+      "diff": 34.4
+    },
+    {
+      "adepor_norm": "barcelona",
+      "clubelo_name": "Barcelona",
+      "country": "ESP",
+      "elo_adepor": 1792.3,
+      "elo_clubelo": 1969.6,
+      "diff": -177.4
+    },
+    {
+      "adepor_norm": "manchestercity",
+      "clubelo_name": "Man City",
+      "country": "ENG",
+      "elo_adepor": 1843.2,
+      "elo_clubelo": 1969.0,
+      "diff": -125.8
+    },
+    {
+      "adepor_norm": "liverpool",
+      "clubelo_name": "Liverpool",
+      "country": "ENG",
+      "elo_adepor": 1751.1,
+      "elo_clubelo": 1932.0,
+      "diff": -180.9
+    },
+    {
+      "adepor_norm": "realmadrid",
+      "clubelo_name": "Real Madrid",
+      "country": "ESP",
+      "elo_adepor": 1834.0,
+      "elo_clubelo": 1915.3,
+      "diff": -81.3
+    },
+    {
+      "adepor_norm": "inter",
+      "clubelo_name": "Inter",
+      "country": "ITA",
+      "elo_adepor": 1761.6,
+      "elo_clubelo": 1890.0,
+      "diff": -128.5
+    },
+    {
+      "adepor_norm": "astonvilla",
+      "clubelo_name": "Aston Villa",
+      "country": "ENG",
+      "elo_adepor": 1844.0,
+      "elo_clubelo": 1889.5,
+      "diff": -45.5
+    },
+    {
+      "adepor_norm": "manchesterunited",
+      "clubelo_name": "Man United",
+      "country": "ENG",
+      "elo_adepor": 1826.5,
+      "elo_clubelo": 1887.2,
+      "diff": -60.7
+    },
+    {
+      "adepor_norm": "manunited",
+      "clubelo_name": "Man United",
+      "country": "ENG",
+      "elo_adepor": 1518.6,
+      "elo_clubelo": 1887.2,
+      "diff": -368.6
+    },
+    {
+      "adepor_norm": "brighton",
+      "clubelo_name": "Brighton",
+      "country": "ENG",
+      "elo_adepor": 1624.4,
+      "elo_clubelo": 1864.6,
+      "diff": -240.3
+    },
+    {
+      "adepor_norm": "brightonhovealbion",
+      "clubelo_name": "Brighton",
+      "country": "ENG",
+      "elo_adepor": 1647.3,
+      "elo_clubelo": 1864.6,
+      "diff": -217.3
+    },
+    {
+      "adepor_norm": "afcbournemouth",
+      "clubelo_name": "Bournemouth",
+      "country": "ENG",
+      "elo_adepor": 1596.2,
+      "elo_clubelo": 1846.5,
+      "diff": -250.3
+    },
+    {
+      "adepor_norm": "borussiadortmund",
+      "clubelo_name": "Dortmund",
+      "country": "GER",
+      "elo_adepor": 1698.1,
+      "elo_clubelo": 1841.0,
+      "diff": -142.9
+    },
+    {
+      "adepor_norm": "dortmund",
+      "clubelo_name": "Dortmund",
+      "country": "GER",
+      "elo_adepor": 1683.8,
+      "elo_clubelo": 1841.0,
+      "diff": -157.2
+    },
+    {
+      "adepor_norm": "chelsea",
+      "clubelo_name": "Chelsea",
+      "country": "ENG",
+      "elo_adepor": 1787.9,
+      "elo_clubelo": 1839.9,
+      "diff": -52.0
+    },
+    {
+      "adepor_norm": "benfica",
+      "clubelo_name": "Benfica",
+      "country": "POR",
+      "elo_adepor": 1635.9,
+      "elo_clubelo": 1833.7,
+      "diff": -197.8
+    },
+    {
+      "adepor_norm": "brentford",
+      "clubelo_name": "Brentford",
+      "country": "ENG",
+      "elo_adepor": 1598.8,
+      "elo_clubelo": 1827.2,
+      "diff": -228.4
+    },
+    {
+      "adepor_norm": "newcastle",
+      "clubelo_name": "Newcastle",
+      "country": "ENG",
+      "elo_adepor": 1666.4,
+      "elo_clubelo": 1824.5,
+      "diff": -158.0
+    },
+    {
+      "adepor_norm": "newcastleunited",
+      "clubelo_name": "Newcastle",
+      "country": "ENG",
+      "elo_adepor": 1747.0,
+      "elo_clubelo": 1824.5,
+      "diff": -77.5
+    },
+    {
+      "adepor_norm": "everton",
+      "clubelo_name": "Everton",
+      "country": "ENG",
+      "elo_adepor": 1566.4,
+      "elo_clubelo": 1820.1,
+      "diff": -253.7
+    },
+    {
+      "adepor_norm": "bayerleverkusen",
+      "clubelo_name": "Leverkusen",
+      "country": "GER",
+      "elo_adepor": 1703.7,
+      "elo_clubelo": 1814.6,
+      "diff": -110.8
+    },
+    {
+      "adepor_norm": "leverkusen",
+      "clubelo_name": "Leverkusen",
+      "country": "GER",
+      "elo_adepor": 1764.1,
+      "elo_clubelo": 1814.6,
+      "diff": -50.4
+    },
+    {
+      "adepor_norm": "fulham",
+      "clubelo_name": "Fulham",
+      "country": "ENG",
+      "elo_adepor": 1551.2,
+      "elo_clubelo": 1810.6,
+      "diff": -259.4
+    },
+    {
+      "adepor_norm": "crystalpalace",
+      "clubelo_name": "Crystal Palace",
+      "country": "ENG",
+      "elo_adepor": 1707.3,
+      "elo_clubelo": 1804.6,
+      "diff": -97.3
+    },
+    {
+      "adepor_norm": "juventus",
+      "clubelo_name": "Juventus",
+      "country": "ITA",
+      "elo_adepor": 1692.4,
+      "elo_clubelo": 1797.5,
+      "diff": -105.1
+    },
+    {
+      "adepor_norm": "leeds",
+      "clubelo_name": "Leeds",
+      "country": "ENG",
+      "elo_adepor": 1367.0,
+      "elo_clubelo": 1791.9,
+      "diff": -425.0
+    },
+    {
+      "adepor_norm": "rbleipzig",
+      "clubelo_name": "RB Leipzig",
+      "country": "GER",
+      "elo_adepor": 1577.5,
+      "elo_clubelo": 1786.9,
+      "diff": -209.4
+    },
+    {
+      "adepor_norm": "napoli",
+      "clubelo_name": "Napoli",
+      "country": "ITA",
+      "elo_adepor": 1616.5,
+      "elo_clubelo": 1783.5,
+      "diff": -167.0
+    },
+    {
+      "adepor_norm": "acmilan",
+      "clubelo_name": "Milan",
+      "country": "ITA",
+      "elo_adepor": 1661.9,
+      "elo_clubelo": 1781.5,
+      "diff": -119.6
+    },
+    {
+      "adepor_norm": "milan",
+      "clubelo_name": "Milan",
+      "country": "ITA",
+      "elo_adepor": 1667.1,
+      "elo_clubelo": 1781.5,
+      "diff": -114.4
+    },
+    {
+      "adepor_norm": "atalanta",
+      "clubelo_name": "Atalanta",
+      "country": "ITA",
+      "elo_adepor": 1661.1,
+      "elo_clubelo": 1772.3,
+      "diff": -111.2
+    },
+    {
+      "adepor_norm": "asroma",
+      "clubelo_name": "Roma",
+      "country": "ITA",
+      "elo_adepor": 1611.2,
+      "elo_clubelo": 1768.6,
+      "diff": -157.4
+    },
+    {
+      "adepor_norm": "roma",
+      "clubelo_name": "Roma",
+      "country": "ITA",
+      "elo_adepor": 1716.4,
+      "elo_clubelo": 1768.6,
+      "diff": -52.2
+    },
+    {
+      "adepor_norm": "westham",
+      "clubelo_name": "West Ham",
+      "country": "ENG",
+      "elo_adepor": 1507.2,
+      "elo_clubelo": 1768.4,
+      "diff": -261.1
+    },
+    {
+      "adepor_norm": "lille",
+      "clubelo_name": "Lille",
+      "country": "FRA",
+      "elo_adepor": 1638.9,
+      "elo_clubelo": 1760.5,
+      "diff": -121.7
+    },
+    {
+      "adepor_norm": "villarreal",
+      "clubelo_name": "Villarreal",
+      "country": "ESP",
+      "elo_adepor": 1551.8,
+      "elo_clubelo": 1758.7,
+      "diff": -206.8
+    },
+    {
+      "adepor_norm": "tottenham",
+      "clubelo_name": "Tottenham",
+      "country": "ENG",
+      "elo_adepor": 1512.9,
+      "elo_clubelo": 1757.5,
+      "diff": -244.6
+    },
+    {
+      "adepor_norm": "tottenhamhotspur",
+      "clubelo_name": "Tottenham",
+      "country": "ENG",
+      "elo_adepor": 1794.6,
+      "elo_clubelo": 1757.5,
+      "diff": 37.2
+    },
+    {
+      "adepor_norm": "stuttgart",
+      "clubelo_name": "Stuttgart",
+      "country": "GER",
+      "elo_adepor": 1642.4,
+      "elo_clubelo": 1756.0,
+      "diff": -113.6
+    },
+    {
+      "adepor_norm": "lens",
+      "clubelo_name": "Lens",
+      "country": "FRA",
+      "elo_adepor": 1628.6,
+      "elo_clubelo": 1755.4,
+      "diff": -126.8
+    },
+    {
+      "adepor_norm": "lyon",
+      "clubelo_name": "Lyon",
+      "country": "FRA",
+      "elo_adepor": 1670.8,
+      "elo_clubelo": 1751.7,
+      "diff": -80.9
+    },
+    {
+      "adepor_norm": "como",
+      "clubelo_name": "Como",
+      "country": "ITA",
+      "elo_adepor": 1547.7,
+      "elo_clubelo": 1746.1,
+      "diff": -198.4
+    },
+    {
+      "adepor_norm": "betis",
+      "clubelo_name": "Betis",
+      "country": "ESP",
+      "elo_adepor": 1629.2,
+      "elo_clubelo": 1734.6,
+      "diff": -105.4
+    },
+    {
+      "adepor_norm": "realbetis",
+      "clubelo_name": "Betis",
+      "country": "ESP",
+      "elo_adepor": 1616.3,
+      "elo_clubelo": 1734.6,
+      "diff": -118.3
+    },
+    {
+      "adepor_norm": "rennes",
+      "clubelo_name": "Rennes",
+      "country": "FRA",
+      "elo_adepor": 1580.5,
+      "elo_clubelo": 1731.9,
+      "diff": -151.3
+    },
+    {
+      "adepor_norm": "monaco",
+      "clubelo_name": "Monaco",
+      "country": "FRA",
+      "elo_adepor": 1671.1,
+      "elo_clubelo": 1730.9,
+      "diff": -59.8
+    },
+    {
+      "adepor_norm": "strasbourg",
+      "clubelo_name": "Strasbourg",
+      "country": "FRA",
+      "elo_adepor": 1616.4,
+      "elo_clubelo": 1728.9,
+      "diff": -112.6
+    },
+    {
+      "adepor_norm": "freiburg",
+      "clubelo_name": "Freiburg",
+      "country": "GER",
+      "elo_adepor": 1572.2,
+      "elo_clubelo": 1725.8,
+      "diff": -153.7
+    },
+    {
+      "adepor_norm": "marseille",
+      "clubelo_name": "Marseille",
+      "country": "FRA",
+      "elo_adepor": 1674.7,
+      "elo_clubelo": 1722.1,
+      "diff": -47.4
+    },
+    {
+      "adepor_norm": "galatasaray",
+      "clubelo_name": "Galatasaray",
+      "country": "TUR",
+      "elo_adepor": 1720.7,
+      "elo_clubelo": 1720.1,
+      "diff": 0.5
+    },
+    {
+      "adepor_norm": "hoffenheim",
+      "clubelo_name": "Hoffenheim",
+      "country": "GER",
+      "elo_adepor": 1471.9,
+      "elo_clubelo": 1716.9,
+      "diff": -245.0
+    },
+    {
+      "adepor_norm": "lazio",
+      "clubelo_name": "Lazio",
+      "country": "ITA",
+      "elo_adepor": 1688.2,
+      "elo_clubelo": 1712.0,
+      "diff": -23.8
+    },
+    {
+      "adepor_norm": "celta",
+      "clubelo_name": "Celta",
+      "country": "ESP",
+      "elo_adepor": 1573.0,
+      "elo_clubelo": 1684.0,
+      "diff": -111.1
+    },
+    {
+      "adepor_norm": "realsociedad",
+      "clubelo_name": "Sociedad",
+      "country": "ESP",
+      "elo_adepor": 1736.0,
+      "elo_clubelo": 1683.7,
+      "diff": 52.3
+    },
+    {
+      "adepor_norm": "sociedad",
+      "clubelo_name": "Sociedad",
+      "country": "ESP",
+      "elo_adepor": 1546.0,
+      "elo_clubelo": 1683.7,
+      "diff": -137.7
+    },
+    {
+      "adepor_norm": "osasuna",
+      "clubelo_name": "Osasuna",
+      "country": "ESP",
+      "elo_adepor": 1616.6,
+      "elo_clubelo": 1682.4,
+      "diff": -65.9
+    },
+    {
+      "adepor_norm": "bologna",
+      "clubelo_name": "Bologna",
+      "country": "ITA",
+      "elo_adepor": 1673.3,
+      "elo_clubelo": 1677.4,
+      "diff": -4.1
+    },
+    {
+      "adepor_norm": "wolves",
+      "clubelo_name": "Wolves",
+      "country": "ENG",
+      "elo_adepor": 1501.1,
+      "elo_clubelo": 1677.1,
+      "diff": -176.0
+    },
+    {
+      "adepor_norm": "mainz",
+      "clubelo_name": "Mainz",
+      "country": "GER",
+      "elo_adepor": 1598.7,
+      "elo_clubelo": 1675.5,
+      "diff": -76.8
+    },
+    {
+      "adepor_norm": "getafe",
+      "clubelo_name": "Getafe",
+      "country": "ESP",
+      "elo_adepor": 1529.0,
+      "elo_clubelo": 1668.6,
+      "diff": -139.6
+    },
+    {
+      "adepor_norm": "valencia",
+      "clubelo_name": "Valencia",
+      "country": "ESP",
+      "elo_adepor": 1581.4,
+      "elo_clubelo": 1664.1,
+      "diff": -82.6
+    },
+    {
+      "adepor_norm": "burnley",
+      "clubelo_name": "Burnley",
+      "country": "ENG",
+      "elo_adepor": 1415.9,
+      "elo_clubelo": 1663.7,
+      "diff": -247.8
+    },
+    {
+      "adepor_norm": "rayovallecano",
+      "clubelo_name": "Rayo Vallecano",
+      "country": "ESP",
+      "elo_adepor": 1599.4,
+      "elo_clubelo": 1661.8,
+      "diff": -62.4
+    },
+    {
+      "adepor_norm": "fiorentina",
+      "clubelo_name": "Fiorentina",
+      "country": "ITA",
+      "elo_adepor": 1633.4,
+      "elo_clubelo": 1660.9,
+      "diff": -27.5
+    },
+    {
+      "adepor_norm": "slaviapraha",
+      "clubelo_name": "Slavia Praha",
+      "country": "CZE",
+      "elo_adepor": 1533.9,
+      "elo_clubelo": 1652.4,
+      "diff": -118.5
+    },
+    {
+      "adepor_norm": "fenerbahce",
+      "clubelo_name": "Fenerbahce",
+      "country": "TUR",
+      "elo_adepor": 1672.1,
+      "elo_clubelo": 1652.0,
+      "diff": 20.1
+    },
+    {
+      "adepor_norm": "brest",
+      "clubelo_name": "Brest",
+      "country": "FRA",
+      "elo_adepor": 1586.6,
+      "elo_clubelo": 1650.2,
+      "diff": -63.6
+    },
+    {
+      "adepor_norm": "girona",
+      "clubelo_name": "Girona",
+      "country": "ESP",
+      "elo_adepor": 1495.8,
+      "elo_clubelo": 1646.0,
+      "diff": -150.2
+    },
+    {
+      "adepor_norm": "udinese",
+      "clubelo_name": "Udinese",
+      "country": "ITA",
+      "elo_adepor": 1465.8,
+      "elo_clubelo": 1643.0,
+      "diff": -177.1
+    },
+    {
+      "adepor_norm": "mallorca",
+      "clubelo_name": "Mallorca",
+      "country": "ESP",
+      "elo_adepor": 1532.2,
+      "elo_clubelo": 1638.9,
+      "diff": -106.7
+    },
+    {
+      "adepor_norm": "lorient",
+      "clubelo_name": "Lorient",
+      "country": "FRA",
+      "elo_adepor": 1532.0,
+      "elo_clubelo": 1637.5,
+      "diff": -105.5
+    },
+    {
+      "adepor_norm": "sassuolo",
+      "clubelo_name": "Sassuolo",
+      "country": "ITA",
+      "elo_adepor": 1417.2,
+      "elo_clubelo": 1634.5,
+      "diff": -217.3
+    },
+    {
+      "adepor_norm": "toulouse",
+      "clubelo_name": "Toulouse",
+      "country": "FRA",
+      "elo_adepor": 1558.3,
+      "elo_clubelo": 1633.9,
+      "diff": -75.6
+    },
+    {
+      "adepor_norm": "augsburg",
+      "clubelo_name": "Augsburg",
+      "country": "GER",
+      "elo_adepor": 1504.5,
+      "elo_clubelo": 1633.2,
+      "diff": -128.7
+    },
+    {
+      "adepor_norm": "torino",
+      "clubelo_name": "Torino",
+      "country": "ITA",
+      "elo_adepor": 1519.5,
+      "elo_clubelo": 1631.1,
+      "diff": -111.6
+    },
+    {
+      "adepor_norm": "alaves",
+      "clubelo_name": "Alaves",
+      "country": "ESP",
+      "elo_adepor": 1528.0,
+      "elo_clubelo": 1628.1,
+      "diff": -100.1
+    },
+    {
+      "adepor_norm": "ipswich",
+      "clubelo_name": "Ipswich",
+      "country": "ENG",
+      "elo_adepor": 1387.6,
+      "elo_clubelo": 1627.2,
+      "diff": -239.7
+    },
+    {
+      "adepor_norm": "genoa",
+      "clubelo_name": "Genoa",
+      "country": "ITA",
+      "elo_adepor": 1516.9,
+      "elo_clubelo": 1625.9,
+      "diff": -109.0
+    },
+    {
+      "adepor_norm": "southampton",
+      "clubelo_name": "Southampton",
+      "country": "ENG",
+      "elo_adepor": 1380.1,
+      "elo_clubelo": 1624.4,
+      "diff": -244.3
+    },
+    {
+      "adepor_norm": "elche",
+      "clubelo_name": "Elche",
+      "country": "ESP",
+      "elo_adepor": 1509.3,
+      "elo_clubelo": 1623.0,
+      "diff": -113.8
+    },
+    {
+      "adepor_norm": "levante",
+      "clubelo_name": "Levante",
+      "country": "ESP",
+      "elo_adepor": 1495.5,
+      "elo_clubelo": 1617.6,
+      "diff": -122.1
+    },
+    {
+      "adepor_norm": "sevilla",
+      "clubelo_name": "Sevilla",
+      "country": "ESP",
+      "elo_adepor": 1523.0,
+      "elo_clubelo": 1604.0,
+      "diff": -81.0
+    },
+    {
+      "adepor_norm": "parma",
+      "clubelo_name": "Parma",
+      "country": "ITA",
+      "elo_adepor": 1517.5,
+      "elo_clubelo": 1603.0,
+      "diff": -85.5
+    },
+    {
+      "adepor_norm": "venezia",
+      "clubelo_name": "Venezia",
+      "country": "ITA",
+      "elo_adepor": 1394.5,
+      "elo_clubelo": 1596.3,
+      "diff": -201.7
+    },
+    {
+      "adepor_norm": "feyenoord",
+      "clubelo_name": "Feyenoord",
+      "country": "NED",
+      "elo_adepor": 1505.7,
+      "elo_clubelo": 1594.8,
+      "diff": -89.1
+    },
+    {
+      "adepor_norm": "unionberlin",
+      "clubelo_name": "Union Berlin",
+      "country": "GER",
+      "elo_adepor": 1472.5,
+      "elo_clubelo": 1591.0,
+      "diff": -118.5
+    },
+    {
+      "adepor_norm": "auxerre",
+      "clubelo_name": "Auxerre",
+      "country": "FRA",
+      "elo_adepor": 1534.1,
+      "elo_clubelo": 1590.7,
+      "diff": -56.5
+    },
+    {
+      "adepor_norm": "nice",
+      "clubelo_name": "Nice",
+      "country": "FRA",
+      "elo_adepor": 1656.3,
+      "elo_clubelo": 1590.7,
+      "diff": 65.6
+    },
+    {
+      "adepor_norm": "paok",
+      "clubelo_name": "PAOK",
+      "country": "GRE",
+      "elo_adepor": 1583.0,
+      "elo_clubelo": 1590.4,
+      "diff": -7.3
+    },
+    {
+      "adepor_norm": "ajax",
+      "clubelo_name": "Ajax",
+      "country": "NED",
+      "elo_adepor": 1490.0,
+      "elo_clubelo": 1588.4,
+      "diff": -98.4
+    },
+    {
+      "adepor_norm": "wolfsburg",
+      "clubelo_name": "Wolfsburg",
+      "country": "GER",
+      "elo_adepor": 1510.5,
+      "elo_clubelo": 1587.0,
+      "diff": -76.5
+    },
+    {
+      "adepor_norm": "genk",
+      "clubelo_name": "Genk",
+      "country": "BEL",
+      "elo_adepor": 1552.3,
+      "elo_clubelo": 1583.3,
+      "diff": -31.0
+    },
+    {
+      "adepor_norm": "cagliari",
+      "clubelo_name": "Cagliari",
+      "country": "ITA",
+      "elo_adepor": 1451.3,
+      "elo_clubelo": 1579.3,
+      "diff": -128.0
+    },
+    {
+      "adepor_norm": "dinamozagreb",
+      "clubelo_name": "Dinamo Zagreb",
+      "country": "CRO",
+      "elo_adepor": 1540.3,
+      "elo_clubelo": 1570.0,
+      "diff": -29.6
+    },
+    {
+      "adepor_norm": "laspalmas",
+      "clubelo_name": "Las Palmas",
+      "country": "ESP",
+      "elo_adepor": 1449.3,
+      "elo_clubelo": 1566.4,
+      "diff": -117.0
+    },
+    {
+      "adepor_norm": "almeria",
+      "clubelo_name": "Almeria",
+      "country": "ESP",
+      "elo_adepor": 1453.3,
+      "elo_clubelo": 1566.3,
+      "diff": -113.1
+    },
+    {
+      "adepor_norm": "spartapraha",
+      "clubelo_name": "Sparta Praha",
+      "country": "CZE",
+      "elo_adepor": 1522.5,
+      "elo_clubelo": 1566.1,
+      "diff": -43.5
+    },
+    {
+      "adepor_norm": "twente",
+      "clubelo_name": "Twente",
+      "country": "NED",
+      "elo_adepor": 1544.3,
+      "elo_clubelo": 1564.7,
+      "diff": -20.4
+    },
+    {
+      "adepor_norm": "lehavre",
+      "clubelo_name": "Le Havre",
+      "country": "FRA",
+      "elo_adepor": 1441.4,
+      "elo_clubelo": 1564.5,
+      "diff": -123.1
+    },
+    {
+      "adepor_norm": "norwich",
+      "clubelo_name": "Norwich",
+      "country": "ENG",
+      "elo_adepor": 1348.8,
+      "elo_clubelo": 1563.3,
+      "diff": -214.5
+    },
+    {
+      "adepor_norm": "monza",
+      "clubelo_name": "Monza",
+      "country": "ITA",
+      "elo_adepor": 1341.3,
+      "elo_clubelo": 1559.9,
+      "diff": -218.6
+    },
+    {
+      "adepor_norm": "stpauli",
+      "clubelo_name": "St Pauli",
+      "country": "GER",
+      "elo_adepor": 1473.4,
+      "elo_clubelo": 1556.3,
+      "diff": -82.9
+    },
+    {
+      "adepor_norm": "panathinaikos",
+      "clubelo_name": "Panathinaikos",
+      "country": "GRE",
+      "elo_adepor": 1550.5,
+      "elo_clubelo": 1554.8,
+      "diff": -4.3
+    },
+    {
+      "adepor_norm": "frosinone",
+      "clubelo_name": "Frosinone",
+      "country": "ITA",
+      "elo_adepor": 1449.8,
+      "elo_clubelo": 1550.9,
+      "diff": -101.1
+    },
+    {
+      "adepor_norm": "angers",
+      "clubelo_name": "Angers",
+      "country": "FRA",
+      "elo_adepor": 1406.9,
+      "elo_clubelo": 1550.5,
+      "diff": -143.6
+    },
+    {
+      "adepor_norm": "celtic",
+      "clubelo_name": "Celtic",
+      "country": "SCO",
+      "elo_adepor": 1528.6,
+      "elo_clubelo": 1550.1,
+      "diff": -21.5
+    },
+    {
+      "adepor_norm": "guimaraes",
+      "clubelo_name": "Guimaraes",
+      "country": "POR",
+      "elo_adepor": 1597.0,
+      "elo_clubelo": 1547.9,
+      "diff": 49.0
+    },
+    {
+      "adepor_norm": "trabzonspor",
+      "clubelo_name": "Trabzonspor",
+      "country": "TUR",
+      "elo_adepor": 1659.3,
+      "elo_clubelo": 1546.9,
+      "diff": 112.4
+    },
+    {
+      "adepor_norm": "lecce",
+      "clubelo_name": "Lecce",
+      "country": "ITA",
+      "elo_adepor": 1416.8,
+      "elo_clubelo": 1543.4,
+      "diff": -126.6
+    },
+    {
+      "adepor_norm": "heidenheim",
+      "clubelo_name": "Heidenheim",
+      "country": "GER",
+      "elo_adepor": 1437.7,
+      "elo_clubelo": 1541.1,
+      "diff": -103.4
+    },
+    {
+      "adepor_norm": "rangers",
+      "clubelo_name": "Rangers",
+      "country": "SCO",
+      "elo_adepor": 1544.9,
+      "elo_clubelo": 1539.2,
+      "diff": 5.7
+    },
+    {
+      "adepor_norm": "reims",
+      "clubelo_name": "Reims",
+      "country": "FRA",
+      "elo_adepor": 1503.8,
+      "elo_clubelo": 1538.2,
+      "diff": -34.5
+    },
+    {
+      "adepor_norm": "sheffieldunited",
+      "clubelo_name": "Sheffield United",
+      "country": "ENG",
+      "elo_adepor": 1350.7,
+      "elo_clubelo": 1532.0,
+      "diff": -181.3
+    },
+    {
+      "adepor_norm": "anderlecht",
+      "clubelo_name": "Anderlecht",
+      "country": "BEL",
+      "elo_adepor": 1586.3,
+      "elo_clubelo": 1526.3,
+      "diff": 60.0
+    },
+    {
+      "adepor_norm": "nantes",
+      "clubelo_name": "Nantes",
+      "country": "FRA",
+      "elo_adepor": 1484.7,
+      "elo_clubelo": 1525.5,
+      "diff": -40.8
+    },
+    {
+      "adepor_norm": "troyes",
+      "clubelo_name": "Troyes",
+      "country": "FRA",
+      "elo_adepor": 1336.8,
+      "elo_clubelo": 1524.7,
+      "diff": -187.9
+    },
+    {
+      "adepor_norm": "cremonese",
+      "clubelo_name": "Cremonese",
+      "country": "ITA",
+      "elo_adepor": 1439.3,
+      "elo_clubelo": 1520.6,
+      "diff": -81.3
+    },
+    {
+      "adepor_norm": "besiktas",
+      "clubelo_name": "Besiktas",
+      "country": "TUR",
+      "elo_adepor": 1617.2,
+      "elo_clubelo": 1518.8,
+      "diff": 98.4
+    },
+    {
+      "adepor_norm": "leganes",
+      "clubelo_name": "Leganes",
+      "country": "ESP",
+      "elo_adepor": 1517.4,
+      "elo_clubelo": 1507.4,
+      "diff": 10.0
+    },
+    {
+      "adepor_norm": "gent",
+      "clubelo_name": "Gent",
+      "country": "BEL",
+      "elo_adepor": 1582.5,
+      "elo_clubelo": 1502.4,
+      "diff": 80.1
+    },
+    {
+      "adepor_norm": "metz",
+      "clubelo_name": "Metz",
+      "country": "FRA",
+      "elo_adepor": 1449.7,
+      "elo_clubelo": 1501.1,
+      "diff": -51.4
+    },
+    {
+      "adepor_norm": "blackburn",
+      "clubelo_name": "Blackburn",
+      "country": "ENG",
+      "elo_adepor": 1562.0,
+      "elo_clubelo": 1497.3,
+      "diff": 64.8
+    },
+    {
+      "adepor_norm": "verona",
+      "clubelo_name": "Verona",
+      "country": "ITA",
+      "elo_adepor": 1422.4,
+      "elo_clubelo": 1494.2,
+      "diff": -71.8
+    },
+    {
+      "adepor_norm": "montpellier",
+      "clubelo_name": "Montpellier",
+      "country": "FRA",
+      "elo_adepor": 1342.0,
+      "elo_clubelo": 1489.9,
+      "diff": -148.0
+    },
+    {
+      "adepor_norm": "leicester",
+      "clubelo_name": "Leicester",
+      "country": "ENG",
+      "elo_adepor": 1358.2,
+      "elo_clubelo": 1488.8,
+      "diff": -130.6
+    },
+    {
+      "adepor_norm": "hertha",
+      "clubelo_name": "Hertha",
+      "country": "GER",
+      "elo_adepor": 1391.9,
+      "elo_clubelo": 1488.5,
+      "diff": -96.6
+    },
+    {
+      "adepor_norm": "granada",
+      "clubelo_name": "Granada",
+      "country": "ESP",
+      "elo_adepor": 1371.8,
+      "elo_clubelo": 1486.1,
+      "diff": -114.3
+    },
+    {
+      "adepor_norm": "darmstadt",
+      "clubelo_name": "Darmstadt",
+      "country": "GER",
+      "elo_adepor": 1360.8,
+      "elo_clubelo": 1485.9,
+      "diff": -125.1
+    },
+    {
+      "adepor_norm": "bochum",
+      "clubelo_name": "Bochum",
+      "country": "GER",
+      "elo_adepor": 1391.9,
+      "elo_clubelo": 1482.0,
+      "diff": -90.1
+    },
+    {
+      "adepor_norm": "sturmgraz",
+      "clubelo_name": "Sturm Graz",
+      "country": "AUT",
+      "elo_adepor": 1429.2,
+      "elo_clubelo": 1476.9,
+      "diff": -47.7
+    },
+    {
+      "adepor_norm": "watford",
+      "clubelo_name": "Watford",
+      "country": "ENG",
+      "elo_adepor": 1369.4,
+      "elo_clubelo": 1461.7,
+      "diff": -92.3
+    },
+    {
+      "adepor_norm": "molde",
+      "clubelo_name": "Molde",
+      "country": "NOR",
+      "elo_adepor": 1523.5,
+      "elo_clubelo": 1457.8,
+      "diff": 65.7
+    },
+    {
+      "adepor_norm": "celje",
+      "clubelo_name": "Celje",
+      "country": "SVN",
+      "elo_adepor": 1527.3,
+      "elo_clubelo": 1452.1,
+      "diff": 75.2
+    },
+    {
+      "adepor_norm": "nacional",
+      "clubelo_name": "Nacional",
+      "country": "POR",
+      "elo_adepor": 1656.7,
+      "elo_clubelo": 1450.4,
+      "diff": 206.2
+    },
+    {
+      "adepor_norm": "valladolid",
+      "clubelo_name": "Valladolid",
+      "country": "ESP",
+      "elo_adepor": 1349.0,
+      "elo_clubelo": 1438.2,
+      "diff": -89.3
+    },
+    {
+      "adepor_norm": "dynamokyiv",
+      "clubelo_name": "Dynamo Kyiv",
+      "country": "UKR",
+      "elo_adepor": 1431.5,
+      "elo_clubelo": 1437.3,
+      "diff": -5.9
+    },
+    {
+      "adepor_norm": "samsunspor",
+      "clubelo_name": "Samsunspor",
+      "country": "TUR",
+      "elo_adepor": 1583.8,
+      "elo_clubelo": 1435.8,
+      "diff": 148.0
+    },
+    {
+      "adepor_norm": "konyaspor",
+      "clubelo_name": "Konyaspor",
+      "country": "TUR",
+      "elo_adepor": 1551.0,
+      "elo_clubelo": 1420.2,
+      "diff": 130.8
+    },
+    {
+      "adepor_norm": "empoli",
+      "clubelo_name": "Empoli",
+      "country": "ITA",
+      "elo_adepor": 1421.9,
+      "elo_clubelo": 1411.9,
+      "diff": 10.0
+    },
+    {
+      "adepor_norm": "rizespor",
+      "clubelo_name": "Rizespor",
+      "country": "TUR",
+      "elo_adepor": 1514.7,
+      "elo_clubelo": 1410.6,
+      "diff": 104.0
+    },
+    {
+      "adepor_norm": "alanyaspor",
+      "clubelo_name": "Alanyaspor",
+      "country": "TUR",
+      "elo_adepor": 1540.5,
+      "elo_clubelo": 1401.3,
+      "diff": 139.2
+    },
+    {
+      "adepor_norm": "cadiz",
+      "clubelo_name": "Cadiz",
+      "country": "ESP",
+      "elo_adepor": 1442.9,
+      "elo_clubelo": 1396.9,
+      "diff": 46.0
+    },
+    {
+      "adepor_norm": "sampdoria",
+      "clubelo_name": "Sampdoria",
+      "country": "ITA",
+      "elo_adepor": 1318.1,
+      "elo_clubelo": 1393.0,
+      "diff": -74.9
+    },
+    {
+      "adepor_norm": "bielefeld",
+      "clubelo_name": "Bielefeld",
+      "country": "GER",
+      "elo_adepor": 1432.3,
+      "elo_clubelo": 1385.3,
+      "diff": 47.0
+    },
+    {
+      "adepor_norm": "spezia",
+      "clubelo_name": "Spezia",
+      "country": "ITA",
+      "elo_adepor": 1386.9,
+      "elo_clubelo": 1379.7,
+      "diff": 7.2
+    },
+    {
+      "adepor_norm": "kasimpasa",
+      "clubelo_name": "Kasimpasa",
+      "country": "TUR",
+      "elo_adepor": 1549.3,
+      "elo_clubelo": 1379.6,
+      "diff": 169.7
+    },
+    {
+      "adepor_norm": "maccabihaifa",
+      "clubelo_name": "Maccabi Haifa",
+      "country": "ISR",
+      "elo_adepor": 1508.4,
+      "elo_clubelo": 1375.1,
+      "diff": 133.3
+    },
+    {
+      "adepor_norm": "clermont",
+      "clubelo_name": "Clermont",
+      "country": "FRA",
+      "elo_adepor": 1421.0,
+      "elo_clubelo": 1371.9,
+      "diff": 49.2
+    },
+    {
+      "adepor_norm": "maribor",
+      "clubelo_name": "Maribor",
+      "country": "SVN",
+      "elo_adepor": 1454.6,
+      "elo_clubelo": 1349.8,
+      "diff": 104.8
+    },
+    {
+      "adepor_norm": "eyupspor",
+      "clubelo_name": "Eyupspor",
+      "country": "TUR",
+      "elo_adepor": 1489.4,
+      "elo_clubelo": 1344.1,
+      "diff": 145.3
+    },
+    {
+      "adepor_norm": "olimpijaljubljana",
+      "clubelo_name": "Olimpija Ljubljana",
+      "country": "SVN",
+      "elo_adepor": 1528.1,
+      "elo_clubelo": 1324.0,
+      "diff": 204.1
+    },
+    {
+      "adepor_norm": "antalyaspor",
+      "clubelo_name": "Antalyaspor",
+      "country": "TUR",
+      "elo_adepor": 1466.9,
+      "elo_clubelo": 1322.4,
+      "diff": 144.5
+    }
+  ],
+  "by_country": {
+    "ENG": {
+      "n": 29,
+      "corr": 0.7803030649298831,
+      "bias": -177.86206896551724,
+      "rmse": 207.44225951932444
+    },
+    "GER": {
+      "n": 19,
+      "corr": 0.9249429723198137,
+      "bias": -109.72105263157894,
+      "rmse": 125.25553879968741
+    },
+    "FRA": {
+      "n": 21,
+      "corr": 0.8908369211527903,
+      "bias": -75.32380952380952,
+      "rmse": 99.8330034178506
+    },
+    "ESP": {
+      "n": 24,
+      "corr": 0.8813744741536856,
+      "bias": -95.325,
+      "rmse": 112.29766990755715
+    },
+    "ITA": {
+      "n": 27,
+      "corr": 0.8760527488016724,
+      "bias": -107.27777777777777,
+      "rmse": 125.05758525427247
+    },
+    "POR": {
+      "n": 3,
+      "corr": -0.07387363417354405,
+      "bias": 19.133333333333326,
+      "rmse": 167.37610343176232
+    },
+    "TUR": {
+      "n": 11,
+      "corr": 0.9654601699629474,
+      "bias": 110.26363636363637,
+      "rmse": 121.62396967703366
+    },
+    "NED": {
+      "n": 3,
+      "corr": -0.883291445051825,
+      "bias": -69.3,
+      "rmse": 77.54037657891531
+    },
+    "BEL": {
+      "n": 3,
+      "corr": -0.9234603287069617,
+      "bias": 36.36666666666667,
+      "rmse": 60.48969609225469
+    },
+    "SVN": {
+      "n": 3,
+      "corr": 0.31698261046469123,
+      "bias": 128.03333333333333,
+      "rmse": 139.3973816109901
+    }
+  }
+}

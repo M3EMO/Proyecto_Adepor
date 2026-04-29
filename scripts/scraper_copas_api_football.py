@@ -184,16 +184,31 @@ def parse_fixture(fix, copa_meta):
 
 
 def insertar(con, rows):
+    """[adepor-qqb fix 2026-04-28] Canonicaliza nombres + popula _norm. La copa
+    se pasa como contexto a gestor_nombres (que sabe via _meta.ligas_por_copa
+    cuales sub-ligas participan, ej Libertadores -> [Argentina,Brasil,...])."""
+    from src.comun.gestor_nombres import obtener_nombre_estandar, limpiar_texto
+
     cur = con.cursor()
     n_ins = 0; n_dup = 0
     for r in rows:
+        # Canonicalizar via gestor_nombres con scope de competicion (ej 'Libertadores')
+        equipo_local_oficial = obtener_nombre_estandar(
+            r['equipo_local'], liga=r['competicion'], modo_interactivo=False)
+        equipo_visita_oficial = obtener_nombre_estandar(
+            r['equipo_visita'], liga=r['competicion'], modo_interactivo=False)
+        equipo_local_norm = limpiar_texto(equipo_local_oficial)
+        equipo_visita_norm = limpiar_texto(equipo_visita_oficial)
         try:
             cur.execute("""INSERT INTO partidos_no_liga
                 (fecha, competicion, competicion_tipo, pais_origen, fase,
-                 equipo_local, equipo_visita, goles_l, goles_v, fuente)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                 equipo_local, equipo_visita,
+                 equipo_local_norm, equipo_visita_norm,
+                 goles_l, goles_v, fuente)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (r['fecha'], r['competicion'], r['competicion_tipo'], r['pais_origen'],
-                 r['fase'], r['equipo_local'], r['equipo_visita'],
+                 r['fase'], equipo_local_oficial, equipo_visita_oficial,
+                 equipo_local_norm, equipo_visita_norm,
                  r['goles_l'], r['goles_v'], r['fuente']))
             n_ins += 1
         except sqlite3.IntegrityError:

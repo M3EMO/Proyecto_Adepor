@@ -130,6 +130,24 @@ El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreat
   `analisis/fixture_layer3_upcoming.py`, `analisis/audit_layer3_monthly.py`,
   `analisis/backtest_layer3_contrafactual.py`, `analisis/diagnostic_mojibake_equipos.py`,
   `analisis/fix_mojibake_equipos.py`.
+- **V5.2 sesión 3 (2026-04-28 PM, 3 fases consecutivas):**
+  - **F1 Consistencia INSERT:** 4 scripts modificados para wrappear `gestor_nombres.obtener_nombre_estandar()`
+    + popular `_norm` (cierra `adepor-qqb`). Backfill idempotente `scripts/backfill_norm_columns.py`.
+  - **F2 Schema enriquecido `partidos_no_liga`:** agregadas 7 cols (liga_local, liga_visita,
+    competicion_formato, id_serie_eliminatoria, numero_partido_serie, agregado_local_pre/visita_pre).
+    Backfill: 21% liga_home resuelta (limitado por diccionario incompleto — `adepor-g4s`).
+    125 series 2-legs detectadas con agregados pre-poblados. 539 partidos cross-liga.
+  - **F3 Motor copa research + Elo:** documentado en `docs/papers/copa_modelado.md` + `docs/papers/elo_calibracion.md`
+    (18 fuentes peer-reviewed: Cattelan 2013 RSS, Olesker-Taylor 2024 NeurIPS, Tandfonline 2025 sparse,
+    Aldous Berkeley, World Football Elo, Eloratings.net). Workflow `scripts/research/buscar_papers.py`
+    (Semantic Scholar + arXiv API fallback). Tabla nueva `equipo_nivel_elo` (39,164 filas Elo dinámico
+    cross-competition con K-factor diferenciado: liga 20, copa nacional 30, copa internacional 40,
+    knockout 50, final 60). Cold-start regularization K*0.5 cuando n<30 (Tandfonline 2025).
+    Backtest desglosado: hit standalone 49.5% global, copa internacional 53.0% (mejor), Turquía 53.3%,
+    Argentina 43.2% (peor de los grandes — coherente con `adepor-09s` régimen). 2025 OOS 54.1% (mejor año).
+  - **Process gate fundamentación académica (decisión usuario 2026-04-28):** toda decisión técnica
+    nueva debe estar fundamentada en investigación (Semantic Scholar / arXiv / WebSearch) + persistida
+    en `docs/papers/<topic>.md` + referenciada en código con `[REF: docs/papers/...]`.
 - **V13 SHADOW puro:** Argentina F1_off NNLS, Francia F2_pos NNLS, Italia F2_pos RIDGE,
   Inglaterra F5_ratio NNLS. NO afecta picks. Validación N≥200 SHADOW para promoción.
 - **Calendario individual:** tabla `liga_calendario_temp` (80 filas) con fechas reales

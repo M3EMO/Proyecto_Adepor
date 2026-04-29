@@ -29,6 +29,11 @@ from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
+# [adepor-qqb fix 2026-04-28] Importar limpiar_texto para popular equipo_norm
+# en cada INSERT — sin esto los snapshots nuevos no son lookable por helpers
+# Layer 3 (_get_pos_local_forward usa WHERE equipo_norm = ?).
+from src.comun.gestor_nombres import limpiar_texto
+
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -255,15 +260,17 @@ def regenerar_grupo(con, liga, temp, fecha_inicio):
     for (liga_s, temp_s, fm_s, fecha_s), eq_stats in by_lookup.items():
         ord_ = sorted(eq_stats, key=lambda x: (-x[8], -x[7], -x[5], x[0]))
         for posicion, (eq_s, pj, pg, pe, pp, gf, gc, dif, pts) in enumerate(ord_, 1):
-            rows_final.append((liga_s, temp_s, fm_s, fecha_s, eq_s, posicion,
+            # [adepor-qqb fix] Popular equipo_norm para que helpers Layer 3 lookeen.
+            equipo_norm = limpiar_texto(eq_s)
+            rows_final.append((liga_s, temp_s, fm_s, fecha_s, eq_s, equipo_norm, posicion,
                                 pj, pg, pe, pp, gf, gc, dif, pts))
 
     # Insert batch
     cur.executemany("""
         INSERT OR REPLACE INTO posiciones_tabla_snapshot
-        (liga, temp, formato, fecha_snapshot, equipo, posicion,
+        (liga, temp, formato, fecha_snapshot, equipo, equipo_norm, posicion,
          pj, pg, pe, pp, gf, gc, dif_gol, puntos)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, rows_final)
     con.commit()
     return len(rows_final)

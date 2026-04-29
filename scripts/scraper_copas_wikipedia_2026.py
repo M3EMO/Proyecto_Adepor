@@ -160,17 +160,33 @@ def extraer_partidos(html, year_default):
 
 
 def insertar_partidos(con, copa_meta, partidos):
+    """[adepor-qqb fix 2026-04-28] Canonicaliza nombres via gestor_nombres antes
+    de INSERT + popula _norm. Wikipedia trae a veces variantes con paréntesis
+    (ej 'Estudiantes (LP)', 'Boca Juniors (Argentina)') que el diccionario v5
+    sabe resolver al nombre oficial canónico."""
+    from src.comun.gestor_nombres import obtener_nombre_estandar, limpiar_texto
+
     cur = con.cursor()
     n_ins = 0; n_dup = 0
     for p in partidos:
+        equipo_local_oficial = obtener_nombre_estandar(
+            p['local'], liga=copa_meta['competicion'], modo_interactivo=False)
+        equipo_visita_oficial = obtener_nombre_estandar(
+            p['visita'], liga=copa_meta['competicion'], modo_interactivo=False)
+        equipo_local_norm = limpiar_texto(equipo_local_oficial)
+        equipo_visita_norm = limpiar_texto(equipo_visita_oficial)
         try:
             cur.execute("""INSERT INTO partidos_no_liga
                 (fecha, competicion, competicion_tipo, pais_origen, fase,
-                 equipo_local, equipo_visita, goles_l, goles_v, fuente)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                 equipo_local, equipo_visita,
+                 equipo_local_norm, equipo_visita_norm,
+                 goles_l, goles_v, fuente)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (p['fecha'], copa_meta['competicion'], copa_meta['tipo'],
                  copa_meta['pais_origen'], p.get('fase'),
-                 p['local'], p['visita'], p.get('goles_l'), p.get('goles_v'),
+                 equipo_local_oficial, equipo_visita_oficial,
+                 equipo_local_norm, equipo_visita_norm,
+                 p.get('goles_l'), p.get('goles_v'),
                  'wikipedia-2026'))
             n_ins += 1
         except sqlite3.IntegrityError:

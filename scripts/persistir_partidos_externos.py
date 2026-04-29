@@ -91,6 +91,16 @@ def parse_csv_temp(texto, codigo):
 
 
 def insert_partidos(con, liga, fuente, partidos):
+    """[adepor-qqb fix 2026-04-28] Pasa nombres por gestor_nombres antes de INSERT
+    + popula ht_norm/at_norm. Sin esto: variantes acumuladas + Layer 3 helpers fallan.
+
+    `obtener_nombre_estandar(modo_interactivo=False)` mapea aliases a nombre oficial
+    sin pedir input manual. Si fuente trae 'Man Utd' (CSV football-data) y diccionario
+    sabe que es 'Manchester United' (oficial ESPN), ambos pipelines persisten 'Manchester
+    United' -> id_partido determinista cross-source.
+    """
+    from src.comun.gestor_nombres import obtener_nombre_estandar, limpiar_texto
+
     cur = con.cursor()
     inserted = 0
     updated = 0
@@ -104,14 +114,22 @@ def insert_partidos(con, liga, fuente, partidos):
         ay = p.get("ay")
         hr = p.get("hr")
         ar = p.get("ar")
+
+        # Canonicalizar nombres via gestor_nombres scoped a la liga del partido
+        ht_oficial = obtener_nombre_estandar(p["ht"], liga=liga, modo_interactivo=False)
+        at_oficial = obtener_nombre_estandar(p["at"], liga=liga, modo_interactivo=False)
+        ht_norm = limpiar_texto(ht_oficial)
+        at_norm = limpiar_texto(at_oficial)
+
         try:
             cur.execute("""
                 INSERT INTO partidos_historico_externo
-                (liga, temp, fecha, fuente, ht, at, hg, ag, hst, ast, hs, as_, hc, ac,
+                (liga, temp, fecha, fuente, ht, at, ht_norm, at_norm, hg, ag, hst, ast, hs, as_, hc, ac,
                  has_full_stats, evt_id_externo, hf, af, hy, ay, hr, ar)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (liga, p["temp"], p["fecha"], fuente,
-                  p["ht"], p["at"], p["hg"], p["ag"],
+                  ht_oficial, at_oficial, ht_norm, at_norm,
+                  p["hg"], p["ag"],
                   p["hst"], p["ast"], p["hs"], p["as"],
                   p["hc"], p["ac"], has_stats, p.get("evt_id"),
                   hf, af, hy, ay, hr, ar))
@@ -123,9 +141,11 @@ def insert_partidos(con, liga, fuente, partidos):
                     UPDATE partidos_historico_externo
                     SET hf = COALESCE(hf, ?), af = COALESCE(af, ?),
                         hy = COALESCE(hy, ?), ay = COALESCE(ay, ?),
-                        hr = COALESCE(hr, ?), ar = COALESCE(ar, ?)
+                        hr = COALESCE(hr, ?), ar = COALESCE(ar, ?),
+                        ht_norm = COALESCE(ht_norm, ?), at_norm = COALESCE(at_norm, ?)
                     WHERE liga = ? AND temp = ? AND fecha = ? AND ht = ? AND at = ?
-                """, (hf, af, hy, ay, hr, ar, liga, p["temp"], p["fecha"], p["ht"], p["at"]))
+                """, (hf, af, hy, ay, hr, ar, ht_norm, at_norm,
+                      liga, p["temp"], p["fecha"], ht_oficial, at_oficial))
                 if cur.rowcount > 0:
                     updated += 1
                 else:

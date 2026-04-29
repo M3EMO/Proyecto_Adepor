@@ -86,7 +86,27 @@ FLOOR_PROB_MIN, MAX_KELLY_PCT_*, etc.)** se debe:
 
 El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreated`.
 
-**Estado actual (2026-04-28 post-sesión 2):**
+**Estado actual (2026-04-29 post-sesión β_sot recalibration):**
+
+- **Sesión 2026-04-29 V14 v2 + β recalibration completa.**
+  - V14 v2 (no-xG) calibrado: train N=881→6,843 (+776%), Brier 0.3014→0.2918.
+  - SHADOW V14 v2 LIVE: 9,300 filas backfill copa, hit 50.2% pool, **subset apostable hit 69.4%** (rules drill, pick_apostable_v14_v2 flag persistido).
+  - β_sot recalibrado per liga (yield +3.68pp IS 2026 EU agregado): persistido en
+    `config_motor_valores.beta_sot_recom_calibrado_v2` como SHADOW. Bead PROPOSAL
+    `adepor-3py` P0 creado.
+  - Cuotas históricas football-data.co.uk: tabla `cuotas_historicas_fdco` 23,599 filas
+    (8 ligas EU 2022-2026 con stats + ARG/BRA 2012-2026 cuotas). Bead `adepor-d5u` cerrado.
+  - Bias factors per edición copa apples-to-apples persistido en `xg_bias_per_edicion_copa`
+    (Champions +21%, Sudamericana -25%, Libertadores -15%, Copa do Brasil -15%).
+  - F2-sub-15 fase 1: 31 partidos copa LIVE en partidos_backtest (motor_fixture extended).
+  - Fix BUG temp `partidos_historico_externo` (vista compatibilidad
+    `v_partidos_historico_externo_norm`). Bead `adepor-asi` cerrado.
+  - Bug fuzzy gestor_nombres: audit completo, 7 pares cross-liga legítimos. Bead `adepor-yrc` cerrado.
+  - Stats post-partido ESPN summary scraper (`scripts/scraper_stats_partidos_no_liga.py`):
+    27 stats/equipo/partido (possession, pass%, crosses, long balls, etc.). Backfill
+    background en curso 2022-2026 todas copas.
+
+**Estado previo (2026-04-28 post-sesión 2):**
 - **Versión:** V5.2 (Layer 3 H4 X-rescue per-liga, **ACTIVO**) + bug-fix helpers (decision-log adepor-0og)
 - **SHA-256:** `471c1c00b927baad59cd13688bd5db142550a1aadbc45980a2b6d76862c4ab6c` (sin cambios — fix interno no toca manifesto)
 - **Locked:** `configuracion.manifesto_locked = 'true'`

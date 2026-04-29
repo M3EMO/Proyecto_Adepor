@@ -1,0 +1,102 @@
+{
+  "fecha_audit": "2026-04-29",
+  "metricas": {
+    "pool_copa_internacional": {
+      "n": 4675,
+      "liquidados": 4543,
+      "hits": 2388,
+      "hit_pct": 52.5643847677746,
+      "wilson_lo": 51.11077607219466
+    },
+    "pool_copa_nacional": {
+      "n": 4625,
+      "liquidados": 4621,
+      "hits": 2210,
+      "hit_pct": 47.82514607227873,
+      "wilson_lo": 46.38727000452681
+    },
+    "subset_apostable": {
+      "n": 615,
+      "hits": 427,
+      "hit_pct": 69.4308943089431,
+      "wilson_lo": 65.67845752428792
+    },
+    "apostable_por_edicion": [
+      {
+        "edicion": "DFB Pokal",
+        "n": 18,
+        "hit_pct": 83.33333333333333,
+        "wilson_lo": 60.77750036164077
+      },
+      {
+        "edicion": "Copa Argentina",
+        "n": 23,
+        "hit_pct": 60.869565217391305,
+        "wilson_lo": 40.785179603745995
+      },
+      {
+        "edicion": "Coupe de France",
+        "n": 38,
+        "hit_pct": 63.1578947368421,
+        "wilson_lo": 47.28367282426011
+      },
+      {
+        "edicion": "FA Cup",
+        "n": 52,
+        "hit_pct": 75.0,
+        "wilson_lo": 61.79328224079475
+      },
+      {
+        "edicion": "EFL Cup",
+        "n": 53,
+        "hit_pct": 64.15094339622641,
+        "wilson_lo": 50.690893299998805
+      },
+      {
+        "edicion": "Copa do Brasil",
+        "n": 57,
+        "hit_pct": 71.9298245614035,
+        "wilson_lo": 59.16955491727644
+      },
+      {
+        "edicion": "Copa del Rey",
+        "n": 93,
+        "hit_pct": 78.49462365591398,
+        "wilson_lo": 69.10345980717027
+      },
+      {
+        "edicion": "Coppa Italia",
+        "n": 97,
+        "hit_pct": 62.88659793814433,
+        "wilson_lo": 52.953581425912
+      },
+      {
+        "edicion": "Türkiye Kupası",
+        "n": 184,
+        "hit_pct": 68.47826086956522,
+        "wilson_lo": 61.44543482236753
+      }
+    ],
+    "tendencia_mensual_2026": [
+      {
+        "mes": "2026-02",
+        "n": 18,
+        "hits": 16,
+        "hit_pct": 88.88888888888889
+      },
+      {
+        "mes": "2026-03",
+        "n": 10,
+        "hits": 5,
+        "hit_pct": 50.0
+      },
+      {
+        "mes": "2026-04",
+        "n": 15,
+        "hits": 11,
+        "hit_pct": 73.33333333333333
+      }
+    ]
+  },
+  "trigger_proposal": true
+}

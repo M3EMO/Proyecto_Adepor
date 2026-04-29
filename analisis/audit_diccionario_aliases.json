@@ -1,0 +1,327 @@
+{
+  "sospechosos_fuerte": [
+    {
+      "liga_persistida": "Chile",
+      "alias": "universidadcatolica",
+      "oficial": "Universidad Católica (Quito)",
+      "sim": 0.884,
+      "liga_oficial_meta": [
+        "Ecuador"
+      ],
+      "cross_country": true
+    },
+    {
+      "liga_persistida": "Chile",
+      "alias": "universidadcatolicachi",
+      "oficial": "Universidad Católica (Quito)",
+      "sim": 0.87,
+      "liga_oficial_meta": [
+        "Ecuador"
+      ],
+      "cross_country": true
+    },
+    {
+      "liga_persistida": "Colombia",
+      "alias": "deportestolima",
+      "oficial": "Deportes Limache",
+      "sim": 0.828,
+      "liga_oficial_meta": [
+        "Chile"
+      ],
+      "cross_country": true
+    },
+    {
+      "liga_persistida": "Colombia",
+      "alias": "deportivopereira",
+      "oficial": "Deportivo Riestra",
+      "sim": 0.75,
+      "liga_oficial_meta": [
+        "Argentina"
+      ],
+      "cross_country": true
+    },
+    {
+      "liga_persistida": "Colombia",
+      "alias": "independientemedellin",
+      "oficial": "Independiente del Valle",
+      "sim": 0.81,
+      "liga_oficial_meta": [
+        "Ecuador"
+      ],
+      "cross_country": true
+    },
+    {
+      "liga_persistida": "Peru",
+      "alias": "atleticograu",
+      "oficial": "Atlético-mg",
+      "sim": 0.818,
+      "liga_oficial_meta": [
+        "Brasil"
+      ],
+      "cross_country": true
+    },
+    {
+      "liga_persistida": "Peru",
+      "alias": "atleticomineiro",
+      "oficial": "Atlético-mg",
+      "sim": 0.72,
+      "liga_oficial_meta": [
+        "Brasil"
+      ],
+      "cross_country": true
+    }
+  ],
+  "sospechosos_medio": [
+    {
+      "liga_persistida": "Argentina",
+      "alias": "atleticohuracan",
+      "oficial": "Atletico Tucuman",
+      "sim": 0.8,
+      "liga_oficial_meta": [
+        "Argentina"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "catigreba",
+      "oficial": "Tigre",
+      "sim": 0.714,
+      "liga_oficial_meta": [
+        "Argentina"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "deportivopereira",
+      "oficial": "Deportivo Riestra",
+      "sim": 0.75,
+      "liga_oficial_meta": [
+        "Argentina"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "estudiantes",
+      "oficial": "Estudiantes de la Plata",
+      "sim": 0.71,
+      "liga_oficial_meta": [
+        "Argentina"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "gimnasialaplatacordoba",
+      "oficial": "Gimnasia la Plata",
+      "sim": 0.811,
+      "liga_oficial_meta": [
+        "Argentina"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "gimnasiayesgrimalaplata",
+      "oficial": "Gimnasia la Plata",
+      "sim": 0.789,
+      "liga_oficial_meta": [
+        "Argentina"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Argentina",
+      "alias": "gimnasiaylp",
+      "oficial": "Gimnasia la Plata",
+      "sim": 0.769,
+      "liga_oficial_meta": [
+        "Argentina"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "athletico-pr",
+      "oficial": "Athletico Paranaense",
+      "sim": 0.733,
+      "liga_oficial_meta": [
+        "Brasil"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "athleticopr",
+      "oficial": "Athletico Paranaense",
+      "sim": 0.733,
+      "liga_oficial_meta": [
+        "Brasil"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "atleticograu",
+      "oficial": "Atlético-mg",
+      "sim": 0.818,
+      "liga_oficial_meta": [
+        "Brasil"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Brasil",
+      "alias": "atleticomineiro",
+      "oficial": "Atlético-mg",
+      "sim": 0.72,
+      "liga_oficial_meta": [
+        "Brasil"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Chile",
+      "alias": "aitaliano",
+      "oficial": "Audax Italiano",
+      "sim": 0.818,
+      "liga_oficial_meta": [
+        "Chile"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Chile",
+      "alias": "deportestolima",
+      "oficial": "Deportes Limache",
+      "sim": 0.828,
+      "liga_oficial_meta": [
+        "Chile"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Colombia",
+      "alias": "fortaleza",
+      "oficial": "Fortaleza CEIF",
+      "sim": 0.818,
+      "liga_oficial_meta": [
+        "Colombia"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Colombia",
+      "alias": "fortalezafc",
+      "oficial": "Fortaleza CEIF",
+      "sim": 0.833,
+      "liga_oficial_meta": [
+        "Colombia"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Ecuador",
+      "alias": "independientemedellin",
+      "oficial": "Independiente del Valle",
+      "sim": 0.81,
+      "liga_oficial_meta": [
+        "Ecuador"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Espana",
+      "alias": "elchecf",
+      "oficial": "Elche",
+      "sim": 0.833,
+      "liga_oficial_meta": [
+        "Espana"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Inglaterra",
+      "alias": "bournemouthfc",
+      "oficial": "AFC Bournemouth",
+      "sim": 0.815,
+      "liga_oficial_meta": [
+        "Inglaterra"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Noruega",
+      "alias": "hamkamhamar",
+      "oficial": "Hamkam",
+      "sim": 0.706,
+      "liga_oficial_meta": [
+        "Noruega"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Peru",
+      "alias": "cusco",
+      "oficial": "Cusco FC",
+      "sim": 0.833,
+      "liga_oficial_meta": [
+        "Peru"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "basaksehir",
+      "oficial": "Istanbul Basaksehir",
+      "sim": 0.714,
+      "liga_oficial_meta": [
+        "Turquia"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "hatayspor",
+      "oficial": "Antalyaspor",
+      "sim": 0.8,
+      "liga_oficial_meta": [
+        "Turquia"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "kocaeli",
+      "oficial": "Kocaelispor",
+      "sim": 0.778,
+      "liga_oficial_meta": [
+        "Turquia"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "rizespor",
+      "oficial": "Caykur Rizespor",
+      "sim": 0.727,
+      "liga_oficial_meta": [
+        "Turquia"
+      ],
+      "cross_country": false
+    },
+    {
+      "liga_persistida": "Turquia",
+      "alias": "torkukonyaspor",
+      "oficial": "Konyaspor",
+      "sim": 0.783,
+      "liga_oficial_meta": [
+        "Turquia"
+      ],
+      "cross_country": false
+    }
+  ],
+  "n_legitimos": 61
+}

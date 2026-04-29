@@ -1,0 +1,132 @@
+{
+  "apply": false,
+  "snapshot": null,
+  "operations": [
+    {
+      "contexto": "Champions League",
+      "canon_display": "Internazionale",
+      "canon_norm": "internazionale",
+      "canon_n": 36,
+      "variant_display": "Inter",
+      "variant_norm": "inter",
+      "variant_n": 2
+    },
+    {
+      "contexto": "Copa Argentina",
+      "canon_display": "Central Córdoba (santiago del Estero)",
+      "canon_norm": "centralcordobasantiagodelestero",
+      "canon_n": 1,
+      "variant_display": "Central Cordoba",
+      "variant_norm": "centralcordoba",
+      "variant_n": 1
+    },
+    {
+      "contexto": "Copa do Brasil",
+      "canon_display": "Botafogo",
+      "canon_norm": "botafogo",
+      "canon_n": 15,
+      "variant_display": "Botafogo SP",
+      "variant_norm": "botafogosp",
+      "variant_n": 9
+    },
+    {
+      "contexto": "Coppa Italia",
+      "canon_display": "Internazionale",
+      "canon_norm": "internazionale",
+      "canon_n": 10,
+      "variant_display": "Inter",
+      "variant_norm": "inter",
+      "variant_n": 3
+    },
+    {
+      "contexto": "DFB Pokal",
+      "canon_display": "FC St. Pauli",
+      "canon_norm": "fcstpauli",
+      "canon_n": 8,
+      "variant_display": "St. Pauli",
+      "variant_norm": "stpauli",
+      "variant_n": 1
+    },
+    {
+      "contexto": "FA Cup",
+      "canon_display": "AFC Bournemouth",
+      "canon_norm": "afcbournemouth",
+      "canon_n": 8,
+      "variant_display": "Bournemouth FC",
+      "variant_norm": "bournemouthfc",
+      "variant_n": 3
+    },
+    {
+      "contexto": "Libertadores",
+      "canon_display": "Deportes Tolima",
+      "canon_norm": "deportestolima",
+      "canon_n": 14,
+      "variant_display": "Deportes Limache",
+      "variant_norm": "deporteslimache",
+      "variant_n": 7
+    },
+    {
+      "contexto": "Libertadores",
+      "canon_display": "Deportivo Tachira FC",
+      "canon_norm": "deportivotachirafc",
+      "canon_n": 12,
+      "variant_display": "Deportivo Táchira",
+      "variant_norm": "deportivotachira",
+      "variant_n": 4
+    },
+    {
+      "contexto": "Libertadores",
+      "canon_display": "Universidad Catolica",
+      "canon_norm": "universidadcatolica",
+      "canon_n": 12,
+      "variant_display": "Universidad Católica (Quito)",
+      "variant_norm": "universidadcatolicaquito",
+      "variant_n": 4
+    },
+    {
+      "contexto": "Libertadores",
+      "canon_display": "Nacional",
+      "canon_norm": "nacional",
+      "canon_n": 7,
+      "variant_display": "El Nacional",
+      "variant_norm": "elnacional",
+      "variant_n": 6
+    },
+    {
+      "contexto": "Libertadores",
+      "canon_display": "Cusco",
+      "canon_norm": "cusco",
+      "canon_n": 6,
+      "variant_display": "Cusco FC",
+      "variant_norm": "cuscofc",
+      "variant_n": 2
+    },
+    {
+      "contexto": "Libertadores",
+      "canon_display": "Carabobo",
+      "canon_norm": "carabobo",
+      "canon_n": 4,
+      "variant_display": "Carabobo FC",
+      "variant_norm": "carabobofc",
+      "variant_n": 2
+    },
+    {
+      "contexto": "Sudamericana",
+      "canon_display": "Audax Italiano",
+      "canon_norm": "audaxitaliano",
+      "canon_n": 10,
+      "variant_display": "A. Italiano",
+      "variant_norm": "aitaliano",
+      "variant_n": 9
+    },
+    {
+      "contexto": "Sudamericana",
+      "canon_display": "Carabobo",
+      "canon_norm": "carabobo",
+      "canon_n": 8,
+      "variant_display": "Carabobo FC",
+      "variant_norm": "carabobofc",
+      "variant_n": 1
+    }
+  ]
+}

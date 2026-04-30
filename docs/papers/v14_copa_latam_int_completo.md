@@ -26,6 +26,55 @@
 - Lib/Sud defensivos (cohort 2026 menos productivo)
 - UEL/UECL estables
 
+## Generación de juego: UEFA vs CONMEBOL (3,203 partidos)
+
+### Stats medias per equipo
+
+| Edición | Poss L avg | Pass% L | Crosses L | Long balls L | Saves V |
+|---|---|---|---|---|---|
+| UCL | 50.7% | **84.0%** | 17.1 | 46 | 3.69 |
+| UEL | 51.5% | 82.0% | 18.6 | 52 | 3.49 |
+| UECL | 50.6% | 80.9% | 18.1 | 55 | 3.34 |
+| **Libertadores** | **53.2%** | 79.6% | **21.5** | 54 | 3.62 |
+| **Sudamericana** | **53.2%** | 78.9% | **22.1** | 56 | 3.61 |
+
+**Patrón regional:**
+- UEFA: pass% mayor (mejor circulación), crosses menores, possession más balanceada
+- CONMEBOL: home advantage MÁS fuerte (poss L 53.2% vs 50% UEFA), MÁS crosses (21.5 vs 17.1), pass% menor → estilo más directo
+
+### Possession LOCAL ≥60% (dominante) — predictor fuerte UCL
+
+| Edición | N | Hit% LOCAL | Goals_L | Goals_V |
+|---|---|---|---|---|
+| **Champions League** | 152 | **62.5%** | **2.546** | 0.967 |
+| Europa League | 171 | 58.5% | 1.977 | 1.064 |
+| Conference League | 158 | 52.5% | 1.778 | 0.956 |
+| **Libertadores** | 185 | 55.1% | 1.595 | **0.762** |
+| **Sudamericana** | 214 | 43.9% | 1.593 | 0.930 |
+
+**UCL local-dominante: hit 62.5% — predictor MUY fuerte.**
+**CONMEBOL Lib: poss alta limita goals_V a 0.762 (mejor defensa).**
+**Sudamericana: poss alta NO predice ganar (43.9%) — más volátil.**
+
+### Possession VISITA ≥55% (away-dominante)
+
+| Edición | N | Hit% VISITA | Goals_L | Goals_V |
+|---|---|---|---|---|
+| **Champions League** | 197 | 46.2% | 1.360 | **1.802** |
+| Europa League | 184 | 33.7% | 1.435 | 1.293 |
+| Conference League | 190 | 38.9% | 1.342 | 1.358 |
+| Libertadores | 132 | 28.8% | 1.220 | 0.985 |
+| Sudamericana | 168 | 31.5% | 1.292 | 1.107 |
+
+**UCL visita-dominante: goals_V 1.802 + hit 46.2% — equipos visitantes elite producen mucho.**
+**CONMEBOL: home advantage prevalece (visita-dom hit solo 28-31%).**
+
+### Implicaciones para motor V14 v3 (futuro)
+
+`possession_dominance_local` (categórico ≥60% / 45-55% / ≤45%) es feature predictor MUY fuerte en UCL (hit 62.5% vs 46.2%). En CONMEBOL es más débil (Sudamericana 43.9%).
+
+→ **Add `possession_dominance` como feature OPCIONAL solo para UEFA copas** en futuro V14 v3 (target: 3-6 meses post promoción V14 v2).
+
 ## Bias mensual cross-año per edición
 
 **Champions League** (avg 3.208): estable, sin shifts >5%

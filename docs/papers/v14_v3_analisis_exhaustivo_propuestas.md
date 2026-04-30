@@ -229,9 +229,28 @@ Frontiers SAL 2021, PMC 2021, ScienceDirect 2023 — home advantage redujo 48% s
 
 **CONMEBOL (Lib/Sud)**: conv 88% Premier. Drift -15-17% IS 2026 (defensivización).
 
-### COPA NACIONAL EU (parcial, scrapers en bg)
+### COPA NACIONAL EU (3/4 completas post-backfill)
 
-Análisis pendiente al completar backfill.
+| Edición | β recom | Conv vs Premier | Poss_L | Insight |
+|---|---|---|---|---|
+| **Copa del Rey** | **0.355** | **123%** | **36.6%** | Big-3 visita y MASACRE (eficiencia max) |
+| **DFB Pokal** | 0.294 | 105% | 42.2% | Bayern visita y domina |
+| **Coupe de France** | 0.284 | 102% | 44.1% | PSG visita amateurs |
+| **Coppa Italia** | 0.278 | 101% | 53.6% | Inter/Milan/Juve más balanceado |
+| **FA Cup** | 0.261 | 96% | 50.7% | Top Premier rotan early rounds |
+
+**Patrón unificado**: en copas con Big-3 dominantes (España/Alemania/Francia), los favoritos juegan VISITA y convierten con eficiencia ALTA. Resulta en β intermedio-alto y poss_L bajo (<45%).
+
+**Excepciones**:
+- **Coppa Italia**: poss_L 53.6% más alto (Italia tactical balance, no Big-3 abrumador)
+- **FA Cup**: top Premier rotan en early rounds, conversion baja vs Premier liga
+
+**Implicación motor V14 v3 cuando F2-sub-15 fase 2 implemente copas:**
+- Copa del Rey: usar β default 0.352 (compatible)
+- DFB Pokal: β 0.294
+- Coupe de France: β 0.284
+- Coppa Italia: β 0.278
+- FA Cup: β 0.261
 
 ---
 

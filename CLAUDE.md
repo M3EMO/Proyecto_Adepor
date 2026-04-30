@@ -86,7 +86,30 @@ FLOOR_PROB_MIN, MAX_KELLY_PCT_*, etc.)** se debe:
 
 El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreated`.
 
-**Estado actual (2026-04-29 post-sesión β_sot recalibration):**
+**Estado actual (2026-04-29 noche post-backfill UEFA + bins temporales):**
+
+- **Sesión 2026-04-29 noche V14 v3 análisis exhaustivo COMPLETO.**
+  - Backfill ESPN summary 4,116+ partidos: UCL 654, UEL 698, UECL 628, Lib 538, Sud 685.
+    EU domésticas pendientes scrape parcial (Copa Rey 45%, Coppa 78%, DFB 78%, Coupe France 30%).
+  - β consolidado per edición copa internacional (UCL 0.279 alcista IS, UEL 0.266,
+    UECL 0.272, Lib 0.238 bajista -17% IS, Sud 0.237 bajista -15% IS).
+  - **Bins temporales bin4/bin8/bin12 calibrado per liga**: shifts IS 2026 detectados:
+    Turquía bin9 -32%, Francia bin3 +32%, Italia bin3 -26%, España bin7+10 +22-25%,
+    Argentina bin3 -22%. Persistido v14_v3_bias_bin{4,8,12}_ligas.
+  - **Tabla shadow M.2 logging**: 161 picks IS 2026 backfilled. Bucket n_acum_l>=60:
+    72 picks bloqueados, hit 38.9%, cuota 4.16, yield simple +61.6%. Confirma
+    hipótesis adepor-9uq. Trigger N>=200 pendiente.
+  - **Possession dominance LOCAL >=60% UEFA UCL**: hit 62.5% (predictor fuerte
+    consideración V14 v3 feature).
+  - **Doc exhaustivo**: docs/papers/v14_v3_analisis_exhaustivo_propuestas.md con
+    auditoría arquitectura, 15+ papers, 9 propuestas ranked P0-P3, roadmap 4 fases.
+  - **Investigación académica acumulada**: Zou-Hastie 2005 (20k cits), Baio-Blangiardo
+    2010 (158), Constantinou-Fenton 2012 (82), Davis 2024 ML (53), Frontiers 2025,
+    Carling 2019 (54+46), Hewitt-Karakuş 2023, Cavus-Biecek 2022.
+  - **Scrapers ESPN domésticas EU en bg**: completarán próximas horas. Análisis
+    Copa Rey/Coppa Italia/DFB Pokal/Coupe France pendiente.
+
+**Estado previo (2026-04-29 post-sesión β_sot recalibration):**
 
 - **Sesión 2026-04-29 V14 v2 + β recalibration completa.**
   - V14 v2 (no-xG) calibrado: train N=881→6,843 (+776%), Brier 0.3014→0.2918.

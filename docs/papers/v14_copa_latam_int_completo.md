@@ -1,9 +1,51 @@
-# Copa Internacional LATAM: β_sot + bias mensual + generación de juego
+# Copa Internacional CONSOLIDADO (UEFA + CONMEBOL): β_sot + bias mensual + generación de juego
 
-> **Fecha:** 2026-04-29
+> **Fecha:** 2026-04-29 (UEFA backfill completado post-LATAM)
 > **Source:** `stats_partidos_no_liga` (backfill ESPN summary 2026-04-29)
-> **N total:** Libertadores 538 + Sudamericana 685 = 1,223 partidos con stats
+> **N total UEFA+CONMEBOL:** **3,203 partidos con stats**
+>   - Champions League: 654, Europa League: 698, Conference League: 628
+>   - Libertadores: 538, Sudamericana: 685
 > **Convención:** IS 2026 = año en curso; OOS = 2022-2025
+
+## Consolidado β_sot per edición copa internacional (post-backfill UEFA)
+
+| Edición | β OOS 22-25 | β IS 2026 | Conv vs Premier | Sobrestima default | Drift IS |
+|---|---|---|---|---|---|
+| **Champions League** | 0.279 | **0.300** | 100% | -26% | **+8% alcista** |
+| Europa League | 0.266 | 0.253 | 97% | -32% | -5% bajista |
+| Conference League | 0.272 | 0.274 | 99% | -29% | estable |
+| **Libertadores** | 0.238 | **0.198** | 88.7% | -48% | **-17% bajista** |
+| **Sudamericana** | 0.237 | **0.201** | 88.7% | -49% | **-15% bajista** |
+
+**Patrón regional:**
+- UEFA top: conv ≈ Premier (β 0.27-0.28, sobrestima default ~30%)
+- CONMEBOL: conv 88% Premier (β 0.24, sobrestima default ~48%)
+
+**Drift IS 2026:**
+- UCL alcista (top elite produciendo más goles)
+- Lib/Sud defensivos (cohort 2026 menos productivo)
+- UEL/UECL estables
+
+## Bias mensual cross-año per edición
+
+**Champions League** (avg 3.208): estable, sin shifts >5%
+
+**Europa League** (avg 2.848):
+- Feb: +11% (octavos), May: -14% (final cierra)
+
+**Conference League** (avg 2.788):
+- Feb: -13%, Mar: +11%
+
+**Libertadores** (avg 2.387):
+- Mayo: +13.4% (semis fase grupos)
+- Ago/Sep: -15-16% (octavos cerrados)
+
+**Sudamericana** (avg 2.434):
+- Mar: -11% (inicio), May: +9%, Oct: -10%
+
+Persistido: `config_motor_valores.xg_bias_mensual_copa_internacional_v2`
+
+
 
 ## Hallazgos clave
 

@@ -26,6 +26,10 @@ def _coerce(valor_real, valor_texto, tipo):
         return valor_texto == 'TRUE'
     if tipo == 'text':
         return valor_texto
+    if tipo == 'json':
+        # [BUG-FIX 2026-05-01] Sin esto, get_param('h4_x_rescue_threshold') con
+        # tipo='json' retornaba valor_real (NULL) y Layer 3 nunca activaba.
+        return valor_texto
     if tipo == 'int':
         return int(valor_real)
     return valor_real

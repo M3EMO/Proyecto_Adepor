@@ -1,0 +1,567 @@
+{
+  "combos_evaluados": [
+    {
+      "id": "AND_H_yield_visita_recoveries_lag1_v_pos__H_yield_visita_recoveries_lag1_diff_pos",
+      "desc": "(recoveries_lag1_v in [51.000, 75.000] -> visita) AND (recoveries_lag1_diff in [-27.000, -7.000] -> visita)",
+      "pick_field": "yield_visita",
+      "tipo": "AND",
+      "n_pool": 46,
+      "yield_pool": 0.24093023255813953,
+      "buckets": {
+        "2": {
+          "n": 41,
+          "yield": 0.1648780487804878
+        },
+        "1": {
+          "n": 2,
+          "yield": 1.7999999999999998
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 41,
+          "n_test": 2,
+          "yield_train": 0.1648780487804878,
+          "yield_test": 1.7999999999999998
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 2,
+          "n_test": 41,
+          "yield_train": 1.7999999999999998,
+          "yield_test": 0.1648780487804878
+        }
+      ],
+      "avg_test_yield_loyo": 0.9824390243902438,
+      "n_pos_test_loyo": 2,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "AND_H_yield_empate_avg_rating_lag1_l_pos__H_yield_empate_shots_on_target_lag1_l_pos",
+      "desc": "(avg_rating_lag1_l in [6.920, 7.394] -> empate) AND (shots_on_target_lag1_l in [5.000, 16.000] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "AND",
+      "n_pool": 53,
+      "yield_pool": 0.6067391304347826,
+      "buckets": {
+        "2": {
+          "n": 44,
+          "yield": 0.5813636363636363
+        },
+        "1": {
+          "n": 2,
+          "yield": 1.165
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 44,
+          "n_test": 2,
+          "yield_train": 0.5813636363636363,
+          "yield_test": 1.165
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 2,
+          "n_test": 44,
+          "yield_train": 1.165,
+          "yield_test": 0.5813636363636363
+        }
+      ],
+      "avg_test_yield_loyo": 0.8731818181818182,
+      "n_pos_test_loyo": 2,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "OR_H_yield_visita_recoveries_lag1_v_pos__H_yield_visita_recoveries_lag1_diff_pos",
+      "desc": "(recoveries_lag1_v in [51.000, 75.000] -> visita) OR (recoveries_lag1_diff in [-27.000, -7.000] -> visita)",
+      "pick_field": "yield_visita",
+      "tipo": "OR",
+      "n_pool": 131,
+      "yield_pool": 0.24352941176470588,
+      "buckets": {
+        "2": {
+          "n": 113,
+          "yield": 0.20513274336283185
+        },
+        "1": {
+          "n": 6,
+          "yield": 0.9666666666666665
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 113,
+          "n_test": 6,
+          "yield_train": 0.20513274336283185,
+          "yield_test": 0.9666666666666665
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 6,
+          "n_test": 113,
+          "yield_train": 0.9666666666666665,
+          "yield_test": 0.20513274336283185
+        }
+      ],
+      "avg_test_yield_loyo": 0.5858997050147492,
+      "n_pos_test_loyo": 2,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "OR_H_yield_empate_corners_lag1_l_pos__H_yield_empate_avg_rating_lag1_l_pos",
+      "desc": "(corners_lag1_l in [0.000, 2.000] -> empate) OR (avg_rating_lag1_l in [6.920, 7.394] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "OR",
+      "n_pool": 178,
+      "yield_pool": 0.2660526315789474,
+      "buckets": {
+        "2": {
+          "n": 148,
+          "yield": 0.2710135135135135
+        },
+        "1": {
+          "n": 4,
+          "yield": 0.08250000000000002
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 148,
+          "n_test": 4,
+          "yield_train": 0.2710135135135135,
+          "yield_test": 0.08250000000000002
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 4,
+          "n_test": 148,
+          "yield_train": 0.08250000000000002,
+          "yield_test": 0.2710135135135135
+        }
+      ],
+      "avg_test_yield_loyo": 0.17675675675675676,
+      "n_pos_test_loyo": 2,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "OR_H_yield_empate_corners_lag1_l_pos__H_yield_empate_shots_on_target_lag1_l_pos",
+      "desc": "(corners_lag1_l in [0.000, 2.000] -> empate) OR (shots_on_target_lag1_l in [5.000, 16.000] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "OR",
+      "n_pool": 213,
+      "yield_pool": 0.2442458100558659,
+      "buckets": {
+        "2": {
+          "n": 175,
+          "yield": 0.24794285714285716
+        },
+        "1": {
+          "n": 4,
+          "yield": 0.08250000000000002
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 175,
+          "n_test": 4,
+          "yield_train": 0.24794285714285716,
+          "yield_test": 0.08250000000000002
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 4,
+          "n_test": 175,
+          "yield_train": 0.08250000000000002,
+          "yield_test": 0.24794285714285716
+        }
+      ],
+      "avg_test_yield_loyo": 0.16522142857142857,
+      "n_pos_test_loyo": 2,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "OR_H_yield_empate_keeper_save_value_lag1_v_pos__H_yield_empate_avg_rating_lag1_l_pos",
+      "desc": "(keeper_save_value_lag1_v in [0.509, 1.667] -> empate) OR (avg_rating_lag1_l in [6.920, 7.394] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "OR",
+      "n_pool": 157,
+      "yield_pool": 0.26304347826086955,
+      "buckets": {
+        "2": {
+          "n": 133,
+          "yield": 0.2779699248120301
+        },
+        "1": {
+          "n": 5,
+          "yield": -0.13399999999999998
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 133,
+          "n_test": 5,
+          "yield_train": 0.2779699248120301,
+          "yield_test": -0.13399999999999998
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 5,
+          "n_test": 133,
+          "yield_train": -0.13399999999999998,
+          "yield_test": 0.2779699248120301
+        }
+      ],
+      "avg_test_yield_loyo": 0.07198496240601505,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "OR_H_yield_empate_corners_lag1_diff_pos__H_yield_empate_avg_rating_lag1_l_pos",
+      "desc": "(corners_lag1_diff in [-17.000, -3.000] -> empate) OR (avg_rating_lag1_l in [6.920, 7.394] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "OR",
+      "n_pool": 185,
+      "yield_pool": 0.23443037974683545,
+      "buckets": {
+        "2": {
+          "n": 153,
+          "yield": 0.24647058823529414
+        },
+        "1": {
+          "n": 5,
+          "yield": -0.13399999999999998
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 153,
+          "n_test": 5,
+          "yield_train": 0.24647058823529414,
+          "yield_test": -0.13399999999999998
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 5,
+          "n_test": 153,
+          "yield_train": -0.13399999999999998,
+          "yield_test": 0.24647058823529414
+        }
+      ],
+      "avg_test_yield_loyo": 0.05623529411764708,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "AND_H_yield_empate_corners_lag1_diff_pos__H_yield_empate_shots_on_target_lag1_l_pos",
+      "desc": "(corners_lag1_diff in [-17.000, -3.000] -> empate) AND (shots_on_target_lag1_l in [5.000, 16.000] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "AND",
+      "n_pool": 37,
+      "yield_pool": 0.8626666666666666,
+      "buckets": {
+        "2": {
+          "n": 29,
+          "yield": 0.9268965517241379
+        },
+        "1": {
+          "n": 1,
+          "yield": -1.0
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 29,
+          "n_test": 1,
+          "yield_train": 0.9268965517241379,
+          "yield_test": -1.0
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 1,
+          "n_test": 29,
+          "yield_train": -1.0,
+          "yield_test": 0.9268965517241379
+        }
+      ],
+      "avg_test_yield_loyo": -0.03655172413793106,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "AND_H_yield_empate_corners_lag1_l_pos__H_yield_empate_corners_lag1_diff_pos",
+      "desc": "(corners_lag1_l in [0.000, 2.000] -> empate) AND (corners_lag1_diff in [-17.000, -3.000] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "AND",
+      "n_pool": 61,
+      "yield_pool": 0.5728301886792453,
+      "buckets": {
+        "2": {
+          "n": 52,
+          "yield": 0.6030769230769231
+        },
+        "1": {
+          "n": 1,
+          "yield": -1.0
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 52,
+          "n_test": 1,
+          "yield_train": 0.6030769230769231,
+          "yield_test": -1.0
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 1,
+          "n_test": 52,
+          "yield_train": -1.0,
+          "yield_test": 0.6030769230769231
+        }
+      ],
+      "avg_test_yield_loyo": -0.19846153846153847,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "AND_H_yield_empate_shots_on_target_lag1_l_pos__H_yield_empate_avg_rating_lag1_diff_pos",
+      "desc": "(shots_on_target_lag1_l in [5.000, 16.000] -> empate) AND (avg_rating_lag1_diff in [0.138, 1.312] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "AND",
+      "n_pool": 47,
+      "yield_pool": 0.403170731707317,
+      "buckets": {
+        "2": {
+          "n": 40,
+          "yield": 0.4382499999999999
+        },
+        "1": {
+          "n": 1,
+          "yield": -1.0
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 40,
+          "n_test": 1,
+          "yield_train": 0.4382499999999999,
+          "yield_test": -1.0
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 1,
+          "n_test": 40,
+          "yield_train": -1.0,
+          "yield_test": 0.4382499999999999
+        }
+      ],
+      "avg_test_yield_loyo": -0.28087500000000004,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "OR_H_yield_empate_corners_lag1_l_pos__H_yield_empate_keeper_save_value_lag1_v_pos",
+      "desc": "(corners_lag1_l in [0.000, 2.000] -> empate) OR (keeper_save_value_lag1_v in [0.509, 1.667] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "OR",
+      "n_pool": 164,
+      "yield_pool": 0.37083916083916085,
+      "buckets": {
+        "2": {
+          "n": 141,
+          "yield": 0.3902836879432624
+        },
+        "1": {
+          "n": 2,
+          "yield": -1.0
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 141,
+          "n_test": 2,
+          "yield_train": 0.3902836879432624,
+          "yield_test": -1.0
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 2,
+          "n_test": 141,
+          "yield_train": -1.0,
+          "yield_test": 0.3902836879432624
+        }
+      ],
+      "avg_test_yield_loyo": -0.3048581560283688,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "OR_H_yield_empate_corners_lag1_diff_pos__H_yield_empate_keeper_save_value_lag1_v_pos",
+      "desc": "(corners_lag1_diff in [-17.000, -3.000] -> empate) OR (keeper_save_value_lag1_v in [0.509, 1.667] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "OR",
+      "n_pool": 178,
+      "yield_pool": 0.33594936708860756,
+      "buckets": {
+        "2": {
+          "n": 155,
+          "yield": 0.3618064516129032
+        },
+        "1": {
+          "n": 3,
+          "yield": -1.0
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 155,
+          "n_test": 3,
+          "yield_train": 0.3618064516129032,
+          "yield_test": -1.0
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 3,
+          "n_test": 155,
+          "yield_train": -1.0,
+          "yield_test": 0.3618064516129032
+        }
+      ],
+      "avg_test_yield_loyo": -0.3190967741935484,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "OR_H_yield_empate_corners_lag1_l_pos__H_yield_empate_corners_lag1_diff_pos",
+      "desc": "(corners_lag1_l in [0.000, 2.000] -> empate) OR (corners_lag1_diff in [-17.000, -3.000] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "OR",
+      "n_pool": 164,
+      "yield_pool": 0.3380575539568345,
+      "buckets": {
+        "2": {
+          "n": 137,
+          "yield": 0.3575912408759124
+        },
+        "1": {
+          "n": 2,
+          "yield": -1.0
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 137,
+          "n_test": 2,
+          "yield_train": 0.3575912408759124,
+          "yield_test": -1.0
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 2,
+          "n_test": 137,
+          "yield_train": -1.0,
+          "yield_test": 0.3575912408759124
+        }
+      ],
+      "avg_test_yield_loyo": -0.32120437956204384,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "AND_H_yield_empate_avg_rating_lag1_l_pos__H_yield_empate_avg_rating_lag1_diff_pos",
+      "desc": "(avg_rating_lag1_l in [6.920, 7.394] -> empate) AND (avg_rating_lag1_diff in [0.138, 1.312] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "AND",
+      "n_pool": 60,
+      "yield_pool": 0.28903846153846147,
+      "buckets": {
+        "2": {
+          "n": 50,
+          "yield": 0.34059999999999996
+        },
+        "1": {
+          "n": 2,
+          "yield": -1.0
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 50,
+          "n_test": 2,
+          "yield_train": 0.34059999999999996,
+          "yield_test": -1.0
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 2,
+          "n_test": 50,
+          "yield_train": -1.0,
+          "yield_test": 0.34059999999999996
+        }
+      ],
+      "avg_test_yield_loyo": -0.3297,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    },
+    {
+      "id": "OR_H_yield_empate_corners_lag1_l_pos__H_yield_empate_avg_rating_lag1_diff_pos",
+      "desc": "(corners_lag1_l in [0.000, 2.000] -> empate) OR (avg_rating_lag1_diff in [0.138, 1.312] -> empate)",
+      "pick_field": "yield_empate",
+      "tipo": "OR",
+      "n_pool": 175,
+      "yield_pool": 0.27559999999999996,
+      "buckets": {
+        "2": {
+          "n": 148,
+          "yield": 0.2928378378378378
+        },
+        "1": {
+          "n": 2,
+          "yield": -1.0
+        }
+      },
+      "loyo": [
+        {
+          "bucket_test": 1,
+          "n_train": 148,
+          "n_test": 2,
+          "yield_train": 0.2928378378378378,
+          "yield_test": -1.0
+        },
+        {
+          "bucket_test": 2,
+          "n_train": 2,
+          "n_test": 148,
+          "yield_train": -1.0,
+          "yield_test": 0.2928378378378378
+        }
+      ],
+      "avg_test_yield_loyo": -0.3535810810810811,
+      "n_pos_test_loyo": 1,
+      "n_total_loyo": 2
+    }
+  ],
+  "promueven_walkforward": 5,
+  "promueven_walkforward_ids": [
+    "AND_H_yield_visita_recoveries_lag1_v_pos__H_yield_visita_recoveries_lag1_diff_pos",
+    "AND_H_yield_empate_avg_rating_lag1_l_pos__H_yield_empate_shots_on_target_lag1_l_pos",
+    "OR_H_yield_visita_recoveries_lag1_v_pos__H_yield_visita_recoveries_lag1_diff_pos",
+    "OR_H_yield_empate_corners_lag1_l_pos__H_yield_empate_avg_rating_lag1_l_pos",
+    "OR_H_yield_empate_corners_lag1_l_pos__H_yield_empate_shots_on_target_lag1_l_pos"
+  ]
+}

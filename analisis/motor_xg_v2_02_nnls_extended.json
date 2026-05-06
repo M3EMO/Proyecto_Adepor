@@ -1,0 +1,408 @@
+{
+  "_meta": {
+    "N_partidos": 13430,
+    "WARMUP": 5,
+    "THETA_GRID": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3
+    ],
+    "TRAIN_YEARS": [
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "HOLDOUT_YEARS": [
+      "2026"
+    ],
+    "COTA_POISSON": 1.18,
+    "BASE_FEATS": [
+      "sot",
+      "shots_off",
+      "corners",
+      "pos",
+      "pass_pct",
+      "saves_rival",
+      "blocks_rival"
+    ],
+    "INTER_FEATS": [
+      "sot_x_pos",
+      "sot_x_pass_pct",
+      "ratio_xg_l_v",
+      "lag_goles_3",
+      "residuo_xg_lag"
+    ],
+    "ALL_FEATS": [
+      "sot",
+      "shots_off",
+      "corners",
+      "pos",
+      "pass_pct",
+      "saves_rival",
+      "blocks_rival",
+      "sot_x_pos",
+      "sot_x_pass_pct",
+      "ratio_xg_l_v",
+      "lag_goles_3",
+      "residuo_xg_lag"
+    ],
+    "n_eventos_completos_train_all": 18551,
+    "n_eventos_completos_train_base": 18774,
+    "n_eventos_total_train": 25998
+  },
+  "BASE": {
+    "theta_best": 0.3,
+    "rmse_oos_pool": 1.1705641757285912,
+    "rmse_is_2026": 1.1645306173476386,
+    "n_eventos_usados_full": 19482,
+    "n_eventos_skipped_full": 7378,
+    "rmse_per_year": {
+      "2022": {
+        "rmse": 1.1423719693533065,
+        "n": 3000
+      },
+      "2023": {
+        "rmse": 1.17269824327507,
+        "n": 6109
+      },
+      "2024": {
+        "rmse": 1.1741864781142135,
+        "n": 6136
+      },
+      "2025": {
+        "rmse": 1.1918525180047705,
+        "n": 2246
+      },
+      "2026": {
+        "rmse": 1.1645306173476386,
+        "n": 488
+      }
+    },
+    "modelo": {
+      "intercept": 0.26282106024909413,
+      "coefs": {
+        "sot": 0.25176109701581295,
+        "shots_off": 0.0,
+        "corners": 0.0,
+        "pos": 0.0,
+        "pass_pct": 0.0,
+        "saves_rival": 0.0,
+        "blocks_rival": 0.0
+      },
+      "n_train": 18774,
+      "residual_norm": 139.05401268733982
+    },
+    "cv5_temporal": {
+      "rmse_mean": 1.0156118796564182,
+      "rmse_per_fold": [
+        0.9897689292094989,
+        1.0386576651084154,
+        1.01979926788446,
+        1.0144559117599417,
+        1.0153776243197745
+      ],
+      "n_folds": 5
+    },
+    "loyo_per_year": {
+      "2022": {
+        "rmse_test_year": 1.142639471375444,
+        "n_test_year": 3000
+      },
+      "2023": {
+        "rmse_test_year": 1.1729378221157325,
+        "n_test_year": 6109
+      },
+      "2024": {
+        "rmse_test_year": 1.1740828752727424,
+        "n_test_year": 6136
+      },
+      "2025": {
+        "rmse_test_year": 1.1918005931157472,
+        "n_test_year": 2246
+      },
+      "_loyo_mean_rmse": 1.1703651904699166
+    },
+    "breaks_poisson_floor": true,
+    "grid_full": {
+      "theta=0.05": {
+        "rmse_oos": 1.183826499133445,
+        "rmse_is_2026": 1.1791299641054942,
+        "n_train_completos": 18774,
+        "dof_abort": false
+      },
+      "theta=0.10": {
+        "rmse_oos": 1.1806224886580736,
+        "rmse_is_2026": 1.175804378285478,
+        "n_train_completos": 18774,
+        "dof_abort": false
+      },
+      "theta=0.15": {
+        "rmse_oos": 1.177692290883897,
+        "rmse_is_2026": 1.1726800827660122,
+        "n_train_completos": 18774,
+        "dof_abort": false
+      },
+      "theta=0.20": {
+        "rmse_oos": 1.1750379542368334,
+        "rmse_is_2026": 1.1697586904203068,
+        "n_train_completos": 18774,
+        "dof_abort": false
+      },
+      "theta=0.25": {
+        "rmse_oos": 1.1726613519658382,
+        "rmse_is_2026": 1.1670417249989342,
+        "n_train_completos": 18774,
+        "dof_abort": false
+      },
+      "theta=0.30": {
+        "rmse_oos": 1.1705641757285912,
+        "rmse_is_2026": 1.1645306173476386,
+        "n_train_completos": 18774,
+        "dof_abort": false
+      }
+    }
+  },
+  "BASE_plus_lags": {
+    "theta_best": 0.3,
+    "rmse_oos_pool": 1.1727174057845327,
+    "rmse_is_2026": 1.164227004609239,
+    "n_eventos_usados_full": 19208,
+    "n_eventos_skipped_full": 7652,
+    "rmse_per_year": {
+      "2022": {
+        "rmse": 1.146975202548587,
+        "n": 2820
+      },
+      "2023": {
+        "rmse": 1.1743150358541552,
+        "n": 6086
+      },
+      "2024": {
+        "rmse": 1.1752341388187497,
+        "n": 6118
+      },
+      "2025": {
+        "rmse": 1.1933080459237368,
+        "n": 2246
+      },
+      "2026": {
+        "rmse": 1.164227004609239,
+        "n": 480
+      }
+    },
+    "modelo": {
+      "intercept": 0.11633146295130109,
+      "coefs": {
+        "sot": 0.24725037745809378,
+        "shots_off": 0.0,
+        "corners": 0.0,
+        "pos": 0.0,
+        "pass_pct": 0.0,
+        "saves_rival": 0.0,
+        "blocks_rival": 0.0,
+        "lag_goles_3": 0.12112807314792755,
+        "residuo_xg_lag": 0.013551828827509988
+      },
+      "n_train": 18551,
+      "residual_norm": 137.73819777924032
+    },
+    "cv5_temporal": {
+      "rmse_mean": 1.011698539619995,
+      "rmse_per_fold": [
+        0.9832242596049926,
+        1.0364767218419102,
+        1.0162339399854146,
+        1.0105856658844798,
+        1.0119721107831772
+      ],
+      "n_folds": 5
+    },
+    "loyo_per_year": {
+      "2022": {
+        "rmse_test_year": 1.147191293144492,
+        "n_test_year": 2820
+      },
+      "2023": {
+        "rmse_test_year": 1.174490259875469,
+        "n_test_year": 6086
+      },
+      "2024": {
+        "rmse_test_year": 1.1750923225350125,
+        "n_test_year": 6118
+      },
+      "2025": {
+        "rmse_test_year": 1.1932898651371153,
+        "n_test_year": 2246
+      },
+      "_loyo_mean_rmse": 1.1725159351730223
+    },
+    "breaks_poisson_floor": true,
+    "grid_full": {
+      "theta=0.05": {
+        "rmse_oos": 1.184950477785401,
+        "rmse_is_2026": 1.176397086953497,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.10": {
+        "rmse_oos": 1.182061939845307,
+        "rmse_is_2026": 1.173639014545678,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.15": {
+        "rmse_oos": 1.1793929264443488,
+        "rmse_is_2026": 1.1710419261521603,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.20": {
+        "rmse_oos": 1.1769449310618556,
+        "rmse_is_2026": 1.1686068950763158,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.25": {
+        "rmse_oos": 1.174719335435721,
+        "rmse_is_2026": 1.1663349363304638,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.30": {
+        "rmse_oos": 1.1727174057845327,
+        "rmse_is_2026": 1.164227004609239,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      }
+    }
+  },
+  "ALL": {
+    "theta_best": 0.3,
+    "rmse_oos_pool": 1.1727133637892304,
+    "rmse_is_2026": 1.1642336744083857,
+    "n_eventos_usados_full": 19208,
+    "n_eventos_skipped_full": 7652,
+    "rmse_per_year": {
+      "2022": {
+        "rmse": 1.1469620405609657,
+        "n": 2820
+      },
+      "2023": {
+        "rmse": 1.1743127805949491,
+        "n": 6086
+      },
+      "2024": {
+        "rmse": 1.1752330463385445,
+        "n": 6118
+      },
+      "2025": {
+        "rmse": 1.1933023310421593,
+        "n": 2246
+      },
+      "2026": {
+        "rmse": 1.1642336744083857,
+        "n": 480
+      }
+    },
+    "modelo": {
+      "intercept": 0.11626797804369522,
+      "coefs": {
+        "sot": 0.24686319749878005,
+        "shots_off": 0.0,
+        "corners": 0.0,
+        "pos": 0.0,
+        "pass_pct": 0.0,
+        "saves_rival": 0.0,
+        "blocks_rival": 0.00013319990445226018,
+        "sot_x_pos": 0.0,
+        "sot_x_pass_pct": 0.0,
+        "ratio_xg_l_v": 0.0008654290029371135,
+        "lag_goles_3": 0.12103103248233747,
+        "residuo_xg_lag": 0.013535162777395181
+      },
+      "n_train": 18551,
+      "residual_norm": 137.73783930987568
+    },
+    "cv5_temporal": {
+      "rmse_mean": 1.0129800376798015,
+      "rmse_per_fold": [
+        0.9832215274790383,
+        1.0364720724789223,
+        1.0162262393678982,
+        1.0105781717703768,
+        1.0184021773027716
+      ],
+      "n_folds": 5
+    },
+    "loyo_per_year": {
+      "2022": {
+        "rmse_test_year": 1.147191293144492,
+        "n_test_year": 2820
+      },
+      "2023": {
+        "rmse_test_year": 1.1744873046197934,
+        "n_test_year": 6086
+      },
+      "2024": {
+        "rmse_test_year": 1.175091025753072,
+        "n_test_year": 6118
+      },
+      "2025": {
+        "rmse_test_year": 1.1932793737422318,
+        "n_test_year": 2246
+      },
+      "_loyo_mean_rmse": 1.1725122493148974
+    },
+    "breaks_poisson_floor": true,
+    "grid_full": {
+      "theta=0.05": {
+        "rmse_oos": 1.18494998457359,
+        "rmse_is_2026": 1.1763983563525373,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.10": {
+        "rmse_oos": 1.1820608814420412,
+        "rmse_is_2026": 1.1736414914442421,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.15": {
+        "rmse_oos": 1.1793912306566117,
+        "rmse_is_2026": 1.1710455477155752,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.20": {
+        "rmse_oos": 1.176942525565075,
+        "rmse_is_2026": 1.1686115975737925,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.25": {
+        "rmse_oos": 1.174716147857377,
+        "rmse_is_2026": 1.1663406551766788,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      },
+      "theta=0.30": {
+        "rmse_oos": 1.1727133637892304,
+        "rmse_is_2026": 1.1642336744083857,
+        "n_train_completos": 18551,
+        "dof_abort": false
+      }
+    }
+  },
+  "best_config": "BASE",
+  "comparison_vs_baseline_v5": {
+    "v5_baseline_rmse": 1.1963,
+    "best_config": "BASE",
+    "best_rmse": 1.1705641757285912,
+    "delta_rmse_oos": -0.025735824271408747,
+    "ratio": 0.9784871484816444
+  }
+}

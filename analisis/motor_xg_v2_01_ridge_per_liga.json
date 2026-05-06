@@ -1,0 +1,790 @@
+{
+  "_meta": {
+    "N_partidos": 13430,
+    "WARMUP": 5,
+    "ALPHA_GRID": [
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "THETA_GRID": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3
+    ],
+    "TRAIN_YEARS": [
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "HOLDOUT_YEARS": [
+      "2026"
+    ],
+    "COTA_POISSON": 1.18
+  },
+  "F_simple": {
+    "alpha_best": 10.0,
+    "theta_best": 0.3,
+    "rmse_oos_pool": 1.1848615041356287,
+    "rmse_is_2026": 1.1858407155160842,
+    "n_eventos_usados_full": 26860,
+    "n_eventos_skipped_full": 0,
+    "rmse_per_year": {
+      "2022": {
+        "rmse": 1.17106143000172,
+        "n": 4748
+      },
+      "2023": {
+        "rmse": 1.2003615037598654,
+        "n": 9202
+      },
+      "2024": {
+        "rmse": 1.1730462785431401,
+        "n": 7972
+      },
+      "2025": {
+        "rmse": 1.191653527190405,
+        "n": 2246
+      },
+      "2026": {
+        "rmse": 1.1858407155160842,
+        "n": 665
+      }
+    },
+    "cv5_temporal": {
+      "rmse_mean": 1.0847058096170905,
+      "rmse_per_fold": [
+        1.0797755934771889,
+        1.1017799895363523,
+        1.1148279692766991,
+        1.077327557761334,
+        1.0498179380338786
+      ],
+      "n_folds": 5
+    },
+    "loyo_per_year": {
+      "2022": {
+        "rmse_test_year": 1.1715549982263862,
+        "n_test_year": 4748
+      },
+      "2023": {
+        "rmse_test_year": 1.2010043217965551,
+        "n_test_year": 9202
+      },
+      "2024": {
+        "rmse_test_year": 1.173162946276743,
+        "n_test_year": 7972
+      },
+      "2025": {
+        "rmse_test_year": 1.1916476194034962,
+        "n_test_year": 2246
+      },
+      "_loyo_mean_rmse": 1.184342471425795
+    },
+    "coefs_per_liga": {
+      "Colombia": {
+        "intercept": 0.31155781973150665,
+        "coefs": {
+          "sot": 0.19770425179343828,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 1180
+      },
+      "Peru": {
+        "intercept": 1.3666666666666667,
+        "coefs": {
+          "sot": 0.0,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 990
+      },
+      "Chile": {
+        "intercept": 0.1347221135524972,
+        "coefs": {
+          "sot": 0.27128159595952667,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 1440
+      },
+      "Bolivia": {
+        "intercept": 1.345388788426763,
+        "coefs": {
+          "sot": 0.0,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 1106
+      },
+      "Uruguay": {
+        "intercept": 1.2083333333333333,
+        "coefs": {
+          "sot": 0.0,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 720
+      },
+      "Ecuador": {
+        "intercept": 1.2777777777777777,
+        "coefs": {
+          "sot": 0.0,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 720
+      },
+      "Venezuela": {
+        "intercept": 1.2039106145251397,
+        "coefs": {
+          "sot": 0.0,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 1074
+      },
+      "Noruega": {
+        "intercept": 1.4771321976505358,
+        "coefs": {
+          "sot": 0.07081950075425146,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 1440
+      },
+      "Brasil": {
+        "intercept": 0.3252549458089158,
+        "coefs": {
+          "sot": 0.20650579713865586,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 2280
+      },
+      "Argentina": {
+        "intercept": 0.16011160544211278,
+        "coefs": {
+          "sot": 0.22996188545277896,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 2268
+      },
+      "Inglaterra": {
+        "intercept": 0.5059968804245836,
+        "coefs": {
+          "sot": 0.23965349990920926,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 2280
+      },
+      "Alemania": {
+        "intercept": 0.14870878145367583,
+        "coefs": {
+          "sot": 0.30853330342765983,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 1836
+      },
+      "Turquia": {
+        "intercept": 1.3157990455463855,
+        "coefs": {
+          "sot": 0.10045144995984678,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 2128
+      },
+      "Francia": {
+        "intercept": 0.2682626727737991,
+        "coefs": {
+          "sot": 0.2564070944939935,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 1984
+      },
+      "Espana": {
+        "intercept": 0.22330246946234178,
+        "coefs": {
+          "sot": 0.2616391747795879,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 2272
+      },
+      "Italia": {
+        "intercept": 0.4216009788221913,
+        "coefs": {
+          "sot": 0.22751061409011894,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 2280
+      },
+      "__global__": {
+        "intercept": 0.9193318421844918,
+        "coefs": {
+          "sot": 0.13633349080979773,
+          "shots_off": 0.0,
+          "corners": 0.0
+        },
+        "n_train": 25998
+      }
+    },
+    "breaks_poisson_floor": false,
+    "grid_full": {
+      "alpha=0.001|theta=0.05": {
+        "rmse_oos": 1.2005494029212498,
+        "rmse_is_2026": 1.201160266456038,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.10": {
+        "rmse_oos": 1.1967463214160856,
+        "rmse_is_2026": 1.197549422837113,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.15": {
+        "rmse_oos": 1.1932736352518816,
+        "rmse_is_2026": 1.1942103661435652,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.20": {
+        "rmse_oos": 1.1901342366084138,
+        "rmse_is_2026": 1.1911453820228979,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.25": {
+        "rmse_oos": 1.1873307692061583,
+        "rmse_is_2026": 1.1883565911235083,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.30": {
+        "rmse_oos": 1.1848656175515548,
+        "rmse_is_2026": 1.1858459420436438,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.05": {
+        "rmse_oos": 1.2005494022559797,
+        "rmse_is_2026": 1.2011602656670446,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.10": {
+        "rmse_oos": 1.1967463201035782,
+        "rmse_is_2026": 1.1975494212599365,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.15": {
+        "rmse_oos": 1.1932736333108793,
+        "rmse_is_2026": 1.1942103637795598,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.20": {
+        "rmse_oos": 1.190134234058353,
+        "rmse_is_2026": 1.1911453788739752,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.25": {
+        "rmse_oos": 1.187330766067149,
+        "rmse_is_2026": 1.188356587192144,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.30": {
+        "rmse_oos": 1.1848656138443587,
+        "rmse_is_2026": 1.185845937332886,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.05": {
+        "rmse_oos": 1.2005493956033448,
+        "rmse_is_2026": 1.2011602577771967,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.10": {
+        "rmse_oos": 1.196746306978639,
+        "rmse_is_2026": 1.197549405488345,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.15": {
+        "rmse_oos": 1.193273613901067,
+        "rmse_is_2026": 1.1942103401397848,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.20": {
+        "rmse_oos": 1.1901342085580353,
+        "rmse_is_2026": 1.1911453473851363,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.25": {
+        "rmse_oos": 1.187330734677435,
+        "rmse_is_2026": 1.1883565478790101,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.30": {
+        "rmse_oos": 1.1848655767728677,
+        "rmse_is_2026": 1.185845890225945,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.05": {
+        "rmse_oos": 1.2005493290833833,
+        "rmse_is_2026": 1.2011601788871302,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.10": {
+        "rmse_oos": 1.196746175742611,
+        "rmse_is_2026": 1.1975492477901348,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.15": {
+        "rmse_oos": 1.193273419823872,
+        "rmse_is_2026": 1.1942101037699036,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.20": {
+        "rmse_oos": 1.1901339535839421,
+        "rmse_is_2026": 1.1911450325356612,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.25": {
+        "rmse_oos": 1.1873304208181148,
+        "rmse_is_2026": 1.1883561547985055,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.30": {
+        "rmse_oos": 1.1848652061051037,
+        "rmse_is_2026": 1.1858454192201653,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.05": {
+        "rmse_oos": 1.2005486645217855,
+        "rmse_is_2026": 1.2011593908267157,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.10": {
+        "rmse_oos": 1.196744864717123,
+        "rmse_is_2026": 1.1975476725759209,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.15": {
+        "rmse_oos": 1.1932714811422571,
+        "rmse_is_2026": 1.1942077428541706,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.20": {
+        "rmse_oos": 1.1901314067475646,
+        "rmse_is_2026": 1.1911418879267706,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.25": {
+        "rmse_oos": 1.1873272860021815,
+        "rmse_is_2026": 1.1883522290696054,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.30": {
+        "rmse_oos": 1.1848615041356287,
+        "rmse_is_2026": 1.1858407155160842,
+        "dof_abort": false
+      }
+    }
+  },
+  "F_extended": {
+    "alpha_best": 10.0,
+    "theta_best": 0.3,
+    "rmse_oos_pool": 1.169816298540888,
+    "rmse_is_2026": 1.1669731698099246,
+    "n_eventos_usados_full": 19482,
+    "n_eventos_skipped_full": 7378,
+    "rmse_per_year": {
+      "2022": {
+        "rmse": 1.1419104407819505,
+        "n": 3000
+      },
+      "2023": {
+        "rmse": 1.1714012171504073,
+        "n": 6109
+      },
+      "2024": {
+        "rmse": 1.1732457296566094,
+        "n": 6136
+      },
+      "2025": {
+        "rmse": 1.1927248366129921,
+        "n": 2246
+      },
+      "2026": {
+        "rmse": 1.1669731698099246,
+        "n": 488
+      }
+    },
+    "cv5_temporal": {
+      "rmse_mean": 1.0059459349638826,
+      "rmse_per_fold": [
+        0.9782832411397997,
+        1.0268616357846176,
+        1.008864760602654,
+        1.0053757761016349,
+        1.0103442611907074
+      ],
+      "n_folds": 5
+    },
+    "loyo_per_year": {
+      "2022": {
+        "rmse_test_year": 1.1419791949026543,
+        "n_test_year": 3000
+      },
+      "2023": {
+        "rmse_test_year": 1.1719438563950872,
+        "n_test_year": 6109
+      },
+      "2024": {
+        "rmse_test_year": 1.1731670938523642,
+        "n_test_year": 6136
+      },
+      "2025": {
+        "rmse_test_year": 1.1928843070896813,
+        "n_test_year": 2246
+      },
+      "_loyo_mean_rmse": 1.1699936130599466
+    },
+    "coefs_per_liga": {
+      "Colombia": {
+        "intercept": 0.1909906574519149,
+        "coefs": {
+          "sot": 0.20228935130891598,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.03456501991571527,
+          "longballs_acc": 0.0
+        },
+        "n_train": 1178
+      },
+      "Chile": {
+        "intercept": 0.02235612444495394,
+        "coefs": {
+          "sot": 0.2754153100203689,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.004707468771908748,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.03086143513934996,
+          "longballs_acc": 0.0
+        },
+        "n_train": 1438
+      },
+      "Brasil": {
+        "intercept": 0.32527548114284055,
+        "coefs": {
+          "sot": 0.20650105389467363,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.0,
+          "longballs_acc": 0.0
+        },
+        "n_train": 2280
+      },
+      "Argentina": {
+        "intercept": 0.08711248571245467,
+        "coefs": {
+          "sot": 0.22987561093142062,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.025536011494478216,
+          "longballs_acc": 0.0
+        },
+        "n_train": 2268
+      },
+      "Inglaterra": {
+        "intercept": 0.5059968804245836,
+        "coefs": {
+          "sot": 0.23965349990920923,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.0,
+          "longballs_acc": 0.0
+        },
+        "n_train": 2280
+      },
+      "Alemania": {
+        "intercept": 0.05263688072962469,
+        "coefs": {
+          "sot": 0.3119090284817432,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.023163448420173136,
+          "longballs_acc": 0.0
+        },
+        "n_train": 1836
+      },
+      "Francia": {
+        "intercept": 0.26825392062917586,
+        "coefs": {
+          "sot": 0.25640905434218003,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.0,
+          "longballs_acc": 0.0
+        },
+        "n_train": 1984
+      },
+      "Espana": {
+        "intercept": 0.21418052343524296,
+        "coefs": {
+          "sot": 0.2609965918481863,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.004095652859062161,
+          "longballs_acc": 0.0
+        },
+        "n_train": 2268
+      },
+      "Italia": {
+        "intercept": 0.4219953706582181,
+        "coefs": {
+          "sot": 0.22740717300118057,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.0,
+          "longballs_acc": 0.0
+        },
+        "n_train": 2280
+      },
+      "Noruega": {
+        "intercept": -0.10946871753099363,
+        "coefs": {
+          "sot": 0.3344364524582445,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.022656475108227273,
+          "longballs_acc": 0.0
+        },
+        "n_train": 270
+      },
+      "Turquia": {
+        "intercept": -0.055936443184416706,
+        "coefs": {
+          "sot": 0.32099974660118336,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.029323110777475937,
+          "longballs_acc": 0.0
+        },
+        "n_train": 684
+      },
+      "__global__": {
+        "intercept": 0.2629115943162943,
+        "coefs": {
+          "sot": 0.25173956973346706,
+          "shots_off": 0.0,
+          "corners": 0.0,
+          "pos": 0.0,
+          "pass_pct": 0.0,
+          "saves_rival": 0.0,
+          "blocks_rival": 0.0,
+          "longballs_acc": 0.0
+        },
+        "n_train": 18774
+      }
+    },
+    "breaks_poisson_floor": true,
+    "grid_full": {
+      "alpha=0.001|theta=0.05": {
+        "rmse_oos": 1.1838068577530887,
+        "rmse_is_2026": 1.179590457852604,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.10": {
+        "rmse_oos": 1.1805420357748433,
+        "rmse_is_2026": 1.1767055449354222,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.15": {
+        "rmse_oos": 1.17750955634677,
+        "rmse_is_2026": 1.174001728686562,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.20": {
+        "rmse_oos": 1.174711218824826,
+        "rmse_is_2026": 1.1714802630384846,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.25": {
+        "rmse_oos": 1.1721487001512376,
+        "rmse_is_2026": 1.16914232780736,
+        "dof_abort": false
+      },
+      "alpha=0.001|theta=0.30": {
+        "rmse_oos": 1.1698235500228011,
+        "rmse_is_2026": 1.1669890260432279,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.05": {
+        "rmse_oos": 1.1838068565105362,
+        "rmse_is_2026": 1.1795904554765693,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.10": {
+        "rmse_oos": 1.1805420333477818,
+        "rmse_is_2026": 1.1767055402127446,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.15": {
+        "rmse_oos": 1.1775095527944275,
+        "rmse_is_2026": 1.174001721647936,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.20": {
+        "rmse_oos": 1.1747112142075635,
+        "rmse_is_2026": 1.171480253715901,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.25": {
+        "rmse_oos": 1.1721486945304944,
+        "rmse_is_2026": 1.169142316234097,
+        "dof_abort": false
+      },
+      "alpha=0.01|theta=0.30": {
+        "rmse_oos": 1.1698235434610365,
+        "rmse_is_2026": 1.1669890122538389,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.05": {
+        "rmse_oos": 1.1838068440852596,
+        "rmse_is_2026": 1.1795904317170114,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.10": {
+        "rmse_oos": 1.1805420090776761,
+        "rmse_is_2026": 1.176705492987595,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.15": {
+        "rmse_oos": 1.1775095172717795,
+        "rmse_is_2026": 1.1740016512641873,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.20": {
+        "rmse_oos": 1.1747111680359952,
+        "rmse_is_2026": 1.1714801604935114,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.25": {
+        "rmse_oos": 1.1721486383244124,
+        "rmse_is_2026": 1.169142200505898,
+        "dof_abort": false
+      },
+      "alpha=0.1|theta=0.30": {
+        "rmse_oos": 1.1698234778450403,
+        "rmse_is_2026": 1.1669888743654107,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.05": {
+        "rmse_oos": 1.1838067198572404,
+        "rmse_is_2026": 1.1795901942002918,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.10": {
+        "rmse_oos": 1.1805417664272222,
+        "rmse_is_2026": 1.1767050208986674,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.15": {
+        "rmse_oos": 1.1775091621228682,
+        "rmse_is_2026": 1.1740009476778246,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.20": {
+        "rmse_oos": 1.1747107064259432,
+        "rmse_is_2026": 1.1714792286141362,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.25": {
+        "rmse_oos": 1.1721480763983807,
+        "rmse_is_2026": 1.1691410436666567,
+        "dof_abort": false
+      },
+      "alpha=1|theta=0.30": {
+        "rmse_oos": 1.1698228218501106,
+        "rmse_is_2026": 1.1669874960269249,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.05": {
+        "rmse_oos": 1.1838054823011195,
+        "rmse_is_2026": 1.179587730890809,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.10": {
+        "rmse_oos": 1.1805393499223367,
+        "rmse_is_2026": 1.1767001227457092,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.15": {
+        "rmse_oos": 1.1775056264621662,
+        "rmse_is_2026": 1.1739936444842438,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.20": {
+        "rmse_oos": 1.1747061125367495,
+        "rmse_is_2026": 1.1714695515151115,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.25": {
+        "rmse_oos": 1.17214248628675,
+        "rmse_is_2026": 1.1691290251219602,
+        "dof_abort": false
+      },
+      "alpha=10|theta=0.30": {
+        "rmse_oos": 1.169816298540888,
+        "rmse_is_2026": 1.1669731698099246,
+        "dof_abort": false
+      }
+    }
+  },
+  "best_config": "F_extended",
+  "comparison_vs_baseline_v5": {
+    "v5_baseline_rmse": 1.1963,
+    "best_config": "F_extended",
+    "best_rmse": 1.169816298540888,
+    "delta_rmse_oos": -0.02648370145911194,
+    "ratio": 0.977861989919659
+  }
+}

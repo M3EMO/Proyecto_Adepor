@@ -1,0 +1,11 @@
+{
+  "ts_log": "2026-05-04 12:53:08",
+  "n_eventos": 237,
+  "n_features": 60,
+  "n_tests": 726,
+  "bonferroni_alpha": 6.887052341597797e-05,
+  "n_findings": 0,
+  "findings_top": [],
+  "n_picks_shadow": 0,
+  "summary_per_patron": []
+}

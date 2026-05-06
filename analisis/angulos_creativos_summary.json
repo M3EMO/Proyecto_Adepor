@@ -1,0 +1,163 @@
+{
+  "titulo": "Angulos Creativos NO Probados - Universo Expandido N=8892",
+  "fecha": "2026-05-02",
+  "sesion": "2026-05-02_team_filtros_oro",
+  "agente": "investigador_xg",
+  "universo_apostable_V0": 4339,
+  "universo_expandido": 8892,
+  "baseline": {
+    "N": 4339,
+    "yield": -0.0372,
+    "ci95": [
+      -0.0718,
+      -0.0021
+    ],
+    "hit": 0.4632,
+    "yrs_pos": "0/4"
+  },
+  "top5_angulos_creativos": [
+    {
+      "rank": 1,
+      "nombre": "2C_anti_hype_local_fade",
+      "condicion": "ola5_l>=4 (4-5 wins) -> apostar visita",
+      "side": "2",
+      "N": 210,
+      "yield": 0.1816,
+      "ci95": [
+        -0.1778,
+        0.5671
+      ],
+      "yrs_pos": "3/4",
+      "veredicto": "volatil cross-liga: ITA+48% ARG+57% pero ESP-26% TUR-9%; decay 2025 -33%"
+    },
+    {
+      "rank": 2,
+      "nombre": "5E_dog_aligned",
+      "condicion": "liga in (BRA,ITA,FRA) AND c2 in [4,7] AND ola5_v>=2 -> 2",
+      "side": "2",
+      "N": 201,
+      "yield": 0.0898,
+      "ci95": [
+        -0.2049,
+        0.3813
+      ],
+      "yrs_pos": "4/4",
+      "veredicto": "ARG destruye yield (-61%); excluir ARG da N=111 yield robusto BRA+30 ITA+107 FRA+14"
+    },
+    {
+      "rank": 3,
+      "nombre": "1B_mes_6_junio",
+      "condicion": "mes==6 -> apostar V0_argmax",
+      "side": "argmax",
+      "N": 297,
+      "yield": 0.0697,
+      "ci95": [
+        -0.0887,
+        0.2242
+      ],
+      "yrs_pos": "3/4",
+      "veredicto": "driver es ARG+Mes6 (yield +31.15%, fin Apertura/Clausura)"
+    },
+    {
+      "rank": 4,
+      "nombre": "1B_mes_2_febrero",
+      "condicion": "mes==2 AND liga in (FRA,TUR,ESP) -> argmax",
+      "side": "argmax",
+      "N": 130,
+      "yield": 0.235,
+      "ci95": null,
+      "yrs_pos": "2/3",
+      "veredicto": "EUR midwinter; FRA +20% TUR +26% ESP +24% (ITA -16, ENG -9 excluir)"
+    },
+    {
+      "rank": 5,
+      "nombre": "1D_diff_gap_V_2_4",
+      "condicion": "visita con +2/4 dias mas descanso que local -> apostar 1",
+      "side": "1",
+      "N": 362,
+      "yield": 0.0589,
+      "ci95": [
+        -0.0562,
+        0.1846
+      ],
+      "yrs_pos": "2/4",
+      "veredicto": "sugiere visita FRESCA no convierte ventaja; local con menos dias gana mas que esperado"
+    }
+  ],
+  "filtros_NEGATIVOS_sig": [
+    {
+      "nombre": "gap_l_GTE_14",
+      "N": 906,
+      "yield": -0.1365,
+      "ci95": [
+        -0.2041,
+        -0.0671
+      ]
+    },
+    {
+      "nombre": "DOW_lunes",
+      "N": 376,
+      "yield": -0.146,
+      "ci95": [
+        -0.2513,
+        -0.0291
+      ]
+    },
+    {
+      "nombre": "mes_10",
+      "N": 529,
+      "yield": -0.1058,
+      "ci95": [
+        -0.1971,
+        -0.0138
+      ]
+    },
+    {
+      "nombre": "mes_11",
+      "N": 382,
+      "yield": -0.1249,
+      "ci95": [
+        -0.2374,
+        -0.0085
+      ]
+    },
+    {
+      "nombre": "diff_gap_L_2_4",
+      "N": 374,
+      "yield": -0.1587,
+      "ci95": [
+        -0.2708,
+        -0.0294
+      ]
+    },
+    {
+      "nombre": "hora_LT_14",
+      "N": 2167,
+      "yield": -0.0699,
+      "ci95": [
+        -0.1136,
+        -0.0217
+      ]
+    },
+    {
+      "nombre": "OR_LTE_104_eficiente",
+      "N": 3820,
+      "yield": -0.0424,
+      "ci95": [
+        -0.0778,
+        -0.0067
+      ]
+    }
+  ],
+  "filtro_combinado_NEG_LunYGap14": {
+    "N_keep": 1672,
+    "yield_keep": -0.0092,
+    "ci95": [
+      -0.0648,
+      0.0475
+    ],
+    "lift_pp": 2.8,
+    "N_excl": 2667,
+    "yield_excl": -0.0547
+  }
+}

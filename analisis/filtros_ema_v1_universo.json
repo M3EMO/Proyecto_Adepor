@@ -1,0 +1,31 @@
+{
+  "n_backtest_2026": 637,
+  "n_universo_final": 289,
+  "n_with_both_snapshots_pre_warmup": 403,
+  "n_warmup_skipped": 114,
+  "n_only_one_snapshot": 70,
+  "n_neither": 164,
+  "cobertura_por_liga": {
+    "Argentina": 49,
+    "Brasil": 44,
+    "Inglaterra": 42,
+    "Turquia": 36,
+    "Espana": 23,
+    "Colombia": 23,
+    "Francia": 17,
+    "Alemania": 16,
+    "Noruega": 15,
+    "Italia": 15,
+    "Chile": 9
+  },
+  "baseline_pool_local": 0.06852941176470587,
+  "baseline_pool_local_n": 272,
+  "baseline_pool_visita": -0.17779411764705882,
+  "baseline_pool_visita_n": 272,
+  "baseline_pool_empate": -0.07080882352941177,
+  "baseline_pool_empate_n": 272,
+  "baseline_pool_o25": 0.18632478632478633,
+  "baseline_pool_o25_n": 117,
+  "baseline_pool_u25": -0.24811965811965814,
+  "baseline_pool_u25_n": 117
+}

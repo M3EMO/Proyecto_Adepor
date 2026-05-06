@@ -1,0 +1,34 @@
+{
+  "n_fdco_2022_2026": 16042,
+  "n_with_both_snapshots": 4236,
+  "n_warmup_skipped": 196,
+  "n_no_snapshot": 11806,
+  "n_universo_final": 4040,
+  "cobertura_por_liga": {
+    "Argentina": 896,
+    "Italia": 842,
+    "Brasil": 714,
+    "Espana": 510,
+    "Francia": 492,
+    "Inglaterra": 281,
+    "Turquia": 228,
+    "Alemania": 77
+  },
+  "cobertura_por_temp": {
+    "2022": 316,
+    "2023": 964,
+    "2024": 1006,
+    "2025": 1061,
+    "2026": 693
+  },
+  "baseline_pool_local": -0.06569554455445545,
+  "baseline_pool_local_n": 4040,
+  "baseline_pool_visita": -0.07168316831683169,
+  "baseline_pool_visita_n": 4040,
+  "baseline_pool_empate": -0.004705445544554455,
+  "baseline_pool_empate_n": 4040,
+  "baseline_pool_o25": -0.05797119341563786,
+  "baseline_pool_o25_n": 2430,
+  "baseline_pool_u25": -0.016399176954732517,
+  "baseline_pool_u25_n": 2430
+}

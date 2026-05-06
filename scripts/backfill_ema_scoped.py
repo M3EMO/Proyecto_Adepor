@@ -207,15 +207,33 @@ def backfill_uno(conn, nombre_oficial, liga, dry_run=False):
           AND (sot_l IS NULL OR sot_v IS NULL)
     """, (liga, nombre_oficial, nombre_oficial)).fetchone()[0]
 
+    # V2 hybrid SOFA: importar lazily (bead adepor-atn)
+    try:
+        from src.ingesta.motor_data import calcular_xg_v2_hibrido_sofa
+        USE_V2 = True
+    except ImportError:
+        USE_V2 = False
+
     for p in partidos:
-        _, _, local, visita, goles_l, goles_v, sot_l, shots_l, corn_l, sot_v, shots_v, corn_v = p
+        id_p, fecha_p, local, visita, goles_l, goles_v, sot_l, shots_l, corn_l, sot_v, shots_v, corn_v = p
         is_home = (local == nombre_oficial)
 
         stats_loc = _stats_desde_row(sot_l, corn_l, shots_l)
         stats_vis = _stats_desde_row(sot_v, corn_v, shots_v)
 
-        xg_loc_crudo = calcular_xg_hibrido(stats_loc, goles_l, coef_corner, pais=liga)
-        xg_vis_crudo = calcular_xg_hibrido(stats_vis, goles_v, coef_corner, pais=liga)
+        if USE_V2:
+            # V2 hybrid SOFA cuando flag='active' y SOFA matched, sino fallback V0 automático
+            xg_loc_crudo = calcular_xg_v2_hibrido_sofa(
+                stats_loc, goles_l, liga=liga, coef_corner_liga=coef_corner,
+                conn=conn, fecha=fecha_p, ht=local, at=visita, es_local=True
+            )
+            xg_vis_crudo = calcular_xg_v2_hibrido_sofa(
+                stats_vis, goles_v, liga=liga, coef_corner_liga=coef_corner,
+                conn=conn, fecha=fecha_p, ht=local, at=visita, es_local=False
+            )
+        else:
+            xg_loc_crudo = calcular_xg_hibrido(stats_loc, goles_l, coef_corner, pais=liga)
+            xg_vis_crudo = calcular_xg_hibrido(stats_vis, goles_v, coef_corner, pais=liga)
         xg_loc = ajustar_xg_por_estado_juego(xg_loc_crudo, goles_l, goles_v)
         xg_vis = ajustar_xg_por_estado_juego(xg_vis_crudo, goles_v, goles_l)
 

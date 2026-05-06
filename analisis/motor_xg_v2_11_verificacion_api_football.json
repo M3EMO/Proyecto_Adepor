@@ -1,0 +1,222 @@
+{
+  "leagues": {
+    "Argentina": {
+      "league_id": 128,
+      "league_name": "Liga Profesional Argentina",
+      "country": "Argentina",
+      "cov_events": true,
+      "cov_lineups": true,
+      "cov_statistics_fixtures": true,
+      "cov_statistics_players": true,
+      "cov_injuries": false,
+      "cov_predictions": true,
+      "cov_odds": false,
+      "cov_standings": true
+    },
+    "Inglaterra": {
+      "status": "no_response"
+    },
+    "Brasil": {
+      "status": "no_response"
+    },
+    "Noruega": {
+      "status": "no_response"
+    },
+    "Turquia": {
+      "league_id": 203,
+      "league_name": "Süper Lig",
+      "country": "Turkey",
+      "cov_events": true,
+      "cov_lineups": true,
+      "cov_statistics_fixtures": true,
+      "cov_statistics_players": true,
+      "cov_injuries": true,
+      "cov_predictions": true,
+      "cov_odds": false,
+      "cov_standings": true
+    },
+    "Bolivia": {
+      "status": "no_response"
+    },
+    "Chile": {
+      "status": "no_response"
+    },
+    "Uruguay": {
+      "status": "no_response"
+    },
+    "Peru": {
+      "league_id": 281,
+      "league_name": "Primera División",
+      "country": "Peru",
+      "cov_events": true,
+      "cov_lineups": true,
+      "cov_statistics_fixtures": true,
+      "cov_statistics_players": true,
+      "cov_injuries": false,
+      "cov_predictions": true,
+      "cov_odds": false,
+      "cov_standings": true
+    },
+    "Ecuador": {
+      "status": "no_response"
+    },
+    "Colombia": {
+      "status": "no_response"
+    },
+    "Venezuela": {
+      "status": "no_response"
+    },
+    "Espana": {
+      "league_id": 140,
+      "league_name": "La Liga",
+      "country": "Spain",
+      "cov_events": true,
+      "cov_lineups": true,
+      "cov_statistics_fixtures": true,
+      "cov_statistics_players": true,
+      "cov_injuries": true,
+      "cov_predictions": true,
+      "cov_odds": false,
+      "cov_standings": true
+    },
+    "Italia": {
+      "status": "no_response"
+    },
+    "Alemania": {
+      "status": "no_response"
+    },
+    "Francia": {
+      "status": "no_response"
+    }
+  },
+  "sample_fixtures": {
+    "Argentina": {
+      "fixture_id": 1158779,
+      "referee": "F. Espinoza",
+      "referee_populated": true,
+      "date": "2024-08-02T23:00:00+00:00",
+      "home": "Newells Old Boys",
+      "away": "Estudiantes L.P."
+    },
+    "Inglaterra": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Brasil": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Noruega": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Turquia": {
+      "fixture_id": 1237855,
+      "referee": "T. Doman",
+      "referee_populated": true,
+      "date": "2024-08-09T18:00:00+00:00",
+      "home": "Galatasaray",
+      "away": "Hatayspor"
+    },
+    "Bolivia": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Chile": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Uruguay": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Peru": {
+      "fixture_id": 1227557,
+      "referee": "J. Espinoza",
+      "referee_populated": true,
+      "date": "2024-08-01T00:30:00+00:00",
+      "home": "Carlos A. Mannucci",
+      "away": "ADT"
+    },
+    "Ecuador": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Colombia": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Venezuela": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Espana": {
+      "fixture_id": 1208494,
+      "referee": "Alejandro Muñiz",
+      "referee_populated": true,
+      "date": "2024-08-15T17:00:00+00:00",
+      "home": "Athletic Club",
+      "away": "Getafe"
+    },
+    "Italia": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Alemania": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    },
+    "Francia": {
+      "status": "no_fixtures",
+      "referee_populated": false
+    }
+  },
+  "sample_lineups": {
+    "Espana": {
+      "fixture_id": 1208494,
+      "formacion_local": "4-2-3-1",
+      "formacion_visita": "4-1-4-1",
+      "startxi_counts": [
+        11,
+        11
+      ],
+      "formation_populated": true
+    },
+    "Argentina": {
+      "status": "no_lineups",
+      "formation_populated": false
+    },
+    "Peru": {
+      "status": "no_lineups",
+      "formation_populated": false
+    }
+  },
+  "sample_injuries": {
+    "Inglaterra": {
+      "count": 0,
+      "has_data": false
+    },
+    "Argentina": {
+      "count": 0,
+      "has_data": false
+    },
+    "Bolivia": {
+      "status": "error",
+      "count": 0
+    },
+    "Venezuela": {
+      "status": "error",
+      "count": 0
+    },
+    "Peru": {
+      "status": "error",
+      "count": 0
+    }
+  },
+  "_meta": {
+    "calls_realizadas": 40,
+    "pct_referee_ok": 25.0,
+    "pct_formation_ok": 33.333333333333336,
+    "decision": "ABORT: cobertura insuficiente. NO scraping. Ir a Opcion C baseline Bayesian."
+  }
+}

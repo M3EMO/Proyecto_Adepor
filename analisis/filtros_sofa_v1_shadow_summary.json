@@ -1,0 +1,49 @@
+{
+  "n_filtros_loggeados": 7,
+  "n_picks_shadow": 731,
+  "bonferroni_alpha_total": 0.0003703703703703704,
+  "filtros_summary": [
+    {
+      "filtro_id": "AND_H_yield_empate_avg_rating_lag1_l_pos__H_yield_empate_shots_on_target_lag1_l_pos",
+      "n": 46,
+      "yield": 0.6067391304347826,
+      "hit": 0.43478260869565216
+    },
+    {
+      "filtro_id": "H_yield_empate_corners_lag1_l_pos",
+      "n": 92,
+      "yield": 0.4309782608695652,
+      "hit": 0.42391304347826086
+    },
+    {
+      "filtro_id": "H_yield_empate_corners_lag1_diff_pos",
+      "n": 100,
+      "yield": 0.37699999999999995,
+      "hit": 0.39
+    },
+    {
+      "filtro_id": "OR_H_yield_empate_corners_lag1_l_pos__H_yield_empate_avg_rating_lag1_l_pos",
+      "n": 152,
+      "yield": 0.2660526315789474,
+      "hit": 0.3618421052631579
+    },
+    {
+      "filtro_id": "OR_H_yield_empate_corners_lag1_l_pos__H_yield_empate_shots_on_target_lag1_l_pos",
+      "n": 179,
+      "yield": 0.2442458100558659,
+      "hit": 0.33519553072625696
+    },
+    {
+      "filtro_id": "OR_H_yield_visita_recoveries_lag1_v_pos__H_yield_visita_recoveries_lag1_diff_pos",
+      "n": 119,
+      "yield": 0.24352941176470588,
+      "hit": 0.35294117647058826
+    },
+    {
+      "filtro_id": "AND_H_yield_visita_recoveries_lag1_v_pos__H_yield_visita_recoveries_lag1_diff_pos",
+      "n": 43,
+      "yield": 0.24093023255813953,
+      "hit": 0.3488372093023256
+    }
+  ]
+}

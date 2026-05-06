@@ -157,6 +157,136 @@ def calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga=0.03, pais=
     return round(xg_final, 3)
 
 
+def calcular_xg_v2_hibrido_sofa(estadisticas, goles_reales, liga=None,
+                                 coef_corner_liga=0.03, conn=None,
+                                 fecha=None, ht=None, at=None, es_local=None):
+    """
+    [V2 hybrid SOFA - POC 2026-05-04]
+    xG calculator híbrido per-liga: blend xg_shotmap (SofaScore) + xg_calc V0 legacy.
+
+    Rationale (POC validado, ablation v2 N=465 eventos, RMSE forward-EMA):
+      LATAM exóticas (BOL/VEN/URU/ECU): ESPN devuelve stats=0 → xG_V0=0 (motor falla).
+        SOFA xg_shotmap basado en coordenadas + situation reduce RMSE -7.8% a -11.4%.
+      LATAM mainstream (ARG/BRA): SOFA -2% RMSE marginal.
+      EUR mainstream (ENG/ESP/ITA/ALE/FRA/TUR/NOR): SOFA ≈ ruido vs V0 (V0 ya calibrado).
+
+    Fórmula:
+      xg_calc_v2 = α(liga) · xg_shotmap_sofa + (1 − α(liga)) · xg_calc_v0_legacy
+      α(liga) ∈ config_motor_valores.alpha_xg_v2_hibrido_sofa
+        Default α(BOL/VEN/URU)=1.0, α(ECU)=0.95, α(PER)=0.85, α(ARG/BRA)=0.50,
+                α(EUR)=0.25-0.40, α(global fallback)=0.30
+
+    Si SOFA NO disponible (no hay row en sofascore_match_features para liga/fecha/ht/at):
+      → fallback a calcular_xg_hibrido (V0 legacy)
+
+    Modo SHADOW (default) vs ACTIVO:
+      config_motor_valores.xg_v2_hibrido_modo IN ('shadow','active'):
+        shadow: NO afecta producción. Usar para SHADOW logging.
+        active: aplica al motor productivo.
+
+    Manifesto change autorizado por usuario 2026-05-04 (sesión motor_xg_v2_sofa_poc).
+
+    Args:
+      estadisticas: list de stats ESPN (mismo formato que calcular_xg_hibrido)
+      goles_reales: int goles del equipo en este partido
+      liga: str (e.g., 'Argentina')
+      coef_corner_liga: float coef corner para fallback V0
+      conn: sqlite3 connection (para lookup SOFA)
+      fecha: str 'YYYY-MM-DD' del partido
+      ht: str equipo local
+      at: str equipo visita
+      es_local: bool — True si el equipo del cálculo es local
+
+    Returns:
+      float xG ajustado, o resultado de V0 si SOFA no disponible.
+    """
+    # Fallback V0 si modo shadow o falta info para lookup SOFA
+    modo = get_param('xg_v2_hibrido_modo', default='shadow')
+    if modo == 'shadow':
+        # SHADOW: NO aplicar v2, devolver V0 legacy
+        return calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga, pais=liga)
+
+    if conn is None or fecha is None or ht is None or at is None or es_local is None:
+        return calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga, pais=liga)
+
+    # Lookup SOFA xg_shotmap usando matching robusto (norm_team_name + fechas ±2 + fuzzy)
+    sofa_xg = None
+    try:
+        # Importar lazily para evitar circular imports
+        from analisis.aliases_sofa_espn import norm_team_name
+        from datetime import datetime, timedelta
+        cur = conn.cursor()
+        ht_n = norm_team_name(ht, liga)
+        at_n = norm_team_name(at, liga)
+
+        # Buscar SOFA partidos del mismo liga + fecha ±2 días
+        try:
+            d0 = datetime.fromisoformat(fecha).date()
+            fechas_alt = [(d0 + timedelta(days=delta)).isoformat() for delta in (0, -1, 1, -2, 2)]
+        except (ValueError, TypeError):
+            fechas_alt = [fecha]
+
+        # V3 (2026-05-04): preferir xg_v3 (xgot SOFA + custom fallback) sobre xg_shotmap (custom puro)
+        # Mejora -16% RMSE global validated empirically (8 WIN / 5 TIE / 1 LOSS)
+        for f in fechas_alt:
+            rows = cur.execute('''
+                SELECT ht, at, xg_v3_l, xg_v3_v, xg_shotmap_l, xg_shotmap_v
+                FROM sofascore_match_features
+                WHERE liga=? AND fecha=? AND error IS NULL
+                  AND (xg_v3_l IS NOT NULL OR xg_shotmap_l IS NOT NULL)
+            ''', (liga, f)).fetchall()
+            for sofa_ht, sofa_at, xg_v3_l, xg_v3_v, xg_sh_l, xg_sh_v in rows:
+                if norm_team_name(sofa_ht, liga) == ht_n and norm_team_name(sofa_at, liga) == at_n:
+                    if es_local:
+                        sofa_xg = xg_v3_l if xg_v3_l is not None else xg_sh_l
+                    else:
+                        sofa_xg = xg_v3_v if xg_v3_v is not None else xg_sh_v
+                    break
+            if sofa_xg is not None:
+                break
+
+        # Fuzzy fallback si no match estricto
+        if sofa_xg is None:
+            from difflib import SequenceMatcher
+            for f in fechas_alt:
+                rows = cur.execute('''
+                    SELECT ht, at, xg_v3_l, xg_v3_v, xg_shotmap_l, xg_shotmap_v
+                    FROM sofascore_match_features
+                    WHERE liga=? AND fecha=? AND error IS NULL
+                      AND (xg_v3_l IS NOT NULL OR xg_shotmap_l IS NOT NULL)
+                ''', (liga, f)).fetchall()
+                best, best_sim = None, 0
+                for sofa_ht, sofa_at, xg_v3_l, xg_v3_v, xg_sh_l, xg_sh_v in rows:
+                    sim = (SequenceMatcher(None, ht_n, norm_team_name(sofa_ht, liga)).ratio()
+                           + SequenceMatcher(None, at_n, norm_team_name(sofa_at, liga)).ratio()) / 2
+                    if sim > best_sim:
+                        best_sim = sim
+                        if es_local:
+                            best = xg_v3_l if xg_v3_l is not None else xg_sh_l
+                        else:
+                            best = xg_v3_v if xg_v3_v is not None else xg_sh_v
+                if best is not None and best_sim >= 0.75:
+                    sofa_xg = best
+                    break
+    except Exception:
+        sofa_xg = None
+
+    # V0 legacy
+    xg_v0 = calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga, pais=liga)
+
+    if sofa_xg is None:
+        # SOFA no disponible → fallback V0
+        return xg_v0
+
+    # Aplicar α blend per liga
+    alpha = get_param('alpha_xg_v2_hibrido_sofa', scope=liga, default=0.30)
+    # SOFA es xg_calc puro (sin híbrido goles_reales). V0 ya tiene 0.70/0.30 incorporado.
+    # Para coherencia, aplicar mismo blend 0.70/0.30 al sofa también:
+    sofa_final = (sofa_xg * 0.70) + (goles_reales * 0.30)
+    xg_v2 = alpha * sofa_final + (1.0 - alpha) * xg_v0
+    return round(xg_v2, 3)
+
+
 def calcular_xg_v6(estadisticas, goles_reales, liga=None, conn=None):
     """[SHADOW V6 — adepor-d7h] xG recalibrado con coeficientes OLS empíricos.
 
@@ -562,8 +692,18 @@ def main():
                             stats_vis = vis.get('statistics', [])
 
                             # P4 fase3: pasar pais para que lea beta_sot por liga
-                            xg_loc_crudo = calcular_xg_hibrido(stats_loc, goles_loc, coef_corner_actual, pais=pais)
-                            xg_vis_crudo = calcular_xg_hibrido(stats_vis, goles_vis, coef_corner_actual, pais=pais)
+                            # V2 hybrid SOFA (bead adepor-atn, MANIFESTO-CHANGE-APPROVED:adepor-atn)
+                            # Si modo='active' y SOFA disponible -> V2 hybrid; sino fallback V0.
+                            xg_loc_crudo = calcular_xg_v2_hibrido_sofa(
+                                stats_loc, goles_loc, liga=pais,
+                                coef_corner_liga=coef_corner_actual, conn=conn,
+                                fecha=fecha_iso, ht=loc_oficial, at=vis_oficial, es_local=True
+                            )
+                            xg_vis_crudo = calcular_xg_v2_hibrido_sofa(
+                                stats_vis, goles_vis, liga=pais,
+                                coef_corner_liga=coef_corner_actual, conn=conn,
+                                fecha=fecha_iso, ht=loc_oficial, at=vis_oficial, es_local=False
+                            )
 
                             xg_loc = ajustar_xg_por_estado_juego(xg_loc_crudo, goles_loc, goles_vis)
                             xg_vis = ajustar_xg_por_estado_juego(xg_vis_crudo, goles_vis, goles_loc)

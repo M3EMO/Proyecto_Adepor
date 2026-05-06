@@ -1,0 +1,2162 @@
+{
+  "universo_total": 443,
+  "n_filtros_no_baseline": 29,
+  "bonferroni_alpha": 0.001724137931034483,
+  "filtros": [
+    {
+      "id": "A4_novel_neg",
+      "desc": "ref novel (games<30) -> filtro NEG visita",
+      "pick_field": "yield_local",
+      "n": 18,
+      "yield_mean": 0.48000000000000004,
+      "hit_rate": 0.4482758620689655,
+      "ci95_lo": 0.017777777777777806,
+      "ci95_hi": 0.9622222222222222,
+      "ci95_lo_gt_zero": true,
+      "supera_bonferroni_5pct": true,
+      "per_liga": {
+        "Brasil": {
+          "n": 1,
+          "yield_mean": 0.52,
+          "hit_rate": 1.0
+        },
+        "Argentina": {
+          "n": 9,
+          "yield_mean": -0.10555555555555557,
+          "hit_rate": 0.4444444444444444
+        },
+        "Ecuador": {
+          "n": 2,
+          "yield_mean": 1.615,
+          "hit_rate": 1.0
+        },
+        "Peru": {
+          "n": 5,
+          "yield_mean": 0.992,
+          "hit_rate": 1.0
+        },
+        "Uruguay": {
+          "n": 1,
+          "yield_mean": 0.8799999999999999,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "B1_3vs5_o25",
+      "desc": "form 3-x vs 5-x -> o25",
+      "pick_field": "yield_o25",
+      "n": 5,
+      "yield_mean": 0.13600000000000004,
+      "hit_rate": 0.6,
+      "ci95_lo": -0.634,
+      "ci95_hi": 0.906,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 1,
+          "yield_mean": 0.99,
+          "hit_rate": 1.0
+        },
+        "Inglaterra": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Francia": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Noruega": {
+          "n": 1,
+          "yield_mean": 0.8300000000000001,
+          "hit_rate": 1.0
+        },
+        "Peru": {
+          "n": 1,
+          "yield_mean": 0.8600000000000001,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "B5_5atras_loc_neg_loc",
+      "desc": "local 5-atras -> NO local (visita)",
+      "pick_field": "yield_visita",
+      "n": 26,
+      "yield_mean": 0.11923076923076922,
+      "hit_rate": 0.34375,
+      "ci95_lo": -0.41500000000000004,
+      "ci95_hi": 0.7488461538461538,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Inglaterra": {
+          "n": 1,
+          "yield_mean": 0.1399999999999999,
+          "hit_rate": 1.0
+        },
+        "Alemania": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Espana": {
+          "n": 4,
+          "yield_mean": 1.2025,
+          "hit_rate": 0.75
+        },
+        "Turquia": {
+          "n": 1,
+          "yield_mean": 0.98,
+          "hit_rate": 1.0
+        },
+        "Francia": {
+          "n": 2,
+          "yield_mean": -0.365,
+          "hit_rate": 0.5
+        },
+        "Brasil": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Noruega": {
+          "n": 5,
+          "yield_mean": -0.656,
+          "hit_rate": 0.2
+        },
+        "Argentina": {
+          "n": 5,
+          "yield_mean": 1.1940000000000002,
+          "hit_rate": 0.6
+        },
+        "Ecuador": {
+          "n": 2,
+          "yield_mean": 0.605,
+          "hit_rate": 0.5
+        },
+        "Peru": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Bolivia": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        }
+      }
+    },
+    {
+      "id": "B_4atras_balanc_local",
+      "desc": "ambos 4-atras -> local",
+      "pick_field": "yield_local",
+      "n": 202,
+      "yield_mean": 0.11207920792079207,
+      "hit_rate": 0.38934426229508196,
+      "ci95_lo": -0.0705940594059406,
+      "ci95_hi": 0.30024752475247524,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 9,
+          "yield_mean": 0.3277777777777778,
+          "hit_rate": 0.4444444444444444
+        },
+        "Inglaterra": {
+          "n": 36,
+          "yield_mean": 0.058055555555555555,
+          "hit_rate": 0.5
+        },
+        "Alemania": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Espana": {
+          "n": 24,
+          "yield_mean": 0.07625000000000001,
+          "hit_rate": 0.4583333333333333
+        },
+        "Turquia": {
+          "n": 28,
+          "yield_mean": 0.6535714285714286,
+          "hit_rate": 0.6071428571428571
+        },
+        "Francia": {
+          "n": 7,
+          "yield_mean": -0.5128571428571428,
+          "hit_rate": 0.2857142857142857
+        },
+        "Brasil": {
+          "n": 40,
+          "yield_mean": 0.18,
+          "hit_rate": 0.425
+        },
+        "Noruega": {
+          "n": 5,
+          "yield_mean": -0.6519999999999999,
+          "hit_rate": 0.2
+        },
+        "Argentina": {
+          "n": 23,
+          "yield_mean": -0.011304347826086957,
+          "hit_rate": 0.43478260869565216
+        },
+        "Ecuador": {
+          "n": 7,
+          "yield_mean": -0.26285714285714284,
+          "hit_rate": 0.42857142857142855
+        },
+        "Peru": {
+          "n": 3,
+          "yield_mean": 1.24,
+          "hit_rate": 1.0
+        },
+        "Bolivia": {
+          "n": 12,
+          "yield_mean": -0.05250000000000001,
+          "hit_rate": 0.5833333333333334
+        },
+        "Uruguay": {
+          "n": 6,
+          "yield_mean": -0.3116666666666667,
+          "hit_rate": 0.3333333333333333
+        }
+      }
+    },
+    {
+      "id": "F2_keeper_lag1_l_low_o25",
+      "desc": "keeper_save_lag1_l<0.3 -> o25",
+      "pick_field": "yield_o25",
+      "n": 72,
+      "yield_mean": 0.09444444444444443,
+      "hit_rate": 0.5833333333333334,
+      "ci95_lo": -0.12222222222222223,
+      "ci95_hi": 0.31805555555555554,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 12,
+          "yield_mean": -0.01833333333333333,
+          "hit_rate": 0.5
+        },
+        "Inglaterra": {
+          "n": 15,
+          "yield_mean": 0.256,
+          "hit_rate": 0.6666666666666666
+        },
+        "Espana": {
+          "n": 7,
+          "yield_mean": 0.3085714285714286,
+          "hit_rate": 0.7142857142857143
+        },
+        "Turquia": {
+          "n": 3,
+          "yield_mean": 1.0099999999999998,
+          "hit_rate": 1.0
+        },
+        "Francia": {
+          "n": 4,
+          "yield_mean": -0.14750000000000002,
+          "hit_rate": 0.5
+        },
+        "Brasil": {
+          "n": 13,
+          "yield_mean": -0.24384615384615385,
+          "hit_rate": 0.38461538461538464
+        },
+        "Noruega": {
+          "n": 1,
+          "yield_mean": 0.8300000000000001,
+          "hit_rate": 1.0
+        },
+        "Ecuador": {
+          "n": 6,
+          "yield_mean": 0.34500000000000003,
+          "hit_rate": 0.6666666666666666
+        },
+        "Peru": {
+          "n": 6,
+          "yield_mean": -0.3416666666666666,
+          "hit_rate": 0.3333333333333333
+        },
+        "Bolivia": {
+          "n": 5,
+          "yield_mean": 0.18,
+          "hit_rate": 0.8
+        }
+      }
+    },
+    {
+      "id": "D1_bcm_lag1_v_o25",
+      "desc": "big_chances_missed_lag1_v>=3 -> o25",
+      "pick_field": "yield_o25",
+      "n": 34,
+      "yield_mean": 0.0714705882352941,
+      "hit_rate": 0.5588235294117647,
+      "ci95_lo": -0.23970588235294113,
+      "ci95_hi": 0.40264705882352947,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 2,
+          "yield_mean": 0.014999999999999902,
+          "hit_rate": 0.5
+        },
+        "Inglaterra": {
+          "n": 8,
+          "yield_mean": 0.19375,
+          "hit_rate": 0.625
+        },
+        "Alemania": {
+          "n": 3,
+          "yield_mean": -0.5466666666666666,
+          "hit_rate": 0.3333333333333333
+        },
+        "Espana": {
+          "n": 6,
+          "yield_mean": 0.3316666666666666,
+          "hit_rate": 0.6666666666666666
+        },
+        "Turquia": {
+          "n": 3,
+          "yield_mean": 0.2933333333333333,
+          "hit_rate": 0.6666666666666666
+        },
+        "Francia": {
+          "n": 5,
+          "yield_mean": -0.18999999999999995,
+          "hit_rate": 0.4
+        },
+        "Brasil": {
+          "n": 3,
+          "yield_mean": 0.33666666666666667,
+          "hit_rate": 0.6666666666666666
+        },
+        "Ecuador": {
+          "n": 2,
+          "yield_mean": -0.08499999999999996,
+          "hit_rate": 0.5
+        },
+        "Argentina": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Peru": {
+          "n": 1,
+          "yield_mean": 0.73,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "D2_err_lag1_v_local",
+      "desc": "errors_lead_lag1_v>=2 -> local",
+      "pick_field": "yield_local",
+      "n": 30,
+      "yield_mean": 0.06599999999999998,
+      "hit_rate": 0.38461538461538464,
+      "ci95_lo": -0.338,
+      "ci95_hi": 0.5353333333333333,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Inglaterra": {
+          "n": 6,
+          "yield_mean": -0.355,
+          "hit_rate": 0.3333333333333333
+        },
+        "Alemania": {
+          "n": 1,
+          "yield_mean": 1.3900000000000001,
+          "hit_rate": 1.0
+        },
+        "Espana": {
+          "n": 4,
+          "yield_mean": -0.20500000000000002,
+          "hit_rate": 0.5
+        },
+        "Turquia": {
+          "n": 5,
+          "yield_mean": 0.34199999999999997,
+          "hit_rate": 0.6
+        },
+        "Francia": {
+          "n": 1,
+          "yield_mean": 1.0,
+          "hit_rate": 1.0
+        },
+        "Brasil": {
+          "n": 5,
+          "yield_mean": 0.3459999999999999,
+          "hit_rate": 0.4
+        },
+        "Noruega": {
+          "n": 1,
+          "yield_mean": 0.74,
+          "hit_rate": 1.0
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": 0.22999999999999998,
+          "hit_rate": 1.0
+        },
+        "Uruguay": {
+          "n": 4,
+          "yield_mean": 0.03249999999999997,
+          "hit_rate": 0.5
+        }
+      }
+    },
+    {
+      "id": "H_xg_lag1_diff_visita",
+      "desc": "xg_shotmap_lag1_v - xg_shotmap_lag1_l >= 1.0 -> visita",
+      "pick_field": "yield_visita",
+      "n": 66,
+      "yield_mean": 0.0653030303030303,
+      "hit_rate": 0.3972602739726027,
+      "ci95_lo": -0.26772727272727276,
+      "ci95_hi": 0.42348484848484846,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 6,
+          "yield_mean": -0.25,
+          "hit_rate": 0.3333333333333333
+        },
+        "Inglaterra": {
+          "n": 8,
+          "yield_mean": -0.37375,
+          "hit_rate": 0.375
+        },
+        "Alemania": {
+          "n": 4,
+          "yield_mean": 0.14250000000000002,
+          "hit_rate": 0.75
+        },
+        "Espana": {
+          "n": 7,
+          "yield_mean": 0.3185714285714285,
+          "hit_rate": 0.42857142857142855
+        },
+        "Turquia": {
+          "n": 9,
+          "yield_mean": -0.4933333333333333,
+          "hit_rate": 0.3333333333333333
+        },
+        "Francia": {
+          "n": 6,
+          "yield_mean": -0.0633333333333334,
+          "hit_rate": 0.5
+        },
+        "Brasil": {
+          "n": 9,
+          "yield_mean": 0.7766666666666667,
+          "hit_rate": 0.5555555555555556
+        },
+        "Noruega": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Argentina": {
+          "n": 6,
+          "yield_mean": -0.045000000000000005,
+          "hit_rate": 0.3333333333333333
+        },
+        "Ecuador": {
+          "n": 6,
+          "yield_mean": 0.9716666666666667,
+          "hit_rate": 0.6666666666666666
+        },
+        "Bolivia": {
+          "n": 3,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Uruguay": {
+          "n": 1,
+          "yield_mean": 2.27,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "D3_tpa_lag1_l_local",
+      "desc": "touches_pen_lag1_l>=25 -> local",
+      "pick_field": "yield_local",
+      "n": 85,
+      "yield_mean": 0.04882352941176469,
+      "hit_rate": 0.4791666666666667,
+      "ci95_lo": -0.17211764705882354,
+      "ci95_hi": 0.30752941176470583,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 8,
+          "yield_mean": 0.24124999999999996,
+          "hit_rate": 0.75
+        },
+        "Inglaterra": {
+          "n": 18,
+          "yield_mean": 0.4538888888888889,
+          "hit_rate": 0.7222222222222222
+        },
+        "Alemania": {
+          "n": 5,
+          "yield_mean": -0.426,
+          "hit_rate": 0.4
+        },
+        "Espana": {
+          "n": 13,
+          "yield_mean": 0.553076923076923,
+          "hit_rate": 0.7692307692307693
+        },
+        "Turquia": {
+          "n": 8,
+          "yield_mean": 0.009999999999999953,
+          "hit_rate": 0.25
+        },
+        "Francia": {
+          "n": 9,
+          "yield_mean": -0.3577777777777778,
+          "hit_rate": 0.4444444444444444
+        },
+        "Brasil": {
+          "n": 9,
+          "yield_mean": -0.3011111111111111,
+          "hit_rate": 0.3333333333333333
+        },
+        "Noruega": {
+          "n": 3,
+          "yield_mean": -0.31000000000000005,
+          "hit_rate": 0.3333333333333333
+        },
+        "Argentina": {
+          "n": 4,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": 0.69,
+          "hit_rate": 1.0
+        },
+        "Peru": {
+          "n": 3,
+          "yield_mean": 0.24666666666666667,
+          "hit_rate": 0.6666666666666666
+        },
+        "Bolivia": {
+          "n": 3,
+          "yield_mean": -0.21999999999999997,
+          "hit_rate": 0.6666666666666666
+        },
+        "Uruguay": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        }
+      }
+    },
+    {
+      "id": "I3_keeper_low_lag1_o25",
+      "desc": "keeper_lag1_l<0.3 OR keeper_lag1_v<0.3 -> o25",
+      "pick_field": "yield_o25",
+      "n": 117,
+      "yield_mean": 0.03786324786324785,
+      "hit_rate": 0.5555555555555556,
+      "ci95_lo": -0.13247863247863248,
+      "ci95_hi": 0.2111111111111111,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 24,
+          "yield_mean": -0.11416666666666668,
+          "hit_rate": 0.4583333333333333
+        },
+        "Inglaterra": {
+          "n": 21,
+          "yield_mean": 0.21476190476190476,
+          "hit_rate": 0.6190476190476191
+        },
+        "Alemania": {
+          "n": 1,
+          "yield_mean": 0.3600000000000001,
+          "hit_rate": 1.0
+        },
+        "Espana": {
+          "n": 8,
+          "yield_mean": 0.375,
+          "hit_rate": 0.75
+        },
+        "Turquia": {
+          "n": 7,
+          "yield_mean": 0.687142857142857,
+          "hit_rate": 0.8571428571428571
+        },
+        "Francia": {
+          "n": 6,
+          "yield_mean": -0.43166666666666664,
+          "hit_rate": 0.3333333333333333
+        },
+        "Brasil": {
+          "n": 17,
+          "yield_mean": -0.18764705882352944,
+          "hit_rate": 0.4117647058823529
+        },
+        "Noruega": {
+          "n": 1,
+          "yield_mean": 0.8300000000000001,
+          "hit_rate": 1.0
+        },
+        "Argentina": {
+          "n": 2,
+          "yield_mean": 0.010000000000000009,
+          "hit_rate": 0.5
+        },
+        "Ecuador": {
+          "n": 9,
+          "yield_mean": 0.33888888888888885,
+          "hit_rate": 0.6666666666666666
+        },
+        "Peru": {
+          "n": 8,
+          "yield_mean": -0.265,
+          "hit_rate": 0.375
+        },
+        "Bolivia": {
+          "n": 13,
+          "yield_mean": -0.11615384615384615,
+          "hit_rate": 0.6153846153846154
+        }
+      }
+    },
+    {
+      "id": "A4_novel_under",
+      "desc": "ref novel (games<30) -> u25",
+      "pick_field": "yield_u25",
+      "n": 9,
+      "yield_mean": 0.027777777777777752,
+      "hit_rate": 0.5555555555555556,
+      "ci95_lo": -0.6022222222222222,
+      "ci95_hi": 0.6411111111111111,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Brasil": {
+          "n": 1,
+          "yield_mean": 0.9299999999999999,
+          "hit_rate": 1.0
+        },
+        "Ecuador": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Peru": {
+          "n": 5,
+          "yield_mean": 0.14799999999999996,
+          "hit_rate": 0.6
+        },
+        "Uruguay": {
+          "n": 1,
+          "yield_mean": 0.5800000000000001,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "Z1_pos_local_random",
+      "desc": "BASE: apostar local todos -> baseline",
+      "pick_field": "yield_local",
+      "n": 381,
+      "yield_mean": -0.003018372703412078,
+      "hit_rate": 0.3905191873589165,
+      "ci95_lo": -0.13078740157480315,
+      "ci95_hi": 0.12459317585301836,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 48,
+          "yield_mean": -0.12875,
+          "hit_rate": 0.3958333333333333
+        },
+        "Inglaterra": {
+          "n": 52,
+          "yield_mean": -0.061538461538461535,
+          "hit_rate": 0.46153846153846156
+        },
+        "Alemania": {
+          "n": 15,
+          "yield_mean": -0.39466666666666667,
+          "hit_rate": 0.26666666666666666
+        },
+        "Espana": {
+          "n": 40,
+          "yield_mean": 0.139,
+          "hit_rate": 0.525
+        },
+        "Turquia": {
+          "n": 41,
+          "yield_mean": 0.32390243902439025,
+          "hit_rate": 0.5365853658536586
+        },
+        "Francia": {
+          "n": 23,
+          "yield_mean": -0.6617391304347826,
+          "hit_rate": 0.21739130434782608
+        },
+        "Brasil": {
+          "n": 54,
+          "yield_mean": 0.19055555555555553,
+          "hit_rate": 0.46296296296296297
+        },
+        "Noruega": {
+          "n": 13,
+          "yield_mean": -0.07615384615384616,
+          "hit_rate": 0.38461538461538464
+        },
+        "Argentina": {
+          "n": 45,
+          "yield_mean": -0.2826666666666667,
+          "hit_rate": 0.3333333333333333
+        },
+        "Ecuador": {
+          "n": 15,
+          "yield_mean": 0.148,
+          "hit_rate": 0.6
+        },
+        "Peru": {
+          "n": 10,
+          "yield_mean": 0.758,
+          "hit_rate": 0.9
+        },
+        "Bolivia": {
+          "n": 16,
+          "yield_mean": -0.050625,
+          "hit_rate": 0.625
+        },
+        "Uruguay": {
+          "n": 9,
+          "yield_mean": 0.5511111111111112,
+          "hit_rate": 0.5555555555555556
+        }
+      }
+    },
+    {
+      "id": "H_xg_lag1_diff_local",
+      "desc": "xg_shotmap_lag1_l - xg_shotmap_lag1_v >= 1.0 -> local",
+      "pick_field": "yield_local",
+      "n": 34,
+      "yield_mean": -0.01735294117647061,
+      "hit_rate": 0.5263157894736842,
+      "ci95_lo": -0.3297058823529412,
+      "ci95_hi": 0.27970588235294114,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 3,
+          "yield_mean": -0.54,
+          "hit_rate": 0.3333333333333333
+        },
+        "Inglaterra": {
+          "n": 5,
+          "yield_mean": 0.13799999999999998,
+          "hit_rate": 0.6
+        },
+        "Espana": {
+          "n": 9,
+          "yield_mean": 0.18555555555555556,
+          "hit_rate": 0.6666666666666666
+        },
+        "Turquia": {
+          "n": 1,
+          "yield_mean": 0.6799999999999999,
+          "hit_rate": 1.0
+        },
+        "Francia": {
+          "n": 4,
+          "yield_mean": -0.04250000000000004,
+          "hit_rate": 0.75
+        },
+        "Brasil": {
+          "n": 6,
+          "yield_mean": -0.3566666666666667,
+          "hit_rate": 0.3333333333333333
+        },
+        "Noruega": {
+          "n": 1,
+          "yield_mean": 1.0699999999999998,
+          "hit_rate": 1.0
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": 0.49,
+          "hit_rate": 1.0
+        },
+        "Argentina": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Peru": {
+          "n": 2,
+          "yield_mean": -0.15000000000000002,
+          "hit_rate": 0.5
+        },
+        "Bolivia": {
+          "n": 1,
+          "yield_mean": 0.040000000000000036,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "Z4_pos_o25_random",
+      "desc": "BASE: apostar o25 todos -> baseline",
+      "pick_field": "yield_o25",
+      "n": 221,
+      "yield_mean": -0.01918552036199096,
+      "hit_rate": 0.5158371040723982,
+      "ci95_lo": -0.14108597285067873,
+      "ci95_hi": 0.1060180995475113,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 39,
+          "yield_mean": -0.25871794871794873,
+          "hit_rate": 0.38461538461538464
+        },
+        "Inglaterra": {
+          "n": 31,
+          "yield_mean": 0.17516129032258063,
+          "hit_rate": 0.6129032258064516
+        },
+        "Alemania": {
+          "n": 5,
+          "yield_mean": 0.03799999999999999,
+          "hit_rate": 0.6
+        },
+        "Espana": {
+          "n": 25,
+          "yield_mean": 0.01039999999999999,
+          "hit_rate": 0.52
+        },
+        "Turquia": {
+          "n": 19,
+          "yield_mean": -0.0026315789473684466,
+          "hit_rate": 0.5263157894736842
+        },
+        "Francia": {
+          "n": 17,
+          "yield_mean": -0.22588235294117645,
+          "hit_rate": 0.4117647058823529
+        },
+        "Brasil": {
+          "n": 31,
+          "yield_mean": 0.03419354838709676,
+          "hit_rate": 0.5161290322580645
+        },
+        "Noruega": {
+          "n": 2,
+          "yield_mean": -0.08499999999999996,
+          "hit_rate": 0.5
+        },
+        "Argentina": {
+          "n": 2,
+          "yield_mean": 0.010000000000000009,
+          "hit_rate": 0.5
+        },
+        "Ecuador": {
+          "n": 15,
+          "yield_mean": 0.26266666666666666,
+          "hit_rate": 0.6
+        },
+        "Peru": {
+          "n": 10,
+          "yield_mean": -0.030000000000000027,
+          "hit_rate": 0.5
+        },
+        "Bolivia": {
+          "n": 16,
+          "yield_mean": -0.04437500000000001,
+          "hit_rate": 0.6875
+        },
+        "Uruguay": {
+          "n": 9,
+          "yield_mean": 0.0022222222222222244,
+          "hit_rate": 0.4444444444444444
+        }
+      }
+    },
+    {
+      "id": "H_sot_lag1_diff_visita",
+      "desc": "sot_lag1_v - sot_lag1_l >= 3 -> visita",
+      "pick_field": "yield_visita",
+      "n": 87,
+      "yield_mean": -0.03149425287356322,
+      "hit_rate": 0.2980769230769231,
+      "ci95_lo": -0.3273563218390805,
+      "ci95_hi": 0.30770114942528737,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 7,
+          "yield_mean": 1.157142857142857,
+          "hit_rate": 0.5714285714285714
+        },
+        "Inglaterra": {
+          "n": 9,
+          "yield_mean": -0.4388888888888889,
+          "hit_rate": 0.2222222222222222
+        },
+        "Alemania": {
+          "n": 5,
+          "yield_mean": -0.44800000000000006,
+          "hit_rate": 0.4
+        },
+        "Espana": {
+          "n": 9,
+          "yield_mean": -0.11777777777777779,
+          "hit_rate": 0.3333333333333333
+        },
+        "Turquia": {
+          "n": 14,
+          "yield_mean": -0.3442857142857143,
+          "hit_rate": 0.35714285714285715
+        },
+        "Francia": {
+          "n": 4,
+          "yield_mean": 0.08749999999999991,
+          "hit_rate": 0.5
+        },
+        "Brasil": {
+          "n": 13,
+          "yield_mean": 0.5130769230769231,
+          "hit_rate": 0.46153846153846156
+        },
+        "Noruega": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Argentina": {
+          "n": 10,
+          "yield_mean": -0.538,
+          "hit_rate": 0.2
+        },
+        "Ecuador": {
+          "n": 7,
+          "yield_mean": 0.76,
+          "hit_rate": 0.5714285714285714
+        },
+        "Peru": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Bolivia": {
+          "n": 5,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Uruguay": {
+          "n": 2,
+          "yield_mean": 0.635,
+          "hit_rate": 0.5
+        }
+      }
+    },
+    {
+      "id": "Z3_pos_emp_random",
+      "desc": "BASE: apostar empate todos -> baseline",
+      "pick_field": "yield_empate",
+      "n": 381,
+      "yield_mean": -0.03858267716535433,
+      "hit_rate": 0.22573363431151242,
+      "ci95_lo": -0.21110236220472442,
+      "ci95_hi": 0.1367716535433071,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 48,
+          "yield_mean": 0.083125,
+          "hit_rate": 0.2916666666666667
+        },
+        "Inglaterra": {
+          "n": 52,
+          "yield_mean": -0.11096153846153847,
+          "hit_rate": 0.23076923076923078
+        },
+        "Alemania": {
+          "n": 15,
+          "yield_mean": 0.7080000000000001,
+          "hit_rate": 0.4
+        },
+        "Espana": {
+          "n": 40,
+          "yield_mean": -0.35350000000000004,
+          "hit_rate": 0.175
+        },
+        "Turquia": {
+          "n": 41,
+          "yield_mean": -0.06926829268292684,
+          "hit_rate": 0.21951219512195122
+        },
+        "Francia": {
+          "n": 23,
+          "yield_mean": 0.8143478260869564,
+          "hit_rate": 0.4782608695652174
+        },
+        "Brasil": {
+          "n": 54,
+          "yield_mean": -0.0024074074074074054,
+          "hit_rate": 0.2962962962962963
+        },
+        "Noruega": {
+          "n": 13,
+          "yield_mean": -0.005384615384615372,
+          "hit_rate": 0.3076923076923077
+        },
+        "Argentina": {
+          "n": 45,
+          "yield_mean": -0.05399999999999999,
+          "hit_rate": 0.3111111111111111
+        },
+        "Ecuador": {
+          "n": 15,
+          "yield_mean": -0.7966666666666666,
+          "hit_rate": 0.06666666666666667
+        },
+        "Peru": {
+          "n": 10,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Bolivia": {
+          "n": 16,
+          "yield_mean": 0.018750000000000017,
+          "hit_rate": 0.25
+        },
+        "Uruguay": {
+          "n": 9,
+          "yield_mean": -0.11222222222222225,
+          "hit_rate": 0.2222222222222222
+        }
+      }
+    },
+    {
+      "id": "B5_5atras_loc_emp",
+      "desc": "local 5-atras -> empate",
+      "pick_field": "yield_empate",
+      "n": 26,
+      "yield_mean": -0.05730769230769228,
+      "hit_rate": 0.21875,
+      "ci95_lo": -0.6207692307692307,
+      "ci95_hi": 0.5642307692307693,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Inglaterra": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Alemania": {
+          "n": 2,
+          "yield_mean": 0.915,
+          "hit_rate": 0.5
+        },
+        "Espana": {
+          "n": 4,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Turquia": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Francia": {
+          "n": 2,
+          "yield_mean": 0.55,
+          "hit_rate": 0.5
+        },
+        "Brasil": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Noruega": {
+          "n": 5,
+          "yield_mean": 0.506,
+          "hit_rate": 0.4
+        },
+        "Argentina": {
+          "n": 5,
+          "yield_mean": 0.17,
+          "hit_rate": 0.4
+        },
+        "Ecuador": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Peru": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Bolivia": {
+          "n": 1,
+          "yield_mean": 3.2,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "A3_lax_local",
+      "desc": "ref lax (cards/g<=4) -> local",
+      "pick_field": "yield_local",
+      "n": 84,
+      "yield_mean": -0.05785714285714285,
+      "hit_rate": 0.43529411764705883,
+      "ci95_lo": -0.3003571428571429,
+      "ci95_hi": 0.18000000000000002,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 2,
+          "yield_mean": -0.33499999999999996,
+          "hit_rate": 0.5
+        },
+        "Inglaterra": {
+          "n": 46,
+          "yield_mean": -0.041739130434782605,
+          "hit_rate": 0.45652173913043476
+        },
+        "Alemania": {
+          "n": 5,
+          "yield_mean": 0.05999999999999996,
+          "hit_rate": 0.4
+        },
+        "Espana": {
+          "n": 3,
+          "yield_mean": 0.42333333333333334,
+          "hit_rate": 0.6666666666666666
+        },
+        "Turquia": {
+          "n": 3,
+          "yield_mean": -0.16999999999999993,
+          "hit_rate": 0.3333333333333333
+        },
+        "Francia": {
+          "n": 10,
+          "yield_mean": -0.558,
+          "hit_rate": 0.3
+        },
+        "Noruega": {
+          "n": 13,
+          "yield_mean": -0.07615384615384616,
+          "hit_rate": 0.38461538461538464
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": 2.25,
+          "hit_rate": 1.0
+        },
+        "Peru": {
+          "n": 1,
+          "yield_mean": 0.99,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "H_sot_lag1_diff_local",
+      "desc": "sot_lag1_l - sot_lag1_v >= 3 -> local",
+      "pick_field": "yield_local",
+      "n": 54,
+      "yield_mean": -0.06351851851851853,
+      "hit_rate": 0.45161290322580644,
+      "ci95_lo": -0.3261111111111111,
+      "ci95_hi": 0.21537037037037035,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 7,
+          "yield_mean": -0.24285714285714285,
+          "hit_rate": 0.42857142857142855
+        },
+        "Inglaterra": {
+          "n": 8,
+          "yield_mean": 0.45875,
+          "hit_rate": 0.75
+        },
+        "Alemania": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Espana": {
+          "n": 7,
+          "yield_mean": -0.07285714285714286,
+          "hit_rate": 0.5714285714285714
+        },
+        "Turquia": {
+          "n": 4,
+          "yield_mean": 0.7225,
+          "hit_rate": 0.75
+        },
+        "Francia": {
+          "n": 5,
+          "yield_mean": -0.46799999999999997,
+          "hit_rate": 0.4
+        },
+        "Brasil": {
+          "n": 7,
+          "yield_mean": -0.29714285714285715,
+          "hit_rate": 0.2857142857142857
+        },
+        "Noruega": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Argentina": {
+          "n": 4,
+          "yield_mean": -0.53,
+          "hit_rate": 0.25
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": 0.49,
+          "hit_rate": 1.0
+        },
+        "Peru": {
+          "n": 2,
+          "yield_mean": -0.15000000000000002,
+          "hit_rate": 0.5
+        },
+        "Bolivia": {
+          "n": 4,
+          "yield_mean": 0.33,
+          "hit_rate": 1.0
+        },
+        "Uruguay": {
+          "n": 3,
+          "yield_mean": -0.25,
+          "hit_rate": 0.3333333333333333
+        }
+      }
+    },
+    {
+      "id": "Z5_pos_u25_random",
+      "desc": "BASE: apostar u25 todos -> baseline",
+      "pick_field": "yield_u25",
+      "n": 221,
+      "yield_mean": -0.07728506787330318,
+      "hit_rate": 0.4841628959276018,
+      "ci95_lo": -0.2060633484162896,
+      "ci95_hi": 0.05280542986425339,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 39,
+          "yield_mean": 0.10923076923076923,
+          "hit_rate": 0.6153846153846154
+        },
+        "Inglaterra": {
+          "n": 31,
+          "yield_mean": -0.20935483870967742,
+          "hit_rate": 0.3870967741935484
+        },
+        "Alemania": {
+          "n": 5,
+          "yield_mean": -0.21400000000000002,
+          "hit_rate": 0.4
+        },
+        "Espana": {
+          "n": 25,
+          "yield_mean": -0.0656,
+          "hit_rate": 0.48
+        },
+        "Turquia": {
+          "n": 19,
+          "yield_mean": -0.09947368421052631,
+          "hit_rate": 0.47368421052631576
+        },
+        "Francia": {
+          "n": 17,
+          "yield_mean": 0.05117647058823529,
+          "hit_rate": 0.5882352941176471
+        },
+        "Brasil": {
+          "n": 31,
+          "yield_mean": -0.09709677419354838,
+          "hit_rate": 0.4838709677419355
+        },
+        "Noruega": {
+          "n": 2,
+          "yield_mean": 0.004999999999999893,
+          "hit_rate": 0.5
+        },
+        "Argentina": {
+          "n": 2,
+          "yield_mean": -0.06499999999999995,
+          "hit_rate": 0.5
+        },
+        "Ecuador": {
+          "n": 15,
+          "yield_mean": -0.3513333333333334,
+          "hit_rate": 0.4
+        },
+        "Peru": {
+          "n": 10,
+          "yield_mean": -0.08900000000000001,
+          "hit_rate": 0.5
+        },
+        "Bolivia": {
+          "n": 16,
+          "yield_mean": -0.05875,
+          "hit_rate": 0.3125
+        },
+        "Uruguay": {
+          "n": 9,
+          "yield_mean": -0.09888888888888887,
+          "hit_rate": 0.5555555555555556
+        }
+      }
+    },
+    {
+      "id": "F1_keeper_lag1_l_high_visita",
+      "desc": "keeper_save_lag1_l>1.5 -> visita",
+      "pick_field": "yield_visita",
+      "n": 6,
+      "yield_mean": -0.09166666666666663,
+      "hit_rate": 0.5,
+      "ci95_lo": -0.7733333333333333,
+      "ci95_hi": 0.8083333333333335,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Alemania": {
+          "n": 2,
+          "yield_mean": -0.31999999999999995,
+          "hit_rate": 0.5
+        },
+        "Espana": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Turquia": {
+          "n": 1,
+          "yield_mean": 0.3899999999999999,
+          "hit_rate": 1.0
+        },
+        "Brasil": {
+          "n": 1,
+          "yield_mean": 1.7000000000000002,
+          "hit_rate": 1.0
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        }
+      }
+    },
+    {
+      "id": "A1_strict_o25",
+      "desc": "ref strict (cards/g>=6) -> o25",
+      "pick_field": "yield_o25",
+      "n": 12,
+      "yield_mean": -0.11166666666666665,
+      "hit_rate": 0.4166666666666667,
+      "ci95_lo": -0.6683333333333333,
+      "ci95_hi": 0.5683333333333334,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Brasil": {
+          "n": 2,
+          "yield_mean": 0.020000000000000018,
+          "hit_rate": 0.5
+        },
+        "Argentina": {
+          "n": 1,
+          "yield_mean": 1.02,
+          "hit_rate": 1.0
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Peru": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Uruguay": {
+          "n": 6,
+          "yield_mean": 0.10000000000000002,
+          "hit_rate": 0.5
+        }
+      }
+    },
+    {
+      "id": "E2_avg_lag1_l_low_visita",
+      "desc": "avg_rating_lag1_l<6.5 -> visita",
+      "pick_field": "yield_visita",
+      "n": 39,
+      "yield_mean": -0.11435897435897438,
+      "hit_rate": 0.30434782608695654,
+      "ci95_lo": -0.47282051282051285,
+      "ci95_hi": 0.28538461538461535,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 3,
+          "yield_mean": 0.6000000000000001,
+          "hit_rate": 0.6666666666666666
+        },
+        "Inglaterra": {
+          "n": 3,
+          "yield_mean": 0.10333333333333328,
+          "hit_rate": 0.6666666666666666
+        },
+        "Alemania": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Espana": {
+          "n": 4,
+          "yield_mean": 0.125,
+          "hit_rate": 0.25
+        },
+        "Turquia": {
+          "n": 5,
+          "yield_mean": 0.8119999999999999,
+          "hit_rate": 0.8
+        },
+        "Francia": {
+          "n": 4,
+          "yield_mean": 0.08749999999999991,
+          "hit_rate": 0.5
+        },
+        "Brasil": {
+          "n": 6,
+          "yield_mean": -0.38666666666666666,
+          "hit_rate": 0.16666666666666666
+        },
+        "Noruega": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Argentina": {
+          "n": 2,
+          "yield_mean": 0.29499999999999993,
+          "hit_rate": 0.5
+        },
+        "Ecuador": {
+          "n": 3,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Peru": {
+          "n": 4,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Bolivia": {
+          "n": 2,
+          "yield_mean": 0.125,
+          "hit_rate": 0.5
+        }
+      }
+    },
+    {
+      "id": "Z2_pos_visita_random",
+      "desc": "BASE: apostar visita todos -> baseline",
+      "pick_field": "yield_visita",
+      "n": 381,
+      "yield_mean": -0.1168241469816273,
+      "hit_rate": 0.24379232505643342,
+      "ci95_lo": -0.27979002624671917,
+      "ci95_hi": 0.06296587926509185,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 48,
+          "yield_mean": -0.06854166666666667,
+          "hit_rate": 0.3125
+        },
+        "Inglaterra": {
+          "n": 52,
+          "yield_mean": 0.03057692307692307,
+          "hit_rate": 0.3076923076923077
+        },
+        "Alemania": {
+          "n": 15,
+          "yield_mean": -0.20733333333333334,
+          "hit_rate": 0.3333333333333333
+        },
+        "Espana": {
+          "n": 40,
+          "yield_mean": -0.07750000000000001,
+          "hit_rate": 0.3
+        },
+        "Turquia": {
+          "n": 41,
+          "yield_mean": -0.5197560975609756,
+          "hit_rate": 0.24390243902439024
+        },
+        "Francia": {
+          "n": 23,
+          "yield_mean": -0.46869565217391307,
+          "hit_rate": 0.30434782608695654
+        },
+        "Brasil": {
+          "n": 54,
+          "yield_mean": -0.19314814814814815,
+          "hit_rate": 0.24074074074074073
+        },
+        "Noruega": {
+          "n": 13,
+          "yield_mean": -0.05923076923076925,
+          "hit_rate": 0.3076923076923077
+        },
+        "Argentina": {
+          "n": 45,
+          "yield_mean": 0.26355555555555554,
+          "hit_rate": 0.35555555555555557
+        },
+        "Ecuador": {
+          "n": 15,
+          "yield_mean": 0.03533333333333336,
+          "hit_rate": 0.3333333333333333
+        },
+        "Peru": {
+          "n": 10,
+          "yield_mean": -0.125,
+          "hit_rate": 0.1
+        },
+        "Bolivia": {
+          "n": 16,
+          "yield_mean": -0.046875,
+          "hit_rate": 0.125
+        },
+        "Uruguay": {
+          "n": 9,
+          "yield_mean": -0.41111111111111115,
+          "hit_rate": 0.2222222222222222
+        }
+      }
+    },
+    {
+      "id": "E1_max_lag1_l_local",
+      "desc": "max_rating_lag1_l>=8.5 -> local",
+      "pick_field": "yield_local",
+      "n": 51,
+      "yield_mean": -0.11705882352941176,
+      "hit_rate": 0.34375,
+      "ci95_lo": -0.42333333333333334,
+      "ci95_hi": 0.19098039215686274,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 7,
+          "yield_mean": 0.08142857142857143,
+          "hit_rate": 0.5714285714285714
+        },
+        "Inglaterra": {
+          "n": 4,
+          "yield_mean": 0.8825,
+          "hit_rate": 1.0
+        },
+        "Alemania": {
+          "n": 4,
+          "yield_mean": -0.63,
+          "hit_rate": 0.25
+        },
+        "Espana": {
+          "n": 9,
+          "yield_mean": 0.09888888888888893,
+          "hit_rate": 0.5555555555555556
+        },
+        "Turquia": {
+          "n": 8,
+          "yield_mean": 0.3,
+          "hit_rate": 0.5
+        },
+        "Francia": {
+          "n": 4,
+          "yield_mean": -0.5125,
+          "hit_rate": 0.25
+        },
+        "Brasil": {
+          "n": 4,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Noruega": {
+          "n": 4,
+          "yield_mean": -0.48250000000000004,
+          "hit_rate": 0.25
+        },
+        "Argentina": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Ecuador": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Peru": {
+          "n": 2,
+          "yield_mean": 0.07000000000000006,
+          "hit_rate": 0.5
+        },
+        "Bolivia": {
+          "n": 1,
+          "yield_mean": 1.0,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "A1_strict_emp",
+      "desc": "ref strict (cards/g>=6) -> empate",
+      "pick_field": "yield_empate",
+      "n": 19,
+      "yield_mean": -0.13473684210526318,
+      "hit_rate": 0.16666666666666666,
+      "ci95_lo": -0.7189473684210527,
+      "ci95_hi": 0.6068421052631577,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Espana": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Brasil": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Argentina": {
+          "n": 7,
+          "yield_mean": 0.2071428571428571,
+          "hit_rate": 0.42857142857142855
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Peru": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Uruguay": {
+          "n": 6,
+          "yield_mean": 0.3316666666666666,
+          "hit_rate": 0.3333333333333333
+        }
+      }
+    },
+    {
+      "id": "B_3atras_loc_o25",
+      "desc": "local 3-atras -> o25",
+      "pick_field": "yield_o25",
+      "n": 58,
+      "yield_mean": -0.2153448275862069,
+      "hit_rate": 0.39655172413793105,
+      "ci95_lo": -0.4625862068965517,
+      "ci95_hi": 0.044310344827586196,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 20,
+          "yield_mean": -0.319,
+          "hit_rate": 0.35
+        },
+        "Inglaterra": {
+          "n": 6,
+          "yield_mean": -0.20166666666666663,
+          "hit_rate": 0.3333333333333333
+        },
+        "Alemania": {
+          "n": 3,
+          "yield_mean": 0.2766666666666666,
+          "hit_rate": 0.6666666666666666
+        },
+        "Espana": {
+          "n": 2,
+          "yield_mean": 0.050000000000000044,
+          "hit_rate": 0.5
+        },
+        "Turquia": {
+          "n": 5,
+          "yield_mean": -0.21800000000000005,
+          "hit_rate": 0.4
+        },
+        "Francia": {
+          "n": 6,
+          "yield_mean": -0.39999999999999997,
+          "hit_rate": 0.3333333333333333
+        },
+        "Brasil": {
+          "n": 5,
+          "yield_mean": -0.17600000000000007,
+          "hit_rate": 0.4
+        },
+        "Ecuador": {
+          "n": 4,
+          "yield_mean": 0.09750000000000003,
+          "hit_rate": 0.5
+        },
+        "Peru": {
+          "n": 4,
+          "yield_mean": -0.05249999999999999,
+          "hit_rate": 0.5
+        },
+        "Bolivia": {
+          "n": 1,
+          "yield_mean": 0.3600000000000001,
+          "hit_rate": 1.0
+        },
+        "Uruguay": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        }
+      }
+    },
+    {
+      "id": "D5_recov_lag1_l_low_visita",
+      "desc": "recoveries_lag1_l<50 -> visita",
+      "pick_field": "yield_visita",
+      "n": 236,
+      "yield_mean": -0.23932203389830511,
+      "hit_rate": 0.22388059701492538,
+      "ci95_lo": -0.4315677966101695,
+      "ci95_hi": -0.02330508474576272,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 34,
+          "yield_mean": -0.13823529411764707,
+          "hit_rate": 0.29411764705882354
+        },
+        "Inglaterra": {
+          "n": 34,
+          "yield_mean": -0.07058823529411766,
+          "hit_rate": 0.29411764705882354
+        },
+        "Alemania": {
+          "n": 13,
+          "yield_mean": -0.4084615384615385,
+          "hit_rate": 0.23076923076923078
+        },
+        "Espana": {
+          "n": 28,
+          "yield_mean": -0.5160714285714285,
+          "hit_rate": 0.17857142857142858
+        },
+        "Turquia": {
+          "n": 25,
+          "yield_mean": -0.5004,
+          "hit_rate": 0.28
+        },
+        "Francia": {
+          "n": 16,
+          "yield_mean": -0.7075,
+          "hit_rate": 0.1875
+        },
+        "Brasil": {
+          "n": 35,
+          "yield_mean": -0.17457142857142854,
+          "hit_rate": 0.2571428571428571
+        },
+        "Noruega": {
+          "n": 8,
+          "yield_mean": -0.51125,
+          "hit_rate": 0.25
+        },
+        "Argentina": {
+          "n": 12,
+          "yield_mean": 0.3858333333333333,
+          "hit_rate": 0.3333333333333333
+        },
+        "Ecuador": {
+          "n": 13,
+          "yield_mean": 0.19461538461538463,
+          "hit_rate": 0.38461538461538464
+        },
+        "Peru": {
+          "n": 7,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Bolivia": {
+          "n": 11,
+          "yield_mean": 0.38636363636363635,
+          "hit_rate": 0.18181818181818182
+        }
+      }
+    },
+    {
+      "id": "D2_err_lag1_l_visita",
+      "desc": "errors_lead_lag1_l>=2 -> visita",
+      "pick_field": "yield_visita",
+      "n": 44,
+      "yield_mean": -0.2645454545454546,
+      "hit_rate": 0.23076923076923078,
+      "ci95_lo": -0.6270454545454546,
+      "ci95_hi": 0.1318181818181818,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 6,
+          "yield_mean": 0.024999999999999984,
+          "hit_rate": 0.3333333333333333
+        },
+        "Inglaterra": {
+          "n": 7,
+          "yield_mean": -0.22285714285714286,
+          "hit_rate": 0.2857142857142857
+        },
+        "Espana": {
+          "n": 5,
+          "yield_mean": -0.23399999999999999,
+          "hit_rate": 0.2
+        },
+        "Turquia": {
+          "n": 6,
+          "yield_mean": -0.14833333333333334,
+          "hit_rate": 0.3333333333333333
+        },
+        "Francia": {
+          "n": 4,
+          "yield_mean": -0.17000000000000004,
+          "hit_rate": 0.5
+        },
+        "Brasil": {
+          "n": 5,
+          "yield_mean": -0.358,
+          "hit_rate": 0.2
+        },
+        "Argentina": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Uruguay": {
+          "n": 8,
+          "yield_mean": -0.3375,
+          "hit_rate": 0.25
+        }
+      }
+    },
+    {
+      "id": "D1_bcm_lag1_l_o25",
+      "desc": "big_chances_missed_lag1_l>=3 -> o25",
+      "pick_field": "yield_o25",
+      "n": 21,
+      "yield_mean": -0.2733333333333333,
+      "hit_rate": 0.38095238095238093,
+      "ci95_lo": -0.67,
+      "ci95_hi": 0.14523809523809522,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 3,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Inglaterra": {
+          "n": 2,
+          "yield_mean": 1.4900000000000002,
+          "hit_rate": 1.0
+        },
+        "Alemania": {
+          "n": 2,
+          "yield_mean": -0.31999999999999995,
+          "hit_rate": 0.5
+        },
+        "Espana": {
+          "n": 4,
+          "yield_mean": -0.1825,
+          "hit_rate": 0.5
+        },
+        "Turquia": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Francia": {
+          "n": 1,
+          "yield_mean": 0.43999999999999995,
+          "hit_rate": 1.0
+        },
+        "Brasil": {
+          "n": 4,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Ecuador": {
+          "n": 3,
+          "yield_mean": 0.4033333333333334,
+          "hit_rate": 0.6666666666666666
+        },
+        "Argentina": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        }
+      }
+    },
+    {
+      "id": "E1_max_lag1_v_visita",
+      "desc": "max_rating_lag1_v>=8.5 -> visita",
+      "pick_field": "yield_visita",
+      "n": 67,
+      "yield_mean": -0.3611940298507463,
+      "hit_rate": 0.21794871794871795,
+      "ci95_lo": -0.6208955223880597,
+      "ci95_hi": -0.0844776119402985,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 10,
+          "yield_mean": -0.2,
+          "hit_rate": 0.3
+        },
+        "Inglaterra": {
+          "n": 13,
+          "yield_mean": -0.6023076923076923,
+          "hit_rate": 0.15384615384615385
+        },
+        "Alemania": {
+          "n": 5,
+          "yield_mean": -0.44800000000000006,
+          "hit_rate": 0.4
+        },
+        "Espana": {
+          "n": 9,
+          "yield_mean": 0.38333333333333336,
+          "hit_rate": 0.4444444444444444
+        },
+        "Turquia": {
+          "n": 7,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Francia": {
+          "n": 4,
+          "yield_mean": -0.17000000000000004,
+          "hit_rate": 0.5
+        },
+        "Brasil": {
+          "n": 7,
+          "yield_mean": -0.5814285714285715,
+          "hit_rate": 0.14285714285714285
+        },
+        "Noruega": {
+          "n": 4,
+          "yield_mean": 0.1225,
+          "hit_rate": 0.5
+        },
+        "Argentina": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Ecuador": {
+          "n": 1,
+          "yield_mean": 2.68,
+          "hit_rate": 1.0
+        },
+        "Peru": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Bolivia": {
+          "n": 3,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Uruguay": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        }
+      }
+    },
+    {
+      "id": "A2_red_freq_visita",
+      "desc": "ref red/g>=0.30 -> visita",
+      "pick_field": "yield_visita",
+      "n": 22,
+      "yield_mean": -0.4481818181818182,
+      "hit_rate": 0.12121212121212122,
+      "ci95_lo": -0.9190909090909091,
+      "ci95_hi": 0.10454545454545458,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Italia": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Brasil": {
+          "n": 4,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Argentina": {
+          "n": 6,
+          "yield_mean": -0.5033333333333333,
+          "hit_rate": 0.16666666666666666
+        },
+        "Ecuador": {
+          "n": 6,
+          "yield_mean": 0.5266666666666667,
+          "hit_rate": 0.5
+        },
+        "Peru": {
+          "n": 4,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Uruguay": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        }
+      }
+    },
+    {
+      "id": "B2_4231_local",
+      "desc": "local 4-2-3-1 vs 5-x -> local",
+      "pick_field": "yield_local",
+      "n": 8,
+      "yield_mean": -0.5037499999999999,
+      "hit_rate": 0.2727272727272727,
+      "ci95_lo": -0.8375,
+      "ci95_hi": -0.012499999999999956,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {
+        "Inglaterra": {
+          "n": 1,
+          "yield_mean": 0.3400000000000001,
+          "hit_rate": 1.0
+        },
+        "Espana": {
+          "n": 2,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Francia": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Noruega": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Argentina": {
+          "n": 1,
+          "yield_mean": -1.0,
+          "hit_rate": 0.0
+        },
+        "Peru": {
+          "n": 1,
+          "yield_mean": 0.33000000000000007,
+          "hit_rate": 1.0
+        },
+        "Bolivia": {
+          "n": 1,
+          "yield_mean": 0.30000000000000004,
+          "hit_rate": 1.0
+        }
+      }
+    },
+    {
+      "id": "I1_strict_3v5_o25",
+      "desc": "ref strict + form 3-x vs 5-x -> o25",
+      "pick_field": "yield_o25",
+      "n": 0,
+      "yield_mean": null,
+      "hit_rate": null,
+      "ci95_lo": null,
+      "ci95_hi": null,
+      "ci95_lo_gt_zero": false,
+      "supera_bonferroni_5pct": false,
+      "per_liga": {}
+    }
+  ]
+}

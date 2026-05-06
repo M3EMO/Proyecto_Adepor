@@ -1,0 +1,301 @@
+{
+  "matched": 279,
+  "unmatched": 490,
+  "eventos_total": 558,
+  "eventos_train": 0,
+  "results": {
+    "BASELINE_sot": {
+      "features": [
+        "sot"
+      ],
+      "coefs": [
+        0.8188825813629247,
+        0.1565382736475765
+      ],
+      "rmse": 0.6956407458391887,
+      "n_err": 2,
+      "delta": 0.0
+    },
+    "sot+big_chances": {
+      "features": [
+        "sot",
+        "big_chances"
+      ],
+      "coefs": [
+        0.345906510534052,
+        0.09025969202314683,
+        0.31421996632821125
+      ],
+      "rmse": 0.4371689123020872,
+      "n_err": 1,
+      "delta": -0.25847183353710146
+    },
+    "sot+shots_inside_box": {
+      "features": [
+        "sot",
+        "shots_inside_box"
+      ],
+      "coefs": [
+        0.5053810154836721,
+        0.11594622189159727,
+        0.058618343300735995
+      ],
+      "rmse": 0.7218458177363893,
+      "n_err": 2,
+      "delta": 0.02620507189720067
+    },
+    "sot+touches_penalty": {
+      "features": [
+        "sot",
+        "touches_penalty_area"
+      ],
+      "coefs": [
+        0.7376272818606355,
+        0.14697562082858542,
+        0.0055795891229137775
+      ],
+      "rmse": 0.7078228392902916,
+      "n_err": 2,
+      "delta": 0.012182093451102882
+    },
+    "sot+xg_shotmap": {
+      "features": [
+        "sot",
+        "xg_shotmap"
+      ],
+      "coefs": [
+        0.17365247814510348,
+        0.08409628029216043,
+        0.6630353077743015
+      ],
+      "rmse": 0.7032135840216566,
+      "n_err": 2,
+      "delta": 0.0075728381824679
+    },
+    "sot+keeper_save_rival": {
+      "features": [
+        "sot",
+        "keeper_save_value_rival"
+      ],
+      "coefs": [
+        0.7201597422516327,
+        0.16912035652618485,
+        0.0
+      ],
+      "rmse": 0.40755292164333845,
+      "n_err": 1,
+      "delta": -0.2880878241958502
+    },
+    "sot+avg_rating": {
+      "features": [
+        "sot",
+        "avg_rating"
+      ],
+      "coefs": [
+        0.0,
+        0.1454109563519575,
+        0.12823924312267476
+      ],
+      "rmse": 0.7034871095043804,
+      "n_err": 2,
+      "delta": 0.007846363665191758
+    },
+    "sot+max_rating": {
+      "features": [
+        "sot",
+        "max_rating"
+      ],
+      "coefs": [
+        0.0,
+        0.1289224201717589,
+        0.1206043942797116
+      ],
+      "rmse": 0.7083770847991712,
+      "n_err": 2,
+      "delta": 0.012736338959982496
+    },
+    "sot+ref_cards_per_game": {
+      "features": [
+        "sot",
+        "ref_cards_per_game"
+      ],
+      "coefs": [
+        0.1212701784517334,
+        0.1986228133242474,
+        0.09652577403623566
+      ],
+      "rmse": 0.6783000852983624,
+      "n_err": 2,
+      "delta": -0.01734066054082628
+    },
+    "sot+ref_red_per_game": {
+      "features": [
+        "sot",
+        "ref_red_per_game"
+      ],
+      "coefs": [
+        0.5273283657536983,
+        0.1957824565588578,
+        0.46158351700872075
+      ],
+      "rmse": 0.6871546946483543,
+      "n_err": 2,
+      "delta": -0.008486051190834343
+    },
+    "PURE_xg_shotmap": {
+      "features": [
+        "xg_shotmap"
+      ],
+      "coefs": [
+        0.2617592833161815,
+        0.7957980882837397
+      ],
+      "rmse": 0.7018330438202521,
+      "n_err": 2,
+      "delta": 0.006192297981063466
+    },
+    "PURE_keeper_save_rival": {
+      "features": [
+        "keeper_save_value_rival"
+      ],
+      "coefs": [
+        1.1761990229161121,
+        0.40408579311723336
+      ],
+      "rmse": 0.43138705051849024,
+      "n_err": 1,
+      "delta": -0.2642536953206984
+    },
+    "PURE_big_chances": {
+      "features": [
+        "big_chances"
+      ],
+      "coefs": [
+        0.5198968231544773,
+        0.3764037130781922
+      ],
+      "rmse": 0.4618282309006454,
+      "n_err": 1,
+      "delta": -0.23381251493854327
+    },
+    "PURE_avg_rating": {
+      "features": [
+        "avg_rating"
+      ],
+      "coefs": [
+        0.0,
+        0.19569896771637688
+      ],
+      "rmse": 0.7029170583742624,
+      "n_err": 2,
+      "delta": 0.00727631253507377
+    },
+    "sot+all_shots": {
+      "features": [
+        "sot",
+        "big_chances",
+        "shots_inside_box",
+        "shots_outside_box",
+        "touches_penalty_area"
+      ],
+      "coefs": [
+        0.3459065105340525,
+        0.0902596920231467,
+        0.31421996632821114,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rmse": 0.4371689123020872,
+      "n_err": 1,
+      "delta": -0.25847183353710146
+    },
+    "sot+ratings+xg": {
+      "features": [
+        "sot",
+        "avg_rating",
+        "max_rating",
+        "xg_shotmap"
+      ],
+      "coefs": [
+        0.0,
+        0.0753407500245915,
+        0.0,
+        0.04826491276519536,
+        0.5567139879536279
+      ],
+      "rmse": 0.708312875881556,
+      "n_err": 2,
+      "delta": 0.012672130042367336
+    },
+    "sot+xg+keeper": {
+      "features": [
+        "sot",
+        "xg_shotmap",
+        "keeper_save_value_rival"
+      ],
+      "coefs": [
+        0.08660376476398884,
+        0.10090125546261196,
+        0.6396510241239615,
+        0.0
+      ],
+      "rmse": 0.3912007240914457,
+      "n_err": 1,
+      "delta": -0.304440021747743
+    },
+    "sot+all_xg_proxies": {
+      "features": [
+        "sot",
+        "xg_shotmap",
+        "keeper_save_value_rival",
+        "big_chances",
+        "shots_inside_box"
+      ],
+      "coefs": [
+        0.10415117353945057,
+        0.0726599350583162,
+        0.3272885217594191,
+        0.0,
+        0.23591069739246337,
+        0.0
+      ],
+      "rmse": 0.42574380934797285,
+      "n_err": 1,
+      "delta": -0.2698969364912158
+    },
+    "KITCHEN_SINK": {
+      "features": [
+        "sot",
+        "big_chances",
+        "shots_inside_box",
+        "touches_penalty_area",
+        "avg_rating",
+        "max_rating",
+        "xg_shotmap",
+        "keeper_save_value_rival",
+        "recoveries",
+        "errors_lead_to_shot",
+        "ref_red_per_game"
+      ],
+      "coefs": [
+        0.0,
+        0.1115599612865834,
+        0.25641113794932835,
+        0.0,
+        0.0,
+        0.0,
+        0.008764439117763432,
+        0.14827238482338226,
+        0.0,
+        0.0,
+        0.0038322244139577274,
+        0.3659356750741766
+      ],
+      "rmse": null,
+      "n_err": 0,
+      "delta": 0
+    }
+  },
+  "baseline_rmse": 0.6956407458391887
+}

@@ -47,6 +47,10 @@ MOTORES_DIARIOS = [
     {"archivo": "scripts/evaluar_pretest.py", "desc": "1.6. Pretest Monitor (auto-flip LIVE/PRETEST por liga)", "critico": False, "interactivo": False},
     {"archivo": "motor_arbitro.py",          "desc": "2. El Inquisidor (Auditoria Arbitral y Tarjetas)",       "critico": False, "interactivo": False},
     {"archivo": "motor_data.py",             "desc": "3. Regresion Bayesiana (Actualizacion de Poderio)",      "critico": True,  "interactivo": False},
+    {"archivo": "scripts/scrape_sofa_post_liquidacion.py --dias 7 --max 30", "desc": "3.1. Hook SOFA (xG v2 hybrid - bead adepor-atn)", "critico": False, "interactivo": False},
+    {"archivo": "analisis/motor_xg_v2_14_xg_from_shotmap.py", "desc": "3.15. xG model V_custom recompute (LogReg coords)", "critico": False, "interactivo": False},
+    {"archivo": "analisis/xg_v3_hibrido_sofa_custom.py", "desc": "3.16. xG V3 hibrido (xgot SOFA + custom fallback) - bead adepor-173", "critico": False, "interactivo": False},
+    {"archivo": "scripts/rebuild_ema_v2.py", "desc": "3.17. Rebuild EMAs con V3 (overwrite EMAs V0 con V3 para partidos liquidados)", "critico": False, "interactivo": False},
     {"archivo": "-m src.persistencia.actualizar_posiciones", "desc": "3.2. Actualizador Posiciones (incremental, hook post-liquidados)", "critico": False, "interactivo": False},
     {"archivo": "motor_adaptativo.py",       "desc": "3.5. Motor Adaptativo (Online SGD V12 + Auto-audit + Drift)", "critico": False, "interactivo": False},
 
@@ -58,6 +62,7 @@ MOTORES_DIARIOS = [
 
     # --- FASE 3: DECISIONES ---
     {"archivo": "motor_calculadora.py",      "desc": "7. Cerebro Cuantitativo (Poisson, EV y Kelly)",          "critico": True,  "interactivo": False},
+    {"archivo": "scripts/aplicar_antifiltro_shotmap_f4b.py", "desc": "7.5. Anti-filtro F4b shotmap (SHADOW only - sp_dep_v>0.5 anti-X)", "critico": False, "interactivo": False},
 
     # --- FASE 4: REDUNDANCIA + EXCEL ---
     {"archivo": "motor_backtest.py",         "desc": "8. Liquidador de Ultimo Minuto (Doble Barrido)",         "critico": False, "interactivo": False},

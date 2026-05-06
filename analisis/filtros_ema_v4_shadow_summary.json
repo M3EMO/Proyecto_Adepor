@@ -1,0 +1,86 @@
+{
+  "n_picks_persistidos": 2692,
+  "filtros": [
+    {
+      "filtro_id": "ema_l_crosses_visita_empate",
+      "feature": "ema_l_crosses_visita",
+      "pick": "empate",
+      "lo": 0.0,
+      "hi": 14.207290595294157,
+      "n_pool": 1062,
+      "yield_pool": 0.11483992467043315,
+      "whitelist_ligas": [
+        "Argentina",
+        "Francia",
+        "Inglaterra",
+        "Italia",
+        "Turquia"
+      ],
+      "whitelist_n": 928,
+      "whitelist_yield_estimado": 0.16723060344827587,
+      "ligas_descartadas": [
+        "Brasil",
+        "Espana"
+      ],
+      "ligas_n_pequeno": [
+        "Alemania",
+        "Colombia",
+        "Noruega",
+        "Chile"
+      ]
+    },
+    {
+      "filtro_id": "ratio_propio_tackle_pct_u25",
+      "feature": "ratio_propio_tackle_pct",
+      "pick": "u25",
+      "lo": 1.0671511875502357,
+      "hi": 32.94265642691375,
+      "n_pool": 568,
+      "yield_pool": 0.09049295774647888,
+      "whitelist_ligas": [
+        "Espana",
+        "Francia",
+        "Inglaterra",
+        "Italia"
+      ],
+      "whitelist_n": 538,
+      "whitelist_yield_estimado": 0.10330855018587361,
+      "ligas_descartadas": [],
+      "ligas_n_pequeno": [
+        "Argentina",
+        "Brasil",
+        "Alemania",
+        "Colombia",
+        "Chile"
+      ]
+    },
+    {
+      "filtro_id": "ema_l_saves_visita_empate",
+      "feature": "ema_l_saves_visita",
+      "pick": "empate",
+      "lo": 0.0,
+      "hi": 2.407531162988032,
+      "n_pool": 1062,
+      "yield_pool": 0.10197740112994351,
+      "whitelist_ligas": [
+        "Argentina",
+        "Brasil",
+        "Francia",
+        "Inglaterra",
+        "Italia",
+        "Turquia"
+      ],
+      "whitelist_n": 912,
+      "whitelist_yield_estimado": 0.13114035087719297,
+      "ligas_descartadas": [
+        "Espana"
+      ],
+      "ligas_n_pequeno": [
+        "Alemania",
+        "Colombia",
+        "Noruega",
+        "Chile"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1075 @@
+{
+  "universe_size": 8277,
+  "picks_apostables_total": 2458,
+  "distribucion_year": {
+    "2022": 790,
+    "2023": 826,
+    "2024": 842
+  },
+  "top_sostenibles": [
+    {
+      "dimension": "LIGA_BANDA",
+      "descripcion": "LIGA_BANDA ('Argentina', '4.0+')",
+      "N_IS": 53,
+      "yield_IS": 0.9538,
+      "hit_IS": 0.3962,
+      "cuota_avg": 4.921,
+      "aciertos": 21,
+      "profit_total": 50.55,
+      "aniosvalidos": 3,
+      "por_year": {
+        "2022": {
+          "N": 22,
+          "yield": 0.7905,
+          "hit": 0.3636
+        },
+        "2023": {
+          "N": 11,
+          "yield": 0.6291,
+          "hit": 0.3636
+        },
+        "2024": {
+          "N": 20,
+          "yield": 1.312,
+          "hit": 0.45
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 6.9436
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Argentina', '1', '4.0+')",
+      "N_IS": 27,
+      "yield_IS": 1.1096,
+      "hit_IS": 0.4074,
+      "cuota_avg": 5.024,
+      "aciertos": 11,
+      "profit_total": 29.96,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 5,
+          "yield": 1.126,
+          "hit": 0.4
+        },
+        "2023": {
+          "N": 5,
+          "yield": -0.106,
+          "hit": 0.2
+        },
+        "2024": {
+          "N": 17,
+          "yield": 1.4624,
+          "hit": 0.4706
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 5.7658
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Inglaterra', 12)",
+      "N_IS": 42,
+      "yield_IS": 0.6743,
+      "hit_IS": 0.5,
+      "cuota_avg": 3.74,
+      "aciertos": 21,
+      "profit_total": 28.32,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 4,
+          "yield": -0.165,
+          "hit": 0.25
+        },
+        "2023": {
+          "N": 23,
+          "yield": 1.1239,
+          "hit": 0.6087
+        },
+        "2024": {
+          "N": 15,
+          "yield": 0.2087,
+          "hit": 0.4
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 4.3699
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Inglaterra', 4, '1')",
+      "N_IS": 87,
+      "yield_IS": 0.4403,
+      "hit_IS": 0.4023,
+      "cuota_avg": 3.53,
+      "aciertos": 35,
+      "profit_total": 38.31,
+      "aniosvalidos": 3,
+      "por_year": {
+        "2022": {
+          "N": 21,
+          "yield": 0.55,
+          "hit": 0.381
+        },
+        "2023": {
+          "N": 37,
+          "yield": 0.7162,
+          "hit": 0.4865
+        },
+        "2024": {
+          "N": 29,
+          "yield": 0.009,
+          "hit": 0.3103
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 4.1073
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Argentina', 'V', '4.0+')",
+      "N_IS": 26,
+      "yield_IS": 0.7919,
+      "hit_IS": 0.3846,
+      "cuota_avg": 4.813,
+      "aciertos": 10,
+      "profit_total": 20.59,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 17,
+          "yield": 0.6918,
+          "hit": 0.3529
+        },
+        "2023": {
+          "N": 6,
+          "yield": 1.2417,
+          "hit": 0.5
+        },
+        "2024": {
+          "N": 3,
+          "yield": 0.46,
+          "hit": 0.3333
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 4.038
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Argentina', 6)",
+      "N_IS": 28,
+      "yield_IS": 0.7293,
+      "hit_IS": 0.5,
+      "cuota_avg": 3.321,
+      "aciertos": 14,
+      "profit_total": 20.42,
+      "aniosvalidos": 3,
+      "por_year": {
+        "2022": {
+          "N": 5,
+          "yield": 1.192,
+          "hit": 0.6
+        },
+        "2023": {
+          "N": 13,
+          "yield": 0.3069,
+          "hit": 0.4615
+        },
+        "2024": {
+          "N": 10,
+          "yield": 1.047,
+          "hit": 0.5
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 3.859
+    },
+    {
+      "dimension": "LIGA_BIN4",
+      "descripcion": "LIGA_BIN4 ('Inglaterra', 4)",
+      "N_IS": 111,
+      "yield_IS": 0.302,
+      "hit_IS": 0.3694,
+      "cuota_avg": 3.637,
+      "aciertos": 41,
+      "profit_total": 33.52,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 29,
+          "yield": 0.3631,
+          "hit": 0.3448
+        },
+        "2023": {
+          "N": 46,
+          "yield": 0.5026,
+          "hit": 0.4348
+        },
+        "2024": {
+          "N": 36,
+          "yield": -0.0036,
+          "hit": 0.3056
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 3.1816
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Brasil', 4, 'V')",
+      "N_IS": 24,
+      "yield_IS": 0.5508,
+      "hit_IS": 0.4167,
+      "cuota_avg": 3.485,
+      "aciertos": 10,
+      "profit_total": 13.22,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 11,
+          "yield": 0.6827,
+          "hit": 0.4545
+        },
+        "2023": {
+          "N": 11,
+          "yield": 0.4327,
+          "hit": 0.3636
+        },
+        "2024": {
+          "N": 2,
+          "yield": 0.475,
+          "hit": 0.5
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 2.6985
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Francia', 1, 'V')",
+      "N_IS": 37,
+      "yield_IS": 0.4024,
+      "hit_IS": 0.4054,
+      "cuota_avg": 3.59,
+      "aciertos": 15,
+      "profit_total": 14.89,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 11,
+          "yield": 0.0664,
+          "hit": 0.3636
+        },
+        "2023": {
+          "N": 10,
+          "yield": -0.446,
+          "hit": 0.2
+        },
+        "2024": {
+          "N": 16,
+          "yield": 1.1638,
+          "hit": 0.5625
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 2.4479
+    },
+    {
+      "dimension": "EQUIPO_LOCAL",
+      "descripcion": "EQUIPO_LOCAL ('Inglaterra', 'Wolves')",
+      "N_IS": 19,
+      "yield_IS": 0.5605,
+      "hit_IS": 0.4737,
+      "cuota_avg": 3.111,
+      "aciertos": 9,
+      "profit_total": 10.65,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 9,
+          "yield": 1.2144,
+          "hit": 0.6667
+        },
+        "2023": {
+          "N": 5,
+          "yield": 0.258,
+          "hit": 0.4
+        },
+        "2024": {
+          "N": 5,
+          "yield": -0.314,
+          "hit": 0.2
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 2.4433
+    },
+    {
+      "dimension": "LIGA_BANDA",
+      "descripcion": "LIGA_BANDA ('Inglaterra', '3.0-4.0')",
+      "N_IS": 94,
+      "yield_IS": 0.2511,
+      "hit_IS": 0.3617,
+      "cuota_avg": 3.429,
+      "aciertos": 34,
+      "profit_total": 23.6,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 35,
+          "yield": 0.3414,
+          "hit": 0.4
+        },
+        "2023": {
+          "N": 38,
+          "yield": -0.0984,
+          "hit": 0.2632
+        },
+        "2024": {
+          "N": 21,
+          "yield": 0.7329,
+          "hit": 0.4762
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 2.4342
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Francia', 5)",
+      "N_IS": 28,
+      "yield_IS": 0.4546,
+      "hit_IS": 0.4286,
+      "cuota_avg": 3.384,
+      "aciertos": 12,
+      "profit_total": 12.73,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 12,
+          "yield": 0.5967,
+          "hit": 0.5
+        },
+        "2023": {
+          "N": 7,
+          "yield": -0.0371,
+          "hit": 0.2857
+        },
+        "2024": {
+          "N": 9,
+          "yield": 0.6478,
+          "hit": 0.4444
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 2.4057
+    },
+    {
+      "dimension": "LIGA_BIN4",
+      "descripcion": "LIGA_BIN4 ('Argentina', 2)",
+      "N_IS": 77,
+      "yield_IS": 0.2414,
+      "hit_IS": 0.3636,
+      "cuota_avg": 3.369,
+      "aciertos": 28,
+      "profit_total": 18.59,
+      "aniosvalidos": 3,
+      "por_year": {
+        "2022": {
+          "N": 5,
+          "yield": 1.192,
+          "hit": 0.6
+        },
+        "2023": {
+          "N": 47,
+          "yield": 0.027,
+          "hit": 0.3191
+        },
+        "2024": {
+          "N": 25,
+          "yield": 0.4544,
+          "hit": 0.4
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 2.1185
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Alemania', 11)",
+      "N_IS": 24,
+      "yield_IS": 0.4208,
+      "hit_IS": 0.4583,
+      "cuota_avg": 3.327,
+      "aciertos": 11,
+      "profit_total": 10.1,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 6,
+          "yield": 1.74,
+          "hit": 0.8333
+        },
+        "2023": {
+          "N": 8,
+          "yield": -0.2975,
+          "hit": 0.25
+        },
+        "2024": {
+          "N": 10,
+          "yield": 0.204,
+          "hit": 0.4
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 2.0617
+    },
+    {
+      "dimension": "LIGA_BIN4",
+      "descripcion": "LIGA_BIN4 ('Francia', 2)",
+      "N_IS": 67,
+      "yield_IS": 0.2507,
+      "hit_IS": 0.3731,
+      "cuota_avg": 3.398,
+      "aciertos": 25,
+      "profit_total": 16.8,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 26,
+          "yield": 0.5515,
+          "hit": 0.4615
+        },
+        "2023": {
+          "N": 20,
+          "yield": -0.1275,
+          "hit": 0.3
+        },
+        "2024": {
+          "N": 21,
+          "yield": 0.2386,
+          "hit": 0.3333
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 2.0524
+    },
+    {
+      "dimension": "EQUIPO_LOCAL",
+      "descripcion": "EQUIPO_LOCAL ('Inglaterra', \"Nott'm Forest\")",
+      "N_IS": 24,
+      "yield_IS": 0.4133,
+      "hit_IS": 0.3333,
+      "cuota_avg": 3.745,
+      "aciertos": 8,
+      "profit_total": 9.92,
+      "aniosvalidos": 3,
+      "por_year": {
+        "2022": {
+          "N": 11,
+          "yield": 0.8018,
+          "hit": 0.3636
+        },
+        "2023": {
+          "N": 7,
+          "yield": 0.0714,
+          "hit": 0.2857
+        },
+        "2024": {
+          "N": 6,
+          "yield": 0.1,
+          "hit": 0.3333
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 2.0249
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Inglaterra', '1', '3.0-4.0')",
+      "N_IS": 64,
+      "yield_IS": 0.2395,
+      "hit_IS": 0.3594,
+      "cuota_avg": 3.399,
+      "aciertos": 23,
+      "profit_total": 15.33,
+      "aniosvalidos": 3,
+      "por_year": {
+        "2022": {
+          "N": 22,
+          "yield": 0.3736,
+          "hit": 0.4091
+        },
+        "2023": {
+          "N": 29,
+          "yield": 0.0776,
+          "hit": 0.3103
+        },
+        "2024": {
+          "N": 13,
+          "yield": 0.3738,
+          "hit": 0.3846
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.9163
+    },
+    {
+      "dimension": "LIGA_BIN4",
+      "descripcion": "LIGA_BIN4 ('Argentina', 4)",
+      "N_IS": 75,
+      "yield_IS": 0.2127,
+      "hit_IS": 0.3467,
+      "cuota_avg": 3.456,
+      "aciertos": 26,
+      "profit_total": 15.95,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 25,
+          "yield": 0.2012,
+          "hit": 0.32
+        },
+        "2023": null,
+        "2024": {
+          "N": 50,
+          "yield": 0.2184,
+          "hit": 0.36
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.8417
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Alemania', 2)",
+      "N_IS": 26,
+      "yield_IS": 0.3323,
+      "hit_IS": 0.3462,
+      "cuota_avg": 3.439,
+      "aciertos": 9,
+      "profit_total": 8.64,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 9,
+          "yield": 0.7267,
+          "hit": 0.5556
+        },
+        "2023": {
+          "N": 6,
+          "yield": 1.3533,
+          "hit": 0.5
+        },
+        "2024": {
+          "N": 11,
+          "yield": -0.5473,
+          "hit": 0.0909
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.6944
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Argentina', 10)",
+      "N_IS": 40,
+      "yield_IS": 0.2635,
+      "hit_IS": 0.375,
+      "cuota_avg": 3.317,
+      "aciertos": 15,
+      "profit_total": 10.54,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 25,
+          "yield": 0.2012,
+          "hit": 0.32
+        },
+        "2023": null,
+        "2024": {
+          "N": 15,
+          "yield": 0.3673,
+          "hit": 0.4667
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.6665
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Francia', 2, '1')",
+      "N_IS": 31,
+      "yield_IS": 0.2835,
+      "hit_IS": 0.3871,
+      "cuota_avg": 3.355,
+      "aciertos": 12,
+      "profit_total": 8.79,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 13,
+          "yield": 0.6808,
+          "hit": 0.5385
+        },
+        "2023": {
+          "N": 9,
+          "yield": -0.3544,
+          "hit": 0.2222
+        },
+        "2024": {
+          "N": 9,
+          "yield": 0.3478,
+          "hit": 0.3333
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.5787
+    },
+    {
+      "dimension": "EQUIPO_LOCAL",
+      "descripcion": "EQUIPO_LOCAL ('Argentina', 'Gimnasia La Plata')",
+      "N_IS": 18,
+      "yield_IS": 0.3717,
+      "hit_IS": 0.4444,
+      "cuota_avg": 3.152,
+      "aciertos": 8,
+      "profit_total": 6.69,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 3,
+          "yield": 0.9967,
+          "hit": 0.6667
+        },
+        "2023": {
+          "N": 8,
+          "yield": 0.2762,
+          "hit": 0.375
+        },
+        "2024": {
+          "N": 7,
+          "yield": 0.2129,
+          "hit": 0.4286
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.5768
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Inglaterra', '1', '4.0+')",
+      "N_IS": 51,
+      "yield_IS": 0.2155,
+      "hit_IS": 0.2353,
+      "cuota_avg": 5.19,
+      "aciertos": 12,
+      "profit_total": 10.99,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 20,
+          "yield": 0.657,
+          "hit": 0.3
+        },
+        "2023": {
+          "N": 19,
+          "yield": 0.2547,
+          "hit": 0.2632
+        },
+        "2024": {
+          "N": 12,
+          "yield": -0.5825,
+          "hit": 0.0833
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.5389
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Turquia', 3, 'V')",
+      "N_IS": 21,
+      "yield_IS": 0.3348,
+      "hit_IS": 0.381,
+      "cuota_avg": 3.687,
+      "aciertos": 8,
+      "profit_total": 7.03,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 12,
+          "yield": 0.31,
+          "hit": 0.3333
+        },
+        "2023": {
+          "N": 3,
+          "yield": 0.0267,
+          "hit": 0.3333
+        },
+        "2024": {
+          "N": 6,
+          "yield": 0.5383,
+          "hit": 0.5
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.5341
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Inglaterra', 'V', '3.0-4.0')",
+      "N_IS": 30,
+      "yield_IS": 0.2757,
+      "hit_IS": 0.3667,
+      "cuota_avg": 3.495,
+      "aciertos": 11,
+      "profit_total": 8.27,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 13,
+          "yield": 0.2869,
+          "hit": 0.3846
+        },
+        "2023": {
+          "N": 9,
+          "yield": -0.6656,
+          "hit": 0.1111
+        },
+        "2024": {
+          "N": 8,
+          "yield": 1.3162,
+          "hit": 0.625
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.5099
+    },
+    {
+      "dimension": "EQUIPO_LOCAL",
+      "descripcion": "EQUIPO_LOCAL ('Espana', 'Celta')",
+      "N_IS": 15,
+      "yield_IS": 0.3833,
+      "hit_IS": 0.5333,
+      "cuota_avg": 2.932,
+      "aciertos": 8,
+      "profit_total": 5.75,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 4,
+          "yield": 0.3875,
+          "hit": 0.5
+        },
+        "2023": {
+          "N": 6,
+          "yield": 0.2517,
+          "hit": 0.5
+        },
+        "2024": {
+          "N": 5,
+          "yield": 0.538,
+          "hit": 0.6
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.4846
+    },
+    {
+      "dimension": "LIGA_PICK",
+      "descripcion": "LIGA_PICK ('Alemania', 'V')",
+      "N_IS": 82,
+      "yield_IS": 0.163,
+      "hit_IS": 0.3659,
+      "cuota_avg": 3.348,
+      "aciertos": 30,
+      "profit_total": 13.37,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 28,
+          "yield": -0.1118,
+          "hit": 0.2857
+        },
+        "2023": {
+          "N": 19,
+          "yield": 0.4021,
+          "hit": 0.4211
+        },
+        "2024": {
+          "N": 35,
+          "yield": 0.2531,
+          "hit": 0.4
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.4765
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Alemania', 'V', '2.5-3.0')",
+      "N_IS": 29,
+      "yield_IS": 0.2724,
+      "hit_IS": 0.4483,
+      "cuota_avg": 2.799,
+      "aciertos": 13,
+      "profit_total": 7.9,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 9,
+          "yield": 0.28,
+          "hit": 0.4444
+        },
+        "2023": {
+          "N": 8,
+          "yield": -0.2913,
+          "hit": 0.25
+        },
+        "2024": {
+          "N": 12,
+          "yield": 0.6425,
+          "hit": 0.5833
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.467
+    },
+    {
+      "dimension": "LIGA_PICK",
+      "descripcion": "LIGA_PICK ('Argentina', 'V')",
+      "N_IS": 88,
+      "yield_IS": 0.1475,
+      "hit_IS": 0.2955,
+      "cuota_avg": 3.774,
+      "aciertos": 26,
+      "profit_total": 12.98,
+      "aniosvalidos": 2,
+      "por_year": {
+        "2022": {
+          "N": 42,
+          "yield": 0.1667,
+          "hit": 0.2857
+        },
+        "2023": {
+          "N": 38,
+          "yield": 0.2526,
+          "hit": 0.3421
+        },
+        "2024": {
+          "N": 8,
+          "yield": -0.4525,
+          "hit": 0.125
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.3837
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Francia', 2, 'V')",
+      "N_IS": 36,
+      "yield_IS": 0.2225,
+      "hit_IS": 0.3611,
+      "cuota_avg": 3.436,
+      "aciertos": 13,
+      "profit_total": 8.01,
+      "aniosvalidos": 3,
+      "por_year": {
+        "2022": {
+          "N": 13,
+          "yield": 0.4223,
+          "hit": 0.3846
+        },
+        "2023": {
+          "N": 11,
+          "yield": 0.0582,
+          "hit": 0.3636
+        },
+        "2024": {
+          "N": 12,
+          "yield": 0.1567,
+          "hit": 0.3333
+        }
+      },
+      "parcial_2026": null,
+      "priority_score": 1.335
+    }
+  ],
+  "trampas": [
+    {
+      "dimension": "EQUIPO_LOCAL",
+      "descripcion": "EQUIPO_LOCAL ('Alemania', 'Bochum')",
+      "N_IS": 19,
+      "yield_IS_aparente": 0.8363,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "EQUIPO_LOCAL",
+      "descripcion": "EQUIPO_LOCAL ('Italia', 'Bologna')",
+      "N_IS": 15,
+      "yield_IS_aparente": 0.548,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_BANDA",
+      "descripcion": "LIGA_BANDA ('Argentina', '2.0-2.5')",
+      "N_IS": 15,
+      "yield_IS_aparente": 0.4193,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Argentina', '1', '2.0-2.5')",
+      "N_IS": 15,
+      "yield_IS_aparente": 0.4193,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "EQUIPO_LOCAL",
+      "descripcion": "EQUIPO_LOCAL ('Alemania', 'Augsburg')",
+      "N_IS": 18,
+      "yield_IS_aparente": 0.3644,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Turquia', 'V', '2.5-3.0')",
+      "N_IS": 19,
+      "yield_IS_aparente": 0.3553,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Italia', 12)",
+      "N_IS": 20,
+      "yield_IS_aparente": 0.3445,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "EQUIPO_LOCAL",
+      "descripcion": "EQUIPO_LOCAL ('Espana', 'Mallorca')",
+      "N_IS": 21,
+      "yield_IS_aparente": 0.3124,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Argentina', 1, 'V')",
+      "N_IS": 17,
+      "yield_IS_aparente": 0.2912,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Argentina', 2, '1')",
+      "N_IS": 61,
+      "yield_IS_aparente": 0.2674,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "EQUIPO_LOCAL",
+      "descripcion": "EQUIPO_LOCAL ('Francia', 'Brest')",
+      "N_IS": 17,
+      "yield_IS_aparente": 0.2447,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Alemania', 4, 'V')",
+      "N_IS": 18,
+      "yield_IS_aparente": 0.2256,
+      "aniosvalidos": 0
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Espana', 2)",
+      "N_IS": 35,
+      "yield_IS_aparente": 0.1929,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Turquia', 2, 'V')",
+      "N_IS": 21,
+      "yield_IS_aparente": 0.1824,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Alemania', 3, 'V')",
+      "N_IS": 19,
+      "yield_IS_aparente": 0.1721,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Argentina', 2)",
+      "N_IS": 16,
+      "yield_IS_aparente": 0.1581,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Francia', 3)",
+      "N_IS": 32,
+      "yield_IS_aparente": 0.1547,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Argentina', 4, '1')",
+      "N_IS": 62,
+      "yield_IS_aparente": 0.1476,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_BIN4_PICK",
+      "descripcion": "LIGA_BIN4_PICK ('Argentina', 2, 'V')",
+      "N_IS": 16,
+      "yield_IS_aparente": 0.1425,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Francia', 1)",
+      "N_IS": 28,
+      "yield_IS_aparente": 0.1421,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Brasil', 'V', '4.0+')",
+      "N_IS": 37,
+      "yield_IS_aparente": 0.1376,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_MES",
+      "descripcion": "LIGA_MES ('Alemania', 9)",
+      "N_IS": 35,
+      "yield_IS_aparente": 0.1206,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_BANDA",
+      "descripcion": "LIGA_BANDA ('Italia', '2.0-2.5')",
+      "N_IS": 17,
+      "yield_IS_aparente": 0.1082,
+      "aniosvalidos": 1
+    },
+    {
+      "dimension": "LIGA_PICK_BANDA",
+      "descripcion": "LIGA_PICK_BANDA ('Alemania', 'V', '3.0-4.0')",
+      "N_IS": 39,
+      "yield_IS_aparente": 0.1079,
+      "aniosvalidos": 1
+    }
+  ],
+  "criterio": "yield_IS>=0.10 N>=15 + 2/3 anios N>=5 yield>0",
+  "EV_min": 1.03
+}

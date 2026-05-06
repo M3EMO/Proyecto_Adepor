@@ -1,0 +1,53 @@
+{
+  "n_universo_2026_v4": 915,
+  "n_cruzados_con_formacion": 191,
+  "n_combos_test": 4,
+  "bonferroni_alpha": 0.0125,
+  "n_candidates_ci95_pos": 0,
+  "findings": [
+    {
+      "filtro_id": "ema_l_saves_visita_empate",
+      "tipo": "formation_l",
+      "valor": "4-2-3-1",
+      "n": 15,
+      "yield": -0.027333333333333314,
+      "ci95_lo": -0.7226666666666667,
+      "ci95_hi": 0.7786666666666667,
+      "baseline_filtro_solo": 0.09789473684210526,
+      "lift_vs_filtro_solo": -0.12522807017543858
+    },
+    {
+      "filtro_id": "ema_l_crosses_visita_empate",
+      "tipo": "formation_l",
+      "valor": "4-2-3-1",
+      "n": 20,
+      "yield": -0.129,
+      "ci95_lo": -0.759,
+      "ci95_hi": 0.6359999999999999,
+      "baseline_filtro_solo": -0.018510638297872344,
+      "lift_vs_filtro_solo": -0.11048936170212766
+    },
+    {
+      "filtro_id": "ema_l_saves_visita_empate",
+      "tipo": "formation_v",
+      "valor": "4-2-3-1",
+      "n": 10,
+      "yield": -0.191,
+      "ci95_lo": -1.0,
+      "ci95_hi": 1.0110000000000001,
+      "baseline_filtro_solo": 0.09789473684210526,
+      "lift_vs_filtro_solo": -0.28889473684210526
+    },
+    {
+      "filtro_id": "ema_l_crosses_visita_empate",
+      "tipo": "formation_v",
+      "valor": "4-2-3-1",
+      "n": 16,
+      "yield": -0.365625,
+      "ci95_lo": -1.0,
+      "ci95_hi": 0.3375,
+      "baseline_filtro_solo": -0.018510638297872344,
+      "lift_vs_filtro_solo": -0.3471143617021276
+    }
+  ]
+}

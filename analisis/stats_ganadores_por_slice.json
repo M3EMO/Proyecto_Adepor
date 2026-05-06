@@ -1,0 +1,404 @@
+{
+  "top_teams": [
+    {
+      "liga": "Alemania",
+      "equipo": "SC Freiburg",
+      "n": 14,
+      "won": 0,
+      "hit": 0.0,
+      "yield": -100.0
+    },
+    {
+      "liga": "Espana",
+      "equipo": "C\u00e1diz",
+      "n": 5,
+      "won": 0,
+      "hit": 0.0,
+      "yield": -100.0
+    },
+    {
+      "liga": "Inglaterra",
+      "equipo": "Luton Town",
+      "n": 5,
+      "won": 0,
+      "hit": 0.0,
+      "yield": -100.0
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Las Palmas",
+      "n": 13,
+      "won": 1,
+      "hit": 7.6923076923076925,
+      "yield": -78.15384615384615
+    },
+    {
+      "liga": "Francia",
+      "equipo": "Montpellier",
+      "n": 23,
+      "won": 2,
+      "hit": 8.695652173913043,
+      "yield": -75.26086956521738
+    },
+    {
+      "liga": "Italia",
+      "equipo": "Udinese",
+      "n": 9,
+      "won": 1,
+      "hit": 11.11111111111111,
+      "yield": -74.44444444444444
+    },
+    {
+      "liga": "Italia",
+      "equipo": "Cagliari",
+      "n": 8,
+      "won": 1,
+      "hit": 12.5,
+      "yield": -66.875
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Almer\u00eda",
+      "n": 15,
+      "won": 2,
+      "hit": 13.333333333333334,
+      "yield": -63.66666666666667
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Getafe",
+      "n": 7,
+      "won": 1,
+      "hit": 14.285714285714285,
+      "yield": -60.57142857142858
+    },
+    {
+      "liga": "Inglaterra",
+      "equipo": "Leicester City",
+      "n": 6,
+      "won": 1,
+      "hit": 16.666666666666664,
+      "yield": -59.0
+    },
+    {
+      "liga": "Alemania",
+      "equipo": "Mainz",
+      "n": 7,
+      "won": 1,
+      "hit": 14.285714285714285,
+      "yield": -58.85714285714286
+    },
+    {
+      "liga": "Francia",
+      "equipo": "AJ Auxerre",
+      "n": 8,
+      "won": 1,
+      "hit": 12.5,
+      "yield": -56.125
+    },
+    {
+      "liga": "Inglaterra",
+      "equipo": "Liverpool",
+      "n": 5,
+      "won": 1,
+      "hit": 20.0,
+      "yield": -52.2
+    },
+    {
+      "liga": "Inglaterra",
+      "equipo": "AFC Bournemouth",
+      "n": 10,
+      "won": 2,
+      "hit": 20.0,
+      "yield": -51.99999999999999
+    },
+    {
+      "liga": "Argentina",
+      "equipo": "Estudiantes de La Plata",
+      "n": 8,
+      "won": 2,
+      "hit": 25.0,
+      "yield": -51.5
+    },
+    {
+      "liga": "Brasil",
+      "equipo": "Atl\u00e9tico-MG",
+      "n": 5,
+      "won": 1,
+      "hit": 20.0,
+      "yield": -49.6
+    },
+    {
+      "liga": "Italia",
+      "equipo": "Monza",
+      "n": 15,
+      "won": 3,
+      "hit": 20.0,
+      "yield": -47.0
+    },
+    {
+      "liga": "Italia",
+      "equipo": "Genoa",
+      "n": 9,
+      "won": 2,
+      "hit": 22.22222222222222,
+      "yield": -46.111111111111114
+    },
+    {
+      "liga": "Brasil",
+      "equipo": "Corinthians",
+      "n": 16,
+      "won": 3,
+      "hit": 18.75,
+      "yield": -45.3125
+    },
+    {
+      "liga": "Alemania",
+      "equipo": "TSG Hoffenheim",
+      "n": 27,
+      "won": 6,
+      "hit": 22.22222222222222,
+      "yield": -44.51851851851852
+    },
+    {
+      "liga": "Italia",
+      "equipo": "Salernitana",
+      "n": 13,
+      "won": 2,
+      "hit": 15.384615384615385,
+      "yield": -41.53846153846154
+    },
+    {
+      "liga": "Francia",
+      "equipo": "Metz",
+      "n": 5,
+      "won": 1,
+      "hit": 20.0,
+      "yield": -39.2
+    },
+    {
+      "liga": "Italia",
+      "equipo": "Frosinone",
+      "n": 8,
+      "won": 2,
+      "hit": 25.0,
+      "yield": -38.75
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Rayo Vallecano",
+      "n": 9,
+      "won": 2,
+      "hit": 22.22222222222222,
+      "yield": -38.0
+    },
+    {
+      "liga": "Argentina",
+      "equipo": "Tigre",
+      "n": 10,
+      "won": 2,
+      "hit": 20.0,
+      "yield": -37.8
+    },
+    {
+      "liga": "Francia",
+      "equipo": "Stade de Reims",
+      "n": 8,
+      "won": 2,
+      "hit": 25.0,
+      "yield": -36.37499999999999
+    },
+    {
+      "liga": "Argentina",
+      "equipo": "Rosario Central",
+      "n": 11,
+      "won": 3,
+      "hit": 27.27272727272727,
+      "yield": -36.18181818181819
+    },
+    {
+      "liga": "Brasil",
+      "equipo": "Santos",
+      "n": 11,
+      "won": 3,
+      "hit": 27.27272727272727,
+      "yield": -36.09090909090909
+    },
+    {
+      "liga": "Brasil",
+      "equipo": "Fluminense",
+      "n": 13,
+      "won": 4,
+      "hit": 30.76923076923077,
+      "yield": -33.53846153846154
+    },
+    {
+      "liga": "Turquia",
+      "equipo": "Kasimpasa",
+      "n": 7,
+      "won": 2,
+      "hit": 28.57142857142857,
+      "yield": -33.142857142857146
+    },
+    {
+      "liga": "Inglaterra",
+      "equipo": "Chelsea",
+      "n": 8,
+      "won": 3,
+      "hit": 37.5,
+      "yield": -30.874999999999996
+    },
+    {
+      "liga": "Argentina",
+      "equipo": "Central C\u00f3rdoba (Santiago del Estero)",
+      "n": 7,
+      "won": 1,
+      "hit": 14.285714285714285,
+      "yield": -30.85714285714286
+    },
+    {
+      "liga": "Alemania",
+      "equipo": "VfL Wolfsburg",
+      "n": 18,
+      "won": 5,
+      "hit": 27.77777777777778,
+      "yield": -30.72222222222222
+    },
+    {
+      "liga": "Francia",
+      "equipo": "Lens",
+      "n": 9,
+      "won": 3,
+      "hit": 33.33333333333333,
+      "yield": -27.44444444444445
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Real Valladolid",
+      "n": 9,
+      "won": 2,
+      "hit": 22.22222222222222,
+      "yield": -27.333333333333332
+    },
+    {
+      "liga": "Francia",
+      "equipo": "Stade Rennais",
+      "n": 15,
+      "won": 5,
+      "hit": 33.33333333333333,
+      "yield": -27.066666666666666
+    },
+    {
+      "liga": "Alemania",
+      "equipo": "FC Cologne",
+      "n": 15,
+      "won": 4,
+      "hit": 26.666666666666668,
+      "yield": -26.266666666666666
+    },
+    {
+      "liga": "Francia",
+      "equipo": "Strasbourg",
+      "n": 9,
+      "won": 2,
+      "hit": 22.22222222222222,
+      "yield": -23.666666666666668
+    },
+    {
+      "liga": "Alemania",
+      "equipo": "Werder Bremen",
+      "n": 14,
+      "won": 4,
+      "hit": 28.57142857142857,
+      "yield": -22.785714285714285
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Legan\u00e9s",
+      "n": 8,
+      "won": 2,
+      "hit": 25.0,
+      "yield": -22.125
+    },
+    {
+      "liga": "Italia",
+      "equipo": "Internazionale",
+      "n": 7,
+      "won": 3,
+      "hit": 42.857142857142854,
+      "yield": -20.85714285714286
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Villarreal",
+      "n": 37,
+      "won": 15,
+      "hit": 40.54054054054054,
+      "yield": -18.945945945945947
+    },
+    {
+      "liga": "Argentina",
+      "equipo": "Deportivo Riestra",
+      "n": 8,
+      "won": 2,
+      "hit": 25.0,
+      "yield": -18.875000000000004
+    },
+    {
+      "liga": "Argentina",
+      "equipo": "Banfield",
+      "n": 7,
+      "won": 2,
+      "hit": 28.57142857142857,
+      "yield": -15.714285714285708
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Barcelona",
+      "n": 6,
+      "won": 3,
+      "hit": 50.0,
+      "yield": -15.66666666666667
+    },
+    {
+      "liga": "Francia",
+      "equipo": "Marseille",
+      "n": 5,
+      "won": 2,
+      "hit": 40.0,
+      "yield": -15.200000000000005
+    },
+    {
+      "liga": "Brasil",
+      "equipo": "Athletico Paranaense",
+      "n": 13,
+      "won": 5,
+      "hit": 38.46153846153847,
+      "yield": -14.461538461538465
+    },
+    {
+      "liga": "Alemania",
+      "equipo": "1. FC Union Berlin",
+      "n": 13,
+      "won": 5,
+      "hit": 38.46153846153847,
+      "yield": -13.923076923076922
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Sevilla",
+      "n": 11,
+      "won": 4,
+      "hit": 36.36363636363637,
+      "yield": -13.181818181818183
+    },
+    {
+      "liga": "Espana",
+      "equipo": "Alav\u00e9s",
+      "n": 19,
+      "won": 8,
+      "hit": 42.10526315789473,
+      "yield": -12.684210526315788
+    }
+  ]
+}

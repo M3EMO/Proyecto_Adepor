@@ -1,0 +1,357 @@
+{
+  "sesion_id": "2026-05-02_team_filtros_oro",
+  "ev_min": 1.03,
+  "ema_alpha": 0.2,
+  "betas_dev_2022": {
+    "Alemania": 0.3327790409610751,
+    "Argentina": 0.26631322851229167,
+    "Brasil": 0.2702974472087969,
+    "Espana": 0.29570447346880674,
+    "Francia": 0.30324549562767766,
+    "Inglaterra": 0.3327956121955154,
+    "Italia": 0.308021792222431
+  },
+  "betas_train_2024": {
+    "Alemania": 0.33085026088668656,
+    "Argentina": 0.26562731721785554,
+    "Brasil": 0.27228904385267,
+    "Espana": 0.3024818001323627,
+    "Francia": 0.29831387808041504,
+    "Inglaterra": 0.32845423342722135,
+    "Italia": 0.3106574250694064
+  },
+  "betas_train_2025": {
+    "Alemania": 0.33467593470717527,
+    "Argentina": 0.2661630269172169,
+    "Brasil": 0.26889377348743454,
+    "Espana": 0.30851123753731763,
+    "Francia": 0.3039308210609486,
+    "Inglaterra": 0.32448807967820703,
+    "Italia": 0.310753851318587,
+    "Turquia": 0.3275386490474052
+  },
+  "n_universo": 7890,
+  "n_picks_por_year": {
+    "2022": 1163,
+    "2023": 1144,
+    "2024": 1283,
+    "2025": 42
+  },
+  "resultados_por_liga": {
+    "Alemania": {
+      "tipo_split": "anual_2022dev",
+      "regla": [
+        {
+          "feat": "ema_sot_ag_V",
+          "op": "<=",
+          "thr": 3.918
+        },
+        {
+          "feat": "ema_sot_ag_V",
+          "op": ">=",
+          "thr": 3.108
+        }
+      ],
+      "yield_dev": 0.3765,
+      "hit_dev": 0.4615,
+      "n_dev": 26,
+      "yield_2023": 0.0084,
+      "hit_2023": 0.4,
+      "n_2023": 25,
+      "yield_2024": 0.1822,
+      "hit_2024": 0.4074,
+      "n_2024": 27,
+      "yield_pool": 0.1913,
+      "hit_pool": 0.4231,
+      "n_pool": 78,
+      "ci95_pool": [
+        -0.1052,
+        0.5406
+      ],
+      "sharpe_pool": 1.137,
+      "maxdd_pool": -5.4,
+      "v0_crudo_yield": -0.1445,
+      "v0_crudo_hit": 0.3036,
+      "v0_crudo_n": 415,
+      "v0_crudo_sharpe": -2.145,
+      "v0_crudo_mdd": -76.2,
+      "anios_positivos": 3,
+      "cumple_criterio": true
+    },
+    "Argentina": {
+      "tipo_split": "anual_2022dev",
+      "regla": [
+        {
+          "feat": "p2",
+          "op": "<=",
+          "thr": 0.345
+        },
+        {
+          "feat": "prob_pick",
+          "op": "<=",
+          "thr": 0.457
+        }
+      ],
+      "yield_dev": 0.915,
+      "hit_dev": 0.5769,
+      "n_dev": 26,
+      "yield_2023": 0.0524,
+      "hit_2023": 0.36,
+      "n_2023": 25,
+      "yield_2024": -0.165,
+      "hit_2024": 0.2917,
+      "n_2024": 24,
+      "yield_pool": 0.2819,
+      "hit_pool": 0.4133,
+      "n_pool": 75,
+      "ci95_pool": [
+        -0.093,
+        0.6616
+      ],
+      "sharpe_pool": 1.527,
+      "maxdd_pool": -10.99,
+      "v0_crudo_yield": -0.1664,
+      "v0_crudo_hit": 0.2594,
+      "v0_crudo_n": 609,
+      "v0_crudo_sharpe": -2.78,
+      "v0_crudo_mdd": -113.38,
+      "anios_positivos": 2,
+      "cumple_criterio": true
+    },
+    "Brasil": {
+      "tipo_split": "anual_2022dev",
+      "regla": [
+        {
+          "feat": "n_min",
+          "op": ">=",
+          "thr": 27.0
+        },
+        {
+          "feat": "cuota_pick",
+          "op": ">=",
+          "thr": 2.94
+        }
+      ],
+      "yield_dev": 1.3932,
+      "hit_dev": 0.56,
+      "n_dev": 25,
+      "yield_2023": 0.1131,
+      "hit_2023": 0.2581,
+      "n_2023": 93,
+      "yield_2024": -0.2416,
+      "hit_2024": 0.1913,
+      "n_2024": 115,
+      "yield_pool": 0.0754,
+      "hit_pool": 0.2575,
+      "n_pool": 233,
+      "ci95_pool": [
+        -0.1572,
+        0.3464
+      ],
+      "sharpe_pool": 0.598,
+      "maxdd_pool": -39.64,
+      "v0_crudo_yield": -0.0278,
+      "v0_crudo_hit": 0.2809,
+      "v0_crudo_n": 591,
+      "v0_crudo_sharpe": -0.399,
+      "v0_crudo_mdd": -53.96,
+      "anios_positivos": 2,
+      "cumple_criterio": true
+    },
+    "Espana": {
+      "tipo_split": "anual_2022dev",
+      "regla": [
+        {
+          "feat": "ema_pos_V",
+          "op": ">=",
+          "thr": 56.903
+        },
+        {
+          "feat": "ema_pos_V",
+          "op": ">=",
+          "thr": 58.914
+        }
+      ],
+      "yield_dev": 0.5419,
+      "hit_dev": 0.6667,
+      "n_dev": 27,
+      "yield_2023": 0.1767,
+      "hit_2023": 0.5,
+      "n_2023": 18,
+      "yield_2024": 0.4165,
+      "hit_2024": 0.5882,
+      "n_2024": 17,
+      "yield_pool": 0.4015,
+      "hit_pool": 0.5968,
+      "n_pool": 62,
+      "ci95_pool": [
+        0.0908,
+        0.7153
+      ],
+      "sharpe_pool": 2.517,
+      "maxdd_pool": -5.53,
+      "v0_crudo_yield": -0.051,
+      "v0_crudo_hit": 0.3174,
+      "v0_crudo_n": 545,
+      "v0_crudo_sharpe": -0.784,
+      "v0_crudo_mdd": -55.7,
+      "anios_positivos": 3,
+      "cumple_criterio": true
+    },
+    "Francia": {
+      "tipo_split": "anual_2022dev",
+      "regla": [
+        {
+          "feat": "n_min",
+          "op": ">=",
+          "thr": 13.5
+        },
+        {
+          "feat": "cuota_pick",
+          "op": "<=",
+          "thr": 3.01
+        },
+        {
+          "feat": "p_implicita",
+          "op": "<=",
+          "thr": 0.406
+        }
+      ],
+      "yield_dev": 0.8007,
+      "hit_dev": 0.6667,
+      "n_dev": 27,
+      "yield_2023": 0.3361,
+      "hit_2023": 0.5,
+      "n_2023": 46,
+      "yield_2024": 0.0011,
+      "hit_2024": 0.3714,
+      "n_2024": 35,
+      "yield_pool": 0.3437,
+      "hit_pool": 0.5,
+      "n_pool": 108,
+      "ci95_pool": [
+        0.089,
+        0.5968
+      ],
+      "sharpe_pool": 2.634,
+      "maxdd_pool": -6.13,
+      "v0_crudo_yield": 0.1317,
+      "v0_crudo_hit": 0.381,
+      "v0_crudo_n": 399,
+      "v0_crudo_sharpe": 1.689,
+      "v0_crudo_mdd": -26.93,
+      "anios_positivos": 3,
+      "cumple_criterio": true
+    },
+    "Inglaterra": {
+      "tipo_split": "anual_2022dev",
+      "regla": [
+        {
+          "feat": "p1",
+          "op": ">=",
+          "thr": 0.408
+        }
+      ],
+      "yield_dev": 0.6271,
+      "hit_dev": 0.6071,
+      "n_dev": 28,
+      "yield_2023": -0.2088,
+      "hit_2023": 0.32,
+      "n_2023": 25,
+      "yield_2024": 0.0428,
+      "hit_2024": 0.4138,
+      "n_2024": 29,
+      "yield_pool": 0.1656,
+      "hit_pool": 0.4512,
+      "n_pool": 82,
+      "ci95_pool": [
+        -0.1253,
+        0.4696
+      ],
+      "sharpe_pool": 1.08,
+      "maxdd_pool": -12.22,
+      "v0_crudo_yield": 0.0094,
+      "v0_crudo_hit": 0.366,
+      "v0_crudo_n": 418,
+      "v0_crudo_sharpe": 0.135,
+      "v0_crudo_mdd": -44.95,
+      "anios_positivos": 2,
+      "cumple_criterio": true
+    },
+    "Italia": {
+      "tipo_split": "anual_2022dev",
+      "regla": [
+        {
+          "feat": "ema_sot_ag_L",
+          "op": "<=",
+          "thr": 3.738
+        },
+        {
+          "feat": "prob_pick",
+          "op": "<=",
+          "thr": 0.452
+        }
+      ],
+      "yield_dev": 0.6372,
+      "hit_dev": 0.4138,
+      "n_dev": 29,
+      "yield_2023": -0.3904,
+      "hit_2023": 0.1852,
+      "n_2023": 27,
+      "yield_2024": -0.3233,
+      "hit_2024": 0.1818,
+      "n_2024": 33,
+      "yield_pool": -0.0307,
+      "hit_pool": 0.2584,
+      "n_pool": 89,
+      "ci95_pool": [
+        -0.3682,
+        0.3554
+      ],
+      "sharpe_pool": -0.165,
+      "maxdd_pool": -31.06,
+      "v0_crudo_yield": -0.205,
+      "v0_crudo_hit": 0.2633,
+      "v0_crudo_n": 452,
+      "v0_crudo_sharpe": -3.032,
+      "v0_crudo_mdd": -93.59,
+      "anios_positivos": 1,
+      "cumple_criterio": false
+    },
+    "Turquia": {
+      "tipo_split": "turquia_intra2024",
+      "regla": [
+        {
+          "feat": "ev",
+          "op": "<=",
+          "thr": 1.16
+        }
+      ],
+      "yield_dev_2024H1": 0.355,
+      "hit_dev_2024H1": 0.5625,
+      "n_dev_2024H1": 16,
+      "yield_val_2024H2": -0.0253,
+      "hit_val_2024H2": 0.4,
+      "n_val_2024H2": 15,
+      "yield_val_2025": 0.665,
+      "hit_val_2025": 0.75,
+      "n_val_2025": 4,
+      "yield_pool": 0.2274,
+      "hit_pool": 0.5143,
+      "n_pool": 35,
+      "ci95_pool": [
+        -0.1652,
+        0.6198
+      ],
+      "sharpe_pool": 1.092,
+      "maxdd_pool": -4.67,
+      "v0_crudo_yield": -0.197,
+      "v0_crudo_hit": 0.2616,
+      "v0_crudo_n": 172,
+      "v0_crudo_sharpe": -1.687,
+      "v0_crudo_mdd": -38.0,
+      "anios_positivos": 2,
+      "cumple_criterio": true
+    }
+  }
+}

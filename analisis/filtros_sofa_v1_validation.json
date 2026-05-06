@@ -1,0 +1,2471 @@
+{
+  "n_filtros_total": 101,
+  "bonferroni_alpha": 0.0004950495049504951,
+  "universo_total": 443,
+  "filtros_validados": [
+    {
+      "id": "A4_novel_neg",
+      "desc": "ref novel (games<30) -> filtro NEG visita",
+      "pick_field": "yield_local",
+      "tipo": "p11_propuesto",
+      "n_pool": 18,
+      "yield_pool": 0.48000000000000004,
+      "hit_rate": 0.4482758620689655,
+      "ci95_lo": -0.02777777777777779,
+      "ci95_hi": 1.0038888888888888,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 18,
+          "yield": 0.48000000000000004
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_corners_lag1_l_pos",
+      "desc": "corners_lag1_l in [0.000, 2.000] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 92,
+      "yield_pool": 0.4309782608695652,
+      "hit_rate": 0.3611111111111111,
+      "ci95_lo": 0.06978260869565216,
+      "ci95_hi": 0.7736956521739131,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 1,
+          "yield": -1.0
+        },
+        {
+          "n": 91,
+          "yield": 0.44670329670329667
+        }
+      ],
+      "promociona_shadow": true
+    },
+    {
+      "id": "H_yield_empate_corners_lag1_diff_pos",
+      "desc": "corners_lag1_diff in [-17.000, -3.000] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 100,
+      "yield_pool": 0.37699999999999995,
+      "hit_rate": 0.3333333333333333,
+      "ci95_lo": 0.015299999999999972,
+      "ci95_hi": 0.7406999999999999,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": -1.0
+        },
+        {
+          "n": 98,
+          "yield": 0.4051020408163265
+        }
+      ],
+      "promociona_shadow": true
+    },
+    {
+      "id": "H_yield_empate_keeper_save_value_lag1_v_pos",
+      "desc": "keeper_save_value_lag1_v in [0.509, 1.667] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 74,
+      "yield_pool": 0.3005405405405406,
+      "hit_rate": 0.3125,
+      "ci95_lo": -0.12175675675675675,
+      "ci95_hi": 0.7558108108108109,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": -1.0
+        },
+        {
+          "n": 72,
+          "yield": 0.33666666666666667
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_avg_rating_lag1_l_pos",
+      "desc": "avg_rating_lag1_l in [6.920, 7.394] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 84,
+      "yield_pool": 0.27119047619047615,
+      "hit_rate": 0.30612244897959184,
+      "ci95_lo": -0.09666666666666665,
+      "ci95_hi": 0.648095238095238,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 4,
+          "yield": 0.08250000000000002
+        },
+        {
+          "n": 80,
+          "yield": 0.280625
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_cuota_x_pos",
+      "desc": "cuota_x in [3.560, 4.110] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 98,
+      "yield_pool": 0.2653061224489796,
+      "hit_rate": 0.5204081632653061,
+      "ci95_lo": -0.04112244897959183,
+      "ci95_hi": 0.5908163265306123,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 8,
+          "yield": 0.3025
+        },
+        {
+          "n": 90,
+          "yield": 0.26199999999999996
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_touches_penalty_area_lag1_v_pos",
+      "desc": "touches_penalty_area_lag1_v in [4.000, 16.750] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 83,
+      "yield_pool": 0.24867469879518073,
+      "hit_rate": 0.4636363636363636,
+      "ci95_lo": -0.013493975903614454,
+      "ci95_hi": 0.5057831325301204,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": 0.3466666666666667
+        },
+        {
+          "n": 80,
+          "yield": 0.24500000000000002
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_shots_on_target_lag1_l_pos",
+      "desc": "shots_on_target_lag1_l in [5.000, 16.000] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 111,
+      "yield_pool": 0.24837837837837837,
+      "hit_rate": 0.26119402985074625,
+      "ci95_lo": -0.0836036036036036,
+      "ci95_hi": 0.6166666666666667,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 4,
+          "yield": 0.08250000000000002
+        },
+        {
+          "n": 107,
+          "yield": 0.25457943925233645
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_recoveries_lag1_v_pos",
+      "desc": "recoveries_lag1_v in [51.000, 75.000] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 83,
+      "yield_pool": 0.24457831325301205,
+      "hit_rate": 0.3516483516483517,
+      "ci95_lo": -0.13855421686746988,
+      "ci95_hi": 0.6961445783132528,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 6,
+          "yield": 0.9666666666666665
+        },
+        {
+          "n": 77,
+          "yield": 0.18831168831168832
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_recoveries_lag1_diff_pos",
+      "desc": "recoveries_lag1_diff in [-27.000, -7.000] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 79,
+      "yield_pool": 0.2410126582278481,
+      "hit_rate": 0.29069767441860467,
+      "ci95_lo": -0.19329113924050637,
+      "ci95_hi": 0.8099999999999999,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 1.7999999999999998
+        },
+        {
+          "n": 77,
+          "yield": 0.20051948051948051
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_avg_rating_lag1_diff_pos",
+      "desc": "avg_rating_lag1_diff in [0.138, 1.312] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 80,
+      "yield_pool": 0.22774999999999998,
+      "hit_rate": 0.29347826086956524,
+      "ci95_lo": -0.14750000000000002,
+      "ci95_hi": 0.626125,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": -1.0
+        },
+        {
+          "n": 78,
+          "yield": 0.2592307692307692
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_duels_pct_lag1_l_pos",
+      "desc": "duels_pct_lag1_l in [54.000, 68.000] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 48,
+      "yield_pool": 0.22083333333333333,
+      "hit_rate": 0.6666666666666666,
+      "ci95_lo": -0.03416666666666666,
+      "ci95_hi": 0.4737499999999999,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 1,
+          "yield": 0.78
+        },
+        {
+          "n": 47,
+          "yield": 0.20893617021276598
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_ref_cards_per_game_pos",
+      "desc": "ref_cards_per_game in [5.359, 7.375] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 91,
+      "yield_pool": 0.21054945054945054,
+      "hit_rate": 0.39166666666666666,
+      "ci95_lo": -0.08010989010989011,
+      "ci95_hi": 0.5063736263736265,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.0
+        },
+        {
+          "n": 89,
+          "yield": 0.2152808988764045
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_xg_shotmap_lag1_v_pos",
+      "desc": "xg_shotmap_lag1_v in [1.909, 4.038] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 83,
+      "yield_pool": 0.207710843373494,
+      "hit_rate": 0.2967032967032967,
+      "ci95_lo": -0.19963855421686746,
+      "ci95_hi": 0.5851807228915663,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.78
+        },
+        {
+          "n": 81,
+          "yield": 0.19358024691358025
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_xg_shotmap_lag1_l_pos",
+      "desc": "xg_shotmap_lag1_l in [1.645, 4.057] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 83,
+      "yield_pool": 0.2032530120481928,
+      "hit_rate": 0.2826086956521739,
+      "ci95_lo": -0.18204819277108433,
+      "ci95_hi": 0.6509638554216869,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.6499999999999999
+        },
+        {
+          "n": 81,
+          "yield": 0.19222222222222224
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_touches_penalty_area_lag1_v_pos",
+      "desc": "touches_penalty_area_lag1_v in [29.000, 55.000] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 85,
+      "yield_pool": 0.20070588235294115,
+      "hit_rate": 0.3409090909090909,
+      "ci95_lo": -0.15717647058823528,
+      "ci95_hi": 0.5834117647058824,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": -1.0
+        },
+        {
+          "n": 83,
+          "yield": 0.22963855421686746
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_max_rating_lag1_v_pos",
+      "desc": "max_rating_lag1_v in [8.300, 10.000] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 94,
+      "yield_pool": 0.1997872340425532,
+      "hit_rate": 0.2897196261682243,
+      "ci95_lo": -0.15851063829787232,
+      "ci95_hi": 0.5836170212765958,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 5,
+          "yield": -0.288
+        },
+        {
+          "n": 89,
+          "yield": 0.22719101123595503
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_max_rating_lag1_diff_pos",
+      "desc": "max_rating_lag1_diff in [-0.700, -0.100] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 85,
+      "yield_pool": 0.19929411764705884,
+      "hit_rate": 0.33980582524271846,
+      "ci95_lo": -0.14764705882352944,
+      "ci95_hi": 0.5554117647058824,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 5,
+          "yield": -1.0
+        },
+        {
+          "n": 80,
+          "yield": 0.27425
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_corners_lag1_l_pos",
+      "desc": "corners_lag1_l in [6.000, 15.000] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 90,
+      "yield_pool": 0.19088888888888889,
+      "hit_rate": 0.2524271844660194,
+      "ci95_lo": -0.2656666666666666,
+      "ci95_hi": 0.7122222222222222,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": -1.0
+        },
+        {
+          "n": 87,
+          "yield": 0.23195402298850573
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_ball_possession_lag1_v_pos",
+      "desc": "ball_possession_lag1_v in [59.000, 75.000] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 51,
+      "yield_pool": 0.18999999999999995,
+      "hit_rate": 0.6274509803921569,
+      "ci95_lo": -0.05627450980392157,
+      "ci95_hi": 0.42392156862745095,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": 0.9933333333333332
+        },
+        {
+          "n": 48,
+          "yield": 0.13979166666666665
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_duels_pct_lag1_v_pos",
+      "desc": "duels_pct_lag1_v in [28.000, 46.000] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 86,
+      "yield_pool": 0.18313953488372092,
+      "hit_rate": 0.43119266055045874,
+      "ci95_lo": -0.05755813953488372,
+      "ci95_hi": 0.4550000000000001,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": 0.21333333333333337
+        },
+        {
+          "n": 83,
+          "yield": 0.18204819277108433
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_touches_penalty_area_lag1_diff_pos",
+      "desc": "touches_penalty_area_lag1_diff in [-3.000, 5.000] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 95,
+      "yield_pool": 0.1791578947368421,
+      "hit_rate": 0.45132743362831856,
+      "ci95_lo": -0.07484210526315792,
+      "ci95_hi": 0.43242105263157893,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": -0.3333333333333333
+        },
+        {
+          "n": 92,
+          "yield": 0.1958695652173913
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_duels_pct_lag1_diff_pos",
+      "desc": "duels_pct_lag1_diff in [-19.000, -5.000] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 53,
+      "yield_pool": 0.1758490566037736,
+      "hit_rate": 0.5849056603773585,
+      "ci95_lo": -0.09698113207547171,
+      "ci95_hi": 0.45603773584905666,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.020000000000000018
+        },
+        {
+          "n": 51,
+          "yield": 0.18196078431372548
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_ref_games_pos",
+      "desc": "ref_games in [2.000, 88.750] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 91,
+      "yield_pool": 0.1678021978021978,
+      "hit_rate": 0.41964285714285715,
+      "ci95_lo": -0.07604395604395603,
+      "ci95_hi": 0.44703296703296713,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 4,
+          "yield": -0.08250000000000002
+        },
+        {
+          "n": 87,
+          "yield": 0.1793103448275862
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_cuota_1_pos",
+      "desc": "cuota_1 in [3.100, 27.450] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 99,
+      "yield_pool": 0.16464646464646465,
+      "hit_rate": 0.2828282828282828,
+      "ci95_lo": -0.18535353535353538,
+      "ci95_hi": 0.5851515151515152,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": 0.09499999999999997
+        },
+        {
+          "n": 89,
+          "yield": 0.17247191011235954
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_big_chances_missed_lag1_l_pos",
+      "desc": "big_chances_missed_lag1_l in [2.000, 6.000] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 50,
+      "yield_pool": 0.1642,
+      "hit_rate": 0.6,
+      "ci95_lo": -0.10379999999999999,
+      "ci95_hi": 0.4238,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": -0.2966666666666667
+        },
+        {
+          "n": 47,
+          "yield": 0.19361702127659577
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_big_chances_lag1_l_pos",
+      "desc": "big_chances_lag1_l in [3.000, 8.000] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 50,
+      "yield_pool": 0.16399999999999998,
+      "hit_rate": 0.62,
+      "ci95_lo": -0.08919999999999999,
+      "ci95_hi": 0.41199999999999987,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.9199999999999999
+        },
+        {
+          "n": 48,
+          "yield": 0.13249999999999998
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_cuota_x_pos",
+      "desc": "cuota_x in [4.110, 11.220] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 96,
+      "yield_pool": 0.15989583333333335,
+      "hit_rate": 0.22916666666666666,
+      "ci95_lo": -0.24458333333333335,
+      "ci95_hi": 0.5778125,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 12,
+          "yield": 0.6983333333333333
+        },
+        {
+          "n": 84,
+          "yield": 0.08297619047619048
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_ball_possession_lag1_l_pos",
+      "desc": "ball_possession_lag1_l in [56.000, 80.000] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 90,
+      "yield_pool": 0.1591111111111111,
+      "hit_rate": 0.24074074074074073,
+      "ci95_lo": -0.20777777777777778,
+      "ci95_hi": 0.5587777777777778,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.6499999999999999
+        },
+        {
+          "n": 88,
+          "yield": 0.14795454545454545
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_ref_cards_per_game_pos",
+      "desc": "ref_cards_per_game in [4.059, 4.810] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 92,
+      "yield_pool": 0.14804347826086958,
+      "hit_rate": 0.2621359223300971,
+      "ci95_lo": -0.2195652173913043,
+      "ci95_hi": 0.5492391304347827,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 9,
+          "yield": -0.021111111111111105
+        },
+        {
+          "n": 83,
+          "yield": 0.1663855421686747
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_xg_shotmap_lag1_v_pos",
+      "desc": "xg_shotmap_lag1_v in [0.180, 0.937] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 83,
+      "yield_pool": 0.14602409638554217,
+      "hit_rate": 0.45794392523364486,
+      "ci95_lo": -0.08951807228915663,
+      "ci95_hi": 0.39590361445783134,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 4,
+          "yield": -0.04999999999999999
+        },
+        {
+          "n": 79,
+          "yield": 0.1559493670886076
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_xg_shotmap_lag1_diff_pos",
+      "desc": "xg_shotmap_lag1_diff in [-0.174, 0.436] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 45,
+      "yield_pool": 0.14422222222222222,
+      "hit_rate": 0.6,
+      "ci95_lo": -0.11711111111111112,
+      "ci95_hi": 0.420888888888889,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.875
+        },
+        {
+          "n": 43,
+          "yield": 0.11023255813953489
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_max_rating_lag1_l_pos",
+      "desc": "max_rating_lag1_l in [6.900, 7.500] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 60,
+      "yield_pool": 0.14150000000000001,
+      "hit_rate": 0.5833333333333334,
+      "ci95_lo": -0.10083333333333333,
+      "ci95_hi": 0.39266666666666666,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": 0.8533333333333334
+        },
+        {
+          "n": 57,
+          "yield": 0.10403508771929824
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_ref_cards_per_game_pos",
+      "desc": "ref_cards_per_game in [3.153, 4.081] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 52,
+      "yield_pool": 0.14134615384615384,
+      "hit_rate": 0.5961538461538461,
+      "ci95_lo": -0.13692307692307693,
+      "ci95_hi": 0.4113461538461539,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 20,
+          "yield": 0.251
+        },
+        {
+          "n": 32,
+          "yield": 0.0728125
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "B1_3vs5_o25",
+      "desc": "form 3-x vs 5-x -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "p11_propuesto",
+      "n_pool": 5,
+      "yield_pool": 0.13600000000000004,
+      "hit_rate": 0.6,
+      "ci95_lo": -0.634,
+      "ci95_hi": 0.906,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 1,
+          "yield": -1.0
+        },
+        {
+          "n": 4,
+          "yield": 0.42000000000000004
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_cuota_2_pos",
+      "desc": "cuota_2 in [1.120, 2.530] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 96,
+      "yield_pool": 0.13583333333333333,
+      "hit_rate": 0.2708333333333333,
+      "ci95_lo": -0.22781249999999997,
+      "ci95_hi": 0.5810416666666667,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": 0.09499999999999997
+        },
+        {
+          "n": 86,
+          "yield": 0.1405813953488372
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_cuota_ratio_2_1_pos",
+      "desc": "cuota_ratio_2_1 in [0.041, 0.833] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 96,
+      "yield_pool": 0.13583333333333333,
+      "hit_rate": 0.2708333333333333,
+      "ci95_lo": -0.24479166666666666,
+      "ci95_hi": 0.5194791666666666,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": 0.09499999999999997
+        },
+        {
+          "n": 86,
+          "yield": 0.1405813953488372
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_log_cuota_diff_pos",
+      "desc": "log_cuota_diff in [-3.199, -0.182] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 96,
+      "yield_pool": 0.13583333333333333,
+      "hit_rate": 0.2708333333333333,
+      "ci95_lo": -0.2266666666666667,
+      "ci95_hi": 0.5175,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": 0.09499999999999997
+        },
+        {
+          "n": 86,
+          "yield": 0.1405813953488372
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_cuota_x_pos",
+      "desc": "cuota_x in [4.110, 11.220] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 56,
+      "yield_pool": 0.13142857142857142,
+      "hit_rate": 0.6607142857142857,
+      "ci95_lo": -0.07535714285714287,
+      "ci95_hi": 0.35571428571428576,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 12,
+          "yield": -0.013333333333333345
+        },
+        {
+          "n": 44,
+          "yield": 0.17090909090909093
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_cuota_1_pos",
+      "desc": "cuota_1 in [2.220, 3.100] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 99,
+      "yield_pool": 0.1302020202020202,
+      "hit_rate": 0.37373737373737376,
+      "ci95_lo": -0.16828282828282826,
+      "ci95_hi": 0.4139393939393939,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 7,
+          "yield": 1.2857142857142858
+        },
+        {
+          "n": 92,
+          "yield": 0.04228260869565218
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_cuota_x_pos",
+      "desc": "cuota_x in [1.330, 3.210] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 96,
+      "yield_pool": 0.12802083333333333,
+      "hit_rate": 0.3645833333333333,
+      "ci95_lo": -0.18479166666666666,
+      "ci95_hi": 0.43677083333333333,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 6,
+          "yield": 1.875
+        },
+        {
+          "n": 90,
+          "yield": 0.01155555555555556
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_ref_yellows_pos",
+      "desc": "ref_yellows in [11.000, 424.500] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 91,
+      "yield_pool": 0.12197802197802197,
+      "hit_rate": 0.41284403669724773,
+      "ci95_lo": -0.15142857142857147,
+      "ci95_hi": 0.40692307692307694,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 5,
+          "yield": -0.266
+        },
+        {
+          "n": 86,
+          "yield": 0.14453488372093024
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_ref_cards_per_game_pos",
+      "desc": "ref_cards_per_game in [4.081, 4.828] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 52,
+      "yield_pool": 0.12076923076923077,
+      "hit_rate": 0.5961538461538461,
+      "ci95_lo": -0.1198076923076923,
+      "ci95_hi": 0.3521153846153846,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 9,
+          "yield": 0.6133333333333333
+        },
+        {
+          "n": 43,
+          "yield": 0.017674418604651167
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_duels_pct_lag1_diff_pos",
+      "desc": "duels_pct_lag1_diff in [0.000, 6.000] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 64,
+      "yield_pool": 0.12015624999999998,
+      "hit_rate": 0.578125,
+      "ci95_lo": -0.110625,
+      "ci95_hi": 0.3576562499999999,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": -0.015000000000000013
+        },
+        {
+          "n": 62,
+          "yield": 0.12451612903225805
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "B5_5atras_loc_neg_loc",
+      "desc": "local 5-atras -> NO local (visita)",
+      "pick_field": "yield_visita",
+      "tipo": "p11_propuesto",
+      "n_pool": 26,
+      "yield_pool": 0.11923076923076922,
+      "hit_rate": 0.34375,
+      "ci95_lo": -0.446923076923077,
+      "ci95_hi": 0.658076923076923,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 26,
+          "yield": 0.11923076923076922
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_ref_yellows_pos",
+      "desc": "ref_yellows in [16.000, 428.000] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 52,
+      "yield_pool": 0.11499999999999999,
+      "hit_rate": 0.5384615384615384,
+      "ci95_lo": -0.18423076923076923,
+      "ci95_hi": 0.4276923076923077,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 5,
+          "yield": -0.15999999999999998
+        },
+        {
+          "n": 47,
+          "yield": 0.14425531914893616
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_keeper_save_value_lag1_v_pos",
+      "desc": "keeper_save_value_lag1_v in [0.509, 1.667] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 74,
+      "yield_pool": 0.11486486486486487,
+      "hit_rate": 0.2875,
+      "ci95_lo": -0.3147297297297298,
+      "ci95_hi": 0.6218918918918919,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 1.7999999999999998
+        },
+        {
+          "n": 72,
+          "yield": 0.06805555555555555
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "B_4atras_balanc_local",
+      "desc": "ambos 4-atras -> local",
+      "pick_field": "yield_local",
+      "tipo": "p11_propuesto",
+      "n_pool": 202,
+      "yield_pool": 0.11207920792079207,
+      "hit_rate": 0.38934426229508196,
+      "ci95_lo": -0.07485148514851486,
+      "ci95_hi": 0.3045049504950495,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 19,
+          "yield": 0.03631578947368421
+        },
+        {
+          "n": 183,
+          "yield": 0.11994535519125683
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_ref_games_pos",
+      "desc": "ref_games in [4.000, 90.000] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 52,
+      "yield_pool": 0.10999999999999997,
+      "hit_rate": 0.5384615384615384,
+      "ci95_lo": -0.17865384615384616,
+      "ci95_hi": 0.39999999999999997,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 5,
+          "yield": -0.6
+        },
+        {
+          "n": 47,
+          "yield": 0.185531914893617
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_big_chances_lag1_l_pos",
+      "desc": "big_chances_lag1_l in [1.000, 2.000] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 89,
+      "yield_pool": 0.10752808988764043,
+      "hit_rate": 0.5955056179775281,
+      "ci95_lo": -0.09292134831460673,
+      "ci95_hi": 0.2857303370786517,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": 0.337
+        },
+        {
+          "n": 79,
+          "yield": 0.07848101265822784
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_recoveries_lag1_l_pos",
+      "desc": "recoveries_lag1_l in [50.000, 68.000] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 84,
+      "yield_pool": 0.10738095238095238,
+      "hit_rate": 0.2755102040816326,
+      "ci95_lo": -0.2776190476190476,
+      "ci95_hi": 0.49785714285714294,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.7
+        },
+        {
+          "n": 82,
+          "yield": 0.09292682926829268
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_touches_penalty_area_lag1_diff_pos",
+      "desc": "touches_penalty_area_lag1_diff in [-3.000, 5.000] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 95,
+      "yield_pool": 0.10652631578947368,
+      "hit_rate": 0.23008849557522124,
+      "ci95_lo": -0.2731578947368421,
+      "ci95_hi": 0.5136842105263156,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": 0.18666666666666668
+        },
+        {
+          "n": 92,
+          "yield": 0.10391304347826086
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_ref_reds_pos",
+      "desc": "ref_reds in [27.000, 38.000] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 101,
+      "yield_pool": 0.10465346534653466,
+      "hit_rate": 0.3119266055045872,
+      "ci95_lo": -0.22603960396039602,
+      "ci95_hi": 0.4767326732673267,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 12,
+          "yield": -0.09166666666666667
+        },
+        {
+          "n": 89,
+          "yield": 0.13112359550561797
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_avg_rating_lag1_l_pos",
+      "desc": "avg_rating_lag1_l in [6.631, 6.787] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 50,
+      "yield_pool": 0.1038,
+      "hit_rate": 0.54,
+      "ci95_lo": -0.17800000000000002,
+      "ci95_hi": 0.418,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": 0.25666666666666665
+        },
+        {
+          "n": 47,
+          "yield": 0.09404255319148937
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_empate_duels_pct_lag1_diff_pos",
+      "desc": "duels_pct_lag1_diff in [-6.000, 0.000] -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "positivo",
+      "n_pool": 96,
+      "yield_pool": 0.10229166666666667,
+      "hit_rate": 0.24369747899159663,
+      "ci95_lo": -0.22916666666666666,
+      "ci95_hi": 0.461875,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 1,
+          "yield": -1.0
+        },
+        {
+          "n": 95,
+          "yield": 0.11389473684210527
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_avg_rating_lag1_l_pos",
+      "desc": "avg_rating_lag1_l in [5.875, 6.631] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 48,
+      "yield_pool": 0.10062499999999998,
+      "hit_rate": 0.5625,
+      "ci95_lo": -0.21395833333333328,
+      "ci95_hi": 0.358125,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": -0.050000000000000044
+        },
+        {
+          "n": 46,
+          "yield": 0.10717391304347826
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_touches_penalty_area_lag1_l_pos",
+      "desc": "touches_penalty_area_lag1_l in [18.000, 25.000] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 107,
+      "yield_pool": 0.09626168224299066,
+      "hit_rate": 0.4426229508196721,
+      "ci95_lo": -0.12214953271028038,
+      "ci95_hi": 0.3369158878504673,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 5,
+          "yield": -0.6
+        },
+        {
+          "n": 102,
+          "yield": 0.1303921568627451
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "F2_keeper_lag1_l_low_o25",
+      "desc": "keeper_save_lag1_l<0.3 -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "p11_propuesto",
+      "n_pool": 72,
+      "yield_pool": 0.09444444444444443,
+      "hit_rate": 0.5833333333333334,
+      "ci95_lo": -0.11513888888888887,
+      "ci95_hi": 0.29694444444444446,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 6,
+          "yield": 0.265
+        },
+        {
+          "n": 66,
+          "yield": 0.07893939393939392
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_ref_red_per_game_pos",
+      "desc": "ref_red_per_game in [0.000, 0.108] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 52,
+      "yield_pool": 0.09423076923076924,
+      "hit_rate": 0.5576923076923077,
+      "ci95_lo": -0.17538461538461536,
+      "ci95_hi": 0.37326923076923085,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 19,
+          "yield": 0.016842105263157887
+        },
+        {
+          "n": 33,
+          "yield": 0.1387878787878788
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_touches_penalty_area_lag1_l_pos",
+      "desc": "touches_penalty_area_lag1_l in [13.000, 18.000] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 86,
+      "yield_pool": 0.08034883720930233,
+      "hit_rate": 0.30097087378640774,
+      "ci95_lo": -0.24511627906976743,
+      "ci95_hi": 0.41883720930232554,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 4,
+          "yield": -0.15000000000000002
+        },
+        {
+          "n": 82,
+          "yield": 0.09158536585365855
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_shots_total_lag1_v_pos",
+      "desc": "shots_total_lag1_v in [10.000, 13.000] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 58,
+      "yield_pool": 0.07999999999999997,
+      "hit_rate": 0.5689655172413793,
+      "ci95_lo": -0.17344827586206898,
+      "ci95_hi": 0.3356896551724138,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 7,
+          "yield": 0.5485714285714286
+        },
+        {
+          "n": 51,
+          "yield": 0.01568627450980391
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_fouls_lag1_v_pos",
+      "desc": "fouls_lag1_v in [15.000, 24.000] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 53,
+      "yield_pool": 0.0760377358490566,
+      "hit_rate": 0.5471698113207547,
+      "ci95_lo": -0.1890566037735849,
+      "ci95_hi": 0.36490566037735844,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 1.15
+        },
+        {
+          "n": 51,
+          "yield": 0.03392156862745098
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "D1_bcm_lag1_v_o25",
+      "desc": "big_chances_missed_lag1_v>=3 -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "p11_propuesto",
+      "n_pool": 34,
+      "yield_pool": 0.0714705882352941,
+      "hit_rate": 0.5588235294117647,
+      "ci95_lo": -0.24647058823529414,
+      "ci95_hi": 0.3976470588235294,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": -0.06999999999999995
+        },
+        {
+          "n": 32,
+          "yield": 0.0803125
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_cuota_x_pos",
+      "desc": "cuota_x in [2.620, 3.300] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 67,
+      "yield_pool": 0.0664179104477612,
+      "hit_rate": 0.6268656716417911,
+      "ci95_lo": -0.131044776119403,
+      "ci95_hi": 0.2759701492537313,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 12,
+          "yield": 0.10416666666666667
+        },
+        {
+          "n": 55,
+          "yield": 0.05818181818181818
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "D2_err_lag1_v_local",
+      "desc": "errors_lead_lag1_v>=2 -> local",
+      "pick_field": "yield_local",
+      "tipo": "p11_propuesto",
+      "n_pool": 30,
+      "yield_pool": 0.06599999999999998,
+      "hit_rate": 0.38461538461538464,
+      "ci95_lo": -0.3373333333333334,
+      "ci95_hi": 0.5486666666666665,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.0
+        },
+        {
+          "n": 28,
+          "yield": 0.07071428571428569
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_xg_lag1_diff_visita",
+      "desc": "xg_shotmap_lag1_v - xg_shotmap_lag1_l >= 1.0 -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "p11_propuesto",
+      "n_pool": 66,
+      "yield_pool": 0.0653030303030303,
+      "hit_rate": 0.3972602739726027,
+      "ci95_lo": -0.24636363636363634,
+      "ci95_hi": 0.39575757575757575,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 66,
+          "yield": 0.0653030303030303
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_ref_reds_pos",
+      "desc": "ref_reds in [38.000, 103.000] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 57,
+      "yield_pool": 0.063859649122807,
+      "hit_rate": 0.5614035087719298,
+      "ci95_lo": -0.1828070175438596,
+      "ci95_hi": 0.32122807017543864,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": 0.45199999999999996
+        },
+        {
+          "n": 47,
+          "yield": -0.01872340425531915
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_keeper_save_value_lag1_v_pos",
+      "desc": "keeper_save_value_lag1_v in [-0.002, 0.107] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 74,
+      "yield_pool": 0.0631081081081081,
+      "hit_rate": 0.4367816091954023,
+      "ci95_lo": -0.21635135135135133,
+      "ci95_hi": 0.35283783783783784,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": -0.19999999999999996
+        },
+        {
+          "n": 72,
+          "yield": 0.07041666666666666
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_ref_red_per_game_pos",
+      "desc": "ref_red_per_game in [0.148, 0.216] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 53,
+      "yield_pool": 0.05584905660377358,
+      "hit_rate": 0.5660377358490566,
+      "ci95_lo": -0.2007547169811321,
+      "ci95_hi": 0.3052830188679245,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": 0.141
+        },
+        {
+          "n": 43,
+          "yield": 0.03604651162790697
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_o25_ball_possession_lag1_diff_pos",
+      "desc": "ball_possession_lag1_diff in [-45.000, -12.000] -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "positivo",
+      "n_pool": 48,
+      "yield_pool": 0.05479166666666665,
+      "hit_rate": 0.5416666666666666,
+      "ci95_lo": -0.22125000000000003,
+      "ci95_hi": 0.34083333333333327,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": 0.2866666666666666
+        },
+        {
+          "n": 45,
+          "yield": 0.03933333333333332
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_ball_possession_lag1_v_pos",
+      "desc": "ball_possession_lag1_v in [23.000, 42.000] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 51,
+      "yield_pool": 0.05470588235294118,
+      "hit_rate": 0.5686274509803921,
+      "ci95_lo": -0.18862745098039213,
+      "ci95_hi": 0.31980392156862747,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 6,
+          "yield": 0.37166666666666665
+        },
+        {
+          "n": 45,
+          "yield": 0.01244444444444445
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_ref_games_pos",
+      "desc": "ref_games in [90.000, 160.000] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 52,
+      "yield_pool": 0.05173076923076921,
+      "hit_rate": 0.5769230769230769,
+      "ci95_lo": -0.19826923076923078,
+      "ci95_hi": 0.305,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 9,
+          "yield": 0.27888888888888885
+        },
+        {
+          "n": 43,
+          "yield": 0.004186046511627885
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_local_duels_pct_lag1_diff_pos",
+      "desc": "duels_pct_lag1_diff in [0.000, 4.500] -> local",
+      "pick_field": "yield_local",
+      "tipo": "positivo",
+      "n_pool": 89,
+      "yield_pool": 0.04932584269662922,
+      "hit_rate": 0.4368932038834951,
+      "ci95_lo": -0.2015730337078652,
+      "ci95_hi": 0.3095505617977528,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 2,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": 0.020000000000000018
+        },
+        {
+          "n": 87,
+          "yield": 0.05
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "D3_tpa_lag1_l_local",
+      "desc": "touches_pen_lag1_l>=25 -> local",
+      "pick_field": "yield_local",
+      "tipo": "p11_propuesto",
+      "n_pool": 85,
+      "yield_pool": 0.04882352941176469,
+      "hit_rate": 0.4791666666666667,
+      "ci95_lo": -0.19905882352941182,
+      "ci95_hi": 0.2968235294117647,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 4,
+          "yield": 1.16
+        },
+        {
+          "n": 81,
+          "yield": -0.006049382716049393
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "I3_keeper_low_lag1_o25",
+      "desc": "keeper_lag1_l<0.3 OR keeper_lag1_v<0.3 -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "p11_propuesto",
+      "n_pool": 117,
+      "yield_pool": 0.03786324786324785,
+      "hit_rate": 0.5555555555555556,
+      "ci95_lo": -0.12632478632478633,
+      "ci95_hi": 0.19658119658119658,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 12,
+          "yield": -0.06083333333333333
+        },
+        {
+          "n": 105,
+          "yield": 0.049142857142857134
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_avg_rating_lag1_diff_pos",
+      "desc": "avg_rating_lag1_diff in [-0.787, -0.295] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 80,
+      "yield_pool": 0.034,
+      "hit_rate": 0.3229166666666667,
+      "ci95_lo": -0.27375,
+      "ci95_hi": 0.38012500000000005,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 1,
+          "yield": -1.0
+        },
+        {
+          "n": 79,
+          "yield": 0.04708860759493671
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_ref_reds_pos",
+      "desc": "ref_reds in [27.000, 38.000] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 55,
+      "yield_pool": 0.03309090909090908,
+      "hit_rate": 0.5454545454545454,
+      "ci95_lo": -0.2170909090909091,
+      "ci95_hi": 0.2865454545454545,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 11,
+          "yield": 0.7463636363636362
+        },
+        {
+          "n": 44,
+          "yield": -0.14522727272727273
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "A4_novel_under",
+      "desc": "ref novel (games<30) -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "p11_propuesto",
+      "n_pool": 9,
+      "yield_pool": 0.027777777777777752,
+      "hit_rate": 0.5555555555555556,
+      "ci95_lo": -0.6022222222222222,
+      "ci95_hi": 0.6566666666666666,
+      "consistencia_temporal": 1.0,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 9,
+          "yield": 0.027777777777777752
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_u25_max_rating_lag1_l_pos",
+      "desc": "max_rating_lag1_l in [7.800, 8.200] -> u25",
+      "pick_field": "yield_u25",
+      "tipo": "positivo",
+      "n_pool": 61,
+      "yield_pool": 0.014262295081967212,
+      "hit_rate": 0.4918032786885246,
+      "ci95_lo": -0.2680327868852459,
+      "ci95_hi": 0.29475409836065575,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 5,
+          "yield": -0.172
+        },
+        {
+          "n": 56,
+          "yield": 0.03089285714285714
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_log_cuota_diff_pos",
+      "desc": "log_cuota_diff in [-3.199, -0.182] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 96,
+      "yield_pool": 0.010104166666666652,
+      "hit_rate": 0.5208333333333334,
+      "ci95_lo": -0.19145833333333337,
+      "ci95_hi": 0.2255208333333333,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": -0.096
+        },
+        {
+          "n": 86,
+          "yield": 0.022441860465116262
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_cuota_ratio_2_1_pos",
+      "desc": "cuota_ratio_2_1 in [0.041, 0.833] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 96,
+      "yield_pool": 0.010104166666666652,
+      "hit_rate": 0.5208333333333334,
+      "ci95_lo": -0.20010416666666667,
+      "ci95_hi": 0.20854166666666663,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": -0.096
+        },
+        {
+          "n": 86,
+          "yield": 0.022441860465116262
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_cuota_2_pos",
+      "desc": "cuota_2 in [1.120, 2.530] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 96,
+      "yield_pool": -0.01687500000000001,
+      "hit_rate": 0.5104166666666666,
+      "ci95_lo": -0.20885416666666667,
+      "ci95_hi": 0.19135416666666663,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": -0.096
+        },
+        {
+          "n": 86,
+          "yield": -0.007674418604651178
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_xg_lag1_diff_local",
+      "desc": "xg_shotmap_lag1_l - xg_shotmap_lag1_v >= 1.0 -> local",
+      "pick_field": "yield_local",
+      "tipo": "p11_propuesto",
+      "n_pool": 34,
+      "yield_pool": -0.01735294117647061,
+      "hit_rate": 0.5263157894736842,
+      "ci95_lo": -0.30558823529411766,
+      "ci95_hi": 0.2635294117647059,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 34,
+          "yield": -0.01735294117647061
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_sot_lag1_diff_visita",
+      "desc": "sot_lag1_v - sot_lag1_l >= 3 -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "p11_propuesto",
+      "n_pool": 87,
+      "yield_pool": -0.03149425287356322,
+      "hit_rate": 0.2980769230769231,
+      "ci95_lo": -0.3373563218390805,
+      "ci95_hi": 0.3039080459770115,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 87,
+          "yield": -0.03149425287356322
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "B5_5atras_loc_emp",
+      "desc": "local 5-atras -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "p11_propuesto",
+      "n_pool": 26,
+      "yield_pool": -0.05730769230769228,
+      "hit_rate": 0.21875,
+      "ci95_lo": -0.6096153846153846,
+      "ci95_hi": 0.528846153846154,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 26,
+          "yield": -0.05730769230769228
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "A3_lax_local",
+      "desc": "ref lax (cards/g<=4) -> local",
+      "pick_field": "yield_local",
+      "tipo": "p11_propuesto",
+      "n_pool": 84,
+      "yield_pool": -0.05785714285714285,
+      "hit_rate": 0.43529411764705883,
+      "ci95_lo": -0.31,
+      "ci95_hi": 0.2001190476190476,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 17,
+          "yield": -0.06058823529411764
+        },
+        {
+          "n": 67,
+          "yield": -0.05716417910447761
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_sot_lag1_diff_local",
+      "desc": "sot_lag1_l - sot_lag1_v >= 3 -> local",
+      "pick_field": "yield_local",
+      "tipo": "p11_propuesto",
+      "n_pool": 54,
+      "yield_pool": -0.06351851851851853,
+      "hit_rate": 0.45161290322580644,
+      "ci95_lo": -0.3068518518518519,
+      "ci95_hi": 0.2037037037037037,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 1,
+          "yield": -1.0
+        },
+        {
+          "n": 53,
+          "yield": -0.0458490566037736
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "F1_keeper_lag1_l_high_visita",
+      "desc": "keeper_save_lag1_l>1.5 -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "p11_propuesto",
+      "n_pool": 6,
+      "yield_pool": -0.09166666666666663,
+      "hit_rate": 0.5,
+      "ci95_lo": -0.7733333333333333,
+      "ci95_hi": 0.8083333333333335,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 6,
+          "yield": -0.09166666666666663
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "A1_strict_o25",
+      "desc": "ref strict (cards/g>=6) -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "p11_propuesto",
+      "n_pool": 12,
+      "yield_pool": -0.11166666666666665,
+      "hit_rate": 0.4166666666666667,
+      "ci95_lo": -0.66,
+      "ci95_hi": 0.4741666666666667,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 12,
+          "yield": -0.11166666666666665
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "E2_avg_lag1_l_low_visita",
+      "desc": "avg_rating_lag1_l<6.5 -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "p11_propuesto",
+      "n_pool": 39,
+      "yield_pool": -0.11435897435897438,
+      "hit_rate": 0.30434782608695654,
+      "ci95_lo": -0.5061538461538462,
+      "ci95_hi": 0.31820512820512814,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 1,
+          "yield": -1.0
+        },
+        {
+          "n": 38,
+          "yield": -0.09105263157894739
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "E1_max_lag1_l_local",
+      "desc": "max_rating_lag1_l>=8.5 -> local",
+      "pick_field": "yield_local",
+      "tipo": "p11_propuesto",
+      "n_pool": 51,
+      "yield_pool": -0.11705882352941176,
+      "hit_rate": 0.34375,
+      "ci95_lo": -0.38333333333333336,
+      "ci95_hi": 0.2088235294117647,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 1,
+          "yield": 0.95
+        },
+        {
+          "n": 50,
+          "yield": -0.1384
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "A1_strict_emp",
+      "desc": "ref strict (cards/g>=6) -> empate",
+      "pick_field": "yield_empate",
+      "tipo": "p11_propuesto",
+      "n_pool": 19,
+      "yield_pool": -0.13473684210526318,
+      "hit_rate": 0.16666666666666666,
+      "ci95_lo": -0.7578947368421053,
+      "ci95_hi": 0.583157894736842,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 19,
+          "yield": -0.13473684210526318
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "H_yield_visita_offsides_lag1_v_pos",
+      "desc": "offsides_lag1_v in [0.000, 1.000] -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "positivo",
+      "n_pool": 151,
+      "yield_pool": -0.13622516556291392,
+      "hit_rate": 0.21787709497206703,
+      "ci95_lo": -0.3951655629139073,
+      "ci95_hi": 0.17668874172185434,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 5,
+          "yield": -0.2
+        },
+        {
+          "n": 146,
+          "yield": -0.13404109589041097
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "B_3atras_loc_o25",
+      "desc": "local 3-atras -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "p11_propuesto",
+      "n_pool": 58,
+      "yield_pool": -0.2153448275862069,
+      "hit_rate": 0.39655172413793105,
+      "ci95_lo": -0.4794827586206896,
+      "ci95_hi": 0.059482758620689656,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 12,
+          "yield": -0.057500000000000016
+        },
+        {
+          "n": 46,
+          "yield": -0.2565217391304348
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "D5_recov_lag1_l_low_visita",
+      "desc": "recoveries_lag1_l<50 -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "p11_propuesto",
+      "n_pool": 236,
+      "yield_pool": -0.23932203389830511,
+      "hit_rate": 0.22388059701492538,
+      "ci95_lo": -0.43411016949152537,
+      "ci95_hi": -0.034830508474576284,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 10,
+          "yield": -0.44000000000000006
+        },
+        {
+          "n": 226,
+          "yield": -0.2304424778761062
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "D2_err_lag1_l_visita",
+      "desc": "errors_lead_lag1_l>=2 -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "p11_propuesto",
+      "n_pool": 44,
+      "yield_pool": -0.2645454545454546,
+      "hit_rate": 0.23076923076923078,
+      "ci95_lo": -0.6456818181818181,
+      "ci95_hi": 0.14295454545454545,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 2,
+          "yield": -1.0
+        },
+        {
+          "n": 42,
+          "yield": -0.22952380952380955
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "D1_bcm_lag1_l_o25",
+      "desc": "big_chances_missed_lag1_l>=3 -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "p11_propuesto",
+      "n_pool": 21,
+      "yield_pool": -0.2733333333333333,
+      "hit_rate": 0.38095238095238093,
+      "ci95_lo": -0.6833333333333333,
+      "ci95_hi": 0.16857142857142857,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 21,
+          "yield": -0.2733333333333333
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "E1_max_lag1_v_visita",
+      "desc": "max_rating_lag1_v>=8.5 -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "p11_propuesto",
+      "n_pool": 67,
+      "yield_pool": -0.3611940298507463,
+      "hit_rate": 0.21794871794871795,
+      "ci95_lo": -0.6405970149253731,
+      "ci95_hi": -0.04611940298507463,
+      "consistencia_temporal": 0.5,
+      "n_buckets_pos": 1,
+      "n_buckets_total": 2,
+      "cv_buckets": [
+        {
+          "n": 3,
+          "yield": 0.1333333333333333
+        },
+        {
+          "n": 64,
+          "yield": -0.384375
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "A2_red_freq_visita",
+      "desc": "ref red/g>=0.30 -> visita",
+      "pick_field": "yield_visita",
+      "tipo": "p11_propuesto",
+      "n_pool": 22,
+      "yield_pool": -0.4481818181818182,
+      "hit_rate": 0.12121212121212122,
+      "ci95_lo": -0.8645454545454545,
+      "ci95_hi": 0.1036363636363637,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 22,
+          "yield": -0.4481818181818182
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "B2_4231_local",
+      "desc": "local 4-2-3-1 vs 5-x -> local",
+      "pick_field": "yield_local",
+      "tipo": "p11_propuesto",
+      "n_pool": 8,
+      "yield_pool": -0.5037499999999999,
+      "hit_rate": 0.2727272727272727,
+      "ci95_lo": -0.8375,
+      "ci95_hi": -0.008749999999999952,
+      "consistencia_temporal": 0.0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 1,
+      "cv_buckets": [
+        {
+          "n": 8,
+          "yield": -0.5037499999999999
+        }
+      ],
+      "promociona_shadow": false
+    },
+    {
+      "id": "I1_strict_3v5_o25",
+      "desc": "ref strict + form 3-x vs 5-x -> o25",
+      "pick_field": "yield_o25",
+      "tipo": "p11_propuesto",
+      "n_pool": 0,
+      "yield_pool": null,
+      "hit_rate": null,
+      "ci95_lo": null,
+      "ci95_hi": null,
+      "consistencia_temporal": 0,
+      "n_buckets_pos": 0,
+      "n_buckets_total": 0,
+      "cv_buckets": [],
+      "promociona_shadow": false
+    }
+  ]
+}

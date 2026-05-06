@@ -1,0 +1,94 @@
+{
+  "V0_REAL_total_N": 3711,
+  "V0_BUG_total_N": 3596,
+  "filtros_suaves_per_liga": {
+    "Alemania": {
+      "liga": "Alemania",
+      "p_min": 0.55,
+      "d_min": -0.1,
+      "N": 97,
+      "yield": -21.195876288659793,
+      "ci_lo": -41.391752577319586,
+      "ci_hi": 1.3505154639175254,
+      "yrs_pos": 0,
+      "yrs_count": 4
+    },
+    "Argentina": {
+      "liga": "Argentina",
+      "p_min": 0.6,
+      "d_min": 0.08,
+      "N": 25,
+      "yield": 50.36000000000001,
+      "ci_lo": -9.68,
+      "ci_hi": 115.8,
+      "yrs_pos": 2,
+      "yrs_count": 2
+    },
+    "Brasil": {
+      "liga": "Brasil",
+      "p_min": 0.6,
+      "d_min": 0.15,
+      "N": 22,
+      "yield": 11.590909090909088,
+      "ci_lo": -37.36363636363637,
+      "ci_hi": 59.0,
+      "yrs_pos": 1,
+      "yrs_count": 1
+    },
+    "Espana": {
+      "liga": "Espana",
+      "p_min": 0.6,
+      "d_min": 0.15,
+      "N": 21,
+      "yield": 3.1904761904761916,
+      "ci_lo": -40.04761904761905,
+      "ci_hi": 48.23809523809524,
+      "yrs_pos": 1,
+      "yrs_count": 1
+    },
+    "Francia": {
+      "liga": "Francia",
+      "p_min": 0.5,
+      "d_min": 0.05,
+      "N": 66,
+      "yield": 15.818181818181817,
+      "ci_lo": -11.727272727272728,
+      "ci_hi": 45.25757575757575,
+      "yrs_pos": 3,
+      "yrs_count": 4
+    },
+    "Inglaterra": {
+      "liga": "Inglaterra",
+      "p_min": 0.55,
+      "d_min": 0.05,
+      "N": 107,
+      "yield": 23.046728971962615,
+      "ci_lo": 1.1869158878504669,
+      "ci_hi": 47.52336448598131,
+      "yrs_pos": 4,
+      "yrs_count": 4
+    },
+    "Italia": {
+      "liga": "Italia",
+      "p_min": 0.55,
+      "d_min": 0.15,
+      "N": 64,
+      "yield": 14.828125,
+      "ci_lo": -19.640625,
+      "ci_hi": 49.796875,
+      "yrs_pos": 3,
+      "yrs_count": 3
+    },
+    "Turquia": {
+      "liga": "Turquia",
+      "p_min": 0.55,
+      "d_min": 0.1,
+      "N": 274,
+      "yield": 12.48905109489051,
+      "ci_lo": -7.445255474452556,
+      "ci_hi": 33.10948905109489,
+      "yrs_pos": 3,
+      "yrs_count": 5
+    }
+  }
+}

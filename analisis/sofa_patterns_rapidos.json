@@ -1,0 +1,106 @@
+{
+  "ts_log": "2026-05-04 12:50:04",
+  "n_eventos": 231,
+  "n_features": 42,
+  "n_tests": 502,
+  "bonferroni_alpha": 9.960159362549801e-05,
+  "n_findings_lift_5pp_ci_pos": 5,
+  "findings_top": [
+    {
+      "feature": "diff_bcc_ema_lag5",
+      "target": "yield_empate",
+      "pick": "empate",
+      "lo": 0.0,
+      "hi": 0.2041666666666666,
+      "n": 44,
+      "yield_mean": 0.7127272727272727,
+      "ci95_lo": 0.16136363636363635,
+      "ci95_hi": 1.2936363636363637,
+      "baseline": 0.00718918918918919,
+      "lift": 0.7055380835380834
+    },
+    {
+      "feature": "shots_ema_v_lag5",
+      "target": "yield_empate",
+      "pick": "empate",
+      "lo": 13.0,
+      "hi": 14.75,
+      "n": 46,
+      "yield_mean": 0.6202173913043478,
+      "ci95_lo": 0.0856521739130435,
+      "ci95_hi": 1.1673913043478261,
+      "baseline": 0.00718918918918919,
+      "lift": 0.6130282021151586
+    },
+    {
+      "feature": "errors_ema_l_lag5",
+      "target": "yield_local",
+      "pick": "local",
+      "lo": 0.5,
+      "hi": 1.0,
+      "n": 50,
+      "yield_mean": 0.42019999999999996,
+      "ci95_lo": 0.018000000000000016,
+      "ci95_hi": 0.8492000000000001,
+      "baseline": -0.03654054054054054,
+      "lift": 0.4567405405405405
+    },
+    {
+      "feature": "diff_xg_perf_ema_lag5",
+      "target": "yield_local",
+      "pick": "local",
+      "lo": -0.4089352748375976,
+      "hi": 0.01478105818457709,
+      "n": 46,
+      "yield_mean": 0.37913043478260866,
+      "ci95_lo": 0.01630434782608692,
+      "ci95_hi": 0.7613043478260869,
+      "baseline": -0.03654054054054054,
+      "lift": 0.4156709753231492
+    },
+    {
+      "feature": "shots_ema_v_lag3",
+      "target": "yield_o25",
+      "pick": "o25",
+      "lo": 14.666666666666666,
+      "hi": 24.666666666666668,
+      "n": 30,
+      "yield_mean": 0.30833333333333335,
+      "ci95_lo": 0.015999999999999993,
+      "ci95_hi": 0.63,
+      "baseline": -0.06656565656565658,
+      "lift": 0.37489898989898995
+    }
+  ],
+  "n_picks_shadow": 269,
+  "summary_per_patron": [
+    {
+      "patron": "E_sequencing_lag3",
+      "n_filtros": 1,
+      "n_picks": 30,
+      "yield_acum": 0.30833333333333335,
+      "hit_acum": 0.6666666666666666
+    },
+    {
+      "patron": "E_sequencing_lag5",
+      "n_filtros": 2,
+      "n_picks": 147,
+      "yield_acum": 0.21374149659863947,
+      "hit_acum": 0.4557823129251701
+    },
+    {
+      "patron": "F1_xg_overperformance",
+      "n_filtros": 1,
+      "n_picks": 47,
+      "yield_acum": 0.34978723404255324,
+      "hit_acum": 0.5957446808510638
+    },
+    {
+      "patron": "F2_big_chance_conversion",
+      "n_filtros": 1,
+      "n_picks": 45,
+      "yield_acum": 0.6746666666666666,
+      "hit_acum": 0.4666666666666667
+    }
+  ]
+}

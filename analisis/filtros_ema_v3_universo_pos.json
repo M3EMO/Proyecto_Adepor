@@ -1,0 +1,45 @@
+{
+  "n_fdco": 16042,
+  "n_with_ema_both": 4236,
+  "n_warmup_skipped": 196,
+  "n_with_pos": 4040,
+  "n_universo_final": 4040,
+  "cobertura_pos": {
+    "with_pos": 4040,
+    "no_pos": 0
+  },
+  "por_liga": {
+    "Argentina": {
+      "total": 896,
+      "con_pos": 896
+    },
+    "Italia": {
+      "total": 842,
+      "con_pos": 842
+    },
+    "Brasil": {
+      "total": 714,
+      "con_pos": 714
+    },
+    "Espana": {
+      "total": 510,
+      "con_pos": 510
+    },
+    "Francia": {
+      "total": 492,
+      "con_pos": 492
+    },
+    "Inglaterra": {
+      "total": 281,
+      "con_pos": 281
+    },
+    "Turquia": {
+      "total": 228,
+      "con_pos": 228
+    },
+    "Alemania": {
+      "total": 77,
+      "con_pos": 77
+    }
+  }
+}

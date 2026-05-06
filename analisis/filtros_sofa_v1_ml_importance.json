@@ -1,0 +1,2191 @@
+{
+  "feat_count": 92,
+  "n_samples": 443,
+  "targets": [
+    {
+      "target": "yield_local",
+      "regression": {
+        "target": "yield_local",
+        "n_samples": 381,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "cuota_1",
+            "rf_importance": 0.08975112500929767,
+            "perm_importance_mean": 0.02228091496504948,
+            "perm_importance_std": 0.0018041733333724298,
+            "mutual_info": 1.7268533866547986
+          },
+          {
+            "feature": "ref_yellows",
+            "rf_importance": 0.06780454743220159,
+            "perm_importance_mean": 0.021106517867942966,
+            "perm_importance_std": 0.0034681586964000755,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "cuota_x",
+            "rf_importance": 0.05049787201693064,
+            "perm_importance_mean": 0.01785135115627833,
+            "perm_importance_std": 0.002567673086070377,
+            "mutual_info": 0.3408863550907313
+          },
+          {
+            "feature": "touches_penalty_area_lag1_v",
+            "rf_importance": 0.042898402221411905,
+            "perm_importance_mean": 0.01569515257717773,
+            "perm_importance_std": 0.0030440738546026556,
+            "mutual_info": 0.03263652344794998
+          },
+          {
+            "feature": "cuota_2",
+            "rf_importance": 0.0616656679945836,
+            "perm_importance_mean": 0.01515632939156374,
+            "perm_importance_std": 0.0035103503684548567,
+            "mutual_info": 0.7121553909908602
+          },
+          {
+            "feature": "cuota_ratio_2_1",
+            "rf_importance": 0.06546822873339782,
+            "perm_importance_mean": 0.014033553169043611,
+            "perm_importance_std": 0.0016816372525338408,
+            "mutual_info": 0.8836064402121471
+          },
+          {
+            "feature": "touches_penalty_area_lag1_l",
+            "rf_importance": 0.020591041399661666,
+            "perm_importance_mean": 0.013485487330103917,
+            "perm_importance_std": 0.0027151738051535957,
+            "mutual_info": 0.03601443501636137
+          },
+          {
+            "feature": "ref_cards_per_game",
+            "rf_importance": 0.03451764198758796,
+            "perm_importance_mean": 0.012307171218937329,
+            "perm_importance_std": 0.0029155195416545256,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "log_cuota_diff",
+            "rf_importance": 0.05919638883741175,
+            "perm_importance_mean": 0.012127680896532045,
+            "perm_importance_std": 0.0015513339247976963,
+            "mutual_info": 0.990987135627829
+          },
+          {
+            "feature": "xg_shotmap_lag1_v",
+            "rf_importance": 0.035034822711536774,
+            "perm_importance_mean": 0.01018919812350454,
+            "perm_importance_std": 0.0010680491673128144,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "touches_penalty_area_lag1_diff",
+            "rf_importance": 0.026138415684074906,
+            "perm_importance_mean": 0.009512984092340738,
+            "perm_importance_std": 0.0019176667081526506,
+            "mutual_info": 0.043103711783322396
+          },
+          {
+            "feature": "duels_pct_lag1_diff",
+            "rf_importance": 0.021108126424439804,
+            "perm_importance_mean": 0.00862548046025945,
+            "perm_importance_std": 0.0014994810037142075,
+            "mutual_info": 0.0008442190664155191
+          },
+          {
+            "feature": "keeper_save_value_lag1_v",
+            "rf_importance": 0.026034257892412267,
+            "perm_importance_mean": 0.008395694919600927,
+            "perm_importance_std": 0.0013670771518769684,
+            "mutual_info": 0.0020965266552126494
+          },
+          {
+            "feature": "ref_games",
+            "rf_importance": 0.024096557432846874,
+            "perm_importance_mean": 0.007637736540440476,
+            "perm_importance_std": 0.0012235640687735722,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "duels_pct_lag1_v",
+            "rf_importance": 0.02363342825505574,
+            "perm_importance_mean": 0.0075943917453574535,
+            "perm_importance_std": 0.0010018984550209476,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ball_possession_lag1_l",
+            "rf_importance": 0.029350975210908258,
+            "perm_importance_mean": 0.0074968083017037945,
+            "perm_importance_std": 0.001600969452702357,
+            "mutual_info": 0.014543416121839847
+          },
+          {
+            "feature": "shots_on_target_lag1_l",
+            "rf_importance": 0.020995313558208092,
+            "perm_importance_mean": 0.0069599513237971755,
+            "perm_importance_std": 0.0015937879116501826,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "recoveries_lag1_l",
+            "rf_importance": 0.020061678808799766,
+            "perm_importance_mean": 0.005005667436555938,
+            "perm_importance_std": 0.0014058694912608522,
+            "mutual_info": 0.019590924616055716
+          },
+          {
+            "feature": "avg_rating_lag1_diff",
+            "rf_importance": 0.01229268727517125,
+            "perm_importance_mean": 0.004705970379288704,
+            "perm_importance_std": 0.0009110210150404411,
+            "mutual_info": 0.02247031321984405
+          },
+          {
+            "feature": "avg_rating_lag1_v",
+            "rf_importance": 0.0217077015115463,
+            "perm_importance_mean": 0.00433241471953677,
+            "perm_importance_std": 0.0007981372761783562,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "keeper_save_value_lag1_l",
+            "rf_importance": 0.013881443999999445,
+            "perm_importance_mean": 0.0042373802565457645,
+            "perm_importance_std": 0.0007691612651160012,
+            "mutual_info": 0.001342332764841636
+          },
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.018422590317595595,
+            "perm_importance_mean": 0.004112674908709824,
+            "perm_importance_std": 0.0007814915363570161,
+            "mutual_info": 0.0005188567768055208
+          },
+          {
+            "feature": "xg_shotmap_lag1_diff",
+            "rf_importance": 0.012129795340688232,
+            "perm_importance_mean": 0.003832721681683693,
+            "perm_importance_std": 0.0007838442154309255,
+            "mutual_info": 0.0034196126196794907
+          },
+          {
+            "feature": "recoveries_lag1_v",
+            "rf_importance": 0.011405421088886172,
+            "perm_importance_mean": 0.0038115785948418246,
+            "perm_importance_std": 0.0009997159980589625,
+            "mutual_info": 0.010391531416464872
+          },
+          {
+            "feature": "max_rating_lag1_v",
+            "rf_importance": 0.008126855952615709,
+            "perm_importance_mean": 0.003359690771321866,
+            "perm_importance_std": 0.0006913013739256984,
+            "mutual_info": 0.02894770173558925
+          },
+          {
+            "feature": "shots_on_target_lag1_v",
+            "rf_importance": 0.008781493819431828,
+            "perm_importance_mean": 0.003337167558906273,
+            "perm_importance_std": 0.0006571937551418305,
+            "mutual_info": 0.03764265989575577
+          },
+          {
+            "feature": "ref_reds",
+            "rf_importance": 0.012408325325787936,
+            "perm_importance_mean": 0.0029553333653509206,
+            "perm_importance_std": 0.0006793424331590282,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ball_possession_lag1_diff",
+            "rf_importance": 0.011044179479657142,
+            "perm_importance_mean": 0.002908276325321313,
+            "perm_importance_std": 0.0006169230358836684,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_red_per_game",
+            "rf_importance": 0.010143203302615384,
+            "perm_importance_mean": 0.0025967024861397125,
+            "perm_importance_std": 0.00044870914384281796,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "shots_total_lag1_diff",
+            "rf_importance": 0.009445972077859148,
+            "perm_importance_mean": 0.0024457428862723176,
+            "perm_importance_std": 0.00042533408426409747,
+            "mutual_info": 0.0
+          }
+        ]
+      },
+      "classification": {
+        "target": "hit_local",
+        "n_samples": 443,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "cuota_2",
+            "rf_importance": 0.14892678995803801,
+            "perm_importance_mean": 0.004514672686230248,
+            "perm_importance_std": 0.013278050717699993,
+            "mutual_info": 0.1317258974462916
+          },
+          {
+            "feature": "keeper_save_value_lag1_v",
+            "rf_importance": 0.014707004196692313,
+            "perm_importance_mean": 0.0027088036117381307,
+            "perm_importance_std": 0.002632483925438054,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ball_possession_lag1_v",
+            "rf_importance": 0.005134664121377331,
+            "perm_importance_mean": 0.0022573363431150906,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.004149783665438278
+          },
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.007749165918280124,
+            "perm_importance_mean": 0.0013544018058690543,
+            "perm_importance_std": 0.0014973475351491424,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "max_rating_lag1_diff",
+            "rf_importance": 0.0035868606382372403,
+            "perm_importance_mean": 0.0013544018058690543,
+            "perm_importance_std": 0.0014973475351491424,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "recoveries_lag1_v",
+            "rf_importance": 0.007303911366620473,
+            "perm_importance_mean": 0.0013544018058690543,
+            "perm_importance_std": 0.002068882932259942,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "keeper_save_value_lag1_diff",
+            "rf_importance": 0.011225084152568444,
+            "perm_importance_mean": 0.0011286681715575453,
+            "perm_importance_std": 0.0011286681715575455,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_l_4",
+            "rf_importance": 0.0015684498028536848,
+            "perm_importance_mean": 0.0009029345372460363,
+            "perm_importance_std": 0.0011058644436944206,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "fouls_lag1_l",
+            "rf_importance": 0.006302759921987315,
+            "perm_importance_mean": 0.0009029345372460363,
+            "perm_importance_std": 0.0011058644436944206,
+            "mutual_info": 0.01848209959911773
+          },
+          {
+            "feature": "avg_rating_lag1_diff",
+            "rf_importance": 0.009438735156021054,
+            "perm_importance_mean": 0.0006772009029345271,
+            "perm_importance_std": 0.001763036044222695,
+            "mutual_info": 0.018201341070520405
+          },
+          {
+            "feature": "keeper_save_value_lag1_l",
+            "rf_importance": 0.008137698977774211,
+            "perm_importance_mean": 0.0006772009029345271,
+            "perm_importance_std": 0.001445400505063827,
+            "mutual_info": 0.006975888854757972
+          },
+          {
+            "feature": "fouls_lag1_v",
+            "rf_importance": 0.0034838548002380587,
+            "perm_importance_mean": 0.00045146726862301814,
+            "perm_importance_std": 0.0009029345372460363,
+            "mutual_info": 0.01606417443555852
+          },
+          {
+            "feature": "saves_lag1_diff",
+            "rf_importance": 0.004311968789504253,
+            "perm_importance_mean": 0.00045146726862301814,
+            "perm_importance_std": 0.001689235840529971,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "won_lag1_l",
+            "rf_importance": 0.0019341677491127574,
+            "perm_importance_mean": 0.00045146726862301814,
+            "perm_importance_std": 0.0009029345372460363,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ball_possession_lag1_diff",
+            "rf_importance": 0.013586415028514083,
+            "perm_importance_mean": 0.00022573363431150907,
+            "perm_importance_std": 0.0015801354401805635,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "big_chances_lag1_v",
+            "rf_importance": 0.002824335343769967,
+            "perm_importance_mean": 0.00022573363431150907,
+            "perm_importance_std": 0.000677200902934527,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "saves_lag1_l",
+            "rf_importance": 0.004544714440091648,
+            "perm_importance_mean": 0.00022573363431150907,
+            "perm_importance_std": 0.000677200902934527,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "shots_total_lag1_v",
+            "rf_importance": 0.008092612053662135,
+            "perm_importance_mean": 0.00022573363431150907,
+            "perm_importance_std": 0.002129566846965342,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "xg_shotmap_lag1_diff",
+            "rf_importance": 0.012291913364626874,
+            "perm_importance_mean": 0.00022573363431149795,
+            "perm_importance_std": 0.002356728331582504,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "big_chances_lag1_l",
+            "rf_importance": 0.0006548214939273876,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "big_chances_missed_lag1_l",
+            "rf_importance": 0.0012685784664739602,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "corners_lag1_l",
+            "rf_importance": 0.0043467975468575145,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0017485252127346996,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "drew_lag1_l",
+            "rf_importance": 0.0007577607011775952,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.03267467902871757
+          },
+          {
+            "feature": "drew_lag1_v",
+            "rf_importance": 0.00041215477258965574,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "duels_pct_lag1_v",
+            "rf_importance": 0.0030209855392795337,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_diff",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.004163572959850148
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_l",
+            "rf_importance": 0.0003196354285666085,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.019700987146881177
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_v",
+            "rf_importance": 0.00037299303574608563,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_l",
+            "rf_importance": 7.232466423903755e-05,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_l_3",
+            "rf_importance": 0.0003786392335412774,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "target": "yield_visita",
+      "regression": {
+        "target": "yield_visita",
+        "n_samples": 381,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "recoveries_lag1_diff",
+            "rf_importance": 0.14780514910382483,
+            "perm_importance_mean": 0.05323415469052587,
+            "perm_importance_std": 0.009087935857314842,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "cuota_2",
+            "rf_importance": 0.1279599017082826,
+            "perm_importance_mean": 0.03721163435074611,
+            "perm_importance_std": 0.004158472614448736,
+            "mutual_info": 0.926128134229038
+          },
+          {
+            "feature": "corners_lag1_l",
+            "rf_importance": 0.10829143984805883,
+            "perm_importance_mean": 0.03229159941219745,
+            "perm_importance_std": 0.005720973937759398,
+            "mutual_info": 0.022360534623562245
+          },
+          {
+            "feature": "recoveries_lag1_l",
+            "rf_importance": 0.033290079112425736,
+            "perm_importance_mean": 0.012549564635861354,
+            "perm_importance_std": 0.0012036121303485308,
+            "mutual_info": 0.013897411012579575
+          },
+          {
+            "feature": "recoveries_lag1_v",
+            "rf_importance": 0.033495195715498895,
+            "perm_importance_mean": 0.010134136067600996,
+            "perm_importance_std": 0.0027748454414105233,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "log_cuota_diff",
+            "rf_importance": 0.03507269577074516,
+            "perm_importance_mean": 0.009638703790249514,
+            "perm_importance_std": 0.001813271336632099,
+            "mutual_info": 0.6833499465681738
+          },
+          {
+            "feature": "max_rating_lag1_diff",
+            "rf_importance": 0.02501741417831079,
+            "perm_importance_mean": 0.008903383666092923,
+            "perm_importance_std": 0.002240009012935222,
+            "mutual_info": 0.017013622239685944
+          },
+          {
+            "feature": "cuota_ratio_2_1",
+            "rf_importance": 0.03138284203729195,
+            "perm_importance_mean": 0.00845910767736462,
+            "perm_importance_std": 0.0017714061202992013,
+            "mutual_info": 0.6887246822971678
+          },
+          {
+            "feature": "cuota_1",
+            "rf_importance": 0.036831272291495916,
+            "perm_importance_mean": 0.006991058803346639,
+            "perm_importance_std": 0.001410686377669555,
+            "mutual_info": 0.48709173922187343
+          },
+          {
+            "feature": "cuota_x",
+            "rf_importance": 0.02930463150877778,
+            "perm_importance_mean": 0.005669980550606935,
+            "perm_importance_std": 0.0011538089178211,
+            "mutual_info": 0.16811776231367137
+          },
+          {
+            "feature": "touches_penalty_area_lag1_l",
+            "rf_importance": 0.01386213224546512,
+            "perm_importance_mean": 0.004941207684175009,
+            "perm_importance_std": 0.0007241943975658837,
+            "mutual_info": 0.01947034705268713
+          },
+          {
+            "feature": "avg_rating_lag1_diff",
+            "rf_importance": 0.016352575745157912,
+            "perm_importance_mean": 0.004704524444432856,
+            "perm_importance_std": 0.000903706592103557,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_reds",
+            "rf_importance": 0.02028062052125718,
+            "perm_importance_mean": 0.004620413714444804,
+            "perm_importance_std": 0.0011747431953860364,
+            "mutual_info": 0.04397321153436806
+          },
+          {
+            "feature": "offsides_lag1_v",
+            "rf_importance": 0.015945631893603884,
+            "perm_importance_mean": 0.004610247168499382,
+            "perm_importance_std": 0.0006849369770029315,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "keeper_save_value_lag1_v",
+            "rf_importance": 0.014341321097125397,
+            "perm_importance_mean": 0.004597975573046609,
+            "perm_importance_std": 0.0006922277943715575,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "xg_shotmap_lag1_diff",
+            "rf_importance": 0.015801613014785623,
+            "perm_importance_mean": 0.0041756627520435855,
+            "perm_importance_std": 0.00044125467769392,
+            "mutual_info": 0.00508723954818624
+          },
+          {
+            "feature": "ref_cards_per_game",
+            "rf_importance": 0.021963539879481953,
+            "perm_importance_mean": 0.004001890831273625,
+            "perm_importance_std": 0.000565363470650572,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "xg_shotmap_lag1_v",
+            "rf_importance": 0.015788132158141215,
+            "perm_importance_mean": 0.0039017283107084856,
+            "perm_importance_std": 0.0006216158701795908,
+            "mutual_info": 0.04312110380155154
+          },
+          {
+            "feature": "corners_lag1_diff",
+            "rf_importance": 0.013723713164094091,
+            "perm_importance_mean": 0.0037364679291111424,
+            "perm_importance_std": 0.0006793753088085038,
+            "mutual_info": 0.02202100892895853
+          },
+          {
+            "feature": "xg_shotmap_lag1_l",
+            "rf_importance": 0.011609908454574182,
+            "perm_importance_mean": 0.003152779871714151,
+            "perm_importance_std": 0.0005927364297049115,
+            "mutual_info": 0.03267986871273809
+          },
+          {
+            "feature": "touches_penalty_area_lag1_diff",
+            "rf_importance": 0.009439315740455756,
+            "perm_importance_mean": 0.003035466079532556,
+            "perm_importance_std": 0.0005994922021827115,
+            "mutual_info": 0.05760395032501897
+          },
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.011989339037141788,
+            "perm_importance_mean": 0.003032799528619912,
+            "perm_importance_std": 0.0005815629124151765,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_games",
+            "rf_importance": 0.017502514695775698,
+            "perm_importance_mean": 0.002989762565505516,
+            "perm_importance_std": 0.000813671751499077,
+            "mutual_info": 0.03909888836842779
+          },
+          {
+            "feature": "fouls_lag1_l",
+            "rf_importance": 0.013221911957021914,
+            "perm_importance_mean": 0.002875549292811486,
+            "perm_importance_std": 0.00029365266641024636,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "shots_total_lag1_diff",
+            "rf_importance": 0.010484248598446872,
+            "perm_importance_mean": 0.002221538415999236,
+            "perm_importance_std": 0.00048247545890516637,
+            "mutual_info": 0.04093001940453611
+          },
+          {
+            "feature": "duels_pct_lag1_v",
+            "rf_importance": 0.009671233947442704,
+            "perm_importance_mean": 0.0019782326124876846,
+            "perm_importance_std": 0.0003893642199861217,
+            "mutual_info": 0.001989072500751199
+          },
+          {
+            "feature": "max_rating_lag1_v",
+            "rf_importance": 0.008215006578079453,
+            "perm_importance_mean": 0.0019417669724297148,
+            "perm_importance_std": 0.0003305483929004745,
+            "mutual_info": 0.021940166768473546
+          },
+          {
+            "feature": "touches_penalty_area_lag1_v",
+            "rf_importance": 0.009043974324246596,
+            "perm_importance_mean": 0.0017512623294889784,
+            "perm_importance_std": 0.0001971688969486968,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "shots_inside_box_lag1_diff",
+            "rf_importance": 0.00514318450930611,
+            "perm_importance_mean": 0.001610713629398064,
+            "perm_importance_std": 0.0002523726866277732,
+            "mutual_info": 0.04003345358898791
+          },
+          {
+            "feature": "ref_yellows",
+            "rf_importance": 0.01011855912161208,
+            "perm_importance_mean": 0.0015412814295080678,
+            "perm_importance_std": 0.0006535782971031364,
+            "mutual_info": 0.0
+          }
+        ]
+      },
+      "classification": {
+        "target": "hit_visita",
+        "n_samples": 443,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "cuota_ratio_2_1",
+            "rf_importance": 0.11298367803871578,
+            "perm_importance_mean": 0.015124153498871362,
+            "perm_importance_std": 0.0030369354508067267,
+            "mutual_info": 0.10416067750223368
+          },
+          {
+            "feature": "log_cuota_diff",
+            "rf_importance": 0.11227649103669092,
+            "perm_importance_mean": 0.014898419864559842,
+            "perm_importance_std": 0.0028908010101277126,
+            "mutual_info": 0.10386973929070553
+          },
+          {
+            "feature": "cuota_1",
+            "rf_importance": 0.16326006487418052,
+            "perm_importance_mean": 0.013995485327313806,
+            "perm_importance_std": 0.002632483925438054,
+            "mutual_info": 0.11649243415836974
+          },
+          {
+            "feature": "cuota_2",
+            "rf_importance": 0.058274545291440764,
+            "perm_importance_mean": 0.007223476297968412,
+            "perm_importance_std": 0.0022117288873888617,
+            "mutual_info": 0.09518606266256491
+          },
+          {
+            "feature": "xg_shotmap_lag1_diff",
+            "rf_importance": 0.021973578395025985,
+            "perm_importance_mean": 0.004288939051918761,
+            "perm_importance_std": 0.003103324398389944,
+            "mutual_info": 0.04070087346699469
+          },
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.015904023026126205,
+            "perm_importance_mean": 0.004063205417607252,
+            "perm_importance_std": 0.0029946950702983153,
+            "mutual_info": 0.013301138346378139
+          },
+          {
+            "feature": "max_rating_lag1_v",
+            "rf_importance": 0.021175838623681272,
+            "perm_importance_mean": 0.003837471783295743,
+            "perm_importance_std": 0.003504328373873574,
+            "mutual_info": 0.03178408341529759
+          },
+          {
+            "feature": "touches_penalty_area_lag1_diff",
+            "rf_importance": 0.01967264605651621,
+            "perm_importance_mean": 0.003611738148984245,
+            "perm_importance_std": 0.0020688829322599613,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "avg_rating_lag1_diff",
+            "rf_importance": 0.015086390141018874,
+            "perm_importance_mean": 0.003160270880361227,
+            "perm_importance_std": 0.0018058690744920918,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "max_rating_lag1_diff",
+            "rf_importance": 0.014206813334663166,
+            "perm_importance_mean": 0.0027088036117381975,
+            "perm_importance_std": 0.0016892358405300066,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "touches_penalty_area_lag1_l",
+            "rf_importance": 0.013653300720605546,
+            "perm_importance_mean": 0.0024830699774266774,
+            "perm_importance_std": 0.002755430161565168,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "touches_penalty_area_lag1_v",
+            "rf_importance": 0.019008424451889713,
+            "perm_importance_mean": 0.0020316027088036594,
+            "perm_importance_std": 0.002356728331582521,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "xg_shotmap_lag1_v",
+            "rf_importance": 0.017390660180497942,
+            "perm_importance_mean": 0.0020316027088036594,
+            "perm_importance_std": 0.0018750843934352396,
+            "mutual_info": 0.029762280602294133
+          },
+          {
+            "feature": "keeper_save_value_lag1_l",
+            "rf_importance": 0.008583753406931576,
+            "perm_importance_mean": 0.0018058690744921612,
+            "perm_importance_std": 0.0009029345372460807,
+            "mutual_info": 0.005563773656064086
+          },
+          {
+            "feature": "ball_possession_lag1_v",
+            "rf_importance": 0.009312088972524885,
+            "perm_importance_mean": 0.0018058690744921391,
+            "perm_importance_std": 0.0016892358405300185,
+            "mutual_info": 0.008661584685937251
+          },
+          {
+            "feature": "cuota_x",
+            "rf_importance": 0.05340407815637028,
+            "perm_importance_mean": 0.0018058690744921168,
+            "perm_importance_std": 0.0031602708803611726,
+            "mutual_info": 0.04654086479199693
+          },
+          {
+            "feature": "avg_rating_lag1_v",
+            "rf_importance": 0.013140099113471195,
+            "perm_importance_mean": 0.0013544018058691209,
+            "perm_importance_std": 0.001105864443694475,
+            "mutual_info": 0.02606974346257318
+          },
+          {
+            "feature": "max_rating_lag1_l",
+            "rf_importance": 0.011769228225081007,
+            "perm_importance_mean": 0.0013544018058691209,
+            "perm_importance_std": 0.0018058690744921198,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "recoveries_lag1_v",
+            "rf_importance": 0.023300821193780873,
+            "perm_importance_mean": 0.0013544018058691209,
+            "perm_importance_std": 0.0018058690744921194,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "shots_inside_box_lag1_v",
+            "rf_importance": 0.008163692388596499,
+            "perm_importance_mean": 0.0013544018058691209,
+            "perm_importance_std": 0.001105864443694475,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "xg_shotmap_lag1_l",
+            "rf_importance": 0.011503803810306372,
+            "perm_importance_mean": 0.0013544018058691098,
+            "perm_importance_std": 0.0014973475351491928,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_cards_per_game",
+            "rf_importance": 0.010938302883148494,
+            "perm_importance_mean": 0.0011286681715576008,
+            "perm_importance_std": 0.0011286681715576006,
+            "mutual_info": 0.012923667011337514
+          },
+          {
+            "feature": "corners_lag1_l",
+            "rf_importance": 0.009732622964572203,
+            "perm_importance_mean": 0.0009029345372460918,
+            "perm_importance_std": 0.0014973475351491928,
+            "mutual_info": 0.023292440975017925
+          },
+          {
+            "feature": "saves_lag1_l",
+            "rf_importance": 0.0015277082479698222,
+            "perm_importance_mean": 0.0009029345372460806,
+            "perm_importance_std": 0.0011058644436944748,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "corners_lag1_diff",
+            "rf_importance": 0.005917031927658016,
+            "perm_importance_mean": 0.0006772009029345716,
+            "perm_importance_std": 0.0014454005050638758,
+            "mutual_info": 0.0012776232851663405
+          },
+          {
+            "feature": "keeper_save_value_lag1_diff",
+            "rf_importance": 0.00530368274221896,
+            "perm_importance_mean": 0.0006772009029345604,
+            "perm_importance_std": 0.001034441466130022,
+            "mutual_info": 0.03905742380977539
+          },
+          {
+            "feature": "keeper_save_value_lag1_v",
+            "rf_importance": 0.01626765266657245,
+            "perm_importance_mean": 0.00045146726862307365,
+            "perm_importance_std": 0.001967900200244118,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ball_possession_lag1_diff",
+            "rf_importance": 0.008395326066652099,
+            "perm_importance_mean": 0.0004514672686230403,
+            "perm_importance_std": 0.0009029345372460806,
+            "mutual_info": 0.011845370440344505
+          },
+          {
+            "feature": "shots_total_lag1_v",
+            "rf_importance": 0.005302170221428707,
+            "perm_importance_mean": 0.0004514672686230403,
+            "perm_importance_std": 0.0009029345372460807,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_yellows",
+            "rf_importance": 0.016402675495223763,
+            "perm_importance_mean": 2.2204460492503132e-17,
+            "perm_importance_std": 0.001427664857863842,
+            "mutual_info": 0.041540422595284676
+          }
+        ]
+      }
+    },
+    {
+      "target": "yield_empate",
+      "regression": {
+        "target": "yield_empate",
+        "n_samples": 381,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.09832438331381885,
+            "perm_importance_mean": 0.033353823852582384,
+            "perm_importance_std": 0.0060660108270803245,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "corners_lag1_l",
+            "rf_importance": 0.06480017817541696,
+            "perm_importance_mean": 0.024668667269777067,
+            "perm_importance_std": 0.006192229854644098,
+            "mutual_info": 0.012852709024313569
+          },
+          {
+            "feature": "ref_cards_per_game",
+            "rf_importance": 0.04625745546171921,
+            "perm_importance_mean": 0.01716641343868216,
+            "perm_importance_std": 0.0023221540964430618,
+            "mutual_info": 0.07190963273268203
+          },
+          {
+            "feature": "corners_lag1_diff",
+            "rf_importance": 0.0376732373503519,
+            "perm_importance_mean": 0.012059566187725556,
+            "perm_importance_std": 0.002411607989265324,
+            "mutual_info": 0.008812773561411191
+          },
+          {
+            "feature": "avg_rating_lag1_diff",
+            "rf_importance": 0.047814297774385756,
+            "perm_importance_mean": 0.011171330202186348,
+            "perm_importance_std": 0.0021595324132509266,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "cuota_x",
+            "rf_importance": 0.0404246231626761,
+            "perm_importance_mean": 0.010096043218574536,
+            "perm_importance_std": 0.0016782520045643594,
+            "mutual_info": 0.7164321971206542
+          },
+          {
+            "feature": "xg_shotmap_lag1_l",
+            "rf_importance": 0.029262863620269232,
+            "perm_importance_mean": 0.010060349632157873,
+            "perm_importance_std": 0.0024791746043145192,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "max_rating_lag1_v",
+            "rf_importance": 0.03268628001659186,
+            "perm_importance_mean": 0.009268182707055705,
+            "perm_importance_std": 0.0019046146004372375,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "touches_penalty_area_lag1_v",
+            "rf_importance": 0.02214653619360713,
+            "perm_importance_mean": 0.008380678121276585,
+            "perm_importance_std": 0.001478881825268697,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "keeper_save_value_lag1_v",
+            "rf_importance": 0.035321701702019426,
+            "perm_importance_mean": 0.006216377523329886,
+            "perm_importance_std": 0.0016941290869758184,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "xg_shotmap_lag1_v",
+            "rf_importance": 0.021511278187164126,
+            "perm_importance_mean": 0.006048614429449461,
+            "perm_importance_std": 0.0008582586517131714,
+            "mutual_info": 0.014376720898494177
+          },
+          {
+            "feature": "ball_possession_lag1_l",
+            "rf_importance": 0.03155241546485773,
+            "perm_importance_mean": 0.005608896038500522,
+            "perm_importance_std": 0.0009072018748474116,
+            "mutual_info": 0.017817685082783363
+          },
+          {
+            "feature": "duels_pct_lag1_diff",
+            "rf_importance": 0.017711945632949623,
+            "perm_importance_mean": 0.005212004412909477,
+            "perm_importance_std": 0.0008496147526114846,
+            "mutual_info": 0.00787313102430609
+          },
+          {
+            "feature": "shots_on_target_lag1_l",
+            "rf_importance": 0.014938689591295146,
+            "perm_importance_mean": 0.005052369276037472,
+            "perm_importance_std": 0.0012619083876591886,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "touches_penalty_area_lag1_diff",
+            "rf_importance": 0.018827209315715084,
+            "perm_importance_mean": 0.005014546964419153,
+            "perm_importance_std": 0.0006116345572883541,
+            "mutual_info": 0.017081131668648553
+          },
+          {
+            "feature": "ref_red_per_game",
+            "rf_importance": 0.019621157677648788,
+            "perm_importance_mean": 0.004642894342965576,
+            "perm_importance_std": 0.000426134633818077,
+            "mutual_info": 0.06571225871563602
+          },
+          {
+            "feature": "cuota_1",
+            "rf_importance": 0.020775557760904066,
+            "perm_importance_mean": 0.004442546876277831,
+            "perm_importance_std": 0.0010385146422159193,
+            "mutual_info": 0.13996354653677212
+          },
+          {
+            "feature": "shots_total_lag1_diff",
+            "rf_importance": 0.015755046813348036,
+            "perm_importance_mean": 0.004381060723871333,
+            "perm_importance_std": 0.0007192342898206221,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "max_rating_lag1_diff",
+            "rf_importance": 0.014856767486472647,
+            "perm_importance_mean": 0.004005911641424431,
+            "perm_importance_std": 0.0008484026992551124,
+            "mutual_info": 0.0052792802417389595
+          },
+          {
+            "feature": "ref_reds",
+            "rf_importance": 0.017546325267822085,
+            "perm_importance_mean": 0.003961915121271142,
+            "perm_importance_std": 0.0005670400085943425,
+            "mutual_info": 0.00020913306886072291
+          },
+          {
+            "feature": "won_lag1_l",
+            "rf_importance": 0.006726151485890135,
+            "perm_importance_mean": 0.0036210016106430374,
+            "perm_importance_std": 0.0005992785515052633,
+            "mutual_info": 0.046800739906863065
+          },
+          {
+            "feature": "cuota_2",
+            "rf_importance": 0.017584804286068463,
+            "perm_importance_mean": 0.0034967389837121886,
+            "perm_importance_std": 0.0009278199627224691,
+            "mutual_info": 0.14205977752227028
+          },
+          {
+            "feature": "ball_possession_lag1_v",
+            "rf_importance": 0.01562046107546306,
+            "perm_importance_mean": 0.0034216152902788012,
+            "perm_importance_std": 0.0008973609089839448,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "recoveries_lag1_diff",
+            "rf_importance": 0.01636758483276633,
+            "perm_importance_mean": 0.003343099459253074,
+            "perm_importance_std": 0.0010487840446757656,
+            "mutual_info": 0.023401040942707674
+          },
+          {
+            "feature": "recoveries_lag1_v",
+            "rf_importance": 0.014828618683832123,
+            "perm_importance_mean": 0.003256766946401757,
+            "perm_importance_std": 0.0004002340537971625,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_yellows",
+            "rf_importance": 0.01083709580641347,
+            "perm_importance_mean": 0.003207369808227001,
+            "perm_importance_std": 0.0004087912070016703,
+            "mutual_info": 0.049223655493839225
+          },
+          {
+            "feature": "offsides_lag1_v",
+            "rf_importance": 0.009223261079657173,
+            "perm_importance_mean": 0.0031360550801478927,
+            "perm_importance_std": 0.000390486289483916,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "fouls_lag1_l",
+            "rf_importance": 0.013283089603544252,
+            "perm_importance_mean": 0.003097570168517394,
+            "perm_importance_std": 0.0005784298874780985,
+            "mutual_info": 0.002694233408572444
+          },
+          {
+            "feature": "ref_games",
+            "rf_importance": 0.012352269405147756,
+            "perm_importance_mean": 0.002757827888158493,
+            "perm_importance_std": 0.0003522006507241324,
+            "mutual_info": 0.03944075740445996
+          },
+          {
+            "feature": "keeper_save_value_lag1_diff",
+            "rf_importance": 0.01840192875623752,
+            "perm_importance_mean": 0.0026394131425475755,
+            "perm_importance_std": 0.0006952604355069233,
+            "mutual_info": 0.0
+          }
+        ]
+      },
+      "classification": {
+        "target": "hit_empate",
+        "n_samples": 443,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "avg_rating_lag1_diff",
+            "rf_importance": 0.021515169493492827,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.005511300565312904
+          },
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.04255136980351085,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.010455412321300983
+          },
+          {
+            "feature": "avg_rating_lag1_v",
+            "rf_importance": 0.0110231048593726,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.002042160659772696
+          },
+          {
+            "feature": "ball_possession_lag1_diff",
+            "rf_importance": 0.009989502944710403,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ball_possession_lag1_l",
+            "rf_importance": 0.017306480133156322,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ball_possession_lag1_v",
+            "rf_importance": 0.007138940814044774,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "big_chances_lag1_diff",
+            "rf_importance": 6.296984951150173e-05,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "big_chances_lag1_l",
+            "rf_importance": 0.0033006153307218217,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "big_chances_lag1_v",
+            "rf_importance": 0.005161174723872276,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "big_chances_missed_lag1_diff",
+            "rf_importance": 0.00154803475322488,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.02384117734731883
+          },
+          {
+            "feature": "big_chances_missed_lag1_l",
+            "rf_importance": 0.007448509700463447,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.016371389292061833
+          },
+          {
+            "feature": "big_chances_missed_lag1_v",
+            "rf_importance": 0.0007197833069988844,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.008748901294412192
+          },
+          {
+            "feature": "corners_lag1_diff",
+            "rf_importance": 0.018698839270900366,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "corners_lag1_l",
+            "rf_importance": 0.025549516454110553,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.007835569349089688
+          },
+          {
+            "feature": "corners_lag1_v",
+            "rf_importance": 0.008469276582329814,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0077847592929423115
+          },
+          {
+            "feature": "cuota_1",
+            "rf_importance": 0.07824722349325819,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.04608438649854518
+          },
+          {
+            "feature": "cuota_2",
+            "rf_importance": 0.07903238694229305,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.052992679553857114
+          },
+          {
+            "feature": "cuota_ratio_2_1",
+            "rf_importance": 0.04331645023728539,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.036789819513714184
+          },
+          {
+            "feature": "cuota_x",
+            "rf_importance": 0.056065287961351754,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0033009805950448
+          },
+          {
+            "feature": "drew_lag1_l",
+            "rf_importance": 0.0005279044737121014,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.028723639596861084
+          },
+          {
+            "feature": "drew_lag1_v",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "duels_pct_lag1_diff",
+            "rf_importance": 0.011606254357551651,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.015206181891729509
+          },
+          {
+            "feature": "duels_pct_lag1_l",
+            "rf_importance": 0.004945804714146616,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.01925783565519379
+          },
+          {
+            "feature": "duels_pct_lag1_v",
+            "rf_importance": 0.010005969503066552,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_diff",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_l",
+            "rf_importance": 0.00047678235319231093,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.021903394784322794
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_v",
+            "rf_importance": 0.0005769595690544608,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_diff",
+            "rf_importance": 0.00368790729523965,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_l",
+            "rf_importance": 0.0012033816191509468,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_l_3",
+            "rf_importance": 0.0012062436243412758,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.02942175432844274
+          }
+        ]
+      }
+    },
+    {
+      "target": "yield_o25",
+      "regression": {
+        "target": "yield_o25",
+        "n_samples": 221,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "cuota_x",
+            "rf_importance": 0.08229653797719778,
+            "perm_importance_mean": 0.029170397014184245,
+            "perm_importance_std": 0.008360008996400062,
+            "mutual_info": 0.21902279228223875
+          },
+          {
+            "feature": "ball_possession_lag1_v",
+            "rf_importance": 0.04287147129499324,
+            "perm_importance_mean": 0.019198486983526254,
+            "perm_importance_std": 0.0039175652309949285,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_cards_per_game",
+            "rf_importance": 0.05625987990089418,
+            "perm_importance_mean": 0.0185558484392905,
+            "perm_importance_std": 0.0034956223104633285,
+            "mutual_info": 0.05198466741648744
+          },
+          {
+            "feature": "ref_red_per_game",
+            "rf_importance": 0.05781613452435958,
+            "perm_importance_mean": 0.017196584283698524,
+            "perm_importance_std": 0.0029987661663361557,
+            "mutual_info": 0.10436176459709356
+          },
+          {
+            "feature": "big_chances_lag1_l",
+            "rf_importance": 0.04541460907177146,
+            "perm_importance_mean": 0.01640206712332235,
+            "perm_importance_std": 0.004164450909295004,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "max_rating_lag1_l",
+            "rf_importance": 0.03437816501542754,
+            "perm_importance_mean": 0.014922456764436754,
+            "perm_importance_std": 0.0027670089356090287,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_l_4",
+            "rf_importance": 0.024127781648151533,
+            "perm_importance_mean": 0.012392341788884664,
+            "perm_importance_std": 0.0024701160472005777,
+            "mutual_info": 0.029161858081578007
+          },
+          {
+            "feature": "ref_reds",
+            "rf_importance": 0.034024950694479285,
+            "perm_importance_mean": 0.01146540492591791,
+            "perm_importance_std": 0.0032055690387008165,
+            "mutual_info": 0.11198715333384124
+          },
+          {
+            "feature": "ref_yellows",
+            "rf_importance": 0.033139279930946924,
+            "perm_importance_mean": 0.010531594310697667,
+            "perm_importance_std": 0.0013450492471358997,
+            "mutual_info": 0.21670589530111428
+          },
+          {
+            "feature": "xg_shotmap_lag1_diff",
+            "rf_importance": 0.032966512252324554,
+            "perm_importance_mean": 0.010009827849874631,
+            "perm_importance_std": 0.003714354154896786,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_games",
+            "rf_importance": 0.028119251403411604,
+            "perm_importance_mean": 0.00982130386330644,
+            "perm_importance_std": 0.0018919600541588647,
+            "mutual_info": 0.1298831479479743
+          },
+          {
+            "feature": "ball_possession_lag1_diff",
+            "rf_importance": 0.03102042328502275,
+            "perm_importance_mean": 0.009562235892076965,
+            "perm_importance_std": 0.002175074379084341,
+            "mutual_info": 0.05993866929548952
+          },
+          {
+            "feature": "duels_pct_lag1_diff",
+            "rf_importance": 0.025948926102932174,
+            "perm_importance_mean": 0.008680350444650842,
+            "perm_importance_std": 0.00183316322135139,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.024347063410269276,
+            "perm_importance_mean": 0.00764765037100984,
+            "perm_importance_std": 0.0017334461470689946,
+            "mutual_info": 0.027021379412125235
+          },
+          {
+            "feature": "duels_pct_lag1_l",
+            "rf_importance": 0.024156929974358716,
+            "perm_importance_mean": 0.0070097920492876,
+            "perm_importance_std": 0.0018318308560490112,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "recoveries_lag1_v",
+            "rf_importance": 0.018077995905925962,
+            "perm_importance_mean": 0.006519673730098185,
+            "perm_importance_std": 0.0013202081863154364,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "saves_lag1_diff",
+            "rf_importance": 0.016016536153750458,
+            "perm_importance_mean": 0.00554339956158636,
+            "perm_importance_std": 0.0021938529245272057,
+            "mutual_info": 0.020840697792471996
+          },
+          {
+            "feature": "keeper_save_value_lag1_l",
+            "rf_importance": 0.016888875757333385,
+            "perm_importance_mean": 0.004800387499156833,
+            "perm_importance_std": 0.0005144296797986847,
+            "mutual_info": 0.016955977695134017
+          },
+          {
+            "feature": "saves_lag1_l",
+            "rf_importance": 0.01303614235090102,
+            "perm_importance_mean": 0.004677863903386948,
+            "perm_importance_std": 0.002106583129429898,
+            "mutual_info": 0.003562592871466652
+          },
+          {
+            "feature": "max_rating_lag1_diff",
+            "rf_importance": 0.013970073325246517,
+            "perm_importance_mean": 0.004511263413803512,
+            "perm_importance_std": 0.0013857861419320076,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "touches_penalty_area_lag1_diff",
+            "rf_importance": 0.020044547582639467,
+            "perm_importance_mean": 0.004435057677746723,
+            "perm_importance_std": 0.0010673463191034197,
+            "mutual_info": 0.02960064350103986
+          },
+          {
+            "feature": "cuota_1",
+            "rf_importance": 0.01750244738602167,
+            "perm_importance_mean": 0.004261637353386772,
+            "perm_importance_std": 0.0007656754676746586,
+            "mutual_info": 0.041876077285706526
+          },
+          {
+            "feature": "keeper_save_value_lag1_v",
+            "rf_importance": 0.01670608711071223,
+            "perm_importance_mean": 0.004259648365121016,
+            "perm_importance_std": 0.0011418069363870618,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "avg_rating_lag1_v",
+            "rf_importance": 0.018625976051578976,
+            "perm_importance_mean": 0.004213910453255487,
+            "perm_importance_std": 0.0012991780041696492,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "xg_shotmap_lag1_v",
+            "rf_importance": 0.014253590958725365,
+            "perm_importance_mean": 0.00343299210547503,
+            "perm_importance_std": 0.001070705072441651,
+            "mutual_info": 0.024006202628159112
+          },
+          {
+            "feature": "xg_shotmap_lag1_l",
+            "rf_importance": 0.01451509855384338,
+            "perm_importance_mean": 0.0033349471430188737,
+            "perm_importance_std": 0.0015956859854859774,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "shots_total_lag1_v",
+            "rf_importance": 0.007812415841649355,
+            "perm_importance_mean": 0.002938177148644594,
+            "perm_importance_std": 0.0009421627355546996,
+            "mutual_info": 0.07481361558181909
+          },
+          {
+            "feature": "fouls_lag1_v",
+            "rf_importance": 0.010294922034062258,
+            "perm_importance_mean": 0.0028562931516614596,
+            "perm_importance_std": 0.0009687729396571805,
+            "mutual_info": 0.0343807980313966
+          },
+          {
+            "feature": "ball_possession_lag1_l",
+            "rf_importance": 0.01113290276277912,
+            "perm_importance_mean": 0.002805224708028642,
+            "perm_importance_std": 0.0004976976676762273,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "cuota_2",
+            "rf_importance": 0.011370135181341041,
+            "perm_importance_mean": 0.0027550828346055156,
+            "perm_importance_std": 0.00046092951961284516,
+            "mutual_info": 0.028093937889376974
+          }
+        ]
+      },
+      "classification": {
+        "target": "hit_o25",
+        "n_samples": 221,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "cuota_x",
+            "rf_importance": 0.10519743685519817,
+            "perm_importance_mean": 0.010859728506787302,
+            "perm_importance_std": 0.012507036163878068,
+            "mutual_info": 0.009865255023788766
+          },
+          {
+            "feature": "duels_pct_lag1_v",
+            "rf_importance": 0.008177744216795515,
+            "perm_importance_mean": 0.0009049773755656076,
+            "perm_importance_std": 0.003386115282148351,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_v",
+            "rf_importance": 0.001990281779588301,
+            "perm_importance_mean": 0.0004524886877828038,
+            "perm_importance_std": 0.0037586533316371247,
+            "mutual_info": 0.00035857266642769225
+          },
+          {
+            "feature": "shots_inside_box_lag1_l",
+            "rf_importance": 0.005346308207288696,
+            "perm_importance_mean": 0.0004524886877828038,
+            "perm_importance_std": 0.0037586533316371247,
+            "mutual_info": 0.022280278411662913
+          },
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.014179184667511786,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0028617897377089304,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "drew_lag1_l",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.07611278326226723
+          },
+          {
+            "feature": "drew_lag1_v",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.015027199665371471
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_diff",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.000292135835284979
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_l",
+            "rf_importance": 0.0012988836064473557,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0555854975766108
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_v",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.07139183435047469
+          },
+          {
+            "feature": "form_back_diff",
+            "rf_importance": 0.0012182742624575053,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_l_5",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_v_4",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.001944028437403933
+          },
+          {
+            "feature": "form_back_v_5",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.08851663129959952
+          },
+          {
+            "feature": "liga_Alemania",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.014572796566606483
+          },
+          {
+            "feature": "liga_Argentina",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.05556709591793729
+          },
+          {
+            "feature": "liga_Bolivia",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Ecuador",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.021138119916563447
+          },
+          {
+            "feature": "liga_Espana",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Francia",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Inglaterra",
+            "rf_importance": 0.0009043334401866914,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Noruega",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.00498512068121415
+          },
+          {
+            "feature": "liga_Peru",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.014672752704589787
+          },
+          {
+            "feature": "liga_Turquia",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Uruguay",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.02529670642809112
+          },
+          {
+            "feature": "liga_Venezuela",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.026417757322897417
+          },
+          {
+            "feature": "offsides_lag1_diff",
+            "rf_importance": 0.0022473515063613707,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.004174264264924732
+          },
+          {
+            "feature": "offsides_lag1_v",
+            "rf_importance": 0.011073344786656593,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0035049623042600936,
+            "mutual_info": 0.03406941938632424
+          },
+          {
+            "feature": "ref_novel",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "saves_lag1_l",
+            "rf_importance": 0.015994690409462886,
+            "perm_importance_mean": -1.1102230246251566e-17,
+            "perm_importance_std": 0.005723579475417887,
+            "mutual_info": 0.012555526039851772
+          }
+        ]
+      }
+    },
+    {
+      "target": "yield_u25",
+      "regression": {
+        "target": "yield_u25",
+        "n_samples": 221,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "duels_pct_lag1_diff",
+            "rf_importance": 0.07572479462904683,
+            "perm_importance_mean": 0.0339846701247975,
+            "perm_importance_std": 0.0048725561836495835,
+            "mutual_info": 0.07980317146463278
+          },
+          {
+            "feature": "big_chances_lag1_l",
+            "rf_importance": 0.06454815417655124,
+            "perm_importance_mean": 0.02941278861647053,
+            "perm_importance_std": 0.0073187881277672565,
+            "mutual_info": 0.021960938381481387
+          },
+          {
+            "feature": "cuota_x",
+            "rf_importance": 0.08201265960632587,
+            "perm_importance_mean": 0.027980136322956782,
+            "perm_importance_std": 0.007712528543281374,
+            "mutual_info": 0.16482539612412506
+          },
+          {
+            "feature": "ref_cards_per_game",
+            "rf_importance": 0.05125324722759687,
+            "perm_importance_mean": 0.014340423671696568,
+            "perm_importance_std": 0.002887172299833248,
+            "mutual_info": 0.09311435092499032
+          },
+          {
+            "feature": "ball_possession_lag1_v",
+            "rf_importance": 0.036177886417297314,
+            "perm_importance_mean": 0.013283014175202534,
+            "perm_importance_std": 0.0029912055306363576,
+            "mutual_info": 0.03119724233382204
+          },
+          {
+            "feature": "max_rating_lag1_l",
+            "rf_importance": 0.028246339569527743,
+            "perm_importance_mean": 0.011320918528966583,
+            "perm_importance_std": 0.0019044165987980232,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_reds",
+            "rf_importance": 0.035690052247069566,
+            "perm_importance_mean": 0.010537067433249203,
+            "perm_importance_std": 0.0036817014450639405,
+            "mutual_info": 0.13338553359981908
+          },
+          {
+            "feature": "shots_total_lag1_v",
+            "rf_importance": 0.024238996324752692,
+            "perm_importance_mean": 0.007660053253821575,
+            "perm_importance_std": 0.0021864521246451525,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ref_games",
+            "rf_importance": 0.030916771187507474,
+            "perm_importance_mean": 0.007497095888428018,
+            "perm_importance_std": 0.0009621554651067633,
+            "mutual_info": 0.15233478481415652
+          },
+          {
+            "feature": "ref_red_per_game",
+            "rf_importance": 0.02955460132176887,
+            "perm_importance_mean": 0.007082319388431924,
+            "perm_importance_std": 0.001310688523498429,
+            "mutual_info": 0.08401014313086996
+          },
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.020694003025037017,
+            "perm_importance_mean": 0.006721827152646987,
+            "perm_importance_std": 0.0010741472758324742,
+            "mutual_info": 0.009186813677505512
+          },
+          {
+            "feature": "form_back_l_4",
+            "rf_importance": 0.014571336017328724,
+            "perm_importance_mean": 0.006510564100506611,
+            "perm_importance_std": 0.0010836409805122511,
+            "mutual_info": 0.09857312013339081
+          },
+          {
+            "feature": "saves_lag1_diff",
+            "rf_importance": 0.01620899238008626,
+            "perm_importance_mean": 0.006235096331400636,
+            "perm_importance_std": 0.002229190936259645,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "fouls_lag1_v",
+            "rf_importance": 0.020682448511524915,
+            "perm_importance_mean": 0.0061399194558221185,
+            "perm_importance_std": 0.002530527188837386,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "big_chances_missed_lag1_l",
+            "rf_importance": 0.017557076923124585,
+            "perm_importance_mean": 0.005883845171805624,
+            "perm_importance_std": 0.0017751046881498162,
+            "mutual_info": 0.06045383709146401
+          },
+          {
+            "feature": "duels_pct_lag1_l",
+            "rf_importance": 0.022229861381418487,
+            "perm_importance_mean": 0.005549772313090773,
+            "perm_importance_std": 0.0014535077620139807,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "ball_possession_lag1_diff",
+            "rf_importance": 0.018999502187727356,
+            "perm_importance_mean": 0.005411758363584318,
+            "perm_importance_std": 0.0008942373153522302,
+            "mutual_info": 0.06827319929796216
+          },
+          {
+            "feature": "xg_shotmap_lag1_diff",
+            "rf_importance": 0.024388252723565342,
+            "perm_importance_mean": 0.0054088056461393365,
+            "perm_importance_std": 0.0015503687582916982,
+            "mutual_info": 0.014166602458370647
+          },
+          {
+            "feature": "keeper_save_value_lag1_l",
+            "rf_importance": 0.016113422787123577,
+            "perm_importance_mean": 0.004945589071586676,
+            "perm_importance_std": 0.0011378610925882975,
+            "mutual_info": 0.02544841703235301
+          },
+          {
+            "feature": "xg_shotmap_lag1_v",
+            "rf_importance": 0.01467050235271131,
+            "perm_importance_mean": 0.004616645635601347,
+            "perm_importance_std": 0.0012748780587495678,
+            "mutual_info": 0.014920710360105893
+          },
+          {
+            "feature": "offsides_lag1_v",
+            "rf_importance": 0.009804282111401582,
+            "perm_importance_mean": 0.004512660970438643,
+            "perm_importance_std": 0.0017835497999678855,
+            "mutual_info": 0.0009519540432383344
+          },
+          {
+            "feature": "avg_rating_lag1_diff",
+            "rf_importance": 0.01491362160631286,
+            "perm_importance_mean": 0.004383407458131883,
+            "perm_importance_std": 0.0010071524359839968,
+            "mutual_info": 0.015060727514185412
+          },
+          {
+            "feature": "ref_yellows",
+            "rf_importance": 0.018118188452843735,
+            "perm_importance_mean": 0.0042173906561461475,
+            "perm_importance_std": 0.0006634449316833501,
+            "mutual_info": 0.05550602589446019
+          },
+          {
+            "feature": "recoveries_lag1_l",
+            "rf_importance": 0.014575147665155323,
+            "perm_importance_mean": 0.004063467148490829,
+            "perm_importance_std": 0.00098061657082848,
+            "mutual_info": 0.05971127060109449
+          },
+          {
+            "feature": "ball_possession_lag1_l",
+            "rf_importance": 0.016770412824775805,
+            "perm_importance_mean": 0.004016841170494223,
+            "perm_importance_std": 0.0013161366608106175,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "cuota_1",
+            "rf_importance": 0.0164225223044218,
+            "perm_importance_mean": 0.003916359357981558,
+            "perm_importance_std": 0.0007595741212514903,
+            "mutual_info": 0.017920052731713376
+          },
+          {
+            "feature": "avg_rating_lag1_v",
+            "rf_importance": 0.016467548600018013,
+            "perm_importance_mean": 0.0036689744529028066,
+            "perm_importance_std": 0.00096023872616547,
+            "mutual_info": 0.025485854505212124
+          },
+          {
+            "feature": "xg_shotmap_lag1_l",
+            "rf_importance": 0.012237712535923212,
+            "perm_importance_mean": 0.0032643211978031104,
+            "perm_importance_std": 0.0013282400537382947,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "max_rating_lag1_v",
+            "rf_importance": 0.011674645807278177,
+            "perm_importance_mean": 0.0032232486087595434,
+            "perm_importance_std": 0.000768195384408982,
+            "mutual_info": 0.02886713562641674
+          },
+          {
+            "feature": "saves_lag1_l",
+            "rf_importance": 0.01033831220229319,
+            "perm_importance_mean": 0.003181571214718759,
+            "perm_importance_std": 0.0008696792674538679,
+            "mutual_info": 0.0
+          }
+        ]
+      },
+      "classification": {
+        "target": "hit_u25",
+        "n_samples": 221,
+        "n_features": 92,
+        "importance": [
+          {
+            "feature": "cuota_x",
+            "rf_importance": 0.10519743685519817,
+            "perm_importance_mean": 0.010859728506787302,
+            "perm_importance_std": 0.012507036163878068,
+            "mutual_info": 0.009865255023788766
+          },
+          {
+            "feature": "duels_pct_lag1_v",
+            "rf_importance": 0.008177744216795515,
+            "perm_importance_mean": 0.0009049773755656076,
+            "perm_importance_std": 0.003386115282148351,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_v",
+            "rf_importance": 0.001990281779588301,
+            "perm_importance_mean": 0.0004524886877828038,
+            "perm_importance_std": 0.0037586533316371247,
+            "mutual_info": 0.00035857266642769225
+          },
+          {
+            "feature": "shots_inside_box_lag1_l",
+            "rf_importance": 0.005346308207288696,
+            "perm_importance_mean": 0.0004524886877828038,
+            "perm_importance_std": 0.0037586533316371247,
+            "mutual_info": 0.022280278411662913
+          },
+          {
+            "feature": "avg_rating_lag1_l",
+            "rf_importance": 0.014179184667511786,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0028617897377089304,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "drew_lag1_l",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.07611278326226723
+          },
+          {
+            "feature": "drew_lag1_v",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.015027199665371471
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_diff",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.000292135835284979
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_l",
+            "rf_importance": 0.0012988836064473557,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0555854975766108
+          },
+          {
+            "feature": "errors_lead_to_shot_lag1_v",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.07139183435047469
+          },
+          {
+            "feature": "form_back_diff",
+            "rf_importance": 0.0012182742624575053,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_l_5",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "form_back_v_4",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.001944028437403933
+          },
+          {
+            "feature": "form_back_v_5",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.08851663129959952
+          },
+          {
+            "feature": "liga_Alemania",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.014572796566606483
+          },
+          {
+            "feature": "liga_Argentina",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.05556709591793729
+          },
+          {
+            "feature": "liga_Bolivia",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Ecuador",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.021138119916563447
+          },
+          {
+            "feature": "liga_Espana",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Francia",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Inglaterra",
+            "rf_importance": 0.0009043334401866914,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Noruega",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.00498512068121415
+          },
+          {
+            "feature": "liga_Peru",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.014672752704589787
+          },
+          {
+            "feature": "liga_Turquia",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "liga_Uruguay",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.02529670642809112
+          },
+          {
+            "feature": "liga_Venezuela",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.026417757322897417
+          },
+          {
+            "feature": "offsides_lag1_diff",
+            "rf_importance": 0.0022473515063613707,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.004174264264924732
+          },
+          {
+            "feature": "offsides_lag1_v",
+            "rf_importance": 0.011073344786656593,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0035049623042600936,
+            "mutual_info": 0.03406941938632424
+          },
+          {
+            "feature": "ref_novel",
+            "rf_importance": 0.0,
+            "perm_importance_mean": 0.0,
+            "perm_importance_std": 0.0,
+            "mutual_info": 0.0
+          },
+          {
+            "feature": "saves_lag1_l",
+            "rf_importance": 0.015994690409462886,
+            "perm_importance_mean": -1.1102230246251566e-17,
+            "perm_importance_std": 0.005723579475417887,
+            "mutual_info": 0.012555526039851772
+          }
+        ]
+      }
+    }
+  ]
+}

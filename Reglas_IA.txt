@@ -20,12 +20,100 @@ II. LA BIBLIA MATEMÁTICA (EL NÚCLEO INTOCABLE)
 Estas son las fórmulas exactas que rigen el fondo. Bajo ninguna circunstancia se deben alterar las constantes sin autorización explícita.
 
 A. Cálculo de xG Híbrido (Interno):
-Está estrictamente prohibido usar APIs externas para extraer "xG pre-cocinado". El motor_data.py debe construir el xG de cada partido leyendo la estadística cruda de ESPN y combinándola con los goles reales para obtener un modelo híbrido.
+El motor_data.py construye el xG de cada partido leyendo la estadística cruda de ESPN
+y combinándola con los goles reales para obtener un modelo híbrido.
 
-Fórmula de Componente Estadístico: (Tiros al Arco * 0.30) + (Tiros Fuera/Bloqueados * 0.04) + (Córners * Coef_Liga)
-Fórmula Híbrida Final: (Componente Estadístico * 0.70) + (Goles Reales * 0.30)
+Fórmula V0 LEGACY (P4 fase3 OLS recalibrada):
+  xg_calc = (SOT * β_sot[liga]) + (shots_off * β_shots_off) + (corners * coef_corner[liga])
+  xg_final_v0 = (xg_calc * 0.70) + (goles_reales * 0.30)
 
-Ajuste por 'Score Effects': El xG crudo se ajusta según el resultado del partido para normalizar el comportamiento de los equipos (un equipo que va ganando tiende a ser más conservador).
+Donde:
+  β_sot[liga]: per liga desde config_motor_valores.beta_sot (default global 0.352)
+  β_shots_off: 0.010 global
+  coef_corner[liga]: ligas_stats.coef_corner_calculado (default 0.03)
+
+Ajuste por 'Score Effects': El xG crudo se ajusta según el resultado del partido.
+
+[V2 — APROBADO 2026-05-04 — bead adepor-atn — MANIFESTO-CHANGE-APPROVED]
+A.bis Cálculo de xG Híbrido SOFA per-liga (V2):
+Validado empíricamente en POC ablation v2 N=465 eventos forward-EMA RMSE.
+Solución al bias estructural detectado: ESPN devuelve stats=0 en LATAM exóticas
+(Bolivia/Venezuela/Uruguay/Ecuador), causando xg_v0=0 → motor falla en esas ligas.
+
+Fórmula V2 (paralela a V0, no la reemplaza):
+  xg_shotmap_sofa = Σ P(goal | shot_features) sobre shots SofaScore (Caley-Maye 2015)
+  sofa_final = (xg_shotmap_sofa * 0.70) + (goles_reales * 0.30)
+  xg_final_v2 = α(liga) · sofa_final + (1 − α(liga)) · xg_final_v0
+
+Donde:
+  α(liga) ∈ config_motor_valores.alpha_xg_v2_hibrido_sofa (per liga)
+  Default per liga (validado POC):
+    Bolivia/Venezuela/Uruguay  → α=1.00 (SOFA puro, ESPN inservible)
+    Ecuador                    → α=0.95
+    Perú                       → α=0.85
+    Argentina/Brasil           → α=0.50 (híbrido balanceado)
+    Inglaterra/España/Alemania → α=0.30
+    Italia                     → α=0.40
+    Francia                    → α=0.25
+    Turquía                    → α=0.35
+    Noruega/Chile/Colombia     → α=0.30
+    Global fallback            → α=0.30
+
+xg_shotmap_sofa coefs (LogReg sobre shotmap, persistido en config_motor_valores.xg_model_coefs_v2):
+  Brier 5-fold CV = 0.0778 ± 0.0035 (industria estándar 0.07-0.10)
+  N train: 19,660 shots, 2,062 goles (10.49% conversion)
+  Calibración: ratio sum_xG/goles = 1.000 in-sample
+  Coefs principales (z-scored): distance=-0.84, angle=+0.45, body_head=-0.35, sit_penalty=+0.30
+
+[V3 UPDATE — APROBADO 2026-05-04 — bead shotmap_v1_xg_v3 — MANIFESTO-CHANGE-APPROVED]
+xg_shotmap V3 híbrido por shot (mejor que V2 LogReg puro):
+  xg_v3_per_shot = shot.xgot if shot.xgot is not None else logreg_custom(shot)
+  xg_v3_team = sum(xg_v3_per_shot) for shots of team
+
+Cobertura SofaScore xgot field:
+  100% populated en: ENG/ESP/ITA/ALE/FRA/TUR/NOR/BRA + URU(36%) (9 ligas mainstream)
+  0% populated en: ARG/BOL/ECU/PER/VEN (5 LATAM exóticas)
+
+En ligas LATAM exóticas: V3 == V_custom (fallback puro, sin cambio)
+En ligas mainstream: V3 usa xgot SOFA directo (entrenado SofaScore con N enorme).
+
+Validación empírica (N=762 partidos, 1,524 eventos):
+  V_custom global: RMSE 1.0467, corr +0.4914
+  V_v3 global:     RMSE 0.8836 (-16%), corr +0.6753 (+37%)
+
+Per-liga RMSE delta (V_v3 vs V_custom):
+  Italia       -0.35 WIN     Brasil       -0.36 WIN
+  Francia      -0.39 WIN     Inglaterra   -0.34 WIN
+  Turquia      -0.30 WIN     Alemania     -0.25 WIN
+  Espana       -0.24 WIN     Noruega      -0.23 WIN
+  ARG/BOL/ECU/PER/VEN: 0 (TIE, fallback custom)
+  Uruguay      +0.10 LOSS (xgot 36% partial, blend subóptimo)
+
+Implementación:
+  - sofascore_match_features.xg_v3_l/v cols (ALTERed 2026-05-04)
+  - motor_data.py:calcular_xg_v2_hibrido_sofa preferential lookup xg_v3 > xg_shotmap fallback
+  - rebuild_ema_v2.py re-ejecutado con V3 (322 equipos updated 2026-05-04 13:40)
+  - analisis/xg_v3_hibrido_sofa_custom.py (script reproducible)
+  - analisis/xg_v3_sofa_vs_custom_comparativa.py (comparación empírica)
+
+Snapshot pre-V3: snapshots/fondo_quant_20260504_133955_pre_xg_v3_rebuild.db
+
+Modo de operación (config_motor_valores.xg_v2_hibrido_modo):
+  'shadow' (default): NO afecta producción, V0 sigue siendo el motor productivo.
+                      V2 solo se loggea en picks_shadow_xg_v2 para validación.
+  'active': V2 reemplaza a V0 en motor productivo. Requiere:
+    1. N≥80 partidos SHADOW logged con yield/Brier comparables o mejores
+    2. Cascada de recalibración previa: rho DC, gamma_1x2, factor_corr_xg_ou, EMAs
+    3. Confirmación humana adicional (segunda revisión)
+
+Si SOFA NO disponible para un partido (sin row en sofascore_match_features):
+  → fallback automático a calcular_xg_hibrido (V0 legacy)
+
+Implementación: src/ingesta/motor_data.py:calcular_xg_v2_hibrido_sofa
+Tabla SHADOW logging: picks_shadow_xg_v2
+Bead PROPOSAL: adepor-atn (label proposal-manifesto + approved-by-lead)
+Evidencia: docs/papers/motor_xg_v2_resultados_finales.md
+Snapshot pre-cambio: snapshots/fondo_quant_20260504_102513_pre_xg_v2_hibrido.db
 
 B. MEMORIA ESTOCÁSTICA Y FILTRO DE VARIANZA (motor_data.py)
 - EMA (Media Móvil Exponencial): Se aplica al xG_Crudo_Total. La constante ALFA es específica

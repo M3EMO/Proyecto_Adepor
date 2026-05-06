@@ -1,0 +1,70 @@
+{
+  "n_universal_union": 16588,
+  "n_no_ema": 12028,
+  "n_warmup_skipped": 298,
+  "n_universo_final": 4262,
+  "por_liga": {
+    "Argentina": {
+      "total": 929,
+      "con_pos": 929,
+      "fuentes": "fdco,backtest"
+    },
+    "Italia": {
+      "total": 851,
+      "con_pos": 848,
+      "fuentes": "fdco,backtest"
+    },
+    "Brasil": {
+      "total": 746,
+      "con_pos": 746,
+      "fuentes": "fdco,backtest"
+    },
+    "Espana": {
+      "total": 527,
+      "con_pos": 521,
+      "fuentes": "fdco,backtest"
+    },
+    "Francia": {
+      "total": 506,
+      "con_pos": 501,
+      "fuentes": "fdco,backtest"
+    },
+    "Inglaterra": {
+      "total": 315,
+      "con_pos": 308,
+      "fuentes": "fdco,backtest"
+    },
+    "Turquia": {
+      "total": 249,
+      "con_pos": 246,
+      "fuentes": "fdco,backtest"
+    },
+    "Alemania": {
+      "total": 92,
+      "con_pos": 85,
+      "fuentes": "fdco,backtest"
+    },
+    "Colombia": {
+      "total": 23,
+      "con_pos": 0,
+      "fuentes": "backtest"
+    },
+    "Noruega": {
+      "total": 15,
+      "con_pos": 9,
+      "fuentes": "backtest"
+    },
+    "Chile": {
+      "total": 9,
+      "con_pos": 9,
+      "fuentes": "backtest"
+    }
+  },
+  "por_temp": {
+    "2022": 316,
+    "2023": 964,
+    "2024": 1006,
+    "2025": 1061,
+    "2026": 915
+  }
+}

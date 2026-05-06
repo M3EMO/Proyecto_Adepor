@@ -1,0 +1,1136 @@
+{
+  "_meta": {
+    "N_partidos": 13430,
+    "N_eventos_total": 26860,
+    "N_partidos_cuotas_matched": 8892,
+    "N_eventos_cuotas_matched": 17784,
+    "WARMUP": 5,
+    "thetas_grid": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3
+    ],
+    "best_theta_OOS_no_cuotas": "0.30",
+    "best_OOS_RMSE_no_cuotas": 1.1953150173204203,
+    "best_theta_OOS_con_cuotas": "0.30",
+    "best_OOS_RMSE_con_cuotas": 1.1936243916545723,
+    "baseline_V5_RMSE": 1.1963,
+    "breaks_poisson_floor_no_cuotas": false,
+    "breaks_poisson_floor_con_cuotas": false,
+    "feat_cols": [
+      "sot",
+      "shots_off",
+      "corners",
+      "pos",
+      "pass_pct",
+      "saves",
+      "blocks",
+      "longballs_acc",
+      "sot_rival",
+      "shots_off_rival",
+      "corners_rival",
+      "pos_rival",
+      "pass_pct_rival",
+      "saves_rival",
+      "blocks_rival",
+      "longballs_acc_rival",
+      "ema_sot",
+      "ema_pos",
+      "ema_goles_l3",
+      "es_local",
+      "liga_Argentina",
+      "liga_Brasil",
+      "liga_Inglaterra",
+      "liga_Espana",
+      "liga_Italia",
+      "liga_Turquia",
+      "liga_Francia",
+      "liga_Alemania",
+      "liga_Noruega",
+      "liga_Chile",
+      "liga_Colombia",
+      "liga_Bolivia",
+      "liga_Venezuela",
+      "liga_Peru",
+      "liga_Ecuador",
+      "liga_Uruguay"
+    ],
+    "feat_cols_cuotas": [
+      "sot",
+      "shots_off",
+      "corners",
+      "pos",
+      "pass_pct",
+      "saves",
+      "blocks",
+      "longballs_acc",
+      "sot_rival",
+      "shots_off_rival",
+      "corners_rival",
+      "pos_rival",
+      "pass_pct_rival",
+      "saves_rival",
+      "blocks_rival",
+      "longballs_acc_rival",
+      "ema_sot",
+      "ema_pos",
+      "ema_goles_l3",
+      "es_local",
+      "p_imp_propio",
+      "p_imp_x",
+      "p_imp_rival",
+      "liga_Argentina",
+      "liga_Brasil",
+      "liga_Inglaterra",
+      "liga_Espana",
+      "liga_Italia",
+      "liga_Turquia",
+      "liga_Francia",
+      "liga_Alemania",
+      "liga_Noruega",
+      "liga_Chile",
+      "liga_Colombia",
+      "liga_Bolivia",
+      "liga_Venezuela",
+      "liga_Peru",
+      "liga_Ecuador",
+      "liga_Uruguay"
+    ]
+  },
+  "GroupKFold_NO_cuotas": {
+    "fold_info": [
+      {
+        "fold": 0,
+        "n_train": 21488,
+        "n_test": 5372,
+        "best_params": {
+          "max_depth": 4,
+          "n_estimators": 200,
+          "learning_rate": 0.1,
+          "reg_alpha": 0.1,
+          "reg_lambda": 10.0,
+          "min_child_weight": 10,
+          "random_state": 42
+        },
+        "rmse_val": 0.7197972607950941,
+        "dof": {
+          "n_trees": 200,
+          "avg_leaves": 12.955,
+          "dof_estimado": 2591,
+          "dof_cap_10:1": 1719,
+          "dof_safe": false
+        }
+      },
+      {
+        "fold": 1,
+        "n_train": 21488,
+        "n_test": 5372,
+        "best_params": {
+          "max_depth": 3,
+          "n_estimators": 200,
+          "learning_rate": 0.1,
+          "reg_alpha": 0.1,
+          "reg_lambda": 10.0,
+          "min_child_weight": 10,
+          "random_state": 43
+        },
+        "rmse_val": 0.710190192359572,
+        "dof": {
+          "n_trees": 200,
+          "avg_leaves": 7.405,
+          "dof_estimado": 1481,
+          "dof_cap_10:1": 1719,
+          "dof_safe": true
+        }
+      },
+      {
+        "fold": 2,
+        "n_train": 21488,
+        "n_test": 5372,
+        "best_params": {
+          "max_depth": 4,
+          "n_estimators": 200,
+          "learning_rate": 0.1,
+          "reg_alpha": 1.0,
+          "reg_lambda": 0.1,
+          "min_child_weight": 10,
+          "random_state": 44
+        },
+        "rmse_val": 0.7494076874609726,
+        "dof": {
+          "n_trees": 200,
+          "avg_leaves": 13.75,
+          "dof_estimado": 2750,
+          "dof_cap_10:1": 1719,
+          "dof_safe": false
+        }
+      },
+      {
+        "fold": 3,
+        "n_train": 21488,
+        "n_test": 5372,
+        "best_params": {
+          "max_depth": 3,
+          "n_estimators": 200,
+          "learning_rate": 0.1,
+          "reg_alpha": 1.0,
+          "reg_lambda": 10.0,
+          "min_child_weight": 10,
+          "random_state": 45
+        },
+        "rmse_val": 0.7501931836686664,
+        "dof": {
+          "n_trees": 200,
+          "avg_leaves": 7.305,
+          "dof_estimado": 1461,
+          "dof_cap_10:1": 1719,
+          "dof_safe": true
+        }
+      },
+      {
+        "fold": 4,
+        "n_train": 21488,
+        "n_test": 5372,
+        "best_params": {
+          "max_depth": 3,
+          "n_estimators": 200,
+          "learning_rate": 0.1,
+          "reg_alpha": 0.1,
+          "reg_lambda": 10.0,
+          "min_child_weight": 10,
+          "random_state": 46
+        },
+        "rmse_val": 0.7519249055034923,
+        "dof": {
+          "n_trees": 200,
+          "avg_leaves": 7.62,
+          "dof_estimado": 1524,
+          "dof_cap_10:1": 1719,
+          "dof_safe": true
+        }
+      }
+    ],
+    "grid": {
+      "0.05": {
+        "2022": {
+          "rmse": 1.2010907113048197,
+          "n": 4748
+        },
+        "2023": {
+          "rmse": 1.216508530024809,
+          "n": 9202
+        },
+        "2024": {
+          "rmse": 1.1867247769696792,
+          "n": 7972
+        },
+        "2025": {
+          "rmse": 1.2058149861722347,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.2034700380640595,
+          "n": 665
+        },
+        "OOS_pool": {
+          "rmse": 1.202727159411263,
+          "n": 24168
+        },
+        "IS_2026": {
+          "rmse": 1.2034700380640595,
+          "n": 665
+        }
+      },
+      "0.10": {
+        "2022": {
+          "rmse": 1.1979218175381257,
+          "n": 4748
+        },
+        "2023": {
+          "rmse": 1.2146162540528362,
+          "n": 9202
+        },
+        "2024": {
+          "rmse": 1.1854328256914357,
+          "n": 7972
+        },
+        "2025": {
+          "rmse": 1.2055350401664406,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.2020159632520349,
+          "n": 665
+        },
+        "OOS_pool": {
+          "rmse": 1.2009304130121239,
+          "n": 24168
+        },
+        "IS_2026": {
+          "rmse": 1.2020159632520349,
+          "n": 665
+        }
+      },
+      "0.15": {
+        "2022": {
+          "rmse": 1.1950057989004523,
+          "n": 4748
+        },
+        "2023": {
+          "rmse": 1.212895900902935,
+          "n": 9202
+        },
+        "2024": {
+          "rmse": 1.184256632990827,
+          "n": 7972
+        },
+        "2025": {
+          "rmse": 1.2052827417341985,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.200678652060947,
+          "n": 665
+        },
+        "OOS_pool": {
+          "rmse": 1.1992902119245703,
+          "n": 24168
+        },
+        "IS_2026": {
+          "rmse": 1.200678652060947,
+          "n": 665
+        }
+      },
+      "0.20": {
+        "2022": {
+          "rmse": 1.1923445107007906,
+          "n": 4748
+        },
+        "2023": {
+          "rmse": 1.2113482030681901,
+          "n": 9202
+        },
+        "2024": {
+          "rmse": 1.1831965440879666,
+          "n": 7972
+        },
+        "2025": {
+          "rmse": 1.2050581082409109,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.199458495040337,
+          "n": 665
+        },
+        "OOS_pool": {
+          "rmse": 1.1978071992383936,
+          "n": 24168
+        },
+        "IS_2026": {
+          "rmse": 1.199458495040337,
+          "n": 665
+        }
+      },
+      "0.25": {
+        "2022": {
+          "rmse": 1.18993966204663,
+          "n": 4748
+        },
+        "2023": {
+          "rmse": 1.2099738230877173,
+          "n": 9202
+        },
+        "2024": {
+          "rmse": 1.1822528713027443,
+          "n": 7972
+        },
+        "2025": {
+          "rmse": 1.2048611551600712,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.1983558500467772,
+          "n": 665
+        },
+        "OOS_pool": {
+          "rmse": 1.1964819594482878,
+          "n": 24168
+        },
+        "IS_2026": {
+          "rmse": 1.1983558500467772,
+          "n": 665
+        }
+      },
+      "0.30": {
+        "2022": {
+          "rmse": 1.1877928105295652,
+          "n": 4748
+        },
+        "2023": {
+          "rmse": 1.2087733521508817,
+          "n": 9202
+        },
+        "2024": {
+          "rmse": 1.1814258935999369,
+          "n": 7972
+        },
+        "2025": {
+          "rmse": 1.20469189606796,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.1973710417266665,
+          "n": 665
+        },
+        "OOS_pool": {
+          "rmse": 1.1953150173204203,
+          "n": 24168
+        },
+        "IS_2026": {
+          "rmse": 1.1973710417266665,
+          "n": 665
+        }
+      }
+    },
+    "n_total": 26860,
+    "use_cuotas": false,
+    "n_nan_imputed": 0
+  },
+  "GroupKFold_CON_cuotas": {
+    "fold_info": [
+      {
+        "fold": 0,
+        "n_train": 14227,
+        "n_test": 3557,
+        "best_params": {
+          "max_depth": 4,
+          "n_estimators": 200,
+          "learning_rate": 0.1,
+          "reg_alpha": 0.1,
+          "reg_lambda": 10.0,
+          "min_child_weight": 10,
+          "random_state": 42
+        },
+        "rmse_val": 0.5348252074430234,
+        "dof": {
+          "n_trees": 190,
+          "avg_leaves": 13.378947368421052,
+          "dof_estimado": 2542,
+          "dof_cap_10:1": 1138,
+          "dof_safe": false
+        }
+      },
+      {
+        "fold": 1,
+        "n_train": 14227,
+        "n_test": 3557,
+        "best_params": {
+          "max_depth": 4,
+          "n_estimators": 200,
+          "learning_rate": 0.05,
+          "reg_alpha": 1.0,
+          "reg_lambda": 0.1,
+          "min_child_weight": 10,
+          "random_state": 43
+        },
+        "rmse_val": 0.5672626999451003,
+        "dof": {
+          "n_trees": 200,
+          "avg_leaves": 14.49,
+          "dof_estimado": 2898,
+          "dof_cap_10:1": 1138,
+          "dof_safe": false
+        }
+      },
+      {
+        "fold": 2,
+        "n_train": 14227,
+        "n_test": 3557,
+        "best_params": {
+          "max_depth": 3,
+          "n_estimators": 200,
+          "learning_rate": 0.1,
+          "reg_alpha": 0.01,
+          "reg_lambda": 1.0,
+          "min_child_weight": 10,
+          "random_state": 44
+        },
+        "rmse_val": 0.5342282581769141,
+        "dof": {
+          "n_trees": 200,
+          "avg_leaves": 7.52,
+          "dof_estimado": 1504,
+          "dof_cap_10:1": 1138,
+          "dof_safe": false
+        }
+      },
+      {
+        "fold": 3,
+        "n_train": 14227,
+        "n_test": 3557,
+        "best_params": {
+          "max_depth": 4,
+          "n_estimators": 200,
+          "learning_rate": 0.05,
+          "reg_alpha": 0.1,
+          "reg_lambda": 1.0,
+          "min_child_weight": 10,
+          "random_state": 45
+        },
+        "rmse_val": 0.5468979688320394,
+        "dof": {
+          "n_trees": 200,
+          "avg_leaves": 14.635,
+          "dof_estimado": 2927,
+          "dof_cap_10:1": 1138,
+          "dof_safe": false
+        }
+      },
+      {
+        "fold": 4,
+        "n_train": 14228,
+        "n_test": 3556,
+        "best_params": {
+          "max_depth": 3,
+          "n_estimators": 200,
+          "learning_rate": 0.1,
+          "reg_alpha": 0.1,
+          "reg_lambda": 10.0,
+          "min_child_weight": 10,
+          "random_state": 46
+        },
+        "rmse_val": 0.5624903664269162,
+        "dof": {
+          "n_trees": 200,
+          "avg_leaves": 7.46,
+          "dof_estimado": 1492,
+          "dof_cap_10:1": 1138,
+          "dof_safe": false
+        }
+      }
+    ],
+    "grid": {
+      "0.05": {
+        "2022": {
+          "rmse": 1.1911463500317263,
+          "n": 2495
+        },
+        "2023": {
+          "rmse": 1.2084368680080964,
+          "n": 5918
+        },
+        "2024": {
+          "rmse": 1.1885355864099543,
+          "n": 5601
+        },
+        "2025": {
+          "rmse": 1.2059003053960662,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.154501141093252,
+          "n": 395
+        },
+        "OOS_pool": {
+          "rmse": 1.1986139445620787,
+          "n": 16260
+        },
+        "IS_2026": {
+          "rmse": 1.154501141093252,
+          "n": 395
+        }
+      },
+      "0.10": {
+        "2022": {
+          "rmse": 1.1890993118735063,
+          "n": 2495
+        },
+        "2023": {
+          "rmse": 1.2072297743285845,
+          "n": 5918
+        },
+        "2024": {
+          "rmse": 1.1875480904067879,
+          "n": 5601
+        },
+        "2025": {
+          "rmse": 1.2056158643561867,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.153697011467817,
+          "n": 395
+        },
+        "OOS_pool": {
+          "rmse": 1.1974821341456168,
+          "n": 16260
+        },
+        "IS_2026": {
+          "rmse": 1.153697011467817,
+          "n": 395
+        }
+      },
+      "0.15": {
+        "2022": {
+          "rmse": 1.1871643073026166,
+          "n": 2495
+        },
+        "2023": {
+          "rmse": 1.206097871685367,
+          "n": 5918
+        },
+        "2024": {
+          "rmse": 1.1866140708883992,
+          "n": 5601
+        },
+        "2025": {
+          "rmse": 1.20535773172424,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.1529317198724478,
+          "n": 395
+        },
+        "OOS_pool": {
+          "rmse": 1.1964171005017379,
+          "n": 16260
+        },
+        "IS_2026": {
+          "rmse": 1.1529317198724478,
+          "n": 395
+        }
+      },
+      "0.20": {
+        "2022": {
+          "rmse": 1.1853418849849469,
+          "n": 2495
+        },
+        "2023": {
+          "rmse": 1.2050413719606439,
+          "n": 5918
+        },
+        "2024": {
+          "rmse": 1.1857336542273957,
+          "n": 5601
+        },
+        "2025": {
+          "rmse": 1.2051259244056558,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.152205343695482,
+          "n": 395
+        },
+        "OOS_pool": {
+          "rmse": 1.1954190221105732,
+          "n": 16260
+        },
+        "IS_2026": {
+          "rmse": 1.152205343695482,
+          "n": 395
+        }
+      },
+      "0.25": {
+        "2022": {
+          "rmse": 1.1836325649445165,
+          "n": 2495
+        },
+        "2023": {
+          "rmse": 1.2040604736407245,
+          "n": 5918
+        },
+        "2024": {
+          "rmse": 1.1849069599087345,
+          "n": 5601
+        },
+        "2025": {
+          "rmse": 1.2049204575941357,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.1515179565803242,
+          "n": 395
+        },
+        "OOS_pool": {
+          "rmse": 1.1944880668095408,
+          "n": 16260
+        },
+        "IS_2026": {
+          "rmse": 1.1515179565803242,
+          "n": 395
+        }
+      },
+      "0.30": {
+        "2022": {
+          "rmse": 1.1820368378463162,
+          "n": 2495
+        },
+        "2023": {
+          "rmse": 1.2031553616326311,
+          "n": 5918
+        },
+        "2024": {
+          "rmse": 1.1841341004499635,
+          "n": 5601
+        },
+        "2025": {
+          "rmse": 1.2047413447666784,
+          "n": 2246
+        },
+        "2026": {
+          "rmse": 1.1508696283886992,
+          "n": 395
+        },
+        "OOS_pool": {
+          "rmse": 1.1936243916545723,
+          "n": 16260
+        },
+        "IS_2026": {
+          "rmse": 1.1508696283886992,
+          "n": 395
+        }
+      }
+    },
+    "n_total": 17784,
+    "use_cuotas": true,
+    "n_nan_imputed": 0
+  },
+  "LOYO_no_cuotas": {
+    "2023": {
+      "n_train": 6238,
+      "best_params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.05,
+        "reg_alpha": 1.0,
+        "reg_lambda": 0.1,
+        "min_child_weight": 10,
+        "random_state": 42
+      },
+      "rmse_val_internal": 0.821039344935382,
+      "dof": {
+        "n_trees": 192,
+        "avg_leaves": 13.692708333333334,
+        "dof_estimado": 2629,
+        "dof_cap_10:1": 499,
+        "dof_safe": false
+      },
+      "top_features": [
+        [
+          "sot",
+          0.18475103378295898
+        ],
+        [
+          "saves_rival",
+          0.1467391550540924
+        ],
+        [
+          "shots_off",
+          0.1247449666261673
+        ],
+        [
+          "liga_Noruega",
+          0.08449359238147736
+        ],
+        [
+          "saves",
+          0.07466293126344681
+        ],
+        [
+          "longballs_acc_rival",
+          0.045850738883018494
+        ],
+        [
+          "pass_pct",
+          0.038295239210128784
+        ],
+        [
+          "es_local",
+          0.0342426672577858
+        ],
+        [
+          "liga_Uruguay",
+          0.027489686384797096
+        ],
+        [
+          "liga_Peru",
+          0.02600211650133133
+        ]
+      ],
+      "grid": {
+        "0.05": {
+          "2023": {
+            "rmse": 1.2164079709001054,
+            "n": 9202
+          },
+          "OOS_pool": {
+            "rmse": 1.2025822988410564,
+            "n": 24168
+          }
+        },
+        "0.10": {
+          "2023": {
+            "rmse": 1.2144071033453483,
+            "n": 9202
+          },
+          "OOS_pool": {
+            "rmse": 1.2006354894383393,
+            "n": 24168
+          }
+        },
+        "0.15": {
+          "2023": {
+            "rmse": 1.2125677640403574,
+            "n": 9202
+          },
+          "OOS_pool": {
+            "rmse": 1.1988353302690313,
+            "n": 24168
+          }
+        },
+        "0.20": {
+          "2023": {
+            "rmse": 1.210891821215069,
+            "n": 9202
+          },
+          "OOS_pool": {
+            "rmse": 1.1971875611785419,
+            "n": 24168
+          }
+        },
+        "0.25": {
+          "2023": {
+            "rmse": 1.2093778841836924,
+            "n": 9202
+          },
+          "OOS_pool": {
+            "rmse": 1.1956867305375678,
+            "n": 24168
+          }
+        },
+        "0.30": {
+          "2023": {
+            "rmse": 1.208030607953626,
+            "n": 9202
+          },
+          "OOS_pool": {
+            "rmse": 1.19433653637301,
+            "n": 24168
+          }
+        }
+      }
+    },
+    "2024": {
+      "n_train": 15640,
+      "best_params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.1,
+        "reg_alpha": 0.1,
+        "reg_lambda": 10.0,
+        "min_child_weight": 10,
+        "random_state": 42
+      },
+      "rmse_val_internal": 0.8144880100906594,
+      "dof": {
+        "n_trees": 200,
+        "avg_leaves": 11.765,
+        "dof_estimado": 2353,
+        "dof_cap_10:1": 1251,
+        "dof_safe": false
+      },
+      "top_features": [
+        [
+          "sot",
+          0.19327279925346375
+        ],
+        [
+          "saves_rival",
+          0.18124143779277802
+        ],
+        [
+          "pos_rival",
+          0.11235690861940384
+        ],
+        [
+          "shots_off",
+          0.08825968950986862
+        ],
+        [
+          "liga_Noruega",
+          0.05693145468831062
+        ],
+        [
+          "es_local",
+          0.05521389842033386
+        ],
+        [
+          "pass_pct",
+          0.034369174391031265
+        ],
+        [
+          "shots_off_rival",
+          0.030241593718528748
+        ],
+        [
+          "liga_Peru",
+          0.027822498232126236
+        ],
+        [
+          "liga_Turquia",
+          0.022686734795570374
+        ]
+      ],
+      "grid": {
+        "0.05": {
+          "2024": {
+            "rmse": 1.1867653933632303,
+            "n": 7972
+          },
+          "OOS_pool": {
+            "rmse": 1.2027865838033647,
+            "n": 24168
+          }
+        },
+        "0.10": {
+          "2024": {
+            "rmse": 1.185506351790191,
+            "n": 7972
+          },
+          "OOS_pool": {
+            "rmse": 1.2010383841918308,
+            "n": 24168
+          }
+        },
+        "0.15": {
+          "2024": {
+            "rmse": 1.1843586580865177,
+            "n": 7972
+          },
+          "OOS_pool": {
+            "rmse": 1.1994278815510302,
+            "n": 24168
+          }
+        },
+        "0.20": {
+          "2024": {
+            "rmse": 1.1833171962031732,
+            "n": 7972
+          },
+          "OOS_pool": {
+            "rmse": 1.1979590643414957,
+            "n": 24168
+          }
+        },
+        "0.25": {
+          "2024": {
+            "rmse": 1.182389304320853,
+            "n": 7972
+          },
+          "OOS_pool": {
+            "rmse": 1.1966304618880552,
+            "n": 24168
+          }
+        },
+        "0.30": {
+          "2024": {
+            "rmse": 1.181569297466283,
+            "n": 7972
+          },
+          "OOS_pool": {
+            "rmse": 1.1954480761264952,
+            "n": 24168
+          }
+        }
+      }
+    },
+    "2025": {
+      "n_train": 23752,
+      "best_params": {
+        "max_depth": 3,
+        "n_estimators": 200,
+        "learning_rate": 0.1,
+        "reg_alpha": 0.01,
+        "reg_lambda": 10.0,
+        "min_child_weight": 10,
+        "random_state": 42
+      },
+      "rmse_val_internal": 0.7558728450785304,
+      "dof": {
+        "n_trees": 200,
+        "avg_leaves": 7.53,
+        "dof_estimado": 1506,
+        "dof_cap_10:1": 1900,
+        "dof_safe": true
+      },
+      "top_features": [
+        [
+          "sot",
+          0.2156352698802948
+        ],
+        [
+          "shots_off_rival",
+          0.18358974158763885
+        ],
+        [
+          "saves_rival",
+          0.15072819590568542
+        ],
+        [
+          "pass_pct",
+          0.06436926126480103
+        ],
+        [
+          "es_local",
+          0.05924190208315849
+        ],
+        [
+          "shots_off",
+          0.058979324996471405
+        ],
+        [
+          "pos_rival",
+          0.04137260839343071
+        ],
+        [
+          "liga_Noruega",
+          0.029158320277929306
+        ],
+        [
+          "saves",
+          0.01963028870522976
+        ],
+        [
+          "sot_rival",
+          0.01727628894150257
+        ]
+      ],
+      "grid": {
+        "0.05": {
+          "2025": {
+            "rmse": 1.2058472489716423,
+            "n": 2246
+          },
+          "OOS_pool": {
+            "rmse": 1.2027419830606947,
+            "n": 24168
+          }
+        },
+        "0.10": {
+          "2025": {
+            "rmse": 1.2055974549211599,
+            "n": 2246
+          },
+          "OOS_pool": {
+            "rmse": 1.2009477607870396,
+            "n": 24168
+          }
+        },
+        "0.15": {
+          "2025": {
+            "rmse": 1.2053740646546978,
+            "n": 2246
+          },
+          "OOS_pool": {
+            "rmse": 1.1993042359341477,
+            "n": 24168
+          }
+        },
+        "0.20": {
+          "2025": {
+            "rmse": 1.2051763015398511,
+            "n": 2246
+          },
+          "OOS_pool": {
+            "rmse": 1.1978048631766502,
+            "n": 24168
+          }
+        },
+        "0.25": {
+          "2025": {
+            "rmse": 1.2050065030124302,
+            "n": 2246
+          },
+          "OOS_pool": {
+            "rmse": 1.196453024079525,
+            "n": 24168
+          }
+        },
+        "0.30": {
+          "2025": {
+            "rmse": 1.2048621579231946,
+            "n": 2246
+          },
+          "OOS_pool": {
+            "rmse": 1.1952432849266936,
+            "n": 24168
+          }
+        }
+      }
+    }
+  },
+  "global_model": {
+    "best_params": {
+      "max_depth": 3,
+      "n_estimators": 200,
+      "learning_rate": 0.1,
+      "reg_alpha": 0.01,
+      "reg_lambda": 10.0,
+      "min_child_weight": 10,
+      "random_state": 42
+    },
+    "rmse_val_internal": 0.7333945029457306,
+    "dof": {
+      "n_trees": 200,
+      "avg_leaves": 7.61,
+      "dof_estimado": 1522,
+      "dof_cap_10:1": 2079,
+      "dof_safe": true
+    },
+    "top_features": [
+      [
+        "sot",
+        0.24720247089862823
+      ],
+      [
+        "shots_off_rival",
+        0.20063446462154388
+      ],
+      [
+        "saves_rival",
+        0.1656305193901062
+      ],
+      [
+        "es_local",
+        0.0660431981086731
+      ],
+      [
+        "pass_pct",
+        0.04044933617115021
+      ],
+      [
+        "shots_off",
+        0.03853454813361168
+      ],
+      [
+        "pos_rival",
+        0.035052426159381866
+      ],
+      [
+        "liga_Noruega",
+        0.028675135225057602
+      ],
+      [
+        "liga_Peru",
+        0.017162714153528214
+      ],
+      [
+        "liga_Uruguay",
+        0.014023926109075546
+      ]
+    ]
+  }
+}

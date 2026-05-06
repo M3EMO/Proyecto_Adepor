@@ -1,0 +1,74 @@
+{
+  "n_sofa_total": 769,
+  "n_backtest_2026": 649,
+  "n_fdco_2026": 1367,
+  "matched_exact": 272,
+  "matched_loose": 92,
+  "unmatched": 326,
+  "universo_final": 443,
+  "cobertura_por_liga": {
+    "Alemania": {
+      "sofa": 60,
+      "universo": 15
+    },
+    "Argentina": {
+      "sofa": 60,
+      "universo": 48
+    },
+    "Bolivia": {
+      "sofa": 39,
+      "universo": 20
+    },
+    "Brasil": {
+      "sofa": 60,
+      "universo": 54
+    },
+    "Ecuador": {
+      "sofa": 60,
+      "universo": 30
+    },
+    "Espana": {
+      "sofa": 60,
+      "universo": 40
+    },
+    "Francia": {
+      "sofa": 58,
+      "universo": 23
+    },
+    "Inglaterra": {
+      "sofa": 59,
+      "universo": 52
+    },
+    "Italia": {
+      "sofa": 60,
+      "universo": 49
+    },
+    "Noruega": {
+      "sofa": 20,
+      "universo": 13
+    },
+    "Peru": {
+      "sofa": 59,
+      "universo": 20
+    },
+    "Turquia": {
+      "sofa": 58,
+      "universo": 44
+    },
+    "Uruguay": {
+      "sofa": 57,
+      "universo": 23
+    },
+    "Venezuela": {
+      "sofa": 59,
+      "universo": 12
+    }
+  },
+  "con_apuesta_v0": 121,
+  "con_cuota_o25": 438,
+  "baseline_v0_yield_pool": 0.4489690721649484,
+  "baseline_v0_hit_pool": 0.44329896907216493,
+  "baseline_pool_apostar_local": -0.003018372703412078,
+  "baseline_pool_apostar_empate": -0.03858267716535433,
+  "baseline_pool_apostar_visita": -0.1168241469816273
+}

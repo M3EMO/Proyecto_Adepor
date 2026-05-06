@@ -1,0 +1,277 @@
+{
+  "universo": 4040,
+  "baselines": {
+    "local": -0.06569554455445545,
+    "visita": -0.07168316831683169,
+    "empate": -0.004705445544554455,
+    "o25": -0.05797119341563786,
+    "u25": -0.016399176954732517
+  },
+  "n_tests_total": 4200,
+  "bonferroni_alpha": 1.1904761904761905e-05,
+  "n_findings_pool_lift_5pp": 1311,
+  "n_post_bonferroni_ci_strict": 5,
+  "n_walkforward_pass": 4,
+  "findings": [
+    {
+      "stat": "crosses",
+      "metodo": "ema_l_{stat}_visita",
+      "feature": "ema_l_crosses_visita",
+      "target": "yield_empate",
+      "pick": "empate",
+      "lo": 0.0,
+      "hi": 14.251133351770324,
+      "n": 1010,
+      "yield_pool": 0.13280198019801984,
+      "ci95_lo_005": 0.028891089108910903,
+      "ci95_hi_005": 0.24538613861386138,
+      "baseline_pick": -0.004705445544554455,
+      "lift": 0.1375074257425743,
+      "ci95_lo_pos": true,
+      "ci_lo_bonf": -0.055099009900990106,
+      "ci_hi_bonf": 0.35236633663366335,
+      "bonf_pos": false,
+      "wf_per_year": [
+        {
+          "year_eval": 2024,
+          "n_train": 320,
+          "yield_train": 0.11040625000000001,
+          "n_eval": 282,
+          "yield_eval": 0.1995744680851064,
+          "lo_train": 0.0,
+          "hi_train": 14.261540042080096
+        },
+        {
+          "year_eval": 2025,
+          "n_train": 572,
+          "yield_train": 0.14522727272727273,
+          "n_eval": 219,
+          "yield_eval": 0.07255707762557077,
+          "lo_train": 0.0,
+          "hi_train": 14.007665811654277
+        },
+        {
+          "year_eval": 2026,
+          "n_train": 837,
+          "yield_train": 0.12915173237753885,
+          "n_eval": 167,
+          "yield_eval": 0.14820359281437126,
+          "lo_train": 0.0,
+          "hi_train": 14.216046739654658
+        }
+      ],
+      "n_pos_eval": 3,
+      "n_with_eval": 3,
+      "avg_eval_yield": 0.1401117128416828,
+      "wf_passes": true
+    },
+    {
+      "stat": "tackle_pct",
+      "metodo": "ema_l_{stat}_local",
+      "feature": "ema_l_tackle_pct_local",
+      "target": "yield_empate",
+      "pick": "empate",
+      "lo": 0.5322537277458833,
+      "hi": 0.5818570427882207,
+      "n": 1017,
+      "yield_pool": 0.11737463126843659,
+      "ci95_lo_005": 0.009292035398230092,
+      "ci95_hi_005": 0.22217305801376597,
+      "baseline_pick": -0.004705445544554455,
+      "lift": 0.12208007681299105,
+      "ci95_lo_pos": true,
+      "ci_lo_bonf": -0.051179941002949855,
+      "ci_hi_bonf": 0.2875712881022615,
+      "bonf_pos": false,
+      "wf_per_year": [
+        {
+          "year_eval": 2024,
+          "n_train": 320,
+          "yield_train": 0.1263125,
+          "n_eval": 227,
+          "yield_eval": 0.13330396475770925,
+          "lo_train": 0.0,
+          "hi_train": 0.517664568800572
+        },
+        {
+          "year_eval": 2025,
+          "n_train": 572,
+          "yield_train": 0.09860139860139862,
+          "n_eval": 186,
+          "yield_eval": -0.13489247311827954,
+          "lo_train": 0.0,
+          "hi_train": 0.5211801145920951
+        },
+        {
+          "year_eval": 2026,
+          "n_train": 835,
+          "yield_train": 0.12077844311377245,
+          "n_eval": 105,
+          "yield_eval": -0.02038095238095238,
+          "lo_train": 0.5293079772113399,
+          "hi_train": 0.5776365520357521
+        }
+      ],
+      "n_pos_eval": 1,
+      "n_with_eval": 3,
+      "avg_eval_yield": -0.007323153580507555,
+      "wf_passes": false
+    },
+    {
+      "stat": "tackle_pct",
+      "metodo": "ratio_propio_{stat}",
+      "feature": "ratio_propio_tackle_pct",
+      "target": "yield_u25",
+      "pick": "u25",
+      "lo": 1.0673238139130303,
+      "hi": 32.94265642691375,
+      "n": 549,
+      "yield_pool": 0.09970856102003643,
+      "ci95_lo_005": 0.019307832422586504,
+      "ci95_hi_005": 0.190655737704918,
+      "baseline_pick": -0.016399176954732517,
+      "lift": 0.11610773797476895,
+      "ci95_lo_pos": true,
+      "ci_lo_bonf": -0.03734061930783244,
+      "ci_hi_bonf": 0.2614754098360656,
+      "bonf_pos": false,
+      "wf_per_year": [
+        {
+          "year_eval": 2024,
+          "n_train": 130,
+          "yield_train": 0.06376923076923076,
+          "n_eval": 98,
+          "yield_eval": -0.12122448979591838,
+          "lo_train": 0.0,
+          "hi_train": 0.897968971684543
+        },
+        {
+          "year_eval": 2025,
+          "n_train": 287,
+          "yield_train": 0.1197212543554007,
+          "n_eval": 111,
+          "yield_eval": 0.12522522522522522,
+          "lo_train": 1.083498807689825,
+          "hi_train": 32.94265642691375
+        },
+        {
+          "year_eval": 2026,
+          "n_train": 428,
+          "yield_train": 0.12733644859813084,
+          "n_eval": 68,
+          "yield_eval": 0.09338235294117647,
+          "lo_train": 1.0758723791370897,
+          "hi_train": 32.94265642691375
+        }
+      ],
+      "n_pos_eval": 2,
+      "n_with_eval": 3,
+      "avg_eval_yield": 0.03246102945682777,
+      "wf_passes": true
+    },
+    {
+      "stat": "fouls",
+      "metodo": "diff_propio_{stat}",
+      "feature": "diff_propio_fouls",
+      "target": "yield_u25",
+      "pick": "u25",
+      "lo": 1.4849407811382052,
+      "hi": 15.913599999999999,
+      "n": 608,
+      "yield_pool": 0.08144736842105263,
+      "ci95_lo_005": 0.0042598684210526224,
+      "ci95_hi_005": 0.16470394736842106,
+      "baseline_pick": -0.016399176954732517,
+      "lift": 0.09784654537578515,
+      "ci95_lo_pos": true,
+      "ci_lo_bonf": -0.0615625,
+      "ci_hi_bonf": 0.20766447368421054,
+      "bonf_pos": false,
+      "wf_per_year": [
+        {
+          "year_eval": 2024,
+          "n_train": 132,
+          "yield_train": 0.14469696969696969,
+          "n_eval": 232,
+          "yield_eval": -0.15439655172413794,
+          "lo_train": -0.17291624843864994,
+          "hi_train": 2.1396564906439433
+        },
+        {
+          "year_eval": 2025,
+          "n_train": 288,
+          "yield_train": 0.0714236111111111,
+          "n_eval": 148,
+          "yield_eval": 0.15047297297297296,
+          "lo_train": 1.6838264177434215,
+          "hi_train": 15.913599999999999
+        },
+        {
+          "year_eval": 2026,
+          "n_train": 461,
+          "yield_train": 0.07206073752711496,
+          "n_eval": 125,
+          "yield_eval": 0.11055999999999999,
+          "lo_train": 1.5702744750000002,
+          "hi_train": 15.913599999999999
+        }
+      ],
+      "n_pos_eval": 2,
+      "n_with_eval": 3,
+      "avg_eval_yield": 0.03554547374961167,
+      "wf_passes": true
+    },
+    {
+      "stat": "tackle_pct",
+      "metodo": "diff_propio_{stat}",
+      "feature": "diff_propio_tackle_pct",
+      "target": "yield_u25",
+      "pick": "u25",
+      "lo": 0.03482613157277045,
+      "hi": 0.6710291949200001,
+      "n": 608,
+      "yield_pool": 0.07879934210526317,
+      "ci95_lo_005": 0.0023848684210526216,
+      "ci95_hi_005": 0.15932565789473682,
+      "baseline_pick": -0.016399176954732517,
+      "lift": 0.09519851905999568,
+      "ci95_lo_pos": true,
+      "ci_lo_bonf": -0.09993421052631579,
+      "ci_hi_bonf": 0.22235197368421053,
+      "bonf_pos": false,
+      "wf_per_year": [
+        {
+          "year_eval": 2024,
+          "n_train": 132,
+          "yield_train": 0.08318181818181818,
+          "n_eval": 108,
+          "yield_eval": 0.1313888888888889,
+          "lo_train": 0.05496757324118906,
+          "hi_train": 0.6710291949200001
+        },
+        {
+          "year_eval": 2025,
+          "n_train": 288,
+          "yield_train": 0.12138888888888887,
+          "n_eval": 108,
+          "yield_eval": 0.09083333333333334,
+          "lo_train": 0.04669316925993715,
+          "hi_train": 0.6710291949200001
+        },
+        {
+          "year_eval": 2026,
+          "n_train": 461,
+          "yield_train": 0.12292841648590021,
+          "n_eval": 83,
+          "yield_eval": -0.04216867469879518,
+          "lo_train": 0.0395022267442493,
+          "hi_train": 0.6710291949200001
+        }
+      ],
+      "n_pos_eval": 2,
+      "n_with_eval": 3,
+      "avg_eval_yield": 0.06001784917447569,
+      "wf_passes": true
+    }
+  ]
+}

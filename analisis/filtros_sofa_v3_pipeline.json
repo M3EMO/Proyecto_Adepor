@@ -1,0 +1,273 @@
+{
+  "universo_n": 421,
+  "n_features": 32,
+  "n_tests": 312,
+  "alpha_bonferroni": 0.00016025641025641026,
+  "top_features_by_target": {
+    "1": [
+      {
+        "feat": "max_xg_shot_lag1_v",
+        "importance": 0.060949521090416514
+      },
+      {
+        "feat": "mean_xg_per_shot_lag1_l",
+        "importance": 0.056360495977966885
+      },
+      {
+        "feat": "mean_dist_goal_lag1_l",
+        "importance": 0.05310780364775591
+      },
+      {
+        "feat": "body_part_diversity_lag1_v",
+        "importance": 0.043523597676442094
+      },
+      {
+        "feat": "n_high_xg_lag1_v",
+        "importance": 0.03180890389818636
+      },
+      {
+        "feat": "n_shots_assisted_lag1_v",
+        "importance": 0.029436304068410912
+      },
+      {
+        "feat": "goal_y_spread_lag1_v",
+        "importance": 0.028172602934598556
+      },
+      {
+        "feat": "mean_dist_goal_lag1_v",
+        "importance": 0.02800125937288911
+      },
+      {
+        "feat": "n_shots_first15_lag1_v",
+        "importance": 0.026902003227043725
+      },
+      {
+        "feat": "n_shots_first15_lag1_l",
+        "importance": 0.02229011728663277
+      }
+    ],
+    "X": [
+      {
+        "feat": "n_high_xg_lag1_l",
+        "importance": 0.3413043038230472
+      },
+      {
+        "feat": "mean_dist_goal_lag1_l",
+        "importance": 0.20676715207783802
+      },
+      {
+        "feat": "hi_xg_ratio_lag1_v",
+        "importance": 0.17824409787492224
+      },
+      {
+        "feat": "goal_y_spread_lag1_l",
+        "importance": 0.11651241378695998
+      },
+      {
+        "feat": "n_high_xg_lag1_v",
+        "importance": 0.10741016405696957
+      },
+      {
+        "feat": "body_part_diversity_lag1_v",
+        "importance": 0.0751389370965665
+      },
+      {
+        "feat": "n_shots_assisted_lag1_l",
+        "importance": 0.06534106618353652
+      },
+      {
+        "feat": "n_shots_set_piece_lag1_l",
+        "importance": 0.05139667324939268
+      },
+      {
+        "feat": "n_shots_set_piece_lag1_v",
+        "importance": 0.02835979784810405
+      },
+      {
+        "feat": "n_shots_wide_lag1_v",
+        "importance": 0.02622401937709462
+      }
+    ],
+    "2": [
+      {
+        "feat": "n_high_xg_lag1_l",
+        "importance": 0.5357968907951434
+      },
+      {
+        "feat": "hi_xg_ratio_lag1_l",
+        "importance": 0.16284265518102137
+      },
+      {
+        "feat": "mean_xg_per_shot_lag1_l",
+        "importance": 0.15102142901584292
+      },
+      {
+        "feat": "max_xg_shot_lag1_l",
+        "importance": 0.13196836389717248
+      },
+      {
+        "feat": "n_shots_set_piece_lag1_v",
+        "importance": 0.1293381415631205
+      },
+      {
+        "feat": "n_shots_last15_lag1_l",
+        "importance": 0.09839950363022698
+      },
+      {
+        "feat": "n_shots_outside_box_lag1_v",
+        "importance": 0.0758454449881274
+      },
+      {
+        "feat": "n_high_xg_lag1_v",
+        "importance": 0.07519005450656646
+      },
+      {
+        "feat": "n_shots_assisted_lag1_v",
+        "importance": 0.0518942078568565
+      },
+      {
+        "feat": "n_shots_assisted_lag1_l",
+        "importance": 0.026006117109870885
+      }
+    ],
+    "O": [
+      {
+        "feat": "n_high_xg_lag1_l",
+        "importance": 0.3034613670969757
+      },
+      {
+        "feat": "hi_xg_ratio_lag1_l",
+        "importance": 0.2569425350431389
+      },
+      {
+        "feat": "mean_xg_per_shot_lag1_v",
+        "importance": 0.1321214222046363
+      },
+      {
+        "feat": "hi_xg_ratio_lag1_v",
+        "importance": 0.09328274205446796
+      },
+      {
+        "feat": "n_shots_set_piece_lag1_l",
+        "importance": 0.08933595258573723
+      },
+      {
+        "feat": "n_shots_assisted_lag1_v",
+        "importance": 0.08704429865150587
+      },
+      {
+        "feat": "n_shots_last15_lag1_l",
+        "importance": 0.08040742379685206
+      },
+      {
+        "feat": "max_xg_shot_lag1_v",
+        "importance": 0.057968379115315716
+      },
+      {
+        "feat": "max_xg_shot_lag1_l",
+        "importance": 0.05031495739784775
+      },
+      {
+        "feat": "body_part_diversity_lag1_v",
+        "importance": 0.04822174646397748
+      }
+    ],
+    "U": [
+      {
+        "feat": "n_high_xg_lag1_l",
+        "importance": 0.42116550020812127
+      },
+      {
+        "feat": "hi_xg_ratio_lag1_l",
+        "importance": 0.33290633526813773
+      },
+      {
+        "feat": "mean_xg_per_shot_lag1_v",
+        "importance": 0.1260236677896892
+      },
+      {
+        "feat": "n_shots_assisted_lag1_v",
+        "importance": 0.09198621642191473
+      },
+      {
+        "feat": "n_shots_set_piece_lag1_l",
+        "importance": 0.08612518429271776
+      },
+      {
+        "feat": "n_shots_last15_lag1_l",
+        "importance": 0.08182558845220511
+      },
+      {
+        "feat": "hi_xg_ratio_lag1_v",
+        "importance": 0.059994475622173415
+      },
+      {
+        "feat": "max_xg_shot_lag1_l",
+        "importance": 0.045808833177656716
+      },
+      {
+        "feat": "n_shots_inside_box_lag1_l",
+        "importance": 0.03862341434506622
+      },
+      {
+        "feat": "n_shots_central_lag1_l",
+        "importance": 0.03260077216293722
+      }
+    ]
+  },
+  "promovibles": [
+    {
+      "feat": "n_high_xg_lag1_l",
+      "pick": "X",
+      "bin": "q4>1.00",
+      "lo": 1.0,
+      "hi": null,
+      "n": 69,
+      "yield": 0.5647826086956521,
+      "ci95_lo": 0.0869565217391304,
+      "ci95_hi": 1.058695652173913,
+      "loyo_pos": 2,
+      "loyo_total": 2
+    },
+    {
+      "feat": "hi_xg_ratio_lag1_l",
+      "pick": "X",
+      "bin": "q4>0.11",
+      "lo": 0.1111111111111111,
+      "hi": null,
+      "n": 80,
+      "yield": 0.43187500000000006,
+      "ci95_lo": 0.04312499999999999,
+      "ci95_hi": 0.8876249999999999,
+      "loyo_pos": 1,
+      "loyo_total": 2
+    },
+    {
+      "feat": "mean_dist_goal_lag1_l",
+      "pick": "X",
+      "bin": "q1<=13.46",
+      "lo": null,
+      "hi": 13.457142857142857,
+      "n": 88,
+      "yield": 0.4105681818181818,
+      "ci95_lo": 0.009659090909090905,
+      "ci95_hi": 0.8445454545454545,
+      "loyo_pos": 2,
+      "loyo_total": 2
+    },
+    {
+      "feat": "n_shots_assisted_lag1_l",
+      "pick": "O",
+      "bin": "q3(5.00,8.00]",
+      "lo": 5.0,
+      "hi": 8.0,
+      "n": 50,
+      "yield": 0.2906,
+      "ci95_lo": 0.022999999999999972,
+      "ci95_hi": 0.5416000000000001,
+      "loyo_pos": 2,
+      "loyo_total": 2
+    }
+  ],
+  "shadow_persisted": 287
+}

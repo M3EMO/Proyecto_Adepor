@@ -1,0 +1,291 @@
+{
+  "universo_n": 393,
+  "n_features": 192,
+  "baselines": {
+    "1": {
+      "yield": -0.0678041543026706,
+      "n": 337
+    },
+    "X": {
+      "yield": 0.037359050445103854,
+      "n": 337
+    },
+    "2": {
+      "yield": -0.13513353115727003,
+      "n": 337
+    },
+    "O": {
+      "yield": 0.018068965517241364,
+      "n": 145
+    },
+    "U": {
+      "yield": -0.10620689655172415,
+      "n": 145
+    }
+  },
+  "n_tests": 543,
+  "alpha_bonferroni": 9.208103130755066e-05,
+  "top_features_by_target": {
+    "1": [
+      {
+        "feat": "recoveries_lag1_l_dom_2nd",
+        "importance": 0.6494427044609999
+      },
+      {
+        "feat": "accurate_passes_lag1_l_dom_2nd",
+        "importance": 0.6074851286120945
+      },
+      {
+        "feat": "shots_total_lag1_l_dom_2nd",
+        "importance": 0.5250191659867539
+      },
+      {
+        "feat": "gk_saves_lag1_l_delta",
+        "importance": 0.42266911277364116
+      },
+      {
+        "feat": "big_chances_missed_lag1_v_delta",
+        "importance": 0.38170609516374066
+      },
+      {
+        "feat": "recoveries_lag1_v_dom_2nd",
+        "importance": 0.3625712015893704
+      },
+      {
+        "feat": "shots_total_lag1_l_2nd_team",
+        "importance": 0.3410218966536317
+      },
+      {
+        "feat": "big_chances_missed_lag1_v_1st_team",
+        "importance": 0.306288270064348
+      },
+      {
+        "feat": "shots_inside_lag1_l_dom_2nd",
+        "importance": 0.2858015665619923
+      },
+      {
+        "feat": "recoveries_lag1_l_delta",
+        "importance": 0.2847816719016082
+      }
+    ],
+    "X": [
+      {
+        "feat": "xg_lag1_v_delta",
+        "importance": 1.7396602120583156
+      },
+      {
+        "feat": "recoveries_lag1_v_dom_2nd",
+        "importance": 1.6396482093291485
+      },
+      {
+        "feat": "big_chances_lag1_l_dom_2nd",
+        "importance": 1.620974717437965
+      },
+      {
+        "feat": "big_chances_missed_lag1_l_dom_2nd",
+        "importance": 1.4116963848342938
+      },
+      {
+        "feat": "shots_total_lag1_l_dom_2nd",
+        "importance": 1.403539067909577
+      },
+      {
+        "feat": "xg_lag1_v_1st_team",
+        "importance": 1.2428212465407982
+      },
+      {
+        "feat": "accurate_passes_lag1_l_dom_2nd",
+        "importance": 1.1104773325936854
+      },
+      {
+        "feat": "xg_lag1_v_2nd_team",
+        "importance": 0.9375880257661673
+      },
+      {
+        "feat": "clearances_lag1_v_dom_2nd",
+        "importance": 0.711668877357237
+      },
+      {
+        "feat": "duels_lag1_v_dom_2nd",
+        "importance": 0.6464664302019032
+      }
+    ],
+    "2": [
+      {
+        "feat": "recoveries_lag1_l_dom_2nd",
+        "importance": 3.108461058310555
+      },
+      {
+        "feat": "recoveries_lag1_v_dom_2nd",
+        "importance": 2.454291221551269
+      },
+      {
+        "feat": "tackles_won_lag1_v_dom_2nd",
+        "importance": 1.85629898366266
+      },
+      {
+        "feat": "aerial_duels_lag1_l_dom_2nd",
+        "importance": 1.1534848937593845
+      },
+      {
+        "feat": "tackles_won_lag1_l_dom_2nd",
+        "importance": 1.1038343554828791
+      },
+      {
+        "feat": "big_chances_lag1_l_dom_2nd",
+        "importance": 1.0952880038199497
+      },
+      {
+        "feat": "big_chances_missed_lag1_l_dom_2nd",
+        "importance": 1.0893527097207079
+      },
+      {
+        "feat": "recoveries_lag1_l_delta",
+        "importance": 1.0517252019033525
+      },
+      {
+        "feat": "xg_lag1_v_2nd_team",
+        "importance": 0.7977282746481587
+      },
+      {
+        "feat": "shots_total_lag1_v_dom_2nd",
+        "importance": 0.7767477795089612
+      }
+    ],
+    "O": [
+      {
+        "feat": "tackles_won_lag1_v_dom_2nd",
+        "importance": 1.7762460830670834
+      },
+      {
+        "feat": "accurate_passes_lag1_v_dom_2nd",
+        "importance": 0.9640391348348142
+      },
+      {
+        "feat": "tackles_lag1_l_dom_2nd",
+        "importance": 0.9552314488700949
+      },
+      {
+        "feat": "third_entries_lag1_v_dom_2nd",
+        "importance": 0.8004610258617707
+      },
+      {
+        "feat": "possession_lag1_v_delta",
+        "importance": 0.6425330387028142
+      },
+      {
+        "feat": "big_chances_missed_lag1_l_delta",
+        "importance": 0.5678392154890111
+      },
+      {
+        "feat": "tackles_lag1_l_2nd_team",
+        "importance": 0.5331941174512466
+      },
+      {
+        "feat": "gk_saves_lag1_v_dom_2nd",
+        "importance": 0.47127642562327543
+      },
+      {
+        "feat": "big_chances_missed_lag1_l_dom_2nd",
+        "importance": 0.45844826933335603
+      },
+      {
+        "feat": "recoveries_lag1_v_dom_2nd",
+        "importance": 0.4506114926397594
+      }
+    ],
+    "U": [
+      {
+        "feat": "tackles_won_lag1_v_dom_2nd",
+        "importance": 1.972433533295774
+      },
+      {
+        "feat": "accurate_passes_lag1_v_dom_2nd",
+        "importance": 1.3559671831144402
+      },
+      {
+        "feat": "tackles_lag1_l_dom_2nd",
+        "importance": 1.074089093090452
+      },
+      {
+        "feat": "shots_total_lag1_v_dom_2nd",
+        "importance": 0.6595995339154768
+      },
+      {
+        "feat": "possession_lag1_v_delta",
+        "importance": 0.6084111201297662
+      },
+      {
+        "feat": "possession_lag1_l_dom_2nd",
+        "importance": 0.5931136077488259
+      },
+      {
+        "feat": "recoveries_lag1_l_dom_2nd",
+        "importance": 0.5862152434163816
+      },
+      {
+        "feat": "tackles_lag1_l_2nd_team",
+        "importance": 0.5857354372422083
+      },
+      {
+        "feat": "possession_lag1_v_2nd_team",
+        "importance": 0.5502723063048534
+      },
+      {
+        "feat": "big_chances_missed_lag1_l_delta",
+        "importance": 0.542580617547106
+      }
+    ]
+  },
+  "promovibles": [
+    {
+      "feat": "xg_lag1_v_2nd_team",
+      "pick": "X",
+      "bin": "q2_(0.36,0.77]",
+      "n": 59,
+      "yield": 0.531186440677966,
+      "ci95_lo": 0.03813559322033895,
+      "ci95_hi": 1.0316949152542372,
+      "loyo_pos": 1,
+      "loyo_total": 2,
+      "loyo_pct": 0.5
+    },
+    {
+      "feat": "accurate_passes_lag1_l_2nd_team",
+      "pick": "O",
+      "bin": "q4_>186.00",
+      "n": 36,
+      "yield": 0.355,
+      "ci95_lo": 0.03444444444444445,
+      "ci95_hi": 0.6516666666666667,
+      "loyo_pos": 2,
+      "loyo_total": 2,
+      "loyo_pct": 1.0
+    },
+    {
+      "feat": "fouls_lag1_v_delta",
+      "pick": "O",
+      "bin": "q2_(-2.00,1.00]",
+      "n": 40,
+      "yield": 0.3085,
+      "ci95_lo": 0.019499999999999983,
+      "ci95_hi": 0.569,
+      "loyo_pos": 2,
+      "loyo_total": 2,
+      "loyo_pct": 1.0
+    },
+    {
+      "feat": "shots_outside_lag1_v_dom_2nd",
+      "pick": "O",
+      "bin": "q3_(0.53,0.71]",
+      "n": 37,
+      "yield": 0.3013513513513513,
+      "ci95_lo": 0.001081081081081064,
+      "ci95_hi": 0.5775675675675676,
+      "loyo_pos": 2,
+      "loyo_total": 2,
+      "loyo_pct": 1.0
+    }
+  ],
+  "all_tests_count_bonferroni_pass": 191
+}

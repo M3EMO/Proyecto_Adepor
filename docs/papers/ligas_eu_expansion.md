@@ -3,6 +3,24 @@
 **Fecha:** 2026-05-02
 **Trigger:** investigación de qué ligas EU NO integradas hoy tienen cobertura completa para validación.
 
+> ⚡ **Update 2026-05-07 — análisis ESPN-only resultó incompleto.**
+>
+> Probe SofaScore directo (`analisis/test_sofa_ligas_eu_expansion.py`) confirmó
+> que **3 ligas descartadas por falta de stats ESPN sí tienen statistics +
+> shotmap + xgot 100% en SOFA**: Dinamarca, Bélgica, Grecia. Las 7 ligas EU
+> expansión candidatas (NED, POR, SCO, DEN, BEL, GRE, SWE) son ahora todas
+> viables vía SOFA-primary path.
+>
+> Scaffolding INACTIVO persistido hoy en `LIGAS_SOFA_PRIMARY` +
+> `motor_data.lookup_stats_sofa_primario` + IDs en
+> `scrape_sofa_post_liquidacion.SOFASCORE_LIGA_IDS`.
+>
+> Ver `docs/papers/sofa_primary_path_scaffolding.md` para detalle.
+>
+> Veredictos en tabla siguiente NO actualizados — la lógica original
+> ESPN-stats-only sigue siendo válida para el path estándar; el scaffolding
+> SOFA-primary es path alternativo activado por config.
+
 ## Tabla resumen
 
 | Liga | ESPN slug | Stats ESPN 2024 | fdco mainline | Profundidad | Recomendación |

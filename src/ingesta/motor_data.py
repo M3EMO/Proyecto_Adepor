@@ -7,7 +7,7 @@ import sys
 import os
 from collections import defaultdict
 from datetime import datetime, timedelta
-from src.comun.config_sistema import LIGAS_ESPN, DB_NAME
+from src.comun.config_sistema import LIGAS_ESPN, DB_NAME, LIGAS_SOFA_PRIMARY
 from src.comun.constantes_espn import ESTADOS_ESPN_FINALIZADO
 from src.comun.tipos import safe_int, safe_float
 from src.comun.tiempo import fecha_a_espn
@@ -115,6 +115,78 @@ def extraer_stats_raw(estadisticas):
         elif nombre == 'totalShots':     # B2 fase3: ESPN real es 'totalShots' (antes: 'shots')
             total_shots = int(valor)
     return sot, total_shots, corners
+
+
+def lookup_stats_sofa_primario(conn, liga, fecha, ht, at):
+    """[SOFA-PRIMARY scaffolding 2026-05-07]
+
+    Busca stats post-partido en sofascore_match_features para ligas listadas
+    en LIGAS_SOFA_PRIMARY. Si encuentra row con error IS NULL, devuelve dict
+    con sot/shots/corners para local y visita. Caller lo usa como fuente
+    PRIMARIA de stats; cae a extraer_stats_raw(ESPN) cuando esta función
+    devuelve None (o cuando liga NO está en LIGAS_SOFA_PRIMARY).
+
+    Diseñado para ligas EU expansión (Holanda/Portugal/Escocia/Dinamarca/
+    Belgica/Grecia/Suecia) donde:
+      - ESPN scoreboard devuelve fixture pero statistics[] vacío (DEN/BEL/GRE)
+      - O ESPN tiene stats pero SOFA es estrictamente mejor por xgot 100% (NED/POR/SCO)
+      - O xg/xgot NULL en SOFA pero stats sí (SWE → fallback custom)
+
+    NOTA temporal: scrape_sofa_post_liquidacion corre en FASE 3.1 (después de
+    motor_data en FASE 3). Día 1 fresh events: SOFA aún no scrapeado → MISS →
+    fallback ESPN. Día 2+: SOFA ya cargado → HIT. Aceptable para scaffolding;
+    para ligas SOFA-only sin stats ESPN (DEN/BEL/GRE) eventualmente requerirá
+    reorden de pipeline o re-pass de motor_data tras FASE 3.1.
+
+    Args:
+      conn: sqlite3 connection
+      liga: nombre interno (e.g., "Holanda")
+      fecha: 'YYYY-MM-DD'
+      ht, at: equipos local/visita ya canonicalizados via gestor_nombres
+
+    Returns:
+      dict con keys (sot_l, shots_l, corners_l, sot_v, shots_v, corners_v)
+      o None si no hay match SOFA disponible.
+    """
+    if liga not in LIGAS_SOFA_PRIMARY:
+        return None
+    if conn is None or not fecha or not ht or not at:
+        return None
+    try:
+        from analisis.aliases_sofa_espn import norm_team_name
+        from datetime import datetime, timedelta
+        cur = conn.cursor()
+        ht_n = norm_team_name(ht, liga)
+        at_n = norm_team_name(at, liga)
+
+        try:
+            d0 = datetime.fromisoformat(fecha).date()
+            fechas_alt = [(d0 + timedelta(days=delta)).isoformat() for delta in (0, -1, 1, -2, 2)]
+        except (ValueError, TypeError):
+            fechas_alt = [fecha]
+
+        for f in fechas_alt:
+            rows = cur.execute('''
+                SELECT ht, at,
+                       shots_on_target_l, shots_on_target_v,
+                       shots_total_l, shots_total_v,
+                       corners_l, corners_v
+                FROM sofascore_match_features
+                WHERE liga=? AND fecha=? AND error IS NULL
+            ''', (liga, f)).fetchall()
+            for sofa_ht, sofa_at, sot_l, sot_v, sh_l, sh_v, c_l, c_v in rows:
+                if norm_team_name(sofa_ht, liga) == ht_n and norm_team_name(sofa_at, liga) == at_n:
+                    return {
+                        'sot_l': int(sot_l) if sot_l is not None else 0,
+                        'shots_l': int(sh_l) if sh_l is not None else 0,
+                        'corners_l': int(c_l) if c_l is not None else 0,
+                        'sot_v': int(sot_v) if sot_v is not None else 0,
+                        'shots_v': int(sh_v) if sh_v is not None else 0,
+                        'corners_v': int(c_v) if c_v is not None else 0,
+                    }
+    except Exception:
+        return None
+    return None
 
 def calcular_xg_hibrido(estadisticas, goles_reales, coef_corner_liga=0.03, pais=None):
     """
@@ -728,6 +800,17 @@ def main():
                             # Persistir estadísticas brutas para calibración OLS futura de xG
                             sot_loc, shots_loc, _ = extraer_stats_raw(stats_loc)
                             sot_vis, shots_vis, _ = extraer_stats_raw(stats_vis)
+
+                            # SOFA-primary override: para ligas en LIGAS_SOFA_PRIMARY
+                            # (e.g. DEN/BEL/GRE sin statistics[] ESPN) preferir stats SOFA.
+                            # Fresh same-day events: MISS (SOFA aún no scrapeado), fallback ESPN.
+                            # Día 2+: HIT. Scaffolding inactivo hasta onboarding (LIGAS_ESPN
+                            # no contiene aún las 7 ligas EU expansión).
+                            stats_sofa = lookup_stats_sofa_primario(conn, pais, fecha_iso, loc_oficial, vis_oficial)
+                            if stats_sofa is not None:
+                                sot_loc, shots_loc, corners_loc = stats_sofa['sot_l'], stats_sofa['shots_l'], stats_sofa['corners_l']
+                                sot_vis, shots_vis, corners_vis = stats_sofa['sot_v'], stats_sofa['shots_v'], stats_sofa['corners_v']
+
                             cursor.execute(
                                 "UPDATE partidos_backtest SET sot_l=?, shots_l=?, corners_l=?, sot_v=?, shots_v=?, corners_v=? WHERE id_partido=?",
                                 (sot_loc, shots_loc, corners_loc, sot_vis, shots_vis, corners_vis, id_unico)

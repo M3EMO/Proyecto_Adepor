@@ -53,6 +53,33 @@ LIGAS_ESPN = {
     "conmebol.recopa": "Recopa Sudamericana",
 }
 
+# --- Ligas con SOFA como fuente PRIMARIA de stats post-partido (con fallback ESPN) ---
+# Cuando el nombre interno aparece aquí Y en LIGAS_ESPN, motor_data prefiere
+# stats (sot/shots/corners/xG) extraídos de sofascore_match_features y solo
+# cae a ESPN si no hay row SOFA para el partido.
+#
+# Probe empírico SOFA 2026-05-07 (analisis/test_sofa_ligas_eu_expansion.py):
+#   Ligas EU expansión candidatas (NO onboardeadas todavía):
+#     Holanda Eredivisie     (uniqueTournament=37)  xgot 100% — ESPN OK
+#     Portugal Primeira      (tid=238)              xgot 100% — ESPN OK
+#     Escocia Premiership    (tid=36)               xgot 100% — ESPN OK
+#     Dinamarca Superliga    (tid=39)               xgot 100% — ESPN sin statistics[]
+#     Belgica Pro League     (tid=38)               xgot 100% — ESPN sin statistics[]
+#     Grecia Super League    (tid=185)              xgot 100% — ESPN sin statistics[]
+#     Suecia Allsvenskan     (tid=40)               xg/xgot NULL — ESPN OK, fallback custom
+#
+# Estado: scaffolding INACTIVO. Las 7 ligas no están en LIGAS_ESPN. Cuando el
+# bead INFRA EPIC de onboarding las agregue, esta lista activa el path SOFA-primary.
+LIGAS_SOFA_PRIMARY = {
+    "Holanda",
+    "Portugal",
+    "Escocia",
+    "Dinamarca",
+    "Belgica",
+    "Grecia",
+    "Suecia",
+}
+
 # --- Mapeo nombre interno -> sport key de The-Odds-API ---
 MAPA_LIGAS_ODDS = {
     "Argentina": "soccer_argentina_primera_division",

@@ -47,6 +47,9 @@ SOFASCORE_LIGA_IDS = {
     'Ecuador': 240, 'Venezuela': 231, 'Uruguay': 278, 'Inglaterra': 17,
     'Espana': 8, 'Italia': 23, 'Alemania': 35, 'Francia': 34,
     'Turquia': 52, 'Noruega': 20, 'Chile': 11653, 'Colombia': 152,
+    # EU expansion (probe 2026-05-07 verificado, INACTIVAS hasta onboarding):
+    'Holanda': 37, 'Portugal': 238, 'Escocia': 36,
+    'Dinamarca': 39, 'Belgica': 38, 'Grecia': 185, 'Suecia': 40,
 }
 
 # Safeguards

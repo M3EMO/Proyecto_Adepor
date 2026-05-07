@@ -115,40 +115,56 @@ def get(url, st):
         return {'_error': str(e)}
 
 
-def cargar_pendientes(conn, liga=None, fecha_min='2022-01-01', fecha_max='2025-12-31', max_n=None):
-    """Partidos en partidos_historico_externo (con goles) en rango fecha,
-    de ligas SOFA-cubiertas, sin entry en sofascore_match_features.
+def cargar_pendientes(conn, liga=None, fecha_min='2022-01-01', fecha_max='2026-12-31', max_n=None):
+    """Partidos pendientes (con goles) en rango fecha, de ligas SOFA-cubiertas,
+    sin entry en sofascore_match_features.
 
-    Driver universe: 14,489 stats crudas históricas 2021-2025.
+    Driver universe UNION:
+      - partidos_historico_externo: 2021-2025 (~14k stats crudas)
+      - partidos_backtest:          2026 picks históricos motor
     Filter: liga ∈ SOFASCORE_LIGA_IDS keys.
     """
     cur = conn.cursor()
-    where = [
-        "SUBSTR(p.fecha,1,10) >= ?",
-        "SUBSTR(p.fecha,1,10) <= ?",
-        "p.hg IS NOT NULL",
-    ]
-    params = [fecha_min, fecha_max]
     if liga:
-        where.append('p.liga=?')
-        params.append(liga)
+        liga_filter_he = 'AND p.liga=?'
+        liga_filter_pb = 'AND p.pais=?'
+        liga_params = [liga, liga]
     else:
-        # solo ligas SOFA-cubiertas
         ligas_sofa = list(SOFASCORE_LIGA_IDS.keys())
         placeholders = ', '.join(['?'] * len(ligas_sofa))
-        where.append(f'p.liga IN ({placeholders})')
-        params.extend(ligas_sofa)
+        liga_filter_he = f'AND p.liga IN ({placeholders})'
+        liga_filter_pb = f'AND p.pais IN ({placeholders})'
+        liga_params = ligas_sofa + ligas_sofa
+    params = [fecha_min, fecha_max] + liga_params[:len(liga_params)//2] + [fecha_min, fecha_max] + liga_params[len(liga_params)//2:]
     sql = f'''
-        SELECT p.id, p.liga, SUBSTR(p.fecha,1,10) AS fecha, p.ht, p.at
-        FROM partidos_historico_externo p
-        WHERE {' AND '.join(where)}
-          AND NOT EXISTS (
-              SELECT 1 FROM sofascore_match_features s
-              WHERE s.liga = p.liga AND s.fecha = SUBSTR(p.fecha,1,10)
-                AND LOWER(s.ht) = LOWER(p.ht)
-                AND LOWER(s.at) = LOWER(p.at)
-          )
-        ORDER BY p.fecha DESC
+        SELECT * FROM (
+            SELECT 'he_' || p.id AS uid, p.liga, SUBSTR(p.fecha,1,10) AS fecha, p.ht, p.at
+            FROM partidos_historico_externo p
+            WHERE SUBSTR(p.fecha,1,10) >= ?
+              AND SUBSTR(p.fecha,1,10) <= ?
+              AND p.hg IS NOT NULL
+              {liga_filter_he}
+              AND NOT EXISTS (
+                  SELECT 1 FROM sofascore_match_features s
+                  WHERE s.liga = p.liga AND s.fecha = SUBSTR(p.fecha,1,10)
+                    AND LOWER(s.ht) = LOWER(p.ht)
+                    AND LOWER(s.at) = LOWER(p.at)
+              )
+            UNION ALL
+            SELECT 'pb_' || p.id_partido AS uid, p.pais AS liga, SUBSTR(p.fecha,1,10) AS fecha,
+                   p.local AS ht, p.visita AS at
+            FROM partidos_backtest p
+            WHERE SUBSTR(p.fecha,1,10) >= ?
+              AND SUBSTR(p.fecha,1,10) <= ?
+              AND p.goles_l IS NOT NULL
+              {liga_filter_pb}
+              AND NOT EXISTS (
+                  SELECT 1 FROM sofascore_match_features s
+                  WHERE s.liga = p.pais AND s.fecha = SUBSTR(p.fecha,1,10)
+                    AND LOWER(s.ht) = LOWER(p.local)
+                    AND LOWER(s.at) = LOWER(p.visita)
+              )
+        ) ORDER BY fecha DESC
     '''
     if max_n:
         sql += f' LIMIT {max_n}'
@@ -307,7 +323,7 @@ def main():
     ap.add_argument('--cap', type=int, default=CAP_TOTAL_DEFAULT)
     ap.add_argument('--liga', type=str, default=None)
     ap.add_argument('--fecha-min', default='2022-01-01')
-    ap.add_argument('--fecha-max', default='2025-12-31')
+    ap.add_argument('--fecha-max', default='2026-12-31')
     ap.add_argument('--dry-run', action='store_true')
     args = ap.parse_args()
 

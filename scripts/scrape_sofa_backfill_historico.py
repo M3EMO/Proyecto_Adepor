@@ -123,52 +123,74 @@ def cargar_pendientes(conn, liga=None, fecha_min='2022-01-01', fecha_max='2026-1
       - partidos_historico_externo: 2021-2025 (~14k stats crudas)
       - partidos_backtest:          2026 picks históricos motor
     Filter: liga ∈ SOFASCORE_LIGA_IDS keys.
+
+    Dedup robusta (2026-05-07 fix): en lugar de NOT EXISTS LOWER simple
+    (que falla en 'AFC Bournemouth' vs 'Bournemouth', 'Bodø' vs 'Bodo', etc),
+    se hace pre-filter en Python con norm_team_name + dedup cross-tabla
+    (mismo partido en historico_externo Y backtest no se duplica).
     """
     cur = conn.cursor()
+    # Pre-load índice SOFA por (liga, fecha, norm_ht, norm_at)
+    sofa_idx = set()
+    for s_liga, s_fecha, s_ht, s_at in cur.execute(
+        'SELECT liga, fecha, ht, at FROM sofascore_match_features'
+    ).fetchall():
+        sofa_idx.add((s_liga, s_fecha, norm_team_name(s_ht, s_liga), norm_team_name(s_at, s_liga)))
+
+    # Build queries (sin NOT EXISTS, dedup en Python)
     if liga:
         liga_filter_he = 'AND p.liga=?'
         liga_filter_pb = 'AND p.pais=?'
-        liga_params = [liga, liga]
+        liga_params_he = [liga]
+        liga_params_pb = [liga]
     else:
         ligas_sofa = list(SOFASCORE_LIGA_IDS.keys())
-        placeholders = ', '.join(['?'] * len(ligas_sofa))
-        liga_filter_he = f'AND p.liga IN ({placeholders})'
-        liga_filter_pb = f'AND p.pais IN ({placeholders})'
-        liga_params = ligas_sofa + ligas_sofa
-    params = [fecha_min, fecha_max] + liga_params[:len(liga_params)//2] + [fecha_min, fecha_max] + liga_params[len(liga_params)//2:]
-    sql = f'''
-        SELECT * FROM (
-            SELECT 'he_' || p.id AS uid, p.liga, SUBSTR(p.fecha,1,10) AS fecha, p.ht, p.at
-            FROM partidos_historico_externo p
-            WHERE SUBSTR(p.fecha,1,10) >= ?
-              AND SUBSTR(p.fecha,1,10) <= ?
-              AND p.hg IS NOT NULL
-              {liga_filter_he}
-              AND NOT EXISTS (
-                  SELECT 1 FROM sofascore_match_features s
-                  WHERE s.liga = p.liga AND s.fecha = SUBSTR(p.fecha,1,10)
-                    AND LOWER(s.ht) = LOWER(p.ht)
-                    AND LOWER(s.at) = LOWER(p.at)
-              )
-            UNION ALL
-            SELECT 'pb_' || p.id_partido AS uid, p.pais AS liga, SUBSTR(p.fecha,1,10) AS fecha,
-                   p.local AS ht, p.visita AS at
-            FROM partidos_backtest p
-            WHERE SUBSTR(p.fecha,1,10) >= ?
-              AND SUBSTR(p.fecha,1,10) <= ?
-              AND p.goles_l IS NOT NULL
-              {liga_filter_pb}
-              AND NOT EXISTS (
-                  SELECT 1 FROM sofascore_match_features s
-                  WHERE s.liga = p.pais AND s.fecha = SUBSTR(p.fecha,1,10)
-                    AND LOWER(s.ht) = LOWER(p.local)
-                    AND LOWER(s.at) = LOWER(p.visita)
-              )
-        ) ORDER BY fecha DESC
-    '''
+        ph = ', '.join(['?'] * len(ligas_sofa))
+        liga_filter_he = f'AND p.liga IN ({ph})'
+        liga_filter_pb = f'AND p.pais IN ({ph})'
+        liga_params_he = ligas_sofa
+        liga_params_pb = ligas_sofa
+
+    rows = []
+    rows.extend(cur.execute(f'''
+        SELECT 'he_' || p.id, p.liga, SUBSTR(p.fecha,1,10), p.ht, p.at
+        FROM partidos_historico_externo p
+        WHERE SUBSTR(p.fecha,1,10) >= ? AND SUBSTR(p.fecha,1,10) <= ?
+          AND p.hg IS NOT NULL
+          {liga_filter_he}
+    ''', [fecha_min, fecha_max] + liga_params_he).fetchall())
+    rows.extend(cur.execute(f'''
+        SELECT 'pb_' || p.id_partido, p.pais, SUBSTR(p.fecha,1,10), p.local, p.visita
+        FROM partidos_backtest p
+        WHERE SUBSTR(p.fecha,1,10) >= ? AND SUBSTR(p.fecha,1,10) <= ?
+          AND p.goles_l IS NOT NULL
+          {liga_filter_pb}
+    ''', [fecha_min, fecha_max] + liga_params_pb).fetchall())
+
+    # Filter en Python: skip si ya en SOFA via norm; dedup cross-tabla
+    seen = set()
+    pendientes = []
+    for uid, p_liga, p_fecha, p_ht, p_at in rows:
+        key = (p_liga, p_fecha, norm_team_name(p_ht, p_liga), norm_team_name(p_at, p_liga))
+        if key in sofa_idx:
+            continue  # ya scrapeado
+        if key in seen:
+            continue  # duplicado entre historico_externo y backtest
+        seen.add(key)
+        pendientes.append((uid, p_liga, p_fecha, p_ht, p_at))
+
+    # Sort por fecha DESC
+    pendientes.sort(key=lambda x: x[2], reverse=True)
     if max_n:
-        sql += f' LIMIT {max_n}'
-    return cur.execute(sql, params).fetchall()
+        pendientes = pendientes[:max_n]
+    return pendientes
+
+
+def eid_ya_existe(conn, sofa_eid):
+    """Check if sofa_event_id ya está en sofascore_match_features (con error IS NULL)."""
+    r = conn.execute('SELECT 1 FROM sofascore_match_features WHERE sofa_event_id=? AND error IS NULL',
+                     (sofa_eid,)).fetchone()
+    return r is not None
 
 
 def buscar_event_id_sofa(liga_id, fecha, ht, at, liga, st):
@@ -358,6 +380,11 @@ def main():
             continue
         if st.aborted:
             break
+        # Guard: si eid ya en DB (otro partido_backtest/historico apuntó al mismo evento),
+        # skip 4-endpoints fetch para no desperdiciar 4 calls del cap.
+        if eid_ya_existe(conn, eid):
+            n_skip += 1
+            continue
         raw = fetch_4_endpoints(eid, st)
         if st.aborted and raw.get('statistics', {}).get('_error'):
             break

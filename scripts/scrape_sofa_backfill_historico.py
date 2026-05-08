@@ -44,6 +44,7 @@ from analisis.aliases_sofa_espn import norm_team_name
 DB = ROOT / 'fondo_quant.db'
 
 SOFASCORE_LIGA_IDS = {
+    # Ligas domésticas (verificadas pre-2026-05-07)
     'Argentina': 155, 'Brasil': 325, 'Bolivia': 16736, 'Peru': 406,
     'Ecuador': 240, 'Venezuela': 231, 'Uruguay': 278, 'Inglaterra': 17,
     'Espana': 8, 'Italia': 23, 'Alemania': 35, 'Francia': 34,
@@ -51,6 +52,22 @@ SOFASCORE_LIGA_IDS = {
     # EU expansion (probe 2026-05-07)
     'Holanda': 37, 'Portugal': 238, 'Escocia': 36,
     'Dinamarca': 39, 'Belgica': 38, 'Grecia': 185, 'Suecia': 40,
+    # Copas internacionales (probe 2026-05-08, todas xgot completo verificado en SOFA)
+    'Champions League': 7,
+    'Europa League': 679,
+    'Conference League': 17015,
+    'Libertadores': 384,
+    'Sudamericana': 480,
+    'Recopa Sudamericana': 490,
+    # Copas domésticas (probe 2026-05-08)
+    'FA Cup': 19,
+    'EFL Cup': 21,
+    'Copa del Rey': 329,
+    'Coppa Italia': 328,
+    'Coupe de France': 335,
+    'DFB Pokal': 217,
+    'Copa Argentina': 1024,
+    'Copa do Brasil': 373,
 }
 
 CAP_TOTAL_DEFAULT = 1500     # Por sesión (cron 32H)
@@ -152,6 +169,7 @@ def cargar_pendientes(conn, liga=None, fecha_min='2022-01-01', fecha_max='2026-1
         liga_params_pb = ligas_sofa
 
     rows = []
+    # Source 1: partidos_historico_externo (ligas 2021-2025)
     rows.extend(cur.execute(f'''
         SELECT 'he_' || p.id, p.liga, SUBSTR(p.fecha,1,10), p.ht, p.at
         FROM partidos_historico_externo p
@@ -159,6 +177,7 @@ def cargar_pendientes(conn, liga=None, fecha_min='2022-01-01', fecha_max='2026-1
           AND p.hg IS NOT NULL
           {liga_filter_he}
     ''', [fecha_min, fecha_max] + liga_params_he).fetchall())
+    # Source 2: partidos_backtest (2026 driver)
     rows.extend(cur.execute(f'''
         SELECT 'pb_' || p.id_partido, p.pais, SUBSTR(p.fecha,1,10), p.local, p.visita
         FROM partidos_backtest p
@@ -166,6 +185,21 @@ def cargar_pendientes(conn, liga=None, fecha_min='2022-01-01', fecha_max='2026-1
           AND p.goles_l IS NOT NULL
           {liga_filter_pb}
     ''', [fecha_min, fecha_max] + liga_params_pb).fetchall())
+    # Source 3: partidos_no_liga (copas internacionales + nacionales 2022-2026)
+    if liga:
+        liga_filter_nl = 'AND p.competicion=?'
+        liga_params_nl = [liga]
+    else:
+        liga_params_nl = list(SOFASCORE_LIGA_IDS.keys())
+        ph = ', '.join(['?'] * len(liga_params_nl))
+        liga_filter_nl = f'AND p.competicion IN ({ph})'
+    rows.extend(cur.execute(f'''
+        SELECT 'nl_' || p.id, p.competicion, SUBSTR(p.fecha,1,10), p.equipo_local, p.equipo_visita
+        FROM partidos_no_liga p
+        WHERE SUBSTR(p.fecha,1,10) >= ? AND SUBSTR(p.fecha,1,10) <= ?
+          AND p.goles_l IS NOT NULL
+          {liga_filter_nl}
+    ''', [fecha_min, fecha_max] + liga_params_nl).fetchall())
 
     # Filter en Python: skip si ya en SOFA via norm; dedup cross-tabla
     seen = set()

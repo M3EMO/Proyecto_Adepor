@@ -48,3 +48,7 @@ log_diario.txt
 # Beads / Dolt files (added by bd init)
 .dolt/
 .beads-credential-key
+
+# Token-efficiency skill (instrumentacion local de spawns de agentes)
+data/logs/agent_tokens.jsonl
+reports/token_audit_*.md

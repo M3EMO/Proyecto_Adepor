@@ -1,5 +1,5 @@
 # Setup Windows Task Scheduler para backfill SOFA histórico cada 32H.
-# Cap 1500 calls/sesión. Idempotente. Continúa donde quedó.
+# Cap 1000 calls/sesión. Idempotente. Continúa donde quedó.
 #
 # Uso:
 #   PS> .\scripts\schedule_sofa_backfill_setup.ps1                # crea task
@@ -34,7 +34,7 @@ if (-not (Test-Path $LogsDir)) {
 }
 
 # Crear wrapper PowerShell que:
-#   1. Ejecuta py con cap 1500 (try/catch para garantizar reschedule)
+#   1. Ejecuta py con cap 1000 (try/catch para garantizar reschedule)
 #   2. Redirige logs a $LogsDir
 #   3. Self-reschedules INCLUSO si py falla (try/finally) — fix bug 2026-05-08:
 #      el wrapper anterior tenía quotes anidadas mal escapadas en /TR
@@ -47,7 +47,7 @@ $WrapperContent = @"
 
 try {
     Set-Location '$ProyectoPath'
-    & py '$ScriptPath' --cap 1500 *>&1 | Tee-Object -FilePath `$logFile
+    & py '$ScriptPath' --cap 1000 *>&1 | Tee-Object -FilePath `$logFile
 } catch {
     "[ERROR] py crashed: `$_" | Out-File -FilePath `$logFile -Append
 } finally {
@@ -100,7 +100,7 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "  Auto-reschedule: +32H exacto tras cada run (try/finally)"
     Write-Host "  Rotacion horaria: 06:00 -> 14:00 -> 22:00 -> 06:00 ..."
     Write-Host "  Wrapper: $WrapperPath"
-    Write-Host "  Cap por sesion: 1500 calls (~370 partidos)"
+    Write-Host "  Cap por sesion: 1000 calls (~250 partidos)"
     Write-Host "  Universo total: 24,069 partidos (ligas + copas)"
     Write-Host "  ETA backfill: ~80 sesiones / ~107 dias"
     Write-Host "  Logs: $LogsDir"

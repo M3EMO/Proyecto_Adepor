@@ -4,7 +4,7 @@ $logFile = Join-Path 'C:\Users\map12\Desktop\Proyecto_Adepor\scrape_sofa_backfil
 
 try {
     Set-Location 'C:\Users\map12\Desktop\Proyecto_Adepor'
-    & py 'C:\Users\map12\Desktop\Proyecto_Adepor\scripts\scrape_sofa_backfill_historico.py' --cap 1500 *>&1 | Tee-Object -FilePath $logFile
+    & py 'C:\Users\map12\Desktop\Proyecto_Adepor\scripts\scrape_sofa_backfill_historico.py' --cap 1000 *>&1 | Tee-Object -FilePath $logFile
 } catch {
     "[ERROR] py crashed: $_" | Out-File -FilePath $logFile -Append
 } finally {

@@ -1,11 +1,11 @@
-"""Backfill SOFA histórico 2022-2025 — sesiones acotadas con cap 1500.
+"""Backfill SOFA histórico 2022-2025 — sesiones acotadas con cap 1000.
 
 Diseñado para ejecutarse periódicamente (cron / Task Scheduler) cada ~32H.
 Cada ejecución:
   1. Identifica partidos pendientes (en partidos_backtest o
      partidos_historico_externo, fecha 2022-2025, sin entry en
      sofascore_match_features).
-  2. Itera hasta CAP_TOTAL=1500 calls SOFA (~370 partidos x 4 endpoints).
+  2. Itera hasta CAP_TOTAL=1000 calls SOFA (~250 partidos x 4 endpoints).
   3. Persiste cada partido completado individualmente (idempotente).
   4. Aborta limpio en 403/429/CAP. Próxima ejecución continúa donde quedó.
 
@@ -70,7 +70,7 @@ SOFASCORE_LIGA_IDS = {
     'Copa do Brasil': 373,
 }
 
-CAP_TOTAL_DEFAULT = 1500     # Por sesión (cron 32H)
+CAP_TOTAL_DEFAULT = 1000     # Por sesión (cron 32H) — bajado 2026-05-11 tras 3 corridas con 403 antes de 1500
 SLEEP_MIN = 1.5
 SLEEP_MAX = 3.5
 PAUSE_EVERY_N = 50

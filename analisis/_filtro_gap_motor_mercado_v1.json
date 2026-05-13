@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "descripcion": "Filtro hard gap motor vs mercado para LOCAL — Rec #3 rev2",
+    "fuente": "partidos_backtest 2026 (N motor + outcome disponible)",
+    "rango_cuota": [
+      2.0,
+      4.5
+    ],
+    "metodologia": "bloquear pick LOCAL si prob_1_motor - prob_1_mercado_devig > umbral",
+    "estado": "PROPUESTA — requiere PROPOSAL bead para aplicar"
+  },
+  "yield_por_gap_bucket": [
+    {
+      "gap_bucket": "1_<-5pp_(motor_sub_predice)",
+      "N": 18,
+      "hit": 0.2777777777777778,
+      "p_motor_med": 0.3790565678716896,
+      "imp_med": 0.4517714378095595,
+      "cuota_med": 2.1327777777777777,
+      "yield_unif": -0.4116666666666667
+    },
+    {
+      "gap_bucket": "2_[-5pp,+5pp]_(alineado)",
+      "N": 136,
+      "hit": 0.40441176470588236,
+      "p_motor_med": 0.4249189502395316,
+      "imp_med": 0.4159081072430814,
+      "cuota_med": 2.336470588235294,
+      "yield_unif": -0.0974264705882353
+    },
+    {
+      "gap_bucket": "3_(+5pp,+10pp]",
+      "N": 77,
+      "hit": 0.4155844155844156,
+      "p_motor_med": 0.438431122852045,
+      "imp_med": 0.3637421086702312,
+      "cuota_med": 2.682077922077922,
+      "yield_unif": 0.0916883116883117
+    },
+    {
+      "gap_bucket": "4_(+10pp,+15pp]",
+      "N": 42,
+      "hit": 0.2619047619047619,
+      "p_motor_med": 0.43132858093973875,
+      "imp_med": 0.30674654531276646,
+      "cuota_med": 3.2140476190476193,
+      "yield_unif": -0.23285714285714285
+    },
+    {
+      "gap_bucket": "5_(+15pp,+20pp]",
+      "N": 39,
+      "hit": 0.38461538461538464,
+      "p_motor_med": 0.44549739858126686,
+      "imp_med": 0.2745634134939773,
+      "cuota_med": 3.532820512820513,
+      "yield_unif": 0.3243589743589744
+    },
+    {
+      "gap_bucket": "6_>+20pp_(motor_muy_optimista)",
+      "N": 19,
+      "hit": 0.3684210526315789,
+      "p_motor_med": 0.5323242781364087,
+      "imp_med": 0.28452572312766194,
+      "cuota_med": 3.5399999999999996,
+      "yield_unif": 0.33421052631578946
+    }
+  ],
+  "umbral_recomendado": {
+    "umbral": 0.2,
+    "N_apostables": 312,
+    "yield_apostables": -0.034391025641025634
+  }
+}

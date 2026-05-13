@@ -52,3 +52,7 @@ log_diario.txt
 # Token-efficiency skill (instrumentacion local de spawns de agentes)
 data/logs/agent_tokens.jsonl
 reports/token_audit_*.md
+
+# Análisis CSV regenerables grandes (regenerar con analisis/_d1_d2_temp.py)
+analisis/_d1_bookmaker_calib.csv
+analisis/_d2_m2_historico.csv

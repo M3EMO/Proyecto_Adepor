@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "descripcion": "M.2 thresholds calibrados per-liga sobre histórico 2012-2025",
+    "fuente": "cuotas_historicas_fdco",
+    "rango_cuota_1": [
+      2.2,
+      3.5
+    ],
+    "metodologia": "grid search threshold maximizando yield del bucket <thr (apostable)",
+    "estado": "PROPUESTA — no aplicado a producción"
+  },
+  "resultados": [
+    {
+      "liga": "Alemania",
+      "N_total": 513,
+      "yield_sin_filtro": -0.11896686159844055,
+      "best_thr": 50,
+      "best_yield_filtrado": -0.002232142857142849,
+      "best_gap": 0.20721422392486408,
+      "decision": "USAR thr=50 (yld -0.119 -> -0.002)"
+    },
+    {
+      "liga": "Argentina",
+      "N_total": 2807,
+      "yield_sin_filtro": -0.03077662985393658,
+      "best_thr": 100,
+      "best_yield_filtrado": -0.020062499999999994,
+      "best_gap": 0.016282925013535465,
+      "decision": "INDIFERENTE (mantener thr=60 default)"
+    },
+    {
+      "liga": "Brasil",
+      "N_total": 1925,
+      "yield_sin_filtro": 0.025932467532467536,
+      "best_thr": 150,
+      "best_yield_filtrado": 0.039560117302052784,
+      "best_gap": 0.02908339889850512,
+      "decision": "INDIFERENTE (mantener thr=60 default)"
+    },
+    {
+      "liga": "Espana",
+      "N_total": 661,
+      "yield_sin_filtro": -0.0318910741301059,
+      "best_thr": 30,
+      "best_yield_filtrado": -0.0008053691275167614,
+      "best_gap": 0.04013213087248323,
+      "decision": "USAR thr=30 (yld -0.032 -> -0.001)"
+    },
+    {
+      "liga": "Francia",
+      "N_total": 525,
+      "yield_sin_filtro": -0.0832761904761905,
+      "best_thr": 150,
+      "best_yield_filtrado": -0.09509054325955733,
+      "best_gap": -0.22151911468812874,
+      "decision": "DESACTIVAR M.2 (todos thr empeoran)"
+    },
+    {
+      "liga": "Holanda",
+      "N_total": 442,
+      "yield_sin_filtro": -0.0766289592760181,
+      "best_thr": 20,
+      "best_yield_filtrado": 0.08109756097560974,
+      "best_gap": 0.19365311653116535,
+      "decision": "USAR thr=20 (yld -0.077 -> +0.081)"
+    },
+    {
+      "liga": "Inglaterra",
+      "N_total": 574,
+      "yield_sin_filtro": -0.007404181184668991,
+      "best_thr": 100,
+      "best_yield_filtrado": 0.018281249999999992,
+      "best_gap": 0.07759703947368421,
+      "decision": "USAR thr=100 (yld -0.007 -> +0.018)"
+    },
+    {
+      "liga": "Italia",
+      "N_total": 572,
+      "yield_sin_filtro": -0.11561188811188813,
+      "best_thr": 70,
+      "best_yield_filtrado": -0.06092526690391461,
+      "best_gap": 0.10749397708233971,
+      "decision": "USAR thr=70 (yld -0.116 -> -0.061)"
+    },
+    {
+      "liga": "Turquia",
+      "N_total": 627,
+      "yield_sin_filtro": 0.0036842105263158046,
+      "best_thr": 20,
+      "best_yield_filtrado": 0.09194444444444445,
+      "best_gap": 0.11457384403036577,
+      "decision": "USAR thr=20 (yld +0.004 -> +0.092)"
+    }
+  ]
+}

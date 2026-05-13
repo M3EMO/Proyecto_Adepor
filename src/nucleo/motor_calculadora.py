@@ -239,6 +239,78 @@ _M2_PER_LIGA_ACTIVO = (
     str(get_param('m2_per_liga_activo', scope='global', default='FALSE')).upper() == 'TRUE'
 )
 
+# === Calibracion P(LOCAL) post-hoc (MANIFESTO-CHANGE-APPROVED:bd-dh0, 2026-05-13) ===
+# Flag de activacion + tablas de correccion. Si flag TRUE, prob_1 motor se
+# multiplica por correction_factor[(liga, bucket cuota_1)] y se renormaliza
+# antes de calcular EV. Si FALSE, comportamiento legacy.
+# Validacion en SHADOW table picks_shadow_prob_calibrada_1x2_log.
+def _cargar_calibracion_local():
+    """Carga calibracion P(LOCAL) desde config_motor_valores.
+
+    Returns (activo, calibration_table, buckets_def). Si falla cualquier paso,
+    devuelve (False, None, None) — failsafe NO aplicar.
+    """
+    try:
+        import json
+        activo_raw = get_param('prob_local_calibration_activa', scope='global',
+                                default='FALSE')
+        activo = str(activo_raw).upper() == 'TRUE'
+        if not activo:
+            return False, None, None
+        calib_raw = get_param('prob_local_calibration_v1', scope='global', default=None)
+        buckets_raw = get_param('prob_local_calibration_buckets', scope='global', default=None)
+        if not calib_raw or not buckets_raw:
+            return False, None, None
+        return True, json.loads(calib_raw), json.loads(buckets_raw)
+    except Exception:
+        return False, None, None
+
+(_PROB_LOCAL_CAL_ACTIVO, _PROB_LOCAL_CALIBRATION, _PROB_LOCAL_CAL_BUCKETS) = (
+    _cargar_calibracion_local()
+)
+
+
+def _calibrar_prob_local(p1, px, p2, c1, liga):
+    """Aplica calibracion post-hoc a (p1, px, p2) basado en (liga, bucket cuota_1).
+
+    Si flag inactivo o datos faltan, devuelve (p1, px, p2) sin cambio.
+    Multiplica p1 por correction_factor y renormaliza (px, p2) manteniendo ratio.
+    """
+    if not _PROB_LOCAL_CAL_ACTIVO:
+        return p1, px, p2
+    if _PROB_LOCAL_CALIBRATION is None or _PROB_LOCAL_CAL_BUCKETS is None:
+        return p1, px, p2
+    if not isinstance(c1, (int, float)) or c1 <= 0:
+        return p1, px, p2
+    # Encontrar bucket
+    bucket = None
+    for bname, brange in _PROB_LOCAL_CAL_BUCKETS.items():
+        try:
+            if brange['min'] <= c1 < brange['max']:
+                bucket = bname
+                break
+        except (KeyError, TypeError):
+            continue
+    if bucket is None:
+        return p1, px, p2
+    # Buscar correction_factor (liga primero, _global fallback)
+    factor = None
+    if liga and liga in _PROB_LOCAL_CALIBRATION:
+        factor = _PROB_LOCAL_CALIBRATION[liga].get(bucket)
+    if factor is None:
+        factor = _PROB_LOCAL_CALIBRATION.get('_global', {}).get(bucket)
+    if factor is None or factor == 1.0:
+        return p1, px, p2
+    # Aplicar + renormalizar
+    p1_new = max(0.0, min(1.0, p1 * factor))
+    rest_old = px + p2
+    rest_new = 1.0 - p1_new
+    if rest_old > 0 and rest_new > 0:
+        scale = rest_new / rest_old
+        return p1_new, px * scale, p2 * scale
+    return p1_new, px, p2
+
+
 # Mercado O/U 2.5 (complementario — opera solo cuando no hay señal 1X2)
 # True  = activo  (backtest post-fix: 5 bets, 100% hit, +140.6% yield)
 # False = shadow  (registra pick_ou en DB pero stake_ou = 0, sin dinero real)
@@ -1434,6 +1506,10 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None,
                 and momento_bin_4 is not None and momento_bin_4 == 3):
             return f"[PASAR] Cierre Temporada Q4 (V5.1)", -100, 0
     # ===== fin filtro V5.1 =====
+
+    # Calibracion P(LOCAL) post-hoc (MANIFESTO-CHANGE-APPROVED:bd-dh0)
+    # No-op si flag prob_local_calibration_activa = FALSE.
+    p1, px, p2 = _calibrar_prob_local(p1, px, p2, c1, liga)
 
     # Resolver divergencia maxima segun eficiencia de mercado de la liga (F4 via DB)
     if liga:

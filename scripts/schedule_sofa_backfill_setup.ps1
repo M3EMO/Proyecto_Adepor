@@ -47,7 +47,7 @@ $WrapperContent = @"
 
 try {
     Set-Location '$ProyectoPath'
-    & py '$ScriptPath' --cap 1000 *>&1 | Tee-Object -FilePath `$logFile
+    & '$ProyectoPath\.venv\Scripts\python.exe' '$ScriptPath' --cap 1000 *>&1 | Tee-Object -FilePath `$logFile
 } catch {
     "[ERROR] py crashed: `$_" | Out-File -FilePath `$logFile -Append
 } finally {

@@ -230,6 +230,15 @@ def _cargar_filtro_picks_v51():
 
 _FILTRO_PICKS_V51 = _cargar_filtro_picks_v51()
 
+# === M.2 per-liga (MANIFESTO-CHANGE-APPROVED:bd-to4, 2026-05-13) ===
+# Flag de activacion. Si TRUE, M.2 threshold se lee scope-aware via get_param
+# clave 'm2_n_acum_max' (fallback global=60). Si FALSE, comportamiento legacy
+# usando _FILTRO_PICKS_V51['n_acum_max']. Cambiar a TRUE solo tras validar
+# SHADOW con N>=80 picks.
+_M2_PER_LIGA_ACTIVO = (
+    str(get_param('m2_per_liga_activo', scope='global', default='FALSE')).upper() == 'TRUE'
+)
+
 # Mercado O/U 2.5 (complementario — opera solo cuando no hay señal 1X2)
 # True  = activo  (backtest post-fix: 5 bets, 100% hit, +140.6% yield)
 # False = shadow  (registra pick_ou en DB pero stake_ou = 0, sin dinero real)
@@ -1406,8 +1415,20 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None,
         if liga is not None and liga not in _FILTRO_PICKS_V51['ligas']:
             return f"[PASAR] Liga No Apostable (V5.1)", -100, 0
         # M.2: madurez EMA local (fail-safe: si n_acum_l es None, NO bloquea)
-        if n_acum_l is not None and n_acum_l >= _FILTRO_PICKS_V51['n_acum_max']:
-            return f"[PASAR] EMA Madura n_acum>={_FILTRO_PICKS_V51['n_acum_max']} (V5.1)", -100, 0
+        # MANIFESTO-CHANGE-APPROVED:bd-to4 (2026-05-13): si flag _M2_PER_LIGA_ACTIVO,
+        # usa threshold scope-aware via get_param. Sino, legacy (60 global).
+        if n_acum_l is not None:
+            if _M2_PER_LIGA_ACTIVO and liga is not None:
+                _n_acum_max_aplicado = get_param('m2_n_acum_max', scope=liga,
+                                                  default=_FILTRO_PICKS_V51['n_acum_max'])
+                try:
+                    _n_acum_max_aplicado = int(_n_acum_max_aplicado)
+                except (TypeError, ValueError):
+                    _n_acum_max_aplicado = _FILTRO_PICKS_V51['n_acum_max']
+            else:
+                _n_acum_max_aplicado = _FILTRO_PICKS_V51['n_acum_max']
+            if n_acum_l >= _n_acum_max_aplicado:
+                return f"[PASAR] EMA Madura n_acum>={_n_acum_max_aplicado} (V5.1)", -100, 0
         # M.3: cierre temporada (Q4). fail-safe: si momento_bin_4 es None, NO bloquea
         if (_FILTRO_PICKS_V51.get('excluir_q4', False)
                 and momento_bin_4 is not None and momento_bin_4 == 3):

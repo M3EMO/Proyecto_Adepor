@@ -27,6 +27,8 @@ import sys
 # Patrones que disparan validacion estricta
 PATRONES_MANIFIESTO = [
     re.compile(r'\bReglas_IA\.txt\b', re.IGNORECASE),
+    re.compile(r'00-contrato\.md', re.IGNORECASE),  # contrato vigente (reemplaza Reglas_IA.txt)
+    re.compile(r'\bevaluar_pretest\.py\b', re.IGNORECASE),
     re.compile(r'\bmanifest', re.IGNORECASE),
     re.compile(r'\bmotor_calculadora\.py\b', re.IGNORECASE),
 ]
@@ -35,6 +37,7 @@ CONSTANTES_PROTEGIDAS = [
     'ALFA_EMA', 'N0_ANCLA', 'RHO_FALLBACK', 'FACTOR_CORR_XG_OU',
     'FLOOR_PROB_MIN', 'MARGEN_PREDICTIVO_1X2', 'CORR_VISITA',
     'MAX_KELLY_PCT_NORMAL', 'MAX_KELLY_PCT_DRAWDOWN',
+    'FRACCION_KELLY', 'RATIO_MIN_IMPLICITA', 'N_MIN_PARTIDOS_EQUIPO',
 ]
 
 TAG_APROBADO = re.compile(r'MANIFESTO-CHANGE-APPROVED\s*:\s*(bd-[\w-]+|HUMAN)', re.IGNORECASE)

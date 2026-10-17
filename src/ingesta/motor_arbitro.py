@@ -81,9 +81,11 @@ def auditar_partidos():
 
         # Procesar cada evento de la API contra nuestra lista de pendientes para ese día
         for ev in eventos_api:
+            partido_db = None
             try:
-                loc_api = ev['competitions'][0]['competitors'][0]['team']['displayName']
-                vis_api = ev['competitions'][0]['competitors'][1]['team']['displayName']
+                comp = ev['competitions'][0]['competitors']
+                loc_api = next(c for c in comp if c.get('homeAway') == 'home')['team']['displayName']
+                vis_api = next(c for c in comp if c.get('homeAway') == 'away')['team']['displayName']
 
                 # Usar el gestor de nombres para un emparejamiento robusto
                 partido_db = next((p for p in partidos_del_dia if gestor_nombres.son_equivalentes(p[3], loc_api, diccionario_nombres, liga=pais) and gestor_nombres.son_equivalentes(p[4], vis_api, diccionario_nombres, liga=pais)), None)
@@ -150,9 +152,9 @@ def auditar_partidos():
                 partidos_del_dia.remove(partido_db) # Evitar doble procesamiento
 
             except requests.exceptions.RequestException as e:
-                print(f"[ERROR] Fallo de red al auditar {partido_db[3]} vs {partido_db[4]}: {e}")
-            except (KeyError, IndexError, TypeError) as e:
-                print(f"[ERROR] Estructura de datos inesperada al auditar {partido_db[3]} vs {partido_db[4]}: {e}")
+                print(f"[ERROR] Fallo de red al auditar {partido_db[3:5] if partido_db else ev.get('name', '?')}: {type(e).__name__}")
+            except (KeyError, IndexError, TypeError, StopIteration) as e:
+                print(f"[ERROR] Estructura de datos inesperada al auditar {partido_db[3:5] if partido_db else ev.get('name', '?')}: {e}")
             except Exception as e:
                 print(f"[ERROR] Fallo inesperado al auditar partido: {e}")
 

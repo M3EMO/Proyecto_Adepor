@@ -48,3 +48,11 @@ def test_evaluar_revierte_a_pretest_sin_aprobacion(db):
     db.commit()
     ep.evaluar()
     assert _flag(db, 'Perdedora') == 'FALSE'
+
+
+def test_flip_live_1x2_funciona_en_db_nueva_sin_fila_previa(db):
+    _cargar(db, 'Ganadora', 40, 30, 1.70)
+    ep.evaluar(dry_run=False, aprobar_live=True)
+    fila = db.execute("SELECT valor_texto FROM config_motor_valores WHERE clave='apuestas_live' "
+                      "AND scope='Ganadora'").fetchone()
+    assert fila == ('TRUE',)

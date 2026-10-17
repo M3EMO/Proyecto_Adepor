@@ -340,35 +340,6 @@ def cmd_status():
     except Exception as e:
         log_terminal(f"Error leyendo DB: {e}", "ERROR")
 
-    # 3. Quota API-Football
-    print()
-    print("--- API-FOOTBALL QUOTA ---")
-    try:
-        sys.path.insert(0, '.')
-        from src.comun.config_sistema import API_KEYS_FOOTBALL
-        import requests
-        total_restante = 0
-        for i, key in enumerate(API_KEYS_FOOTBALL, 1):
-            try:
-                r = requests.get('https://v3.football.api-sports.io/status',
-                                 headers={'x-apisports-key': key}, timeout=6)
-                data = r.json().get('response', {})
-                errs = r.json().get('errors', {})
-                if errs:
-                    print(f"  Key #{i}: ERROR {errs}")
-                    continue
-                req = data.get('requests', {})
-                cur_ = req.get('current', 0)
-                lim  = req.get('limit_day', 100)
-                rest = lim - cur_
-                total_restante += rest
-                print(f"  Key #{i}: {cur_}/{lim}  ({rest} restantes hoy)")
-            except Exception as e:
-                print(f"  Key #{i}: sin respuesta ({e.__class__.__name__})")
-        print(f"  TOTAL restante hoy: {total_restante} requests")
-    except Exception as e:
-        log_terminal(f"No pude chequear quota: {e}", "ALERTA")
-
     # 4. Ultima corrida (ver Excel modtime)
     print()
     if os.path.exists('Backtest_Modelo.xlsx'):

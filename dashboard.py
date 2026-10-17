@@ -447,7 +447,7 @@ def _tab_picks(b):
         (st.success if aviso[0] == "ok" else st.error)(aviso[1])
     picks = b["picks"]
     if not picks:
-        st.info("No hay picks vivos con stake > 0.")
+        st.info("No hay picks vivos para partidos que no empezaron.")
         return
     c = st.columns(3)
     c[0].metric("Picks vivos", len(picks))

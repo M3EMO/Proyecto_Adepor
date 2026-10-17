@@ -175,3 +175,29 @@ def test_bankroll_bajo_piso_usa_capital_real(db):
         ('bankroll_fecha_corte', '2026-01-01')])
     _fila(db, 'p1', '2026-05-01 20:00', '[PERDIDA] LOCAL', 20000.0)
     assert mc.obtener_bankroll_operativo(db.cursor()) == 80000.0
+
+
+def test_filtro_v51_sin_clave_ligas_no_bloquea(monkeypatch):
+    monkeypatch.setattr(mc, '_FILTRO_PICKS_V51',
+                        {'ligas': None, 'n_acum_max': 60, 'excluir_q4': False, 'm2_activo': False})
+    pick, _, _ = mc.evaluar_mercado_1x2(0.60, 0.22, 0.18, 2.0, 3.6, 4.5, liga='Argentina')
+    assert 'Liga No Apostable' not in pick
+
+
+def test_ou_por_omision_es_pretest():
+    assert mc.APUESTA_OU_ACTIVA is False
+
+
+def test_layer2_sin_pesos_v12_mantiene_v0(db):
+    futuro = (ahora_art() + timedelta(days=2)).strftime('%Y-%m-%d %H:%M')
+    _fila(db, 'v12', futuro, 'pendiente', estado='Pendiente')
+    db.execute("CREATE TABLE historial_equipos_v6_shadow (equipo_norm TEXT, ema_xg_v6_favor_home REAL, "
+               "ema_xg_v6_contra_home REAL, ema_xg_v6_favor_away REAL, ema_xg_v6_contra_away REAL)")
+    db.executemany("INSERT INTO historial_equipos_v6_shadow VALUES (?, 1.5, 1.1, 1.2, 1.4)",
+                   [('riverplate',), ('bocajuniors',)])
+    db.execute("INSERT INTO config_motor_valores (clave, scope, valor_texto, tipo) VALUES "
+               "('arch_decision_per_liga', 'global', '{\"Argentina\": \"V12\"}', 'json')")
+    db.commit()
+    mc.main()
+    p1, px, p2 = db.execute("SELECT prob_1, prob_x, prob_2 FROM partidos_backtest").fetchone()
+    assert abs(p1 - 1 / 3) > 1e-6 and abs(p1 + px + p2 - 1) < 1e-6

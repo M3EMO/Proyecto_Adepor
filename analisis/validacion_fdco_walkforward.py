@@ -202,12 +202,43 @@ def resumir(r, semilla=7):
     }
 
 
+def mezcla_con_pinnacle(partidos_por_liga):
+    """Peso optimo w de p = q_apertura^(1-w) * p_modelo^w (motor nuevo), elegido en la 1ra mitad
+    de la temporada de evaluacion y medido en la 2da. w=0: el modelo no agrega informacion."""
+    filas = []
+    for liga, (warm, evalua) in partidos_por_liga.items():
+        ema = Ema(True, ALFA.get(liga, 0.15))
+        for fase, partidos in (('warm', warm), ('eval', evalua)):
+            for p in partidos:
+                lam, mu, nh, na = ema.lambdas(p['h'], p['a'])
+                if fase == 'eval' and all(k in p['odds'] for k in ('PSH', 'PSD', 'PSA')) and min(nh, na) >= 5:
+                    q = [1 / p['odds'][k] for k in ('PSH', 'PSD', 'PSA')]
+                    o = (p['FTHG'] > p['FTAG'], p['FTHG'] == p['FTAG'], p['FTHG'] < p['FTAG']).index(True)
+                    filas.append((p['fecha'], probs(lam, mu, 1.0)[:3], [x / sum(q) for x in q], o))
+                ema.actualizar(p)
+    filas.sort(key=lambda f: f[0])
+    mitad = len(filas) // 2
+
+    def ll(fs, w):
+        tot = 0.0
+        for _, pm, q, o in fs:
+            z = [(qi ** (1 - w)) * (pi ** w) for qi, pi in zip(q, pm)]
+            tot -= math.log(z[o] / sum(z))
+        return tot / len(fs)
+    grilla = [i / 20 for i in range(11)]
+    w = min(grilla, key=lambda x: ll(filas[:mitad], x))
+    return {'n': len(filas), 'w_optimo_1ra_mitad': w,
+            'logloss_2da_mercado': ll(filas[mitad:], 0.0), 'logloss_2da_mezcla': ll(filas[mitad:], w),
+            'logloss_2da_modelo': ll(filas[mitad:], 1.0)}
+
+
 def main():
     d = Path(sys.argv[1])
     datos = {}
     for cod, liga in LIGAS.items():
         datos[liga] = (leer(d / f'{cod}_2324.csv'), leer(d / f'{cod}_2425.csv'))
     out = {m: resumir(r) for m, r in correr(datos).items()}
+    out['mezcla_modelo_pinnacle'] = mezcla_con_pinnacle(datos)
     texto = json.dumps(out, indent=2, ensure_ascii=False, default=float)
     print(texto)
     if len(sys.argv) > 2:

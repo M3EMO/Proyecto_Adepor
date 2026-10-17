@@ -61,3 +61,10 @@ def test_picks_vivos_incluye_pretest_y_excluye_empezados():
                 'Calculado', None, None, 0.1, 'NO', '', 0.0]
     vivos = dashboard.picks_vivos([fila('pre', fut, 0.0), fila('emp', pas, 50.0)])
     assert [p['id'] for p in vivos] == ['pre'] and vivos[0]['stake'] == 0.0
+
+
+def test_confirmacion_duplicada_da_error_claro(db):
+    _pick(db, 'm1')
+    confirmar_apuesta(db, 'm1', '1X2', 2.0, 100.0)
+    with pytest.raises(ValueError, match='ya esta confirmada'):
+        confirmar_apuesta(db, 'm1', '1X2', 2.1, 50.0)

@@ -103,5 +103,12 @@
         "yield": -0.09607142857142856
       }
     }
+  },
+  "mezcla_modelo_pinnacle": {
+    "n": 1341,
+    "w_optimo_1ra_mitad": 0.0,
+    "logloss_2da_mercado": 0.9651604240057522,
+    "logloss_2da_mezcla": 0.9651604240057522,
+    "logloss_2da_modelo": 1.0542928507270724
   }
 }

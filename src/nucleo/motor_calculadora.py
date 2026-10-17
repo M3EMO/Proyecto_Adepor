@@ -224,7 +224,7 @@ def _cargar_filtro_picks_v51():
         else:
             return None
         return {
-            'ligas': set(cfg.get('ligas', [])),
+            'ligas': set(cfg['ligas']) if 'ligas' in cfg else None,  # sin clave: no filtra por liga
             'n_acum_max': int(cfg.get('n_acum_max', 60)),
             'excluir_q4': bool(cfg.get('excluir_q4', True)),
             # M.2 nunca bloqueo en vivo (lookup roto, ver _get_n_acum_pre_partido) y su
@@ -321,7 +321,7 @@ def _calibrar_prob_local(p1, px, p2, c1, liga):
 # True  = activo  (backtest post-fix: 5 bets, 100% hit, +140.6% yield)
 # False = shadow  (registra pick_ou en DB pero stake_ou = 0, sin dinero real)
 # Cambiar a False si se quiere observar sin apostar hasta acumular n >= 30
-APUESTA_OU_ACTIVA = get_param('apuesta_ou_live', default=True)
+APUESTA_OU_ACTIVA = get_param('apuesta_ou_live', default=False)  # sin fila: pretest, nunca dinero real por omision
 
 # Umbral para el log SHADOW de incertidumbre. Los valores reales de incertidumbre
 # estan en el rango [0.6, 2.8] (post V9.1), entonces el 0.15 original disparaba
@@ -1512,7 +1512,7 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None,
     # M.1: liga apostable. M.2: madurez EMA local. M.3: momento temp.
     if _FILTRO_PICKS_V51 is not None:
         # M.1: liga apostable
-        if liga is not None and liga not in _FILTRO_PICKS_V51['ligas']:
+        if liga is not None and _FILTRO_PICKS_V51['ligas'] is not None and liga not in _FILTRO_PICKS_V51['ligas']:
             return f"[PASAR] Liga No Apostable (V5.1)", -100, 0
         # M.2: madurez EMA local (fail-safe: si n_acum_l es None, NO bloquea)
         # MANIFESTO-CHANGE-APPROVED:bd-to4 (2026-05-13): si flag _M2_PER_LIGA_ACTIVO,
@@ -1677,7 +1677,7 @@ def evaluar_mercado_ou(po, pu, co, cu, p1, px, p2, xg_local=None, xg_visita=None
             return f"[PASAR] xG Margen Insuf ({xg_total:.2f}, delta={abs(xg_total-2.5):.2f}<{margen:.2f})", -100, 0
 
     if abs(po - pu) < MARGEN_PREDICTIVO_OU:
-        return "[PASAR] Margen Predictivo O/U Insuficiente (<15%)", -100, 0
+        return f"[PASAR] Margen Predictivo O/U Insuficiente (<{MARGEN_PREDICTIVO_OU:.0%})", -100, 0
 
     probs = {"OVER 2.5": po, "UNDER 2.5": pu}
     cuotas = {"OVER 2.5": co, "UNDER 2.5": cu}
@@ -2020,6 +2020,9 @@ def main():
                     finally:
                         _conn_arch.close()
                     p1_v0_pre, px_v0_pre, p2_v0_pre = p1, px, p2
+                    # _calcular_probs_v12_lr devuelve 1/3 uniforme si faltan pesos o falla: mantener V0.
+                    if (p1_v12_arch, px_v12_arch, p2_v12_arch) == (1/3, 1/3, 1/3):
+                        raise ValueError('V12 sin pesos')
                     p1, px, p2 = p1_v12_arch, px_v12_arch, p2_v12_arch
                     print(f"   [ARCH-V5.0:V12] {local} vs {visita} ({pais}) | "
                           f"V0=({p1_v0_pre:.3f},{px_v0_pre:.3f},{p2_v0_pre:.3f}) -> "

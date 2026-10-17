@@ -56,8 +56,11 @@ def confirmar_apuesta(conn, id_partido, mercado, cuota_tomada, stake):
     col_cuota = _COL_CUOTA.get(pick)
     if col_cuota is None:
         raise ValueError(f'pick no reconocido: {pick}')
+    conn.execute(SQL_TABLA)
+    if conn.execute("SELECT 1 FROM apuestas_confirmadas WHERE id_partido=? AND mercado=?",
+                    (id_partido, mercado)).fetchone():
+        raise ValueError(f'{id_partido} {mercado} ya esta confirmada')
     with conn:
-        conn.execute(SQL_TABLA)
         conn.execute("INSERT INTO apuestas_confirmadas (id_partido, mercado, pick, cuota_tomada, stake) "
                      "VALUES (?, ?, ?, ?, ?)", (id_partido, mercado, pick, cuota_tomada, stake))
         conn.execute(f"UPDATE partidos_backtest SET {col_cuota}=?, {col_stk}=? WHERE id_partido=?",

@@ -188,13 +188,8 @@ def evaluar(dry_run=False, aprobar_live=False):
         con.close()
         return 0
 
-    # Aplicar. apuestas_live usa UPDATE (ya existen filas), apuesta_ou_live usa UPSERT.
-    for pais, hit, n, pval, nuevo in flips_1x2:
-        cur.execute(
-            "UPDATE config_motor_valores SET valor_texto=?, fuente=?, fecha_actualizacion=datetime('now') "
-            "WHERE clave='apuestas_live' AND scope=?",
-            (nuevo, f'pretest_autoflip_1x2_hit={100*hit:.1f}%_N={n}_p={pval:.3f}', pais)
-        )
+    # UPSERT en ambos: en una DB nueva no hay filas apuestas_live y un UPDATE no flipeaba nada.
+    _aplicar_flips(cur, flips_1x2, 'apuestas_live', 'pretest_autoflip_1x2')
     _aplicar_flips(cur, flips_ou, 'apuesta_ou_live', 'pretest_autoflip_ou')
     con.commit()
     con.close()

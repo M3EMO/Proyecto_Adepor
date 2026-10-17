@@ -9,7 +9,7 @@ from src.comun.tiempo import ahora_art
 from src.comun.tipos import safe_int
 
 # ==========================================
-# MOTOR BACKTEST V7.3 (RESILIENTE CON FAILOVER, SCOPE POR FECHA REAL)
+# MOTOR BACKTEST V7.3 (resultados ESPN; empareja por liga y fecha +-1)
 # Responsabilidad: Liquidación de resultados con conmutación a API secundaria.
 # V7.2: LIGAS_ESPN, MAPA_LIGAS_ODDS, DB_NAME y API_KEYS_ODDS desde config_sistema.
 # V7.3 (2026-04-17): Escanea SOLO partidos 'Calculado' cuya fecha ya paso (no futuros),

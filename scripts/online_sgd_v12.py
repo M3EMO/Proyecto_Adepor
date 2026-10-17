@@ -3,12 +3,15 @@
 Aplica un SGD step incremental sobre lr_v12_weights[scope] dado un partido liquidado.
 Persiste W actualizado + log diagnostico en online_sgd_log.
 
-Uso interactivo (testing):
+Uso interactivo (testing, DRY RUN por default; no escribe en la DB):
     py scripts/online_sgd_v12.py --liga Argentina --partidos 100
+    py scripts/online_sgd_v12.py --liga Argentina --partidos 100 --escribir-produccion
+    (--escribir-produccion borra anchor/n_acum y escribe pasos SGD con outcomes ALEATORIOS
+     en lr_v12_weights: solo para pruebas en una DB sombra via ADEPOR_DB)
 
-Uso programatico (desde motor_data.py):
+Uso programatico (desde motor_adaptativo.py):
     from scripts.online_sgd_v12 import sgd_step_partido
-    sgd_step_partido(conn, liga, features, real_outcome)
+    sgd_step_partido(conn, liga, features, real_outcome, commit=False)  # el caller commitea
 
 Limites:
 - mean/std FROZEN del entrenamiento batch (lr_v12_weights tiene mean+std embeddidos).
@@ -30,7 +33,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-DB = ROOT / "fondo_quant.db"
+from src.comun.config_sistema import DB_NAME as DB  # respeta ADEPOR_DB (tests, sombra)
 LR_BASE = 0.005          # learning rate online
 LAMBDA_RIDGE = 0.1       # ridge (mismo que batch)
 LAMBDA_ANCHOR = 0.05     # anchor regularization hacia W_batch (anti-catastrophic forget)
@@ -123,7 +126,7 @@ def sgd_step(W, mean, std, x_raw, y_one_hot, W_anchor=None,
     return W_new, grad_norm, loss_pre, loss_post, P_pre
 
 
-def sgd_step_partido(conn, liga, features_v12, real_outcome, bead_id="online_v12"):
+def sgd_step_partido(conn, liga, features_v12, real_outcome, bead_id="online_v12", commit=True):
     """API pública: un step SGD sobre el partido y persistir.
 
     Args:
@@ -131,6 +134,7 @@ def sgd_step_partido(conn, liga, features_v12, real_outcome, bead_id="online_v12
         liga: str (scope, 'global' como fallback)
         features_v12: list[float] de 13 elementos (mismo orden que feats_v12 batch)
         real_outcome: '1' | 'X' | '2'
+        commit: False para que el caller commitee (atomicidad con su propia marca)
     """
     init_log_table()
     cur = conn.cursor()
@@ -170,7 +174,8 @@ def sgd_step_partido(conn, liga, features_v12, real_outcome, bead_id="online_v12
                 (clave, scope, valor_real, valor_texto, tipo, fuente, bloqueado)
             VALUES ('online_sgd_n_partidos', ?, ?, NULL, 'real', ?, 0)
         """, (liga, n_acum + 1, 'online_sgd'))
-        conn.commit()
+        if commit:
+            conn.commit()
         return False, f"warmup ({n_acum + 1}/{WARMUP_N})"
 
     # 4. Construir y_one_hot
@@ -219,12 +224,22 @@ def sgd_step_partido(conn, liga, features_v12, real_outcome, bead_id="online_v12
           grad_norm, weight_norm, brier_pre, loss_pre, loss_post, delta_w, reverted,
           f"y={real_outcome} P_pre=[{P_pre[0]:.3f},{P_pre[1]:.3f},{P_pre[2]:.3f}]"))
 
-    conn.commit()
+    if commit:
+        conn.commit()
     return True, f"step_done (delta_w={delta_w:.4f}, reverted={reverted})"
 
 
-def demo_run(n_partidos=100, liga='global'):
-    """Demo: simula online SGD sobre N partidos sintéticos para verificar pipeline."""
+def demo_run(n_partidos=100, liga='global', escribir=False):
+    """Demo: simula online SGD sobre N partidos sintéticos para verificar pipeline.
+    Sin escribir=True solo imprime el plan (dry run). Con True escribe en la DB."""
+    if not escribir:
+        print(f"=== DRY RUN Online SGD V12 (no escribe en DB) ===")
+        print(f"  liga={liga}  n_partidos={n_partidos}  DB={DB}")
+        print(f"  Borraria: lr_v12_weights_batch_anchor y online_sgd_n_partidos (scope={liga})")
+        print(f"  Escribiria: {n_partidos} pasos SGD con outcomes ALEATORIOS en lr_v12_weights[{liga}]")
+        print(f"  Para ejecutar: agregar --escribir-produccion (solo en DB sombra via ADEPOR_DB)")
+        return
+
     init_log_table()
     con = sqlite3.connect(DB)
 
@@ -277,5 +292,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Online SGD V12 prototype")
     parser.add_argument('--liga', default='global', help='scope (default: global)')
     parser.add_argument('--partidos', type=int, default=150, help='N partidos demo (default: 150)')
+    parser.add_argument('--escribir-produccion', action='store_true',
+                        help='Sin este flag no se escribe nada (dry run por default)')
     args = parser.parse_args()
-    demo_run(args.partidos, args.liga)
+    demo_run(args.partidos, args.liga, escribir=args.escribir_produccion)

@@ -56,3 +56,8 @@ reports/token_audit_*.md
 # Análisis CSV regenerables grandes (regenerar con analisis/_d1_d2_temp.py)
 analisis/_d1_bookmaker_calib.csv
 analisis/_d2_m2_historico.csv
+
+# Operativos locales (auditoria 2026-10)
+.beads.gate.lock
+.beads/.auto-import-issues.jsonl
+data/logs/*.log

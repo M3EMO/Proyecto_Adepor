@@ -47,4 +47,5 @@ def calibrar_probs(p1, px, p2, coefs=None):
     s = q1 + qx + q2
     if s > 0:
         return q1 / s, qx / s, q2 / s
-    return p1, px, p2  # fallback si todo clampeo a 0
+    t = p1 + px + p2  # fallback si todo clampeo a 0: probs crudas, pero normalizadas
+    return (p1 / t, px / t, p2 / t) if t > 0 else (1 / 3, 1 / 3, 1 / 3)

@@ -1,0 +1,8 @@
+-r requirements.txt
+pandas==3.0.6
+scipy==1.18.1
+beautifulsoup4==4.15.0
+pytest==9.1.1
+# Sin pin: no instalados en .venv; cota inferior solamente
+matplotlib>=3.8
+xgboost>=2.0

@@ -41,7 +41,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
         pass
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-DB_DEFAULT = ROOT / "fondo_quant.db"
+from src.comun.config_sistema import DB_NAME as DB_DEFAULT  # noqa: E402
 
 # Calendario de splits por liga (Argentina con 3 formatos paralelos)
 ARGENTINA_SPLIT = {
@@ -101,6 +101,7 @@ def crear_tabla_si_no_existe(con):
             formato TEXT NOT NULL,
             fecha_snapshot TEXT NOT NULL,
             equipo TEXT NOT NULL,
+            equipo_norm TEXT,
             posicion INTEGER,
             pj INTEGER,
             pg INTEGER,
@@ -113,6 +114,9 @@ def crear_tabla_si_no_existe(con):
             PRIMARY KEY (liga, temp, formato, fecha_snapshot, equipo)
         )
     """)
+    # equipo_norm se agrego a mano en la DB perdida (adepor-qqb): tablas viejas no la tienen.
+    if 'equipo_norm' not in [r[1] for r in cur.execute("PRAGMA table_info(posiciones_tabla_snapshot)")]:
+        cur.execute("ALTER TABLE posiciones_tabla_snapshot ADD COLUMN equipo_norm TEXT")
     cur.execute("""
         CREATE INDEX IF NOT EXISTS idx_pos_snapshot_lookup
         ON posiciones_tabla_snapshot(liga, temp, formato, equipo, fecha_snapshot DESC)
@@ -147,7 +151,9 @@ def detectar_grupos_pendientes(con):
         )
         SELECT liga, temp, MIN(fecha) AS fecha_min_pendiente
         FROM partidos_unidos pu
-        WHERE fecha > COALESCE(
+        -- >= : un partido del ultimo dia snapshoteado puede liquidarse despues del snapshot;
+        -- regenerar ese dia es idempotente (regenerar_grupo borra >= fecha_inicio).
+        WHERE fecha >= COALESCE(
                 (SELECT MAX(fecha_snapshot) FROM posiciones_tabla_snapshot
                  WHERE liga = pu.liga AND temp = pu.temp),
                 '0000-00-00')

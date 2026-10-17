@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 # Responsabilidad: Eliminar equipos obsoletos para optimizar la memoria y el cálculo.
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
+from src.comun.config_sistema import DB_NAME
 INACTIVITY_MONTHS = 6
 
 def main():

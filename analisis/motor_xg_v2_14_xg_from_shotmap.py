@@ -35,7 +35,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import KFold
 
-DB = 'fondo_quant.db'
+DB = __import__('os').environ.get('ADEPOR_DB') or str(__import__('pathlib').Path(__file__).resolve().parent.parent / 'fondo_quant.db')  # paso 3.15
 OUT_JSON = 'analisis/motor_xg_v2_14_xg_from_shotmap.json'
 
 # Cancha real en metros (FIFA standard)

@@ -133,8 +133,11 @@ def poblar_backtest(wb, datos, bankroll, aportes=None):
         ws.cell(r, COL['auditoria'], auditoria or "").font = FONT_DATA
 
         # Formulas
-        ws.cell(r, COL['ap1x2'],   f_apuesta_1x2(r, ap1x2)).font = FONT_DATA
-        ws.cell(r, COL['apou'],    f_apuesta_ou(r, apou)).font   = FONT_DATA
+        # Solo filas liquidadas resuelven GANADA/PERDIDA: si no, P/L y equity sumaban
+        # partidos con goles pero sin liquidar (el bankroll no los cuenta).
+        liquidado = estado == 'Liquidado'
+        ws.cell(r, COL['ap1x2'],   f_apuesta_1x2(r, ap1x2) if liquidado else ap1x2).font = FONT_DATA
+        ws.cell(r, COL['apou'],    f_apuesta_ou(r, apou) if liquidado else apou).font   = FONT_DATA
         ws.cell(r, COL['acierto'], f_acierto(r)).font            = FONT_DATA
 
         cell = ws.cell(r, COL['pl'], f_pl_neto(r))
@@ -198,7 +201,7 @@ def poblar_backtest(wb, datos, bankroll, aportes=None):
                 stats_liga[pais] = {'apuestas': 0, 'ganadas': 0, 'perdidas': 0,
                                     'vol': 0.0, 'pl': 0.0}
             s = stats_liga[pais]
-            if stk1x2 and stk1x2 > 0 and ap1x2:
+            if stk1x2 and stk1x2 > 0 and ap1x2 and liquidado:
                 res = determinar_resultado_entero(ap1x2, gl, gv)
                 if res != 0:
                     s['apuestas'] += 1
@@ -211,7 +214,7 @@ def poblar_backtest(wb, datos, bankroll, aportes=None):
                     else:
                         s['perdidas'] += 1
                         s['pl'] -= stk1x2
-            if stkou and stkou > 0 and apou:
+            if stkou and stkou > 0 and apou and liquidado:
                 res = determinar_resultado_entero(apou, gl, gv)
                 if res != 0:
                     s['apuestas'] += 1
@@ -224,6 +227,11 @@ def poblar_backtest(wb, datos, bankroll, aportes=None):
                     else:
                         s['perdidas'] += 1
                         s['pl'] -= stkou
+
+    # Aportes posteriores al ultimo partido: obtener_bankroll_operativo ya los cuenta.
+    resto = sum(float(m) for _, m in aportes[aporte_idx:])
+    if datos and resto:
+        ws.cell(r, COL['equity']).value = f_equity(r, bankroll, aporte=aporte_fila + resto)
 
     # Conditional Formatting
     _aplicar_conditional_formatting(ws, len(datos) + 1)

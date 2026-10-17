@@ -185,6 +185,8 @@ def crear_hoja_resimulacion(wb, datos, bankroll):
     for p in candidatos:
         stake = _stake_kelly(p['prob'], p['cuota'], bankroll_running,
                              fraccion_kelly, max_kelly_pct)
+        if stake <= 0:
+            continue  # Kelly <= 0: no hay apuesta; no debe contar en N ni en hit
         pl = round(stake * (p['cuota'] - 1), 2) if p['gana'] else round(-stake, 2)
         bankroll_running = round(bankroll_running + pl, 2)
         p['stake']  = stake

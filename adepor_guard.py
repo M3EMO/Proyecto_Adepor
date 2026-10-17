@@ -19,16 +19,32 @@
 # ============================================================
 
 import sqlite3
-import shutil
 import json
 import os
 import sys
 import glob
 from datetime import datetime
-from config_sistema import DB_NAME
+from src.comun.config_sistema import DB_NAME
 
 SNAPSHOTS_DIR = "snapshots"
 SHADOW_DB     = "fondo_quant_shadow.db"
+
+
+def _copiar_db(origen, destino):
+    """Copia consistente via API de backup de SQLite. shutil.copy2 no ve las paginas
+    committed que viven en el -wal (la DB corre en modo WAL)."""
+    # sqlite3.connect crearia un origen vacio y el backup "funcionaria" sin datos.
+    if not os.path.exists(origen) or os.path.getsize(origen) == 0:
+        raise FileNotFoundError(f"DB origen inexistente o vacia: {origen}")
+    src = sqlite3.connect(origen)
+    try:
+        dst = sqlite3.connect(destino)
+        try:
+            src.backup(dst)
+        finally:
+            dst.close()
+    finally:
+        src.close()
 
 
 # ============================================================
@@ -147,7 +163,7 @@ def cmd_snapshot():
 
     # Backup de la DB
     db_backup = os.path.join(SNAPSHOTS_DIR, f"fondo_quant_{ts}.db")
-    shutil.copy2(DB_NAME, db_backup)
+    _copiar_db(DB_NAME, db_backup)
 
     # JSON de métricas
     conn = sqlite3.connect(DB_NAME)
@@ -257,7 +273,7 @@ def cmd_shadow():
             print("Cancelado.")
             return
 
-    shutil.copy2(DB_NAME, SHADOW_DB)
+    _copiar_db(DB_NAME, SHADOW_DB)
     size_kb = round(os.path.getsize(SHADOW_DB) / 1024, 1)
 
     print(f"[SHADOW OK] {SHADOW_DB} creada ({size_kb} KB)")
@@ -278,7 +294,7 @@ def cmd_restore(snapshot_path):
     # Primero hacemos backup de la DB actual antes de restaurar
     safety = os.path.join(SNAPSHOTS_DIR, f"pre_restore_{ts}.db")
     os.makedirs(SNAPSHOTS_DIR, exist_ok=True)
-    shutil.copy2(DB_NAME, safety)
+    _copiar_db(DB_NAME, safety)
 
     print(f"[SAFETY] DB actual guardada en: {safety}")
 
@@ -287,7 +303,7 @@ def cmd_restore(snapshot_path):
         print("Cancelado.")
         return
 
-    shutil.copy2(snapshot_path, DB_NAME)
+    _copiar_db(snapshot_path, DB_NAME)  # snapshot = origen, DB viva = destino
     size_kb = round(os.path.getsize(DB_NAME) / 1024, 1)
     print(f"[RESTORE OK] {DB_NAME} restaurada desde {snapshot_path} ({size_kb} KB)")
 

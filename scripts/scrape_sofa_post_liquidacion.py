@@ -38,9 +38,11 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from curl_cffi import requests as creq
+
+from analisis.motor_xg_v2_13_sofascore_poc import crear_schema  # noqa: E402
 from analisis.aliases_sofa_espn import norm_team_name
 
-DB = ROOT / "fondo_quant.db"
+from src.comun.config_sistema import DB_NAME as DB  # noqa: E402
 
 SOFASCORE_LIGA_IDS = {
     'Argentina': 155, 'Brasil': 325, 'Bolivia': 16736, 'Peru': 406,
@@ -109,29 +111,33 @@ def get(url):
 
 
 def cargar_pendientes(conn, dias=7, liga=None, max_n=None):
-    """Partidos en stats_partido_espn liquidados en últimos N días, NO en SOFA aún."""
-    cur = conn.cursor()
+    """Partidos liquidados del pipeline en los ultimos N dias, sin features SOFA aun.
+
+    Antes leia stats_partido_espn, que solo llena un backfill manual: el hook nunca
+    veia partidos nuevos. La fuente ahora es partidos_backtest (lo que el pipeline liquida).
+    """
     cutoff = (datetime.now().date() - timedelta(days=dias)).isoformat()
-    where = ['s.fecha >= ?', 's.hg IS NOT NULL', 's.ag IS NOT NULL']
+    where = ["p.estado = 'Liquidado'", 'p.goles_l IS NOT NULL', 'p.goles_v IS NOT NULL',
+             'substr(p.fecha, 1, 10) >= ?']
     params = [cutoff]
     if liga:
-        where.append('s.liga = ?')
+        where.append('p.pais = ?')
         params.append(liga)
-
     sql = f'''
-        SELECT s.evt_id, s.liga, s.fecha, s.ht, s.at, s.hg, s.ag
-        FROM stats_partido_espn s
+        SELECT p.id_partido, p.pais, substr(p.fecha, 1, 10), p.local, p.visita, p.goles_l, p.goles_v
+        FROM partidos_backtest p
         WHERE {' AND '.join(where)}
           AND NOT EXISTS (
               SELECT 1 FROM sofascore_match_features sf
-              WHERE sf.liga = s.liga AND sf.fecha = s.fecha
-                AND LOWER(sf.ht) LIKE '%' || LOWER(SUBSTR(s.ht, 1, 6)) || '%'
+              WHERE sf.liga = p.pais AND sf.fecha = substr(p.fecha, 1, 10)
+                AND LOWER(sf.ht) LIKE '%' || LOWER(SUBSTR(p.local, 1, 6)) || '%'
           )
-        ORDER BY s.fecha DESC
+        ORDER BY p.fecha DESC
     '''
     if max_n:
-        sql += f' LIMIT {max_n}'
-    return cur.execute(sql, params).fetchall()
+        sql += ' LIMIT ?'
+        params.append(int(max_n))
+    return conn.execute(sql, params).fetchall()
 
 
 def buscar_event_id_sofa(liga_id, fecha, ht, at, liga):
@@ -285,6 +291,7 @@ def main():
     args = parser.parse_args()
 
     conn = sqlite3.connect(str(DB))
+    crear_schema(conn)  # DB nueva: la tabla la creaba solo el backfill manual
     pendientes = cargar_pendientes(conn, args.dias, args.liga, args.max)
     print(f'Pendientes (últimos {args.dias} días): {len(pendientes)}')
 

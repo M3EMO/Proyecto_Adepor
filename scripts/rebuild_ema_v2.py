@@ -61,12 +61,99 @@ def _coef_corner_liga(cur, liga):
     return r[0] if r and r[0] is not None else 0.03
 
 
-def _promedio_goles_liga(cur, liga):
+def _promedio_goles_liga(cur, liga, por_equipo=False):
+    """Prior de las EMAs. por_equipo=True divide por 2: las EMAs son xG de UN equipo
+    y AVG(goles_l + goles_v) es por partido (ver motor_data.prior_liga_por_equipo)."""
     r = cur.execute("""
         SELECT AVG(goles_l + goles_v) FROM partidos_backtest
         WHERE pais=? AND estado='Liquidado' AND goles_l IS NOT NULL AND goles_v IS NOT NULL
     """, (liga,)).fetchone()
-    return r[0] if r and r[0] else 2.6
+    por_partido = r[0] if r and r[0] else 2.6
+    return por_partido / 2.0 if por_equipo else por_partido
+
+
+def _prior_por_equipo_activo():
+    return str(get_param('ema_prior_por_equipo', default='FALSE')).upper() in ('TRUE', '1')
+
+
+def cargar_partidos(cur, liga=None):
+    where_liga, params = ('', [])
+    if liga:
+        where_liga, params = (' AND pais = ?', [liga])
+    return cur.execute(f'''
+        SELECT id_partido, fecha, pais, local, visita, goles_l, goles_v,
+               sot_l, shots_l, corners_l, sot_v, shots_v, corners_v
+        FROM partidos_backtest
+        WHERE estado='Liquidado'
+          AND goles_l IS NOT NULL AND goles_v IS NOT NULL
+          AND sot_l IS NOT NULL AND sot_v IS NOT NULL
+          {where_liga}
+        ORDER BY fecha ASC
+    ''', params).fetchall()
+
+
+def _actualizar_lado(s, sufijo, xg_f, xg_c, alfa, prom_liga):
+    """EMA + varianza + ancla bayesiana para un lado ('h' local, 'a' visita)."""
+    var_f, var_c = ('var_fh', 'var_ch') if sufijo == 'h' else ('var_fa', 'var_ca')
+    fav, con, n = f'fav_{sufijo}', f'con_{sufijo}', f'p_{sufijo}'
+    viejo_fav, viejo_con = s[fav], s[con]
+    s[var_f] = ((xg_f - viejo_fav) ** 2 * alfa) + (s[var_f] * (1 - alfa))
+    s[var_c] = ((xg_c - viejo_con) ** 2 * alfa) + (s[var_c] * (1 - alfa))
+    nuevo_fav = xg_f * alfa + viejo_fav * (1 - alfa)
+    nuevo_con = xg_c * alfa + viejo_con * (1 - alfa)
+    w_liga = N0_ANCLA / (N0_ANCLA + s[n])
+    s[fav] = round((1.0 - w_liga) * nuevo_fav + w_liga * prom_liga, 3)
+    s[con] = round((1.0 - w_liga) * nuevo_con + w_liga * prom_liga, 3)
+    s[n] += 1
+
+
+def reconstruir(conn, partidos, prior_por_equipo, antes_de_actualizar=None):
+    """Replay cronologico de EMAs desde cero. Devuelve (state, stats).
+
+    antes_de_actualizar(partido, st_local, st_visita) se llama con el estado AS-OF
+    (antes de absorber el partido): permite evaluar walk-forward sin look-ahead.
+    """
+    from src.ingesta.motor_data import calcular_xg_v2_hibrido_sofa, calcular_xg_hibrido
+    cur = conn.cursor()
+    state = defaultdict(lambda: {
+        'fav_h': 1.4, 'con_h': 1.4, 'p_h': 0,
+        'fav_a': 1.4, 'con_a': 1.4, 'p_a': 0,
+        'var_fh': 0.1, 'var_ch': 0.1, 'var_fa': 0.1, 'var_ca': 0.1,
+    })
+    prom_liga_cache, coef_corner_cache = {}, {}
+    stats = {'v2': 0, 'v0': 0, 'by_liga': defaultdict(int)}
+    for p in partidos:
+        id_p, fecha, liga, local, visita, gol_l, gol_v, sot_l, shots_l, corn_l, sot_v, shots_v, corn_v = p
+        if liga not in prom_liga_cache:
+            prom_liga_cache[liga] = _promedio_goles_liga(cur, liga, prior_por_equipo)
+            coef_corner_cache[liga] = _coef_corner_liga(cur, liga)
+        prom_liga, coef_corner = prom_liga_cache[liga], coef_corner_cache[liga]
+        alfa = ALFA_EMA_POR_LIGA.get(liga, 0.15)
+
+        stats_loc = _stats_desde_row(sot_l, corn_l, shots_l)
+        stats_vis = _stats_desde_row(sot_v, corn_v, shots_v)
+        xg_loc_crudo = calcular_xg_v2_hibrido_sofa(
+            stats_loc, gol_l, liga=liga, coef_corner_liga=coef_corner,
+            conn=conn, fecha=fecha, ht=local, at=visita, es_local=True)
+        xg_vis_crudo = calcular_xg_v2_hibrido_sofa(
+            stats_vis, gol_v, liga=liga, coef_corner_liga=coef_corner,
+            conn=conn, fecha=fecha, ht=local, at=visita, es_local=False)
+        # Heuristica: si V2 != V0 entonces SOFA aplico
+        if abs(xg_loc_crudo - calcular_xg_hibrido(stats_loc, gol_l, coef_corner, pais=liga)) > 0.001:
+            stats['v2'] += 1
+            stats['by_liga'][liga] += 1
+        else:
+            stats['v0'] += 1
+        xg_loc = _ajustar_xg_por_estado(xg_loc_crudo, gol_l, gol_v)
+        xg_vis = _ajustar_xg_por_estado(xg_vis_crudo, gol_v, gol_l)
+
+        st_l = state[(gestor_nombres.limpiar_texto(local), liga)]
+        st_v = state[(gestor_nombres.limpiar_texto(visita), liga)]
+        if antes_de_actualizar is not None:
+            antes_de_actualizar(p, st_l, st_v)
+        _actualizar_lado(st_l, 'h', xg_loc, xg_vis, alfa, prom_liga)
+        _actualizar_lado(st_v, 'a', xg_vis, xg_loc, alfa, prom_liga)
+    return state, stats
 
 
 def main():
@@ -78,16 +165,15 @@ def main():
 
     # Snapshot
     if args.backup and not args.dry_run:
-        import shutil
         ts = datetime.now().strftime('%Y%m%d_%H%M%S')
         backup_path = ROOT / 'snapshots' / f'fondo_quant_{ts}_pre_rebuild_ema_v2.db'
-        shutil.copy2(str(DB), str(backup_path))
+        backup_path.parent.mkdir(exist_ok=True)
+        # API de backup: copy2 pierde las paginas que siguen en el -wal.
+        with sqlite3.connect(str(DB)) as _src, sqlite3.connect(str(backup_path)) as _dst:
+            _src.backup(_dst)
         print(f'Snapshot: {backup_path.name}')
 
     conn = sqlite3.connect(str(DB))
-
-    # Importar V2 después de tener conn
-    from src.ingesta.motor_data import calcular_xg_v2_hibrido_sofa, calcular_xg_hibrido
 
     cur = conn.cursor()
 
@@ -95,110 +181,18 @@ def main():
     modo = cur.execute("SELECT valor_texto FROM config_motor_valores WHERE clave='xg_v2_hibrido_modo'").fetchone()
     if modo:
         print(f'Modo xg_v2_hibrido: {modo[0]}')
+    # Sin xG SOFA activo el rebuild solo reproduce V0 sobre partidos_backtest y pisa EMAs que
+    # motor_data construyo con mas historia (en una DB nueva, el backfill ESPN no esta en
+    # partidos_backtest): se perderia historia todos los dias.
+    if not args.dry_run and (not modo or modo[0] != 'active'):
+        print('[SKIP] xg_v2_hibrido_modo != active: EMAs de motor_data quedan intactas.')
+        conn.close()
+        return
 
-    # Cargar partidos liquidados cronológicamente, optionally filtrar liga
-    where_liga = ''
-    params = []
-    if args.liga:
-        where_liga = ' AND pais = ?'
-        params.append(args.liga)
-
-    partidos = cur.execute(f'''
-        SELECT id_partido, fecha, pais, local, visita, goles_l, goles_v,
-               sot_l, shots_l, corners_l, sot_v, shots_v, corners_v
-        FROM partidos_backtest
-        WHERE estado='Liquidado'
-          AND goles_l IS NOT NULL AND goles_v IS NOT NULL
-          AND sot_l IS NOT NULL AND sot_v IS NOT NULL
-          {where_liga}
-        ORDER BY fecha ASC
-    ''', params).fetchall()
+    partidos = cargar_partidos(cur, args.liga)
     print(f'Partidos liquidados a procesar: {len(partidos)}')
-
-    # Estado por equipo (FRESH START)
-    state = defaultdict(lambda: {
-        'fav_h': 1.4, 'con_h': 1.4, 'p_h': 0,
-        'fav_a': 1.4, 'con_a': 1.4, 'p_a': 0,
-        'var_fh': 0.1, 'var_ch': 0.1, 'var_fa': 0.1, 'var_ca': 0.1,
-    })
-
-    # Promedio liga (cache)
-    prom_liga_cache = {}
-    coef_corner_cache = {}
-
-    # Process
-    n_v2_used = 0
-    n_v0_fallback = 0
-    by_liga = defaultdict(int)
-
-    for p in partidos:
-        id_p, fecha, liga, local, visita, gol_l, gol_v, sot_l, shots_l, corn_l, sot_v, shots_v, corn_v = p
-
-        if liga not in prom_liga_cache:
-            prom_liga_cache[liga] = _promedio_goles_liga(cur, liga)
-        if liga not in coef_corner_cache:
-            coef_corner_cache[liga] = _coef_corner_liga(cur, liga)
-
-        prom_liga = prom_liga_cache[liga]
-        coef_corner = coef_corner_cache[liga]
-        alfa = ALFA_EMA_POR_LIGA.get(liga, 0.15)
-
-        stats_loc = _stats_desde_row(sot_l, corn_l, shots_l)
-        stats_vis = _stats_desde_row(sot_v, corn_v, shots_v)
-
-        # V2 hybrid (con fallback automático V0)
-        xg_loc_crudo = calcular_xg_v2_hibrido_sofa(
-            stats_loc, gol_l, liga=liga, coef_corner_liga=coef_corner,
-            conn=conn, fecha=fecha, ht=local, at=visita, es_local=True
-        )
-        xg_vis_crudo = calcular_xg_v2_hibrido_sofa(
-            stats_vis, gol_v, liga=liga, coef_corner_liga=coef_corner,
-            conn=conn, fecha=fecha, ht=local, at=visita, es_local=False
-        )
-
-        # Detectar si SOFA fue usado (heurística: si V2 != V0 entonces SOFA aplicó)
-        v0_l = calcular_xg_hibrido(stats_loc, gol_l, coef_corner, pais=liga)
-        if abs(xg_loc_crudo - v0_l) > 0.001:
-            n_v2_used += 1
-            by_liga[liga] += 1
-        else:
-            n_v0_fallback += 1
-
-        # Score effects
-        xg_loc = _ajustar_xg_por_estado(xg_loc_crudo, gol_l, gol_v)
-        xg_vis = _ajustar_xg_por_estado(xg_vis_crudo, gol_v, gol_l)
-
-        # Update LOCAL state (home perspective)
-        eq_l = gestor_nombres.limpiar_texto(local)
-        s = state[(eq_l, liga)]
-        viejo_fav, viejo_con = s['fav_h'], s['con_h']
-        err_f, err_c = xg_loc - viejo_fav, xg_vis - viejo_con
-        s['var_fh'] = (err_f ** 2 * alfa) + (s['var_fh'] * (1 - alfa))
-        s['var_ch'] = (err_c ** 2 * alfa) + (s['var_ch'] * (1 - alfa))
-        nuevo_fav = xg_loc * alfa + viejo_fav * (1 - alfa)
-        nuevo_con = xg_vis * alfa + viejo_con * (1 - alfa)
-        N = s['p_h']
-        w_liga = N0_ANCLA / (N0_ANCLA + N) if (N0_ANCLA + N) > 0 else 1.0
-        w_ema = 1.0 - w_liga
-        s['fav_h'] = round(w_ema * nuevo_fav + w_liga * prom_liga, 3)
-        s['con_h'] = round(w_ema * nuevo_con + w_liga * prom_liga, 3)
-        s['p_h'] += 1
-
-        # Update VISITA state (away perspective)
-        eq_v = gestor_nombres.limpiar_texto(visita)
-        s = state[(eq_v, liga)]
-        viejo_fav, viejo_con = s['fav_a'], s['con_a']
-        err_f, err_c = xg_vis - viejo_fav, xg_loc - viejo_con
-        s['var_fa'] = (err_f ** 2 * alfa) + (s['var_fa'] * (1 - alfa))
-        s['var_ca'] = (err_c ** 2 * alfa) + (s['var_ca'] * (1 - alfa))
-        nuevo_fav = xg_vis * alfa + viejo_fav * (1 - alfa)
-        nuevo_con = xg_loc * alfa + viejo_con * (1 - alfa)
-        N = s['p_a']
-        w_liga = N0_ANCLA / (N0_ANCLA + N) if (N0_ANCLA + N) > 0 else 1.0
-        w_ema = 1.0 - w_liga
-        s['fav_a'] = round(w_ema * nuevo_fav + w_liga * prom_liga, 3)
-        s['con_a'] = round(w_ema * nuevo_con + w_liga * prom_liga, 3)
-        s['p_a'] += 1
+    state, st = reconstruir(conn, partidos, _prior_por_equipo_activo())
+    n_v2_used, n_v0_fallback, by_liga = st['v2'], st['v0'], st['by_liga']
 
     print(f'\n=== RESULTADOS ===')
     print(f'Partidos procesados: {len(partidos)}')

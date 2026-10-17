@@ -3,6 +3,7 @@ import unicodedata
 import re
 import difflib
 import os
+import sys
 import warnings
 
 # ==========================================
@@ -73,7 +74,8 @@ def generar_candidatos_raiz(nombre_limpio):
             raiz = nombre_limpio[:-len(sufijo)]
             if raiz:
                 candidatos.add(raiz)
-    return list(candidatos)
+    # Orden fijo (antes dependia del hash del set): nombre completo, luego raices mas largas.
+    return [nombre_limpio] + sorted(candidatos - {nombre_limpio}, key=lambda r: (-len(r), r))
 
 
 def _resolver_ligas_contexto(dic, liga):
@@ -126,6 +128,22 @@ def _obtener_dict_plano_para_uso(dic, liga=None):
     return _sub_dict_merge(dic, ligas or [])
 
 
+_NOMBRE_EQUIPO = re.compile(r"[\w .'&()/\-]{2,50}")
+
+
+def nombre_equipo_valido(nombre):
+    """Letras, digitos, espacios y . ' & ( ) -. Sin rutas ni comandos: el 2026-10-13 se
+    guardaron './iniciar_dashboard.sh' y 'sudo libinput ...' pegados por error en el prompt."""
+    # Ningun token empieza con - / . (flags y rutas); 'Bodo/Glimt' y '1. FC Koln' pasan.
+    return bool(_NOMBRE_EQUIPO.fullmatch(nombre)) and not re.search(r'(^|\s)[-/.]', nombre)
+
+
+def es_conocido(nombre, liga=None):
+    """True si el nombre (crudo u oficial) esta en el diccionario del scope de la liga."""
+    plano = _obtener_dict_plano_para_uso(cargar_diccionario(), liga)
+    return limpiar_texto(nombre) in plano or nombre in plano.values()
+
+
 def son_equivalentes(nombre1, nombre2, diccionario, liga=None, umbral_similitud=0.85):
     """Compara dos nombres (posiblemente desde fuentes distintas).
     Si el dict es v5, el cruce via diccionario queda scoped a la liga indicada.
@@ -163,6 +181,8 @@ def obtener_nombre_estandar(nombre_crudo, liga=None, modo_interactivo=True):
               Si None, hace busqueda global (legacy, warning).
         modo_interactivo: si True y todos los matches fallan, pide intervencion manual.
     """
+    # Bajo cron no hay stdin: input() lanza EOFError y el partido se perdia en silencio.
+    modo_interactivo = modo_interactivo and sys.stdin is not None and sys.stdin.isatty()
     dic = cargar_diccionario()
     nombre_limpio = limpiar_texto(nombre_crudo)
     if not nombre_limpio:
@@ -267,6 +287,9 @@ def obtener_nombre_estandar(nombre_crudo, liga=None, modo_interactivo=True):
             return cand_oficial
 
     nuevo_oficial = input(f"Ingrese el nombre oficial para '{nombre_crudo}' (o Enter para mantener crudo): ").strip()
+    if nuevo_oficial and not nombre_equipo_valido(nuevo_oficial):
+        print(f"[RECHAZADO] '{nuevo_oficial}' no parece un nombre de equipo. Se mantiene el crudo.")
+        return nombre_crudo
     if nuevo_oficial:
         liga_destino = liga if liga in dic else None
         if liga_destino:

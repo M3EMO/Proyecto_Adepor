@@ -1,10 +1,13 @@
 import sqlite3
+import sys
 import requests
 import json
 import os
 import difflib
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from src.comun.tiempo import ahora_art
 from src.comun import gestor_nombres
+from src.persistencia.confirmaciones import ids_confirmados
 from src.comun.config_sistema import MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 
 # ==========================================
@@ -39,8 +42,27 @@ def _en_ventana_cierre(fecha_str):
         fp = datetime.strptime(fecha_str, '%Y-%m-%d %H:%M')
     except (ValueError, TypeError):
         return False
-    delta = fp - datetime.now()
+    delta = fp - ahora_art()
     return timedelta(0) <= delta <= VENTANA_CIERRE
+
+
+def _puede_actualizar_cuotas(fecha_str, alertado, ahora):
+    """
+    True si cuota_1/x/2/o25/u25 se pueden sobrescribir: el partido no empezo y no hubo alerta.
+    Las cuotas guardadas deben ser las del pick alertado. Fecha invalida: no se escribe.
+    """
+    if alertado or not fecha_str:
+        return False
+    try:
+        fp = datetime.strptime(fecha_str, '%Y-%m-%d %H:%M')
+    except (ValueError, TypeError):
+        return False
+    return fp > ahora
+
+
+def _tiene_alerta(cursor, id_p):
+    """True si el partido tiene una apuesta confirmada (o alerta legacy)."""
+    return id_p in ids_confirmados(cursor)
 
 MODO_INTERACTIVO = os.getenv('PROYECTO_MODO_INTERACTIVO') == '1'
 DICCIONARIO_FILE = 'diccionario_equipos.json'
@@ -60,10 +82,18 @@ def obtener_datos_api(liga_odds, key_index=0):
         return None, key_index
         
     api_key = API_KEYS[key_index]
-    url = f"https://api.the-odds-api.com/v4/sports/{liga_odds}/odds/?apiKey={api_key}&regions=eu,us,uk,au&markets=h2h,totals&bookmakers=pinnacle,bet365,1xBet,betfair_ex_eu,draftkings"
-    
+    url = f"https://api.the-odds-api.com/v4/sports/{liga_odds}/odds/"
+    # commenceTimeFrom excluye eventos ya iniciados (in-play): sus cuotas no son las del pick
+    params = {
+        "apiKey": api_key,
+        "regions": "eu,us,uk,au",
+        "markets": "h2h,totals",
+        "bookmakers": "pinnacle,bet365,1xBet,betfair_ex_eu,draftkings",
+        "commenceTimeFrom": datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+    }
+
     try:
-        resp = requests.get(url, timeout=10)
+        resp = requests.get(url, params=params, timeout=10)
         if resp.status_code == 200:
             return resp.json(), key_index
         elif resp.status_code == 429 or resp.status_code == 401:
@@ -71,28 +101,34 @@ def obtener_datos_api(liga_odds, key_index=0):
             return obtener_datos_api(liga_odds, key_index + 1)
         else:
             return None, key_index
-    except:
+    except requests.exceptions.RequestException as e:
+        # Solo el tipo: el mensaje de requests incluye la URL con la key
+        print(f"[ERROR] Fallo de red al pedir cuotas ({type(e).__name__}).")
         return None, key_index
 
 def extraer_cuotas_sharp(bookmakers, local_api, visita_api):
     c1, cx, c2 = 0.0, 0.0, 0.0
     co, cu = 0.0, 0.0
 
-    # --- 1X2: preferir Pinnacle, luego bet365 ---
-    for b in bookmakers:
-        if b['key'] in ['pinnacle', 'bet365']:
+    # --- 1X2: Pinnacle, luego bet365. Un libro vale solo si da las 3 cuotas (no mezclar libros) ---
+    for clave in ('pinnacle', 'bet365'):
+        t1, tx, t2 = 0.0, 0.0, 0.0
+        for b in bookmakers:
+            if b['key'] != clave:
+                continue
             for m in b.get('markets', []):
                 if m['key'] == 'h2h':
                     for out in m['outcomes']:
                         nombre = out['name']
                         if nombre == 'Draw':
-                            cx = out['price']
+                            tx = out['price']
                         elif nombre == local_api:
-                            c1 = out['price']
+                            t1 = out['price']
                         elif nombre == visita_api:
-                            c2 = out['price']
-            if c1 > 0:
-                break
+                            t2 = out['price']
+        if t1 > 0 and tx > 0 and t2 > 0:
+            c1, cx, c2 = t1, tx, t2
+            break
 
     # --- O/U 2.5: jerarquia Pinnacle -> bet365 -> resto (igual que 1X2) ---
     # Primero intentar fuentes sharp; si no tienen 2.5, caer al resto.
@@ -133,7 +169,11 @@ def extraer_cuotas_sharp(bookmakers, local_api, visita_api):
 
 def main():
     print("[SISTEMA] Iniciando Motor Cuotas V9.1 (Radar Sharp con Contencion)...")
-    
+    if not API_KEYS:
+        # Paso critico: sin keys no hay cuotas ni picks; antes terminaba en "EXITO" con 0.
+        print("[ERROR] No hay api_keys_odds en config.json.")
+        sys.exit(1)
+
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
     
@@ -222,17 +262,21 @@ def main():
                     match_evento['vis_raw']
                 )
                 if c1 > 0 or co > 0:
-                    cursor.execute("""
-                        UPDATE partidos_backtest SET
-                        cuota_1   = CASE WHEN ? > 0 THEN ? ELSE cuota_1   END,
-                        cuota_x   = CASE WHEN ? > 0 THEN ? ELSE cuota_x   END,
-                        cuota_2   = CASE WHEN ? > 0 THEN ? ELSE cuota_2   END,
-                        cuota_o25 = CASE WHEN ? > 0 THEN ? ELSE cuota_o25 END,
-                        cuota_u25 = CASE WHEN ? > 0 THEN ? ELSE cuota_u25 END
-                        WHERE id_partido=?
-                    """, (c1, c1, cx, cx, c2, c2, co, co, cu, cu, id_p))
-                    cuotas_actualizadas += 1
-                    print(f"      [MATCH] Cuotas capturadas: {loc_espn} vs {vis_espn} | 1={c1} X={cx} 2={c2} O={co} U={cu}")
+                    # Cuotas del pick: no sobrescribir si el partido ya empezo o ya hubo alerta
+                    if _puede_actualizar_cuotas(fecha_p, _tiene_alerta(cursor, id_p), ahora_art()):
+                        cursor.execute("""
+                            UPDATE partidos_backtest SET
+                            cuota_1   = CASE WHEN ? > 0 THEN ? ELSE cuota_1   END,
+                            cuota_x   = CASE WHEN ? > 0 THEN ? ELSE cuota_x   END,
+                            cuota_2   = CASE WHEN ? > 0 THEN ? ELSE cuota_2   END,
+                            cuota_o25 = CASE WHEN ? > 0 THEN ? ELSE cuota_o25 END,
+                            cuota_u25 = CASE WHEN ? > 0 THEN ? ELSE cuota_u25 END
+                            WHERE id_partido=?
+                        """, (c1, c1, cx, cx, c2, c2, co, co, cu, cu, id_p))
+                        cuotas_actualizadas += 1
+                        print(f"      [MATCH] Cuotas capturadas: {loc_espn} vs {vis_espn} | 1={c1} X={cx} 2={c2} O={co} U={cu}")
+                    else:
+                        print(f"      [SKIP] Cuotas no actualizadas (en juego o ya alertado): {loc_espn} vs {vis_espn}")
                     encontrado = True
 
                     # --- V9.3: captura cuota_cierre para CLV ---

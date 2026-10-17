@@ -38,6 +38,7 @@ from src.ingesta.motor_data import (
     ALFA_EMA, ALFA_EMA_POR_LIGA, N0_ANCLA, get_param,
 )
 from src.comun.config_sistema import DB_NAME
+from src.ingesta.motor_data import prior_liga_por_equipo  # noqa: E402
 from src.comun.gestor_nombres import limpiar_texto
 
 
@@ -59,14 +60,15 @@ def _stats_desde_row(sot, corn, shots):
 
 
 def _promedio_goles_liga(cur, liga):
+    """Prior de la EMA. Misma regla que motor_data (flag ema_prior_por_equipo)."""
     cur.execute("""
-        SELECT AVG(goles_l + goles_v)
+        SELECT SUM(goles_l + goles_v), COUNT(*)
         FROM partidos_backtest
         WHERE pais=? AND estado='Liquidado'
           AND goles_l IS NOT NULL AND goles_v IS NOT NULL
     """, (liga,))
-    r = cur.fetchone()
-    return float(r[0]) if r and r[0] is not None else 1.4
+    goles, n = cur.fetchone()
+    return prior_liga_por_equipo(goles or 0, n or 0)
 
 
 def _coef_corner_liga(cur, liga):

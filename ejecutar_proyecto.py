@@ -14,6 +14,7 @@ Uso:
     py ejecutar_proyecto.py --unlock       # Desbloqueo matriz
     py ejecutar_proyecto.py --purge-history # Purga tablas derivadas
     py ejecutar_proyecto.py --audit-names  # Auditoria interactiva de nombres
+    py ejecutar_proyecto.py --exportar-excel # Backtest_Modelo.xlsx (la vista principal es el Streamlit)
 
 Ejemplos:
     py ejecutar_proyecto.py --analisis         # lista analisis disponibles
@@ -25,6 +26,12 @@ import time
 import sys
 import os
 from datetime import datetime, timedelta
+
+# Los motores usan paths relativos (diccionario_equipos.json, scripts/...): fijar CWD a la raiz.
+RAIZ = os.path.dirname(os.path.abspath(__file__))
+os.chdir(RAIZ)
+sys.path.insert(0, RAIZ)
+from src.comun.config_sistema import DB_NAME  # noqa: E402
 
 # Forzar UTF-8 en stdout/stderr (Windows default cp1252 rompe con caracteres turcos/sudamericanos)
 try:
@@ -52,13 +59,13 @@ MOTORES_DIARIOS = [
     {"archivo": "analisis/xg_v3_hibrido_sofa_custom.py", "desc": "3.16. xG V3 hibrido (xgot SOFA + custom fallback) - bead adepor-173", "critico": False, "interactivo": False},
     {"archivo": "scripts/rebuild_ema_v2.py", "desc": "3.17. Rebuild EMAs con V3 (overwrite EMAs V0 con V3 para partidos liquidados)", "critico": False, "interactivo": False},
     {"archivo": "-m src.persistencia.actualizar_posiciones", "desc": "3.2. Actualizador Posiciones (incremental, hook post-liquidados)", "critico": False, "interactivo": False},
+    {"archivo": "scripts/xg_pesos_dinamicos_shadow.py", "desc": "3.4. Pesos xG dinamicos por liga (SHADOW, Kalman)", "critico": False, "interactivo": False},
     {"archivo": "motor_adaptativo.py",       "desc": "3.5. Motor Adaptativo (Online SGD V12 + Auto-audit + Drift)", "critico": False, "interactivo": False},
 
     # --- FASE 2: HORIZONTE FUTURO ---
+    # API-Football retirado (decision usuario 2026-10-13): fuentes = ESPN + The Odds API.
     {"archivo": "motor_fixture.py",          "desc": "4. El Arquitecto (Proyeccion de Calendario)",            "critico": True,  "interactivo": True},
-    {"archivo": "motor_tactico.py",          "desc": "5. El Analista (Formaciones y Vida de DTs)",             "critico": False, "interactivo": False},
     {"archivo": "motor_cuotas.py",           "desc": "6. El Oraculo (Extraccion de Precios y CLV)",            "critico": True,  "interactivo": False},
-    {"archivo": "-m src.ingesta.motor_cuotas_apifootball", "desc": "6.5. Oraculo Sudamericano (API-Football)",     "critico": False, "interactivo": False},
 
     # --- FASE 3: DECISIONES ---
     {"archivo": "motor_calculadora.py",      "desc": "7. Cerebro Cuantitativo (Poisson, EV y Kelly)",          "critico": True,  "interactivo": False},
@@ -67,7 +74,6 @@ MOTORES_DIARIOS = [
     # --- FASE 4: REDUNDANCIA + EXCEL ---
     {"archivo": "motor_backtest.py",         "desc": "8. Liquidador de Ultimo Minuto (Doble Barrido)",         "critico": False, "interactivo": False},
     {"archivo": "motor_liquidador.py",       "desc": "8.5. Liquidador de Apuestas (Barrido Final)",            "critico": False, "interactivo": False},
-    {"archivo": "motor_sincronizador.py",    "desc": "9. Sincronizador Excel (Backtest + Dashboard + Sombra)", "critico": True,  "interactivo": False},
 ]
 
 
@@ -125,23 +131,19 @@ def ejecutar_motor(script_name, descripcion, interactivo=False):
                 raise subprocess.CalledProcessError(proceso.returncode, script_name)
         else:
             proceso = subprocess.Popen(
-                cmd_full, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                # stderr fusionado en stdout: con dos PIPEs y solo stdout drenado,
+                # un hijo que escribe >64KB a stderr bloquea el pipeline.
+                cmd_full, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                 text=True, encoding='utf-8', errors='replace', env=env,
             )
             full_stdout = ""
-            while True:
-                linea = proceso.stdout.readline()
-                if not linea and proceso.poll() is not None:
-                    break
-                if linea:
-                    full_stdout += linea
-                    print(f"   | {linea.rstrip()}")
-            stdout_resto, stderr = proceso.communicate()
-            full_stdout += stdout_resto
+            for linea in proceso.stdout:
+                full_stdout += linea
+                print(f"   | {linea.rstrip()}")
+            proceso.wait()
             if proceso.returncode != 0:
                 raise subprocess.CalledProcessError(
-                    proceso.returncode, proceso.args,
-                    output=full_stdout, stderr=stderr,
+                    proceso.returncode, proceso.args, output=full_stdout,
                 )
 
         log_terminal(f"COMPLETADO en {round(time.time() - inicio, 2)}s", "EXITO")
@@ -151,7 +153,7 @@ def ejecutar_motor(script_name, descripcion, interactivo=False):
         stderr_txt = getattr(e, 'stderr', None)
         stdout_txt = getattr(e, 'output', None)
         print("\n--- TRAZA DE ERROR ---")
-        print(stderr_txt if stderr_txt else stdout_txt or "(sin salida)")
+        print(stderr_txt if stderr_txt else (stdout_txt or "(sin salida)")[-4000:])
         print("----------------------\n")
         return False
     except FileNotFoundError:
@@ -167,7 +169,7 @@ def _preflight_checks():
     Retorna lista de warnings (strings). Vacia = todo OK."""
     warnings = []
 
-    if not os.path.exists('fondo_quant.db'):
+    if not os.path.exists(DB_NAME) or os.path.getsize(DB_NAME) == 0:
         warnings.append("fondo_quant.db NO existe. Correr con --rebuild para crearla desde CSV.")
 
     if not os.path.exists('config.json'):
@@ -179,8 +181,6 @@ def _preflight_checks():
                 cfg = json.load(f)
             if not cfg.get('api_keys_odds'):
                 warnings.append("config.json: api_keys_odds esta vacio (motor_cuotas fallara).")
-            if not cfg.get('api_key_football') and not cfg.get('api_keys_football'):
-                warnings.append("config.json: no hay API key de api-football.com.")
         except (ValueError, IOError) as e:
             warnings.append(f"config.json corrupto: {e}")
 
@@ -208,7 +208,7 @@ def cmd_status():
     # 2. DB snapshot
     try:
         import sqlite3
-        con = sqlite3.connect('fondo_quant.db')
+        con = sqlite3.connect(DB_NAME)
         cur = con.cursor()
 
         print()
@@ -389,7 +389,7 @@ def cmd_summary():
     _imprimir_banner(f"SUMMARY DEL ULTIMO RUN — {datetime.now().strftime('%d/%m/%Y %H:%M')}")
     try:
         import sqlite3
-        con = sqlite3.connect('fondo_quant.db')
+        con = sqlite3.connect(DB_NAME)
         cur = con.cursor()
 
         # Picks nuevos de la ventana (hoy y manana)
@@ -510,7 +510,7 @@ def cmd_aporte():
         sys.exit(1)
 
     import sqlite3
-    conn = sqlite3.connect('fondo_quant.db')
+    conn = sqlite3.connect(DB_NAME)
     cur = conn.cursor()
     # Asegurar que la tabla exista
     cur.execute("""
@@ -548,7 +548,7 @@ def cmd_aporte():
 def cmd_aportes_list():
     """Lista los aportes/retiros registrados."""
     import sqlite3
-    conn = sqlite3.connect('fondo_quant.db')
+    conn = sqlite3.connect(DB_NAME)
     cur = conn.cursor()
     try:
         rows = cur.execute(
@@ -601,6 +601,10 @@ def cmd_pipeline_diario():
         for w in warns:
             log_terminal(f"  {w}", "ALERTA")
         print()
+    # Sin DB los motores crean un archivo vacio y fallan en cascada: abortar antes.
+    if not os.path.exists(DB_NAME) or os.path.getsize(DB_NAME) == 0:
+        log_terminal(f"ABORTO: no existe la DB {DB_NAME}.", "ERROR")
+        sys.exit(1)
 
     _imprimir_banner(f"PIPELINE CUANTITATIVO V8.0 INICIADO - {datetime.now().strftime('%d/%m/%Y %H:%M')}")
 
@@ -632,7 +636,8 @@ def cmd_pipeline_diario():
 # MAIN DISPATCHER
 # ==========================================================================
 def main():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    if sys.stdout.isatty():  # bajo cron 'clear' ensucia el log
+        os.system('cls' if os.name == 'nt' else 'clear')
 
     if len(sys.argv) <= 1:
         cmd_pipeline_diario()
@@ -658,21 +663,28 @@ def main():
     # Subcomandos de mantenimiento (disparan sub-pipelines y luego cascada)
     if comando == '--rebuild':
         log_terminal("MODO RECONSTRUCCION MAESTRA DESDE CSV", "ALERTA")
-        ejecutar_motor('importador_gold.py',       '1/3: Reconstruccion desde Gold Standard')
-        ejecutar_motor('-m src.persistencia.reset_tablas_derivadas', '2/3: Purga de Tablas Derivadas')
-        ejecutar_motor('-m src.nucleo.desbloquear_matriz',          '3/3: Desbloqueo de Matriz de Partidos')
+        # Cada paso depende del anterior: si el import falla, NO purgar tablas derivadas.
+        pasos = [('importador_gold.py', '1/3: Reconstruccion desde Gold Standard'),
+                 ('-m src.persistencia.reset_tablas_derivadas', '2/3: Purga de Tablas Derivadas'),
+                 ('-m src.nucleo.desbloquear_matriz', '3/3: Desbloqueo de Matriz de Partidos')]
+        for script, desc in pasos:
+            if not ejecutar_motor(script, desc):
+                log_terminal(f"ABORTO: fallo {script}. Reconstruccion incompleta.", "ERROR")
+                sys.exit(1)
         log_terminal("Fase de reconstruccion finalizada. Iniciando pipeline principal.", "EXITO")
         cmd_pipeline_diario()
         return
     if comando == '--unlock':
         log_terminal("MODO DESBLOQUEO DE MATRIZ", "ALERTA")
-        ejecutar_motor('-m src.nucleo.desbloquear_matriz', 'Desbloqueo de Matriz de Partidos')
+        if not ejecutar_motor('-m src.nucleo.desbloquear_matriz', 'Desbloqueo de Matriz de Partidos'):
+            sys.exit(1)
         log_terminal("Matriz desbloqueada. Iniciando pipeline principal.", "EXITO")
         cmd_pipeline_diario()
         return
     if comando == '--purge-history':
         log_terminal("MODO PURGA DE HISTORIAL", "ALERTA")
-        ejecutar_motor('-m src.persistencia.reset_tablas_derivadas', 'Purga de Tablas Derivadas')
+        if not ejecutar_motor('-m src.persistencia.reset_tablas_derivadas', 'Purga de Tablas Derivadas'):
+            sys.exit(1)
         log_terminal("Tablas derivadas purgadas. Iniciando pipeline principal.", "EXITO")
         cmd_pipeline_diario()
         return
@@ -685,6 +697,9 @@ def main():
     if comando == '--aporte':
         cmd_aporte()
         return
+    if comando == '--exportar-excel':
+        # Excel = solo exportacion (decision 2026-10-13); la vista es dashboard.py.
+        sys.exit(0 if ejecutar_motor('motor_sincronizador.py', 'Exportacion Excel') else 1)
     if comando == '--aportes-list':
         cmd_aportes_list()
         return

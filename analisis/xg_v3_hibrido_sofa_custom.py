@@ -21,7 +21,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 
 ROOT = Path(__file__).resolve().parent.parent
-DB = str(ROOT / 'fondo_quant.db')
+DB = __import__('os').environ.get('ADEPOR_DB') or str(ROOT / 'fondo_quant.db')  # paso 3.16 del pipeline
 OUT_JSON = str(ROOT / 'analisis' / 'xg_v3_hibrido_sofa_custom.json')
 
 CANCHA_W_M = 105.0

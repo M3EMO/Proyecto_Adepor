@@ -6,9 +6,10 @@ import re
 from datetime import datetime
 from collections import defaultdict
 from src.comun.config_sistema import DB_NAME
+from src.comun.tiempo import ahora_art
 from src.comun.config_motor import get_param
+from src.persistencia.confirmaciones import ids_confirmados
 from src.comun.tipos import safe_float
-from src.comun.resolucion import determinar_resultado_string as determinar_resultado_apuesta
 
 # ==========================================
 # MOTOR CALCULADORA V4.8 (DIXON-COLES + GESTION DE RIESGO CALIBRADA)
@@ -195,6 +196,8 @@ CONSENSO_CUOTA_MAX = get_param('consenso_cuota_max', default=2.00)       # Cuota
 # El mercado sobreestima aun mas (30.1%). Apostar empate sistematicamente destruye EV.
 # Ningun camino puede seleccionar EMPATE como pick final.
 APUESTA_EMPATE_PERMITIDA = get_param('apuesta_empate_permitida', default=False)
+RATIO_MIN_IMPLICITA = get_param('ratio_min_implicita', default=0.5)  # ver evaluar_mercado_1x2
+N_MIN_PARTIDOS_EQUIPO = get_param('n_min_partidos_equipo', default=5)  # PJ local/visita minimos para apostar
 
 # --- Filtro de picks apostables V5.1 (Manifesto §M, bd-adepor-ptk APPROVED 2026-04-28) ---
 # Triple filtro:
@@ -224,6 +227,9 @@ def _cargar_filtro_picks_v51():
             'ligas': set(cfg.get('ligas', [])),
             'n_acum_max': int(cfg.get('n_acum_max', 60)),
             'excluir_q4': bool(cfg.get('excluir_q4', True)),
+            # M.2 nunca bloqueo en vivo (lookup roto, ver _get_n_acum_pre_partido) y su
+            # umbral 60 salio in-sample: requiere opt-in explicito tras validacion OOS.
+            'm2_activo': bool(cfg.get('m2_activo', False)),
         }
     except Exception:
         return None
@@ -528,22 +534,27 @@ ALTITUD_NIVELES = [
 # ==========================================================================
 
 def detectar_drawdown(cursor, umbral=DRAWDOWN_THRESHOLD):
+    """True si las ultimas `umbral` apuestas reales liquidadas fueron todas perdidas.
+
+    Lee los tokens [GANADA]/[PERDIDA] que deja motor_liquidador. (Antes evaluaba
+    '[APOSTAR]', que ya no existe en filas liquidadas: nunca detectaba drawdown.)
+    """
     cursor.execute("""
-        SELECT apuesta_1x2, apuesta_ou, goles_l, goles_v FROM partidos_backtest
+        SELECT apuesta_1x2, stake_1x2, apuesta_ou, stake_ou FROM partidos_backtest
         WHERE estado = 'Liquidado' AND (stake_1x2 > 0 OR stake_ou > 0)
-        ORDER BY fecha DESC LIMIT 20
+        ORDER BY fecha DESC LIMIT 40
     """)
     perdidas = 0
-    for ap_1x2, ap_ou, gl, gv in cursor.fetchall():
-        apuesta = ap_1x2 if "[APOSTAR]" in str(ap_1x2) else ap_ou
-        resultado = determinar_resultado_apuesta(apuesta, gl, gv)
-        if resultado == "PERDIDA":
-            perdidas += 1
-        elif resultado == "GANADA":
+    for ap_1x2, st_1x2, ap_ou, st_ou in cursor.fetchall():
+        # Un resultado por partido (semantica original): gana si alguna apuesta real gano.
+        tokens = [str(ap or '') for ap, st in ((ap_1x2, st_1x2), (ap_ou, st_ou)) if st and st > 0]
+        if any(t.startswith('[GANADA]') for t in tokens):
             return False
-        if perdidas >= umbral:
-            return True
-    return perdidas >= umbral
+        if any(t.startswith('[PERDIDA]') for t in tokens):
+            perdidas += 1
+            if perdidas >= umbral:
+                return True
+    return False
 
 
 def obtener_bankroll_operativo(cursor):
@@ -619,7 +630,11 @@ def obtener_bankroll_operativo(cursor):
                 pnl -= stou
 
     bankroll = bankroll_base + aportes + pnl
-    return max(piso, min(techo, bankroll))
+    if bankroll < piso:
+        # Antes se clampeaba al piso: Kelly dimensionaba con capital que ya no existe.
+        print(f"[ALERTA] Bankroll real {bankroll:,.2f} bajo el piso {piso:,.2f}: se usa el real.")
+        return max(0.0, bankroll)
+    return min(techo, bankroll)
 
 
 # ==========================================================================
@@ -642,7 +657,8 @@ def obtener_ema(equipo_norm, liga, historial_ema):
     default = {'fav_home': 1.4, 'con_home': 1.4, 'fav_away': 1.4, 'con_away': 1.4,
                'var_fh': 0.1, 'var_ch': 0.1, 'var_fa': 0.1, 'var_ca': 0.1,
                'fav_corto_home': 1.4, 'con_corto_home': 1.4,
-               'fav_corto_away': 1.4, 'con_corto_away': 1.4}
+               'fav_corto_away': 1.4, 'con_corto_away': 1.4,
+               'n_home': 0, 'n_away': 0}
     data = historial_ema.get((equipo_norm, liga))
     if not data:
         # Fuzzy solo entre equipos de la misma liga (evita colisiones cross-liga)
@@ -1007,6 +1023,9 @@ def _log_shadow_v13(id_partido, liga, local, visita, fecha_str, rho):
         pass  # Falla silenciosa: V13 shadow no rompe motor
 
 
+_N_ACUM_NOMBRES = {}  # cache por liga: equipo_norm -> display name en historial_equipos_stats
+
+
 def _get_n_acum_pre_partido(liga, equipo_norm, fecha_str, conn):
     """[V5.1 §M.2 — bd-adepor-ptk] Snapshot n_acum del local PRE-partido.
 
@@ -1018,13 +1037,21 @@ def _get_n_acum_pre_partido(liga, equipo_norm, fecha_str, conn):
     """
     try:
         cur = conn.cursor()
-        # historial_equipos_stats puede tener equipos por nombre normalizado o no.
-        # Probamos ambos: equipo_norm directo y también buscando coincidencia case-insensitive
+        # La tabla guarda el display name ESPN ('River Plate'); el motor usa el
+        # normalizado ('riverplate'). Antes se comparaba directo: 0 matches siempre.
+        nombres = _N_ACUM_NOMBRES.get(liga)
+        if nombres is None:
+            nombres = {normalizar_extremo(e): e for (e,) in cur.execute(
+                "SELECT DISTINCT equipo FROM historial_equipos_stats WHERE liga = ?", (liga,))}
+            _N_ACUM_NOMBRES[liga] = nombres
+        equipo = nombres.get(equipo_norm)
+        if equipo is None:
+            return None
         r = cur.execute("""
             SELECT n_acum FROM historial_equipos_stats
             WHERE liga = ? AND equipo = ? AND fecha < ?
             ORDER BY fecha DESC LIMIT 1
-        """, (liga, equipo_norm, fecha_str)).fetchone()
+        """, (liga, equipo, fecha_str)).fetchone()
         if r and r[0] is not None:
             return int(r[0])
         return None
@@ -1103,9 +1130,10 @@ def _get_pos_local_forward(liga, equipo_norm, fecha_str, conn):
         cur = conn.cursor()
         # Argentina: prefer 'anual' for stable global rank; EUR: 'liga'
         formato_pref = "'anual'" if liga == 'Argentina' else "'liga'"
+        # substr: el snapshot del MISMO dia ya incluye resultados de partidos de ese dia.
         r = cur.execute(f"""
             SELECT posicion FROM posiciones_tabla_snapshot
-            WHERE liga = ? AND equipo_norm = ? AND fecha_snapshot < ?
+            WHERE liga = ? AND equipo_norm = ? AND fecha_snapshot < substr(?, 1, 10)
               AND formato IN ({formato_pref}, 'anual', 'liga')
             ORDER BY fecha_snapshot DESC LIMIT 1
         """, (liga, equipo_norm, fecha_str)).fetchone()
@@ -1489,7 +1517,7 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None,
         # M.2: madurez EMA local (fail-safe: si n_acum_l es None, NO bloquea)
         # MANIFESTO-CHANGE-APPROVED:bd-to4 (2026-05-13): si flag _M2_PER_LIGA_ACTIVO,
         # usa threshold scope-aware via get_param. Sino, legacy (60 global).
-        if n_acum_l is not None:
+        if n_acum_l is not None and _FILTRO_PICKS_V51.get('m2_activo', False):
             if _M2_PER_LIGA_ACTIVO and liga is not None:
                 _n_acum_max_aplicado = get_param('m2_n_acum_max', scope=liga,
                                                   default=_FILTRO_PICKS_V51['n_acum_max'])
@@ -1547,6 +1575,13 @@ def evaluar_mercado_1x2(p1, px, p2, c1, cx, c2, liga=None,
     # --- CAMINO 1: Evaluar al favorito del modelo ---
     fav_key = max(probs, key=probs.get)
     p_fav, c_fav = probs[fav_key], cuotas[fav_key]
+
+    # Coherencia modelo-mercado (auditoria 2026-10): si el libro da al favorito del modelo
+    # menos de RATIO_MIN_IMPLICITA x su prob (EV >= 100%), es error de datos, no edge.
+    # Snapshot 2026-04: 8/8 casos asi los gano el favorito del modelo pagando la cuota del
+    # rival (ej. Palmeiras local a 6.03): cuotas local/visita invertidas.
+    if (1 / c_fav) < RATIO_MIN_IMPLICITA * p_fav:
+        return "[PASAR] Cuotas Incoherentes (posible inversion L/V)", (p_fav * c_fav) - 1, c_fav
     ev_fav = (p_fav * c_fav) - 1
     umb_fav = (UMBRAL_EV_BASE * (0.5 / p_fav)) if p_fav > 0 else 999
     div_fav = p_fav - (1 / c_fav)  # Positiva = modelo ve mas prob que el mercado
@@ -1731,7 +1766,7 @@ def main():
     # --- Columnas shadow (crear si no existen) ---
     for col in ['incertidumbre REAL', 'shadow_xg_local REAL', 'shadow_xg_visita REAL',
                 'apuesta_shadow_1x2 TEXT', 'stake_shadow_1x2 REAL',
-                'xg_local REAL', 'xg_visita REAL']:
+                'xg_local REAL', 'xg_visita REAL', 'xg_local_corto REAL', 'xg_visita_corto REAL']:
         try: cursor.execute(f"ALTER TABLE partidos_backtest ADD COLUMN {col}")
         except sqlite3.OperationalError: pass
 
@@ -1754,14 +1789,16 @@ def main():
     cursor.execute("""
         SELECT equipo_norm, liga, ema_xg_favor_home, ema_xg_contra_home, ema_xg_favor_away, ema_xg_contra_away,
                ema_var_favor_home, ema_var_contra_home, ema_var_favor_away, ema_var_contra_away,
-               ema_corto_favor_home, ema_corto_contra_home, ema_corto_favor_away, ema_corto_contra_away
+               ema_corto_favor_home, ema_corto_contra_home, ema_corto_favor_away, ema_corto_contra_away,
+               partidos_home, partidos_away
         FROM historial_equipos
     """)
     # SHADOW EMA dual (2026-04-26): se cargan ema_corto_* para calcular xg_*_corto en paralelo (no afecta picks).
     historial_ema = {(r[0], r[1]): {'fav_home': r[2], 'con_home': r[3], 'fav_away': r[4], 'con_away': r[5],
                                     'var_fh': r[6], 'var_ch': r[7], 'var_fa': r[8], 'var_ca': r[9],
                                     'fav_corto_home': r[10], 'con_corto_home': r[11],
-                                    'fav_corto_away': r[12], 'con_corto_away': r[13]} for r in cursor.fetchall()}
+                                    'fav_corto_away': r[12], 'con_corto_away': r[13],
+                                    'n_home': r[14], 'n_away': r[15]} for r in cursor.fetchall()}
 
     cursor.execute("SELECT liga, rho_calculado FROM ligas_stats")
     rho_por_liga = {r[0]: r[1] for r in cursor.fetchall()}
@@ -1794,13 +1831,20 @@ def main():
     else:
         print("[HALLAZGO-G] Desactivado globalmente (HALLAZGO_G_ACTIVO=False).")
 
+    # Solo partidos futuros, sin resultado y sin alerta enviada. Recalcular un partido
+    # ya empezado (cuotas en vivo) o ya jugado (EMAs que ya absorbieron su resultado)
+    # contamina el track record; un pick alertado ya fue apostado y queda congelado.
+    ahora_str = ahora_art().strftime('%Y-%m-%d %H:%M')
+    alertados = ids_confirmados(cursor)
     cursor.execute("""
         SELECT p.id_partido, p.local, p.visita, p.pais, p.fecha,
                p.cuota_1, p.cuota_x, p.cuota_2, p.cuota_o25, p.cuota_u25
         FROM partidos_backtest p
-        WHERE p.estado = 'Pendiente' OR p.estado = 'Calculado'
-    """)
-    partidos = cursor.fetchall()
+        WHERE p.estado IN ('Pendiente', 'Calculado')
+          AND p.goles_l IS NULL AND p.goles_v IS NULL
+          AND p.fecha > ?
+    """, (ahora_str,))
+    partidos = [r for r in cursor.fetchall() if r[0] not in alertados]
 
     if not partidos:
         print("[INFO] No hay partidos nuevos para calcular.")
@@ -1861,6 +1905,14 @@ def main():
             print(f"   [SHADOW-ALT] {local} ({alt_msnm}m, {alt_nivel}) vs {visita} | "
                   f"xG_L: {xg_local:.2f}->{sh_xg_l:.2f} | xG_V: {xg_visita:.2f}->{sh_xg_v:.2f}")
 
+        # Opt-in por liga (ver scripts/evaluar_prior_ema.py): el 1X2 usa las mismas lambdas
+        # en escala de goles que el O/U. Sin flag, 1X2 usa xG crudo (comportamiento legacy).
+        xg_local_crudo, xg_visita_crudo = xg_local, xg_visita
+        if str(get_param('escalar_lambda_1x2', scope=pais, default='FALSE')).upper() in ('TRUE', '1'):
+            _k = get_param('factor_corr_xg_ou', scope=pais,
+                           default=FACTOR_CORR_XG_OU_POR_LIGA.get(pais, FACTOR_CORR_XG_OU))
+            xg_local, xg_visita = xg_local * _k, xg_visita * _k
+
         # --- Poisson Bivariado (Dixon-Coles) ---
         p1, px, p2, po, pu = 0.0, 0.0, 0.0, 0.0, 0.0
         rho = rho_por_liga.get(pais, RHO_FALLBACK)
@@ -1885,8 +1937,8 @@ def main():
         # O/U calibrado: segundo loop con xG corregido por factor por liga (no afecta 1X2)
         factor_ou = get_param('factor_corr_xg_ou', scope=pais,
                               default=FACTOR_CORR_XG_OU_POR_LIGA.get(pais, FACTOR_CORR_XG_OU))
-        xg_l_ou = xg_local  * factor_ou
-        xg_v_ou = xg_visita * factor_ou
+        xg_l_ou = xg_local_crudo  * factor_ou
+        xg_v_ou = xg_visita_crudo * factor_ou
         po_ou, pu_ou = 0.0, 0.0
         for i in range(RANGO_POISSON):
             for j in range(RANGO_POISSON):
@@ -1900,17 +1952,14 @@ def main():
         # Guardar probabilidades RAW (sin Fix #5 ni Hallazgo G) para el Shadow
         p1_raw, px_raw, p2_raw = p1, px, p2
 
-        # Hallazgo G (V4.8): boost de ventaja local observada en esta liga (solo si N >= 50)
-        p1, px, p2 = aplicar_hallazgo_g(p1, px, p2, pais, hallazgo_g_data)
-        if pais in hallazgo_g_data:
-            g_info = hallazgo_g_data[pais]
-            boost_aplicado = round(p1 - p1_raw, 4)
-            if abs(boost_aplicado) > 0.0005:
-                print(f"   [HALLAZGO-G] {local} vs {visita} ({pais}) | "
-                      f"freq_real={g_info['freq_local']:.3f} p1: {p1_raw:.3f}->{p1:.3f} (boost={boost_aplicado:+.4f})")
-
-        # Fix #5 (V4.5): corrección de sesgo de compresión de calibración
-        p1, px, p2 = corregir_calibracion(p1, px, p2)
+        # Hallazgo G y Fix #5 salen del camino de decision (auditoria 2026-10, bead adepor-thv):
+        #  - Hallazgo G compara la frecuencia local de la LIGA contra el p1 de CADA partido:
+        #    un local con p1=0.25 sube a 0.36 (fabrica EV en locales no favoritos). El propio
+        #    OOS 2024 lo midio: -1.2pp hit, +0.0044 Brier.
+        #  - Fix #5 no es monotono: p1=0.499 -> 0.519 pero p1=0.500 -> 0.500. OOS: impacto nulo.
+        # Se siguen calculando para el log SHADOW (columna V0 legacy de picks_shadow_arquitecturas).
+        p1_leg, px_leg, p2_leg = corregir_calibracion(
+            *aplicar_hallazgo_g(p1, px, p2, pais, hallazgo_g_data))
 
         # --- SHADOW arquitecturas (adepor-shadow-arq, 2026-04-26) ---
         # Loggea 6 variantes para futura comparativa N>=80:
@@ -1934,7 +1983,7 @@ def main():
                 p1_v4, px_v4, p2_v4 = p1_raw, px_raw, p2_raw
             _log_shadow_arquitecturas(
                 id_partido, pais, fecha_str, xg_local, xg_visita, rho,
-                p1, px, p2,                    # V0 actual
+                p1_leg, px_leg, p2_leg,        # V0 legacy (HG + Fix #5); la decision usa V3 puro
                 p1_v1, px_v1, p2_v1,           # V1 no_fix5
                 p1_v2, px_v2, p2_v2,           # V2 no_hg
                 p1_v3, px_v3, p2_v3,           # V3 puro
@@ -2039,13 +2088,16 @@ def main():
                         # fue excluido arriba con _layer2_aplicado check)
                         p1_v0_pre_h4, px_v0_pre_h4, p2_v0_pre_h4 = p1, px, p2
 
+                        # SHADOW-only desde auditoria 2026-10: con APUESTA_EMPATE_PERMITIDA=False
+                        # el evaluador excluye EMPATE, asi que el override nunca apostaba X:
+                        # apostaba LOCAL/VISITA con probs V12, estrategia jamas validada.
+                        # Ademas el Δ +0.426 sale de elegir 1 de 4 filtros post-hoc (N=160).
                         if not razones_skip:
-                            p1, px, p2 = p1_v12_h4, px_v12_h4, p2_v12_h4
-                            print(f"   [LAYER3-H4-V5.2] {local} vs {visita} ({pais}) | "
+                            print(f"   [LAYER3-H4-SHADOW] {local} vs {visita} ({pais}) | "
                                   f"P_v12(X)={px_v12_h4:.3f}>{_h4_thresh_liga} | "
                                   f"pos_l={pos_local_now} gap_l={gap_l_no_liga}d gap_v={gap_v_no_liga}d | "
                                   f"V0=({p1_v0_pre_h4:.3f},{px_v0_pre_h4:.3f},{p2_v0_pre_h4:.3f}) -> "
-                                  f"V12=({p1:.3f},{px:.3f},{p2:.3f})")
+                                  f"V12=({p1_v12_h4:.3f},{px_v12_h4:.3f},{p2_v12_h4:.3f})")
                         else:
                             print(f"   [LAYER3-H4-SKIP] {local} vs {visita} ({pais}) | "
                                   f"P_v12(X)={px_v12_h4:.3f} pasa thresh pero filtros bloquean: "
@@ -2057,7 +2109,7 @@ def main():
                                     p1_v12_h4, p2_v12_h4,
                                     pos_local_now, gap_l_no_liga, gap_v_no_liga,
                                     p1_v0_pre_h4, px_v0_pre_h4, p2_v0_pre_h4,
-                                    aplicado=(not razones_skip))
+                                    aplicado=False)
         except Exception as _e_h4:
             print(f"   [LAYER3-H4-FAIL] {pais}: {_e_h4}, fallback V0/Layer2")
 
@@ -2131,6 +2183,15 @@ def main():
 
         pick_ou, ev_ou, cu_ou = evaluar_mercado_ou(po_ou, pu_ou, co_v, cu_v, p1, px, p2, xg_l_ou, xg_v_ou)
 
+        # Arranque en frio: con pocos partidos la EMA es casi el prior de la liga y el
+        # "edge" es ruido. Equipo desconocido (sin fila) cuenta como 0 partidos.
+        if min(ema_l['n_home'], ema_v['n_away']) < N_MIN_PARTIDOS_EQUIPO:
+            motivo = f"[PASAR] Datos Insuficientes (<{N_MIN_PARTIDOS_EQUIPO} PJ en EMA)"
+            if "[APOSTAR]" in pick_1x2:
+                pick_1x2 = motivo
+            if "[APOSTAR]" in pick_ou:
+                pick_ou = motivo
+
         # PRETEST MODE (fase3 decision usuario 2026-04-20):
         # apuestas_live por liga. Si False: picks se calculan y persisten (para medir hit%)
         # pero stake=0 (sin plata real). Se activa a True automaticamente cuando
@@ -2152,17 +2213,8 @@ def main():
         stk_shadow_1x2 = calcular_stake_independiente(
             pick_shadow_1x2, ev_1x2_shadow, cu_1x2_shadow, BANKROLL, MAX_KELLY_PCT) if _live else 0.0
 
-        # Hallazgo C (V4.7): multiplicador de stake por dominancia xG
-        # Solo escala apuestas que ya pasaron todos los filtros. El cap MAX_KELLY_PCT
-        # garantiza que no se supere el límite absoluto de riesgo.
-        delta_xg = abs(xg_local - xg_visita)
-        mult_delta = multiplicador_delta_stake(delta_xg)
-        if mult_delta > 1.0:
-            if stk_1x2 > 0:
-                stk_1x2 = min(round(stk_1x2 * mult_delta, 2), BANKROLL * MAX_KELLY_PCT)
-                print(f"   [DELTA-xG] {local} vs {visita} | delta={delta_xg:.2f} mult=x{mult_delta} -> stk_1x2={stk_1x2:.2f}")
-            if stk_ou > 0:
-                stk_ou  = min(round(stk_ou  * mult_delta, 2), BANKROLL * MAX_KELLY_PCT)
+        # Hallazgo C (multiplicador de stake x1.30 por delta xG) retirado en auditoria 2026-10:
+        # la evidencia era 5/5 aciertos (N=5). Kelly ya escala el stake con el edge estimado.
 
         # Overlap: 1X2 siempre tiene prioridad sobre O/U (V4.9)
         # Razon: backtest muestra 1X2 yield=165% vs O/U yield=55% cuando compiten.
@@ -2227,8 +2279,8 @@ def main():
     n_solo_op1    = sum(1 for p in partidos_a_actualizar
                         if "[APOSTAR]" in p['pick_1x2'] and "[APOSTAR]" not in p['pick_shadow_1x2'])
     print(f"\n[EXITO] {calculados} partidos calculados.")
-    print(f"[OP1-ACTIVA]  Apuestas generadas: {n_op1} (Hallazgo G + Fix #5 + Hallazgo C + EV escalado)")
-    print(f"[SHADOW]      Apuestas control:   {n_op4} (sin Hallazgo G, sin Fix #5, sin Hallazgo C)")
+    print(f"[OP1-ACTIVA]  Apuestas generadas: {n_op1} (probs puras + floor + EV escalado)")
+    print(f"[SHADOW]      Apuestas control:   {n_op4} (control: probs Poisson puras, sin override V12 de Layer 2)")
     print(f"[DIVERGENCIA] Op1 exclusivo: {n_solo_op1} | Shadow exclusivo: {n_solo_shadow} | Coincidentes: {n_op1 - n_solo_op1}")
     print(f"[SHADOW] Altitud activa: {shadow_log_alt} | Incertidumbre alta (>0.15): {shadow_log_incert}")
     g_activas = len(hallazgo_g_data)

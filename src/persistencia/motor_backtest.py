@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from src.comun.config_sistema import LIGAS_ESPN, MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 from src.comun.constantes_espn import ESTADOS_ESPN_FINALIZADO
 from src.comun.mapas import MAPA_LIGAS_ESPN
+from src.comun.tiempo import ahora_art
 from src.comun.tipos import safe_int
 
 # ==========================================
@@ -20,6 +21,30 @@ from src.comun.tipos import safe_int
 KEY_INDEX = 0
 
 
+def _score_entero(valor):
+    """Score ESPN -> int. None si falta o no es numerico."""
+    try:
+        return int(str(valor).strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def _coincide_partido(pendiente, pais_liga, fecha_api, loc_oficial, vis_oficial):
+    """True si el evento ESPN corresponde al pendiente: mismos equipos, misma liga y fecha +-1 dia.
+
+    pendiente: (id_partido, local, visita, fecha 'YYYY-MM-DD HH:MM', pais).
+    fecha_api: fecha del scoreboard escaneado, 'YYYYMMDD'.
+    """
+    _id, loc_db, vis_db, fecha_db, pais_db = pendiente
+    if pais_db != pais_liga:
+        return False
+    dias = abs((datetime.strptime(fecha_db[:10], '%Y-%m-%d') - datetime.strptime(fecha_api, '%Y%m%d')).days)
+    if dias > 1:
+        return False
+    return (gestor_nombres.limpiar_texto(loc_db) == gestor_nombres.limpiar_texto(loc_oficial)
+            and gestor_nombres.limpiar_texto(vis_db) == gestor_nombres.limpiar_texto(vis_oficial))
+
+
 def main():
     print("[SISTEMA] Iniciando Motor Backtest V7.3 (Scope por fecha real)...")
 
@@ -28,11 +53,11 @@ def main():
 
     # V7.3: filtrar por fecha <= ahora. Los partidos futuros (estado='Calculado'
     # pero fecha > ahora) aun no se jugaron: no tienen resultado posible en ESPN.
-    ahora_str = datetime.now().strftime('%Y-%m-%d %H:%M')
+    ahora_str = ahora_art().strftime('%Y-%m-%d %H:%M')
     cursor.execute("""
-        SELECT id_partido, local, visita, fecha
+        SELECT id_partido, local, visita, fecha, pais
         FROM partidos_backtest
-        WHERE estado = 'Calculado'
+        WHERE estado IN ('Pendiente', 'Calculado')  -- Pendiente: el pipeline abortó antes de calcularlo
           AND fecha <= ?
     """, (ahora_str,))
     pendientes = cursor.fetchall()
@@ -79,12 +104,14 @@ def main():
                         vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_api['team']['displayName'], liga=pais, modo_interactivo=False)
                         
                         for p in list(pendientes_restantes):
-                            id_partido, loc_db, vis_db, _ = p
-                            
-                            if gestor_nombres.limpiar_texto(loc_db) == gestor_nombres.limpiar_texto(loc_oficial) and gestor_nombres.limpiar_texto(vis_db) == gestor_nombres.limpiar_texto(vis_oficial):
-                                gL = safe_int(loc_api.get('score', 0))
-                                gV = safe_int(vis_api.get('score', 0))
-                                
+                            if _coincide_partido(p, pais, fecha_api, loc_oficial, vis_oficial):
+                                id_partido = p[0]
+                                gL = _score_entero(loc_api.get('score'))
+                                gV = _score_entero(vis_api.get('score'))
+                                if gL is None or gV is None:
+                                    print(f"[WARN] Score no numerico en ESPN, partido sin liquidar: {loc_oficial} vs {vis_oficial}")
+                                    break
+
                                 # FIX: Estado pasa a 'Finalizado', esperando al Sincronizador
                                 cursor.execute('''
                                     UPDATE partidos_backtest 
@@ -97,9 +124,12 @@ def main():
                                 
                                 pendientes_restantes.remove(p)
                                 break 
-                    except Exception: continue
+                    except Exception as e:
+                        print(f"[WARN] Evento ESPN omitido: {type(e).__name__}: {e}")
+                        continue
             except requests.exceptions.RequestException: pass
 
+    print(f"[INFO] Pendientes sin resultado ESPN: {len(pendientes_restantes)}.")
     conn.commit()
     conn.close()
     

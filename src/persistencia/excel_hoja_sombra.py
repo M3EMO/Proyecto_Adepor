@@ -17,6 +17,11 @@ from src.persistencia.excel_estilos import fill
 from src.persistencia.excel_formulas import cuota_1x2
 
 
+
+def _es_pick(ap):
+    """Pick activo o ya liquidado."""
+    return any(t in str(ap or '') for t in ('[APOSTAR]', '[GANADA]', '[PERDIDA]'))
+
 def crear_hoja_sombra(wb, datos, bankroll):
     """Auditoria comparativa Op1 (activa) vs Op4 (shadow)."""
     ws = wb.create_sheet("Sombra")
@@ -110,8 +115,11 @@ def crear_hoja_sombra(wb, datos, bankroll):
          estado, gl, gv, incert, auditoria,
          ap_shadow, stk_shadow, *_extra) = rd
 
-        tiene_op1 = bool(stk1x2 and stk1x2 > 0 and ap1x2 and "[APOSTAR]" in str(ap1x2))
-        tiene_op4 = bool(stk_shadow and stk_shadow > 0 and ap_shadow and "[APOSTAR]" in str(ap_shadow))
+        # El liquidador reescribe apuesta_1x2 a [GANADA]/[PERDIDA] pero no la columna shadow:
+        # buscar solo '[APOSTAR]' descartaba todo Op1 liquidado y sesgaba Op1 vs Op4.
+        tiene_op1 = bool(stk1x2 and stk1x2 > 0 and _es_pick(ap1x2))
+        tiene_op4 = bool(stk_shadow and stk_shadow > 0 and _es_pick(ap_shadow))
+        liquidado = estado == 'Liquidado'  # P/L solo sobre partidos liquidados (igual que bankroll)
         if not tiene_op1 and not tiene_op4:
             continue
 
@@ -124,9 +132,11 @@ def crear_hoja_sombra(wb, datos, bankroll):
                 continue
 
         # --- Op1 resultado ---
-        res_op1 = determinar_resultado_entero(ap1x2, gl, gv) if tiene_op1 else 0
+        res_op1 = determinar_resultado_entero(ap1x2, gl, gv) if (tiene_op1 and liquidado) else 0
+        cuota_op1 = cuota_1x2(ap1x2, c1, cx, c2) or 0
+        if res_op1 == 1 and cuota_op1 <= 1:
+            res_op1 = 0  # ganada sin cuota: no se puede valorar (mismo criterio que excel_metricas)
         if tiene_op1 and res_op1 != 0:
-            cuota_op1 = cuota_1x2(ap1x2, c1, cx, c2) or 0
             pl_op1 = round(stk1x2 * (cuota_op1 - 1) if res_op1 == 1 else -stk1x2, 2)
             stats['op1']['n'] += 1
             stats['op1']['vol'] += stk1x2
@@ -138,14 +148,16 @@ def crear_hoja_sombra(wb, datos, bankroll):
             fill_pl1 = FILL_GANADA_CELL if pl_op1 > 0 else FILL_PERDIDA_CELL
         else:
             pl_op1 = None
-            res_op1_str = "PENDIENTE" if gl is None else "-"
-            fill_res1 = FILL_PEND_CELL if gl is None else FILL_BLANCO
+            res_op1_str = "PENDIENTE" if not liquidado else "-"
+            fill_res1 = FILL_PEND_CELL if not liquidado else FILL_BLANCO
             fill_pl1 = FILL_BLANCO
 
         # --- Op4 resultado ---
-        res_op4 = determinar_resultado_entero(ap_shadow, gl, gv) if tiene_op4 else 0
+        res_op4 = determinar_resultado_entero(ap_shadow, gl, gv) if (tiene_op4 and liquidado) else 0
+        cuota_op4 = cuota_1x2(ap_shadow, c1, cx, c2) or 0
+        if res_op4 == 1 and cuota_op4 <= 1:
+            res_op4 = 0
         if tiene_op4 and res_op4 != 0:
-            cuota_op4 = cuota_1x2(ap_shadow, c1, cx, c2) or 0
             pl_op4 = round(stk_shadow * (cuota_op4 - 1) if res_op4 == 1 else -stk_shadow, 2)
             stats['op4']['n'] += 1
             stats['op4']['vol'] += stk_shadow
@@ -157,8 +169,8 @@ def crear_hoja_sombra(wb, datos, bankroll):
             fill_pl4 = FILL_GANADA_CELL if pl_op4 > 0 else FILL_PERDIDA_CELL
         else:
             pl_op4 = None
-            res_op4_str = "PENDIENTE" if gl is None else "-"
-            fill_res4 = FILL_PEND_CELL if gl is None else FILL_BLANCO
+            res_op4_str = "PENDIENTE" if not liquidado else "-"
+            fill_res4 = FILL_PEND_CELL if not liquidado else FILL_BLANCO
             fill_pl4 = FILL_BLANCO
 
         pl_diff = round(pl_op1 - pl_op4, 2) if (pl_op1 is not None and pl_op4 is not None) else None

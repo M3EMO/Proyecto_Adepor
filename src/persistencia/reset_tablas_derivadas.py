@@ -6,7 +6,7 @@ import sqlite3
 # para forzar una reconstrucción completa del modelo.
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
+from src.comun.config_sistema import DB_NAME
 TABLAS_A_PURGAR = [
     'historial_equipos',
     'arbitros_stats',

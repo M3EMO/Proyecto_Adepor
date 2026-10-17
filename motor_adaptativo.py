@@ -1,7 +1,7 @@
 """[adepor-d7h F2] Motor adaptativo permanente — corre cada pipeline diario.
 
 Pipeline:
-  1. Identifica partidos liquidados desde ultima corrida (idempotente).
+  1. Identifica partidos liquidados no procesados (idempotente por id_partido).
   2. Para cada partido: SGD step sobre V12 weights + log.
   3. Auto-audit: revisa weight_norm growth, gradient norm, brier rolling.
      Si detecta divergencia: revierte W al anchor batch.
@@ -32,7 +32,7 @@ from src.comun.gestor_nombres import limpiar_texto
 from scripts.online_sgd_v12 import sgd_step_partido, init_log_table, WARMUP_N, LR_BASE
 from scripts.drift_detector import detect_drift, init_drift_table
 
-DB = ROOT / "fondo_quant.db"
+from src.comun.config_sistema import DB_NAME as DB  # noqa: E402
 ALFA = 0.15
 OLS_GLOBAL = {'beta_sot': 0.3138, 'beta_off': -0.0272, 'coef_corner': -0.0549, 'intercept': 0.4648}
 
@@ -65,6 +65,35 @@ def set_last_run(conn, ts):
             (clave, scope, valor_real, valor_texto, tipo, fuente, bloqueado)
         VALUES ('motor_adaptativo_last_run', 'global', NULL, ?, 'text', 'motor_adaptativo', 0)
     """, (ts,))
+
+
+# Idempotencia por id: un partido se aplica una sola vez, sin importar su fecha.
+# Reemplaza el watermark por fecha (perdia partidos con la misma fecha y datos tardios).
+FILTRO_LIQUIDADOS = """
+    WHERE sot_l IS NOT NULL AND shots_l IS NOT NULL AND corners_l IS NOT NULL
+      AND goles_l IS NOT NULL AND goles_v IS NOT NULL
+      AND LOWER(estado) IN ('liquidado', 'finalizado')
+"""
+
+
+def init_procesados(conn, last_run):
+    """Crea motor_adaptativo_procesados. Si esta vacia, marca como procesados los partidos
+    con fecha <= last_run (watermark viejo): su SGD ya se aplico en corridas anteriores.
+    Se chequea 'vacia' y no 'no existia': si el proceso muere entre el CREATE y la siembra,
+    la proxima corrida siembra igual en vez de reaplicar SGD sobre todo el historico."""
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS motor_adaptativo_procesados (
+            id_partido TEXT PRIMARY KEY,
+            ts TEXT
+        )
+    """)
+    vacia = conn.execute("SELECT 1 FROM motor_adaptativo_procesados LIMIT 1").fetchone() is None
+    if vacia and last_run:
+        conn.execute(f"""
+            INSERT OR IGNORE INTO motor_adaptativo_procesados (id_partido, ts)
+            SELECT id_partido, ? FROM partidos_backtest {FILTRO_LIQUIDADOS} AND fecha <= ?
+        """, (datetime.now().isoformat(), last_run))
+    conn.commit()
 
 
 def calc_xg_v6(sot, shots, corners, goles, liga, ols):
@@ -101,8 +130,8 @@ def features_v12_para_partido(conn, liga, ht_norm, vt_norm, fecha):
                ema_xg_v6_favor_away, ema_xg_v6_contra_away
         FROM historial_equipos_v6_shadow WHERE equipo_norm=?
     """, (vt_norm,)).fetchone()
-    if not el or not ev or el[0] is None or ev[2] is None:
-        return None
+    if not el or not ev or any(v is None for v in (el[0], el[1], ev[2], ev[3])):
+        return None  # todos los valores usados en la aritmetica de abajo
     xg_l = max(0.10, (el[0] + ev[3]) / 2.0)  # fav_home_l + ca_v
     xg_v = max(0.10, (ev[2] + el[1]) / 2.0)  # fav_away_v + ch_l
 
@@ -132,7 +161,7 @@ def features_v12_para_partido(conn, liga, ht_norm, vt_norm, fecha):
         prev = []
         for ht_r, hg, ag, _ in rows:
             ht_n_r = limpiar_texto(ht_r)
-            if ht_n_r in (ht_norm, vt_norm):
+            if ht_n_r in (ht_norm, vt_norm) and hg is not None and ag is not None:
                 prev.append({'home': ht_n_r, 'hg': hg, 'ag': ag})
         if prev:
             avg_g = sum(p['hg']+p['ag'] for p in prev)/len(prev)
@@ -231,36 +260,23 @@ def auto_audit(conn):
     return issues, revertidos
 
 
-def main():
-    print("=" * 70)
-    print("[*] MOTOR ADAPTATIVO PERMANENTE — V12 SHADOW")
-    print("=" * 70)
-
-    init_log_table()
-    init_drift_table()
-
-    conn = sqlite3.connect(DB)
-    cur = conn.cursor()
-
-    last_run = get_last_run(conn)
-    log(f"Ultima corrida: {last_run}", "INFO")
-
-    # 1. Identificar partidos liquidados desde ultima corrida
-    rows = cur.execute("""
+def procesar_partidos_nuevos(conn, last_run):
+    """SGD por cada partido liquidado aun no procesado (orden por fecha).
+    Commit por partido: el SGD y su marca en motor_adaptativo_procesados van en la misma
+    transaccion. Un partido sin features (EMA no disponible) queda sin marcar y se
+    reintenta en la proxima corrida. Retorna (n_sgd, n_warm, n_skip, last_fecha).
+    last_fecha es solo para display; la idempotencia la da la tabla por id."""
+    rows = conn.execute(f"""
         SELECT id_partido, pais, local, visita, fecha,
                sot_l, shots_l, corners_l, sot_v, shots_v, corners_v,
                goles_l, goles_v
-        FROM partidos_backtest
-        WHERE sot_l IS NOT NULL AND shots_l IS NOT NULL AND corners_l IS NOT NULL
-          AND goles_l IS NOT NULL AND goles_v IS NOT NULL
-          AND fecha > ?
-          AND LOWER(estado) IN ('liquidado', 'finalizado')
+        FROM partidos_backtest {FILTRO_LIQUIDADOS}
+          AND id_partido NOT IN (SELECT id_partido FROM motor_adaptativo_procesados)
         ORDER BY fecha ASC
-    """, (last_run,)).fetchall()
+    """).fetchall()
 
     log(f"Partidos liquidados nuevos: {len(rows)}", "INFO")
 
-    # 2. Procesar cada partido: SGD step
     n_sgd = 0; n_warm = 0; n_skip = 0
     last_fecha = last_run
     for row in rows:
@@ -274,15 +290,40 @@ def main():
             continue
 
         real = "1" if hg > ag else ("2" if hg < ag else "X")
-        # Update weights por liga
-        ok_l, msg_l = sgd_step_partido(conn, pais, feats, real, bead_id="motor_adaptativo")
-        # Update tambien pool global (paralelo)
-        ok_g, msg_g = sgd_step_partido(conn, 'global', feats, real, bead_id="motor_adaptativo")
+        try:
+            ok_l, msg_l = sgd_step_partido(conn, pais, feats, real, bead_id="motor_adaptativo", commit=False)
+            ok_g, msg_g = sgd_step_partido(conn, 'global', feats, real, bead_id="motor_adaptativo", commit=False)
+            conn.execute("INSERT INTO motor_adaptativo_procesados (id_partido, ts) VALUES (?, ?)",
+                         (id_partido, datetime.now().isoformat()))
+            conn.commit()
+        except Exception:
+            conn.rollback()
+            raise
 
         if 'warmup' in msg_l or 'warmup' in msg_g: n_warm += 1
         elif 'step_done' in msg_l or 'step_done' in msg_g: n_sgd += 1
 
-        last_fecha = fecha
+        last_fecha = max(last_fecha, fecha)
+
+    return n_sgd, n_warm, n_skip, last_fecha
+
+
+def main():
+    print("=" * 70)
+    print("[*] MOTOR ADAPTATIVO PERMANENTE — V12 SHADOW")
+    print("=" * 70)
+
+    init_log_table()
+    init_drift_table()
+
+    conn = sqlite3.connect(DB)
+
+    last_run = get_last_run(conn)
+    log(f"Ultima corrida: {last_run}", "INFO")
+    init_procesados(conn, last_run)
+
+    # 1-2. Identificar partidos nuevos (por id) y aplicar SGD a cada uno
+    n_sgd, n_warm, n_skip, last_fecha = procesar_partidos_nuevos(conn, last_run)
 
     log(f"SGD: {n_sgd} steps  warmup: {n_warm}  skip: {n_skip}", "EXITO" if n_sgd > 0 else "INFO")
 

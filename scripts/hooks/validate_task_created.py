@@ -56,6 +56,19 @@ def _texto_de_task(payload):
     return '\n'.join(pieces)
 
 
+def _bead_aprobado(bead_id):
+    """True/False si el bead tiene label approved-by-lead; None si bd no responde (fail-open)."""
+    import subprocess
+    try:
+        out = subprocess.run(['bd', 'show', bead_id, '--json'], capture_output=True,
+                             text=True, timeout=15)
+        d = json.loads(out.stdout)
+    except (OSError, subprocess.SubprocessError, ValueError):
+        return None
+    d = d[0] if isinstance(d, list) and d else d
+    return isinstance(d, dict) and 'approved-by-lead' in (d.get('labels') or [])
+
+
 def main():
     try:
         raw = sys.stdin.read()
@@ -95,8 +108,16 @@ def main():
         sys.stderr.write(msg + "\n")
         return 2
 
-    # Tag presente: log y dejar pasar
-    sys.stderr.write("[hook validate_task_created] tag APPROVED detectado, autorizando task sensible.\n")
+    # Tag presente: el texto lo puede escribir el propio agente, asi que se verifica el bead.
+    ref = TAG_APROBADO.search(texto).group(1)
+    if ref.lower().startswith('bd-'):
+        aprobado = _bead_aprobado(ref[3:])
+        if aprobado is False:
+            sys.stderr.write(f"[BLOQUEADO] El bead {ref[3:]} no tiene label approved-by-lead.\n")
+            return 2
+        if aprobado is None:
+            sys.stderr.write("[hook validate_task_created] WARN: bd no responde, fail-open.\n")
+    sys.stderr.write("[hook validate_task_created] tag APPROVED verificado, autorizando task sensible.\n")
     return 0
 
 

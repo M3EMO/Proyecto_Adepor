@@ -1,11 +1,15 @@
 import sqlite3
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 from src.comun import gestor_nombres
 from collections import defaultdict
 from src.comun.config_sistema import LIGAS_ESPN, DB_NAME
 from src.comun.mapas import MAPA_LIGAS_ESPN
-from src.comun.tiempo import ddmmyyyy_a_espn
+from src.comun.tiempo import fecha_db_a_espn, ahora_art
+
+# Ventana de reintento: antes el fix de fecha ISO habria disparado una consulta ESPN por cada
+# partido historico sin auditar, y los sin boxscore se reintentaban para siempre.
+VENTANA_DIAS = 21
 
 # ==========================================
 # MOTOR ÁRBITRO V6.1 (AUDITORÍA CENTRALIZADA Y ROBUSTA)
@@ -30,7 +34,8 @@ def auditar_partidos():
         SELECT id_partido, fecha, pais, local, visita 
         FROM partidos_backtest 
         WHERE estado = 'Liquidado' AND (auditoria IS NULL OR auditoria != 'SI')
-    """)
+          AND fecha >= ?
+    """, ((ahora_art() - timedelta(days=VENTANA_DIAS)).strftime('%Y-%m-%d'),))
     pendientes = cursor.fetchall()
 
     if not pendientes:
@@ -57,7 +62,7 @@ def auditar_partidos():
 
         codigo_liga = MAPA_LIGAS_ESPN[pais]
         try:
-            fecha_api = ddmmyyyy_a_espn(fecha_corta)
+            fecha_api = fecha_db_a_espn(fecha_corta)
         except ValueError:
             print(f"[ADVERTENCIA] Formato de fecha invalido para el grupo {fecha_corta}, omitiendo.")
             continue
@@ -97,6 +102,11 @@ def auditar_partidos():
                 
                 arbitro_nombre = oficiales[0]['fullName']
                 id_arbitro = gestor_nombres.limpiar_texto(arbitro_nombre)
+
+                # Sin boxscore no hay stats: no tocar EMAs con ceros ni marcar SI (se reintenta)
+                if not res_sum.get('boxscore', {}).get('teams'):
+                    print(f"[AVISO] Sin boxscore para {loc_db} vs {vis_db}. Se reintenta en otra corrida.")
+                    continue
 
                 # C. Contar Stats del partido
                 stats_partido = {'f': 0.0, 'a': 0.0, 'r': 0.0, 'p': 0.0}

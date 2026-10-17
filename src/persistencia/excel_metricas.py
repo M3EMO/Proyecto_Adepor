@@ -19,6 +19,47 @@ from src.persistencia.excel_estilos import (
 from src.persistencia.excel_formulas import cuota_1x2, cuota_ou
 
 
+
+def _beta_incompleta(a, b, x):
+    """Beta incompleta regularizada I_x(a, b) por fraccion continua (Lentz)."""
+    if x <= 0:
+        return 0.0
+    if x >= 1:
+        return 1.0
+    if x > (a + 1) / (a + b + 2):  # convergencia: usar la simetria
+        return 1.0 - _beta_incompleta(b, a, 1.0 - x)
+    ln_pre = (math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b)
+              + a * math.log(x) + b * math.log(1 - x))
+    tiny = 1e-300
+    c, d = 1.0, 1.0 - (a + b) * x / (a + 1)
+    d = 1.0 / (d if abs(d) > tiny else tiny)
+    f = d
+    for m in range(1, 300):
+        for num in (m * (b - m) * x / ((a + 2 * m - 1) * (a + 2 * m)),
+                    -(a + m) * (a + b + m) * x / ((a + 2 * m) * (a + 2 * m + 1))):
+            d = 1.0 + num * d
+            d = 1.0 / (d if abs(d) > tiny else tiny)
+            c = 1.0 + num / c
+            c = c if abs(c) > tiny else tiny
+            f *= c * d
+        if abs(c * d - 1.0) < 1e-12:
+            break
+    return math.exp(ln_pre) * f / a
+
+
+def p_valor_t(t, df):
+    """p-valor bilateral de un estadistico t con df grados de libertad."""
+    if df <= 0:
+        return 1.0
+    return _beta_incompleta(df / 2.0, 0.5, df / (df + t * t))
+
+def _pl_apuesta(res, stk, cuota):
+    """P/L de una apuesta liquidada. None si gana sin cuota valida (no se puede valorar)."""
+    if res == 1:
+        return stk * (cuota - 1) if cuota > 0 else None
+    return -stk
+
+
 def _grupo(bets):
     """Agrega una lista de apuestas en KPIs (n, pl, vol, yield, hit, t, p)."""
     n = len(bets)
@@ -36,7 +77,7 @@ def _grupo(bets):
         var = sum((y - mean_y) ** 2 for y in ys) / (n - 1)
         std = math.sqrt(var) if var > 0 else 0.0
         t = (mean_y / (std / math.sqrt(n))) if std > 0 else 0.0
-        p_v = math.erfc(abs(t) / math.sqrt(2))
+        p_v = p_valor_t(t, n - 1)  # Student-t: la normal subestimaba p con N chico
     else:
         t, p_v = 0.0, 1.0
     return {
@@ -57,6 +98,7 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
     """
     bets_1x2, bets_ou = [], []
     bs_sis_list, bs_casa_list, bs_cal_list = [], [], []
+    dif_glob, dif_glob_cal = [], []  # sistema - casa, PAREADO sobre partidos con cuotas
     pred_aciertos = 0
     pred_fallos = 0
 
@@ -67,6 +109,8 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
     # n/g/p se cuentan desde el texto [GANADA]/[PERDIDA] del pick 1X2.
     # vol/pl solo incluyen apuestas con stake>0 (dinero real movido).
     por_liga = {}
+    # Ganadas sin cuota: excluidas de P/L y volumen (no se valoran).
+    ganadas_sin_cuota = 0
 
     for row in datos:
         (id_p, fecha, local, visita, pais,
@@ -93,38 +137,44 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
                 else:
                     pred_fallos += 1
 
-        # --- por_liga: cuenta TODAS las apuestas con [GANADA]/[PERDIDA] (pretest + live) ---
-        if pais and ap1x2:
-            if '[GANADA]' in ap1x2 or '[PERDIDA]' in ap1x2:
-                if pais not in por_liga:
-                    por_liga[pais] = {'n': 0, 'g': 0, 'p': 0, 'vol': 0.0, 'pl': 0.0}
-                por_liga[pais]['n'] += 1
-                if '[GANADA]' in ap1x2:
-                    por_liga[pais]['g'] += 1
-                else:
-                    por_liga[pais]['p'] += 1
-                # vol/pl solo si hubo dinero real
-                if stk1x2 and stk1x2 > 0:
-                    res = determinar_resultado_entero(ap1x2, gl, gv)
-                    if res != 0:
-                        cuota = cuota_1x2(ap1x2, c1, cx, c2) or 0
-                        por_liga[pais]['vol'] += stk1x2
-                        por_liga[pais]['pl'] += stk1x2 * (cuota - 1) if res == 1 else -stk1x2
+        # --- por_liga: TODAS las apuestas [GANADA]/[PERDIDA] (pretest + live), 1X2 y O/U ---
+        # (antes solo 1X2: una liga con O/U live y 1X2 en pretest mostraba n=0 y yield 0)
+        for ap, stk, cuota in ((ap1x2, stk1x2, cuota_1x2(ap1x2, c1, cx, c2) if ap1x2 else 0),
+                               (apou, stkou, cuota_ou(apou, co, cu) if apou else 0)):
+            if not (pais and ap and ('[GANADA]' in ap or '[PERDIDA]' in ap)):
+                continue
+            s_l = por_liga.setdefault(pais, {'n': 0, 'g': 0, 'p': 0, 'vol': 0.0, 'pl': 0.0})
+            s_l['n'] += 1
+            s_l['g' if '[GANADA]' in ap else 'p'] += 1
+            # vol/pl solo si hubo dinero real liquidado
+            if stk and stk > 0 and estado == 'Liquidado':
+                res = determinar_resultado_entero(ap, gl, gv)
+                if res != 0:
+                    pl_r = _pl_apuesta(res, stk, cuota or 0)
+                    if pl_r is None:
+                        ganadas_sin_cuota += 1
+                    else:
+                        s_l['vol'] += stk
+                        s_l['pl'] += pl_r
 
         # --- Apuestas liquidadas con stake real (para metricas financieras total/1x2/ou) ---
-        if stk1x2 and stk1x2 > 0 and ap1x2:
+        if stk1x2 and stk1x2 > 0 and ap1x2 and estado == 'Liquidado':
             res = determinar_resultado_entero(ap1x2, gl, gv)
             if res != 0:
-                cuota = cuota_1x2(ap1x2, c1, cx, c2) or 0
-                pl_r = stk1x2 * (cuota - 1) if res == 1 else -stk1x2
-                bets_1x2.append({'res': res, 'stk': stk1x2, 'pl': pl_r})
+                pl_r = _pl_apuesta(res, stk1x2, cuota_1x2(ap1x2, c1, cx, c2) or 0)
+                if pl_r is None:
+                    ganadas_sin_cuota += 1
+                else:
+                    bets_1x2.append({'res': res, 'stk': stk1x2, 'pl': pl_r})
 
-        if stkou and stkou > 0 and apou:
+        if stkou and stkou > 0 and apou and estado == 'Liquidado':
             res = determinar_resultado_entero(apou, gl, gv)
             if res != 0:
-                cuota = cuota_ou(apou, co, cu) or 0
-                pl_r = stkou * (cuota - 1) if res == 1 else -stkou
-                bets_ou.append({'res': res, 'stk': stkou, 'pl': pl_r})
+                pl_r = _pl_apuesta(res, stkou, cuota_ou(apou, co, cu) or 0)
+                if pl_r is None:
+                    ganadas_sin_cuota += 1
+                else:
+                    bets_ou.append({'res': res, 'stk': stkou, 'pl': pl_r})
 
         # --- Brier Score por partido ---
         if p1 and px and p2:
@@ -140,6 +190,11 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
                 tot = r1 + rx + r2
                 p1m, pxm, p2m = r1 / tot, rx / tot, r2 / tot
                 bs_casa_list.append((p1m - o1) ** 2 + (pxm - ox) ** 2 + (p2m - o2) ** 2)
+                dif_glob.append(bs_sis_list[-1] - bs_casa_list[-1])
+                dif_glob_cal.append(bs_cal_list[-1] - bs_casa_list[-1])
+
+    if ganadas_sin_cuota:
+        print(f"[WARN] {ganadas_sin_cuota} apuestas ganadas sin cuota: excluidas de P/L y volumen.")
 
     pred_total = pred_aciertos + pred_fallos
     acierto_partidos = pred_aciertos / pred_total if pred_total > 0 else 0.0
@@ -158,8 +213,9 @@ def calcular_metricas_dashboard(datos, fraccion_kelly):
         'bs_sis':  bs_sis,
         'bs_cal':  bs_cal,
         'bs_casa': bs_casa,
-        'bs_glob':     bs_sis - bs_casa,
-        'bs_glob_cal': bs_cal - bs_casa,
+        # Pareado: antes restaba medias sobre conjuntos distintos de partidos.
+        'bs_glob':     sum(dif_glob) / len(dif_glob) if dif_glob else 0.0,
+        'bs_glob_cal': sum(dif_glob_cal) / len(dif_glob_cal) if dif_glob_cal else 0.0,
         'fraccion_kelly': fraccion_kelly,
         'por_liga': por_liga,
     }

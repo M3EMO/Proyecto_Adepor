@@ -310,7 +310,9 @@
       "Wolverhampton Wanderers": "Inglaterra",
       "Zamora": "Venezuela",
       "Águilas Doradas": "Colombia",
-      "Ñublense": "Chile"
+      "Ñublense": "Chile",
+      "Venezia": "Italia",
+      "Coventry City": "Inglaterra"
     },
     "ligas_por_copa": {
       "Libertadores": [
@@ -591,7 +593,9 @@
     "jaguaresdecordoba": "Jaguares de Córdoba",
     "llaneros": "Llaneros",
     "millonarios": "Millonarios",
-    "oncecaldas": "Once Caldas"
+    "oncecaldas": "Once Caldas",
+    "boyacachicofc": "Boyacá Chicó",
+    "llanerosfc": "Llaneros"
   },
   "Ecuador": {
     "aucas": "Aucas",
@@ -688,7 +692,8 @@
     "westhamunited": "West Ham United",
     "wolverhamptonwanderers": "Wolverhampton Wanderers",
     "bournemouthfc": "AFC Bournemouth",
-    "liverpoolfc": "Liverpool"
+    "liverpoolfc": "Liverpool",
+    "coventrycity": "Coventry City"
   },
   "Italia": {
     "acmilan": "AC Milan",
@@ -712,7 +717,8 @@
     "sassuolo": "Sassuolo",
     "torino": "Torino",
     "udinese": "Udinese",
-    "atlanta": "Atalanta"
+    "atlanta": "Atalanta",
+    "venezia": "Venezia"
   },
   "Noruega": {
     "aalesund": "Aalesund",

@@ -54,21 +54,33 @@ PATRONES_DATAOPS = re.compile(
 
 
 def _texto_de_task(payload):
+    """Solo campos de texto de la task. Sin el json completo: una letra suelta
+    (ej. la 'n' de 'nada') no debe cumplir la metrica 'N'."""
     pieces = []
     task = payload.get('task') or payload
-    for key in ('title', 'description', 'body', 'content', 'acceptance_criteria',
+    for key in ('task_subject', 'task_description', 'subject', 'title', 'description', 'body',
+                'content', 'acceptance_criteria',
                 'evidence', 'spec', 'notes', 'comments'):
         val = task.get(key) if isinstance(task, dict) else None
         if isinstance(val, str):
             pieces.append(val)
         elif isinstance(val, list):
             pieces.extend(str(x) for x in val)
-    pieces.append(json.dumps(payload, ensure_ascii=False))
+        elif isinstance(val, dict):
+            pieces.append(json.dumps(val, ensure_ascii=False))
     return '\n'.join(pieces)
 
 
+def _patron_metrica(metrica):
+    """Nombres cortos exigen valor asignado (ej. 'N=80', 'N >= 50', '"N": 80').
+    Nombres largos: presencia case-insensitive."""
+    if len(metrica) <= 2:
+        return re.compile(r'\b' + re.escape(metrica) + r'["\']?\s*[=:≥>]')
+    return re.compile(re.escape(metrica), re.IGNORECASE)
+
+
 def _faltantes(texto, metricas):
-    return [m for m in metricas if m.lower() not in texto.lower()]
+    return [m for m in metricas if not _patron_metrica(m).search(texto)]
 
 
 def main():
@@ -82,9 +94,11 @@ def main():
         return 0
 
     texto = _texto_de_task(payload)
+    # Clasificacion: incluye tambien label y demas campos del payload
+    texto_clasif = texto + '\n' + json.dumps(payload, ensure_ascii=False)
 
-    es_optimizador = bool(PATRONES_OPTIMIZADOR.search(texto))
-    es_dataops = bool(PATRONES_DATAOPS.search(texto))
+    es_optimizador = bool(PATRONES_OPTIMIZADOR.search(texto_clasif))
+    es_dataops = bool(PATRONES_DATAOPS.search(texto_clasif))
 
     if not es_optimizador and not es_dataops:
         return 0  # task operativa comun, sin requerimientos

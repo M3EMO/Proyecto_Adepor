@@ -73,4 +73,5 @@ def calibrar_probs_pw(p1, px, p2, mapas=None, coefs_beta=None):
     s = q1 + qx + q2
     if s > 0:
         return q1 / s, qx / s, q2 / s
-    return p1, px, p2
+    t = p1 + px + p2  # fallback: probs crudas normalizadas (el contrato es suma 1)
+    return (p1 / t, px / t, p2 / t) if t > 0 else (1 / 3, 1 / 3, 1 / 3)

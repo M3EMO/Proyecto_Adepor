@@ -45,6 +45,23 @@ def _fetch_espn_json(session, url, pais, fecha_api):
 ALFA_EMA  = get_param('alfa_ema', default=0.15)  # Fallback global si la liga no tiene ALFA propio
 N0_ANCLA  = get_param('n0_ancla', default=5)    # Fix #1 (V4.4): ancla Bayesiana N-dependiente. N=0 -> 100% liga; N=5 -> 50/50; N=20 -> 80/20.
 
+
+def prior_liga_por_equipo(goles_totales, n_partidos):
+    """Prior bayesiano de las EMAs (xG por EQUIPO) a partir de la liga.
+
+    goles_totales suma ambos equipos: el promedio por partido (~2.6) es el doble del
+    promedio por equipo (~1.3). Usarlo como prior inflaba todas las EMAs ~1.7x y el
+    sesgo dependia del N de cada equipo (auditoria 2026-10). El flag
+    ema_prior_por_equipo lo activa scripts/evaluar_prior_ema.py --aplicar, que
+    recalibra en la misma corrida factor_corr_xg_ou y gamma_1x2 (calibrados contra
+    la escala vieja).
+    """
+    if n_partidos <= 0:
+        return 1.4
+    por_partido = goles_totales / n_partidos
+    activo = str(get_param('ema_prior_por_equipo', default='FALSE')).upper() in ('TRUE', '1')
+    return por_partido / 2.0 if activo else por_partido
+
 # Fix #3 (V4.4): ALFA por liga según volatilidad observada en backtest.
 # Razonamiento:
 #   - ALFA alto  => el modelo olvida rápido, reacciona a tendencias recientes  (ligas volátiles)
@@ -749,12 +766,22 @@ def main():
                             vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_crudo, liga=pais, modo_interactivo=False)
                         
                             fecha_iso = fecha_obj.strftime('%Y-%m-%d')
-                            id_unico = f"{fecha_iso}{gestor_nombres.limpiar_texto(loc_oficial)}{gestor_nombres.limpiar_texto(vis_oficial)}"
+                            sufijo_id = f"{gestor_nombres.limpiar_texto(loc_oficial)}{gestor_nombres.limpiar_texto(vis_oficial)}"
+                            # El ID usa la fecha UTC del evento, igual que motor_fixture: con la fecha
+                            # del scoreboard, un partido de las 21:00+ ART no matcheaba su fila.
+                            id_legacy = f"{fecha_iso}{sufijo_id}"
+                            id_unico = f"{str(evento.get('date', ''))[:10] or fecha_iso}{sufijo_id}"
+                            if id_legacy in procesados: continue  # procesado con el formato viejo
 
                             if id_unico in procesados: continue
 
-                            goles_loc = safe_int(loc.get('score', 0))
-                            goles_vis = safe_int(vis.get('score', 0))
+                            # Score ausente no es 0-0: sin esto la EMA absorbia goles falsos.
+                            try:
+                                goles_loc = int(str(loc.get('score')).strip())
+                                goles_vis = int(str(vis.get('score')).strip())
+                            except (TypeError, ValueError):
+                                print(f"   [WARN] Score no numerico: {loc_oficial} vs {vis_oficial}, omitido.")
+                                continue
 
                             if pais not in estado_ligas:
                                 estado_ligas[pais] = {"total": 0, "empates": 0, "rho": -0.04, "goles": 0, "corners": 0, "coef_c": 0.02}
@@ -780,7 +807,7 @@ def main():
                             xg_loc = ajustar_xg_por_estado_juego(xg_loc_crudo, goles_loc, goles_vis)
                             xg_vis = ajustar_xg_por_estado_juego(xg_vis_crudo, goles_vis, goles_loc)
                         
-                            promedio_goles_liga = (estado_ligas[pais]["goles"] / estado_ligas[pais]["total"]) if estado_ligas[pais]["total"] > 0 else 1.4
+                            promedio_goles_liga = prior_liga_por_equipo(estado_ligas[pais]["goles"], estado_ligas[pais]["total"])
 
                             actualizar_estado(loc_oficial, pais, xg_loc, xg_vis, is_home=True, promedio_liga=promedio_goles_liga, equipos_nuevos=equipos_nuevos_sesion)
                             actualizar_estado(vis_oficial, pais, xg_vis, xg_loc, is_home=False, promedio_liga=promedio_goles_liga, equipos_nuevos=equipos_nuevos_sesion)

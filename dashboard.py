@@ -1,15 +1,11 @@
 """
-Dashboard Adepor — vista de apuestas vivas + historial por liga.
+Dashboard Adepor (Streamlit, local). Reemplaza el workbook Excel.
 
-Launch local:
-    streamlit run dashboard.py
-
-Expone en http://localhost:8501. Para compartir con amigos:
-    ngrok http 8501    (URL temporal)
-
-Sin autenticacion (link abierto).
+Lanzar: ./iniciar_dashboard.sh  (solo 127.0.0.1, sin red externa).
+Los loaders son funciones puras: se prueban sin Streamlit corriendo.
 """
 import sqlite3
+from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
@@ -17,480 +13,676 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-
-DB = Path(__file__).parent / "fondo_quant.db"
-
-FLAGS = {
-    "Argentina": "🇦🇷", "Brasil": "🇧🇷", "Uruguay": "🇺🇾",
-    "Chile": "🇨🇱", "Peru": "🇵🇪", "Ecuador": "🇪🇨",
-    "Colombia": "🇨🇴", "Bolivia": "🇧🇴", "Venezuela": "🇻🇪",
-    "Espana": "🇪🇸", "Italia": "🇮🇹", "Alemania": "🇩🇪",
-    "Francia": "🇫🇷", "Inglaterra": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Turquia": "🇹🇷",
-    "Noruega": "🇳🇴",
-}
-
-
-st.set_page_config(
-    page_title="Adepor — Picks del Día",
-    page_icon="🎯",
-    layout="wide",
+from src.comun.config_motor import get_param
+from src.comun.config_sistema import DB_NAME
+from src.comun.picks import cuota_para_pick
+from src.comun.reglas_actuales import evaluar_actual, evaluar_actual_ou
+from src.comun.resolucion import determinar_resultado_entero
+from src.comun.tiempo import ahora_art
+from src.persistencia.confirmaciones import confirmar_apuesta, ids_confirmados
+from src.persistencia.excel_formulas import cuota_1x2, cuota_ou
+from src.persistencia.excel_hoja_resimulacion import _stake_kelly
+from src.persistencia.excel_metricas import _pl_apuesta, calcular_metricas_dashboard
+from src.persistencia.motor_sincronizador import (
+    _cargar_apuestas_live, _cargar_aportes, _cargar_partidos, _leer_configuracion,
 )
+from src.persistencia.yield_potencial import apuestas_potenciales, yield_potencial
+
+TABS = ["Picks vivos", "Dinero real", "Yield potencial", "Historial",
+        "Resumen por liga", "Sombra", "Si hubiera"]
+CAMINOS = ("C1", "C2", "C2B", "C3", "C4", "OU")
+
+
+# ============================================================================
+# LOADERS (puros: reciben conexion o listas, devuelven datos)
+# ============================================================================
+def conectar_ro():
+    """Conexion de solo lectura a la DB del pipeline (respeta ADEPOR_DB)."""
+    return sqlite3.connect(Path(DB_NAME).resolve().as_uri() + "?mode=ro", uri=True)
+
+
+def _fecha_dt(raw):
+    s = str(raw or "").strip()
+    for fmt in ("%Y-%m-%d %H:%M", "%d/%m/%Y %H:%M", "%Y-%m-%d", "%d/%m/%Y"):
+        try:
+            return datetime.strptime(s, fmt).date()
+        except ValueError:
+            continue
+    return None
+
+
+def _fecha_txt(raw):
+    d = _fecha_dt(raw)
+    return d.strftime("%d/%m/%Y") if d else str(raw or "")[:10]
+
+
+def _pl_pick(estado, ap, stk, cuota, gl, gv):
+    """P/L real de un mercado. None si no hay apuesta liquidada valorable."""
+    if estado != "Liquidado" or not ap or not stk or stk <= 0 or gl is None or gv is None:
+        return None
+    res = determinar_resultado_entero(ap, gl, gv)
+    return None if res == 0 else _pl_apuesta(res, stk, cuota or 0)
+
+
+def apuestas_reales(datos):
+    """Apuestas liquidadas con stake > 0, con la formula de excel_metricas."""
+    out = []
+    for r in datos:
+        estado, gl, gv = r[19], r[20], r[21]
+        for ap, stk, cuota in ((r[10], r[12], cuota_1x2(r[10], r[14], r[15], r[16])),
+                               (r[11], r[13], cuota_ou(r[11], r[17], r[18]))):
+            pl = _pl_pick(estado, ap, stk, cuota, gl, gv)
+            if pl is not None:
+                out.append({"fecha": str(r[1] or ""), "pl": pl})
+    return out
+
+
+def equity_df(datos, aportes, bankroll_base):
+    """Bankroll base + P/L real + aportes, en orden de fecha."""
+    eventos = [(a["fecha"], a["pl"]) for a in apuestas_reales(datos)]
+    eventos += [(str(f), float(m)) for f, m in aportes]
+    eventos.sort(key=lambda e: e[0])
+    filas, acum = [{"n": 0, "fecha": "", "equity": float(bankroll_base)}], float(bankroll_base)
+    for i, (f, delta) in enumerate(eventos, 1):
+        acum += delta
+        filas.append({"n": i, "fecha": _fecha_txt(f), "equity": acum})
+    return pd.DataFrame(filas)
+
+
+def estado_confirmaciones(con):
+    """Set de (id_partido, mercado) confirmados. Alertas legacy cuentan en ambos mercados."""
+    conf = set()
+    try:
+        conf.update(con.execute("SELECT id_partido, mercado FROM apuestas_confirmadas").fetchall())
+    except sqlite3.OperationalError:
+        pass  # la tabla se crea en la primera confirmacion
+    con_tabla = {i for i, _ in conf}
+    for id_p in ids_confirmados(con.cursor()) - con_tabla:
+        conf.update({(id_p, "1X2"), (id_p, "OU")})
+    return conf
+
+
+def picks_vivos(datos, confirmados=frozenset()):
+    """Picks [APOSTAR] de partidos que no empezaron. Incluye pretest (stake sugerido 0):
+    el usuario decide el stake al confirmar."""
+    ahora = ahora_art().strftime("%Y-%m-%d %H:%M")
+    out = []
+    for r in datos:
+        id_p, fecha, local, visita, pais = r[0:5]
+        estado, gl = r[19], r[20]
+        if estado == "Liquidado" or gl is not None or str(fecha or "") <= ahora:
+            continue
+        mercados = (
+            ("1X2", r[10], r[12], {"LOCAL": r[5], "EMPATE": r[6], "VISITA": r[7]}),
+            ("OU", r[11], r[13], {"OVER 2.5": r[8], "UNDER 2.5": r[9]}),
+        )
+        for mercado, ap, stk, probs in mercados:
+            if not str(ap or "").startswith("[APOSTAR]"):
+                continue
+            pick = str(ap)[len("[APOSTAR]"):].strip().upper()
+            cuota = cuota_para_pick(ap, r[14], r[15], r[16], r[17], r[18])
+            prob = probs.get(pick)
+            if prob is None or cuota <= 1:
+                continue
+            out.append({
+                "id": id_p, "mercado": mercado, "pais": pais, "fecha": _fecha_txt(fecha),
+                "orden": str(fecha or ""), "partido": f"{local} vs {visita}", "pick": pick,
+                "cuota": cuota, "prob_modelo": prob, "prob_mercado": 1 / cuota,
+                "ev_pct": (prob * cuota - 1) * 100, "stake": stk or 0.0,
+                "confirmada": (id_p, mercado) in confirmados,
+            })
+    out.sort(key=lambda p: p["orden"])
+    return out
+
+
+def historial_df(datos):
+    """Una fila por partido, como la hoja Backtest. P/L neto de ambos mercados."""
+    filas = []
+    for r in datos:
+        estado, gl, gv = r[19], r[20], r[21]
+        ap1, apou, stk1, stko = r[10], r[11], r[12], r[13]
+        c1, cx, c2, co, cu = r[14:19]
+        pls = [_pl_pick(estado, ap1, stk1, cuota_1x2(ap1, c1, cx, c2), gl, gv),
+               _pl_pick(estado, apou, stko, cuota_ou(apou, co, cu), gl, gv)]
+        validos = [x for x in pls if x is not None]
+        d = _fecha_dt(r[1])
+        filas.append({
+            "fecha_dt": pd.Timestamp(d) if d else pd.NaT,
+            "Fecha": _fecha_txt(r[1]), "Liga": r[4], "Partido": f"{r[2]} vs {r[3]}",
+            "Goles": f"{gl}-{gv}" if gl is not None and gv is not None else "",
+            "Estado": estado,
+            "Prob 1 %": round((r[5] or 0) * 100, 1), "Prob X %": round((r[6] or 0) * 100, 1),
+            "Prob 2 %": round((r[7] or 0) * 100, 1),
+            "Cuota 1": c1, "Cuota X": cx, "Cuota 2": c2,
+            "Apuesta 1X2": ap1 or "", "Stake 1X2": stk1 or 0,
+            "Apuesta O/U": apou or "", "Stake O/U": stko or 0,
+            "P/L neto": sum(validos) if validos else None,
+        })
+    df = pd.DataFrame(filas, columns=["fecha_dt", "Fecha", "Liga", "Partido", "Goles", "Estado",
+                                      "Prob 1 %", "Prob X %", "Prob 2 %", "Cuota 1", "Cuota X",
+                                      "Cuota 2", "Apuesta 1X2", "Stake 1X2", "Apuesta O/U",
+                                      "Stake O/U", "P/L neto"])
+    return df.sort_values("fecha_dt", ascending=False, na_position="last").reset_index(drop=True)
+
+
+def filas_yield(cur):
+    """Filas crudas de partidos_backtest para el yield potencial."""
+    cur.execute("SELECT pais, fecha, apuesta_1x2, apuesta_ou, cuota_1, cuota_x, cuota_2, "
+                "cuota_o25, cuota_u25 FROM partidos_backtest")
+    cols = [d[0] for d in cur.description]
+    return [dict(zip(cols, fila)) for fila in cur.fetchall()]
+
+
+def curva_yield_df(filas):
+    """Yield acumulado a 1 unidad por apuesta, en orden de fecha."""
+    ap = sorted(apuestas_potenciales(filas), key=lambda a: str(a["fecha"] or ""))
+    acum, out = 0.0, []
+    for i, a in enumerate(ap, 1):
+        acum += a["pl"]
+        out.append({"n": i, "fecha": _fecha_txt(a["fecha"]), "pl_acum": acum})
+    return pd.DataFrame(out, columns=["n", "fecha", "pl_acum"])
+
+
+def resumen_liga_df(datos, fk, live):
+    """Una fila por liga y total. Usa calcular_metricas_dashboard (stake > 0, liquidado)."""
+    filas = []
+    for pais in sorted({r[4] for r in datos if r[4]}):
+        t = calcular_metricas_dashboard([r for r in datos if r[4] == pais], fk)["total"]
+        filas.append(_fila_resumen(pais, t, "LIVE" if live.get(pais) else "pretest"))
+    filas.append(_fila_resumen("TOTAL", calcular_metricas_dashboard(datos, fk)["total"], ""))
+    return pd.DataFrame(filas)
+
+
+def _fila_resumen(nombre, t, estado):
+    n = t["n"]
+    g = round(t["acierto_bets"] * n) if n else 0
+    return {"Liga": nombre, "Apuestas": n, "Ganadas": g, "Perdidas": n - g,
+            "% Acierto": t["acierto_bets"] if n else None, "P/L $": t["pl"],
+            "Yield": t["yield"] if n else None, "Volumen $": t["vol"], "Estado": estado}
+
+
+def sombra(datos):
+    """Op1 (activa) vs Op4 (shadow) por partido, como la hoja Sombra."""
+    acum = {"op1": {"n": 0, "g": 0, "vol": 0.0, "pl": 0.0},
+            "op4": {"n": 0, "g": 0, "vol": 0.0, "pl": 0.0}}
+    filas = []
+    for r in datos:
+        estado, gl, gv = r[19], r[20], r[21]
+        c1, cx, c2 = r[14:17]
+        ap1, stk1, ap4, stk4 = r[10], r[12], r[24], r[25]
+        t1 = bool(stk1 and stk1 > 0 and _es_pick(ap1))
+        t4 = bool(stk4 and stk4 > 0 and _es_pick(ap4))
+        if not (t1 or t4):
+            continue
+        res1, pl1 = _op_sombra(estado, t1, ap1, stk1, c1, cx, c2, gl, gv, acum["op1"])
+        res4, pl4 = _op_sombra(estado, t4, ap4, stk4, c1, cx, c2, gl, gv, acum["op4"])
+        filas.append({
+            "Fecha": _fecha_txt(r[1]), "Partido": f"{r[2]} vs {r[3]}", "Liga": r[4],
+            "Apuesta Op1": ap1 or "-", "Stake Op1": stk1 if t1 else None,
+            "Resultado Op1": res1, "P/L Op1": pl1,
+            "Apuesta Op4": ap4 or "-", "Stake Op4": stk4 if t4 else None,
+            "Resultado Op4": res4, "P/L Op4": pl4,
+            "Dif P/L": pl1 - pl4 if pl1 is not None and pl4 is not None else None,
+        })
+    cols = ["Fecha", "Partido", "Liga", "Apuesta Op1", "Stake Op1", "Resultado Op1", "P/L Op1",
+            "Apuesta Op4", "Stake Op4", "Resultado Op4", "P/L Op4", "Dif P/L"]
+    return {"filas": pd.DataFrame(filas, columns=cols), **acum}
+
+
+def _es_pick(ap):
+    return any(t in str(ap or "") for t in ("[APOSTAR]", "[GANADA]", "[PERDIDA]"))
+
+
+def _op_sombra(estado, tiene, ap, stk, c1, cx, c2, gl, gv, stats):
+    """Resultado y P/L de una opcion. Acumula n, g, vol y pl en stats."""
+    if not tiene:
+        return "-", None
+    if estado != "Liquidado":
+        return "PENDIENTE", None
+    pl = _pl_pick(estado, ap, stk, cuota_1x2(ap, c1, cx, c2), gl, gv)
+    if pl is None:
+        return "-", None
+    gana = pl > 0
+    stats["n"] += 1
+    stats["g"] += int(gana)
+    stats["vol"] += stk
+    stats["pl"] += pl
+    return ("GANADA" if gana else "PERDIDA"), pl
+
+
+def simular_si_hubiera(datos, bankroll, fraccion_kelly, max_kelly_pct):
+    """Resimula todo el historico con las reglas actuales. IN-SAMPLE. Compounding."""
+    real = defaultdict(dict)
+    candidatos = []
+    for r in datos:
+        estado, gl, gv = r[19], r[20], r[21]
+        if estado != "Liquidado" or gl is None or gv is None:
+            continue
+        pais, fecha, local, visita = r[4], r[1], r[2], r[3]
+        p1, px, p2, po, pu = r[5], r[6], r[7], r[8], r[9]
+        c1, cx, c2, co, cu = r[14], r[15], r[16], r[17], r[18]
+        ap_real, ap_ou = str(r[10] or ""), str(r[11] or "")
+        xg_l = r[26] if len(r) > 26 else None
+        xg_v = r[27] if len(r) > 27 else None
+        tiene_1x2 = all(isinstance(x, (int, float)) and x > 0 for x in [p1, px, p2, c1, cx, c2])
+        tiene_ou = all(isinstance(x, (int, float)) and x > 0 for x in [po, pu, co, cu])
+
+        if tiene_1x2 and ("[GANADA]" in ap_real or "[PERDIDA]" in ap_real):
+            _sumar_real(real[pais], "[GANADA]" in ap_real)
+        if "[GANADA]" in ap_ou or "[PERDIDA]" in ap_ou:
+            _sumar_real(real[pais], "[GANADA]" in ap_ou)
+
+        if tiene_1x2:
+            pick, cuota, camino = evaluar_actual(p1, px, p2, c1, cx, c2, pais)
+            if pick is not None:
+                gana = ((pick == "LOCAL" and gl > gv) or (pick == "EMPATE" and gl == gv)
+                        or (pick == "VISITA" and gl < gv))
+                candidatos.append(_candidato(fecha, local, visita, pais, pick, cuota, camino,
+                                             "1X2", gl, gv, gana,
+                                             {"LOCAL": p1, "EMPATE": px, "VISITA": p2}[pick]))
+        if tiene_ou:
+            pick_ou, cuota_o, _ = evaluar_actual_ou(po, pu, co, cu, xg_l, xg_v)
+            if pick_ou is not None:
+                total = gl + gv
+                gana = (pick_ou == "OVER 2.5" and total > 2.5) or (pick_ou == "UNDER 2.5" and total < 2.5)
+                candidatos.append(_candidato(fecha, local, visita, pais, pick_ou, cuota_o, "OU",
+                                             "O/U", gl, gv, gana,
+                                             po if pick_ou == "OVER 2.5" else pu))
+
+    picks, bank = [], float(bankroll)
+    for p in sorted(candidatos, key=lambda x: str(x["fecha_raw"] or "")):
+        stake = _stake_kelly(p["prob"], p["cuota"], bank, fraccion_kelly, max_kelly_pct)
+        if stake <= 0:
+            continue  # Kelly <= 0: no es apuesta, no cuenta en N ni en hit
+        pl = round(stake * (p["cuota"] - 1), 2) if p["gana"] else round(-stake, 2)
+        bank = round(bank + pl, 2)
+        picks.append({**p, "stake": stake, "pl": pl, "equity": bank})
+    return {"picks": picks, "real": dict(real), "bankroll": float(bankroll)}
+
+
+def _sumar_real(d, gano):
+    d["n"] = d.get("n", 0) + 1
+    d["g"] = d.get("g", 0) + int(gano)
+
+
+def _candidato(fecha, local, visita, pais, pick, cuota, camino, mercado, gl, gv, gana, prob):
+    return {"fecha_raw": fecha, "fecha": _fecha_txt(fecha), "partido": f"{local} vs {visita}",
+            "pais": pais, "pick": pick, "cuota": cuota, "camino": camino, "mercado": mercado,
+            "gl": gl, "gv": gv, "gana": gana, "prob": prob}
+
+
+def resumen_si_hubiera(sim):
+    """KPIs REAL vs SIMULADO, tabla por liga y por camino."""
+    picks, real, bank = sim["picks"], sim["real"], sim["bankroll"]
+    n_r = sum(v.get("n", 0) for v in real.values())
+    g_r = sum(v.get("g", 0) for v in real.values())
+    stake = sum(p["stake"] for p in picks)
+    pl = sum(p["pl"] for p in picks)
+    kpi = {"n_real": n_r, "g_real": g_r, "n_sim": len(picks),
+           "g_sim": sum(p["gana"] for p in picks), "stake": stake, "pl": pl,
+           "bankroll": bank, "equity": bank + pl}
+    filas_liga, filas_camino = [], []
+    for liga in sorted(set(real) | {p["pais"] for p in picks}):
+        rl = real.get(liga, {})
+        ps = [p for p in picks if p["pais"] == liga]
+        n_l, g_l = len(ps), sum(p["gana"] for p in ps)
+        stk_l, pl_l = sum(p["stake"] for p in ps), sum(p["pl"] for p in ps)
+        hit_r = rl["g"] / rl["n"] if rl.get("n") else None
+        hit_s = g_l / n_l if n_l else None
+        filas_liga.append({
+            "Liga": liga, "N real": rl.get("n", 0), "Hit real": hit_r,
+            "N sim": n_l, "G sim": g_l, "Hit sim": hit_s, "Volumen $": stk_l, "P/L $": pl_l,
+            "Yield sim": pl_l / stk_l if stk_l else None,
+            "dN": n_l - rl.get("n", 0),
+            "dHit": hit_s - hit_r if hit_s is not None and hit_r is not None else None,
+        })
+        fila = {"Liga": liga}
+        for cam in CAMINOS:
+            cp = [p for p in ps if p["camino"] == cam]
+            fila[cam] = f"{sum(p['gana'] for p in cp)}/{len(cp)}" if cp else "-"
+        fila["Total"] = n_l
+        filas_camino.append(fila)
+    return {"kpi": kpi, "por_liga": pd.DataFrame(filas_liga),
+            "por_camino": pd.DataFrame(filas_camino)}
+
+
+def cargar_todo(con):
+    """Carga todo lo que muestra el dashboard. Solo lee la DB."""
+    cur = con.cursor()
+    datos = _cargar_partidos(cur)
+    base, operativo, fk = _leer_configuracion(cur)
+    live = _cargar_apuestas_live(cur)
+    aportes = _cargar_aportes(cur)
+    confirmados = estado_confirmaciones(con)
+    filas = filas_yield(cur)
+    fk_sim = float(get_param("fraccion_kelly", default=0.50) or 0.50)
+    mk_sim = float(get_param("max_kelly_pct_normal", default=0.025) or 0.025)
+    sim = simular_si_hubiera(datos, base, fk_sim, mk_sim)
+    return {
+        "picks": picks_vivos(datos, confirmados),
+        "base": base, "operativo": operativo, "fk": fk,
+        "metricas": calcular_metricas_dashboard(datos, fk),
+        "equity": equity_df(datos, aportes, base),
+        "yield": yield_potencial(filas),
+        "curva_yield": curva_yield_df(filas),
+        "historial": historial_df(datos),
+        "resumen": resumen_liga_df(datos, fk, live),
+        "sombra": sombra(datos),
+        "si_hubiera": sim,
+        "si_resumen": resumen_si_hubiera(sim),
+    }
 
 
 @st.cache_data(ttl=60)
-def cargar_datos():
-    con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
-    con.row_factory = sqlite3.Row
-
-    # Hit rate por liga (pretest + real)
-    ligas = pd.read_sql_query("""
-        WITH evaluados AS (
-            SELECT pais,
-                   COUNT(*) AS n_eval,
-                   SUM(CASE WHEN apuesta_1x2 LIKE '[GANADA]%' OR apuesta_ou LIKE '[GANADA]%' THEN 1 ELSE 0 END) AS n_ganados
-            FROM partidos_backtest
-            WHERE estado='Liquidado'
-              AND (apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%'
-                OR apuesta_ou  LIKE '[GANADA]%' OR apuesta_ou  LIKE '[PERDIDA]%')
-            GROUP BY pais
-        ),
-        reales AS (
-            SELECT pais,
-                   COUNT(*) AS n_real,
-                   SUM(CASE WHEN apuesta_1x2 LIKE '[GANADA]%' OR apuesta_ou LIKE '[GANADA]%' THEN 1 ELSE 0 END) AS n_real_g
-            FROM partidos_backtest
-            WHERE estado='Liquidado' AND (stake_1x2>0 OR stake_ou>0)
-            GROUP BY pais
-        ),
-        vivas AS (
-            SELECT pais, COUNT(*) AS n_vivas
-            FROM partidos_backtest
-            WHERE estado!='Liquidado' AND (stake_1x2>0 OR stake_ou>0)
-            GROUP BY pais
-        )
-        SELECT e.pais,
-               e.n_eval, e.n_ganados,
-               ROUND(100.0 * e.n_ganados / NULLIF(e.n_eval,0), 1) AS hit_pretest,
-               COALESCE(r.n_real, 0) AS n_real,
-               COALESCE(r.n_real_g, 0) AS n_real_g,
-               ROUND(100.0 * r.n_real_g / NULLIF(r.n_real,0), 1) AS hit_real,
-               COALESCE(v.n_vivas, 0) AS n_vivas
-        FROM evaluados e
-        LEFT JOIN reales r ON r.pais = e.pais
-        LEFT JOIN vivas  v ON v.pais = e.pais
-        ORDER BY e.n_eval DESC
-    """, con)
-
-    # Estado LIVE/pretest por liga (1X2 y O/U)
-    cur = con.cursor()
-    cur.execute("""
-        SELECT clave, scope, valor_texto FROM config_motor_valores
-        WHERE clave IN ('apuestas_live','apuesta_ou_live')
-    """)
-    live_map = {}
-    for clave, scope, val in cur.fetchall():
-        is_live = str(val).upper() in ("TRUE", "1")
-        live_map.setdefault(scope, {})[clave] = is_live
-
-    # Apuestas vivas (futuras con stake>0) — separado 1X2 de O/U
-    vivas_1x2 = pd.read_sql_query("""
-        SELECT pais, fecha, local, visita,
-               SUBSTR(apuesta_1x2, INSTR(apuesta_1x2, ']') + 2) AS pick,
-               CASE
-                   WHEN apuesta_1x2 LIKE '% LOCAL' THEN cuota_1
-                   WHEN apuesta_1x2 LIKE '% VISITA' THEN cuota_2
-                   WHEN apuesta_1x2 LIKE '% EMPATE' THEN cuota_x
-               END AS cuota,
-               CASE
-                   WHEN apuesta_1x2 LIKE '% LOCAL' THEN prob_1
-                   WHEN apuesta_1x2 LIKE '% VISITA' THEN prob_2
-                   WHEN apuesta_1x2 LIKE '% EMPATE' THEN prob_x
-               END AS prob_modelo,
-               stake_1x2 AS stake
-        FROM partidos_backtest
-        WHERE estado != 'Liquidado'
-          AND apuesta_1x2 LIKE '[APOSTAR]%'
-          AND stake_1x2 > 0
-        ORDER BY fecha ASC
-    """, con)
-    if not vivas_1x2.empty:
-        vivas_1x2["mercado"] = "1X2"
-        vivas_1x2["prob_mercado"] = 1.0 / vivas_1x2["cuota"]
-        vivas_1x2["ev_pct"] = (vivas_1x2["prob_modelo"] * vivas_1x2["cuota"] - 1.0) * 100.0
-
-    vivas_ou = pd.read_sql_query("""
-        SELECT pais, fecha, local, visita,
-               SUBSTR(apuesta_ou, INSTR(apuesta_ou, ']') + 2) AS pick,
-               CASE WHEN apuesta_ou LIKE '% OVER%' THEN cuota_o25 ELSE cuota_u25 END AS cuota,
-               CASE WHEN apuesta_ou LIKE '% OVER%' THEN prob_o25 ELSE prob_u25 END AS prob_modelo,
-               stake_ou AS stake
-        FROM partidos_backtest
-        WHERE estado != 'Liquidado'
-          AND apuesta_ou LIKE '[APOSTAR]%'
-          AND stake_ou > 0
-        ORDER BY fecha ASC
-    """, con)
-    if not vivas_ou.empty:
-        vivas_ou["mercado"] = "O/U 2.5"
-        vivas_ou["prob_mercado"] = 1.0 / vivas_ou["cuota"]
-        vivas_ou["ev_pct"] = (vivas_ou["prob_modelo"] * vivas_ou["cuota"] - 1.0) * 100.0
-
-    vivas = pd.concat([vivas_1x2, vivas_ou], ignore_index=True) if not (vivas_1x2.empty and vivas_ou.empty) else pd.DataFrame()
-
-    # Historial: últimas 10 liquidadas por liga (picks 1X2 + O/U con stake>0, o solo evaluados si no hay stake>0)
-    historial = pd.read_sql_query("""
-        SELECT pais, fecha, local, visita,
-               CASE WHEN apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%'
-                    THEN SUBSTR(apuesta_1x2, INSTR(apuesta_1x2, ']') + 2) END AS pick_1x2,
-               CASE WHEN apuesta_1x2 LIKE '[GANADA]%' THEN 'GANADA'
-                    WHEN apuesta_1x2 LIKE '[PERDIDA]%' THEN 'PERDIDA' END AS resultado_1x2,
-               stake_1x2,
-               CASE WHEN apuesta_ou LIKE '[GANADA]%' OR apuesta_ou LIKE '[PERDIDA]%'
-                    THEN SUBSTR(apuesta_ou, INSTR(apuesta_ou, ']') + 2) END AS pick_ou,
-               CASE WHEN apuesta_ou LIKE '[GANADA]%' THEN 'GANADA'
-                    WHEN apuesta_ou LIKE '[PERDIDA]%' THEN 'PERDIDA' END AS resultado_ou,
-               stake_ou,
-               goles_l, goles_v,
-               CASE WHEN apuesta_1x2 LIKE '[GANADA]%' THEN
-                      CASE WHEN apuesta_1x2 LIKE '% LOCAL' THEN cuota_1
-                           WHEN apuesta_1x2 LIKE '% VISITA' THEN cuota_2
-                           WHEN apuesta_1x2 LIKE '% EMPATE' THEN cuota_x END
-               END AS cuota_ganada_1x2,
-               CASE WHEN apuesta_ou LIKE '[GANADA]%' THEN
-                      CASE WHEN apuesta_ou LIKE '% OVER%' THEN cuota_o25 ELSE cuota_u25 END
-               END AS cuota_ganada_ou
-        FROM partidos_backtest
-        WHERE estado='Liquidado'
-          AND (apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%'
-            OR apuesta_ou  LIKE '[GANADA]%' OR apuesta_ou  LIKE '[PERDIDA]%')
-        ORDER BY fecha DESC
-    """, con)
-
-    # P/L por apuesta liquidada (en unidades: stake=1, porque el pretest tiene stake=0)
-    # Formula: ganada -> (cuota - 1), perdida -> -1. Para ambos mercados 1X2 y O/U.
-    pl_events = pd.read_sql_query("""
-        SELECT fecha, pais,
-               CASE
-                   WHEN apuesta_1x2 LIKE '[GANADA]%' THEN
-                       CASE WHEN apuesta_1x2 LIKE '% LOCAL'  THEN cuota_1 - 1
-                            WHEN apuesta_1x2 LIKE '% VISITA' THEN cuota_2 - 1
-                            WHEN apuesta_1x2 LIKE '% EMPATE' THEN cuota_x - 1
-                       END
-                   WHEN apuesta_1x2 LIKE '[PERDIDA]%' THEN -1.0
-                   ELSE 0 END AS pl_1x2,
-               CASE
-                   WHEN apuesta_ou LIKE '[GANADA]%' THEN
-                       CASE WHEN apuesta_ou LIKE '% OVER%' THEN cuota_o25 - 1
-                            ELSE cuota_u25 - 1 END
-                   WHEN apuesta_ou LIKE '[PERDIDA]%' THEN -1.0
-                   ELSE 0 END AS pl_ou
-        FROM partidos_backtest
-        WHERE estado='Liquidado'
-          AND (apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%'
-            OR apuesta_ou  LIKE '[GANADA]%' OR apuesta_ou  LIKE '[PERDIDA]%')
-        ORDER BY fecha ASC
-    """, con)
-    if not pl_events.empty:
-        pl_events["pl_1x2"] = pl_events["pl_1x2"].fillna(0)
-        pl_events["pl_ou"] = pl_events["pl_ou"].fillna(0)
-        pl_events["pl"] = pl_events["pl_1x2"] + pl_events["pl_ou"]
-        pl_events["fecha"] = pd.to_datetime(pl_events["fecha"])
-        pl_events = pl_events.sort_values("fecha").reset_index(drop=True)
-        pl_events["pl_acum"] = pl_events["pl"].cumsum()
-
-    con.close()
-
-    # Enriquecer ligas con LIVE tags
-    def _tag_live(row):
-        lv = live_map.get(row["pais"], {})
-        tags = []
-        if lv.get("apuestas_live"): tags.append("LIVE 1X2")
-        if lv.get("apuesta_ou_live"): tags.append("LIVE O/U")
-        return " · ".join(tags) if tags else "pretest"
-    ligas["estado"] = ligas.apply(_tag_live, axis=1)
-
-    return ligas, vivas, historial, pl_events
-
-
-def _color_hit(val):
-    if pd.isna(val):
-        return "color: #888"
-    if val >= 60: return "color: #1db954; font-weight: bold"  # verde
-    if val >= 50: return "color: #d4a017; font-weight: bold"  # amarillo
-    return "color: #e74c3c; font-weight: bold"  # rojo
-
-
-def _color_ev(val):
-    if pd.isna(val): return ""
-    if val >= 15: return "background-color: #0a5c2a; color: white; font-weight: bold"
-    if val >= 8:  return "background-color: #1db954; color: white"
-    if val >= 3:  return "background-color: #d4a017; color: white"
-    return "background-color: #e74c3c; color: white"
-
-
-def _color_resultado(val):
-    if val == "GANADA": return "background-color: #1db954; color: white; font-weight: bold"
-    if val == "PERDIDA": return "background-color: #e74c3c; color: white"
-    return ""
-
-
-def _flag(pais):
-    return FLAGS.get(pais, "🌍")
+def _bundle():
+    con = conectar_ro()
+    try:
+        return cargar_todo(con)
+    finally:
+        con.close()
 
 
 # ============================================================================
-# UI
+# FORMATO Y GRAFICOS
 # ============================================================================
-st.title("🎯 Adepor — Picks del Día")
-st.caption(f"Última actualización: {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+def _pct(x, signo=False):
+    if x is None or pd.isna(x):
+        return "—"
+    return f"{x * 100:{'+' if signo else ''}.1f}%"
 
-try:
-    ligas, vivas, historial, pl_events = cargar_datos()
-except Exception as e:
-    st.error(f"Error cargando DB: {e}")
-    st.stop()
 
-# ====================== GRAFICOS ======================
-st.header("📈 Métricas y gráficos")
+def _usd(x, signo=False):
+    if x is None or pd.isna(x):
+        return "—"
+    signo_txt = "-" if x < 0 else ("+" if signo else "")
+    return f"{signo_txt}${abs(x):,.2f}"
 
-if pl_events.empty:
-    st.info("Todavía no hay apuestas liquidadas para graficar.")
-else:
-    # KPIs arriba (métricas de unidades)
-    total_apuestas = len(pl_events)
-    pl_total = float(pl_events["pl_acum"].iloc[-1])
-    roi_pct = 100.0 * pl_total / total_apuestas if total_apuestas else 0.0
-    ganadas_total = int(((pl_events["pl_1x2"] > 0) | (pl_events["pl_ou"] > 0)).sum())
-    hit_global = 100.0 * ganadas_total / total_apuestas if total_apuestas else 0.0
 
-    k1, k2, k3, k4 = st.columns(4)
-    k1.metric("P/L acumulado", f"{pl_total:+.2f} u",
-              help="Suma de (cuota-1) por ganada y -1 por perdida. Stake unitario.")
-    k2.metric("ROI por apuesta", f"{roi_pct:+.2f}%",
-              help="P/L total dividido el número de apuestas.")
-    k3.metric("Hit rate global", f"{hit_global:.1f}%",
-              help="Apuestas ganadas (1X2 u O/U) sobre total de apuestas evaluadas.")
-    k4.metric("Apuestas evaluadas", f"{total_apuestas}")
+def _ratio(a, b):
+    return a / b if b else None
 
-    st.divider()
 
-    # Timeline P/L acumulado (línea con área)
-    st.subheader("🕒 Timeline P/L acumulado (unidades)")
-    pl_plot = pl_events[["fecha", "pl_acum", "pl"]].copy()
-    pl_plot["resultado"] = pl_plot["pl"].apply(
-        lambda x: "ganada" if x > 0 else ("perdida" if x < 0 else "neutra")
+def _formatear(df, reglas):
+    """Aplica una funcion de formato por columna. Devuelve copia."""
+    out = df.copy()
+    for col, fn in reglas.items():
+        if col in out:  # tabla vacia: sin columnas
+            out[col] = out[col].map(fn)
+    return out
+
+
+def _linea(df, x, y, titulo_x, titulo_y, cero=False):
+    base = alt.Chart(df).mark_line(color="#1db954", strokeWidth=2).encode(
+        x=alt.X(f"{x}:Q", title=titulo_x),
+        y=alt.Y(f"{y}:Q", title=titulo_y, scale=alt.Scale(zero=False)),
+        tooltip=[alt.Tooltip(f"{x}:Q", title=titulo_x), alt.Tooltip(f"{y}:Q", title=titulo_y, format=",.2f")],
     )
+    if cero:
+        base = base + alt.Chart(pd.DataFrame({"y": [0]})).mark_rule(
+            color="#666", strokeDash=[4, 4]).encode(y="y:Q")
+    return base.properties(height=300)
 
-    base = alt.Chart(pl_plot).encode(
-        x=alt.X("fecha:T", title="Fecha"),
-        y=alt.Y("pl_acum:Q", title="P/L acumulado (u)"),
-    )
-    area = base.mark_area(
-        color="#1db954", opacity=0.18, interpolate="monotone"
-    )
-    line = base.mark_line(color="#1db954", strokeWidth=2.5, interpolate="monotone")
-    puntos = alt.Chart(pl_plot).mark_circle(size=70).encode(
-        x="fecha:T",
-        y="pl_acum:Q",
-        color=alt.Color(
-            "resultado:N",
-            scale=alt.Scale(
-                domain=["ganada", "perdida", "neutra"],
-                range=["#1db954", "#e74c3c", "#888"],
-            ),
-            legend=alt.Legend(title="Apuesta"),
-        ),
-        tooltip=[
-            alt.Tooltip("fecha:T", title="Fecha"),
-            alt.Tooltip("pl:Q", title="P/L apuesta (u)", format="+.2f"),
-            alt.Tooltip("pl_acum:Q", title="P/L acumulado (u)", format="+.2f"),
-        ],
-    )
-    regla_zero = alt.Chart(pd.DataFrame({"y": [0]})).mark_rule(color="#666", strokeDash=[4, 4]).encode(y="y:Q")
 
-    st.altair_chart((area + line + regla_zero + puntos).properties(height=320),
-                    use_container_width=True)
+# ============================================================================
+# PESTAÑAS
+# ============================================================================
+def _confirmar(id_p, mercado, cuota, stake):
+    try:
+        con = sqlite3.connect(DB_NAME)
+        try:
+            pick = confirmar_apuesta(con, id_p, mercado, cuota, stake)
+        finally:
+            con.close()
+    except ValueError as e:
+        st.error(str(e))
+        return
+    st.session_state["aviso"] = ("ok", f"Confirmada: {pick} a {cuota:.2f} con stake {_usd(stake)}.")
+    st.cache_data.clear()
+    st.rerun()
 
-    # Fila con 2 columnas: P/L por liga + Hit rate por liga
-    c_izq, c_der = st.columns(2)
 
-    with c_izq:
-        st.subheader("💰 P/L por liga (unidades)")
-        pl_por_liga = pl_events.groupby("pais", as_index=False)["pl"].sum()
-        pl_por_liga = pl_por_liga.sort_values("pl", ascending=False)
-        pl_por_liga["Liga"] = pl_por_liga["pais"].apply(lambda p: f"{_flag(p)} {p}")
-        chart_pl_liga = alt.Chart(pl_por_liga).mark_bar().encode(
-            x=alt.X("pl:Q", title="P/L acumulado (u)"),
-            y=alt.Y("Liga:N", sort="-x", title=""),
-            color=alt.condition(
-                "datum.pl >= 0", alt.value("#1db954"), alt.value("#e74c3c")
-            ),
-            tooltip=[alt.Tooltip("Liga:N"), alt.Tooltip("pl:Q", title="P/L (u)", format="+.2f")],
-        ).properties(height=max(220, 28 * len(pl_por_liga)))
-        st.altair_chart(chart_pl_liga, use_container_width=True)
+def _tab_picks(b):
+    aviso = st.session_state.pop("aviso", None)
+    if aviso:
+        (st.success if aviso[0] == "ok" else st.error)(aviso[1])
+    picks = b["picks"]
+    if not picks:
+        st.info("No hay picks vivos con stake > 0.")
+        return
+    c = st.columns(3)
+    c[0].metric("Picks vivos", len(picks))
+    c[1].metric("Stake total", f"${sum(p['stake'] for p in picks):,.0f}")
+    c[2].metric("Confirmados", sum(p["confirmada"] for p in picks))
 
-    with c_der:
-        st.subheader("🎯 Hit rate por liga")
-        if ligas.empty:
-            st.info("Sin datos.")
-        else:
-            ligas_bar = ligas[["pais", "hit_pretest", "n_eval"]].copy()
-            ligas_bar["Liga"] = ligas_bar["pais"].apply(lambda p: f"{_flag(p)} {p}")
-            ligas_bar = ligas_bar.sort_values("hit_pretest", ascending=False)
-            chart_hit = alt.Chart(ligas_bar).mark_bar().encode(
-                x=alt.X("hit_pretest:Q", title="Hit %", scale=alt.Scale(domain=[0, 100])),
-                y=alt.Y("Liga:N", sort="-x", title=""),
-                color=alt.Color(
-                    "hit_pretest:Q",
-                    scale=alt.Scale(
-                        domain=[0, 50, 60, 100],
-                        range=["#e74c3c", "#e74c3c", "#d4a017", "#1db954"],
-                    ),
-                    legend=None,
-                ),
-                tooltip=[
-                    alt.Tooltip("Liga:N"),
-                    alt.Tooltip("hit_pretest:Q", title="Hit %", format=".1f"),
-                    alt.Tooltip("n_eval:Q", title="N evaluados"),
-                ],
-            ).properties(height=max(220, 28 * len(ligas_bar)))
-            # Línea de referencia 55% (umbral pretest -> LIVE)
-            linea_55 = alt.Chart(pd.DataFrame({"x": [55]})).mark_rule(
-                color="#666", strokeDash=[4, 4]
-            ).encode(x="x:Q")
-            st.altair_chart(chart_hit + linea_55, use_container_width=True)
+    tabla = pd.DataFrame([{
+        "Fecha": p["fecha"], "Liga": p["pais"], "Partido": p["partido"], "Mercado": p["mercado"],
+        "Pick": p["pick"], "Cuota": f"{p['cuota']:.2f}", "Prob modelo": _pct(p["prob_modelo"]),
+        "Prob mercado": _pct(p["prob_mercado"]), "EV %": f"{p['ev_pct']:+.1f}%",
+        "Stake sugerido": f"${p['stake']:,.0f}",
+        "P/L potencial": f"${p['stake'] * (p['cuota'] - 1):,.0f}",
+        "Estado": "Confirmada" if p["confirmada"] else "Pendiente",
+    } for p in picks])
+    st.dataframe(tabla, hide_index=True)
 
-    # Distribución EV% de apuestas vivas
-    if not vivas.empty:
-        st.subheader("📊 Distribución EV % — apuestas vivas")
-        ev_hist = alt.Chart(vivas).mark_bar().encode(
-            x=alt.X("ev_pct:Q", bin=alt.Bin(step=2), title="EV %"),
-            y=alt.Y("count():Q", title="Cantidad de picks"),
-            color=alt.Color(
-                "ev_pct:Q",
-                scale=alt.Scale(
-                    domain=[0, 3, 8, 15, 30],
-                    range=["#e74c3c", "#d4a017", "#1db954", "#0a5c2a", "#0a5c2a"],
-                ),
-                legend=None,
-            ),
-            tooltip=[alt.Tooltip("ev_pct:Q", title="EV %", format=".1f"),
-                     alt.Tooltip("count():Q", title="Picks")],
-        ).properties(height=240)
-        st.altair_chart(ev_hist, use_container_width=True)
-
-st.divider()
-
-# ====================== HIT RATE POR LIGA ======================
-st.header("📊 Hit rate por liga")
-
-if ligas.empty:
-    st.info("No hay datos de liquidaciones todavía.")
-else:
-    # Grid de cards colorido
-    ligas_show = ligas.copy()
-    ligas_show["Liga"] = ligas_show["pais"].apply(lambda p: f"{_flag(p)} {p}")
-    ligas_show = ligas_show.rename(columns={
-        "n_eval": "Evaluados",
-        "n_ganados": "Ganados",
-        "hit_pretest": "Hit %",
-        "n_vivas": "Vivas",
-        "estado": "Estado",
-        "hit_real": "Hit real %",
-        "n_real": "Reales liquidadas",
-    })
-    cols_show = ["Liga", "Estado", "Vivas", "Evaluados", "Ganados", "Hit %", "Reales liquidadas", "Hit real %"]
-    st.dataframe(
-        ligas_show[cols_show].style
-            .map(_color_hit, subset=["Hit %", "Hit real %"])
-            .format({"Hit %": "{:.1f}%", "Hit real %": "{:.1f}%"}, na_rep="—"),
-        use_container_width=True,
-        hide_index=True,
-    )
-
-# ====================== APUESTAS VIVAS POR LIGA ======================
-st.header("🔴 Apuestas vivas (stake > 0)")
-
-if vivas.empty:
-    st.info("No hay apuestas vivas con stake > 0 en este momento.")
-else:
-    total_stake = vivas["stake"].sum()
-    st.metric("Total stake activo", f"${total_stake:,.0f}", f"{len(vivas)} picks")
-
-    paises_orden = ligas["pais"].tolist() + sorted(set(vivas["pais"]) - set(ligas["pais"]))
-    for pais in paises_orden:
-        sub = vivas[vivas["pais"] == pais].copy()
-        if sub.empty:
+    st.subheader("Confirmar apuesta")
+    st.caption("Cuota y stake vienen del motor. Cambielos si difieren de lo que tomo.")
+    for p in picks:
+        etiqueta = f"{p['partido']} · {p['mercado']} {p['pick']} @ {p['cuota']:.2f}"
+        if p["confirmada"]:
+            st.caption(f"Confirmada: {etiqueta}")
             continue
-        stake_liga = sub["stake"].sum()
-        st.subheader(f"{_flag(pais)} {pais} — {len(sub)} picks · ${stake_liga:,.0f} en stake")
+        clave = f"{p['id']}|{p['mercado']}"
+        with st.expander(f"Confirmar apuesta · {etiqueta}"):
+            with st.form(f"form|{clave}"):
+                col1, col2 = st.columns(2)
+                cuota = col1.number_input("Cuota tomada", min_value=1.01,
+                                          value=max(1.01, float(p["cuota"])), step=0.01,
+                                          format="%.2f", key=f"cuota|{clave}")
+                stake = col2.number_input("Stake ($)", min_value=0.01,
+                                          value=max(0.01, float(p["stake"])), step=10.0,
+                                          format="%.2f", key=f"stake|{clave}")
+                enviar = st.form_submit_button("Confirmar apuesta")
+            if enviar:
+                _confirmar(p["id"], p["mercado"], cuota, stake)
 
-        sub["Partido"] = sub["local"] + " vs " + sub["visita"]
-        sub = sub.rename(columns={
-            "fecha": "Fecha",
-            "mercado": "Mercado",
-            "pick": "Pick",
-            "cuota": "Cuota",
-            "prob_modelo": "Prob modelo",
-            "prob_mercado": "Prob mercado",
-            "ev_pct": "EV %",
-            "stake": "Stake $",
-        })
-        cols = ["Partido", "Fecha", "Mercado", "Pick", "Cuota",
-                "Prob modelo", "Prob mercado", "EV %", "Stake $"]
-        st.dataframe(
-            sub[cols].style
-                .map(_color_ev, subset=["EV %"])
-                .format({
-                    "Cuota": "{:.2f}",
-                    "Prob modelo": "{:.1%}",
-                    "Prob mercado": "{:.1%}",
-                    "EV %": "+{:.1f}%",
-                    "Stake $": "${:,.0f}",
-                }, na_rep="—"),
-            use_container_width=True,
-            hide_index=True,
-        )
 
-# ====================== HISTORIAL POR LIGA ======================
-st.header("📜 Historial por liga (últimas 10)")
+def _tab_dinero(b):
+    m = b["metricas"]
+    t = m["total"]
+    st.caption("Solo apuestas liquidadas con stake > 0. Fuente: calcular_metricas_dashboard.")
+    c = st.columns(4)
+    c[0].metric("Ganancia neta", _usd(t["pl"], True))
+    c[1].metric("Yield", _pct(t["yield"], True) if t["n"] else "—")
+    c[2].metric("% acierto $", _pct(t["acierto_bets"]) if t["n"] else "—")
+    c[3].metric("Apuestas liquidadas", t["n"])
+    c = st.columns(4)
+    c[0].metric("Volumen apostado", _usd(t["vol"]))
+    c[1].metric("Bankroll base", _usd(b["base"]))
+    c[2].metric("Bankroll operativo", _usd(b["operativo"]))
+    c[3].metric("Fraccion Kelly", f"{b['fk']:.0%}")
+    c = st.columns(4)
+    c[0].metric("T-score", f"{t['t']:.2f}")
+    c[1].metric("p-valor", f"{t['p']:.4f}")
+    c[2].metric("% acierto P (modelo)", _pct(m["acierto_partidos"]))
+    c[3].metric("Brier sistema - casa", f"{m['bs_glob']:+.4f}",
+                help="Negativo: el modelo supera al mercado.")
 
-if historial.empty:
-    st.info("No hay historial liquidado todavía.")
-else:
-    paises_historial = historial["pais"].drop_duplicates().tolist()
-    for pais in paises_historial:
-        sub = historial[historial["pais"] == pais].head(10).copy()
-        ganados = ((sub["resultado_1x2"] == "GANADA") | (sub["resultado_ou"] == "GANADA")).sum()
-        total = len(sub)
-        hit_recent = f"{100*ganados/total:.0f}%" if total else "—"
+    st.subheader("Equity curve")
+    eq = b["equity"]
+    if len(eq) < 2:
+        st.info("Todavia no hay apuestas reales liquidadas.")
+    else:
+        st.altair_chart(_linea(eq, "n", "equity", "Apuesta #", "Equity ($)"))
 
-        with st.expander(f"{_flag(pais)} {pais} — {total} últimas · hit {hit_recent}"):
-            sub["Partido"] = sub["local"] + " vs " + sub["visita"]
-            sub["Resultado"] = sub["goles_l"].astype("Int64").astype(str) + "–" + sub["goles_v"].astype("Int64").astype(str)
 
-            def _render_pick(row, mercado):
-                pick = row[f"pick_{mercado}"]
-                res = row[f"resultado_{mercado}"]
-                if pick is None or (isinstance(pick, float) and pd.isna(pick)):
-                    return "—"
-                return f"{mercado.upper()}: {pick} [{res}]"
+def _fila_yield(nombre, s):
+    return {"Grupo": nombre, "N": s["n"], "Ganadas": s["ganadas"], "Hit": _pct(s["hit"]),
+            "Profit (u)": f"{s['profit']:+.2f}", "Yield": _pct(s["yield"], True),
+            "Break-even": _pct(s["break_even"]), "IC 95% inf": _pct(s["ci_low"], True),
+            "IC 95% sup": _pct(s["ci_high"], True)}
 
-            sub["Pick 1X2"] = sub.apply(lambda r: _render_pick(r, "1x2"), axis=1)
-            sub["Pick O/U"] = sub.apply(lambda r: _render_pick(r, "ou"), axis=1)
-            sub = sub.rename(columns={
-                "fecha": "Fecha",
-                "resultado_1x2": "_res_1x2",
-                "resultado_ou": "_res_ou",
-                "stake_1x2": "Stake 1X2",
-                "stake_ou":  "Stake O/U",
-            })
-            cols = ["Partido", "Fecha", "Resultado", "Pick 1X2", "Stake 1X2", "Pick O/U", "Stake O/U"]
-            st.dataframe(
-                sub[cols].style
-                    .format({"Stake 1X2": "${:,.0f}", "Stake O/U": "${:,.0f}"}, na_rep="—"),
-                use_container_width=True,
-                hide_index=True,
-            )
 
-st.caption("Datos reales del motor cuantitativo Adepor. Read-only. Refresh automático cada 60s.")
+def _tab_yield(b):
+    st.warning("Incluye picks de pretest con stake 0: no es dinero real.")
+    y = b["yield"]
+    g = y["global"]
+    if g["n"] == 0:
+        st.info("No hay picks liquidados con cuota valida.")
+        return
+    c = st.columns(4)
+    c[0].metric("Picks liquidados", g["n"])
+    c[1].metric("Hit rate", _pct(g["hit"]))
+    c[2].metric("Profit (unidades)", f"{g['profit']:+.1f} u")
+    c[3].metric("Break-even", _pct(g["break_even"]))
+    c = st.columns(2)
+    c[0].metric("Yield por apuesta", _pct(g["yield"], True))
+    c[1].caption(f"IC 95% bootstrap del yield: {_pct(g['ci_low'], True)} a {_pct(g['ci_high'], True)}")
+
+    st.subheader("Por liga")
+    ligas = sorted(y["por_liga"].items(), key=lambda kv: -kv[1]["n"])
+    st.dataframe(pd.DataFrame([_fila_yield(k, v) for k, v in ligas]), hide_index=True)
+
+    st.subheader("Por mercado")
+    nombres = {"1X2": "1X2", "OU": "O/U 2.5"}
+    st.dataframe(pd.DataFrame([_fila_yield(nombres[k], v) for k, v in y["por_mercado"].items()]),
+                 hide_index=True)
+
+    st.subheader("Curva acumulada (unidades, 1 por apuesta)")
+    curva = b["curva_yield"]
+    if curva.empty:
+        st.info("Sin apuestas para graficar.")
+    else:
+        st.altair_chart(_linea(curva, "n", "pl_acum", "Apuesta #", "P/L acumulado (u)", cero=True))
+
+
+def _tab_historial(b):
+    df = b["historial"]
+    if df.empty:
+        st.info("No hay partidos en la base.")
+        return
+    fechas = df["fecha_dt"].dropna()
+    c = st.columns(4)
+    ligas = c[0].multiselect("Liga", sorted(df["Liga"].dropna().unique()),
+                             default=sorted(df["Liga"].dropna().unique()))
+    estado = c[1].selectbox("Estado", ["Todos"] + sorted(df["Estado"].dropna().unique()))
+    mask = df["Liga"].isin(ligas)
+    if estado != "Todos":
+        mask &= df["Estado"].eq(estado)
+    if not fechas.empty:
+        f_min, f_max = fechas.min().date(), fechas.max().date()
+        desde = c[2].date_input("Desde", f_min, min_value=f_min, max_value=f_max)
+        hasta = c[3].date_input("Hasta", f_max, min_value=f_min, max_value=f_max)
+        mask &= df["fecha_dt"].between(pd.Timestamp(desde), pd.Timestamp(hasta))
+    vista = df[mask].drop(columns=["fecha_dt"])
+    st.caption(f"{len(vista)} partidos")
+    st.dataframe(_formatear(vista, {"P/L neto": _usd}), hide_index=True)
+
+
+def _tab_resumen(b):
+    df = b["resumen"]
+    if df.empty:
+        st.info("Sin ligas con partidos.")
+        return
+    st.caption("Apuestas liquidadas con stake > 0 (dinero real). Fuente: calcular_metricas_dashboard por liga.")
+    st.dataframe(_formatear(df, {"% Acierto": _pct, "Yield": lambda x: _pct(x, True),
+                                 "P/L $": lambda x: _usd(x, True), "Volumen $": _usd}),
+                 hide_index=True)
+
+
+def _tab_sombra(b):
+    s = b["sombra"]
+    o1, o4 = s["op1"], s["op4"]
+    st.caption("Op1 = opcion activa (dinero real). Op4 = shadow, solo auditoria.")
+    filas = [
+        ("N apuestas liquidadas", o1["n"], o4["n"], str, False),
+        ("Ganadas", o1["g"], o4["g"], str, True),
+        ("Hit rate", _ratio(o1["g"], o1["n"]), _ratio(o4["g"], o4["n"]), _pct, True),
+        ("Volumen apostado", o1["vol"], o4["vol"], _usd, False),
+        ("P/L neto", o1["pl"], o4["pl"], _usd, True),
+        ("Yield", _ratio(o1["pl"], o1["vol"]), _ratio(o4["pl"], o4["vol"]), _pct, True),
+    ]
+    kpi = []
+    for nombre, v1, v4, fmt, compara in filas:
+        if compara and v1 is not None and v4 is not None and v1 != v4:
+            mejor = "Op1" if v1 > v4 else "Op4"
+        else:
+            mejor = "="
+        kpi.append({"KPI": nombre, "Opcion 1 (activa)": fmt(v1) if v1 is not None else "—",
+                    "Opcion 4 (shadow)": fmt(v4) if v4 is not None else "—", "Mejor": mejor})
+    st.dataframe(pd.DataFrame(kpi), hide_index=True)
+
+    st.subheader("Detalle por partido")
+    st.dataframe(_formatear(s["filas"], {"P/L Op1": _usd, "P/L Op4": _usd, "Dif P/L": _usd}),
+                 hide_index=True)
+
+
+def _tab_si_hubiera(b):
+    st.warning("Backtest IN-SAMPLE: las reglas se calibraron con estos mismos datos. "
+               "Sirve para ver, no para decidir LIVE.")
+    sim, r = b["si_hubiera"], b["si_resumen"]
+    k = r["kpi"]
+    kpi_filas = [
+        ("N picks", k["n_real"], k["n_sim"], str),
+        ("Ganados", k["g_real"], k["g_sim"], str),
+        ("Hit rate", _ratio(k["g_real"], k["n_real"]), _ratio(k["g_sim"], k["n_sim"]), _pct),
+        ("Volumen apostado", None, k["stake"], _usd),
+        ("Yield (P/L / volumen)", None, _ratio(k["pl"], k["stake"]), _pct),
+        ("P/L neto", None, k["pl"], _usd),
+        ("ROI sobre bankroll", None, _ratio(k["pl"], k["bankroll"]), _pct),
+        ("Equity final", k["bankroll"], k["equity"], _usd),
+    ]
+    st.dataframe(pd.DataFrame([{
+        "KPI": nombre,
+        "REAL (historico)": fmt(v1) if v1 is not None else "—",
+        "SIMULADO (reglas actuales)": fmt(v4) if v4 is not None else "—",
+    } for nombre, v1, v4, fmt in kpi_filas]), hide_index=True)
+
+    st.subheader("Detalle por liga")
+    st.dataframe(_formatear(r["por_liga"], {
+        "Hit real": _pct, "Hit sim": _pct, "Yield sim": lambda x: _pct(x, True),
+        "Volumen $": _usd, "P/L $": lambda x: _usd(x, True),
+        "dHit": lambda x: _pct(x, True)}), hide_index=True)
+
+    st.subheader("Picks simulados por camino (ganados/total)")
+    st.dataframe(r["por_camino"], hide_index=True)
+
+    st.subheader("Equity simulada")
+    picks = sim["picks"]
+    if not picks:
+        st.info("Ninguna regla actual genera picks en el historico.")
+        return
+    eq = pd.DataFrame([{"n": i, "equity": p["equity"]} for i, p in enumerate(picks, 1)])
+    st.altair_chart(_linea(eq, "n", "equity", "Pick #", "Equity ($)"))
+    st.subheader(f"Detalle de picks simulados (n={len(picks)})")
+    det = pd.DataFrame([{
+        "Fecha": p["fecha"], "Partido": p["partido"], "Liga": p["pais"], "Pick": p["pick"],
+        "Cuota": p["cuota"], "Camino": p["camino"], "Goles": f"{p['gl']}-{p['gv']}",
+        "Resultado": "GANADA" if p["gana"] else "PERDIDA", "Stake $": p["stake"],
+        "P/L $": p["pl"], "Equity $": p["equity"],
+    } for p in picks])
+    st.dataframe(_formatear(det, {"P/L $": lambda x: _usd(x, True), "Stake $": _usd,
+                                  "Equity $": _usd}), hide_index=True)
+
+
+# ============================================================================
+# APP
+# ============================================================================
+def render():
+    st.set_page_config(page_title="Adepor — Dashboard", page_icon="🎯", layout="wide")
+    st.title("Adepor — Dashboard")
+    try:
+        b = _bundle()
+    except Exception as e:
+        st.error(f"Error cargando DB: {e}")
+        st.stop()
+    st.caption(f"Base: {DB_NAME} · Cargado {datetime.now():%d/%m/%Y %H:%M} · cache 60 s")
+    pestañas = st.tabs(TABS)
+    vistas = (_tab_picks, _tab_dinero, _tab_yield, _tab_historial,
+              _tab_resumen, _tab_sombra, _tab_si_hubiera)
+    for pestaña, vista in zip(pestañas, vistas):
+        with pestaña:
+            vista(b)
+
+
+if __name__ == "__main__":  # Streamlit ejecuta el script como __main__
+    render()

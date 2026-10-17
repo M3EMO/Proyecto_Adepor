@@ -12,7 +12,7 @@ import os
 # Liquidado (necesario para Kelly dinamico que suma P/L historico).
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
+from src.comun.config_sistema import DB_NAME
 CSV_GOLD_STANDARD = 'modelo_estable.csv'
 
 def safe_float_from_csv(val_str):
@@ -122,6 +122,9 @@ def main():
                     r = cursor.fetchone()
                     if r and r[0] in ('Calculado', 'Pendiente'):
                         estado = r[0]
+                    elif r and r[0] in ('Finalizado', 'Liquidado'):
+                        # CSV viejo sin goles: no degradar ni borrar goles/cuotas ya liquidados.
+                        continue
 
                 # UPSERT: INSERT si no existe, UPDATE solo campos externos (preserva stake/apuesta/probs)
                 cursor.execute("""

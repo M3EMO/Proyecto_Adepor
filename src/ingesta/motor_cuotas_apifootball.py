@@ -152,11 +152,12 @@ def _obtener_odds_fixture(fixture_id):
     c1 = cx = c2 = 0.0
     co = cu = 0.0
 
-    # 1X2 (Match Winner id=1)
+    # 1X2 (Match Winner id=1): los 3 precios deben venir del mismo bookie
     for _, bm_id in BOOKIES_SHARP:
         bm = bm_by_id.get(bm_id)
         if not bm:
             continue
+        t1 = tx = t2 = 0.0
         for bet in bm.get("bets", []):
             if bet.get("id") != 1:
                 continue
@@ -167,13 +168,14 @@ def _obtener_odds_fixture(fixture_id):
                 except (TypeError, ValueError):
                     continue
                 if val == "Home":
-                    c1 = odd
+                    t1 = odd
                 elif val == "Draw":
-                    cx = odd
+                    tx = odd
                 elif val == "Away":
-                    c2 = odd
+                    t2 = odd
             break
-        if c1 > 0 and cx > 0 and c2 > 0:
+        if t1 > 0 and tx > 0 and t2 > 0:
+            c1, cx, c2 = t1, tx, t2
             break
 
     # O/U 2.5 (Goals Over/Under id=5) - jerarquia igual

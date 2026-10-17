@@ -38,7 +38,7 @@ sys.path.insert(0, str(ROOT))
 
 from analisis.aliases_sofa_espn import norm_team_name
 
-DB = str(ROOT / 'fondo_quant.db')
+from src.comun.config_sistema import DB_NAME as DB  # noqa: E402
 
 
 def main():
@@ -62,6 +62,12 @@ def main():
     if args.liquidados:
         # Path 2: actualizar yield_real para SHADOW logs ya escritos
         actualizar_liquidados(con, args.dry_run)
+        return
+
+    # SHADOW: sin la tabla de EMAs shotmap (la crea analisis/filtros_shotmap_v1_features.py)
+    # no hay nada que evaluar; salir limpio en vez de cortar el pipeline con traceback.
+    if not cur.execute("SELECT 1 FROM sqlite_master WHERE name='historial_equipos_shotmap_ema'").fetchone():
+        print('[SKIP] historial_equipos_shotmap_ema no existe: correr el backfill shotmap primero.')
         return
 
     # Path 1: detectar picks=X que el filtro habría suprimido
@@ -199,7 +205,7 @@ def actualizar_liquidados(con, dry_run=False):
                 fecha_alt = (d0 + timedelta(days=delta)).isoformat()
                 row = cur.execute('''
                     SELECT goles_l, goles_v FROM partidos_backtest
-                    WHERE pais=? AND fecha=? AND local=? AND visita=? AND estado='Liquidado'
+                    WHERE pais=? AND substr(fecha, 1, 10)=? AND local=? AND visita=? AND estado='Liquidado'
                 ''', (liga, fecha_alt, ht, at)).fetchone()
                 if row and row[0] is not None and row[1] is not None:
                     res = row

@@ -34,7 +34,7 @@ def _get_current_season(pais):
     """
     year  = datetime.now().year
     month = datetime.now().month
-    ligas_temporada_dividida = {"Inglaterra", "Turquia"}
+    ligas_temporada_dividida = {"Inglaterra", "Turquia", "Espana", "Italia", "Alemania", "Francia"}
     if pais in ligas_temporada_dividida:
         return year - 1 if month < 7 else year
     return year  # Argentina, Brasil, Noruega -> año calendario
@@ -110,6 +110,10 @@ def procesar_tactica():
                         lineups = res_lineup.get("response", [])
                         
                         if not lineups or len(lineups) < 2: continue
+                        # La API no garantiza local primero: ordenar por team.id del local.
+                        home_id = ev["teams"]["home"].get("id")
+                        if home_id is not None and lineups[1].get("team", {}).get("id") == home_id:
+                            lineups = lineups[::-1]
 
                         form_l = lineups[0].get("formation", "")
                         coach_l = lineups[0].get("coach", {}).get("name", "Desconocido")

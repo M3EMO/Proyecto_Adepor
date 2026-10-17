@@ -19,18 +19,25 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-DB = ROOT / "fondo_quant.db"
+from src.comun.config_sistema import DB_NAME as DB  # noqa: E402
 WINDOW_DAYS = 30
 MIN_N_WINDOW = 30           # min N en ventana para emitir alerta
 SIGMA_FACTOR = 2.0          # umbral = baseline + 2*sigma
 MIN_DAYS_GAP = 14           # min dias entre alertas mismo (arch, liga)
 
-# Baselines (Brier in-sample) — puede leerse de config si se persiste
-BASELINES = {
-    'V0': {'mean': 0.658, 'sigma': 0.020},   # OOS observado
-    'V6': {'mean': 0.602, 'sigma': 0.018},
-    'V12': {'mean': 0.587, 'sigma': 0.020},
-}
+MIN_N_HIST = 100            # min N previo a la ventana para tener baseline
+
+
+def umbral_drift(hist, ventana, k=SIGMA_FACTOR):
+    """Baseline = Brier medio previo a la ventana; umbral = baseline + k * SE de la diferencia.
+
+    Antes: baselines fijos de la DB perdida (y mezclando in-sample con OOS) y sigma=0.02 contra
+    la MEDIA de la ventana; con SD por partido ~0.45 y N=30 el SE real es ~0.08.
+    """
+    mh = sum(hist) / len(hist)
+    var = sum((b - mh) ** 2 for b in hist) / (len(hist) - 1)
+    se = (var / len(ventana) + var / len(hist)) ** 0.5
+    return mh, mh + k * se, mh + 3 * se
 
 
 def init_drift_table():
@@ -89,36 +96,37 @@ def detect_drift(window_days=WINDOW_DAYS, dry_run=False):
     alertas = []
 
     for arch, (c1, cx, c2) in arch_cols.items():
-        baseline = BASELINES[arch]
-        threshold = baseline['mean'] + SIGMA_FACTOR * baseline['sigma']
-
-        rows = cur.execute(f"""
-            SELECT pais, id_partido, {c1}, {cx}, {c2}
-            FROM picks_shadow_arquitecturas
-            WHERE fecha_log >= ? AND {c1} IS NOT NULL AND {cx} IS NOT NULL AND {c2} IS NOT NULL
-        """, (fecha_corte,)).fetchall()
-
+        try:
+            rows = cur.execute(f"""
+                SELECT pais, id_partido, {c1}, {cx}, {c2}, fecha_log >= ?
+                FROM picks_shadow_arquitecturas
+                WHERE {c1} IS NOT NULL AND {cx} IS NOT NULL AND {c2} IS NOT NULL
+            """, (fecha_corte,)).fetchall()
+        except sqlite3.OperationalError:
+            rows = []  # DB nueva: la tabla shadow aun no existe
         if not rows:
-            print(f"  {arch}: sin datos en ventana — skip")
+            print(f"  {arch}: sin datos — skip")
             continue
 
-        # Bucket por liga
-        buckets = defaultdict(list)
-        for pais, id_p, p1, px, p2 in rows:
+        # Bucket por liga: (historia previa, ventana)
+        buckets = defaultdict(lambda: ([], []))
+        for pais, id_p, p1, px, p2, en_ventana in rows:
             real = get_real_outcome(cur, id_p)
             if real:
                 br = compute_brier(p1, px, p2, real)
-                buckets[pais].append(br)
-                buckets['__global__'].append(br)
+                for clave in (pais, '__global__'):
+                    buckets[clave][1 if en_ventana else 0].append(br)
 
-        for liga, brs in buckets.items():
+        for liga, (hist, brs) in buckets.items():
             n = len(brs)
-            if n < MIN_N_WINDOW:
+            if n < MIN_N_WINDOW or len(hist) < MIN_N_HIST:
                 continue
             avg_br = sum(brs) / n
+            base_mean, threshold, critico = umbral_drift(hist, brs)
+            baseline = {'mean': base_mean}
             severity = None
             if avg_br > threshold:
-                severity = 'critical' if avg_br > baseline['mean'] + 3 * baseline['sigma'] else 'warning'
+                severity = 'critical' if avg_br > critico else 'warning'
                 # Cooldown: skip si hay alerta misma arch/liga en los ultimos MIN_DAYS_GAP
                 last = cur.execute("""
                     SELECT MAX(fecha_deteccion) FROM drift_alerts WHERE arch=? AND liga=?

@@ -11,7 +11,7 @@ from src.comun.resolucion import determinar_resultado_token
 #       Cambio aditivo: NO altera la logica de liquidacion existente.
 # ==========================================
 
-DB_NAME = 'fondo_quant.db'
+from src.comun.config_sistema import DB_NAME
 
 
 # adepor-6ph: helper unificado en src/comun/picks.cuota_para_pick
@@ -94,8 +94,17 @@ def main():
             if clv_1x2 is not None or clv_ou is not None:
                 clv_calculados += 1
 
+            # Apuesta con stake aun en [APOSTAR] sin token: no se liquida, queda Finalizado.
+            sin_token = [
+                nombre for nombre, stk, ap, tok in (("1x2", stk_1x2, ap_1x2, token_1x2),
+                                                    ("OU", stk_ou, ap_ou, token_ou))
+                if stk and stk > 0 and str(ap).startswith("[APOSTAR]") and tok is None
+            ]
+            if sin_token:
+                print(f"[WARN] {id_partido}: apuesta {', '.join(sin_token)} con stake sin token resoluble. Queda Finalizado.")
+
             updates_a_realizar.append((
-                nuevo_ap_1x2, nuevo_ap_ou, 'Liquidado',
+                nuevo_ap_1x2, nuevo_ap_ou, 'Finalizado' if sin_token else 'Liquidado',
                 clv_1x2, clv_ou,
                 id_partido,
             ))

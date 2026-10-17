@@ -26,7 +26,7 @@ from src.persistencia.excel_hoja_sombra import crear_hoja_sombra
 from src.persistencia.excel_metricas import calcular_metricas_dashboard
 
 
-DB_NAME    = 'fondo_quant.db'
+from src.comun.config_sistema import DB_NAME
 EXCEL_FILE = 'Backtest_Modelo.xlsx'
 
 

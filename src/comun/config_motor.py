@@ -47,7 +47,8 @@ def get_param(clave, scope='global', default=None):
     El tipo del valor retornado sigue la columna `tipo` de la tabla:
         'float' -> float, 'int' -> int, 'bool' -> bool, 'text' -> str.
     """
-    conn = sqlite3.connect(_DB_PATH)
+    # mode=rw: si la DB no existe, error claro en vez de crear un archivo vacio.
+    conn = sqlite3.connect(f'file:{_DB_PATH}?mode=rw', uri=True)
     try:
         cur = conn.cursor()
         cur.execute("""

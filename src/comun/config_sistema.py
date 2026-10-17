@@ -9,7 +9,10 @@ import json
 import os
 
 # --- Base de datos ---
-DB_NAME = 'fondo_quant.db'
+# Path absoluto: los motores no dependen del CWD. ADEPOR_DB permite apuntar a otra
+# DB (tests, shadow) sin tocar codigo.
+_RAIZ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DB_NAME = os.environ.get('ADEPOR_DB') or os.path.join(_RAIZ, 'fondo_quant.db')
 
 # --- Ligas activas (codigo ESPN -> nombre interno) ---
 # REGLA: sin tildes en valores ("Turquia" no "Turquía").
@@ -166,6 +169,8 @@ try:
         API_KEYS_FOOTBALL = [API_KEY_FOOTBALL]
 except (FileNotFoundError, json.JSONDecodeError) as _e:
     print(f"[ADVERTENCIA config_sistema] No se pudo leer config.json: {_e}")
+    _cfg = {}
     API_KEYS_ODDS     = []
     API_KEY_FOOTBALL  = ''
     API_KEYS_FOOTBALL = []
+

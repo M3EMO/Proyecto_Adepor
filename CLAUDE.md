@@ -86,7 +86,7 @@ FLOOR_PROB_MIN, MAX_KELLY_PCT_*, etc.)** se debe:
 
 El hook `scripts/hooks/validate_task_created.py` enforca esto a nivel `TaskCreated`.
 
-**Estado actual:** ver `docs/state/2026-05.md` — **lectura obligatoria** antes de proponer cambios
+**Estado actual:** ver `docs/state/2026-10.md` (y auditoría `docs/auditoria/2026-10-12_auditoria_prod_ready.md`) — **lectura obligatoria** antes de proponer cambios
 al motor o al manifesto. Incluye versión activa (V14 v3 con bins temporales calibrados),
 sesiones previas, SHADOW pendientes, beads abiertos, y validación rápida del SHA-256.
 
@@ -112,8 +112,6 @@ py ejecutar_proyecto.py --status
 # Pipeline diario completo
 py ejecutar_proyecto.py
 
-# Sniper Telegram (post-pipeline)
-py motor_live.py --once
 
 # Recalibración mensual / on-demand
 py scripts/calibrar_beta.py        # display-only: factor de calibración Beta
@@ -193,6 +191,7 @@ pagar el costo de revertir cambios mal calibrados.
 - **V13** = Poisson DC + xG ridge regularizado (5-7 features) por liga. BEST por liga: Argentina F1_off NNLS, Francia F2_pos NNLS, Italia F2_pos RIDGE, Inglaterra F5_ratio NNLS. SHADOW puro hasta N≥200 picks.
 
 **Hallazgos OOS 2026-04-26** (test 2024 N=2,768):
+> AUDITORIA 2026-10-12: el H4 "+0.246 N=127" NO se sostiene (walk-forward propio: +0.011, IC [-0.040,+0.060]). Ver `docs/auditoria/2026-10-12_auditoria_prod_ready.md` §3.
 - V0 raw GANA hit (0.488) y Brier (0.6182) en OOS estricto
 - Hallazgo G EMPEORA V0/V6/V7 −1.2pp hit, +0.0044 Brier
 - Fix #5 inocuo (cero impacto OOS)

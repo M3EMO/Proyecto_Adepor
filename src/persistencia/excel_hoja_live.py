@@ -104,7 +104,7 @@ def _build_rows(datos):
     rows_por_liga = defaultdict(list)
     for r in datos:
         estado = r[19]
-        if estado == 'Liquidado':
+        if estado == 'Liquidado' or r[20] is not None:  # con goles ya se jugo: no esta "en juego"
             continue
         local, visita, pais = r[2], r[3], r[4]
         fecha = r[1]

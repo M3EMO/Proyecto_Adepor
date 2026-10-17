@@ -26,7 +26,7 @@
       {
         "hooks": [
           {
-            "command": "py scripts/hooks/validate_task_created.py",
+            "command": "python3 scripts/hooks/validate_task_created.py",
             "type": "command"
           }
         ],
@@ -37,7 +37,7 @@
       {
         "hooks": [
           {
-            "command": "py scripts/hooks/validate_task_completed.py",
+            "command": "python3 scripts/hooks/validate_task_completed.py",
             "type": "command"
           }
         ],

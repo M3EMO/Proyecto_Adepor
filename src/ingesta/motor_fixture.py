@@ -1,10 +1,14 @@
 import sqlite3
+import sys
 import requests
 from datetime import datetime, timedelta
 from src.comun import gestor_nombres
 from src.comun.config_sistema import LIGAS_ESPN, MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 from src.comun.tiempo import fecha_a_espn
 from src.comun.adaptadores_odds_api import adaptar_fixture_odds_api
+
+# Sin terminal (cron) input() lanza EOFError y el partido se perdia en silencio.
+_INTERACTIVO = sys.stdin.isatty()
 
 # ==========================================
 # MOTOR FIXTURE V7.0 (ESCUDO DE VALIDACIÓN PRE-INSERCIÓN)
@@ -61,9 +65,10 @@ def main():
                     codigo_liga_odds = MAPA_LIGAS_ODDS[pais]
                     api_key = API_KEYS_ODDS[KEY_INDEX]
                     # Usamos el endpoint de 'scores' que también sirve para ver partidos futuros
-                    url_odds = f"https://api.the-odds-api.com/v4/sports/{codigo_liga_odds}/scores/?apiKey={api_key}&daysFrom=1"
+                    url_odds = f"https://api.the-odds-api.com/v4/sports/{codigo_liga_odds}/scores/"
                     try:
-                        resp_odds = requests.get(url_odds, timeout=10)
+                        # apiKey en params: si la request falla, el texto de la excepcion no expone la key
+                        resp_odds = requests.get(url_odds, params={"apiKey": api_key, "daysFrom": 1}, timeout=10)
                         if resp_odds.status_code == 401 or resp_odds.status_code == 429:
                             KEY_INDEX += 1 # Rotar la clave si está agotada
                         resp_odds.raise_for_status()
@@ -72,7 +77,9 @@ def main():
                         eventos_api_secundaria = resp_odds.json()
                         eventos_del_dia = [adaptar_fixture_odds_api(ev) for ev in eventos_api_secundaria]
                     except requests.exceptions.RequestException as e_odds:
-                        print(f"[FALLO TOTAL] La API secundaria también falló: {e_odds}")
+                        # Solo tipo y status: el mensaje de requests incluye la URL con la key
+                        status = e_odds.response.status_code if e_odds.response is not None else "sin respuesta"
+                        print(f"[FALLO TOTAL] La API secundaria también falló: {type(e_odds).__name__} (status: {status})")
 
             for evento in eventos_del_dia:
                     try:
@@ -98,8 +105,16 @@ def main():
                         loc_crudo = next(c['team']['displayName'] for c in competidores if c['homeAway'] == 'home')
                         vis_crudo = next(c['team']['displayName'] for c in competidores if c['homeAway'] == 'away')
                         
-                        loc_oficial = gestor_nombres.obtener_nombre_estandar(loc_crudo, liga=pais, modo_interactivo=True)
-                        vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_crudo, liga=pais, modo_interactivo=True)
+                        loc_oficial = gestor_nombres.obtener_nombre_estandar(loc_crudo, liga=pais, modo_interactivo=_INTERACTIVO)
+                        vis_oficial = gestor_nombres.obtener_nombre_estandar(vis_crudo, liga=pais, modo_interactivo=_INTERACTIVO)
+                        # Sin TTY un equipo desconocido vuelve crudo: insertarlo crea duplicados
+                        # cuando despues se carga su alias. Se omite hasta mapearlo.
+                        desconocidos = [n for n in (loc_oficial, vis_oficial)
+                                        if not gestor_nombres.es_conocido(n, liga=pais)]
+                        if desconocidos:
+                            print(f"[ALERTA] Equipo sin mapear en {pais}: {desconocidos}. Partido omitido "
+                                  f"(correr --audit-names).")
+                            continue
                         
                         # FIX CRITICO: Limpieza forzada de espacios para el ID
                         loc_id = gestor_nombres.limpiar_texto(loc_oficial)
@@ -139,7 +154,8 @@ def main():
                         
                         if cursor.rowcount > 0: partidos_agregados += 1
                         else: partidos_omitidos += 1
-                    except Exception:
+                    except Exception as e:
+                        print(f"[WARN] Evento de fixture omitido ({pais}): {type(e).__name__}: {e}")
                         continue
 
     conn.close()

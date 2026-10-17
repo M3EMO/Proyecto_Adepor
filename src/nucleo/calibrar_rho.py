@@ -442,7 +442,8 @@ def main():
             return
         ligas_activas = {SOLO_LIGA}
 
-    resultados = {}
+    resultados = {}   # solo fits MLE reales: son los unicos que se escriben en DB
+    fallbacks = {}    # solo display
 
     # --- Ligas con datos CSV (football-data.co.uk) ---
     for liga, urls in FUENTES_CSV.items():
@@ -452,22 +453,22 @@ def main():
         por_url = {}
         partidos = descargar_partidos_csv(liga, urls, por_url=por_url)
         _imprimir_stats_por_temporada(por_url)
-        _procesar_liga(liga, partidos, resultados)
+        _procesar_liga(liga, partidos, resultados, fallbacks)
 
     # --- Ligas sin CSV: usar API-Football ---
     ligas_sin_csv = ligas_activas - set(FUENTES_CSV.keys())
     for liga in sorted(ligas_sin_csv):
         print(f"\n[{liga}] Fuente: API-Football")
         partidos = descargar_partidos_api_football(liga, TEMPORADAS_API)
-        _procesar_liga(liga, partidos, resultados)
+        _procesar_liga(liga, partidos, resultados, fallbacks)
 
     # --- Resumen ---
     print("\n" + "=" * 62)
     print("Resumen de rho estimados por liga:")
-    for liga in sorted(resultados.keys()):
-        rho = resultados[liga]
-        origen = "FALLBACK" if rho == RHO_FALLBACK else "MLE"
-        print(f"   {liga:15s}: {rho:+.4f}  [{origen}]")
+    for liga in sorted(resultados):
+        print(f"   {liga:15s}: {resultados[liga]:+.4f}  [MLE]")
+    for liga in sorted(fallbacks):
+        print(f"   {liga:15s}: {fallbacks[liga]:+.4f}  [FALLBACK, no se escribe en DB]")
 
     if DRY_RUN:
         print("\n[DRY RUN] ligas_stats NO se actualiza. Revisar resultado y commit manual si OK.")
@@ -495,11 +496,13 @@ def _imprimir_stats_por_temporada(por_url):
         print(f"   {url[-12:]}: N={n}, empates={empates} ({pct:.1f}%), avg_total_goles={avg_total:.2f}")
 
 
-def _procesar_liga(liga, partidos, resultados):
-    """Corre MLE sobre los partidos y guarda el resultado."""
+def _procesar_liga(liga, partidos, resultados, fallbacks):
+    """Corre MLE sobre los partidos. Solo fits MLE reales van a `resultados` (se escriben
+    en DB). Los fallbacks van a `fallbacks` (solo display): un fallback no debe pisar
+    un rho calibrado previo tras una caida de la descarga."""
     if not partidos:
         print(f"   [FALLBACK] Sin datos. rho = {RHO_FALLBACK}")
-        resultados[liga] = RHO_FALLBACK
+        fallbacks[liga] = RHO_FALLBACK
         return
 
     n = len(partidos)
@@ -516,13 +519,13 @@ def _procesar_liga(liga, partidos, resultados):
     if n < min_required:
         print(f"   [FALLBACK] Solo {n} partidos (min_{liga}={min_required}, "
               f"region={'LATAM' if liga in LIGAS_LATAM else 'EUR/global'}). rho = {RHO_FALLBACK}")
-        resultados[liga] = RHO_FALLBACK
+        fallbacks[liga] = RHO_FALLBACK
         return
 
     rho = estimar_rho_mle(partidos)
     if rho is None:
         print(f"   [FALLBACK] Solo {n} partidos (min={MIN_PARTIDOS}). rho = {RHO_FALLBACK}")
-        resultados[liga] = RHO_FALLBACK
+        fallbacks[liga] = RHO_FALLBACK
     else:
         rho_final = min(rho, RHO_FLOOR)   # rho siempre <= -0.03 (floor negativo)
         if rho > RHO_FLOOR:

@@ -13,6 +13,8 @@ from src.comun.config_sistema import MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 # ==========================================
 # MOTOR CUOTAS V9.3 (RADAR SHARP + CAPTURA CUOTA_CIERRE PARA CLV)
 # Responsabilidad: Auto-Matching, Linea 2.5 Estricta y Jerarquia Pinnacle.
+# V10 (modelo v2, D-019): pin_* = Pinnacle crudo pre-match (sin freeze por apuesta
+#       confirmada) y pin_cierre_* en ventana <2h para CLV de cualquier apuesta v2.
 # V9.3 (2026-04-25, bead adepor-dl6): captura cuota_cierre_1x2/ou cuando el
 #       partido esta dentro de la ventana <2h del kickoff y tiene pick con stake>0.
 #       Cambio aditivo: NO altera la logica de UPDATE existente de cuota_1/x/2/o25/u25.
@@ -167,6 +169,44 @@ def extraer_cuotas_sharp(bookmakers, local_api, visita_api):
 
     return c1, cx, c2, co, cu
 
+def cuotas_pinnacle(bookmakers, local_api, visita_api):
+    """Cuotas crudas de Pinnacle: 1X2 completo y O/U 2.5. Faltante -> 0.0."""
+    c1, cx, c2, co, cu = 0.0, 0.0, 0.0, 0.0, 0.0
+    for b in bookmakers:
+        if b['key'] != 'pinnacle':
+            continue
+        for m in b.get('markets', []):
+            if m['key'] == 'h2h':
+                precio = {out['name']: out['price'] for out in m['outcomes']}
+                t1, tx, t2 = precio.get(local_api, 0.0), precio.get('Draw', 0.0), precio.get(visita_api, 0.0)
+                if t1 > 0 and tx > 0 and t2 > 0:  # 1X2 completo o nada
+                    c1, cx, c2 = t1, tx, t2
+            elif m['key'] == 'totals':
+                for out in m['outcomes']:
+                    try:
+                        punto = float(out.get('point'))
+                    except (TypeError, ValueError):
+                        continue
+                    if abs(punto - 2.5) < 0.01:
+                        if out['name'] == 'Over':  co = out['price']
+                        if out['name'] == 'Under': cu = out['price']
+    if not (co > 0 and cu > 0):  # O/U necesita los dos lados
+        co, cu = 0.0, 0.0
+    return c1, cx, c2, co, cu
+
+COLUMNAS_PIN = ['pin_1', 'pin_x', 'pin_2', 'pin_o25', 'pin_u25']
+COLUMNAS_PIN_CIERRE = ['pin_cierre_1', 'pin_cierre_x', 'pin_cierre_2', 'pin_cierre_o25', 'pin_cierre_u25']
+
+def _asegurar_columnas_pinnacle(cursor):
+    """Agrega pin_* y pin_cierre_* si faltan (DBs viejas). Idempotente."""
+    existentes = {r[1] for r in cursor.execute("PRAGMA table_info(partidos_backtest)")}
+    for col in COLUMNAS_PIN:
+        if col not in existentes:
+            cursor.execute(f"ALTER TABLE partidos_backtest ADD COLUMN {col} REAL DEFAULT 0")
+    for col in COLUMNAS_PIN_CIERRE:
+        if col not in existentes:
+            cursor.execute(f"ALTER TABLE partidos_backtest ADD COLUMN {col} REAL")
+
 def main():
     print("[SISTEMA] Iniciando Motor Cuotas V9.1 (Radar Sharp con Contencion)...")
     if not API_KEYS:
@@ -176,7 +216,8 @@ def main():
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
-    
+    _asegurar_columnas_pinnacle(cursor)
+
     # Solo partidos sin resultado: goles_l IS NULL descarta partidos ya jugados pero
     # no liquidados aun, evitando consultas inutiles a la API por partidos pasados.
     # V9.3: traemos fecha + apuestas + stakes para soporte CLV (captura cuota_cierre).
@@ -261,6 +302,33 @@ def main():
                     match_evento['loc_raw'],
                     match_evento['vis_raw']
                 )
+
+                # --- V10: Pinnacle crudo para modelo v2. Sin freeze por apuesta confirmada ---
+                pn1, pnx, pn2, pno, pnu = cuotas_pinnacle(
+                    evento.get("bookmakers", []), match_evento['loc_raw'], match_evento['vis_raw'])
+                if any((pn1, pnx, pn2, pno, pnu)) and _puede_actualizar_cuotas(fecha_p, False, ahora_art()):
+                    cursor.execute("""
+                        UPDATE partidos_backtest SET
+                        pin_1   = CASE WHEN ? > 0 THEN ? ELSE pin_1   END,
+                        pin_x   = CASE WHEN ? > 0 THEN ? ELSE pin_x   END,
+                        pin_2   = CASE WHEN ? > 0 THEN ? ELSE pin_2   END,
+                        pin_o25 = CASE WHEN ? > 0 THEN ? ELSE pin_o25 END,
+                        pin_u25 = CASE WHEN ? > 0 THEN ? ELSE pin_u25 END
+                        WHERE id_partido=?
+                    """, (pn1, pn1, pnx, pnx, pn2, pn2, pno, pno, pnu, pnu, id_p))
+
+                # Cierre Pinnacle para CLV: todo partido en ventana, con o sin stake
+                if any((pn1, pnx, pn2, pno, pnu)) and _en_ventana_cierre(fecha_p):
+                    cursor.execute("""
+                        UPDATE partidos_backtest SET
+                        pin_cierre_1   = CASE WHEN ? > 0 THEN ? ELSE pin_cierre_1   END,
+                        pin_cierre_x   = CASE WHEN ? > 0 THEN ? ELSE pin_cierre_x   END,
+                        pin_cierre_2   = CASE WHEN ? > 0 THEN ? ELSE pin_cierre_2   END,
+                        pin_cierre_o25 = CASE WHEN ? > 0 THEN ? ELSE pin_cierre_o25 END,
+                        pin_cierre_u25 = CASE WHEN ? > 0 THEN ? ELSE pin_cierre_u25 END
+                        WHERE id_partido=?
+                    """, (pn1, pn1, pnx, pnx, pn2, pn2, pno, pno, pnu, pnu, id_p))
+
                 if c1 > 0 or co > 0:
                     # Cuotas del pick: no sobrescribir si el partido ya empezo o ya hubo alerta
                     if _puede_actualizar_cuotas(fecha_p, _tiene_alerta(cursor, id_p), ahora_art()):

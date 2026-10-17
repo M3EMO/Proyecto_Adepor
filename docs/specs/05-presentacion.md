@@ -256,3 +256,12 @@ Escritura en la base que no es del Excel:
 - `EXCEL_FILE` depende del directorio actual. `ejecutar_proyecto.py` lo fija en la raíz (`ejecutar_proyecto.py:32`).
 - Los dos valores de Kelly no coinciden entre el Excel y el dashboard (ver Dashboard).
 - Las listas de valores TRUE no coinciden entre módulos. `config_motor.py` solo acepta TRUE (`src/comun/config_motor.py:26`).
+
+## Anexo v2 (D-021): pestaña "Valor v2"
+
+- Es la primera pestaña del dashboard.
+- Muestra para cada resultado de los partidos futuros la probabilidad justa de Pinnacle y la cuota mínima.
+- El usuario elige la casa e ingresa su cuota y su stake real.
+- El botón de confirmar se deshabilita si la cuota está bajo la mínima.
+- La sección "CLV de mis apuestas v2" muestra el CLV medio total y por casa.
+- Tests: `tests/test_dashboard_v2.py`.

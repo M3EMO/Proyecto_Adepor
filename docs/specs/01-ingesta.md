@@ -289,3 +289,11 @@ Huecos sin test (no encontré test directo para estos puntos):
 - No verifiqué si el pipeline los llama.
 - El lookup de SofaScore falla el primer día de un evento nuevo (`motor_data.py:152-156`).
 - El scraper de SofaScore corre después de `motor_data`, así que el dato llega al día siguiente.
+
+## Anexo v2 (D-021): cuotas Pinnacle
+
+- `motor_cuotas` guarda también las cuotas de Pinnacle solas en `pin_1`, `pin_x`, `pin_2`, `pin_o25` y `pin_u25`.
+- Esas columnas se actualizan hasta el kickoff, aunque el partido tenga una apuesta confirmada.
+- Dentro de la ventana de cierre se guardan `pin_cierre_*` para todos los partidos emparejados.
+- Ningún UPDATE pisa un valor existente con cero.
+- Tests: `tests/test_ingesta_pinnacle.py`.

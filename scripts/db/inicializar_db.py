@@ -44,7 +44,11 @@ CREATE TABLE IF NOT EXISTS partidos_backtest (
     apuesta_shadow_1x2 TEXT, stake_shadow_1x2 REAL,
     xg_local REAL, xg_visita REAL, xg_local_corto REAL, xg_visita_corto REAL,
     sot_l INTEGER, shots_l INTEGER, corners_l INTEGER,
-    sot_v INTEGER, shots_v INTEGER, corners_v INTEGER);
+    sot_v INTEGER, shots_v INTEGER, corners_v INTEGER,
+    pin_1 REAL DEFAULT 0, pin_x REAL DEFAULT 0, pin_2 REAL DEFAULT 0,
+    pin_o25 REAL DEFAULT 0, pin_u25 REAL DEFAULT 0,
+    pin_cierre_1 REAL, pin_cierre_x REAL, pin_cierre_2 REAL,
+    pin_cierre_o25 REAL, pin_cierre_u25 REAL);
 CREATE INDEX IF NOT EXISTS idx_pb_estado_fecha ON partidos_backtest(estado, fecha);
 CREATE TABLE IF NOT EXISTS historial_equipos (
     equipo_norm TEXT NOT NULL, equipo_real TEXT, liga TEXT NOT NULL, ultima_actualizacion TEXT,
@@ -76,6 +80,7 @@ CREATE TABLE IF NOT EXISTS equipos_altitud (equipo_norm TEXT PRIMARY KEY, equipo
 CREATE TABLE IF NOT EXISTS apuestas_confirmadas (
     id_partido TEXT NOT NULL, mercado TEXT NOT NULL, pick TEXT NOT NULL,
     cuota_tomada REAL NOT NULL, stake REAL NOT NULL, ts TEXT DEFAULT CURRENT_TIMESTAMP,
+    casa TEXT,
     PRIMARY KEY (id_partido, mercado));
 """
 

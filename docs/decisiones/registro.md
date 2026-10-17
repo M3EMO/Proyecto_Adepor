@@ -88,5 +88,11 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 ## D-020 · 2026-10-17 · El stake sale del frente de Pareto entre crecimiento y Max DD
 - **Motivo:** el yield no depende del tamaño del stake; el crecimiento y el drawdown sí.
 - **Regla:** se elige la fracción de Kelly y el tope con mayor crecimiento y Max DD p95 bajo la tolerancia.
-- **Pendiente:** la tolerancia al drawdown (hoy 25% por defecto) y el bankroll los decide el usuario.
+- **Tolerancia:** Max DD p95 ≤ 15% (decisión del usuario, 2026-10-17). El bankroll sigue sin decidir.
 - **Herramienta:** `analisis/pareto_stake.py`; necesita al menos 50 picks liquidados.
+- **Default provisorio:** tope de 0.5% del bankroll; con un edge sintético de 5% es lo que cumple el 15%.
+
+## D-021 · 2026-10-17 · El v2 queda implementado
+- **Prueba real:** con cuotas en vivo, `motor_cuotas` capturó Pinnacle en 57 partidos (11 con O/U 2.5).
+- **Prueba de punta a punta:** confirmación en BetWarrior a 2.20, cierre Pinnacle 1.90, `[GANADA]` y CLV v2 positivo.
+- **Spec:** `docs/specs/10-modelo-v2.md` §Implementación.

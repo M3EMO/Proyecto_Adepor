@@ -1,6 +1,6 @@
 # Modelo v2 (en diseño)
 
-Estado: diseño aprobado el 2026-10-17 (D-019). La implementación todavía no empezó.
+Estado: diseño aprobado (D-019) e implementado el 2026-10-17 (D-021).
 
 ## Propósito
 
@@ -72,6 +72,27 @@ Script: `analisis/value_pinnacle_bet365.py` (resultado en `.json`). Datos: EU to
 
 Motivo: las casas donde apostás no tienen cuotas automáticas, y Bet365 no muestra edge contra Pinnacle.
 
+## Implementación (D-021)
+
+| Pieza | Código |
+|---|---|
+| Probabilidad justa, cuota mínima, stake y CLV | `src/nucleo/valor_v2.py` |
+| Cuotas Pinnacle previas y de cierre | `src/ingesta/motor_cuotas.py` (`pin_*`, `pin_cierre_*`) |
+| Confirmación con pick elegido y casa | `src/persistencia/confirmaciones.py` (`pick=`, `casa=`) |
+| Pestaña "Valor v2" y CLV por casa | `dashboard.py` |
+| Test de punta a punta | `tests/test_flujo_dinero_real.py::test_flujo_v2_pinnacle_como_verdad` |
+
+Parámetros (config_motor_valores, default en código):
+| Clave | Default | Efecto |
+|---|---|---|
+| `umbral_ev_v2` | 0.02 | EV mínimo sobre la prob justa para la cuota mínima |
+| `fraccion_kelly_v2` | 0.25 | Fracción de Kelly del stake sugerido |
+| `tope_stake_v2` | 0.005 | Fracción máxima del bankroll por apuesta (Max DD p95 ≤ 15%, D-020) |
+
+- La normalización proporcional sobreestima levemente a los underdogs; si su CLV sale peor, se cambia a Shin.
+- El CLV v2 es el EV de la cuota tomada contra el cierre de Pinnacle sin margen.
+- La fracción y el tope se recalibran con `analisis/pareto_stake.py` cuando haya 50 apuestas liquidadas (D-020).
+
 ## Investigación pendiente
 
 - Medir con datos de LATAM si las casas blandas se desvían más de Pinnacle.
@@ -79,5 +100,5 @@ Motivo: las casas donde apostás no tienen cuotas automáticas, y Bet365 no mues
 ## Preguntas abiertas
 
 - ¿Qué bankroll vas a usar?
-- ¿Qué Max DD (p95) tolerás? El stake sale del frente de Pareto bajo ese tope (D-020).
+- Max DD p95 tolerado: 15% (D-020). El stake sale del frente de Pareto bajo ese tope.
 - ¿Cuánto tarda BetWarrior en limitar una cuenta ganadora? No hay evidencia pública.

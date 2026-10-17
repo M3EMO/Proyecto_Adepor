@@ -24,9 +24,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-FRACCIONES = (0.10, 0.25, 0.50, 0.75, 1.00)
-TOPES = (0.01, 0.025, 0.05)
-DD_MAX = 0.25   # tolerancia al drawdown (p95); decision del usuario, pendiente junto con el bankroll
+FRACCIONES = (0.05, 0.10, 0.25, 0.50, 0.75, 1.00)
+TOPES = (0.0025, 0.005, 0.01, 0.025, 0.05)  # topes chicos: con DD_MAX 15% el 1% ya excede
+DD_MAX = 0.15   # tolerancia al drawdown p95: decision del usuario 2026-10-17 (D-020)
 
 
 def simular(apuestas, fraccion, tope):

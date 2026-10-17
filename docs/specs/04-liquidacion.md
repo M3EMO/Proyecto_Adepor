@@ -174,3 +174,10 @@ Huecos sin test:
 - `motor_liquidador` deja 'Liquidado' los partidos sin apuestas, así que ese estado no prueba que hubo dinero.
 - El COALESCE de CLV conserva un valor viejo si la nueva corrida no lo recalcula (`src/persistencia/motor_liquidador.py:117-118`).
 - `excel_formulas.cuota_1x2` y `picks.cuota_para_pick` resuelven la misma cuota por caminos distintos (`src/persistencia/excel_formulas.py:112-118`).
+
+## Anexo v2 (D-021): confirmación con pick elegido
+
+- `confirmar_apuesta(..., pick=, casa=)` acepta un pick elegido por el usuario y lo escribe como `[APOSTAR] <pick>`.
+- La casa (BetWarrior, Bet365 o casa local) queda en `apuestas_confirmadas.casa`.
+- El CLV v2 es `cuota_tomada × prob_justa_cierre − 1`, con la probabilidad de cierre de Pinnacle sin margen.
+- Tests: `tests/test_confirmaciones.py` y `tests/test_flujo_dinero_real.py::test_flujo_v2_pinnacle_como_verdad`.

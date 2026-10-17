@@ -68,3 +68,26 @@ def test_confirmacion_duplicada_da_error_claro(db):
     confirmar_apuesta(db, 'm1', '1X2', 2.0, 100.0)
     with pytest.raises(ValueError, match='ya esta confirmada'):
         confirmar_apuesta(db, 'm1', '1X2', 2.1, 50.0)
+
+
+def test_confirmacion_v2_elige_pick_y_guarda_casa(db):
+    _pick(db, 'v2', ap='[PASAR] Sin Valor')               # el motor viejo no propuso nada
+    assert confirmar_apuesta(db, 'v2', '1X2', 3.6, 200.0, pick='EMPATE', casa='BetWarrior') == 'EMPATE'
+    assert db.execute("SELECT apuesta_1x2, cuota_x, stake_1x2 FROM partidos_backtest").fetchone() \
+        == ('[APOSTAR] EMPATE', 3.6, 200.0)
+    assert db.execute("SELECT pick, casa FROM apuestas_confirmadas").fetchone() == ('EMPATE', 'BetWarrior')
+
+
+def test_confirmacion_v2_rechaza_pick_de_otro_mercado(db):
+    _pick(db, 'v2')
+    with pytest.raises(ValueError, match='no pertenece'):
+        confirmar_apuesta(db, 'v2', 'OU', 1.9, 100.0, pick='LOCAL')
+
+
+def test_tabla_vieja_sin_casa_se_migra(db):
+    db.execute("CREATE TABLE apuestas_confirmadas (id_partido TEXT NOT NULL, mercado TEXT NOT NULL, "
+               "pick TEXT NOT NULL, cuota_tomada REAL NOT NULL, stake REAL NOT NULL, ts TEXT, "
+               "PRIMARY KEY (id_partido, mercado))")
+    _pick(db, 'm1')
+    confirmar_apuesta(db, 'm1', '1X2', 2.0, 100.0, casa='Bet365')
+    assert db.execute("SELECT casa FROM apuestas_confirmadas").fetchone() == ('Bet365',)

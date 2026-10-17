@@ -4,6 +4,7 @@ Dashboard Adepor (Streamlit, local). Reemplaza el workbook Excel.
 Lanzar: ./iniciar_dashboard.sh  (solo 127.0.0.1, sin red externa).
 Los loaders son funciones puras: se prueban sin Streamlit corriendo.
 """
+import math
 import sqlite3
 from collections import defaultdict
 from datetime import datetime
@@ -19,6 +20,7 @@ from src.comun.picks import cuota_para_pick
 from src.comun.reglas_actuales import evaluar_actual, evaluar_actual_ou
 from src.comun.resolucion import determinar_resultado_entero
 from src.comun.tiempo import ahora_art
+from src.nucleo.valor_v2 import clv_v2, stake_v2, tabla_valor
 from src.persistencia.confirmaciones import confirmar_apuesta, ids_confirmados
 from src.persistencia.excel_formulas import cuota_1x2, cuota_ou
 from src.persistencia.excel_hoja_resimulacion import _stake_kelly
@@ -28,9 +30,14 @@ from src.persistencia.motor_sincronizador import (
 )
 from src.persistencia.yield_potencial import apuestas_potenciales, yield_potencial
 
-TABS = ["Picks vivos", "Dinero real", "Yield potencial", "Historial",
+TABS = ["Valor v2", "Picks vivos", "Dinero real", "Yield potencial", "Historial",
         "Resumen por liga", "Sombra", "Si hubiera"]
 CAMINOS = ("C1", "C2", "C2B", "C3", "C4", "OU")
+CASAS_V2 = ("BetWarrior", "Bet365", "Casa local")
+PIN_PRE = ("pin_1", "pin_x", "pin_2", "pin_o25", "pin_u25")  # Pinnacle pre-partido
+PIN_CIERRE = ("pin_cierre_1", "pin_cierre_x", "pin_cierre_2", "pin_cierre_o25", "pin_cierre_u25")
+PICKS_V2 = {"1X2": ("LOCAL", "EMPATE", "VISITA"), "OU": ("OVER 2.5", "UNDER 2.5")}
+CIERRE_V2 = {"1X2": PIN_CIERRE[:3], "OU": PIN_CIERRE[3:]}
 
 
 # ============================================================================
@@ -346,6 +353,69 @@ def resumen_si_hubiera(sim):
             "por_camino": pd.DataFrame(filas_camino)}
 
 
+def _columnas(con, tabla):
+    return {r[1] for r in con.execute(f"PRAGMA table_info({tabla})")}
+
+
+def _sel_pin(cols, nombres):
+    """Columnas que existen en la DB; NULL para las que faltan (bases viejas)."""
+    return ", ".join(n if n in cols else f"NULL AS {n}" for n in nombres)
+
+
+def _dicts(con, sql):
+    cur = con.execute(sql)
+    cols = [d[0] for d in cur.description]
+    return [dict(zip(cols, fila)) for fila in cur.fetchall()]
+
+
+def _media(xs):
+    xs = [x for x in xs if x is not None]
+    return sum(xs) / len(xs) if xs else None
+
+
+def valor_v2_vivos(con):
+    """Un row por resultado de partidos vivos con cuotas Pinnacle (D-019)."""
+    cols = _columnas(con, "partidos_backtest")
+    filas = _dicts(con, "SELECT id_partido, fecha, pais, local, visita, estado, goles_l, goles_v, "
+                        f"{_sel_pin(cols, PIN_PRE)} FROM partidos_backtest ORDER BY fecha")
+    ahora = ahora_art().strftime("%Y-%m-%d %H:%M")
+    confirmados = estado_confirmaciones(con)
+    out = []
+    for r in filas:
+        if r["estado"] == "Liquidado" or r["goles_l"] is not None or r["goles_v"] is not None:
+            continue
+        if str(r["fecha"] or "") <= ahora:
+            continue
+        for mercado, pick, p, minima in tabla_valor(r):
+            out.append({"id": r["id_partido"], "fecha": _fecha_txt(r["fecha"]), "liga": r["pais"],
+                        "partido": f"{r['local']} vs {r['visita']}", "mercado": mercado, "pick": pick,
+                        "prob_justa": p, "cuota_minima": minima,
+                        "confirmada": (r["id_partido"], mercado) in confirmados})
+    return out
+
+
+def clv_v2_confirmadas(con):
+    """Apuestas confirmadas con CLV contra el cierre Pinnacle (None sin cierre)."""
+    try:
+        cols = _columnas(con, "partidos_backtest")
+        filas = _dicts(con, "SELECT a.id_partido, a.mercado, a.pick, a.casa, a.cuota_tomada, a.stake, "
+                            "p.local, p.visita, p.estado, "
+                            f"{_sel_pin(cols, PIN_CIERRE)} FROM apuestas_confirmadas a "
+                            "JOIN partidos_backtest p ON p.id_partido = a.id_partido ORDER BY a.ts")
+    except sqlite3.OperationalError:
+        filas = []  # la tabla se crea en la primera confirmacion
+    out = [{"id": f["id_partido"], "partido": f"{f['local']} vs {f['visita']}",
+            "mercado": f["mercado"], "pick": f["pick"], "casa": f["casa"],
+            "cuota_tomada": f["cuota_tomada"], "stake": f["stake"], "estado": f["estado"],
+            "clv": clv_v2(f["cuota_tomada"], [f[c] for c in CIERRE_V2[f["mercado"]]],
+                          PICKS_V2[f["mercado"]].index(f["pick"]))} for f in filas]
+    clvs = [f["clv"] for f in out]
+    return {"filas": out, "n": len(out), "n_clv": sum(c is not None for c in clvs),
+            "clv_medio": _media(clvs),
+            "clv_por_casa": {c: _media([f["clv"] for f in out if f["casa"] == c])
+                             for c in {f["casa"] for f in out}}}
+
+
 def cargar_todo(con):
     """Carga todo lo que muestra el dashboard. Solo lee la DB."""
     cur = con.cursor()
@@ -360,6 +430,8 @@ def cargar_todo(con):
     sim = simular_si_hubiera(datos, base, fk_sim, mk_sim)
     return {
         "picks": picks_vivos(datos, confirmados),
+        "valor_v2": valor_v2_vivos(con),
+        "clv_v2": clv_v2_confirmadas(con),
         "base": base, "operativo": operativo, "fk": fk,
         "metricas": calcular_metricas_dashboard(datos, fk),
         "equity": equity_df(datos, aportes, base),
@@ -426,19 +498,87 @@ def _linea(df, x, y, titulo_x, titulo_y, cero=False):
 # ============================================================================
 # PESTAÑAS
 # ============================================================================
-def _confirmar(id_p, mercado, cuota, stake):
+def _confirmar(id_p, mercado, cuota, stake, clave_aviso="aviso", pick=None, casa=None):
     try:
         con = sqlite3.connect(DB_NAME)
         try:
-            pick = confirmar_apuesta(con, id_p, mercado, cuota, stake)
+            confirmada = confirmar_apuesta(con, id_p, mercado, cuota, stake, pick=pick, casa=casa)
         finally:
             con.close()
     except ValueError as e:
         st.error(str(e))
         return
-    st.session_state["aviso"] = ("ok", f"Confirmada: {pick} a {cuota:.2f} con stake {_usd(stake)}.")
+    st.session_state[clave_aviso] = ("ok", f"Confirmada: {confirmada} a {cuota:.2f} con stake {_usd(stake)}.")
     st.cache_data.clear()
     st.rerun()
+
+
+def _tab_valor_v2(b):
+    aviso = st.session_state.pop("aviso_v2", None)
+    if aviso:
+        (st.success if aviso[0] == "ok" else st.error)(aviso[1])
+    st.caption("Prob justa = cuotas Pinnacle sin margen. Confirme solo si su casa paga mas que la cuota minima.")
+    filas = b["valor_v2"]
+    if not filas:
+        st.info("No hay partidos vivos con cuotas Pinnacle.")
+    else:
+        st.dataframe(pd.DataFrame([{
+            "Fecha": f["fecha"], "Liga": f["liga"], "Partido": f["partido"], "Mercado": f["mercado"],
+            "Pick": f["pick"], "Prob justa": _pct(f["prob_justa"]),
+            "Cuota minima": f"{f['cuota_minima']:.2f}",
+            "Estado": "Confirmada" if f["confirmada"] else "Pendiente",
+        } for f in filas]), hide_index=True)
+        pendientes = [f for f in filas if not f["confirmada"]]
+        if pendientes:
+            st.subheader("Confirmar apuesta")
+        for f in pendientes:
+            _formulario_v2(f, b["operativo"])
+    _bloque_clv_v2(b["clv_v2"])
+
+
+def _formulario_v2(f, bankroll):
+    """Compara la cuota de mi casa con la minima. Confirma solo si hay valor."""
+    clave = f"v2|{f['id']}|{f['pick']}"
+    p, minima = f["prob_justa"], f["cuota_minima"]
+    with st.expander(f"Confirmar apuesta · {f['partido']} · {f['mercado']} {f['pick']}"):
+        c = st.columns(2)
+        casa = c[0].selectbox("Casa", CASAS_V2, key=f"casa|{clave}")
+        cuota = c[1].number_input("Cuota de mi casa", min_value=1.01,
+                                  value=math.ceil(minima * 100) / 100, step=0.01,
+                                  format="%.2f", key=f"cuota|{clave}")
+        ev = cuota * p - 1
+        sugerido = stake_v2(p, cuota, bankroll)
+        st.caption(f"Minima {minima:.2f} · EV vs prob justa {ev * 100:+.1f}% · "
+                   f"Stake sugerido {_usd(sugerido)}")
+        # Se registra el stake real: la casa puede limitar el monto aceptado.
+        stake = st.number_input("Stake apostado ($)", min_value=0.0, value=float(sugerido),
+                                step=10.0, key=f"stake|{clave}")
+        sin_valor = cuota < minima or stake <= 0
+        if sin_valor:
+            st.error("Cuota por debajo de la minima: su casa no paga valor.")
+        if st.button("Confirmar apuesta", key=f"btn|{clave}", disabled=sin_valor):
+            _confirmar(f["id"], f["mercado"], cuota, stake, clave_aviso="aviso_v2",
+                       pick=f["pick"], casa=casa)
+
+
+def _bloque_clv_v2(c):
+    st.subheader("CLV de mis apuestas v2")
+    st.caption("CLV = cuota tomada vs cierre Pinnacle sin margen. CLV > 0 sostenido es la señal de edge.")
+    if not c["filas"]:
+        st.info("Todavia no hay apuestas confirmadas en v2.")
+        return
+    k = st.columns(3)
+    k[0].metric("Apuestas confirmadas", c["n"])
+    k[1].metric("CLV medio", _pct(c["clv_medio"], True))
+    k[2].metric("Con cierre Pinnacle", c["n_clv"])
+    if c["clv_por_casa"]:
+        st.dataframe(pd.DataFrame([{"Casa": casa or "-", "CLV medio": _pct(v, True)}
+                                   for casa, v in c["clv_por_casa"].items()]), hide_index=True)
+    st.dataframe(pd.DataFrame([{
+        "Partido": f["partido"], "Casa": f["casa"] or "-", "Mercado": f["mercado"],
+        "Pick": f["pick"], "Cuota tomada": f"{f['cuota_tomada']:.2f}",
+        "Stake": _usd(f["stake"]), "Estado": f["estado"] or "-", "CLV": _pct(f["clv"], True),
+    } for f in c["filas"]]), hide_index=True)
 
 
 def _tab_picks(b):
@@ -677,7 +817,7 @@ def render():
         st.stop()
     st.caption(f"Base: {DB_NAME} · Cargado {datetime.now():%d/%m/%Y %H:%M} · cache 60 s")
     pestañas = st.tabs(TABS)
-    vistas = (_tab_picks, _tab_dinero, _tab_yield, _tab_historial,
+    vistas = (_tab_valor_v2, _tab_picks, _tab_dinero, _tab_yield, _tab_historial,
               _tab_resumen, _tab_sombra, _tab_si_hubiera)
     for pestaña, vista in zip(pestañas, vistas):
         with pestaña:

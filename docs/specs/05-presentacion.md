@@ -182,7 +182,7 @@ Arranca el dashboard Streamlit solo en la interfaz local 127.0.0.1. No usa ngrok
 
 ## Propósito
 
-Genera `Backtest_Modelo.xlsx` bajo demanda. La exportación no forma parte de la cascada diaria. Se lanza con `ejecutar_proyecto.py --exportar-excel` (`ejecutar_proyecto.py:700-702`). La vista principal es el dashboard.
+Genera `Backtest_Modelo.xlsx` bajo demanda. La exportación no forma parte de la cascada diaria. Se lanza con `ejecutar_proyecto.py --exportar-excel` (`ejecutar_proyecto.py:654-656`). La vista principal es el dashboard.
 
 ## Entradas
 
@@ -228,7 +228,7 @@ Escritura en la base que no es del Excel:
 
 - La exportación nunca debe cambiar la base. Hoy la cambia en el paso 2 (ver Limitaciones).
 - El Excel nunca debe ser fuente de verdad para otros motores.
-- La exportación nunca debe correr dentro de la cascada diaria (`ejecutar_proyecto.py:47-77`).
+- La exportación nunca debe correr dentro de la cascada diaria (`ejecutar_proyecto.py:47-63`).
 
 ## Parámetros (clave de config_motor_valores o archivo de config, default, efecto)
 
@@ -252,7 +252,7 @@ Escritura en la base que no es del Excel:
 ## Limitaciones conocidas
 
 - El docstring dice "4 hojas" (`src/persistencia/motor_sincronizador.py:5`). El código crea 5 hojas o 6 si se cuenta Resumen.
-- La exportación escribe en la base (`src/persistencia/motor_sincronizador.py:43-45`). Contradice que sea solo exportación (`ejecutar_proyecto.py:701`).
+- La exportación escribe en la base (`src/persistencia/motor_sincronizador.py:43-45`). Contradice que sea solo exportación (`ejecutar_proyecto.py:655`).
 - `EXCEL_FILE` depende del directorio actual. `ejecutar_proyecto.py` lo fija en la raíz (`ejecutar_proyecto.py:32`).
 - Los dos valores de Kelly no coinciden entre el Excel y el dashboard (ver Dashboard).
 - Las listas de valores TRUE no coinciden entre módulos. `config_motor.py` solo acepta TRUE (`src/comun/config_motor.py:26`).

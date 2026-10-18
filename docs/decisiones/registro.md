@@ -96,3 +96,9 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Prueba real:** con cuotas en vivo, `motor_cuotas` capturó Pinnacle en 57 partidos (11 con O/U 2.5).
 - **Prueba de punta a punta:** confirmación en BetWarrior a 2.20, cierre Pinnacle 1.90, `[GANADA]` y CLV v2 positivo.
 - **Spec:** `docs/specs/10-modelo-v2.md` §Implementación.
+
+## D-022 · 2026-10-18 · El motor v1 sale del camino diario
+- **Motivo:** el v1 no le gana a Pinnacle (D-014), y el v2 decide con Pinnacle sin margen (D-019).
+- **Regla:** la cascada diaria corre solo `motor_backtest`, `motor_liquidador`, `motor_fixture` y `motor_cuotas`.
+- **Fase 2:** el código v1, sus tests y sus pestañas del dashboard se borran en un bead aparte.
+- **Bead:** `adepor-i1n`.

@@ -288,7 +288,7 @@ Huecos sin test (no encontré test directo para estos puntos):
 - `src/ingesta/motor_cuotas_apifootball.py` y su test siguen en el repo.
 - No verifiqué si el pipeline los llama.
 - El lookup de SofaScore falla el primer día de un evento nuevo (`motor_data.py:152-156`).
-- El scraper de SofaScore corre después de `motor_data`, así que el dato llega al día siguiente.
+- Desde D-022 la cascada diaria no corre `motor_data` ni el scraper de SofaScore.
 
 ## Anexo v2 (D-021): cuotas Pinnacle
 

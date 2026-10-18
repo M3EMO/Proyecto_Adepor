@@ -6,10 +6,10 @@ Es el punto de entrada único del sistema. Corre la cascada diaria y los subcoma
 
 ## Entradas
 
-- Argumentos de línea de comandos (`ejecutar_proyecto.py:638-710`).
-- `config.json` en la raíz, solo para el preflight (`ejecutar_proyecto.py:175-183`).
+- Argumentos de línea de comandos (`ejecutar_proyecto.py:592-664`).
+- `config.json` en la raíz, solo para el preflight (`ejecutar_proyecto.py:161-169`).
 - Base `DB_NAME` (`ejecutar_proyecto.py:34`).
-- Scripts de `MOTORES_DIARIOS` (`ejecutar_proyecto.py:47-77`).
+- Scripts de `MOTORES_DIARIOS` (`ejecutar_proyecto.py:47-63`).
 
 ## Salidas (tablas y columnas que escribe)
 
@@ -17,44 +17,31 @@ El orquestador escribe solo por medio de sus hijos y de algunos subcomandos:
 
 | Comando | Qué hace | Escribe en la base | Línea |
 |---|---|---|---|
-| (sin argumentos) | Corre la cascada completa y el resumen | Sí, vía motores | `ejecutar_proyecto.py:596-632` |
-| `--status` | Muestra estado sin tocar la base | No. Llama a la API de API-Football | `ejecutar_proyecto.py:196-381` |
-| `--summary` | Resumen de picks y liquidaciones | No | `ejecutar_proyecto.py:387-442` |
-| `--analisis [nombre]` | Corre un script del catálogo | Depende del script | `ejecutar_proyecto.py:448-465` |
-| `--rebuild` | Importa CSV, purga y desbloquea, luego corre la cascada | Sí | `ejecutar_proyecto.py:664-675` |
-| `--unlock` | Pone estados en Pendiente tras confirmar RESET, luego corre la cascada | Sí | `ejecutar_proyecto.py:677-683` |
-| `--purge-history` | Vacía tablas derivadas, luego corre la cascada | Sí | `ejecutar_proyecto.py:684-690` |
-| `--audit-names` | Auditoría interactiva de nombres | Depende del script | `ejecutar_proyecto.py:691-695` |
-| `--aporte MONTO` | Inserta un aporte o retiro | Sí: tabla `aportes_capital` | `ejecutar_proyecto.py:471-545` |
-| `--aportes-list` | Lista aportes y su total | No | `ejecutar_proyecto.py:548-576` |
-| `--exportar-excel` | Genera el Excel (ver Exportación Excel) | Sí, en `estado` de `partidos_backtest` | `ejecutar_proyecto.py:700-702` |
-| `--help` | Muestra comandos y cascada | No | `ejecutar_proyecto.py:582-590` |
+| (sin argumentos) | Corre la cascada completa y el resumen | Sí, vía motores | `ejecutar_proyecto.py:550-586` |
+| `--status` | Muestra estado sin tocar la base | No | `ejecutar_proyecto.py:179-337` |
+| `--summary` | Resumen de picks y liquidaciones | No | `ejecutar_proyecto.py:341-398` |
+| `--analisis [nombre]` | Corre un script del catálogo | Depende del script | `ejecutar_proyecto.py:402-419` |
+| `--rebuild` | Importa CSV, purga y desbloquea, luego corre la cascada | Sí | `ejecutar_proyecto.py:618-629` |
+| `--unlock` | Pone estados en Pendiente tras confirmar RESET, luego corre la cascada | Sí | `ejecutar_proyecto.py:631-637` |
+| `--purge-history` | Vacía tablas derivadas, luego corre la cascada | Sí | `ejecutar_proyecto.py:638-644` |
+| `--audit-names` | Auditoría interactiva de nombres | Depende del script | `ejecutar_proyecto.py:645-649` |
+| `--aporte MONTO` | Inserta un aporte o retiro | Sí: tabla `aportes_capital` | `ejecutar_proyecto.py:425-499` |
+| `--aportes-list` | Lista aportes y su total | No | `ejecutar_proyecto.py:502-530` |
+| `--exportar-excel` | Genera el Excel (ver Exportación Excel) | Sí, en `estado` de `partidos_backtest` | `ejecutar_proyecto.py:654-656` |
+| `--help` | Muestra comandos y cascada | No | `ejecutar_proyecto.py:536-544` |
 
-La tabla `aportes_capital` tiene columnas `id`, `fecha`, `monto`, `descripcion` y `fecha_creacion` (`ejecutar_proyecto.py:516-524`).
+La tabla `aportes_capital` tiene columnas `id`, `fecha`, `monto`, `descripcion` y `fecha_creacion` (`ejecutar_proyecto.py:470-478`).
 
-Cascada diaria (`MOTORES_DIARIOS`, 19 motores, en este orden):
+Cascada diaria (`MOTORES_DIARIOS`, 6 pasos, en este orden). El v1 salió del camino diario (D-022):
 
 | # | Archivo | Crítico | Interactivo | Línea |
 |---|---|---|---|---|
-| 0 | `motor_purga.py` | No | No | 49 |
 | 1 | `motor_backtest.py` | Sí | No | 52 |
 | 1.5 | `motor_liquidador.py` | Sí | No | 53 |
-| 1.6 | `scripts/evaluar_pretest.py` | No | No | 54 |
-| 2 | `motor_arbitro.py` | No | No | 55 |
-| 3 | `motor_data.py` | Sí | No | 56 |
-| 3.1 | `scripts/scrape_sofa_post_liquidacion.py --dias 7 --max 30` | No | No | 57 |
-| 3.15 | `analisis/motor_xg_v2_14_xg_from_shotmap.py` | No | No | 58 |
-| 3.16 | `analisis/xg_v3_hibrido_sofa_custom.py` | No | No | 59 |
-| 3.17 | `scripts/rebuild_ema_v2.py` | No | No | 60 |
-| 3.2 | `-m src.persistencia.actualizar_posiciones` | No | No | 61 |
-| 3.4 | `scripts/xg_pesos_dinamicos_shadow.py` | No | No | 62 |
-| 3.5 | `motor_adaptativo.py` | No | No | 63 |
-| 4 | `motor_fixture.py` | Sí | Sí | 67 |
-| 6 | `motor_cuotas.py` | Sí | No | 68 |
-| 7 | `motor_calculadora.py` | Sí | No | 71 |
-| 7.5 | `scripts/aplicar_antifiltro_shotmap_f4b.py` | No | No | 72 |
-| 8 | `motor_backtest.py` | No | No | 75 |
-| 8.5 | `motor_liquidador.py` | No | No | 76 |
+| 4 | `motor_fixture.py` | Sí | Sí | 57 |
+| 6 | `motor_cuotas.py` | Sí | No | 58 |
+| 8 | `motor_backtest.py` | No | No | 61 |
+| 8.5 | `motor_liquidador.py` | No | No | 62 |
 
 ## Comportamiento (reglas exactas, en orden, con path:line)
 
@@ -63,34 +50,34 @@ Reglas de arranque:
 1. Cambia el directorio de trabajo a la raíz del repo (`ejecutar_proyecto.py:31-32`).
 2. Agrega la raíz a `sys.path` (`ejecutar_proyecto.py:33`).
 3. Fuerza UTF-8 en stdout y stderr (`ejecutar_proyecto.py:37-41`).
-4. Limpia la pantalla solo si la salida es una terminal (`ejecutar_proyecto.py:639-640`).
+4. Limpia la pantalla solo si la salida es una terminal (`ejecutar_proyecto.py:593-594`).
 
 Reglas de la cascada diaria:
 
-5. Corre preflight: DB, `config.json` y módulos (`ejecutar_proyecto.py:598`, `:167-190`).
-6. Aborta sin DB si el archivo no existe o pesa 0 bytes (`ejecutar_proyecto.py:604-607`).
-7. Ejecuta cada motor en orden, en un subproceso `python -u` (`ejecutar_proyecto.py:613-614`, `:125`).
-8. Fusiona stderr en stdout para que no bloquee el pipe (`ejecutar_proyecto.py:136`).
-9. Imprime cada línea del hijo con prefijo `   | ` (`ejecutar_proyecto.py:142`).
-10. Marca fallo si el código de salida no es 0 (`ejecutar_proyecto.py:144-147`).
-11. Si un motor crítico falla, imprime ABORTO y sale con código 1 (`ejecutar_proyecto.py:617-619`).
-12. Si un motor satélite falla, lo anota y sigue (`ejecutar_proyecto.py:616`, `:620-621`).
-13. Al final imprime los satélites fallidos y el resumen (`ejecutar_proyecto.py:623-632`).
-14. Sale con código 0 aunque haya satélites fallidos (`ejecutar_proyecto.py:623-629`).
+5. Corre preflight: DB, `config.json` y módulos (`ejecutar_proyecto.py:552`, `:153-173`).
+6. Aborta sin DB si el archivo no existe o pesa 0 bytes (`ejecutar_proyecto.py:558-561`).
+7. Ejecuta cada motor en orden, en un subproceso `python -u` (`ejecutar_proyecto.py:567-568`, `:111`).
+8. Fusiona stderr en stdout para que no bloquee el pipe (`ejecutar_proyecto.py:122`).
+9. Imprime cada línea del hijo con prefijo `   | ` (`ejecutar_proyecto.py:128`).
+10. Marca fallo si el código de salida no es 0 (`ejecutar_proyecto.py:130-133`).
+11. Si un motor crítico falla, imprime ABORTO y sale con código 1 (`ejecutar_proyecto.py:571-573`).
+12. Si un motor satélite falla, lo anota y sigue (`ejecutar_proyecto.py:570`, `:574-575`).
+13. Al final imprime los satélites fallidos y el resumen (`ejecutar_proyecto.py:577-586`).
+14. Sale con código 0 aunque haya satélites fallidos (`ejecutar_proyecto.py:577-583`).
 
 Reglas de subcomandos:
 
-15. `--rebuild` corre importador, purga y desbloqueo. Si un paso falla, aborta antes de los siguientes (`ejecutar_proyecto.py:664-675`).
-16. `--unlock` corre el desbloqueo y luego la cascada. Si falla, sale con código 1 (`ejecutar_proyecto.py:677-683`).
-17. `--purge-history` corre la purga y luego la cascada (`ejecutar_proyecto.py:684-690`).
-18. `--aporte` valida monto y fecha antes de insertar (`ejecutar_proyecto.py:485-510`).
-19. Un comando desconocido imprime la ayuda y sale con código 1 (`ejecutar_proyecto.py:707-710`).
+15. `--rebuild` corre importador, purga y desbloqueo. Si un paso falla, aborta antes de los siguientes (`ejecutar_proyecto.py:618-629`).
+16. `--unlock` corre el desbloqueo y luego la cascada. Si falla, sale con código 1 (`ejecutar_proyecto.py:631-637`).
+17. `--purge-history` corre la purga y luego la cascada (`ejecutar_proyecto.py:638-644`).
+18. `--aporte` valida monto y fecha antes de insertar (`ejecutar_proyecto.py:439-464`).
+19. Un comando desconocido imprime la ayuda y sale con código 1 (`ejecutar_proyecto.py:661-664`).
 
 ## Invariantes (lo que nunca debe pasar)
 
-- Ningún motor posterior corre si un motor crítico falla (`ejecutar_proyecto.py:617-619`).
-- La cascada nunca corre sin una base existente y no vacía (`ejecutar_proyecto.py:604-607`).
-- `--rebuild` nunca purga tablas derivadas si la importación falla (`ejecutar_proyecto.py:666`, `tests/test_orquestador.py:28-36`).
+- Ningún motor posterior corre si un motor crítico falla (`ejecutar_proyecto.py:571-573`).
+- La cascada nunca corre sin una base existente y no vacía (`ejecutar_proyecto.py:558-561`).
+- `--rebuild` nunca purga tablas derivadas si la importación falla (`ejecutar_proyecto.py:620`, `tests/test_orquestador.py:28-36`).
 - `--unlock` nunca resetea la base sin escribir RESET (`src/nucleo/desbloquear_matriz.py:18-22`).
 - Todo cambio manual de datos o de esquema debe tener respaldo previo (ver Respaldos). El pipeline diario no crea respaldo.
 
@@ -101,7 +88,6 @@ Reglas de subcomandos:
 | `ADEPOR_DB` (variable de entorno) | Vacía. Usa `fondo_quant.db` en la raíz (`src/comun/config_sistema.py:15`) | Cambia la base que usan todos los motores |
 | Campo `critico` por motor | Ver tabla de cascada | Decide si el fallo aborta el pipeline |
 | Campo `interactivo` por motor | Solo `motor_fixture.py` | Hereda la terminal en vez de capturar la salida |
-| Argumentos de SofaScore | `--dias 7 --max 30` (`ejecutar_proyecto.py:57`) | Ventana y tope del scraper post liquidación |
 | `api_keys_odds` en `config.json` | Lista vacía | Si está vacía, el preflight avisa que `motor_cuotas` fallará |
 | `INACTIVITY_MONTHS` en `src/persistencia/motor_purga.py` | 6 meses | Antigüedad para purgar equipos |
 
@@ -115,22 +101,21 @@ Tests existentes (`tests/test_orquestador.py`):
 
 Huecos sin test:
 
-- No hay test de la regla de motor crítico en `cmd_pipeline_diario` (`ejecutar_proyecto.py:617-619`).
-- No hay test del preflight ni del aborto sin base (`ejecutar_proyecto.py:167`, `:604-607`).
-- No hay test del orden ni de las banderas de `MOTORES_DIARIOS` (`ejecutar_proyecto.py:47-77`).
+- No hay test de la regla de motor crítico en `cmd_pipeline_diario` (`ejecutar_proyecto.py:571-573`).
+- No hay test del preflight ni del aborto sin base (`ejecutar_proyecto.py:153`, `:558-561`).
+- No hay test del orden ni de las banderas de `MOTORES_DIARIOS` (`ejecutar_proyecto.py:47-63`).
 - No hay test de `--status`, `--summary`, `--aporte` ni `--aportes-list`.
 - No hay test del código de salida final con satélites fallidos.
 
 ## Limitaciones conocidas
 
-- Sale con código 0 aunque fallen motores satélite (`ejecutar_proyecto.py:623-629`). `ejecutar_robot.sh` no detecta esos fallos.
-- `--status` llama a la API de API-Football (`ejecutar_proyecto.py:343-370`). Esa API está retirada según el comentario de `ejecutar_proyecto.py:66`.
-- El preflight revisa `api_keys_odds` pero no `api_keys_football` (`ejecutar_proyecto.py:182-183`).
-- `ejecutar_motor` no tiene timeout (`ejecutar_proyecto.py:117-158`). Un motor colgado detiene la cascada.
-- En `--unlock` y `--rebuild`, el prompt de RESET se escribe sin salto de línea. El subproceso captura stdout, así que el prompt no se ve (`src/nucleo/desbloquear_matriz.py:19`, `ejecutar_proyecto.py:140`).
+- Sale con código 0 aunque fallen motores satélite (`ejecutar_proyecto.py:577-583`). `ejecutar_robot.sh` no detecta esos fallos.
+- El preflight revisa `api_keys_odds` pero no `api_keys_football` (`ejecutar_proyecto.py:168-169`).
+- `ejecutar_motor` no tiene timeout (`ejecutar_proyecto.py:103-144`). Un motor colgado detiene la cascada.
+- En `--unlock` y `--rebuild`, el prompt de RESET se escribe sin salto de línea. El subproceso captura stdout, así que el prompt no se ve (`src/nucleo/desbloquear_matriz.py:19`, `ejecutar_proyecto.py:126`).
 - `--purge-history` no pide confirmación (`src/persistencia/reset_tablas_derivadas.py`).
 - `--rebuild` falla en el primer paso si falta `modelo_estable.csv` (`src/persistencia/importador_gold.py:16`). El archivo no está en el repo.
-- `motor_fixture.py` figura como interactivo (`ejecutar_proyecto.py:67`). El módulo no usa `input()` (`src/ingesta/motor_fixture.py:10-11`).
+- `motor_fixture.py` figura como interactivo (`ejecutar_proyecto.py:57`). El módulo no usa `input()` (`src/ingesta/motor_fixture.py:10-11`).
 
 # Ejecución programada (ejecutar_robot.sh)
 

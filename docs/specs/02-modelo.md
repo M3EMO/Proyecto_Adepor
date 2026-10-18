@@ -1,5 +1,7 @@
 # Modelo de probabilidades
 
+> Estado: motor v1, fuera de la cascada diaria desde D-022. El código sigue en disco hasta la fase 2 de `adepor-i1n`.
+
 ## Propósito
 
 Este documento describe cómo el motor calcula las probabilidades de cada partido. Cubre las EMA por equipo, las lambdas de xG, el modelo Poisson con corrección Dixon-Coles y las reglas de decisión. También cubre las arquitecturas shadow y el motor adaptativo. El código es la fuente de verdad. Los números de `Evidencia medida` vienen de un análisis separado.

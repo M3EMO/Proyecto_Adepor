@@ -34,3 +34,10 @@ def test_rebuild_aborta_si_falla_un_paso(monkeypatch):
     except SystemExit as e:
         assert e.code == 1
     assert llamados == ['importador_gold.py']  # no purga tablas derivadas tras el fallo
+
+
+def test_cascada_diaria_solo_corre_motores_v2():
+    # D-022: el v1 salio del camino diario; el v2 solo necesita fixture, cuotas y liquidacion.
+    assert [m['archivo'] for m in ep.MOTORES_DIARIOS] == [
+        'motor_backtest.py', 'motor_liquidador.py', 'motor_fixture.py', 'motor_cuotas.py',
+        'motor_backtest.py', 'motor_liquidador.py']

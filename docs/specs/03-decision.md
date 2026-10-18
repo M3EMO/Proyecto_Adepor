@@ -1,5 +1,7 @@
 # Capa de decisión: motor_calculadora y evaluar_pretest
 
+> Estado: motor v1, fuera de la cascada diaria desde D-022. El código sigue en disco hasta la fase 2 de `adepor-i1n`.
+
 ## Propósito
 
 Esta capa elige el pick y el stake de cada partido futuro. Trabaja con dos mercados: 1X2 y Over/Under 2.5. El motor escribe el pick en `partidos_backtest`. El script `scripts/evaluar_pretest.py` decide cuándo un mercado pasa a live.

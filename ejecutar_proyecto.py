@@ -45,33 +45,19 @@ except Exception:
 # CASCADA DIARIA (orden canonico)
 # ==========================================================================
 MOTORES_DIARIOS = [
-    # --- FASE 0: MANTENIMIENTO ---
-    {"archivo": "motor_purga.py",            "desc": "0. Optimizador de Memoria (Purga de Obsoletos)",         "critico": False, "interactivo": False},
+    # v1 retirado del camino diario (bead adepor-i1n, D-022): el v2 decide con Pinnacle sin margen
+    # y no lee EMAs, stats ni xG. El codigo v1 sigue en disco hasta la fase 2.
 
-    # --- FASE 1: LIQUIDACION Y RECALIBRACION ---
+    # --- FASE 1: LIQUIDACION ---
     {"archivo": "motor_backtest.py",         "desc": "1. Liquidador de Goles (Cierre de Resultados)",          "critico": True,  "interactivo": False},
     {"archivo": "motor_liquidador.py",       "desc": "1.5. Liquidador de Apuestas (Auditoria de Resultados)",  "critico": True,  "interactivo": False},
-    {"archivo": "scripts/evaluar_pretest.py", "desc": "1.6. Pretest Monitor (auto-flip LIVE/PRETEST por liga)", "critico": False, "interactivo": False},
-    {"archivo": "motor_arbitro.py",          "desc": "2. El Inquisidor (Auditoria Arbitral y Tarjetas)",       "critico": False, "interactivo": False},
-    {"archivo": "motor_data.py",             "desc": "3. Regresion Bayesiana (Actualizacion de Poderio)",      "critico": True,  "interactivo": False},
-    {"archivo": "scripts/scrape_sofa_post_liquidacion.py --dias 7 --max 30", "desc": "3.1. Hook SOFA (xG v2 hybrid - bead adepor-atn)", "critico": False, "interactivo": False},
-    {"archivo": "analisis/motor_xg_v2_14_xg_from_shotmap.py", "desc": "3.15. xG model V_custom recompute (LogReg coords)", "critico": False, "interactivo": False},
-    {"archivo": "analisis/xg_v3_hibrido_sofa_custom.py", "desc": "3.16. xG V3 hibrido (xgot SOFA + custom fallback) - bead adepor-173", "critico": False, "interactivo": False},
-    {"archivo": "scripts/rebuild_ema_v2.py", "desc": "3.17. Rebuild EMAs con V3 (overwrite EMAs V0 con V3 para partidos liquidados)", "critico": False, "interactivo": False},
-    {"archivo": "-m src.persistencia.actualizar_posiciones", "desc": "3.2. Actualizador Posiciones (incremental, hook post-liquidados)", "critico": False, "interactivo": False},
-    {"archivo": "scripts/xg_pesos_dinamicos_shadow.py", "desc": "3.4. Pesos xG dinamicos por liga (SHADOW, Kalman)", "critico": False, "interactivo": False},
-    {"archivo": "motor_adaptativo.py",       "desc": "3.5. Motor Adaptativo (Online SGD V12 + Auto-audit + Drift)", "critico": False, "interactivo": False},
 
     # --- FASE 2: HORIZONTE FUTURO ---
     # API-Football retirado (decision usuario 2026-10-13): fuentes = ESPN + The Odds API.
     {"archivo": "motor_fixture.py",          "desc": "4. El Arquitecto (Proyeccion de Calendario)",            "critico": True,  "interactivo": True},
-    {"archivo": "motor_cuotas.py",           "desc": "6. El Oraculo (Extraccion de Precios y CLV)",            "critico": True,  "interactivo": False},
+    {"archivo": "motor_cuotas.py",           "desc": "6. El Oraculo (Cuotas Pinnacle previas y de cierre)",    "critico": True,  "interactivo": False},
 
-    # --- FASE 3: DECISIONES ---
-    {"archivo": "motor_calculadora.py",      "desc": "7. Cerebro Cuantitativo (Poisson, EV y Kelly)",          "critico": True,  "interactivo": False},
-    {"archivo": "scripts/aplicar_antifiltro_shotmap_f4b.py", "desc": "7.5. Anti-filtro F4b shotmap (SHADOW only - sp_dep_v>0.5 anti-X)", "critico": False, "interactivo": False},
-
-    # --- FASE 4: REDUNDANCIA + EXCEL ---
+    # --- FASE 4: REDUNDANCIA ---
     {"archivo": "motor_backtest.py",         "desc": "8. Liquidador de Ultimo Minuto (Doble Barrido)",         "critico": False, "interactivo": False},
     {"archivo": "motor_liquidador.py",       "desc": "8.5. Liquidador de Apuestas (Barrido Final)",            "critico": False, "interactivo": False},
 ]
@@ -183,9 +169,6 @@ def _preflight_checks():
                 warnings.append("config.json: api_keys_odds esta vacio (motor_cuotas fallara).")
         except (ValueError, IOError) as e:
             warnings.append(f"config.json corrupto: {e}")
-
-    if not os.path.exists('motor_calculadora.py'):
-        warnings.append("motor_calculadora.py no esta en raiz (shim roto?).")
 
     return warnings
 

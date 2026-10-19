@@ -1,8 +1,3 @@
-def test_motor_calculadora_importa_con_db_vacia():
-    import src.nucleo.motor_calculadora as m
-    assert m.FLOOR_PROB_MIN == 0.33
-
-
 def test_get_param_no_crea_db_inexistente(tmp_path, monkeypatch):
     import sqlite3
     import pytest

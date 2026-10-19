@@ -4,8 +4,7 @@ Apuestas confirmadas por el usuario (reemplaza a las alertas de Telegram, decisi
 Confirmar = "aposte este pick a esta cuota con este stake". Se registra en
 apuestas_confirmadas y se escribe en partidos_backtest la cuota tomada y el stake real:
 liquidador, bankroll y metricas existentes valoran asi el precio realmente obtenido.
-Un partido confirmado queda congelado: motor_calculadora no lo recalcula y motor_cuotas
-solo actualiza su cuota de cierre (CLV = tomada vs cierre).
+Un partido confirmado queda congelado: motor_cuotas solo actualiza su cuota de cierre (CLV = tomada vs cierre).
 """
 import sqlite3
 

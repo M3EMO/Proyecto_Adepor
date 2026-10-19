@@ -65,7 +65,7 @@ def db():
     conn.close()
 
 
-# Algunos modulos (motor_calculadora) leen config_motor_valores al importarse:
+# Algunos modulos leen config_motor_valores al importarse:
 # la DB debe tener el esquema antes de la coleccion de tests.
 _c = sqlite3.connect(os.environ["ADEPOR_DB"])
 _c.executescript(SCHEMA)

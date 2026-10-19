@@ -70,8 +70,8 @@ This project deliberately runs a **two-plane coordination model**. Read carefull
 
 **Tipo:** motor cuantitativo de apuestas deportivas en Python + SQLite (`fondo_quant.db`).
 **Fuentes:** ESPN (fixtures, resultados, stats) y The Odds API (cuotas). SofaScore es opcional.
-**Presentación:** Streamlit local (`./iniciar_dashboard.sh`). El Excel es exportación a pedido.
-**Estado del modelo:** no le gana a Pinnacle; opera en pretest sin dinero real (D-014).
+**Presentación:** Streamlit local (`./iniciar_dashboard.sh`). Es la única vista; el Excel se borró (D-023).
+**Estado del modelo:** el v2 toma Pinnacle sin margen como verdad (D-019). El v1 se borró (D-022, D-023). El edge se mide con CLV.
 
 ### Lectura obligatoria antes de cambiar el motor
 

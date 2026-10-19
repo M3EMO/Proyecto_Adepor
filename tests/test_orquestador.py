@@ -25,17 +25,6 @@ def test_hijo_que_falla_devuelve_false(tmp_path):
     assert ep.ejecutar_motor(s, 'falla') is False
 
 
-def test_rebuild_aborta_si_falla_un_paso(monkeypatch):
-    llamados = []
-    monkeypatch.setattr(ep, 'ejecutar_motor', lambda s, d, i=False: llamados.append(s) or False)
-    monkeypatch.setattr(sys, 'argv', ['ejecutar_proyecto.py', '--rebuild'])
-    try:
-        ep.main()
-    except SystemExit as e:
-        assert e.code == 1
-    assert llamados == ['importador_gold.py']  # no purga tablas derivadas tras el fallo
-
-
 def test_cascada_diaria_solo_corre_motores_v2():
     # D-022: el v1 salio del camino diario; el v2 solo necesita fixture, cuotas y liquidacion.
     assert [m['archivo'] for m in ep.MOTORES_DIARIOS] == [

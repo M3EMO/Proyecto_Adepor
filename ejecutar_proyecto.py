@@ -9,17 +9,9 @@ Uso:
     py ejecutar_proyecto.py --help         # Lista de comandos
     py ejecutar_proyecto.py --status       # Estado del sistema (sin tocar DB)
     py ejecutar_proyecto.py --summary      # Resumen post-ultima-corrida
-    py ejecutar_proyecto.py --analisis N   # Scripts de analisis puntual
-    py ejecutar_proyecto.py --rebuild      # Reconstruccion desde Gold Standard
-    py ejecutar_proyecto.py --unlock       # Desbloqueo matriz
-    py ejecutar_proyecto.py --purge-history # Purga tablas derivadas
     py ejecutar_proyecto.py --audit-names  # Auditoria interactiva de nombres
-    py ejecutar_proyecto.py --exportar-excel # Backtest_Modelo.xlsx (la vista principal es el Streamlit)
-
-Ejemplos:
-    py ejecutar_proyecto.py --analisis         # lista analisis disponibles
-    py ejecutar_proyecto.py --analisis volumen # corre analisis_volumen_yield.py
-    py ejecutar_proyecto.py --analisis pretest # corre evaluar_pretest dry-run
+    py ejecutar_proyecto.py --aporte <monto> [--fecha YYYY-MM-DD] [--desc "..."]  # Aporte o retiro
+    py ejecutar_proyecto.py --aportes-list # Lista de aportes y retiros
 """
 import subprocess
 import time
@@ -45,8 +37,7 @@ except Exception:
 # CASCADA DIARIA (orden canonico)
 # ==========================================================================
 MOTORES_DIARIOS = [
-    # v1 retirado del camino diario (bead adepor-i1n, D-022): el v2 decide con Pinnacle sin margen
-    # y no lee EMAs, stats ni xG. El codigo v1 sigue en disco hasta la fase 2.
+    # v1 retirado (D-022, D-023): el v2 decide con Pinnacle sin margen y no lee EMAs, stats ni xG.
 
     # --- FASE 1: LIQUIDACION ---
     {"archivo": "motor_backtest.py",         "desc": "1. Liquidador de Goles (Cierre de Resultados)",          "critico": True,  "interactivo": False},
@@ -61,18 +52,6 @@ MOTORES_DIARIOS = [
     {"archivo": "motor_backtest.py",         "desc": "8. Liquidador de Ultimo Minuto (Doble Barrido)",         "critico": False, "interactivo": False},
     {"archivo": "motor_liquidador.py",       "desc": "8.5. Liquidador de Apuestas (Barrido Final)",            "critico": False, "interactivo": False},
 ]
-
-
-# ==========================================================================
-# CATALOGO DE SCRIPTS DE ANALISIS PUNTUAL
-# ==========================================================================
-ANALISIS_DISPONIBLES = {
-    'volumen':      ('scripts/analisis_volumen_yield.py', 'Train/test split + threshold test en filtros (busca oportunidades de volumen)'),
-    'determinismo': ('scripts/analisis_determinismo.py',  'Testea temperature scaling sobre probs Poisson'),
-    'ablation':     ('scripts/ablation_filtros.py',       'Ablation study: que pasa si quitamos cada filtro'),
-    'ablation-liga':('scripts/ablation_por_liga.py',      'Ablation por liga (impacto de cada filtro por pais)'),
-    'pretest':      ('scripts/evaluar_pretest.py --dry-run', 'Estado pretest mode por liga (dry-run, no cambia DB)'),
-}
 
 
 # ==========================================================================
@@ -196,11 +175,7 @@ def cmd_status():
 
         print()
         print("--- APUESTAS ---")
-        # Dos capas de metricas, porque el pipeline corre pretest (stake=0 para
-        # recolectar hit rate antes de flipear a LIVE) + apuestas reales (stake>0):
-        #   REALES   = stake_1x2>0 o stake_ou>0 (solo ligas en LIVE).
-        #   PICKS    = apuesta LIKE '[APOSTAR]%' (incluye pretest).
-        # Liquidadas = estado='Liquidado' + apuesta evaluada GANADA|PERDIDA.
+        # REALES = apuestas confirmadas (stake>0). Liquidadas = apuesta evaluada GANADA|PERDIDA.
         reales_vivas_1x2 = cur.execute(
             "SELECT COUNT(*) FROM partidos_backtest WHERE stake_1x2>0 AND estado!='Liquidado'"
         ).fetchone()[0]
@@ -221,36 +196,10 @@ def cmd_status():
         reales_g_ou = cur.execute(
             "SELECT COUNT(*) FROM partidos_backtest WHERE stake_ou>0 AND apuesta_ou LIKE '[GANADA]%'"
         ).fetchone()[0]
-        picks_vivos_1x2 = cur.execute(
-            "SELECT COUNT(*) FROM partidos_backtest WHERE apuesta_1x2 LIKE '[APOSTAR]%'"
-        ).fetchone()[0]
-        picks_vivos_ou = cur.execute(
-            "SELECT COUNT(*) FROM partidos_backtest WHERE apuesta_ou LIKE '[APOSTAR]%'"
-        ).fetchone()[0]
-        picks_eval_1x2 = cur.execute(
-            "SELECT COUNT(*) FROM partidos_backtest WHERE estado='Liquidado' "
-            "AND (apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%')"
-        ).fetchone()[0]
-        picks_eval_ou = cur.execute(
-            "SELECT COUNT(*) FROM partidos_backtest WHERE estado='Liquidado' "
-            "AND (apuesta_ou LIKE '[GANADA]%' OR apuesta_ou LIKE '[PERDIDA]%')"
-        ).fetchone()[0]
-        picks_g_1x2 = cur.execute(
-            "SELECT COUNT(*) FROM partidos_backtest WHERE apuesta_1x2 LIKE '[GANADA]%'"
-        ).fetchone()[0]
-        picks_g_ou = cur.execute(
-            "SELECT COUNT(*) FROM partidos_backtest WHERE apuesta_ou LIKE '[GANADA]%'"
-        ).fetchone()[0]
-
         reales_vivas = reales_vivas_1x2 + reales_vivas_ou
         reales_liq = reales_liq_1x2 + reales_liq_ou
         reales_g = reales_g_1x2 + reales_g_ou
         hit_real = 100 * reales_g / reales_liq if reales_liq else None
-
-        picks_vivos = picks_vivos_1x2 + picks_vivos_ou
-        picks_eval = picks_eval_1x2 + picks_eval_ou
-        picks_g = picks_g_1x2 + picks_g_ou
-        hit_pick = 100 * picks_g / picks_eval if picks_eval else 0
 
         print(f"  REALES (stake>0):")
         print(f"    Vivas:            {reales_vivas:>4d}   (1X2:{reales_vivas_1x2}  O/U:{reales_vivas_ou})")
@@ -259,48 +208,18 @@ def cmd_status():
             print(f"    Hit real:        {hit_real:>4.1f}%   (ganadas {reales_g})")
         else:
             print(f"    Hit real:         N/A   (sin liquidaciones con stake>0 aun)")
-        print(f"  PICKS (incluye pretest stake=0):")
-        print(f"    Vivos:            {picks_vivos:>4d}   (1X2:{picks_vivos_1x2}  O/U:{picks_vivos_ou})")
-        print(f"    Evaluados:        {picks_eval:>4d}   (1X2:{picks_eval_1x2}  O/U:{picks_eval_ou})")
-        print(f"    Hit pretest:     {hit_pick:>4.1f}%   (ganados {picks_g})")
 
         print()
-        print("--- PRETEST POR LIGA ---")
-        rows = cur.execute("""
-            SELECT pais, COUNT(*) n,
-                SUM(CASE WHEN apuesta_1x2 LIKE '[GANADA]%' THEN 1 ELSE 0 END) g
-            FROM partidos_backtest
-            WHERE estado='Liquidado' AND (apuesta_1x2 LIKE '[GANADA]%' OR apuesta_1x2 LIKE '[PERDIDA]%')
-            GROUP BY pais ORDER BY n DESC
-        """).fetchall()
-        for pais, n, g in rows:
-            hit_liga = 100 * g / n if n else 0
-            # estado live?
-            r = cur.execute(
-                "SELECT valor_texto FROM config_motor_valores WHERE clave='apuestas_live' AND scope=?",
-                (pais,)
-            ).fetchone()
-            live = (r and str(r[0]).upper() in ('TRUE', '1')) if r else False
-            tag = "LIVE" if live else "pretest"
-            print(f"  {pais:<12s} N={n:>3d}  hit={hit_liga:>5.1f}%  estado={tag}")
-
-        print()
-        print("--- CONFIG ACTUAL ---")
-        for clave in ['floor_prob_min', 'margen_predictivo_1x2', 'consenso_prob_min',
-                      'consenso_cuota_min', 'consenso_cuota_max',
-                      'pretest_hit_threshold', 'pretest_n_minimo', 'pretest_p_max']:
-            r = cur.execute(
-                "SELECT valor_real FROM config_motor_valores WHERE clave=? AND scope='global'",
-                (clave,)
-            ).fetchone()
-            print(f"  {clave:<25s} = {r[0] if r else '(default)'}")
+        print("--- CONFIG V2 ---")
+        from src.comun.config_motor import get_param
+        for clave, default in (('umbral_ev_v2', 0.02), ('fraccion_kelly_v2', 0.25), ('tope_stake_v2', 0.005)):
+            print(f"  {clave:<25s} = {get_param(clave, default=default)}")
 
         # Bankroll operativo (base + P/L acumulado si modo=dinamico, clampeado)
         print()
         print("--- BANKROLL ---")
         try:
-            sys.path.insert(0, '.')
-            from src.nucleo.motor_calculadora import obtener_bankroll_operativo
+            from src.persistencia.bankroll import obtener_bankroll_operativo
             base  = cur.execute("SELECT valor FROM configuracion WHERE clave='bankroll'").fetchone()
             modo  = cur.execute("SELECT valor FROM configuracion WHERE clave='bankroll_modo'").fetchone()
             corte = cur.execute("SELECT valor FROM configuracion WHERE clave='bankroll_fecha_corte'").fetchone()
@@ -323,17 +242,6 @@ def cmd_status():
     except Exception as e:
         log_terminal(f"Error leyendo DB: {e}", "ERROR")
 
-    # 4. Ultima corrida (ver Excel modtime)
-    print()
-    if os.path.exists('Backtest_Modelo.xlsx'):
-        mt = os.path.getmtime('Backtest_Modelo.xlsx')
-        edad = datetime.now() - datetime.fromtimestamp(mt)
-        horas = edad.total_seconds() / 3600
-        print(f"--- ULTIMA CORRIDA ---")
-        print(f"  Backtest_Modelo.xlsx: hace {horas:.1f}h ({datetime.fromtimestamp(mt).strftime('%d/%m/%Y %H:%M')})")
-        if horas > 24:
-            log_terminal("  Ultima corrida >24h. Considera ejecutar el pipeline.", "ALERTA")
-
 
 # ==========================================================================
 # SUBCOMANDO: --summary (resumen tras ultima corrida)
@@ -346,24 +254,23 @@ def cmd_summary():
         con = sqlite3.connect(DB_NAME)
         cur = con.cursor()
 
-        # Picks nuevos de la ventana (hoy y manana)
+        # Ventana de hoy a pasado manana
         ayer = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
         hoy = datetime.now().strftime('%Y-%m-%d')
         manana = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
         pasado = (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
 
-        print("\n--- PICKS VIVOS (proximas 72h) ---")
+        print("\n--- PARTIDOS CON CUOTA PINNACLE (proximas 72h) ---")
+        # motor_cuotas agrega las columnas pin_* en su primera corrida.
+        if 'pin_1' not in {r[1] for r in cur.execute("PRAGMA table_info(partidos_backtest)")}:
+            print("  (la base no tiene cuotas Pinnacle: correr el pipeline diario)")
+            con.close()
+            return
         for d in (hoy, manana, pasado):
-            rows = cur.execute("""
-                SELECT pais, apuesta_1x2, stake_1x2
-                FROM partidos_backtest
-                WHERE fecha LIKE ? AND apuesta_1x2 LIKE '[APOSTAR]%'
-                ORDER BY pais, fecha
-            """, (f'{d}%',)).fetchall()
-            if rows:
-                stake_dia = sum(r[2] or 0 for r in rows)
-                live_dia = sum(1 for r in rows if (r[2] or 0) > 0)
-                print(f"  {d}: {len(rows)} picks ({live_dia} LIVE con stake>0, stake total ${stake_dia:.2f})")
+            n = cur.execute("SELECT COUNT(*) FROM partidos_backtest WHERE fecha LIKE ? AND pin_1 > 0",
+                            (f'{d}%',)).fetchone()[0]
+            if n:
+                print(f"  {d}: {n} partidos")
 
         # Liquidados en las ultimas 24h
         print(f"\n--- LIQUIDADOS EN ULTIMAS 24H ---")
@@ -380,9 +287,9 @@ def cmd_summary():
             print(f"  {pais:<12s} N={n} ganadas={g or 0} hit={100*(g or 0)/n:.0f}%")
 
         # Cobertura de cuotas
-        print("\n--- COBERTURA CUOTAS (partidos vivos) ---")
+        print("\n--- COBERTURA PINNACLE (partidos vivos) ---")
         rows = cur.execute("""
-            SELECT pais, COUNT(*) tot, SUM(CASE WHEN cuota_1 > 0 THEN 1 ELSE 0 END) con
+            SELECT pais, COUNT(*) tot, SUM(CASE WHEN pin_1 > 0 THEN 1 ELSE 0 END) con
             FROM partidos_backtest
             WHERE estado != 'Liquidado' GROUP BY pais ORDER BY pais
         """).fetchall()
@@ -394,29 +301,6 @@ def cmd_summary():
         con.close()
     except Exception as e:
         log_terminal(f"Error: {e}", "ERROR")
-
-
-# ==========================================================================
-# SUBCOMANDO: --analisis [nombre]
-# ==========================================================================
-def cmd_analisis(nombre=None):
-    """Dispara un script de analisis puntual del catalogo ANALISIS_DISPONIBLES."""
-    if not nombre:
-        _imprimir_banner("ANALISIS DISPONIBLES")
-        for key, (script, desc) in ANALISIS_DISPONIBLES.items():
-            print(f"  --analisis {key:<15s} {desc}")
-            print(f"  {'':<15s} -> {script}")
-            print()
-        print("Uso: py ejecutar_proyecto.py --analisis <nombre>")
-        return
-
-    if nombre not in ANALISIS_DISPONIBLES:
-        log_terminal(f"Analisis '{nombre}' no existe. Opciones: {list(ANALISIS_DISPONIBLES.keys())}", "ERROR")
-        sys.exit(1)
-
-    script, desc = ANALISIS_DISPONIBLES[nombre]
-    _imprimir_banner(f"ANALISIS: {nombre} — {desc}")
-    ejecutar_motor(script, desc, interactivo=False)
 
 
 # ==========================================================================
@@ -484,7 +368,7 @@ def cmd_aporte():
 
     # Mostrar bankroll resultante
     try:
-        from src.nucleo.motor_calculadora import obtener_bankroll_operativo
+        from src.persistencia.bankroll import obtener_bankroll_operativo
         nuevo_bk = obtener_bankroll_operativo(cur)
     except Exception:
         nuevo_bk = None
@@ -539,9 +423,6 @@ def cmd_help():
     for m in MOTORES_DIARIOS:
         marca = ' [CRITICO]' if m['critico'] else ''
         print(f"  {m['archivo']:<42s} {m['desc']}{marca}")
-    print("\nAnalisis disponibles:")
-    for k, (s, d) in ANALISIS_DISPONIBLES.items():
-        print(f"  --analisis {k:<15s} {d}")
 
 
 # ==========================================================================
@@ -609,39 +490,6 @@ def main():
     if comando == '--summary':
         cmd_summary()
         return
-    if comando == '--analisis':
-        nombre = sys.argv[2] if len(sys.argv) > 2 else None
-        cmd_analisis(nombre)
-        return
-
-    # Subcomandos de mantenimiento (disparan sub-pipelines y luego cascada)
-    if comando == '--rebuild':
-        log_terminal("MODO RECONSTRUCCION MAESTRA DESDE CSV", "ALERTA")
-        # Cada paso depende del anterior: si el import falla, NO purgar tablas derivadas.
-        pasos = [('importador_gold.py', '1/3: Reconstruccion desde Gold Standard'),
-                 ('-m src.persistencia.reset_tablas_derivadas', '2/3: Purga de Tablas Derivadas'),
-                 ('-m src.nucleo.desbloquear_matriz', '3/3: Desbloqueo de Matriz de Partidos')]
-        for script, desc in pasos:
-            if not ejecutar_motor(script, desc):
-                log_terminal(f"ABORTO: fallo {script}. Reconstruccion incompleta.", "ERROR")
-                sys.exit(1)
-        log_terminal("Fase de reconstruccion finalizada. Iniciando pipeline principal.", "EXITO")
-        cmd_pipeline_diario()
-        return
-    if comando == '--unlock':
-        log_terminal("MODO DESBLOQUEO DE MATRIZ", "ALERTA")
-        if not ejecutar_motor('-m src.nucleo.desbloquear_matriz', 'Desbloqueo de Matriz de Partidos'):
-            sys.exit(1)
-        log_terminal("Matriz desbloqueada. Iniciando pipeline principal.", "EXITO")
-        cmd_pipeline_diario()
-        return
-    if comando == '--purge-history':
-        log_terminal("MODO PURGA DE HISTORIAL", "ALERTA")
-        if not ejecutar_motor('-m src.persistencia.reset_tablas_derivadas', 'Purga de Tablas Derivadas'):
-            sys.exit(1)
-        log_terminal("Tablas derivadas purgadas. Iniciando pipeline principal.", "EXITO")
-        cmd_pipeline_diario()
-        return
     if comando == '--audit-names':
         log_terminal("MODO AUDITORIA INTERACTIVA DE NOMBRES", "ALERTA")
         ejecutar_motor('auditor/auditor_espn.py', 'Auditoria Interactiva de Nombres (ESPN vs. Diccionario)')
@@ -651,9 +499,6 @@ def main():
     if comando == '--aporte':
         cmd_aporte()
         return
-    if comando == '--exportar-excel':
-        # Excel = solo exportacion (decision 2026-10-13); la vista es dashboard.py.
-        sys.exit(0 if ejecutar_motor('motor_sincronizador.py', 'Exportacion Excel') else 1)
     if comando == '--aportes-list':
         cmd_aportes_list()
         return

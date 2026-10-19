@@ -51,7 +51,7 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 
 ## D-011 · 2026-10-13 · La presentación es un Streamlit local único; Telegram se retira
 - **Regla:** "Confirmar apuesta" guarda la cuota tomada y el stake real, y congela el pick.
-- **Consecuencia:** el Excel queda como exportación a pedido (`--exportar-excel`).
+- **Consecuencia:** el Excel queda como exportación a pedido (`--exportar-excel`). Reemplazada por D-023: el Excel se borró.
 
 ## D-012 · 2026-10-13 · La base arranca desde cero con `scripts/db/inicializar_db.py`
 - **Motivo:** la base de producción anterior se perdió.
@@ -102,3 +102,12 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Regla:** la cascada diaria corre solo `motor_backtest`, `motor_liquidador`, `motor_fixture` y `motor_cuotas`.
 - **Fase 2:** el código v1, sus tests y sus pestañas del dashboard se borran en un bead aparte.
 - **Bead:** `adepor-i1n`.
+
+## D-023 · 2026-10-19 · El código del motor v1 se borra
+- **Motivo:** el v1 salió del camino diario (D-022) y el v2 no usa su código.
+- **Borrado:** motores v1 (calculadora, EMAs, árbitro, táctico, adaptativo, purga, rho), scrapers de SofaScore, scripts que dependían de ellos y sus tests.
+- **Borrado:** la exportación a Excel (`--exportar-excel`), por decisión del usuario; el Streamlit queda como única vista.
+- **Borrado:** los subcomandos `--rebuild`, `--unlock`, `--purge-history` y `--analisis`.
+- **Dashboard:** quedan Valor v2, Dinero real, Yield potencial e Historial.
+- **Fuera de alcance:** `analisis/` (research congelado) y las tablas y claves v1 de la base.
+- **Bead:** `adepor-q54`.

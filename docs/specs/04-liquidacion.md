@@ -2,7 +2,7 @@
 
 ## Propósito
 
-Este bloque registra resultados reales y cierra cada apuesta. Calcula el CLV de cada pick con stake. Calcula también el yield y el P/L en dinero real. Cubre cinco piezas: `motor_backtest`, `motor_liquidador`, `resolucion`, `picks` y `confirmaciones`. Los agregados viven en `excel_metricas` y `yield_potencial`.
+Este bloque registra resultados reales y cierra cada apuesta. Calcula el CLV de cada pick con stake. Calcula también el yield y el P/L en dinero real. Cubre cinco piezas: `motor_backtest`, `motor_liquidador`, `resolucion`, `picks` y `confirmaciones`. Los agregados viven en `metricas`, `bankroll` y `yield_potencial`.
 
 El bloque no usa claves de `config_motor_valores`. Sus constantes están en el código.
 
@@ -29,7 +29,7 @@ El bloque no usa claves de `config_motor_valores`. Sus constantes están en el c
 | `confirmaciones` | `apuestas_confirmadas` | id_partido, mercado, pick, cuota_tomada, stake, ts | Una fila por partido y mercado (`confirmaciones.py:18-21`, `:59-62`) |
 | `confirmaciones` | `partidos_backtest` | cuota_1/x/2 u cuota_o25/u25 (cuota tomada), stake_1x2 o stake_ou | Misma transacción que el insert (`:66-67`) |
 
-`excel_metricas.calcular_metricas_dashboard` y `yield_potencial.yield_potencial` no escriben en la base. Devuelven diccionarios para el dashboard.
+`metricas.metricas_dinero` y `yield_potencial.yield_potencial` no escriben en la base. Devuelven diccionarios para el dashboard.
 
 ## Comportamiento (reglas exactas, en orden, con path:line)
 
@@ -87,18 +87,17 @@ El bloque no usa claves de `config_motor_valores`. Sus constantes están en el c
 38. La función escribe la cuota tomada en la columna de cuota del pick (`:66-67`).
 39. La función escribe el stake real en stake_1x2 o stake_ou (`:66-67`).
 40. La función devuelve el pick sin prefijo (`:68`).
-41. Un partido confirmado queda fuera del recálculo del motor (`src/nucleo/motor_calculadora.py:1838`, `:1847`).
 
-### Métricas de dinero (`src/persistencia/excel_metricas.py`)
+### Métricas de dinero (`src/persistencia/metricas.py`)
 
-42. `calcular_metricas_dashboard` suma P/L y volumen solo en filas con estado 'Liquidado' y stake mayor a 0 (`:150`, `:161`, `:170`).
-43. El módulo descarta resultados sin token válido, porque `determinar_resultado_entero` devuelve 0 (`:151-152`, `:162-163`).
-44. Una victoria da P/L igual a stake × (cuota − 1) (`:57-58`).
-45. Una derrota da P/L igual a −stake, aunque no tenga cuota (`:59-60`).
-46. Una victoria sin cuota válida no suma P/L ni volumen y se cuenta aparte (`:153-155`, `:165-166`, `:174-175`).
-47. El yield es P/L dividido por volumen, y el hit es ganadas dividido por N (`:72-73`).
-48. El módulo calcula un t de Student sobre los yields por apuesta, con p-valor de dos colas (`:74-82`).
-49. El desglose por liga cuenta picks de pretest, pero suma P/L solo con stake real (`:140-158`).
+42. `metricas_dinero` suma P/L y volumen solo en filas con estado 'Liquidado', goles cargados y stake mayor a 0 (`:84-88`).
+43. El módulo descarta resultados sin token válido, porque `determinar_resultado_entero` devuelve 0 (`:89-91`).
+44. Una victoria da P/L igual a stake × (cuota − 1) (`:43-44`).
+45. Una derrota da P/L igual a −stake, aunque no tenga cuota (`:45`).
+46. Una victoria sin cuota válida no suma P/L ni volumen (`:92-94`).
+47. El yield es P/L dividido por volumen, y el hit es ganadas dividido por N (`:57-58`).
+48. El módulo calcula un t de Student sobre los yields por apuesta, con p-valor de dos colas (`:59-67`).
+49. `obtener_bankroll_operativo` suma base, aportes y P/L liquidado desde la fecha de corte en modo dinámico (`src/persistencia/bankroll.py`).
 
 ### Yield potencial (`src/persistencia/yield_potencial.py`)
 
@@ -115,11 +114,11 @@ El bloque no usa claves de `config_motor_valores`. Sus constantes están en el c
 - Ningún partido sin goles pasa a 'Liquidado' (`motor_liquidador.py:72-73`).
 - Ninguna apuesta con stake mayor a 0 pasa a 'Liquidado' sin token (`motor_liquidador.py:98-107`).
 - Ningún CLV se escribe si falta la cuota tomada o la de cierre (`:27-30`).
-- Ninguna victoria sin cuota entra en P/L ni en volumen (`excel_metricas.py:153-155`).
+- Ninguna victoria sin cuota entra en P/L ni en volumen (`metricas.py:92-94`).
 - Ningún partido tiene dos confirmaciones para el mismo mercado (`confirmaciones.py:59-62`).
 - Ninguna confirmación se acepta después del kickoff (`confirmaciones.py:53-54`).
 - Ningún score no numérico llega a la base (`motor_backtest.py:109-113`).
-- Ninguna métrica de dinero usa filas de pretest sin stake (`excel_metricas.py:150`).
+- Ninguna métrica de dinero usa filas sin stake (`metricas.py:87`).
 
 ## Parámetros (clave de config_motor_valores, default en código, efecto)
 
@@ -132,11 +131,10 @@ Este bloque no lee claves de `config_motor_valores`. Sus constantes son fijas en
 | Timeout ESPN | 5 s | Tiempo máximo por consulta | `src/persistencia/motor_backtest.py:87` |
 | Tolerancia de fecha | 1 día | Diferencia máxima entre fecha de partido y scoreboard | `:42` |
 | `ESTADOS_ESPN_FINALIZADO` | STATUS_FINAL, STATUS_FULL_TIME | Estados que cuentan como terminados | `src/comun/constantes_espn.py:11` |
-| Umbral de acierto del modelo | 0.05 | Margen mínimo para contar acierto de modelo | `src/persistencia/excel_metricas.py:130` |
 
 ## Tests de aceptación (tests existentes en tests/ que lo cubren + huecos sin test)
 
-Test de punta a punta: `tests/test_flujo_dinero_real.py:26` (`test_flujo_completo_de_una_apuesta_real`). Recorre el flujo completo. Pick en pretest con stake 0. Confirmación con cuota 1.95 y stake 1000. Cierre a 1.80. Resultado ESPN 2-0. Liquidación 'Liquidado' con `[GANADA] LOCAL`. CLV de +8.33%. Bankroll de 100950.
+Test de punta a punta: `tests/test_flujo_dinero_real.py:26` (`test_flujo_v2_pinnacle_como_verdad`). Confirmación en BetWarrior a 2.20 con stake 100. Cierre Pinnacle a 1.90. Resultado ESPN 1-0. Liquidación 'Liquidado' con `[GANADA] LOCAL`. CLV v2 positivo. Bankroll de 100120.
 
 Tests por módulo:
 
@@ -144,8 +142,8 @@ Tests por módulo:
 |---|---|---|
 | `tests/test_persistencia_backtest.py` | líneas 6, 10, 14, 18, 23, 27, 31, 39 | Regla de emparejamiento, score entero y pendientes pasados |
 | `tests/test_persistencia_liquidador.py` | líneas 19, 27, 35, 42, 49 | Liquidación, stake sin token, OU sin token, stake 0 y token ya liquidado |
-| `tests/test_confirmaciones.py` | líneas 19, 26, 35, 43, 53 | Guardado de cuota y stake, valores inválidos, congelado y post-kickoff |
-| `tests/test_persistencia_excel_metricas.py` | líneas 16, 42 | Solo liquidadas, victoria sin cuota excluida, derrota sin cuota contada, p-valor t |
+| `tests/test_confirmaciones.py` | líneas 18, 25, 34, 44, 51, 59, 65 | Guardado de cuota y stake, valores inválidos, post-kickoff, duplicado, pick v2 y casa |
+| `tests/test_metricas.py` | líneas 15, 36 | Solo liquidadas, victoria sin cuota excluida, derrota sin cuota contada, p-valor t |
 | `tests/test_yield_potencial.py` | líneas 12, 22, 31, 46, 58, 69, 81, 87 | Yield, break-even, picks sin cuota, mercados, por liga, IC y casos vacíos |
 | `tests/test_persistencia_picks.py` | líneas 18, 25, 29, 37 | Cuota por token, token no reconocido, cuota faltante, pick válido |
 
@@ -156,24 +154,21 @@ Huecos sin test:
 - No hay test de `motor_backtest.main` con score no numérico. Solo prueba `_score_entero`.
 - No hay test de error de red ni de respuesta distinta de 200 en `motor_backtest`.
 - No hay test de un evento con `completed` falso y estado no finalizado.
-- No hay test de una segunda confirmación del mismo mercado.
-- No hay test que compare `excel_metricas` y `yield_potencial` con la misma derrota sin cuota.
+- No hay test que compare `metricas` y `yield_potencial` con la misma derrota sin cuota.
 - No hay test de `filas_yield` ni de su falta de filtro por estado.
 
 ## Limitaciones conocidas
 
 - `yield_potencial` no filtra por estado ni por stake, y depende solo del token (`src/persistencia/yield_potencial.py:21-24`).
-- `excel_metricas` cuenta derrotas sin cuota, pero `yield_potencial` las omite (`src/persistencia/excel_metricas.py:59-60`, `src/persistencia/yield_potencial.py:27-28`).
+- `metricas` cuenta derrotas sin cuota, pero `yield_potencial` las omite (`src/persistencia/metricas.py:45`, `src/persistencia/yield_potencial.py:27-28`).
 - Las dos métricas usan criterios distintos para el mismo caso, así que sus yields no son comparables.
 - `confirmar_apuesta` sobrescribe cuota_1/x/2 y cuota_o25/u25 con la cuota tomada, y no guarda la cuota original (`src/persistencia/confirmaciones.py:66-67`).
 - `confirmar_apuesta` acepta cualquier cuota mayor a 1 y cualquier stake positivo, sin tope ni comparación con la cuota del modelo (`:46-47`).
-- `confirmar_apuesta` no verifica el overlap 1X2 sobre O/U que aplica el motor (`src/nucleo/motor_calculadora.py:2223-2225`).
 - El módulo `motor_backtest` dice "CON FAILOVER" en su encabezado, pero no tiene failover (`src/persistencia/motor_backtest.py:12`).
 - `API_KEYS_ODDS` se importa y no se usa, y `KEY_INDEX` queda sin uso (`:5`, `:21`).
 - Un partido sin evento ESPN queda pendiente y se consulta de nuevo en cada corrida (`:130`, `:132`).
 - `motor_liquidador` deja 'Liquidado' los partidos sin apuestas, así que ese estado no prueba que hubo dinero.
 - El COALESCE de CLV conserva un valor viejo si la nueva corrida no lo recalcula (`src/persistencia/motor_liquidador.py:117-118`).
-- `excel_formulas.cuota_1x2` y `picks.cuota_para_pick` resuelven la misma cuota por caminos distintos (`src/persistencia/excel_formulas.py:112-118`).
 
 ## Anexo v2 (D-021): confirmación con pick elegido
 

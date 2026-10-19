@@ -2,83 +2,74 @@
 
 ## Propósito
 
-Es el punto de entrada único del sistema. Corre la cascada diaria y los subcomandos de mantenimiento. Cada motor corre como proceso hijo.
+Es el punto de entrada único del sistema. Corre la cascada diaria del v2 y los subcomandos de consulta y capital. Cada motor corre como proceso hijo. Los subcomandos del v1 (`--rebuild`, `--unlock`, `--purge-history`, `--analisis`, `--exportar-excel`) se borraron en D-023.
 
 ## Entradas
 
-- Argumentos de línea de comandos (`ejecutar_proyecto.py:592-664`).
-- `config.json` en la raíz, solo para el preflight (`ejecutar_proyecto.py:161-169`).
-- Base `DB_NAME` (`ejecutar_proyecto.py:34`).
-- Scripts de `MOTORES_DIARIOS` (`ejecutar_proyecto.py:47-63`).
+- Argumentos de línea de comandos (`ejecutar_proyecto.py:473-512`).
+- `config.json` en la raíz, solo para el preflight (`ejecutar_proyecto.py:140-150`).
+- Base `DB_NAME` (`ejecutar_proyecto.py:26`).
+- Scripts de `MOTORES_DIARIOS` (`ejecutar_proyecto.py:39-54`).
 
 ## Salidas (tablas y columnas que escribe)
 
-El orquestador escribe solo por medio de sus hijos y de algunos subcomandos:
+El orquestador escribe solo por medio de sus hijos y de `--aporte`:
 
 | Comando | Qué hace | Escribe en la base | Línea |
 |---|---|---|---|
-| (sin argumentos) | Corre la cascada completa y el resumen | Sí, vía motores | `ejecutar_proyecto.py:550-586` |
-| `--status` | Muestra estado sin tocar la base | No | `ejecutar_proyecto.py:179-337` |
-| `--summary` | Resumen de picks y liquidaciones | No | `ejecutar_proyecto.py:341-398` |
-| `--analisis [nombre]` | Corre un script del catálogo | Depende del script | `ejecutar_proyecto.py:402-419` |
-| `--rebuild` | Importa CSV, purga y desbloquea, luego corre la cascada | Sí | `ejecutar_proyecto.py:618-629` |
-| `--unlock` | Pone estados en Pendiente tras confirmar RESET, luego corre la cascada | Sí | `ejecutar_proyecto.py:631-637` |
-| `--purge-history` | Vacía tablas derivadas, luego corre la cascada | Sí | `ejecutar_proyecto.py:638-644` |
-| `--audit-names` | Auditoría interactiva de nombres | Depende del script | `ejecutar_proyecto.py:645-649` |
-| `--aporte MONTO` | Inserta un aporte o retiro | Sí: tabla `aportes_capital` | `ejecutar_proyecto.py:425-499` |
-| `--aportes-list` | Lista aportes y su total | No | `ejecutar_proyecto.py:502-530` |
-| `--exportar-excel` | Genera el Excel (ver Exportación Excel) | Sí, en `estado` de `partidos_backtest` | `ejecutar_proyecto.py:654-656` |
-| `--help` | Muestra comandos y cascada | No | `ejecutar_proyecto.py:536-544` |
+| (sin argumentos) | Corre la cascada completa y el resumen | Sí, vía motores | `ejecutar_proyecto.py:431-467` |
+| `--status` | Muestra apuestas reales, config v2 y bankroll | No | `ejecutar_proyecto.py:158-245` |
+| `--summary` | Partidos con Pinnacle, liquidados en 24 h y cobertura Pinnacle | No | `ejecutar_proyecto.py:249-305` |
+| `--audit-names` | Auditoría interactiva de nombres | Depende del script | `ejecutar_proyecto.py:493-497` |
+| `--aporte MONTO` | Inserta un aporte o retiro | Sí: tabla `aportes_capital` | `ejecutar_proyecto.py:309-383` |
+| `--aportes-list` | Lista aportes y su total | No | `ejecutar_proyecto.py:386-416` |
+| `--help` | Muestra comandos y cascada | No | `ejecutar_proyecto.py:420-427` |
 
-La tabla `aportes_capital` tiene columnas `id`, `fecha`, `monto`, `descripcion` y `fecha_creacion` (`ejecutar_proyecto.py:470-478`).
+La tabla `aportes_capital` tiene columnas `id`, `fecha`, `monto`, `descripcion` y `fecha_creacion` (`ejecutar_proyecto.py:355-363`).
 
-Cascada diaria (`MOTORES_DIARIOS`, 6 pasos, en este orden). El v1 salió del camino diario (D-022):
+Cascada diaria (`MOTORES_DIARIOS`, 6 pasos, en este orden). El v1 salió del camino diario (D-022) y se borró (D-023):
 
 | # | Archivo | Crítico | Interactivo | Línea |
 |---|---|---|---|---|
-| 1 | `motor_backtest.py` | Sí | No | 52 |
-| 1.5 | `motor_liquidador.py` | Sí | No | 53 |
-| 4 | `motor_fixture.py` | Sí | Sí | 57 |
-| 6 | `motor_cuotas.py` | Sí | No | 58 |
-| 8 | `motor_backtest.py` | No | No | 61 |
-| 8.5 | `motor_liquidador.py` | No | No | 62 |
+| 1 | `motor_backtest.py` | Sí | No | 43 |
+| 1.5 | `motor_liquidador.py` | Sí | No | 44 |
+| 4 | `motor_fixture.py` | Sí | Sí | 48 |
+| 6 | `motor_cuotas.py` | Sí | No | 49 |
+| 8 | `motor_backtest.py` | No | No | 52 |
+| 8.5 | `motor_liquidador.py` | No | No | 53 |
 
 ## Comportamiento (reglas exactas, en orden, con path:line)
 
 Reglas de arranque:
 
-1. Cambia el directorio de trabajo a la raíz del repo (`ejecutar_proyecto.py:31-32`).
-2. Agrega la raíz a `sys.path` (`ejecutar_proyecto.py:33`).
-3. Fuerza UTF-8 en stdout y stderr (`ejecutar_proyecto.py:37-41`).
-4. Limpia la pantalla solo si la salida es una terminal (`ejecutar_proyecto.py:593-594`).
+1. Cambia el directorio de trabajo a la raíz del repo (`ejecutar_proyecto.py:24`).
+2. Agrega la raíz a `sys.path` (`ejecutar_proyecto.py:25`).
+3. Fuerza UTF-8 en stdout y stderr (`ejecutar_proyecto.py:29-33`).
+4. Limpia la pantalla solo si la salida es una terminal (`ejecutar_proyecto.py:474-475`).
 
 Reglas de la cascada diaria:
 
-5. Corre preflight: DB, `config.json` y módulos (`ejecutar_proyecto.py:552`, `:153-173`).
-6. Aborta sin DB si el archivo no existe o pesa 0 bytes (`ejecutar_proyecto.py:558-561`).
-7. Ejecuta cada motor en orden, en un subproceso `python -u` (`ejecutar_proyecto.py:567-568`, `:111`).
-8. Fusiona stderr en stdout para que no bloquee el pipe (`ejecutar_proyecto.py:122`).
-9. Imprime cada línea del hijo con prefijo `   | ` (`ejecutar_proyecto.py:128`).
-10. Marca fallo si el código de salida no es 0 (`ejecutar_proyecto.py:130-133`).
-11. Si un motor crítico falla, imprime ABORTO y sale con código 1 (`ejecutar_proyecto.py:571-573`).
-12. Si un motor satélite falla, lo anota y sigue (`ejecutar_proyecto.py:570`, `:574-575`).
-13. Al final imprime los satélites fallidos y el resumen (`ejecutar_proyecto.py:577-586`).
-14. Sale con código 0 aunque haya satélites fallidos (`ejecutar_proyecto.py:577-583`).
+5. Corre preflight: DB y `config.json` (`ejecutar_proyecto.py:433`, `:132-152`).
+6. Aborta sin DB si el archivo no existe o pesa 0 bytes (`ejecutar_proyecto.py:439-442`).
+7. Ejecuta cada motor en orden, en un subproceso `python -u` (`ejecutar_proyecto.py:448-449`, `:90`).
+8. Fusiona stderr en stdout para que no bloquee el pipe (`ejecutar_proyecto.py:101`).
+9. Imprime cada línea del hijo con prefijo `   | ` (`ejecutar_proyecto.py:107`).
+10. Marca fallo si el código de salida no es 0 (`ejecutar_proyecto.py:109-112`).
+11. Si un motor crítico falla, imprime ABORTO y sale con código 1 (`ejecutar_proyecto.py:452-454`).
+12. Si un motor satélite falla, lo anota y sigue (`ejecutar_proyecto.py:451`, `:455-456`).
+13. Al final imprime los satélites fallidos y el resumen (`ejecutar_proyecto.py:458-467`).
+14. Sale con código 0 aunque haya satélites fallidos (`ejecutar_proyecto.py:458-464`).
 
 Reglas de subcomandos:
 
-15. `--rebuild` corre importador, purga y desbloqueo. Si un paso falla, aborta antes de los siguientes (`ejecutar_proyecto.py:618-629`).
-16. `--unlock` corre el desbloqueo y luego la cascada. Si falla, sale con código 1 (`ejecutar_proyecto.py:631-637`).
-17. `--purge-history` corre la purga y luego la cascada (`ejecutar_proyecto.py:638-644`).
-18. `--aporte` valida monto y fecha antes de insertar (`ejecutar_proyecto.py:439-464`).
-19. Un comando desconocido imprime la ayuda y sale con código 1 (`ejecutar_proyecto.py:661-664`).
+15. `--summary` avisa y termina si la base todavía no tiene columnas `pin_*` (`ejecutar_proyecto.py:264-268`).
+16. `--aporte` valida monto y fecha antes de insertar (`ejecutar_proyecto.py:323-350`).
+17. Un comando desconocido imprime la ayuda y sale con código 1 (`ejecutar_proyecto.py:506-509`).
 
 ## Invariantes (lo que nunca debe pasar)
 
-- Ningún motor posterior corre si un motor crítico falla (`ejecutar_proyecto.py:571-573`).
-- La cascada nunca corre sin una base existente y no vacía (`ejecutar_proyecto.py:558-561`).
-- `--rebuild` nunca purga tablas derivadas si la importación falla (`ejecutar_proyecto.py:620`, `tests/test_orquestador.py:28-36`).
-- `--unlock` nunca resetea la base sin escribir RESET (`src/nucleo/desbloquear_matriz.py:18-22`).
+- Ningún motor posterior corre si un motor crítico falla (`ejecutar_proyecto.py:452-454`).
+- La cascada nunca corre sin una base existente y no vacía (`ejecutar_proyecto.py:439-442`).
 - Todo cambio manual de datos o de esquema debe tener respaldo previo (ver Respaldos). El pipeline diario no crea respaldo.
 
 ## Parámetros (clave de config_motor_valores o archivo de config, default, efecto)
@@ -89,7 +80,6 @@ Reglas de subcomandos:
 | Campo `critico` por motor | Ver tabla de cascada | Decide si el fallo aborta el pipeline |
 | Campo `interactivo` por motor | Solo `motor_fixture.py` | Hereda la terminal en vez de capturar la salida |
 | `api_keys_odds` en `config.json` | Lista vacía | Si está vacía, el preflight avisa que `motor_cuotas` fallará |
-| `INACTIVITY_MONTHS` en `src/persistencia/motor_purga.py` | 6 meses | Antigüedad para purgar equipos |
 
 ## Tests de aceptación (tests existentes en tests/ que lo cubren + huecos sin test)
 
@@ -97,25 +87,20 @@ Tests existentes (`tests/test_orquestador.py`):
 
 - `test_hijo_con_mucho_stderr_no_bloquea` (`:13`): stderr grande no bloquea el hijo.
 - `test_hijo_que_falla_devuelve_false` (`:23`): un hijo con error devuelve False.
-- `test_rebuild_aborta_si_falla_un_paso` (`:28`): `--rebuild` no sigue tras un fallo.
+- `test_cascada_diaria_solo_corre_motores_v2` (`:28`): orden de los 6 pasos.
 
 Huecos sin test:
 
-- No hay test de la regla de motor crítico en `cmd_pipeline_diario` (`ejecutar_proyecto.py:571-573`).
-- No hay test del preflight ni del aborto sin base (`ejecutar_proyecto.py:153`, `:558-561`).
-- No hay test del orden ni de las banderas de `MOTORES_DIARIOS` (`ejecutar_proyecto.py:47-63`).
+- No hay test de la regla de motor crítico en `cmd_pipeline_diario` (`ejecutar_proyecto.py:452-454`).
+- No hay test del preflight ni del aborto sin base (`ejecutar_proyecto.py:132`, `:439-442`).
 - No hay test de `--status`, `--summary`, `--aporte` ni `--aportes-list`.
 - No hay test del código de salida final con satélites fallidos.
 
 ## Limitaciones conocidas
 
-- Sale con código 0 aunque fallen motores satélite (`ejecutar_proyecto.py:577-583`). `ejecutar_robot.sh` no detecta esos fallos.
-- El preflight revisa `api_keys_odds` pero no `api_keys_football` (`ejecutar_proyecto.py:168-169`).
-- `ejecutar_motor` no tiene timeout (`ejecutar_proyecto.py:103-144`). Un motor colgado detiene la cascada.
-- En `--unlock` y `--rebuild`, el prompt de RESET se escribe sin salto de línea. El subproceso captura stdout, así que el prompt no se ve (`src/nucleo/desbloquear_matriz.py:19`, `ejecutar_proyecto.py:126`).
-- `--purge-history` no pide confirmación (`src/persistencia/reset_tablas_derivadas.py`).
-- `--rebuild` falla en el primer paso si falta `modelo_estable.csv` (`src/persistencia/importador_gold.py:16`). El archivo no está en el repo.
-- `motor_fixture.py` figura como interactivo (`ejecutar_proyecto.py:57`). El módulo no usa `input()` (`src/ingesta/motor_fixture.py:10-11`).
+- Sale con código 0 aunque fallen motores satélite (`ejecutar_proyecto.py:458-464`). `ejecutar_robot.sh` no detecta esos fallos.
+- `ejecutar_motor` no tiene timeout (`ejecutar_proyecto.py:82-129`). Un motor colgado detiene la cascada.
+- `motor_fixture.py` figura como interactivo (`ejecutar_proyecto.py:48`). El módulo no usa `input()` (`src/ingesta/motor_fixture.py:10-11`).
 
 # Ejecución programada (ejecutar_robot.sh)
 
@@ -278,7 +263,6 @@ Semillas con valor distinto al manifiesto:
 
 - Una base existente nunca se sobrescribe (`scripts/db/inicializar_db.py:98-99`).
 - Una base nueva nunca arranca con O/U en LIVE (`scripts/db/inicializar_db.py:91-92`).
-- Una base nueva nunca arranca con 1X2 en LIVE. El default de `apuestas_live` es FALSE (`src/nucleo/motor_calculadora.py:2199`).
 - Cada par (clave, scope) aparece una sola vez (clave primaria de `config_motor_valores`).
 
 ## Parámetros (clave de config_motor_valores o archivo de config, default, efecto)
@@ -293,15 +277,13 @@ Semillas con valor distinto al manifiesto:
 
 ## Tests de aceptación (tests existentes en tests/ que lo cubren + huecos sin test)
 
-- `tests/test_flujo_dinero_real.py:10,22`: usa `inicializar` para crear la base de la prueba de punta a punta.
-- `tests/test_prior_ema.py:52,61,70,97`: prueban el prior por equipo y el flag.
+- `tests/test_flujo_dinero_real.py`: usa `inicializar` para crear la base de la prueba de punta a punta.
 - Hueco: no hay test de `FileExistsError` en `inicializar`.
 - Hueco: no hay test de que la base nueva tenga todas las tablas que leen los motores.
 
 ## Limitaciones conocidas
 
-- La semilla no crea `apuestas_live` (`scripts/db/inicializar_db.py:91-92` solo trata `apuesta_ou_live`). La promoción automática de 1X2 no tiene filas que actualizar (`scripts/evaluar_pretest.py:195-196`).
-- Lo mismo pasa en la base actual `fondo_quant.db`: no tiene filas `apuestas_live`.
+- La semilla sigue cargando las claves del v1 (EMAs, Kelly, pretest). Ningún módulo del v2 las lee; borrarlas es un cambio de esquema aparte.
 - `crear_config_motor.py` exige que la base exista (`scripts/db/crear_config_motor.py:186-188`). Para crear desde cero se usa `inicializar_db.py`.
 
 # Esquema versionado (scripts/db/esquema.py)
@@ -501,14 +483,14 @@ Configuración (`.claude/settings.json`):
 
 `validate_task_created.py`:
 
-5. Lee stdin. Si el JSON es inválido, deja pasar (`scripts/hooks/validate_task_created.py:74-81`).
-6. Busca `Reglas_IA.txt`, `manifest` o `motor_calculadora.py` (`scripts/hooks/validate_task_created.py:28-32`, `:86`).
-7. Busca constantes protegidas (`scripts/hooks/validate_task_created.py:34-38`, `:87`).
-8. Si no hay coincidencias, deja pasar (`scripts/hooks/validate_task_created.py:89-90`).
-9. Si hay coincidencias y falta el tag `MANIFESTO-CHANGE-APPROVED:bd-<id>` o `HUMAN`, bloquea con código 2 (`scripts/hooks/validate_task_created.py:93-109`).
-10. Si hay tag `bd-<id>`, consulta el label `approved-by-lead` (`scripts/hooks/validate_task_created.py:112-117`).
-11. Si `bd` no responde, avisa y deja pasar (`scripts/hooks/validate_task_created.py:118-119`).
-12. Ante error inesperado, deja pasar (`scripts/hooks/validate_task_created.py:127-129`).
+5. Lee stdin. Si el JSON es inválido, deja pasar (`scripts/hooks/validate_task_created.py:75-84`).
+6. Busca `Reglas_IA.txt`, `00-contrato.md`, `manifest` o `valor_v2.py` (`scripts/hooks/validate_task_created.py:28-33`, `:89`).
+7. Busca constantes protegidas (`scripts/hooks/validate_task_created.py:35-41`, `:90`).
+8. Si no hay coincidencias, deja pasar (`scripts/hooks/validate_task_created.py:92-93`).
+9. Si hay coincidencias y falta el tag `MANIFESTO-CHANGE-APPROVED:bd-<id>` o `HUMAN`, bloquea con código 2 (`scripts/hooks/validate_task_created.py:96-112`).
+10. Si hay tag `bd-<id>`, consulta el label `approved-by-lead` (`scripts/hooks/validate_task_created.py:114-120`).
+11. Si `bd` no responde, avisa y deja pasar (`scripts/hooks/validate_task_created.py:121-122`).
+12. Ante error inesperado, deja pasar (`scripts/hooks/validate_task_created.py:127-132`).
 
 `validate_task_completed.py`:
 
@@ -522,7 +504,7 @@ Configuración (`.claude/settings.json`):
 
 ## Invariantes (lo que nunca debe pasar)
 
-- Un cambio al manifiesto nunca pasa sin label `approved-by-lead`. Excepción: si `bd` no responde (`scripts/hooks/validate_task_created.py:118-119`).
+- Un cambio al manifiesto nunca pasa sin label `approved-by-lead`. Excepción: si `bd` no responde (`scripts/hooks/validate_task_created.py:121-122`).
 - Un hook nunca escribe en la base.
 - Los hooks nunca llaman a un intérprete distinto de `python3` (`tests/test_ops_hooks.py:55-62`).
 
@@ -608,12 +590,6 @@ Paso 7. Correr las pruebas:
 .venv/bin/python -m pytest
 ```
 
-Paso 8. Opcional. Cargar historia desde CSV. Hoy falla si falta `modelo_estable.csv`. Además corre la cascada completa y consulta APIs:
-
-```bash
-.venv/bin/python ejecutar_proyecto.py --rebuild
-```
-
 ## Operación diaria
 
 Pipeline completo:
@@ -664,24 +640,6 @@ Listar aportes y retiros:
 .venv/bin/python ejecutar_proyecto.py --aportes-list
 ```
 
-Generar el Excel bajo demanda:
-
-```bash
-.venv/bin/python ejecutar_proyecto.py --exportar-excel
-```
-
-Ver cambios de pretest sin aplicarlos:
-
-```bash
-.venv/bin/python scripts/evaluar_pretest.py --dry-run
-```
-
-Aplicar pasos a LIVE. Mueve dinero real. Requiere aprobación humana:
-
-```bash
-.venv/bin/python scripts/evaluar_pretest.py --aprobar-live
-```
-
 ## Antes de cambiar la base
 
 Crear un respaldo con la API de SQLite:
@@ -709,17 +667,3 @@ Restaurar un respaldo. Revisar antes el archivo. Reemplazar `<archivo>`:
 ```
 
 No usar `cp` sobre la base viva. La base corre en modo WAL y `cp` puede omitir commits (`adepor_guard.py:33-35`).
-
-## Operaciones destructivas
-
-Vaciar tablas derivadas y correr la cascada. No pide confirmación. Crear respaldo antes:
-
-```bash
-.venv/bin/python ejecutar_proyecto.py --purge-history
-```
-
-Resetear estados a Pendiente y correr la cascada. Pide escribir RESET. Crear respaldo antes:
-
-```bash
-.venv/bin/python ejecutar_proyecto.py --unlock
-```

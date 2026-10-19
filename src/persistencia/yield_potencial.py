@@ -2,7 +2,7 @@
 Yield potencial: cada pick liquidado a 1 unidad, tenga o no stake.
 
 NO es dinero real. El pretest tiene stake 0 y aqui cuenta igual.
-El dinero real vive en excel_metricas.calcular_metricas_dashboard.
+El dinero real vive en metricas.metricas_dinero.
 """
 import random
 

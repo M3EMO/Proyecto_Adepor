@@ -11,7 +11,7 @@ Inputs (stdin JSON, shape segun doc Claude Code):
 Reglas:
   1. Si menciona "Reglas_IA.txt", el body debe incluir
      MANIFESTO-CHANGE-APPROVED:<bead_id> o exit 2.
-  2. Si menciona modificacion de constantes del nucleo (motor_calculadora.py
+  2. Si menciona modificacion de constantes del nucleo (valor_v2.py
      constantes ALFA_*, RHO_*, FACTOR_CORR_*, FLOOR_PROB_MIN, etc.), idem.
 
 Exit code:
@@ -28,9 +28,8 @@ import sys
 PATRONES_MANIFIESTO = [
     re.compile(r'\bReglas_IA\.txt\b', re.IGNORECASE),
     re.compile(r'00-contrato\.md', re.IGNORECASE),  # contrato vigente (reemplaza Reglas_IA.txt)
-    re.compile(r'\bevaluar_pretest\.py\b', re.IGNORECASE),
     re.compile(r'\bmanifest', re.IGNORECASE),
-    re.compile(r'\bmotor_calculadora\.py\b', re.IGNORECASE),
+    re.compile(r'\bvalor_v2\.py\b', re.IGNORECASE),  # capa de decision v2 (D-019)
 ]
 
 CONSTANTES_PROTEGIDAS = [
@@ -38,6 +37,7 @@ CONSTANTES_PROTEGIDAS = [
     'FLOOR_PROB_MIN', 'MARGEN_PREDICTIVO_1X2', 'CORR_VISITA',
     'MAX_KELLY_PCT_NORMAL', 'MAX_KELLY_PCT_DRAWDOWN',
     'FRACCION_KELLY', 'RATIO_MIN_IMPLICITA', 'N_MIN_PARTIDOS_EQUIPO',
+    'umbral_ev_v2', 'fraccion_kelly_v2', 'tope_stake_v2',
 ]
 
 TAG_APROBADO = re.compile(r'MANIFESTO-CHANGE-APPROVED\s*:\s*(bd-[\w-]+|HUMAN)', re.IGNORECASE)
@@ -96,7 +96,7 @@ def main():
     if not TAG_APROBADO.search(texto):
         razones = []
         if dispara_manifiesto:
-            razones.append("la task menciona Reglas_IA.txt o motor_calculadora.py")
+            razones.append("la task menciona Reglas_IA.txt o valor_v2.py")
         if constantes_mencionadas:
             razones.append(f"menciona constantes protegidas: {', '.join(constantes_mencionadas)}")
         msg = (

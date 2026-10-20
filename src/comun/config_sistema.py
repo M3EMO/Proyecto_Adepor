@@ -16,7 +16,7 @@ DB_NAME = os.environ.get('ADEPOR_DB') or os.path.join(_RAIZ, 'fondo_quant.db')
 
 # --- Ligas activas (codigo ESPN -> nombre interno) ---
 # REGLA: sin tildes en valores ("Turquia" no "Turquía").
-# El nombre interno es el usado en historial_equipos.liga, ligas_stats.liga,
+# El nombre interno es el usado en
 # partidos_backtest.pais y en todos los diccionarios por liga del sistema.
 LIGAS_ESPN = {
     "arg.1": "Argentina",

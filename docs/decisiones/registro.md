@@ -111,3 +111,11 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Dashboard:** quedan Valor v2, Dinero real, Yield potencial e Historial.
 - **Fuera de alcance:** `analisis/` (research congelado) y las tablas y claves v1 de la base.
 - **Bead:** `adepor-q54`.
+
+## D-024 · 2026-10-20 · Una base nueva nace solo con el esquema del v2
+- **Motivo:** `inicializar_db.py` creaba tablas, columnas y semillas del v1 que ningún módulo vivo lee.
+- **Regla:** una base nueva tiene `partidos_backtest`, `configuracion`, `apuestas_confirmadas` y `config_motor_valores`.
+- **Semillas:** solo `umbral_ev_v2`, `fraccion_kelly_v2` y `tope_stake_v2`, con los defaults de `valor_v2.py`.
+- **Fusión:** `crear_config_motor.py` se borra; su tabla, índice y trigger viven en `inicializar_db.py`.
+- **Fuera de alcance:** la base de producción conserva sus tablas v1 (fase B, no aprobada).
+- **Bead:** `adepor-xue`.

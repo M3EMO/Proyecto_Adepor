@@ -43,7 +43,6 @@ def cargar_partidos(cur):
     """Partidos de partidos_backtest en orden fijo de columnas (los indices los usan los loaders)."""
     cur.execute("""
         SELECT id_partido, fecha, local, visita, pais,
-               prob_1, prob_x, prob_2, prob_o25, prob_u25,
                apuesta_1x2, apuesta_ou, stake_1x2, stake_ou,
                cuota_1, cuota_x, cuota_2, cuota_o25, cuota_u25,
                estado, goles_l, goles_v
@@ -103,9 +102,9 @@ def apuestas_reales(datos):
     """Apuestas liquidadas con stake > 0, con la formula de metricas_dinero."""
     out = []
     for r in datos:
-        estado, gl, gv = r[19], r[20], r[21]
-        for ap, stk in ((r[10], r[12]), (r[11], r[13])):
-            pl = _pl_pick(estado, ap, stk, cuota_para_pick(ap, *r[14:19]), gl, gv)
+        estado, gl, gv = r[14], r[15], r[16]
+        for ap, stk in ((r[5], r[7]), (r[6], r[8])):
+            pl = _pl_pick(estado, ap, stk, cuota_para_pick(ap, *r[9:14]), gl, gv)
             if pl is not None:
                 out.append({"fecha": str(r[1] or ""), "pl": pl})
     return out
@@ -140,9 +139,9 @@ def historial_df(datos):
     """Una fila por partido, como la hoja Backtest. P/L neto de ambos mercados."""
     filas = []
     for r in datos:
-        estado, gl, gv = r[19], r[20], r[21]
-        ap1, apou, stk1, stko = r[10], r[11], r[12], r[13]
-        c1, cx, c2, co, cu = r[14:19]
+        estado, gl, gv = r[14], r[15], r[16]
+        ap1, apou, stk1, stko = r[5], r[6], r[7], r[8]
+        c1, cx, c2, co, cu = r[9:14]
         pls = [_pl_pick(estado, ap1, stk1, cuota_para_pick(ap1, c1, cx, c2, co, cu), gl, gv),
                _pl_pick(estado, apou, stko, cuota_para_pick(apou, c1, cx, c2, co, cu), gl, gv)]
         validos = [x for x in pls if x is not None]

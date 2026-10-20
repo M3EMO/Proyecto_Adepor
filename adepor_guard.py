@@ -80,36 +80,7 @@ def extraer_metricas(conn):
         for r in c.fetchall()
     }
 
-    # --- 3. rho por liga ---
-    try:
-        c.execute("SELECT liga, rho_calculado, total_partidos FROM ligas_stats")
-        metricas["rho_por_liga"] = {
-            r[0]: {"rho": r[1], "n_partidos": r[2]} for r in c.fetchall()
-        }
-    except Exception:
-        metricas["rho_por_liga"] = {}
-
-    # --- 4. EMA promedio por liga ---
-    try:
-        c.execute("""
-            SELECT liga,
-                   ROUND(AVG(ema_xg_favor_home), 4) as avg_fav_h,
-                   ROUND(AVG(ema_xg_contra_home), 4) as avg_con_h,
-                   ROUND(AVG(ema_xg_favor_away), 4) as avg_fav_a,
-                   ROUND(AVG(ema_xg_contra_away), 4) as avg_con_a,
-                   COUNT(*) as n_equipos
-            FROM historial_equipos
-            GROUP BY liga
-        """)
-        metricas["ema_por_liga"] = {
-            r[0]: {"avg_fav_h": r[1], "avg_con_h": r[2],
-                   "avg_fav_a": r[3], "avg_con_a": r[4], "n_equipos": r[5]}
-            for r in c.fetchall()
-        }
-    except Exception:
-        metricas["ema_por_liga"] = {}
-
-    # --- 5. Últimas 10 apuestas con resultado ---
+    # --- 3. Últimas 10 apuestas con resultado ---
     c.execute("""
         SELECT fecha, pais, local, visita, apuesta_1x2, stake_1x2,
                goles_l, goles_v, apuesta_ou, stake_ou
@@ -125,24 +96,16 @@ def extraer_metricas(conn):
         for r in c.fetchall()
     ]
 
-    # --- 6. Totales globales ---
+    # --- 4. Totales globales ---
     total_liq = sum(v["n"] for v in metricas["liquidados_por_liga"].values())
     total_stake = sum(v["total_stake"] for v in metricas["liquidados_por_liga"].values())
     metricas["totales"] = {
         "total_liquidados": total_liq,
         "total_stake_apostado": round(total_stake, 2),
-        "total_equipos_con_ema": sum(
-            v["n_equipos"] for v in metricas["ema_por_liga"].values()
-        ),
-        "total_partidos_ema": metricas["estados"].get("Liquidado", 0)
-                              + metricas["estados"].get("Calculado", 0)
-                              + metricas["estados"].get("Finalizado", 0),
     }
 
-    # --- 7. Integridad de datos ---
-    c.execute("SELECT COUNT(*) FROM ema_procesados")
+    # --- 5. Integridad de datos ---
     metricas["integridad"] = {
-        "ema_procesados": c.fetchone()[0],
         "estados_validos": all(
             k in ["Pendiente", "Calculado", "Finalizado", "Liquidado"]
             for k in metricas["estados"].keys()
@@ -188,7 +151,6 @@ def cmd_snapshot():
         print(f"    {estado:15s}: {n}")
     print(f"  Total liquidados    : {metricas['totales']['total_liquidados']}")
     print(f"  Total stake apostado: {metricas['totales']['total_stake_apostado']}")
-    print(f"  Equipos con EMA     : {metricas['totales']['total_equipos_con_ema']}")
     return json_path
 
 
@@ -224,30 +186,6 @@ def cmd_compare(snapshot_path=None):
         print(f"  {estado:15s}: {b:4d} -> {a:4d}  ({signo}){marca}")
         if delta != 0:
             cambios.append(f"{estado}: {b}->{a}")
-
-    # --- Comparar rho ---
-    print("\nRHO POR LIGA:")
-    b_rho = baseline.get("rho_por_liga", {})
-    a_rho = actual.get("rho_por_liga", {})
-    for liga in sorted(set(list(b_rho.keys()) + list(a_rho.keys()))):
-        b_val = b_rho.get(liga, {}).get("rho", "—")
-        a_val = a_rho.get(liga, {}).get("rho", "—")
-        marca = " <- CAMBIÓ" if b_val != a_val else ""
-        print(f"  {liga:15s}: {str(b_val):8s} -> {str(a_val):8s}{marca}")
-
-    # --- Comparar EMA promedio ---
-    print("\nEMA PROMEDIO FAV HOME POR LIGA:")
-    b_ema = baseline.get("ema_por_liga", {})
-    a_ema = actual.get("ema_por_liga", {})
-    for liga in sorted(set(list(b_ema.keys()) + list(a_ema.keys()))):
-        b_val = b_ema.get(liga, {}).get("avg_fav_h", "—")
-        a_val = a_ema.get(liga, {}).get("avg_fav_h", "—")
-        try:
-            diff = abs(float(a_val) - float(b_val))
-            marca = " [!] DRIFT > 0.05" if diff > 0.05 else ""
-        except Exception:
-            diff, marca = 0, ""
-        print(f"  {liga:15s}: {str(b_val):8s} -> {str(a_val):8s}{marca}")
 
     # --- Resumen ---
     print("\n" + "="*50)

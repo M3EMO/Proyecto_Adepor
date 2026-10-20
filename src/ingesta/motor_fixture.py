@@ -29,12 +29,9 @@ def main():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS partidos_backtest (
             id_partido TEXT PRIMARY KEY, fecha TEXT, local TEXT, visita TEXT, pais TEXT,
-            estado TEXT, prob_1 REAL, prob_x REAL, prob_2 REAL, prob_o25 REAL, prob_u25 REAL,
-            apuesta_1x2 TEXT, apuesta_ou TEXT, stake_1x2 REAL, stake_ou REAL,
+            estado TEXT, apuesta_1x2 TEXT, apuesta_ou TEXT, stake_1x2 REAL, stake_ou REAL,
             cuota_1 REAL, cuota_x REAL, cuota_2 REAL, cuota_o25 REAL, cuota_u25 REAL,
-            goles_l INTEGER, goles_v INTEGER, formacion_l TEXT, formacion_v TEXT, 
-            arbitro TEXT, id_arbitro TEXT, clv_registrado TEXT,
-            cuota_cierre_1x2 REAL, cuota_cierre_ou REAL
+            goles_l INTEGER, goles_v INTEGER, cuota_cierre_1x2 REAL, cuota_cierre_ou REAL
         )
     """)
 

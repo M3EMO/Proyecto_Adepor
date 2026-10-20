@@ -75,21 +75,21 @@ def _grupo(bets):
 def metricas_dinero(datos):
     """KPIs total / 1x2 / ou de las apuestas liquidadas con stake > 0.
 
-    datos: filas con el orden de dashboard.cargar_partidos (indices 10-21).
+    datos: filas con el orden de dashboard.cargar_partidos (indices 5-16).
     Una apuesta ganada sin cuota valida no se puede valorar: queda fuera de P/L y volumen.
     """
     bets = {'1x2': [], 'ou': []}
     for r in datos:
-        estado, gl, gv = r[19], r[20], r[21]
+        estado, gl, gv = r[14], r[15], r[16]
         if estado != 'Liquidado' or gl is None or gv is None:
             continue
-        for mercado, ap, stk in (('1x2', r[10], r[12]), ('ou', r[11], r[13])):
+        for mercado, ap, stk in (('1x2', r[5], r[7]), ('ou', r[6], r[8])):
             if not ap or not stk or stk <= 0:
                 continue
             res = determinar_resultado_entero(ap, gl, gv)
             if res == 0:
                 continue
-            pl = _pl_apuesta(res, stk, cuota_para_pick(ap, *r[14:19]))
+            pl = _pl_apuesta(res, stk, cuota_para_pick(ap, *r[9:14]))
             if pl is not None:
                 bets[mercado].append({'res': res, 'stk': stk, 'pl': pl})
     return {'total': _grupo(bets['1x2'] + bets['ou']), '1x2': _grupo(bets['1x2']), 'ou': _grupo(bets['ou'])}

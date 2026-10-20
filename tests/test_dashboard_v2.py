@@ -16,7 +16,6 @@ CIERRE = (2.0, 3.5, 4.0, 1.9, 1.9)
 
 def _sembrar(db, con_pin=True):
     """f1 futuro con Pinnacle, f2 futuro sin Pinnacle, f3 pasado y f4 liquidado (ambos con Pinnacle)."""
-    db.execute("ALTER TABLE partidos_backtest ADD COLUMN auditoria TEXT")  # lo lee _cargar_partidos
     db.executemany("INSERT INTO partidos_backtest (id_partido, fecha, pais, local, visita, estado, "
                    "goles_l, goles_v) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [
         ("f1", "2099-01-01 15:00", "Argentina", "River", "Boca", "Pendiente", None, None),

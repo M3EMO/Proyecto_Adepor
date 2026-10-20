@@ -8,7 +8,6 @@ import adepor_guard as ag
 
 def test_snapshot_incluye_commits_en_wal(db, tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)  # snapshots/ se crea en el tmp, no en el repo
-    db.execute("CREATE TABLE ema_procesados (id INTEGER)")
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("""INSERT INTO partidos_backtest (id_partido, fecha, pais, local, visita, estado)
                   VALUES ('WAL1', '2026-01-01', 'Argentina', 'A', 'B', 'Liquidado')""")

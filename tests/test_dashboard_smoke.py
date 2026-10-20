@@ -11,24 +11,19 @@ RAIZ = Path(__file__).resolve().parent.parent
 
 def _sembrar(db):
     """Tres partidos: m1 liquidado con stake, m2 liquidado pretest (stake 0), m3 vivo."""
-    db.execute("ALTER TABLE partidos_backtest ADD COLUMN auditoria TEXT")
     cols = ("id_partido, fecha, pais, local, visita, cuota_1, cuota_x, cuota_2, cuota_o25, "
-            "cuota_u25, prob_1, prob_x, prob_2, prob_o25, prob_u25, apuesta_1x2, apuesta_ou, "
-            "stake_1x2, stake_ou, goles_l, goles_v, estado, apuesta_shadow_1x2, "
-            "stake_shadow_1x2, incertidumbre")
-    marcas = ", ".join("?" * 25)
+            "cuota_u25, apuesta_1x2, apuesta_ou, stake_1x2, stake_ou, goles_l, goles_v, estado")
+    marcas = ", ".join("?" * 17)
     db.executemany(f"INSERT INTO partidos_backtest ({cols}) VALUES ({marcas})", [
         ("m1", "2026-03-01 15:00", "Argentina", "River", "Boca",
-         2.0, 3.4, 3.8, 1.8, 1.9, 0.55, 0.25, 0.20, 0.52, 0.48,
-         "[GANADA] LOCAL", "[PERDIDA] UNDER 2.5", 100, 50, 2, 1, "Liquidado",
-         "[PERDIDA] VISITA", 30, 1.1),
+         2.0, 3.4, 3.8, 1.8, 1.9,
+         "[GANADA] LOCAL", "[PERDIDA] UNDER 2.5", 100, 50, 2, 1, "Liquidado"),
         ("m2", "2026-03-05 15:00", "Italia", "Juve", "Roma",
-         2.5, 3.2, 2.9, 2.0, 1.8, 0.40, 0.30, 0.30, 0.55, 0.45,
-         "[PERDIDA] VISITA", "[PERDIDA] OVER 2.5", 0, 0, 1, 1, "Liquidado", None, None, 1.0),
+         2.5, 3.2, 2.9, 2.0, 1.8,
+         "[PERDIDA] VISITA", "[PERDIDA] OVER 2.5", 0, 0, 1, 1, "Liquidado"),
         ("m3", "2099-01-01 15:00", "Italia", "Lazio", "Milan",
-         2.2, 3.2, 3.4, 2.0, 1.9, 0.40, 0.33, 0.27, 0.55, 0.45,
-         "[APOSTAR] EMPATE", "[APOSTAR] OVER 2.5", 80, 40, None, None, "Calculado",
-         "[APOSTAR] LOCAL", 30, 1.2),
+         2.2, 3.2, 3.4, 2.0, 1.9,
+         "[APOSTAR] EMPATE", "[APOSTAR] OVER 2.5", 80, 40, None, None, "Calculado"),
     ])
     db.execute("INSERT INTO configuracion (clave, valor) VALUES ('bankroll', '100000')")
     db.commit()

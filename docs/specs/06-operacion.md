@@ -220,8 +220,8 @@ Crea una base nueva y operable desde cero. Es la ruta de instalación. Nunca toc
 
 ## Entradas
 
-- Ruta opcional en `argv[1]`. Si falta, usa `DB_NAME` (`scripts/db/inicializar_db.py:116`).
-- Semillas de `scripts/db/crear_config_motor.py` (`seed_rows`, 50 filas).
+- Ruta opcional en `argv[1]`. Si falta, usa `DB_NAME` (`scripts/db/inicializar_db.py:93`).
+- Semillas de `SEMILLAS` (`scripts/db/inicializar_db.py:43-47`, 3 filas).
 
 ## Salidas (tablas y columnas que escribe)
 
@@ -229,51 +229,41 @@ Tablas creadas:
 
 | Tabla | Origen |
 |---|---|
-| `config_motor_valores` (con índice y trigger) | `scripts/db/crear_config_motor.py:33-60`, `scripts/db/inicializar_db.py:103-105` |
-| `partidos_backtest` | `scripts/db/inicializar_db.py:29-47` |
-| `historial_equipos` | `scripts/db/inicializar_db.py:49-59` |
-| `ema_procesados` | `scripts/db/inicializar_db.py:60` |
-| `partidos_historico_externo` | `scripts/db/inicializar_db.py:63-65` |
-| `arbitros_stats` | `scripts/db/inicializar_db.py:66-69` |
-| `configuracion` | `scripts/db/inicializar_db.py:70` |
-| `ligas_stats` | `scripts/db/inicializar_db.py:71-74` |
-| `equipos_altitud` | `scripts/db/inicializar_db.py:75` |
-| `apuestas_confirmadas` | `scripts/db/inicializar_db.py:76-79` |
+| `config_motor_valores` (con índice y trigger) | `scripts/db/inicializar_db.py:19-38` |
+| `partidos_backtest` (con índice por estado y fecha) | `scripts/db/inicializar_db.py:52-66` |
+| `configuracion` | `scripts/db/inicializar_db.py:67` |
+| `apuestas_confirmadas` | `scripts/db/inicializar_db.py:68-72` |
 
-Semillas con valor distinto al manifiesto:
+Semillas (iguales a los defaults de `src/nucleo/valor_v2.py:14-16`):
 
-| Clave | Scope | Valor | Línea |
+| Clave | Scope | Valor | Bloqueado |
 |---|---|---|---|
-| `factor_corr_xg_ou` | global | 1.0 | `scripts/db/inicializar_db.py:23`, `:86-88` |
-| `gamma_1x2` | global | 1.0 | `scripts/db/inicializar_db.py:23`, `:89` |
-| `apuesta_ou_live` | global | FALSE | `scripts/db/inicializar_db.py:91-92` |
-| `ema_prior_por_equipo` | global | TRUE | `scripts/db/inicializar_db.py:93` |
+| `umbral_ev_v2` | global | 0.02 | 0 |
+| `fraccion_kelly_v2` | global | 0.25 | 0 |
+| `tope_stake_v2` | global | 0.005 | 0 |
 
 ## Comportamiento (reglas exactas, en orden, con path:line)
 
-1. Si la ruta existe y pesa más de 0 bytes, lanza FileExistsError (`scripts/db/inicializar_db.py:98-99`).
-2. Abre la conexión (`scripts/db/inicializar_db.py:100`).
-3. Activa el modo WAL (`scripts/db/inicializar_db.py:102`).
-4. Crea `config_motor_valores`, su índice y su trigger (`scripts/db/inicializar_db.py:103-105`).
-5. Inserta las semillas con `INSERT OR IGNORE` (`scripts/db/inicializar_db.py:106-108`).
-6. Crea las tablas base (`scripts/db/inicializar_db.py:109`).
-7. Confirma y cierra la conexión (`scripts/db/inicializar_db.py:110-112`).
+1. Si la ruta existe y pesa más de 0 bytes, lanza FileExistsError (`scripts/db/inicializar_db.py:77-78`).
+2. Abre la conexión (`scripts/db/inicializar_db.py:79`).
+3. Activa el modo WAL (`scripts/db/inicializar_db.py:81`).
+4. Crea `config_motor_valores`, su índice y su trigger (`scripts/db/inicializar_db.py:82`).
+5. Inserta las semillas con `INSERT OR IGNORE` (`scripts/db/inicializar_db.py:83-85`).
+6. Crea las tablas base (`scripts/db/inicializar_db.py:86`).
+7. Confirma y cierra la conexión (`scripts/db/inicializar_db.py:87-89`).
 
 ## Invariantes (lo que nunca debe pasar)
 
-- Una base existente nunca se sobrescribe (`scripts/db/inicializar_db.py:98-99`).
-- Una base nueva nunca arranca con O/U en LIVE (`scripts/db/inicializar_db.py:91-92`).
+- Una base existente nunca se sobrescribe (`scripts/db/inicializar_db.py:77-78`).
 - Cada par (clave, scope) aparece una sola vez (clave primaria de `config_motor_valores`).
 
 ## Parámetros (clave de config_motor_valores o archivo de config, default, efecto)
 
 | Clave | Default de la semilla | Efecto |
 |---|---|---|
-| `ema_prior_por_equipo` | TRUE | Las EMAs nacen en escala de goles por equipo |
-| `factor_corr_xg_ou` | 1.0 | Sin compensación del prior por partido |
-| `gamma_1x2` | 1.0 | Sin compensación del prior por partido |
-| `apuesta_ou_live` | FALSE | O/U arranca en pretest, con stake 0 |
-| Resto de claves | Ver `scripts/db/crear_config_motor.py` | Parámetros del manifiesto |
+| `umbral_ev_v2` | 0.02 | EV mínimo sobre la prob justa (D-019) |
+| `fraccion_kelly_v2` | 0.25 | Fracción de Kelly del stake v2 (D-020) |
+| `tope_stake_v2` | 0.005 | Tope del stake como fracción del bankroll (D-020) |
 
 ## Tests de aceptación (tests existentes en tests/ que lo cubren + huecos sin test)
 
@@ -283,8 +273,9 @@ Semillas con valor distinto al manifiesto:
 
 ## Limitaciones conocidas
 
-- La semilla sigue cargando las claves del v1 (EMAs, Kelly, pretest). Ningún módulo del v2 las lee; borrarlas es un cambio de esquema aparte.
-- `crear_config_motor.py` exige que la base exista (`scripts/db/crear_config_motor.py:186-188`). Para crear desde cero se usa `inicializar_db.py`.
+- Las semillas tienen `bloqueado=0`: D-020 deja esos valores provisorios hasta recalibrar el frente de Pareto.
+- Una base existente no recibe las semillas: el v2 usa los defaults de `valor_v2.py` si falta la clave.
+- La base de producción conserva tablas y columnas v1 sin uso (fase B de `adepor-xue`, no aplicada).
 
 # Esquema versionado (scripts/db/esquema.py)
 
@@ -344,39 +335,38 @@ Crea respaldos de la base y métricas JSON. Compara el estado actual contra un r
 
 - Base `DB_NAME` (`adepor_guard.py:27`).
 - Directorio `snapshots/` relativo al directorio actual (`adepor_guard.py:29`).
-- Argumentos de línea de comandos (`adepor_guard.py:346-372`).
+- Argumentos de línea de comandos (`adepor_guard.py:284-310`).
 
 ## Salidas (tablas y columnas que escribe)
 
 | Comando | Archivo que escribe | Línea |
 |---|---|---|
-| `snapshot` | `snapshots/fondo_quant_TS.db` | `adepor_guard.py:165-166` |
-| `snapshot` | `snapshots/metricas_TS.json` | `adepor_guard.py:179-181` |
-| `shadow` | `fondo_quant_shadow.db` (relativo al directorio actual) | `adepor_guard.py:30`, `:276` |
-| `restore` | `snapshots/pre_restore_TS.db` y luego sobrescribe `DB_NAME` | `adepor_guard.py:295-297`, `:306` |
-| `compare` | Nada. Solo imprime | `adepor_guard.py:195-260` |
-| `status` | Nada. Solo imprime | `adepor_guard.py:311-339` |
+| `snapshot` | `snapshots/fondo_quant_TS.db` | `adepor_guard.py:128-129` |
+| `snapshot` | `snapshots/metricas_TS.json` | `adepor_guard.py:142-144` |
+| `shadow` | `fondo_quant_shadow.db` (relativo al directorio actual) | `adepor_guard.py:30`, `:214` |
+| `restore` | `snapshots/pre_restore_TS.db` y luego sobrescribe `DB_NAME` | `adepor_guard.py:233-235`, `:244` |
+| `compare` | Nada. Solo imprime | `adepor_guard.py:157-198` |
+| `status` | Nada. Solo imprime | `adepor_guard.py:249-277` |
 
 ## Comportamiento (reglas exactas, en orden, con path:line)
 
-1. `snapshot` crea `snapshots/` si no existe (`adepor_guard.py:161`).
-2. `snapshot` copia la base con la API de backup de SQLite (`adepor_guard.py:166`, `:33-47`).
-3. `snapshot` extrae métricas: estados, liquidados, rho, EMA, últimas apuestas (`adepor_guard.py:170`, `:54-152`).
-4. `snapshot` escribe el JSON con bloque `_meta` (`adepor_guard.py:173-181`).
-5. `compare` sin argumento usa el último `metricas_*.json` (`adepor_guard.py:197-203`).
-6. `compare` marca cambios de estado y cambios de rho (`adepor_guard.py:214-236`).
-7. `compare` marca drift de EMA mayor a 0.05 (`adepor_guard.py:247`).
-8. `shadow` pide confirmación si la sombra ya existe (`adepor_guard.py:269-274`).
-9. `restore` copia la base actual a `pre_restore_TS.db` antes de todo (`adepor_guard.py:293-297`).
-10. `restore` pide confirmación con "s" (`adepor_guard.py:301-304`).
-11. `restore` sobrescribe `DB_NAME` desde el respaldo (`adepor_guard.py:306`).
-12. `status` lista snapshots y la sombra (`adepor_guard.py:311-339`).
+1. `snapshot` crea `snapshots/` si no existe (`adepor_guard.py:124`).
+2. `snapshot` copia la base con la API de backup de SQLite (`adepor_guard.py:129`, `:33-47`).
+3. `snapshot` extrae métricas: estados, liquidados, últimas apuestas y totales (`adepor_guard.py:133`, `:54-115`).
+4. `snapshot` escribe el JSON con bloque `_meta` (`adepor_guard.py:136-144`).
+5. `compare` sin argumento usa el último `metricas_*.json` (`adepor_guard.py:159-165`).
+6. `compare` marca cambios de estado (`adepor_guard.py:178-188`).
+7. `shadow` pide confirmación si la sombra ya existe (`adepor_guard.py:207-212`).
+8. `restore` copia la base actual a `pre_restore_TS.db` antes de todo (`adepor_guard.py:231-235`).
+9. `restore` pide confirmación con "s" (`adepor_guard.py:239-242`).
+10. `restore` sobrescribe `DB_NAME` desde el respaldo (`adepor_guard.py:244`).
+11. `status` lista snapshots y la sombra (`adepor_guard.py:249-277`).
 
 ## Invariantes (lo que nunca debe pasar)
 
-- Un restore nunca ocurre sin copia de seguridad previa (`adepor_guard.py:295-297`).
+- Un restore nunca ocurre sin copia de seguridad previa (`adepor_guard.py:233-235`).
 - Un snapshot nunca omite datos del archivo WAL (`adepor_guard.py:34-35`, prueba en `tests/test_ops_guard.py:9-29`).
-- Un restore nunca ocurre sin confirmación interactiva (`adepor_guard.py:301-304`).
+- Un restore nunca ocurre sin confirmación interactiva (`adepor_guard.py:239-242`).
 - Las rutas de respaldo nunca deben depender del directorio actual. Hoy dependen (ver Limitaciones).
 
 ## Parámetros (clave de config_motor_valores o archivo de config, default, efecto)
@@ -385,8 +375,7 @@ Crea respaldos de la base y métricas JSON. Compara el estado actual contra un r
 |---|---|---|
 | `SNAPSHOTS_DIR` | `snapshots` (`adepor_guard.py:29`) | Carpeta de respaldos |
 | `SHADOW_DB` | `fondo_quant_shadow.db` (`adepor_guard.py:30`) | Nombre de la base sombra |
-| Umbral de drift EMA | 0.05 (`adepor_guard.py:247`) | Marca cambios grandes en EMA |
-| Umbral de cambio de estado | 50 filas (`adepor_guard.py:223`) | Marca cambios grandes en estados |
+| Umbral de cambio de estado | 50 filas (`adepor_guard.py:185`) | Marca cambios grandes en estados |
 
 ## Tests de aceptación (tests existentes en tests/ que lo cubren + huecos sin test)
 

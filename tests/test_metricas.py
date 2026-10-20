@@ -6,7 +6,6 @@ from src.persistencia.metricas import metricas_dinero, p_valor_t
 def _fila(id_p, ap1x2, apou, stk1x2, stkou, estado, gl, gv, c1=2.0, cx=3.0, co=1.8):
     # Orden de columnas: ver dashboard.cargar_partidos.
     return (id_p, '2026-03-10 20:00', 'A', 'B', 'Argentina',
-            0.0, 0.0, 0.0, 0.0, 0.0,
             ap1x2, apou, stk1x2, stkou,
             c1, cx, 4.0, co, 2.0,
             estado, gl, gv)

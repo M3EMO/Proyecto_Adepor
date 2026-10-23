@@ -186,3 +186,13 @@ Huecos sin test (no encontré test directo para estos puntos):
 - El cierre guardado es la cuota entre 0 y 15 min antes del kickoff, no la cuota exacta del kickoff.
 - El costo de cupo y la línea de cron están en `06-operacion.md`, sección "Captura de cierre".
 - Test: `test_solo_cierre_consulta_solo_ligas_con_kickoff_inminente`.
+
+## Anexo: captura forward en OddsPapi (adepor-6kk)
+
+- `src/ingesta/motor_oddspapi.py` guarda el 1X2 de Pinnacle, bet365 AR y Betano en `cuotas_forward`, una fila por partido, casa y captura.
+- El motor hace 6 pedidos: una casa por pedido y lotes de 5 torneos, porque la API no acepta más.
+- Captura una vez por día UTC; la segunda corrida de la cascada no gasta cupo.
+- Guarda solo partidos no empezados con las tres cuotas activas.
+- Torneos: Liga Profesional, Copa Argentina, Libertadores, Sudamericana, Brasileirão y las 5 ligas top de Europa.
+- No toca `partidos_backtest` ni la decisión.
+- Tests: `tests/test_ingesta_oddspapi.py`.

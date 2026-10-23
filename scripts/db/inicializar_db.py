@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
 from src.comun.config_sistema import DB_NAME  # noqa: E402
+from src.ingesta.motor_oddspapi import SQL_CUOTAS_FORWARD  # noqa: E402
 
 CONFIG_MOTOR = """
 CREATE TABLE IF NOT EXISTS config_motor_valores (
@@ -70,7 +71,7 @@ CREATE TABLE IF NOT EXISTS apuestas_confirmadas (
     cuota_tomada REAL NOT NULL, stake REAL NOT NULL, ts TEXT DEFAULT CURRENT_TIMESTAMP,
     casa TEXT,
     PRIMARY KEY (id_partido, mercado));
-"""
+""" + SQL_CUOTAS_FORWARD
 
 
 def inicializar(db_path):

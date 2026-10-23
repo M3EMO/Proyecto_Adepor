@@ -133,3 +133,9 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Hallazgo:** en Europa, el proporcional muestra sesgo favorito-underdog; el decil favorito gana 2,4 puntos más de lo predicho.
 - **Pendiente:** probar Shin solo para ligas europeas, fuera de muestra, con los `pin_cierre_*` que captura el pipeline.
 - **Bead:** `adepor-4kg`. Datos: `analisis/margen_y_tiros_pinnacle_eu.json` y `_latam_nor.json`.
+
+## D-027 · 2026-10-22 · Captura forward de casas contra Pinnacle en OddsPapi
+- **Regla:** la cascada guarda una vez por día el 1X2 de Pinnacle, bet365 AR y Betano en `cuotas_forward`.
+- **Cupo:** el plan gratis da 250 pedidos por mes y la API acepta una casa y 5 torneos por pedido: 6 pedidos por día.
+- **Uso:** el estudio pre-registrado en `adepor-6kk` compara margen y EV de cada casa contra Pinnacle.
+- **Bead:** `adepor-6kk`.

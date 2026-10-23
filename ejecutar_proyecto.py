@@ -47,6 +47,7 @@ MOTORES_DIARIOS = [
     # API-Football retirado (decision usuario 2026-10-13): fuentes = ESPN + The Odds API.
     {"archivo": "motor_fixture.py",          "desc": "4. El Arquitecto (Proyeccion de Calendario)",            "critico": True,  "interactivo": True},
     {"archivo": "motor_cuotas.py",           "desc": "6. El Oraculo (Cuotas Pinnacle previas y de cierre)",    "critico": True,  "interactivo": False},
+    {"archivo": "-m src.ingesta.motor_oddspapi", "desc": "6.5. Cuotas forward OddsPapi (Pinnacle vs bet365 AR y Betano)", "critico": False, "interactivo": False},
 
     # --- FASE 4: REDUNDANCIA ---
     {"archivo": "motor_backtest.py",         "desc": "8. Liquidador de Ultimo Minuto (Doble Barrido)",         "critico": False, "interactivo": False},

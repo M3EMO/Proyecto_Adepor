@@ -4,7 +4,7 @@ Captura forward de cuotas 1X2 en OddsPapi: Pinnacle contra bet365 AR (adepor-6kk
 Guarda una fila por partido, casa y captura en cuotas_forward. No toca partidos_backtest ni la
 decision: es la base del estudio Pinnacle vs bet365 AR.
 El plan gratis da 250 pedidos por mes, y cada pedido acepta 1 casa y 5 torneos. Con 2 casas y
-15 torneos son 6 pedidos; el motor captura una vez por dia (unos 185 pedidos por mes).
+17 torneos son 8 pedidos; el motor captura una vez por dia (unos 240 pedidos por mes, al limite).
 Betano salio el 2026-10-22: su feed en OddsPapi es Betano Rumania (ro.betano.com), no argentino.
 """
 import sqlite3
@@ -17,9 +17,10 @@ from src.comun.config_sistema import API_KEY_ODDSPAPI, DB_NAME
 
 URL = 'https://api.oddspapi.io/v4/odds-by-tournaments'
 CASAS = ('pinnacle', 'bet365.bet.ar')  # la API acepta una casa por pedido
-# Argentina, Copa Argentina, Libertadores, Sudamericana, Brasil, las 5 ligas top de Europa,
-# Champions, Europa League, Chile, Uruguay y Colombia.
-TORNEOS = (155, 1024, 384, 480, 325, 17, 8, 23, 35, 34, 7, 679, 27665, 278, 27070)
+# Argentina, Libertadores, Sudamericana, Brasil, las 5 ligas top de Europa, Champions, Europa League,
+# Chile, MLS, Liga MX y las segundas de prueba (Championship, Primera Nacional, Primera B de Chile).
+# Uruguay, Colombia y Copa Argentina salieron el 2026-10-23: sin cierre de Pinnacle no miden CLV.
+TORNEOS = (155, 384, 480, 325, 17, 8, 23, 35, 34, 7, 679, 27665, 242, 27464, 18, 703, 1240)
 TORNEOS_POR_PEDIDO = 5  # tope de la API
 MERCADO_1X2 = '101'
 OUTCOMES_1X2 = ('101', '102', '103')  # local, empate, visita

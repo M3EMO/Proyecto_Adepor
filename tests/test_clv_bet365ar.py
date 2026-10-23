@@ -42,3 +42,16 @@ def test_aprender_guarda_alias_claro_y_deja_dudoso_para_revisar(monkeypatch):
     c.aprender(partido, {'local': 'Málaga', 'visita': 'Athletic Club'}, revisar)
     assert guardados == [('Malaga CF', 'Málaga')]  # 'malaga' esta contenido en 'malagacf'
     assert revisar == [{'pais': 'Espana', 'oddspapi': 'Athletic Bilbao', 'base': 'Athletic Club'}]
+
+
+def test_cusum_alarma_solo_cuando_el_clv_cae():
+    assert not c.cusum([0.02] * 300)['alarma']           # edge de 2 %: S queda en 0
+    r = c.cusum([-0.05] * 40)                            # sin edge: S sube 0.06 por pick
+    assert r['alarma'] and abs(r['s'] - 40 * 0.06) < 1e-9
+
+
+def test_cierre_aproximado_usa_la_ultima_captura_entre_pick_e_inicio():
+    snaps = [('2026-10-20T12:00:00Z', [2.0, 3.4, 4.0]), ('2026-10-21T12:00:00Z', [1.9, 3.5, 4.2]),
+             ('2026-10-22T12:00:00Z', [1.8, 3.6, 4.5]), ('2026-10-23T12:00:00Z', [1.7, 3.7, 4.9])]
+    assert c.cierre_aproximado(snaps, '2026-10-20T12:00:00Z', '2026-10-22T20:00:00.000Z') == [1.8, 3.6, 4.5]
+    assert c.cierre_aproximado(snaps[:1], '2026-10-20T12:00:00Z', '2026-10-22T20:00:00.000Z') is None

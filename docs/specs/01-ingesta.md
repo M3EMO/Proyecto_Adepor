@@ -92,6 +92,7 @@ Los módulos son estos:
 10. La fase 4 devuelve el nombre crudo si no hay modo interactivo (`gestor_nombres.py:269-270`).
 11. En modo interactivo, el módulo sugiere un oficial con similitud 0,55 y pide confirmación S/N (`gestor_nombres.py:272-287`).
 12. Un nombre manual se acepta solo si `nombre_equipo_valido` lo aprueba (`gestor_nombres.py:134-138`, `gestor_nombres.py:290-292`).
+15. En una copa, `motor_fixture` registra un equipo desconocido con `registrar_en_copa`: copa nacional en su país, copa internacional en el grupo `<...> otros`.
 14. `aprender_alias(crudo, oficial, liga)` guarda un alias en el país del equipo; para una copa usa su liga local y no pisa un alias de otro equipo.
 13. Cada alias aprendido se guarda en `diccionario_equipos.json` (`gestor_nombres.py:261-262`, `gestor_nombres.py:301`).
 
@@ -208,3 +209,11 @@ Huecos sin test (no encontré test directo para estos puntos):
 - Es un paso no crítico (6.6): si falla, la cascada sigue. No toca la decisión ni `partidos_backtest`.
 - Protocolo y análisis del CLV: `13-estudios-forward.md`, E1.
 - Tests: `tests/test_cuotas_fotmob.py`.
+
+## Anexo: ligas nuevas del 2026-10-23
+
+- `LIGAS_ESPN` suma Championship (`eng.2`, "Inglaterra 2"), Primera Nacional (`arg.2`, "Argentina 2"), MLS (`usa.1`, "Estados Unidos") y Liga MX (`mex.1`, "Mexico").
+- The Odds API cubre Championship, MLS y Liga MX; no cubre la Primera Nacional.
+- ESPN no cubre la Primera B de Chile: esa liga entra solo a la captura de OddsPapi.
+- `scripts/db/alta_equipos_espn.py <slug>` da de alta los equipos de una liga nueva con los nombres de ESPN (`gestor_nombres.registrar_equipos`).
+- API-Football (D-010, retirado): de las cuatro claves de `config.json`, una funciona con plan gratis, dos están suspendidas y una es inválida. El plan gratis solo da temporadas 2022 a 2024, así que no sirve para cuotas actuales.

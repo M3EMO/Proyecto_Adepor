@@ -413,14 +413,24 @@ def _bloque_casas_locales():
     st.caption(f"Informe del {d['fecha']} · {d['decision']} · cruce con la base: {_pct(d['tasa_cruce'])}")
     filas = []
     for estrato, nombre in (("primario", "Argentina y Conmebol"), ("primario_p_min_035", "Arg. y Conmebol, p >= 35%"),
-                            ("resto", "Resto")):
-        r, m = d[estrato], d["margen_medio"][estrato.split("_p_min")[0]]
+                            ("segundas", "Segundas (adepor-dch)"), ("resto", "Resto")):
+        if estrato not in d:  # informe anterior al estrato
+            continue
+        r, m = d[estrato], d["margen_medio"].get(estrato.split("_p_min")[0], {})
         filas.append({"Estrato": nombre, "Picks EV >= 2%": r["n_picks"], "Con cierre": r["n_con_cierre"],
                       "CLV medio": _pct(r.get("clv_medio"), True),
                       "IC95": " a ".join(_pct(x, True) for x in r["clv_ic95"]) if "clv_ic95" in r else "—",
-                      "Margen bet365 AR": _pct(m["bet365.bet.ar"]), "Margen Pinnacle": _pct(m["pinnacle"])})
+                      "Margen bet365 AR": _pct(m.get("bet365.bet.ar")), "Margen Pinnacle": _pct(m.get("pinnacle")),
+                      "CUSUM": _cusum_txt(r.get("cusum"))})
     st.dataframe(pd.DataFrame(filas), hide_index=True)
     st.caption("La decision se toma una vez, con 300 picks con cierre en el estrato primario o el 2027-06-30.")
+
+
+def _cusum_txt(c):
+    """S / h del CUSUM, con ALARMA si S supero h. Un informe viejo no trae el campo."""
+    if not c:
+        return "—"
+    return f"{c['s']:.2f} / {c['h']:.2f}" + (" ALARMA" if c["alarma"] else "")
 
 
 def _bloque_ev(ev, bankroll):

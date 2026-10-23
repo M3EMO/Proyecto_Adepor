@@ -281,6 +281,8 @@ Protocolo fijado el 2026-10-23, antes de ver ningún CLV. Complementa a E1 con l
 - **Corte secundario, sin decisión:** picks con probabilidad de Pinnacle de 35% o más.
 - **Seguimiento:** `analisis/clv_bet365ar.py`, paso 9 de la cascada, escribe `data/oddspapi/clv_bet365ar.json`; el dashboard lo muestra en Valor v2.
 - **Banco de nombres:** el mismo script guarda como alias los nombres de OddsPapi de un cruce claro (`gestor_nombres.aprender_alias`). Los dudosos quedan en `alias_a_revisar`.
+- **CUSUM, alerta temprana sin decisión:** `S = max(0, S + k − CLV)`, con `k` = 1% y `h` = 2,10. Si `S` supera `h`, el edge probablemente se apagó.
+- **Calibración del CUSUM:** con Bet365 en Europa 2019-2022, 10% de falsas alarmas en 300 picks con edge. En retro, la primera alarma llega el 2024-05-18; sin edge, tarda una mediana de 79 picks.
 
 ## E9. Piso de probabilidad (bead `adepor-aua`)
 
@@ -291,6 +293,33 @@ Protocolo fijado el 2026-10-23, antes de correr. Datos: football-data, Europa to
 - **Resultado:** solo el piso 0 llega a 200 picks, así que el elegido es "sin piso".
 - **Prueba 2023-2025:** CLV −0,02%, IC95 [−1,97%, +1,82%], n=243. No pasa: no se agrega piso (D-037).
 - **Hallazgo:** los picks son casi todos underdogs, con cuota mediana de 6,5 y probabilidad mediana de 16,5%.
+
+## E10. Pinnacle y Bet365 por nivel de división (bead `adepor-4c8`)
+
+Protocolo fijado el 2026-10-23, antes de correr. Datos: football-data 2019-2025.
+
+| Nivel | Divisiones | Margen Pinnacle | Pendiente de calibración | CLV 2023-2025 | IC 98,75% | Pasa |
+|---|---|---|---|---|---|---|
+| N1 | E0 SP1 I1 D1 F1 SC0 | 2,8% | 1,05 | +0,11% | [−2,21%, +2,41%] | No |
+| N2 | E1 SP2 I2 D2 F2 SC1 | 3,3% | 1,01 | +2,06% | [+0,72%, +3,46%] | Sí |
+| N3 | E2 SC2 | 4,1% | 1,13 | +1,17% | [−1,96%, +4,74%] | No |
+| N4 | E3 EC SC3 | 4,5% | 1,01 | +1,43% | [−0,38%, +3,31%] | No |
+
+- El cierre de Pinnacle está bien calibrado en todos los niveles (pendiente cercana a 1).
+- N2 tiene CLV positivo en las 7 temporadas.
+- Por tramo de probabilidad, los picks de 20% a 35% tienen CLV positivo todas las temporadas; los de menos de 20% caen a cero desde 2021.
+- Los favoritos de 50% o más casi nunca dan EV de 2% con Bet365.
+
+## E11. bet365 AR en segundas divisiones, forward (bead `adepor-dch`)
+
+Protocolo fijado el 2026-10-23, antes de capturar datos de estas ligas. Sigue a D-038.
+
+- **Torneos:** Championship (18), Primera Nacional de Argentina (703) y Primera B de Chile (1240), tres niveles distintos.
+- **Pick:** igual que E8.
+- **Cierre:** Championship usa `pin_cierre_*`. Las otras dos ligas no están en The Odds API, así que usan la última captura de Pinnacle posterior al pick y anterior al inicio.
+- **Regla:** CLV medio de los tres torneos juntos con IC95 entero sobre 0, y yield plano no negativo.
+- **Parada:** una sola decisión con 300 picks con cierre o el 2027-06-30.
+- **Límite:** el cierre aproximado es más temprano que un cierre real; el Pinnacle previo está casi tan calibrado como el cierre.
 
 ## Orden propuesto
 

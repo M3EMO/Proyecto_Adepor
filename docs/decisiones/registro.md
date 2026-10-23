@@ -214,3 +214,19 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Por período:** 2019-2022 ganan 28.811; 2023-2025 pierden 7.450. El CLV medio de 2023-2025 es cercano a 0.
 - **Regla:** no se agrega piso. El edge histórico de Bet365 no se toma como vigente (ver también D-031).
 - **Bead:** `adepor-aua`. Datos: `analisis/bankroll_y_piso_v2.json`.
+
+## D-038 · 2026-10-23 · Las segundas divisiones europeas muestran CLV positivo sostenido con Bet365
+- **Evidencia:** en E1, SP2, I2, D2, F2 y SC1, los picks del v2 con Bet365 previo dan CLV +2,06% en 2023-2025, IC 98,75% [+0,72%, +3,46%], n=276.
+- **Estabilidad:** el CLV de ese nivel es positivo en las 7 temporadas de 2019 a 2025.
+- **Primera división:** CLV +0,11% en 2023-2025, sin edge vigente (coincide con D-037).
+- **Calibración:** el cierre de Pinnacle está bien calibrado en los cuatro niveles; el margen sube de 2,8% a 4,5% con el nivel.
+- **Límite:** es Bet365 del Reino Unido, con su cuota previa. Falta medir bet365 AR en segundas divisiones, en forma forward.
+- **Regla:** las segundas divisiones europeas pasan a ser candidatas para la captura forward; no hay apuestas reales hasta medir bet365 AR (contrato, regla 6).
+- **Bead:** `adepor-4c8`. Datos: `analisis/divisiones_pinnacle.json`.
+
+## D-039 · 2026-10-23 · Entran Championship, Primera Nacional, MLS y Liga MX; Primera B de Chile solo en OddsPapi
+- **Motivo:** probar el edge de segundas divisiones de D-038 en tres niveles, y sumar MLS y Liga MX a pedido del usuario.
+- **Calibración del Pinnacle previo:** casi igual a la del cierre en los cuatro niveles (pendientes 1,01 a 1,15).
+- **OddsPapi:** salen Uruguay, Colombia y Copa Argentina, que no tienen cierre de Pinnacle; la captura usa 8 pedidos por día, al límite del plan gratis.
+- **API-Football:** sin uso; el plan gratis no da la temporada actual.
+- **Bead de la prueba:** `adepor-dch`.

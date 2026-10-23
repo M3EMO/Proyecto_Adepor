@@ -122,6 +122,25 @@ Pregunta: ¿sumar ligas sube el ritmo de apuestas sin bajar el EV contra el cier
 - Con 2 apuestas por semana, 50 apuestas tardan unos 6 meses y 250 más de 2 años.
 - Los datos de la piscina son de Bet365 contra Pinnacle en el mismo momento. Tu casa (BetWarrior) puede dar otro EV.
 
+### Selección de divisiones (fijada 2026-10-23, antes de correr)
+
+Pregunta: ¿hay divisiones donde las apuestas con EV previo mayor a 2% pagan, de forma sostenida, más que el cierre de Pinnacle?
+
+- **Selección:** con la temporada 2023/24, se calcula por división el EV medio contra el cierre de las apuestas de la piscina. Entran las divisiones con al menos 30 apuestas y EV medio mayor que 0.
+- **Validación:** con la temporada 2024/25, se agrupan las apuestas de las divisiones elegidas. No se reelige ninguna división.
+- **Métrica:** EV medio contra el cierre del grupo en validación, con IC95 por bootstrap de las apuestas (10.000 remuestreos).
+- **Éxito:** el límite inferior del IC95 es mayor que 0.
+- **Control:** el EV medio del grupo complementario (divisiones no elegidas) en validación. Si el grupo elegido no supera al complementario, la selección no persiste.
+- **Código:** `analisis/seleccion_divisiones_ev.py`. Resultado: `analisis/seleccion_divisiones_ev.json`.
+
+### Resultados de la selección (2026-10-23)
+
+- Con 2023/24 se eligieron 5 de 22 divisiones: E2, E3, EC, G1 y SP2.
+- En 2024/25 el grupo elegido tiene 179 apuestas y EV medio contra el cierre de −0.6%, con IC95 [−2.5%, +1.3%].
+- El grupo complementario tiene 327 apuestas y +0.1%, con IC95 [−1.4%, +1.6%].
+- El éxito exigía límite inferior mayor que 0. No se cumple, y el grupo elegido no supera al complementario.
+- Conclusión: la ventaja de las divisiones elegidas en 2023/24 no persistió. Era ruido de selección.
+
 ### Resultados de la variante `todas` (2026-10-23)
 
 - Piscina: 1.080 apuestas en 15.443 partidos (0.070 por partido), unas 13 por semana. Es 6.6 veces el ritmo de las 5 ligas grandes.

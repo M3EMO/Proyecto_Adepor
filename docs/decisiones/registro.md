@@ -156,3 +156,10 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Límite:** el diseño detecta efectos grandes, no chicos.
 - **Regla:** el xG de FotMob no entra al modelo. La probabilidad justa sigue saliendo solo de Pinnacle.
 - **Protocolo:** `analisis/fotmob_xg_vs_pinnacle_prereg.md`, fijado antes de ver resultados. Datos: `analisis/fotmob_xg_vs_pinnacle_eu.json` y `_arg.json`.
+
+## D-030 · 2026-10-23 · Elegir divisiones por EV contra el cierre no persiste
+- **Evidencia:** se eligieron 5 de 22 divisiones con 2023/24. En 2024/25 su EV medio contra el cierre fue −0.6%, IC95 [−2.5%, +1.3%], n=179.
+- **Control:** las divisiones no elegidas dieron +0.1%, IC95 [−1.4%, +1.6%], n=327.
+- **Regla:** no se filtran divisiones por EV histórico. El volumen sale de sumar divisiones, no de elegir las mejores.
+- **Límite:** el diseño usa una temporada para elegir y una para validar. Detecta efectos grandes, no chicos.
+- **Protocolo:** `docs/specs/12-producto-deploy.md`, fijado antes de correr. Datos: `analisis/seleccion_divisiones_ev.json`.

@@ -57,6 +57,37 @@ El edge contra el cierre de Pinnacle no apareció con modelos propios (D-026, D-
 - **Cuotas:** `cuotas_forward` (OddsPapi) cubre torneos LATAM sin The Odds API. Acumula solo hacia adelante.
 - **Reverse engineering del modelo de Opta:** exige coordenadas de tiros por liga. FotMob las da solo donde hay cobertura `xG`. En las demás ligas no existe una fuente de tiros.
 
+## E4. Cruce entre Pinnacle, Bet365 y el promedio del mercado (histórico)
+
+Pregunta: cuando Pinnacle da más chance a un resultado que las otras dos casas a la vez, ¿la cuota de esas casas tiene CLV positivo contra el cierre de Pinnacle?
+
+- **Datos:** `data/football_data/eu/` de todas las divisiones. Cuotas previas PSH/D/A, B365H/D/A y AvgH/D/A. Cierre PSCH/D/A. Temporada 2023/24 para explorar y 2024/25 para validar.
+- **Probabilidades:** cada casa se normaliza por separado, método proporcional. Se obtienen q_pin, q_b365 y q_avg.
+- **Señal S1 (base):** EV de Bet365 contra Pinnacle mayor que 0.02, es decir `B365 × q_pin − 1 > 0.02`.
+- **Señal S2 (cruce):** S1 y además `Avg × q_pin − 1 > 0.02`. Las dos casas pagan menos chance que Pinnacle.
+- **Señal S3:** S1 y `Avg × q_pin − 1 ≤ 0`. Solo Bet365 difiere de Pinnacle.
+- **Métrica:** CLV de la apuesta en Bet365, es decir `B365 × q_cierre_pin − 1`, con IC95 por bootstrap sobre las apuestas.
+- **Éxito:** en 2024/25, el CLV medio de S2 tiene límite inferior del IC95 mayor que 0, con al menos 80 apuestas.
+- **Diagnóstico:** movimiento medio de Pinnacle `q_cierre_pin − q_pin` en cada señal. Si es negativo, Pinnacle se mueve hacia las otras casas.
+- **Código:** `analisis/cruce_casas_pinnacle.py`. Resultado: `analisis/cruce_casas_pinnacle.json`.
+- **Forward:** con `cuotas_forward` se repite con bet365 AR y Betano, cuando haya N suficiente.
+
+### Resultados de E4 (2026-10-23)
+
+| Señal | Temporada | N | CLV medio | IC95 | Movimiento de Pinnacle |
+|---|---|---|---|---|---|
+| S1 base | 2023/24 | 574 | +1.68% | [+0.52%, +2.83%] | −0.55 pp |
+| S1 base | 2024/25 | 506 | −0.16% | [−1.36%, +1.02%] | −0.90 pp |
+| S2 cruce | 2023/24 | 20 | +5.72% | [−6.71%, +20.53%] | −1.05 pp |
+| S2 cruce | 2024/25 | 53 | −2.98% | [−8.76%, +3.35%] | −1.69 pp |
+| S3 solo Bet365 | 2023/24 | 530 | +1.39% | [+0.29%, +2.50%] | −0.52 pp |
+| S3 solo Bet365 | 2024/25 | 422 | +0.34% | [−0.79%, +1.48%] | −0.73 pp |
+
+- El criterio de éxito no se cumple: S2 tiene 53 apuestas en validación, menos de 80, y su IC95 incluye 0.
+- S2 es rara, porque el promedio del mercado incluye a Pinnacle y casi siempre coincide con él.
+- S1 tuvo CLV positivo en 2023/24 y nulo en 2024/25. El efecto no se sostiene entre temporadas, igual que en D-030.
+- En todas las señales, Pinnacle se mueve hacia las otras casas hasta el cierre. El EV previo mayor a 2% se evapora en parte por ese movimiento.
+
 ## Orden propuesto
 
 1. E1, porque ya hay datos y el CLV es la métrica del contrato.

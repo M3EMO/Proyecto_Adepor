@@ -163,3 +163,11 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Regla:** no se filtran divisiones por EV histórico. El volumen sale de sumar divisiones, no de elegir las mejores.
 - **Límite:** el diseño usa una temporada para elegir y una para validar. Detecta efectos grandes, no chicos.
 - **Protocolo:** `docs/specs/12-producto-deploy.md`, fijado antes de correr. Datos: `analisis/seleccion_divisiones_ev.json`.
+
+## D-031 · 2026-10-23 · Pinnacle contra Bet365 y el promedio no da una señal sostenida
+- **Evidencia:** apostar en Bet365 cuando paga más de 2% de EV sobre Pinnacle previo dio CLV +1.68% en 2023/24 (IC95 [+0.52%, +2.83%], n=574) y −0.16% en 2024/25 (IC95 [−1.36%, +1.02%], n=506).
+- **Cruce:** exigir que además el promedio del mercado pague menos que Pinnacle deja 53 apuestas en 2024/25, CLV −2.98%, IC95 [−8.76%, +3.35%].
+- **Mecanismo:** hasta el cierre, Pinnacle se mueve hacia las otras casas: −0.9 pp en las apuestas base. El EV previo se evapora en parte por ese movimiento.
+- **Regla:** no se agrega la señal de cruce al motor.
+- **Límite:** la prueba usa Bet365 de football-data. Casas locales y LATAM se miden con `cuotas_forward` (E1).
+- **Protocolo:** `docs/specs/13-estudios-forward.md`, E4. Datos: `analisis/cruce_casas_pinnacle.json`.

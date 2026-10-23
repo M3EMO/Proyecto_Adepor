@@ -129,6 +129,34 @@ Pedido del usuario: buscar quién gana más seguido y definir por quién apostar
 - El yield del período reciente tiene IC95 que incluye 0.
 - Queda como hipótesis para seguir hacia adelante, sin cambiar el motor.
 
+## E6c. Rachas por localía y por liga (fijado 2026-10-23, antes de correr)
+
+Pedido del usuario: el efecto puede depender de la liga y de la localía. Se ven las rachas de cada equipo en su cancha y fuera.
+
+- **Rachas, calculadas desde resultados de la misma división (`eu/`, todas las divisiones):**
+  - `L_gana_en_casa`: victorias seguidas del local en sus partidos como local.
+  - `V_gana_fuera`: victorias seguidas del visitante en sus partidos como visitante.
+  - `V_sin_ganar_fuera`: partidos seguidos del visitante sin ganar como visitante.
+- **Umbral principal:** 4 partidos. Se informan 3 y 5 como sensibilidad, sin elegir entre ellos.
+- **Conjunto independiente:** temporadas 2019/20 a 2023/24. El posterior (2024/25 y 2025/26) se informa aparte.
+- **Métrica:** diferencia entre el porcentaje real de victorias del equipo señalado (o de no ganar, para `V_sin_ganar_fuera`) y la probabilidad de Pinnacle de cierre, con z. Yield de apostar al equipo con racha a la cuota de cierre, cuando corresponde.
+- **Éxito:** z mayor que 2.4 en el conjunto independiente para al menos una racha (corrección de Bonferroni por tres rachas), con al menos 300 casos.
+- **Por liga:** se informa z por división con al menos 100 casos. La heterogeneidad entre divisiones no se usa para elegir ligas (D-030).
+- **Código:** `analisis/winrate_local_visita.py`, función `rachas_localia`.
+
+### Resultados de E6c (2026-10-23)
+
+| Racha (umbral 4) | N independiente | Gana real | Pinnacle | z |
+|---|---|---|---|---|
+| Local gana en casa | 1.992 | 58.9% | 58.1% | +0.72 |
+| Visitante gana fuera | 701 | 47.9% | 49.6% | −0.95 |
+| Visitante no gana fuera | 9.126 | 74.7% | 74.8% | −0.18 |
+
+- Ninguna racha alcanza z de 2.4 (criterio con corrección por tres rachas). Los umbrales 3 y 5 dan el mismo resultado.
+- En el período 2024/25 y 2025/26 los z suben a +1.2 y +1.8 en algunas rachas, sin llegar a 2.4.
+- Por división (36 combinaciones con al menos 100 casos), dos pasan z de 1.96: Premier League con racha de local (+1.96) y Eredivisie con visitante sin ganar (+2.02). Con 36 pruebas se esperan unos dos falsos positivos.
+- Conclusión: Pinnacle ya precia las rachas por localía, y la heterogeneidad entre ligas es compatible con ruido.
+
 ## E3. Ligas con poca cobertura
 
 - **Primera Nacional y otras `lower`:** FotMob no trae estadísticas ni tiros. No hay base para xG. Quedan fuera.

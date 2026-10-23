@@ -97,6 +97,40 @@ def rachas(partidos):
     return filas
 
 
+def rachas_localia(partidos):
+    """E6c: filas (carpeta, div, tipo, umbral, resultado_del_equipo_senalado, prob_pinnacle, cuota) por racha en su cancha.
+    Se emite una fila por umbral cumplido (3, 4 y 5)."""
+    casa, fuera = defaultdict(list), defaultdict(list)  # (div, equipo) -> resultados de local / de visitante
+    filas = []
+
+    def racha(lista, cond):
+        n = 0
+        for r in reversed(lista):
+            if not cond(r):
+                break
+            n += 1
+        return n
+
+    for m in partidos:
+        kl, kv = (m['div'], m['l']), (m['div'], m['v'])
+        if m['cierre']:
+            pr, c = sin_margen(m['cierre']), m['cierre']
+            senales = (('L_gana_en_casa', racha(casa[kl], lambda r: r == 'H'), 'H', 0),
+                       ('V_gana_fuera', racha(fuera[kv], lambda r: r == 'A'), 'A', 2),
+                       ('V_sin_ganar_fuera', racha(fuera[kv], lambda r: r != 'A'), 'no_A', 2))
+            for tipo, n, gana, i in senales:
+                for u in (3, 4, 5):
+                    if n >= u:
+                        # V_sin_ganar_fuera: el evento es "el visitante no gana": prob = 1 - P(visitante), sin cuota simple
+                        if gana == 'no_A':
+                            filas.append((m['carpeta'], m['div'], tipo, u, m['res'] != 'A', 1 - pr[2], None))
+                        else:
+                            filas.append((m['carpeta'], m['div'], tipo, u, m['res'] == gana, pr[i], c[i]))
+        casa[kl].append(m['res'])
+        fuera[kv].append(m['res'])
+    return filas
+
+
 def z_y_yield(filas, rng):
     if not filas:
         return {'n': 0}
@@ -137,6 +171,25 @@ def main():
                 'posterior_2024_25': z_y_yield([x for x in rc if x[0] in ('4', '5')], rng)}
     ag = r['E6b']['independiente_agrupado']
     lados = r['E6b']['independiente']
+    rl = rachas_localia(partidos)
+    r['E6c'] = {}
+    for tipo in ('L_gana_en_casa', 'V_gana_fuera', 'V_sin_ganar_fuera'):
+        r['E6c'][tipo] = {}
+        for u in (3, 4, 5):
+            base = [(x[0], x[2], x[4], x[5], x[6]) for x in rl if x[2] == tipo and x[3] == u]
+            sel = lambda per: [(a, b, c, d, e) for a, b, c, d, e in base if (a in INDEPENDIENTE) == per]
+            ind_, post_ = sel(True), sel(False)
+            conv = lambda xs: [(x[0], None, x[2], x[3], x[4] if x[4] else 2.0) for x in xs]
+            r['E6c'][tipo][str(u)] = {'independiente': z_y_yield(conv(ind_), rng) if ind_ else {'n': 0},
+                                      'posterior': z_y_yield(conv(post_), rng) if post_ else {'n': 0}}
+    cand = [r['E6c'][t]['4']['independiente'] for t in r['E6c']]
+    r['E6c']['exito'] = bool(any(c.get('n', 0) >= 300 and c.get('z', 0) > 2.4 for c in cand))
+    por_div = defaultdict(list)
+    for x in rl:
+        if x[3] == 4 and x[0] in INDEPENDIENTE:
+            por_div[(x[2], x[1])].append((x[0], None, x[4], x[5], x[6] if x[6] else 2.0))
+    r['E6c']['por_division_umbral4'] = {f'{k[0]}|{k[1]}': {a: round(b, 3) if isinstance(b, float) else b for a, b in z_y_yield(v, rng).items() if a in ('n', 'gana_real', 'prob_pinnacle', 'z')}
+                                        for k, v in sorted(por_div.items()) if len(v) >= 100}
     r['E6b']['exito'] = bool(ag['n'] >= 300 and ag['z'] > 2 and all(lados[k]['n'] and lados[k]['gana_real'] > lados[k]['prob_pinnacle'] for k in lados))
     texto = json.dumps(r, indent=2)
     (ROOT / 'analisis/winrate_local_visita.json').write_text(texto)

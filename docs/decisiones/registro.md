@@ -192,3 +192,9 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Rachas h2h de 4 o más victorias:** en 2019/20 a 2023/24 (n=967) ganan 61.0% contra 59.7% de Pinnacle, z=+0.92. No se confirma. En 2024/25 y 2025/26 (n=561) ganan 64.9% contra 59.0%, z=+3.01, yield +6.0% con IC95 [−1.6%, +13.6%].
 - **Regla:** ninguna entra al motor. La racha reciente queda como hipótesis para seguir hacia adelante.
 - **Protocolo:** `docs/specs/13-estudios-forward.md`, E6 y E6b. Datos: `analisis/winrate_local_visita.json`.
+
+## D-035 · 2026-10-23 · Las rachas por localía y por liga no superan a Pinnacle
+- **Evidencia:** en 2019/20 a 2023/24, el local con 4 o más victorias seguidas en casa gana 58.9% contra 58.1% de Pinnacle (z=+0.72, n=1.992). El visitante con 4 o más victorias fuera gana 47.9% contra 49.6% (z=−0.95).
+- **Por liga:** de 36 combinaciones con al menos 100 casos, dos pasan z de 1.96 (Premier League y Eredivisie), lo esperable por azar.
+- **Regla:** ninguna racha por localía entra al motor, ni se filtran ligas por ella (D-030).
+- **Protocolo:** `docs/specs/13-estudios-forward.md`, E6c. Datos: `analisis/winrate_local_visita.json`.

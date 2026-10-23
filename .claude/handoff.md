@@ -12,7 +12,7 @@ redefinir como "producto técnico listo", o esperar apuestas reales.
   - `ejecutar_robot.sh` hace snapshot antes del pipeline (verificado en el cron real de las 9:00 del 2026-10-23).
   - `scripts/research/fotmob_pedir.py` (curl_cffi, sin proxy), `src/ingesta/motor_cuotas_fotmob.py` (E1).
   - `analisis/`: `fotmob_xg_vs_pinnacle.py`, `simular_apuestas_ev.py`, `seleccion_divisiones_ev.py`, `cruce_casas_pinnacle.py`, `trayectoria_lineas.py`.
-- Resultados negativos registrados en `docs/decisiones/registro.md`: D-029 (xG FotMob), D-030 (selección de divisiones), D-031 (cruce Pinnacle/Bet365/promedio), D-032 (oddspoll), D-033 (proxy xG), D-034 (porcentaje de victorias y rachas h2h).
+- Resultados negativos registrados en `docs/decisiones/registro.md`: D-029 (xG FotMob), D-030 (selección de divisiones), D-031 (cruce Pinnacle/Bet365/promedio), D-032 (oddspoll), D-033 (proxy xG), D-034 (porcentaje de victorias y rachas h2h), D-035 (rachas por localía y liga).
   Junto con D-026 y D-028: ninguna señal probada supera al cierre de Pinnacle.
 - Cron instalado (3 líneas): pipeline 9 y 17 h, cierre cada 15 min, salud cada hora. Copia previa en `~/.cache/crontab/crontab.bak`.
 - E1 listo en prueba (sobre COPIA de la base, no producción): 87 partidos con Pinnacle, 67 emparejados con FotMob, 201 filas por corrida.
@@ -27,7 +27,7 @@ redefinir como "producto técnico listo", o esperar apuestas reales.
 2. E5 cuando haya 40 partidos terminados en `cuotas_forward`:
    - ¿Cuántos hay?: `.venv/bin/python -I -c "import sqlite3;c=sqlite3.connect('file:fondo_quant.db?mode=ro',uri=True);print(c.execute(\"select count(distinct fixture_id) from cuotas_forward where fixture_id not like 'fm:%' and inicio_utc < strftime('%Y-%m-%dT%H:%M:%SZ','now','-3 hours')\").fetchone())"`, esperado >= 40 (hoy 0; el primero empieza 2026-10-23 18:30Z).
    - Bajar: `.venv/bin/python -I analisis/trayectoria_lineas.py bajar --max 40` (gasta 1 pedido OddsPapi por partido; pesa ~12 MB cada uno).
-   - Medir: `.venv/bin/python -I analisis/trayectoria_lineas.py medir` -> `analisis/trayectoria_lineas.json`; escribir D-035 con el resultado, sea cual sea.
+   - Medir: `.venv/bin/python -I analisis/trayectoria_lineas.py medir` -> `analisis/trayectoria_lineas.json`; escribir D-036 con el resultado, sea cual sea.
 
 ## Decisions
 - Protocolo SIEMPRE antes de correr (spec-driven): cada estudio tiene su sección en las specs 11, 12 o 13 con criterio de éxito fijado.

@@ -88,6 +88,23 @@ Pregunta: cuando Pinnacle da más chance a un resultado que las otras dos casas 
 - S1 tuvo CLV positivo en 2023/24 y nulo en 2024/25. El efecto no se sostiene entre temporadas, igual que en D-030.
 - En todas las señales, Pinnacle se mueve hacia las otras casas hasta el cierre. El EV previo mayor a 2% se evapora en parte por ese movimiento.
 
+## E5. Trayectoria de las líneas, de la apertura al cierre
+
+Pregunta: entre la apertura y el cierre, ¿hay momentos en que una casa paga más que Pinnacle y esa ventaja sobrevive al cierre?
+
+- **Fuente:** OddsPapi `GET /v4/historical-odds?fixtureId=...&bookmakers=pinnacle,bet365.bet.ar,betano`. Devuelve cada movimiento de línea con marca de tiempo (`createdAt`, `price`), desde la apertura. Una sola llamada trae las tres casas.
+- **Prueba hecha el 2026-10-23:** un partido con 12 días de historia: Pinnacle 146 movimientos, bet365 AR 249 en el local, Betano 37. La respuesta pesó 12.7 MB.
+- **Costo:** una llamada por partido, contra 250 pedidos por mes. La captura diaria de `cuotas_forward` ya usa una parte. Se pide una muestra de partidos terminados, no toda la liga.
+- **Muestra:** partidos con `fixture_id` en `cuotas_forward`, terminados, de ligas con cobertura de las tres casas. Mínimo 40 partidos, repartidos entre Europa y LATAM.
+- **Reconstrucción:** el precio de cada casa en cada instante es el último movimiento conocido. Se evalúa cada 30 minutos desde que las tres casas tienen precio.
+- **Oportunidad:** un instante y un resultado donde la casa paga un EV mayor que `umbral_ev_v2` sobre el Pinnacle de ese instante sin margen.
+- **Métrica primaria:** CLV de cada oportunidad contra el cierre de Pinnacle (último precio antes del inicio), promediado por partido para no pesar más a los partidos con más instantes. IC95 por bootstrap de partidos.
+- **Perfil por horas al inicio:** el CLV y la frecuencia de oportunidades en tramos de horas antes del inicio (más de 72, 24 a 72, 6 a 24, menos de 6).
+- **Éxito:** el CLV medio por partido tiene límite inferior del IC95 mayor que 0 en al menos 40 partidos.
+- **Rezago:** tiempo medio desde que Pinnacle se mueve más de 2% hasta que la casa se mueve en la misma dirección.
+- **Sesgo conocido:** la normalización proporcional distorsiona a los resultados de cuota alta. Se informa el CLV aparte para cuotas mayores que 4.
+- **Prototipo (un partido, anecdótico):** bet365 AR pagaba 7.0 al visitante mientras Pinnacle pagaba 6.12: EV previo de +8%. Al cierre Pinnacle pagaba 7.68 y el CLV de esa cuota fue de −12%. El EV previo se evaporó porque Pinnacle se movió hacia bet365.
+
 ## Orden propuesto
 
 1. E1, porque ya hay datos y el CLV es la métrica del contrato.

@@ -17,7 +17,7 @@ from src.comun.config_sistema import DB_NAME
 from src.comun.picks import cuota_para_pick
 from src.comun.resolucion import determinar_resultado_entero
 from src.comun.tiempo import ahora_art
-from src.nucleo.valor_v2 import clv_v2, stake_v2, tabla_valor
+from src.nucleo.valor_v2 import clv_v2, prob_justa, stake_v2, tabla_valor
 from src.persistencia.bankroll import obtener_bankroll_operativo
 from src.persistencia.confirmaciones import confirmar_apuesta, ids_confirmados
 from src.persistencia.metricas import _pl_apuesta, metricas_dinero
@@ -221,6 +221,47 @@ def valor_v2_vivos(con):
     return out
 
 
+def tabla_ev(filas, cuotas_casa):
+    """Filas de valor_v2_vivos con cuota cargada, su EV contra la prob justa y si conviene apostar.
+    cuotas_casa: {(id_partido, pick): cuota}. Ordena de mayor a menor EV."""
+    out = []
+    for f in filas:
+        c = cuotas_casa.get((f["id"], f["pick"]))
+        if c and c > 1:
+            out.append({**f, "cuota_casa": c, "ev": c * f["prob_justa"] - 1, "apostar": c >= f["cuota_minima"]})
+    return sorted(out, key=lambda f: -f["ev"])
+
+
+def resultados_pinnacle(con):
+    """Partidos jugados con la prob justa de Pinnacle: favorito, acierto, Brier y log-loss del 1X2.
+    Usa el cierre si se capturo; si no, la ultima cuota previa al kickoff."""
+    cols = _columnas(con, "partidos_backtest")
+    filas = _dicts(con, "SELECT fecha, pais, local, visita, goles_l, goles_v, "
+                        f"{_sel_pin(cols, PIN_PRE[:3] + PIN_CIERRE[:3])} FROM partidos_backtest "
+                        "WHERE goles_l IS NOT NULL AND goles_v IS NOT NULL ORDER BY fecha DESC")
+    out = []
+    for r in filas:
+        fuente, p = "cierre", prob_justa([r[c] for c in PIN_CIERRE[:3]])
+        if p is None:
+            fuente, p = "previa", prob_justa([r[c] for c in PIN_PRE[:3]])
+        if p is None:
+            continue
+        gl, gv = r["goles_l"], r["goles_v"]
+        y = 0 if gl > gv else (1 if gl == gv else 2)
+        fav = max(range(3), key=lambda i: p[i])
+        out.append({"Fecha": _fecha_txt(r["fecha"]), "Liga": r["pais"],
+                    "Partido": f"{r['local']} vs {r['visita']}", "Goles": f"{gl}-{gv}",
+                    "Favorito": PICKS_V2["1X2"][fav], "Prob favorito": p[fav], "Acerto": fav == y,
+                    "Brier": sum((p[i] - (i == y)) ** 2 for i in range(3)),
+                    "Log-loss": -math.log(p[y]), "Fuente": fuente})
+    n = len(out)
+    return {"filas": out, "n": n,
+            "acierto": _media([f["Acerto"] for f in out]),
+            "brier": _media([f["Brier"] for f in out]),
+            "logloss": _media([f["Log-loss"] for f in out]),
+            "n_cierre": sum(f["Fuente"] == "cierre" for f in out)}
+
+
 def clv_v2_confirmadas(con):
     """Apuestas confirmadas con CLV contra el cierre Pinnacle (None sin cierre)."""
     try:
@@ -252,6 +293,7 @@ def cargar_todo(con):
     return {
         "valor_v2": valor_v2_vivos(con),
         "clv_v2": clv_v2_confirmadas(con),
+        "resultados": resultados_pinnacle(con),
         "base": base, "operativo": operativo,
         "metricas": metricas_dinero(datos),
         "equity": equity_df(datos, cargar_aportes(cur), base),
@@ -329,23 +371,46 @@ def _tab_valor_v2(b):
     aviso = st.session_state.pop("aviso_v2", None)
     if aviso:
         (st.success if aviso[0] == "ok" else st.error)(aviso[1])
-    st.caption("Prob justa = cuotas Pinnacle sin margen. Confirme solo si su casa paga mas que la cuota minima.")
+    st.caption("Prob justa = cuotas Pinnacle sin margen. Cargue en la tabla la cuota de su casa: "
+               "el EV se calcula solo, y un pick conviene si su cuota supera la minima.")
     filas = b["valor_v2"]
     if not filas:
         st.info("No hay partidos vivos con cuotas Pinnacle.")
     else:
-        st.dataframe(pd.DataFrame([{
-            "Fecha": f["fecha"], "Liga": f["liga"], "Partido": f["partido"], "Mercado": f["mercado"],
-            "Pick": f["pick"], "Prob justa": _pct(f["prob_justa"]),
-            "Cuota minima": f"{f['cuota_minima']:.2f}",
+        # Las cuotas cargadas viven en la sesion: sobreviven a cada recarga de la tabla.
+        cuotas = st.session_state.setdefault("cuotas_casa", {})
+        df = pd.DataFrame([{
+            "id": f["id"], "Fecha": f["fecha"], "Liga": f["liga"], "Partido": f["partido"],
+            "Mercado": f["mercado"], "Pick": f["pick"], "Prob justa %": round(f["prob_justa"] * 100, 1),
+            "Cuota minima": round(f["cuota_minima"], 2),
+            "Cuota casa": cuotas.get((f["id"], f["pick"]), float("nan")),
             "Estado": "Confirmada" if f["confirmada"] else "Pendiente",
-        } for f in filas]), hide_index=True)
-        pendientes = [f for f in filas if not f["confirmada"]]
-        if pendientes:
-            st.subheader("Confirmar apuesta")
-        for f in pendientes:
-            _formulario_v2(f, b["operativo"])
+        } for f in filas])
+        editada = st.data_editor(
+            df, key="tabla_v2", hide_index=True,
+            disabled=[c for c in df.columns if c != "Cuota casa"],
+            column_config={"id": None, "Cuota casa": st.column_config.NumberColumn(
+                min_value=1.01, step=0.01, format="%.2f", help="Cuota que paga su casa")})
+        for id_p, pick, c in zip(editada["id"], editada["Pick"], editada["Cuota casa"]):
+            if pd.notna(c):
+                cuotas[(id_p, pick)] = float(c)
+        _bloque_ev(tabla_ev(filas, cuotas), b["operativo"])
     _bloque_clv_v2(b["clv_v2"])
+
+
+def _bloque_ev(ev, bankroll):
+    st.subheader("Picks con cuota cargada")
+    if not ev:
+        st.info("Cargue la cuota de su casa en la tabla para ver el EV.")
+        return
+    st.dataframe(pd.DataFrame([{
+        "Partido": f["partido"], "Mercado": f["mercado"], "Pick": f["pick"],
+        "Cuota casa": f"{f['cuota_casa']:.2f}", "Cuota minima": f"{f['cuota_minima']:.2f}",
+        "EV": _pct(f["ev"], True), "Recomendacion": "Apostar" if f["apostar"] else "No apostar",
+    } for f in ev]), hide_index=True)
+    for f in ev:
+        if f["apostar"] and not f["confirmada"]:
+            _formulario_v2(f, bankroll)
 
 
 def _formulario_v2(f, bankroll):
@@ -356,7 +421,7 @@ def _formulario_v2(f, bankroll):
         c = st.columns(2)
         casa = c[0].selectbox("Casa", CASAS_V2, key=f"casa|{clave}")
         cuota = c[1].number_input("Cuota de mi casa", min_value=1.01,
-                                  value=math.ceil(minima * 100) / 100, step=0.01,
+                                  value=f.get("cuota_casa") or math.ceil(minima * 100) / 100, step=0.01,
                                   format="%.2f", key=f"cuota|{clave}")
         ev = cuota * p - 1
         sugerido = stake_v2(p, cuota, bankroll)
@@ -459,6 +524,8 @@ def _tab_yield(b):
 
 
 def _tab_historial(b):
+    _bloque_resultados(b["resultados"])
+    st.subheader("Partidos")
     df = b["historial"]
     if df.empty:
         st.info("No hay partidos en la base.")
@@ -479,6 +546,23 @@ def _tab_historial(b):
     vista = df[mask].drop(columns=["fecha_dt"])
     st.caption(f"{len(vista)} partidos")
     st.dataframe(_formatear(vista, {"P/L neto": _usd}), hide_index=True)
+
+
+def _bloque_resultados(r):
+    st.subheader("Pinnacle en partidos jugados (1X2)")
+    st.caption("Favorito = resultado con mayor prob justa. Brier: 0 es perfecto; adivinar al azar da 0.667. "
+               "Es la calibracion del mercado, no el edge: el edge se mide con el CLV.")
+    if not r["n"]:
+        st.info("Todavia no hay partidos jugados con cuota Pinnacle.")
+        return
+    k = st.columns(4)
+    k[0].metric("Partidos", r["n"])
+    k[1].metric("Acierto del favorito", _pct(r["acierto"]))
+    k[2].metric("Brier medio", f"{r['brier']:.4f}")
+    k[3].metric("Con cierre capturado", r["n_cierre"])
+    st.dataframe(_formatear(pd.DataFrame(r["filas"]), {
+        "Prob favorito": _pct, "Brier": lambda x: f"{x:.3f}", "Log-loss": lambda x: f"{x:.3f}",
+        "Acerto": lambda x: "Si" if x else "No"}), hide_index=True)
 
 
 # ============================================================================

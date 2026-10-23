@@ -53,6 +53,11 @@ Reglas en orden de ejecución:
 13. Equity suma bankroll base, P/L real y aportes, en orden de fecha (`dashboard.py:114-123`).
 14. Yield potencial incluye los picks del v1 con stake 0 que siguen en la base (`dashboard.py:429-459`).
 15. Historial muestra una fila por partido con el P/L neto de ambos mercados (`dashboard.py:139-163`).
+16. Valor v2 tiene una tabla editable: el usuario carga la cuota de su casa por pick, y la sesión la guarda (`_tab_valor_v2`).
+17. `tabla_ev` calcula `EV = cuota casa × prob justa − 1` y recomienda apostar si la cuota iguala o supera la mínima.
+18. El formulario de confirmación aparece solo para picks recomendados y todavía no confirmados (`_bloque_ev`).
+19. Historial muestra, para cada partido jugado, el favorito de Pinnacle, si acertó, su Brier y su log-loss (`resultados_pinnacle`).
+20. `resultados_pinnacle` usa el cierre si se capturó; si no, usa la última cuota previa al kickoff.
 
 ## Invariantes (lo que nunca debe pasar)
 
@@ -80,7 +85,7 @@ Reglas en orden de ejecución:
 | `test_cargar_todo_con_filas_de_prueba` | `tests/test_dashboard_smoke.py:37` | Dinero real, equity, yield e historial |
 | `test_app_renderiza_las_cuatro_pestanas` | `tests/test_dashboard_smoke.py:62` | Render de las cuatro pestañas |
 | `test_app_sin_liquidados_no_falla` | `tests/test_dashboard_smoke.py:70` | Base recién creada |
-| Cinco tests de Valor v2 | `tests/test_dashboard_v2.py:37-96` | Partidos vivos, confirmación, CLV y bases sin `pin_*` |
+| Siete tests de Valor v2 | `tests/test_dashboard_v2.py` | Partidos vivos, EV, confirmación, CLV, resultados de Pinnacle y bases sin `pin_*` |
 | Siete tests de confirmación | `tests/test_confirmaciones.py:18-65` | Validaciones, kickoff, duplicados y casa |
 | `test_flujo_v2_pinnacle_como_verdad` | `tests/test_flujo_dinero_real.py:26` | Camino del dinero v2 de punta a punta, con bankroll |
 | Dos tests de métricas | `tests/test_metricas.py` | P/L, volumen y p-valor t de Student |

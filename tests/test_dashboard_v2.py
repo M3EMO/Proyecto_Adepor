@@ -97,15 +97,39 @@ def test_app_con_pin_columns_confirma_desde_valor_v2(db):
     st.cache_data.clear()
     at = AppTest.from_file(str(RAIZ / "dashboard.py"), default_timeout=120).run()
     assert not at.exception
-    assert len(at.button) == 5  # 3 de 1X2 y 2 de O/U, todos sin confirmar
+    assert len(at.button) == 0  # sin cuota de la casa cargada no hay formularios
 
-    at.number_input[0].set_value(2.0).run()  # minima LOCAL ~2.30: sin valor
-    assert at.button[0].disabled
+    at.session_state["cuotas_casa"] = {("f1", "LOCAL"): 2.0}  # minima LOCAL ~2.30: sin valor
+    at.run()
+    assert len(at.button) == 0
 
-    at.number_input[0].set_value(2.6).run()
+    at.session_state["cuotas_casa"] = {("f1", "LOCAL"): 2.6}
+    at.run()
+    assert len(at.button) == 1
     at.selectbox[0].set_value("Bet365").run()
     at.button[0].click().run()
     assert not at.exception
     assert "Confirmada" in at.success[0].value
     assert db.execute("SELECT casa, cuota_tomada FROM apuestas_confirmadas "
                       "WHERE id_partido = 'f1' AND mercado = '1X2'").fetchone() == ("Bet365", 2.6)
+
+
+def test_tabla_ev_ordena_y_recomienda(db):
+    _sembrar(db)
+    filas = dashboard.valor_v2_vivos(db)
+    ev = dashboard.tabla_ev(filas, {("f1", "LOCAL"): 2.6, ("f1", "EMPATE"): 3.0, ("otro", "LOCAL"): 9.0})
+    assert [f["pick"] for f in ev] == ["LOCAL", "EMPATE"]  # mayor EV primero; ids ajenos se ignoran
+    local, empate = ev
+    assert local["ev"] == pytest.approx(2.6 * local["prob_justa"] - 1)
+    assert local["apostar"] and not empate["apostar"]  # 3.0 < minima EMPATE (~3.6)
+
+
+def test_resultados_pinnacle_usa_cierre_y_calcula_brier(db):
+    _sembrar(db)
+    r = dashboard.resultados_pinnacle(db)
+    assert r["n"] == 1 and r["n_cierre"] == 1  # f4 jugado 2-1; f3 paso pero no tiene goles
+    f = r["filas"][0]
+    p = [(1 / c) / (1 / 2.0 + 1 / 3.5 + 1 / 4.0) for c in (2.0, 3.5, 4.0)]
+    assert (f["Favorito"], f["Acerto"], f["Fuente"]) == ("LOCAL", True, "cierre")
+    assert f["Brier"] == pytest.approx((p[0] - 1) ** 2 + p[1] ** 2 + p[2] ** 2)
+    assert r["brier"] == pytest.approx(f["Brier"])

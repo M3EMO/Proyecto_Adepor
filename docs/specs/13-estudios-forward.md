@@ -267,6 +267,31 @@ Pregunta: entre la apertura y el cierre, ¿hay momentos en que una casa paga má
 - Lo que el proxy no demuestra: que sirva para apostar. Sin cuotas de Pinnacle en las ligas `ratings` no hay benchmark de mercado.
 - Un proxy de xG exacto no es un edge: el xG real de Opta tampoco superó a Pinnacle (D-029).
 
+## E8. CLV de bet365 AR contra el cierre de Pinnacle, vía OddsPapi (bead `adepor-1uk`)
+
+Protocolo fijado el 2026-10-23, antes de ver ningún CLV. Complementa a E1 con la cuota argentina real de bet365 (`bet365.bet.ar`).
+
+- **Datos:** `cuotas_forward` con `casa` = `pinnacle` y `bet365.bet.ar`, captura diaria de `motor_oddspapi`. El cierre sale de `pin_cierre_*`.
+- **Cruce:** misma liga, kickoff a 3 horas o menos, y nombres iguales o parecidos (enmienda del 2026-10-23, antes de ver datos).
+- **Pick:** primera captura de cada partido; cada resultado con EV de 2% o más sobre Pinnacle de la misma captura.
+- **Filtro de calidad:** se descarta una fila con EV de 100% o más, o con probabilidad a más de 25 puntos de Pinnacle.
+- **Estrato primario:** Liga Profesional, Copa Argentina, Libertadores y Sudamericana.
+- **Regla:** hay edge si el CLV medio es mayor que 0 con IC95 entero sobre 0, y el yield plano no es negativo.
+- **Parada:** una sola decisión, con 300 picks con cierre en el estrato primario o el 2027-06-30.
+- **Corte secundario, sin decisión:** picks con probabilidad de Pinnacle de 35% o más.
+- **Seguimiento:** `analisis/clv_bet365ar.py`, paso 9 de la cascada, escribe `data/oddspapi/clv_bet365ar.json`; el dashboard lo muestra en Valor v2.
+- **Banco de nombres:** el mismo script guarda como alias los nombres de OddsPapi de un cruce claro (`gestor_nombres.aprender_alias`). Los dudosos quedan en `alias_a_revisar`.
+
+## E9. Piso de probabilidad (bead `adepor-aua`)
+
+Protocolo fijado el 2026-10-23, antes de correr. Datos: football-data, Europa top 6.
+
+- **Pick como el v2:** por partido, el resultado de mayor EV de Bet365 previo sobre Pinnacle previo, si ese EV es de 2% o más.
+- **Elección:** con 2019 a 2022, el piso con mayor CLV entre los que dejan 200 picks o más.
+- **Resultado:** solo el piso 0 llega a 200 picks, así que el elegido es "sin piso".
+- **Prueba 2023-2025:** CLV −0,02%, IC95 [−1,97%, +1,82%], n=243. No pasa: no se agrega piso (D-037).
+- **Hallazgo:** los picks son casi todos underdogs, con cuota mediana de 6,5 y probabilidad mediana de 16,5%.
+
 ## Orden propuesto
 
 1. E1, porque ya hay datos y el CLV es la métrica del contrato.

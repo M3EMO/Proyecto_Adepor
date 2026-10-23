@@ -92,6 +92,7 @@ Los módulos son estos:
 10. La fase 4 devuelve el nombre crudo si no hay modo interactivo (`gestor_nombres.py:269-270`).
 11. En modo interactivo, el módulo sugiere un oficial con similitud 0,55 y pide confirmación S/N (`gestor_nombres.py:272-287`).
 12. Un nombre manual se acepta solo si `nombre_equipo_valido` lo aprueba (`gestor_nombres.py:134-138`, `gestor_nombres.py:290-292`).
+14. `aprender_alias(crudo, oficial, liga)` guarda un alias en el país del equipo; para una copa usa su liga local y no pisa un alias de otro equipo.
 13. Cada alias aprendido se guarda en `diccionario_equipos.json` (`gestor_nombres.py:261-262`, `gestor_nombres.py:301`).
 
 ### tiempo (`src/comun/tiempo.py`)

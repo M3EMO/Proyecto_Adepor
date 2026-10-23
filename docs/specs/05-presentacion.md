@@ -58,6 +58,7 @@ Reglas en orden de ejecución:
 18. El formulario de confirmación aparece solo para picks recomendados y todavía no confirmados (`_bloque_ev`).
 19. Historial muestra, para cada partido jugado, el favorito de Pinnacle, si acertó, su Brier y su log-loss (`resultados_pinnacle`).
 20. `resultados_pinnacle` usa el cierre si se capturó; si no, usa la última cuota previa al kickoff.
+21. Valor v2 muestra el informe de `adepor-1uk` (bet365 AR contra Pinnacle) desde `data/oddspapi/clv_bet365ar.json`.
 
 ## Invariantes (lo que nunca debe pasar)
 

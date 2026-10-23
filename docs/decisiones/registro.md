@@ -206,3 +206,11 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Alcance:** los datos de vida privada de los jugadores no se recopilan (spec 13, E7).
 - **Regla:** las variables no entran al motor.
 - **Protocolo:** `docs/specs/13-estudios-forward.md`, E7. Datos: `analisis/jugadores_vs_pinnacle_eu.json` y `_arg.json`.
+
+## D-037 · 2026-10-23 · El v2 no lleva piso de probabilidad, y su edge en Europa se apagó desde 2023
+- **Piso:** solo "sin piso" llega a 200 picks en 2019-2022; en 2023-2025 su CLV es −0,02%, IC95 [−1,97%, +1,82%].
+- **Perfil de los picks:** con Bet365 contra Pinnacle, el EV de 2% aparece casi solo en underdogs (cuota mediana 6,5).
+- **Evolución del bankroll (exploratoria):** 100.000 crecen a 121.361 en 2019-2025, con 740 picks y caída máxima de 9,4%.
+- **Por período:** 2019-2022 ganan 28.811; 2023-2025 pierden 7.450. El CLV medio de 2023-2025 es cercano a 0.
+- **Regla:** no se agrega piso. El edge histórico de Bet365 no se toma como vigente (ver también D-031).
+- **Bead:** `adepor-aua`. Datos: `analisis/bankroll_y_piso_v2.json`.

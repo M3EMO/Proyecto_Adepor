@@ -109,6 +109,19 @@ Script: `analisis/margen_y_tiros_pinnacle.py`. Protocolo pre-registrado en el be
 - En Argentina, Brasil y Noruega, el cierre de Pinnacle no muestra desvíos por decil.
 - Los tiros al arco no agregan información al precio de Pinnacle.
 
+### Evolución del bankroll y piso de probabilidad (D-037, 2026-10-23)
+Script: `analisis/bankroll_y_piso_v2.py`. Un pick por partido: el de mayor EV de Bet365 previo sobre Pinnacle previo, con EV de 2% o más.
+
+| Período | Picks | Resultado | Yield |
+|---|---|---|---|
+| 2019-2022 | 497 | +28.811 | positivo en las 4 temporadas |
+| 2023-2025 | 243 | −7.450 | negativo en las 3 temporadas |
+| Total | 740 | 100.000 → 121.361 | +10,7% |
+
+- La caída máxima fue de 9,4%, bajo el tope de 15% de D-020.
+- El acierto fue de 18,6%, porque los picks son casi todos underdogs.
+- Un piso de probabilidad no pasa la prueba fuera de muestra.
+
 ## Investigación pendiente
 
 - Probar Shin solo para ligas europeas, fuera de muestra, con los `pin_cierre_*` del pipeline.

@@ -27,7 +27,7 @@ El orquestador escribe solo por medio de sus hijos y de `--aporte`:
 
 La tabla `aportes_capital` tiene columnas `id`, `fecha`, `monto`, `descripcion` y `fecha_creacion` (`ejecutar_proyecto.py:355-363`).
 
-Cascada diaria (`MOTORES_DIARIOS`, 8 pasos, en este orden). El v1 salió del camino diario (D-022) y se borró (D-023):
+Cascada diaria (`MOTORES_DIARIOS`, 9 pasos, en este orden). El v1 salió del camino diario (D-022) y se borró (D-023):
 
 | # | Archivo | Crítico | Interactivo | Línea |
 |---|---|---|---|---|
@@ -37,8 +37,9 @@ Cascada diaria (`MOTORES_DIARIOS`, 8 pasos, en este orden). El v1 salió del cam
 | 6 | `motor_cuotas.py` | Sí | No | 49 |
 | 6.5 | `-m src.ingesta.motor_oddspapi` | No | No | 50 |
 | 6.6 | `-m src.ingesta.motor_cuotas_fotmob` | No | No | 51 |
-| 8 | `motor_backtest.py` | No | No | 52 |
-| 8.5 | `motor_liquidador.py` | No | No | 53 |
+| 8 | `motor_backtest.py` | No | No | 54 |
+| 8.5 | `motor_liquidador.py` | No | No | 55 |
+| 9 | `analisis/clv_bet365ar.py` | No | No | 56 |
 
 ## Comportamiento (reglas exactas, en orden, con path:line)
 

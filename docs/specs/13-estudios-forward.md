@@ -157,6 +157,40 @@ Pedido del usuario: el efecto puede depender de la liga y de la localía. Se ven
 - Por división (36 combinaciones con al menos 100 casos), dos pasan z de 1.96: Premier League con racha de local (+1.96) y Eredivisie con visitante sin ganar (+2.02). Con 36 pruebas se esperan unos dos falsos positivos.
 - Conclusión: Pinnacle ya precia las rachas por localía, y la heterogeneidad entre ligas es compatible con ruido.
 
+## E7. Jugadores: ausencias, disciplina y descanso (fijado 2026-10-23, antes de correr)
+
+Pedido del usuario: tener en cuenta a los jugadores. Se usan solo datos deportivos públicos de FotMob. Los datos de vida privada quedan fuera (ver abajo).
+
+- **Datos:** `content.lineup` de cada partido terminado en `data/fotmob/raw/` (valor de mercado de los titulares, edad, capitán) y `content.stats` (tarjetas). Mismo conjunto y cruce con Pinnacle que E2.
+- **Variables por equipo, calculadas solo con partidos previos del mismo equipo en el conjunto (mínimo 3 previos):**
+  - `ausencia`: logaritmo del valor de mercado de los titulares del partido, menos el logaritmo del promedio de los últimos 5 partidos. Negativo significa un once más débil que el habitual, es decir bajas de titulares.
+  - `disciplina`: tarjetas amarillas más roja (cuenta doble) por partido, promedio de los últimos 10.
+  - `descanso`: días desde el partido anterior del equipo en el conjunto, con tope de 10.
+- **Limitación del conjunto:** solo hay partidos de liga. El descanso no ve copas ni selecciones.
+- **Modelo y datos:** igual que E2: Europa 2024/25 contra 2025/26, Argentina 2024 contra 2025, logística L2 C=1.0, 1X2, seis variables (tres por lado).
+- **Éxito:** el límite superior del IC95 del cambio de log-loss contra Pinnacle de cierre sin margen es menor que 0.
+- **Expectativa:** baja. Pinnacle cierra en el inicio y la alineación se publica antes.
+- **Código:** `analisis/jugadores_vs_pinnacle.py`.
+
+### Resultados de E7 (2026-10-23)
+
+| Estrato | n de entrenamiento | n de prueba | Cambio de log-loss con 6 variables | IC95 | Éxito |
+|---|---|---|---|---|---|
+| Europa | 391 | 723 | +0.0130 | [+0.0002, +0.0263] | No |
+| Argentina | 78 | 247 | +0.0312 | [−0.0079, +0.0718] | No |
+
+- Solo ausencias: Europa +0.0070 [−0.0013, +0.0154]; Argentina +0.0196 [−0.0024, +0.0431].
+- La potencia es baja, sobre todo en Argentina: el entrenamiento tiene 78 partidos. El conjunto empieza en 2024/25 y las variables exigen 3 partidos previos con valor del once.
+- Ninguna variante supera a la base recalibrada. No hay evidencia de información sobre Pinnacle.
+- Para un resultado más sólido hace falta historia de alineaciones de más temporadas.
+
+### Vida privada de los jugadores (decisión de alcance)
+
+- No se recopilan ni se infieren datos de vida privada de personas con nombre (relaciones, familia, salud, carácter, vida nocturna), desde redes sociales ni prensa del espectáculo.
+- Motivo: es perfilar a individuos con datos personales, el valor predictivo de un rumor o de una etiqueta como "fiestero" no se puede verificar, y los modelos que usan datos así heredan sesgo y error de atribución.
+- La pregunta de fondo (conducta y liderazgo) se cubre con datos deportivos objetivos: tarjetas y faltas (`disciplina`), capitanía (`isCaptain` en la alineación), minutos juntos y rotación.
+- Si algún día se quiere ir más allá, el camino es una fuente profesional y con consentimiento (por ejemplo, información de un club), no scraping de redes.
+
 ## E3. Ligas con poca cobertura
 
 - **Primera Nacional y otras `lower`:** FotMob no trae estadísticas ni tiros. No hay base para xG. Quedan fuera.

@@ -198,3 +198,11 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Por liga:** de 36 combinaciones con al menos 100 casos, dos pasan z de 1.96 (Premier League y Eredivisie), lo esperable por azar.
 - **Regla:** ninguna racha por localía entra al motor, ni se filtran ligas por ella (D-030).
 - **Protocolo:** `docs/specs/13-estudios-forward.md`, E6c. Datos: `analisis/winrate_local_visita.json`.
+
+## D-036 · 2026-10-23 · Ausencias, disciplina y descanso no agregan información al cierre de Pinnacle
+- **Evidencia, Europa:** seis variables (valor del once frente al habitual, tarjetas y descanso, por equipo) dan +0.0130 de log-loss, IC95 [+0.0002, +0.0263], n=723.
+- **Evidencia, Argentina:** +0.0312, IC95 [−0.0079, +0.0718], n=247, con solo 78 partidos de entrenamiento.
+- **Límite:** potencia baja. Las variables necesitan 3 partidos previos y el conjunto empieza en 2024/25.
+- **Alcance:** los datos de vida privada de los jugadores no se recopilan (spec 13, E7).
+- **Regla:** las variables no entran al motor.
+- **Protocolo:** `docs/specs/13-estudios-forward.md`, E7. Datos: `analisis/jugadores_vs_pinnacle_eu.json` y `_arg.json`.

@@ -64,3 +64,6 @@ data/logs/*.log
 
 # Indice local de codegraph
 .codegraph/
+
+# CSV de football-data.co.uk (datos de terceros, se bajan a mano desde el navegador)
+data/football_data/

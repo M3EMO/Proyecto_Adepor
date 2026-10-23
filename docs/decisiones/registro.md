@@ -124,3 +124,12 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Evidencia:** la corrida del 2026-10-20 emparejó Corinthians con Coritiba y Barracas Central con Rosario Central.
 - **Regla:** un evento de The Odds API compite solo si su kickoff cae a 12 horas o menos de la fecha del partido.
 - **Bead:** `adepor-bh4`.
+
+## D-026 · 2026-10-22 · `prob_justa` sigue proporcional y los tiros no corrigen a Pinnacle
+- **Evidencia A:** en Europa, Shin mejora la log-loss del cierre (1X2 −0.00026, IC95 [−0.00049, −0.00004]).
+- **Evidencia A:** en Argentina, Brasil y Noruega, Shin no mejora (1X2 +0.00007, IC95 [−0.00024, +0.00036]).
+- **Regla pre-registrada:** un método se adopta solo si pasa en los dos estratos, así que el proporcional se queda.
+- **Evidencia B:** los tiros al arco no mejoran el cierre (−0.00009, IC95 [−0.00052, +0.00031]) ni el pre-cierre.
+- **Hallazgo:** en Europa, el proporcional muestra sesgo favorito-underdog; el decil favorito gana 2,4 puntos más de lo predicho.
+- **Pendiente:** probar Shin solo para ligas europeas, fuera de muestra, con los `pin_cierre_*` que captura el pipeline.
+- **Bead:** `adepor-4kg`. Datos: `analisis/margen_y_tiros_pinnacle_eu.json` y `_latam_nor.json`.

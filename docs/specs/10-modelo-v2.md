@@ -93,12 +93,30 @@ Parámetros (config_motor_valores, default en código):
 - El CLV v2 es el EV de la cuota tomada contra el cierre de Pinnacle sin margen.
 - La fracción y el tope se recalibran con `analisis/pareto_stake.py` cuando haya 50 apuestas liquidadas (D-020).
 
+### Método de margen y tiros (D-026, 2026-10-22)
+Script: `analisis/margen_y_tiros_pinnacle.py`. Protocolo pre-registrado en el bead `adepor-4kg`.
+
+| Prueba | Estrato | N | Diferencia de log-loss | IC95 | Pasa |
+|---|---|---|---|---|---|
+| Shin vs proporcional, 1X2 | Europa | 13880 | −0.00026 | [−0.00049, −0.00004] | Sí |
+| Shin vs proporcional, 1X2 | ARG, BRA, NOR | 7386 | +0.00007 | [−0.00024, +0.00036] | No |
+| Shin vs proporcional, O/U 2.5 | Europa | 13809 | −0.00016 | [−0.00028, −0.00004] | Sí |
+| Tiros al arco vs cierre | Europa | 11014 | −0.00009 | [−0.00052, +0.00031] | No |
+| Tiros al arco vs pre-cierre | Europa | 11004 | −0.00038 | [−0.00091, +0.00010] | No |
+
+- El proporcional se queda, porque Shin no pasa en los dos estratos.
+- En Europa, el proporcional sobreestima a los underdogs y subestima al favorito fuerte (decil p=0.69 gana 71%).
+- En Argentina, Brasil y Noruega, el cierre de Pinnacle no muestra desvíos por decil.
+- Los tiros al arco no agregan información al precio de Pinnacle.
+
 ## Investigación pendiente
+
+- Probar Shin solo para ligas europeas, fuera de muestra, con los `pin_cierre_*` del pipeline.
 
 - Medir con datos de LATAM si las casas blandas se desvían más de Pinnacle.
 
 ## Preguntas abiertas
 
-- ¿Qué bankroll vas a usar?
+- Bankroll: 100.000 en modo fijo, cargado el 2026-10-20.
 - Max DD p95 tolerado: 15% (D-020). El stake sale del frente de Pareto bajo ese tope.
 - ¿Cuánto tarda BetWarrior en limitar una cuenta ganadora? No hay evidencia pública.

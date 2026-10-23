@@ -135,7 +135,15 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Bead:** `adepor-4kg`. Datos: `analisis/margen_y_tiros_pinnacle_eu.json` y `_latam_nor.json`.
 
 ## D-027 · 2026-10-22 · Captura forward de casas contra Pinnacle en OddsPapi
-- **Regla:** la cascada guarda una vez por día el 1X2 de Pinnacle, bet365 AR y Betano en `cuotas_forward`.
+- **Regla:** la cascada guarda una vez por día el 1X2 de Pinnacle y bet365 AR en `cuotas_forward`.
+- **Betano:** salió el mismo día, porque su feed en OddsPapi es Betano Rumania (`ro.betano.com`).
 - **Cupo:** el plan gratis da 250 pedidos por mes y la API acepta una casa y 5 torneos por pedido: 6 pedidos por día.
 - **Uso:** el estudio pre-registrado en `adepor-6kk` compara margen y EV de cada casa contra Pinnacle.
 - **Bead:** `adepor-6kk`.
+
+## D-028 · 2026-10-22 · Mezclar casas no mejora al cierre de Pinnacle
+- **Evidencia:** ninguna mezcla de Pinnacle con el promedio del mercado, Bet365 o Betfair Exchange baja la log-loss fuera de muestra.
+- **Evidencia:** el acierto del favorito no cambia: 54,0% contra 53,9% en Europa y 48,4% contra 48,4% en LATAM.
+- **Exploratorio:** en Europa, el peso óptimo de Pinnacle sale mayor que 1, pero esa ventaja no se sostiene fuera de muestra.
+- **Regla:** el v2 sigue tomando la probabilidad justa solo de Pinnacle.
+- **Bead:** `adepor-u3x`. Datos: `analisis/mezcla_casas_pinnacle.json`.

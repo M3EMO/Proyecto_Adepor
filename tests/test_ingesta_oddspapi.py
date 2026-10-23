@@ -49,7 +49,7 @@ def test_main_pide_una_casa_y_cinco_torneos_y_captura_una_vez_por_dia(monkeypatc
     monkeypatch.setattr(mo, 'PAUSA', 0)
     monkeypatch.setattr(mo.requests, 'get', get)
     mo.main()
-    assert len(pedidos) == 6 and all(len(t.split(',')) <= 5 for _, t in pedidos)
+    assert len(pedidos) == 6 and all(len(t.split(',')) <= 5 for _, t in pedidos)  # 2 casas x 3 lotes
     for casa in mo.CASAS:
         assert sorted(int(t) for c, ts in pedidos if c == casa for t in ts.split(',')) == sorted(mo.TORNEOS)
     casas = {r[0] for r in sqlite3.connect(db).execute('SELECT casa FROM cuotas_forward')}

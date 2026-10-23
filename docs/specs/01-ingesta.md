@@ -189,10 +189,11 @@ Huecos sin test (no encontré test directo para estos puntos):
 
 ## Anexo: captura forward en OddsPapi (adepor-6kk)
 
-- `src/ingesta/motor_oddspapi.py` guarda el 1X2 de Pinnacle, bet365 AR y Betano en `cuotas_forward`, una fila por partido, casa y captura.
+- `src/ingesta/motor_oddspapi.py` guarda el 1X2 de Pinnacle y bet365 AR en `cuotas_forward`, una fila por partido, casa y captura.
+- Betano salió el 2026-10-22: su feed en OddsPapi es Betano Rumania, no argentino.
 - El motor hace 6 pedidos: una casa por pedido y lotes de 5 torneos, porque la API no acepta más.
 - Captura una vez por día UTC; la segunda corrida de la cascada no gasta cupo.
 - Guarda solo partidos no empezados con las tres cuotas activas.
-- Torneos: Liga Profesional, Copa Argentina, Libertadores, Sudamericana, Brasileirão y las 5 ligas top de Europa.
+- Torneos: Liga Profesional, Copa Argentina, Libertadores, Sudamericana, Brasileirão, las 5 ligas top de Europa, Champions, Europa League, Chile, Uruguay y Colombia.
 - No toca `partidos_backtest` ni la decisión.
 - Tests: `tests/test_ingesta_oddspapi.py`.

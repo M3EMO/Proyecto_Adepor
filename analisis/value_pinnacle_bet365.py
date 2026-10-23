@@ -15,9 +15,9 @@ import sys
 from pathlib import Path
 
 
-def apuestas(dir_csvs):
+def apuestas(dir_csvs, patron='*.csv'):
     out = []
-    for f in sorted(glob.glob(f'{dir_csvs}/*.csv')):
+    for f in sorted(glob.glob(f'{dir_csvs}/{patron}')):
         for r in csv.DictReader(open(f, encoding='latin-1')):
             try:
                 ps = [float(r[k]) for k in ('PSH', 'PSD', 'PSA')]

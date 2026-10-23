@@ -76,6 +76,42 @@ Flujo de datos:
 
 P1 a P7 son de ingeniería y se cierran con código y pruebas. P8 depende del tiempo y de las apuestas reales del usuario.
 
+## Simulación de apuestas con EV positivo (fijada 2026-10-23, antes de correr)
+
+Pregunta: con las reglas actuales, ¿qué chance hay de que el sistema demuestre edge, y en cuánto tiempo?
+
+- **Piscina de apuestas:** todo resultado 1X2 de las 5 ligas grandes (temporadas 2023/24 y 2024/25) donde Bet365 paga al menos 2% de EV sobre Pinnacle previo sin margen. Es la regla de `10-modelo-v2.md` con `umbral_ev_v2` = 0.02.
+- **Verdad del mundo, dos escenarios:**
+  - A (conservador): la probabilidad real es el cierre de Pinnacle sin margen. Es la verdad del contrato.
+  - B (optimista): la probabilidad real es Pinnacle previo sin margen. El EV es el que el sistema ve al apostar.
+- **Simulación:** se remuestrean N apuestas de la piscina. Cada resultado sale de una Bernoulli con la probabilidad real del escenario. El stake sale de `stake_v2` con la probabilidad previa y el bankroll vigente (100.000, Kelly 0.25, tope 0.5%).
+- **Grilla de N:** 50, 100, 250 y 500 apuestas. Se corren 5.000 simulaciones por celda, con semilla fija.
+- **Salidas por celda:** P(yield > 0), percentiles 5, 50 y 95 del yield, P(drawdown máximo > 15%) y P(promoción).
+- **Promoción:** CLV medio con IC95 normal que excluye 0 y yield no negativo (`10-modelo-v2.md`, punto 5).
+- **Ritmo:** se informa cuántas apuestas de la piscina caen por semana, para convertir N en tiempo.
+- **Límites aceptados:** los partidos remuestreados se tratan como independientes. Los resultados excluyentes del mismo partido se ignoran. La piscina remuestreada es finita y repite apuestas.
+- **Prueba:** una piscina con EV real positivo da P(yield > 0) mayor que 0.5. Una piscina con EV real negativo da menos de 0.5.
+- **Código:** `analisis/simular_apuestas_ev.py`. Resultado: `analisis/simular_apuestas_ev.json`.
+
+### Resultados (2026-10-23)
+
+- Piscina: 156 apuestas en 3.504 partidos (0.044 por partido), unas 2 por semana en las 5 ligas grandes.
+- EV medio de la piscina: +5.3% contra Pinnacle previo y +0.7% contra el cierre.
+
+| Escenario | N | P(yield > 0) | Yield p5 / p50 / p95 | P(DD > 15%) | P(promoción) |
+|---|---|---|---|---|---|
+| A: cierre es verdad | 50 | 0.48 | −59% / −3% / +71% | 0.00 | 0.02 |
+| A: cierre es verdad | 250 | 0.50 | −27% / 0% / +30% | 0.07 | 0.05 |
+| A: cierre es verdad | 500 | 0.49 | −19% / 0% / +21% | 0.30 | 0.09 |
+| B: previo es verdad | 50 | 0.52 | −56% / +2% / +80% | 0.00 | 0.02 |
+| B: previo es verdad | 250 | 0.60 | −24% / +5% / +36% | 0.05 | 0.05 |
+| B: previo es verdad | 500 | 0.65 | −15% / +5% / +27% | 0.19 | 0.11 |
+
+- Con el cierre como verdad, el yield esperado es cero y la chance de ganar es una moneda al aire.
+- Aun con el escenario optimista, la promoción a 500 apuestas tiene 11% de chance.
+- Con 2 apuestas por semana, 50 apuestas tardan unos 6 meses y 250 más de 2 años.
+- Los datos de la piscina son de Bet365 contra Pinnacle en el mismo momento. Tu casa (BetWarrior) puede dar otro EV.
+
 ## Limitaciones conocidas
 
 - Un fallo de `salud.py` queda en `data/logs/salud.log`, en `data/logs/salud_estado.json` y como aviso rojo en el dashboard. No hay mail ni notificación de escritorio.

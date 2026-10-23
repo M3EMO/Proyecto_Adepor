@@ -1,0 +1,101 @@
+{
+  "piscina": 156,
+  "partidos_en_piscina": 3504,
+  "apuestas_por_partido": 0.04452054794520548,
+  "ev_previo_medio": 0.05323990331981314,
+  "ev_cierre_medio": 0.006956265212047372,
+  "escenarios": {
+    "A_cierre_es_verdad": [
+      {
+        "n_apuestas": 50,
+        "p_yield_positivo": 0.4774,
+        "yield_p5_p50_p95": [
+          -0.593929419320974,
+          -0.02620269495701838,
+          0.7119387433930897
+        ],
+        "p_drawdown_mayor_15": 0.0,
+        "p_promocion": 0.0228
+      },
+      {
+        "n_apuestas": 100,
+        "p_yield_positivo": 0.4878,
+        "yield_p5_p50_p95": [
+          -0.4207843089397208,
+          -0.009177785355428628,
+          0.4717441371547725
+        ],
+        "p_drawdown_mayor_15": 0.0008,
+        "p_promocion": 0.0296
+      },
+      {
+        "n_apuestas": 250,
+        "p_yield_positivo": 0.4974,
+        "yield_p5_p50_p95": [
+          -0.2740485016765192,
+          -0.001338166628158233,
+          0.2961710316652611
+        ],
+        "p_drawdown_mayor_15": 0.0698,
+        "p_promocion": 0.0488
+      },
+      {
+        "n_apuestas": 500,
+        "p_yield_positivo": 0.4928,
+        "yield_p5_p50_p95": [
+          -0.19166716134926512,
+          -0.0017534823211648692,
+          0.2099833211340262
+        ],
+        "p_drawdown_mayor_15": 0.3048,
+        "p_promocion": 0.0876
+      }
+    ],
+    "B_previo_es_verdad": [
+      {
+        "n_apuestas": 50,
+        "p_yield_positivo": 0.5162,
+        "yield_p5_p50_p95": [
+          -0.5582579637590724,
+          0.015001162912861415,
+          0.7978664790073076
+        ],
+        "p_drawdown_mayor_15": 0.0,
+        "p_promocion": 0.0234
+      },
+      {
+        "n_apuestas": 100,
+        "p_yield_positivo": 0.5592,
+        "yield_p5_p50_p95": [
+          -0.391165735069477,
+          0.044609130619960594,
+          0.5408494802869844
+        ],
+        "p_drawdown_mayor_15": 0.0004,
+        "p_promocion": 0.03
+      },
+      {
+        "n_apuestas": 250,
+        "p_yield_positivo": 0.5994,
+        "yield_p5_p50_p95": [
+          -0.23771821897849676,
+          0.04806723201610885,
+          0.3617871899108939
+        ],
+        "p_drawdown_mayor_15": 0.0452,
+        "p_promocion": 0.0542
+      },
+      {
+        "n_apuestas": 500,
+        "p_yield_positivo": 0.6514,
+        "yield_p5_p50_p95": [
+          -0.14712744535135913,
+          0.05031857747596047,
+          0.26568457691493713
+        ],
+        "p_drawdown_mayor_15": 0.194,
+        "p_promocion": 0.1104
+      }
+    ]
+  }
+}

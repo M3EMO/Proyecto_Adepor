@@ -46,7 +46,26 @@ El edge contra el cierre de Pinnacle no apareció con modelos propios (D-026, D-
 - **Traducción a hándicap:** no existe una regla directa. Cada partido trae un conjunto distinto de frases.
 - **Prueba:** se extraen variables numéricas por plantilla (por ejemplo, largo de la racha) y se evalúan con el diseño de `11-evaluacion-xg.md`: log-loss contra Pinnacle, entrenamiento y prueba separados en el tiempo.
 - **Expectativa:** baja. Las rachas salen de estadísticas públicas que Pinnacle ya incorpora.
-- **Condición previa:** confirmar que las frases de un partido terminado se calcularon antes del partido.
+- **Condición previa (verificada 2026-10-23):** las frases no filtran el resultado. En rachas h2h de 4 partidos o más, el equipo de la racha gana entre 59% y 61% de las veces, no 100%.
+- **Variables (fijadas antes de correr), 0 si la plantilla falta:**
+  - `f_forma`: (victorias menos derrotas del local en 5 partidos, menos las del visitante) dividido 5. Plantilla `team_form_both`.
+  - `f_h2h_gana`: racha de victorias h2h, positiva si es del local y negativa si es del visitante. Plantilla `h2h_winstreak`.
+  - `f_h2h_invicto`: partidos h2h sin perder, con el mismo signo. Plantilla `h2h_undefeated`.
+  - `f_goles`: goles del local menos goles del visitante en los últimos 3 partidos. Plantilla `goals_total_last_3_both`.
+- **Modelo y datos:** el diseño de `11-evaluacion-xg.md` (Europa 2024/25 contra 2025/26, Argentina 2024 contra 2025), regresión logística con L2 C=1.0, solo mercado 1X2.
+- **Éxito:** el límite superior del IC95 del cambio de log-loss contra Pinnacle de cierre sin margen es menor que 0.
+- **Código:** `analisis/oddspoll_vs_pinnacle.py`. Resultado: `analisis/oddspoll_vs_pinnacle_<estrato>.json`.
+
+### Resultados de E2 (2026-10-23)
+
+| Estrato | n de prueba | Cambio en log-loss con las 4 variables | IC95 | Éxito |
+|---|---|---|---|---|
+| Europa (2025/26) | 898 | +0.0044 | [−0.0017, +0.0105] | No |
+| Argentina (2025) | 464 | +0.0060 | [−0.0090, +0.0213] | No |
+
+- Las variables están presentes en 79% a 81% de los partidos de prueba en Europa y en 70% en Argentina.
+- La base recalibrada sin variables da +0.0023 y +0.0055: el candidato no supera ni a la recalibración.
+- Conclusión: el oddspoll no agrega información al cierre de Pinnacle.
 
 ## E3. Ligas con poca cobertura
 

@@ -1,0 +1,31 @@
+{
+  "estrato": "eu",
+  "n_fotmob": 3505,
+  "train": {
+    "n": 1752,
+    "sin_cruce": 0,
+    "con_alguna_variable": 1369
+  },
+  "test": {
+    "n": 898,
+    "sin_cruce": 0,
+    "con_alguna_variable": 728
+  },
+  "logloss_base": 0.964074218963754,
+  "candidato_oddspoll": {
+    "delta": 0.004411203468912692,
+    "ic95": [
+      -0.001658044820231008,
+      0.01050630964417057
+    ],
+    "exito": false
+  },
+  "recalibrada_sin_oddspoll": {
+    "delta": 0.0022563167351963742,
+    "ic95": [
+      -0.0026690233997766362,
+      0.00731302839475619
+    ],
+    "exito": false
+  }
+}

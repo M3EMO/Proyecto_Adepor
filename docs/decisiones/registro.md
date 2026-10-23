@@ -171,3 +171,11 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Regla:** no se agrega la señal de cruce al motor.
 - **Límite:** la prueba usa Bet365 de football-data. Casas locales y LATAM se miden con `cuotas_forward` (E1).
 - **Protocolo:** `docs/specs/13-estudios-forward.md`, E4. Datos: `analisis/cruce_casas_pinnacle.json`.
+
+## D-032 · 2026-10-23 · El oddspoll de FotMob no agrega información al cierre de Pinnacle
+- **Evidencia, Europa:** forma, rachas h2h y goles recientes dan +0.0044 de log-loss, IC95 [−0.0017, +0.0105], n=898.
+- **Evidencia, Argentina:** +0.0060, IC95 [−0.0090, +0.0213], n=464.
+- **Control:** la recalibración sin variables da +0.0023 y +0.0055; el candidato no la supera.
+- **Condición previa:** las frases no filtran el resultado (el equipo de una racha h2h de 4 o más gana 59%-61%).
+- **Regla:** el oddspoll no entra al modelo.
+- **Protocolo:** `docs/specs/13-estudios-forward.md`, E2. Datos: `analisis/oddspoll_vs_pinnacle_eu.json` y `_arg.json`.

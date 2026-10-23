@@ -38,3 +38,18 @@ def test_prompt_rechaza_comando(monkeypatch):
     assert gn.obtener_nombre_estandar('Venezia FC', liga='Italia') == 'Venezia FC'
     assert next(respuestas, None) is None      # el prompt si se ejecuto
     assert guardado == []
+
+
+def test_aprender_alias_va_al_pais_del_equipo_y_no_pisa(tmp_path, monkeypatch):
+    import json
+    from src.comun import gestor_nombres as g
+    archivo = tmp_path / 'dic.json'
+    archivo.write_text(json.dumps({
+        '_meta': {'version': '5.0', 'equipo_a_liga_home': {'Inter': 'Italia', 'Napoli': 'Italia'},
+                  'ligas_por_copa': {'Champions League': ['Italia']}},
+        'Italia': {'inter': 'Inter', 'napoli': 'Napoli', 'intermilano': 'Napoli'}}))
+    monkeypatch.setattr(g, 'DICCIONARIO_FILE', str(archivo))
+    assert g.aprender_alias('Inter FC', 'Inter', 'Champions League') == 'Italia'  # copa -> pais del equipo
+    assert g.cargar_diccionario()['Italia']['interfc'] == 'Inter'
+    assert g.aprender_alias('Inter Milano', 'Inter', 'Italia') is None  # el alias ya apunta a otro equipo
+    assert g.aprender_alias('Inter', 'Desconocido', 'Italia') is None

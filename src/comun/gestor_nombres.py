@@ -329,6 +329,29 @@ def _liga_de_nombre_oficial(dic, nombre_oficial, ligas_contexto=None):
     return home
 
 
+def aprender_alias(nombre_crudo, nombre_oficial, liga):
+    """Guarda nombre_crudo como alias de nombre_oficial en el banco de nombres de su pais.
+    Para una copa, el pais es la liga local del equipo. No pisa un alias que apunte a otro oficial.
+    Devuelve el pais donde quedo, o None si no se guardo."""
+    if not nombre_equipo_valido(nombre_crudo):
+        return None
+    dic = cargar_diccionario()
+    if not _es_formato_v5(dic):
+        return None
+    destino = liga if liga in dic and liga not in _CLAVES_META else _liga_de_nombre_oficial(
+        dic, nombre_oficial, _resolver_ligas_contexto(dic, liga))
+    sub = dic.get(destino)
+    if not isinstance(sub, dict) or nombre_oficial not in sub.values():
+        return None
+    clave = limpiar_texto(nombre_crudo)
+    if sub.get(clave, nombre_oficial) != nombre_oficial:
+        return None
+    if clave not in sub:
+        sub[clave] = nombre_oficial
+        guardar_diccionario(dic)
+    return destino
+
+
 def obtener_liga_home(nombre_oficial, contexto_liga=None):
     """
     Devuelve la liga domestica de un equipo (donde vive su historial de stats).

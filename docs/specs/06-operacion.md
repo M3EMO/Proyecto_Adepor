@@ -156,6 +156,51 @@ Horario sugerido en el comentario: `0 9,17 * * *` (`ejecutar_robot.sh:3`).
 - La zona horaria es la del sistema. El script no la fija.
 - El exit code no refleja fallos satélite (ver Orquestador).
 
+# Captura de cierre (motor_cuotas --solo-cierre)
+
+## Propósito
+
+Guarda la cuota de cierre de Pinnacle en `pin_cierre_*`. Sin cierre no hay CLV v2 (ver `10-modelo-v2.md`).
+El pipeline de las 9 y las 17 solo captura cierre de kickoffs a 2 h o menos.
+Medido el 2026-10-22: 0 de 25 partidos jugados tienen `pin_cierre_1 > 0`.
+La regla del modo está en `01-ingesta.md`, sección "Modo solo cierre".
+
+## Cron
+
+El cron corre cada 15 min. Cada corrida consulta solo ligas con un kickoff en los próximos 15 min.
+Cada partido recibe una sola captura, entre 0 y 15 min antes del kickoff.
+El log va a `data/logs/cierre_YYYYMM.log`, un archivo por mes.
+
+## Costo de cupo de The Odds API
+
+Supuestos:
+
+- Un pedido por liga cuesta 2 créditos. Los 5 bookmakers cuentan como 1 región, por 2 mercados.
+- La regla de créditos viene de la documentación de The Odds API (fuente externa). No se verificó con el header `x-requests-last`.
+- El cupo total es de 6 claves por 500 créditos al mes: 3000 créditos.
+
+Simulación sobre el fixture real de la semana 2026-10-19 a 2026-10-25 (156 partidos con clave, copas incluidas):
+
+| Esquema | Créditos por semana | Créditos por mes |
+|---|---|---|
+| Cron cada 15 min, ventana 15 min (elegido) | 180 | ~770 |
+| Cron cada 30 min, ventana 30 min | 180 | ~770 |
+| Cron cada 30 min, ventana 2 h | 708 | ~3030 |
+| Pipeline 9 y 17 (cota alta: toda liga con partido en 7 días) | 328 | ~1400 |
+
+- El costo no depende del paso si la ventana iguala al paso. Los kickoffs caen en múltiplos de 15 min.
+- Una ventana de 2 h consulta cada liga 4 veces por partido. Agota el cupo solo.
+- Total elegido: ~770 + ~1400 = ~2170 créditos por mes, el 72 % del cupo.
+- El fin de semana concentra el gasto: 226 créditos el sábado con ventana de 2 h.
+- El paso de 15 min da un cierre más cercano al kickoff que el de 30 min al mismo costo.
+
+## Limitaciones conocidas
+
+- Una corrida fallida (red, cupo, lock) pierde la captura de ese turno. El pipeline la cubre solo si corre a 2 h o menos del kickoff.
+- A las 9:00 y a las 17:00 la corrida de cierre coincide con el pipeline. El commit por liga reduce el riesgo de lock.
+- La hora del kickoff sale de `partidos_backtest.fecha`. Un kickoff mal cargado cae fuera de la ventana.
+- El log de 96 corridas diarias crece sin rotación, salvo el corte mensual del nombre.
+
 # Configuración (src/comun/config_sistema.py)
 
 ## Propósito
@@ -616,6 +661,14 @@ Línea de crontab para correr dos veces al día (pegar con `crontab -e`):
 ```bash
 0 9,17 * * * /home/mpera/BetDeportivo/ejecutar_robot.sh
 ```
+
+Línea de crontab para capturar el cierre de Pinnacle cada 15 min (ver "Captura de cierre"):
+
+```bash
+*/15 * * * * cd /home/mpera/BetDeportivo && .venv/bin/python -m src.ingesta.motor_cuotas --solo-cierre >> data/logs/cierre_$(date +\%Y\%m).log 2>&1
+```
+
+Cron exige `\%` dentro de la línea. Sin la barra, cron corta el comando en el `%`.
 
 Registrar un aporte. Reemplazar los valores entre `<>`:
 

@@ -26,6 +26,9 @@ from src.comun.config_sistema import MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 
 # Ventana CLV: capturar cuota_cierre cuando faltan <= 2h al kickoff
 VENTANA_CIERRE = timedelta(hours=2)
+# --solo-cierre consulta solo ligas con kickoff a <= 15 min. Debe igualar el paso del cron:
+# un paso mayor deja partidos sin cierre; uno menor paga dos consultas por partido.
+VENTANA_SOLO_CIERRE = timedelta(minutes=15)
 # Un evento de la API se empareja solo si su kickoff cae a esta distancia del partido (adepor-bh4).
 VENTANA_MISMO_PARTIDO = timedelta(hours=12)
 
@@ -34,10 +37,10 @@ VENTANA_MISMO_PARTIDO = timedelta(hours=12)
 from src.comun.picks import cuota_para_pick as _seleccionar_cuota_cierre
 
 
-def _en_ventana_cierre(fecha_str):
+def _en_ventana_cierre(fecha_str, ventana=VENTANA_CIERRE):
     """
     True si el partido esta dentro de la ventana de captura: fecha esta entre
-    now y now+2h (kickoff inminente). Fuera de eso: skip (NO sobreescribir).
+    now y now+ventana (kickoff inminente). Fuera de eso: skip (NO sobreescribir).
     fecha_str formato esperado: 'YYYY-MM-DD HH:MM'.
     """
     if not fecha_str:
@@ -47,7 +50,7 @@ def _en_ventana_cierre(fecha_str):
     except (ValueError, TypeError):
         return False
     delta = fp - ahora_art()
-    return timedelta(0) <= delta <= VENTANA_CIERRE
+    return timedelta(0) <= delta <= ventana
 
 
 def _misma_fecha(commence_time, fecha_str):
@@ -220,8 +223,11 @@ def _asegurar_columnas_pinnacle(cursor):
         if col not in existentes:
             cursor.execute(f"ALTER TABLE partidos_backtest ADD COLUMN {col} REAL")
 
-def main():
-    print("[SISTEMA] Iniciando Motor Cuotas V9.1 (Radar Sharp con Contencion)...")
+def main(solo_cierre=False):
+    """solo_cierre: escribe solo pin_cierre_* de partidos con kickoff dentro de VENTANA_SOLO_CIERRE.
+    No toca pin_* ni cuota_*, asi que no cambia lo que ve la decision."""
+    print("[SISTEMA] Iniciando Motor Cuotas V9.1 (Radar Sharp con Contencion)..."
+          + (" Modo solo cierre." if solo_cierre else ""))
     if not API_KEYS:
         # Paso critico: sin keys no hay cuotas ni picks; antes terminaba en "EXITO" con 0.
         print("[ERROR] No hay api_keys_odds en config.json.")
@@ -240,7 +246,9 @@ def main():
         WHERE estado != 'Liquidado' AND goles_l IS NULL AND goles_v IS NULL
     """)
     partidos = cursor.fetchall()
-    
+    if solo_cierre:
+        partidos = [p for p in partidos if _en_ventana_cierre(p[4], VENTANA_SOLO_CIERRE)]
+
     if not partidos:
         print("[INFO] No hay partidos vivos para actualizar cuotas.")
         return
@@ -248,13 +256,14 @@ def main():
     partidos_por_liga = {}
     for p in partidos:
         pais = p[3]
-        if pais in MAPA_LIGAS_ODDS:
+        if MAPA_LIGAS_ODDS.get(pais):  # None = liga sin cobertura: no gastar un pedido
             liga_odds = MAPA_LIGAS_ODDS[pais]
             if liga_odds not in partidos_por_liga: partidos_por_liga[liga_odds] = []
             partidos_por_liga[liga_odds].append(p)
 
     key_actual = 0
     cuotas_actualizadas = 0
+    cierres_capturados = 0
 
     for liga_odds, lista_partidos in partidos_por_liga.items():
         print(f"   [ESCANEO] Buscando mercado para la liga: {liga_odds}...")
@@ -321,7 +330,8 @@ def main():
                 # --- V10: Pinnacle crudo para modelo v2. Sin freeze por apuesta confirmada ---
                 pn1, pnx, pn2, pno, pnu = cuotas_pinnacle(
                     evento.get("bookmakers", []), match_evento['loc_raw'], match_evento['vis_raw'])
-                if any((pn1, pnx, pn2, pno, pnu)) and _puede_actualizar_cuotas(fecha_p, False, ahora_art()):
+                if (not solo_cierre and any((pn1, pnx, pn2, pno, pnu))
+                        and _puede_actualizar_cuotas(fecha_p, False, ahora_art())):
                     cursor.execute("""
                         UPDATE partidos_backtest SET
                         pin_1   = CASE WHEN ? > 0 THEN ? ELSE pin_1   END,
@@ -343,6 +353,11 @@ def main():
                         pin_cierre_u25 = CASE WHEN ? > 0 THEN ? ELSE pin_cierre_u25 END
                         WHERE id_partido=?
                     """, (pn1, pn1, pnx, pnx, pn2, pn2, pno, pno, pnu, pnu, id_p))
+                    cierres_capturados += 1
+                    print(f"         [CIERRE] Pinnacle {loc_espn} vs {vis_espn} | 1={pn1} X={pnx} 2={pn2} O={pno} U={pnu}")
+
+                if solo_cierre:
+                    continue
 
                 if c1 > 0 or co > 0:
                     # Cuotas del pick: no sobrescribir si el partido ya empezo o ya hubo alerta
@@ -388,9 +403,13 @@ def main():
             if not encontrado and match_evento is None:
                 print(f"      [ALERTA] Sin match en mercado para: {loc_espn} vs {vis_espn}")
 
-    conn.commit()
+        # Commit por liga: el lock de escritura no queda tomado durante el pedido HTTP siguiente,
+        # asi la corrida de cierre y el pipeline no se bloquean entre si.
+        conn.commit()
+
     conn.close()
-    print(f"[EXITO] Motor Cuotas completado. {cuotas_actualizadas} partidos inyectados con probabilidades de mercado.")
+    print(f"[EXITO] Motor Cuotas completado. {cuotas_actualizadas} partidos inyectados con probabilidades "
+          f"de mercado. {cierres_capturados} cierres Pinnacle capturados.")
 
 if __name__ == "__main__":
-    main()
+    main(solo_cierre='--solo-cierre' in sys.argv[1:])

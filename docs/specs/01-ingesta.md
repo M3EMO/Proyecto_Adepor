@@ -169,3 +169,17 @@ Huecos sin test (no encontré test directo para estos puntos):
 - Dentro de la ventana de cierre se guardan `pin_cierre_*` para todos los partidos emparejados.
 - Ningún UPDATE pisa un valor existente con cero.
 - Tests: `tests/test_ingesta_pinnacle.py`.
+
+### Modo solo cierre (`--solo-cierre`, 2026-10-22)
+
+- Problema medido el 2026-10-22: 25 partidos jugados en la base, 0 con `pin_cierre_1 > 0`.
+- Causa: el pipeline corre a las 9 y a las 17. Solo captura cierre si un kickoff cae a 2 h o menos.
+- `python -m src.ingesta.motor_cuotas --solo-cierre` toma solo partidos con kickoff a 15 min o menos (`VENTANA_SOLO_CIERRE`).
+- Consulta The Odds API solo para las ligas de esos partidos. Sin partidos en ventana, no hace ningún pedido.
+- Escribe solo `pin_cierre_*`. No toca `pin_*`, `cuota_*` ni `cuota_cierre_*`, así que no cambia la decisión.
+- Una liga con clave `None` en `MAPA_LIGAS_ODDS` nunca genera un pedido.
+- `motor_cuotas` hace commit después de cada liga. El lock de escritura no queda tomado durante un pedido HTTP.
+- `VENTANA_SOLO_CIERRE` debe igualar el paso del cron. Un paso mayor deja partidos sin cierre.
+- El cierre guardado es la cuota entre 0 y 15 min antes del kickoff, no la cuota exacta del kickoff.
+- El costo de cupo y la línea de cron están en `06-operacion.md`, sección "Captura de cierre".
+- Test: `test_solo_cierre_consulta_solo_ligas_con_kickoff_inminente`.

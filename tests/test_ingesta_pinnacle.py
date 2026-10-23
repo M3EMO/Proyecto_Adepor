@@ -103,3 +103,35 @@ def test_misma_fecha_rechaza_eventos_de_otro_partido():
     assert not mc._misma_fecha('2026-10-25T21:30:00Z', '2026-10-19 20:00')   # Corinthians -> Coritiba
     assert not mc._misma_fecha(None, '2026-10-19 20:00')                     # sin fecha: no se empareja
     assert not mc._misma_fecha('2026-10-19T23:00:00Z', '19/10/2026 20:00')
+
+
+def test_solo_cierre_consulta_solo_ligas_con_kickoff_inminente(db, monkeypatch):
+    db.execute("INSERT INTO partidos_backtest (id_partido, fecha, pais, local, visita, cuota_1) "
+               "VALUES ('YA', '2026-10-12 18:15', 'Inglaterra', 'Local', 'Visita', 1.5)")  # +15 min: limite
+    db.execute("INSERT INTO partidos_backtest (id_partido, fecha, pais, local, visita) "
+               "VALUES ('LUEGO', '2026-10-12 19:00', 'Espana', 'Betis', 'Sevilla')")  # +1 h: otra liga, no se consulta
+    db.execute("INSERT INTO partidos_backtest (id_partido, fecha, pais, local, visita) "
+               "VALUES ('SIN_CLAVE', '2026-10-12 18:10', 'Bolivia', 'Bolivar', 'Always Ready')")  # sin clave Odds API
+    db.commit()
+
+    pedidos = []
+
+    class Resp:
+        status_code = 200
+
+        def json(self):
+            return [{'home_team': 'Local', 'away_team': 'Visita', 'commence_time': '2026-10-12T21:15:00Z',
+                     'bookmakers': [_libro('pinnacle', 2.1, 3.3, 3.6)]}]
+
+    monkeypatch.setattr(mc, 'API_KEYS', ['K'])
+    monkeypatch.setattr(mc.requests, 'get', lambda url, **k: pedidos.append(url) or Resp())
+    monkeypatch.setattr(mc, 'ahora_art', lambda: AHORA)
+    monkeypatch.setattr(mc, 'DB_NAME', os.environ['ADEPOR_DB'])
+    monkeypatch.setattr(mc.gestor_nombres, 'obtener_nombre_estandar', lambda n, **k: n)
+
+    mc.main(solo_cierre=True)
+
+    assert pedidos == ['https://api.the-odds-api.com/v4/sports/soccer_epl/odds/']  # un pedido = 2 creditos
+    ya = db.execute("SELECT cuota_1, pin_1, pin_cierre_1, pin_cierre_x, pin_cierre_2 FROM partidos_backtest "
+                    "WHERE id_partido='YA'").fetchone()
+    assert ya == (1.5, 0, 2.1, 3.3, 3.6)  # solo cierre: pin_* y cuota_* intactos

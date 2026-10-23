@@ -53,6 +53,7 @@ MOTORES_DIARIOS = [
     # --- FASE 4: REDUNDANCIA ---
     {"archivo": "motor_backtest.py",         "desc": "8. Liquidador de Ultimo Minuto (Doble Barrido)",         "critico": False, "interactivo": False},
     {"archivo": "motor_liquidador.py",       "desc": "8.5. Liquidador de Apuestas (Barrido Final)",            "critico": False, "interactivo": False},
+    {"archivo": "analisis/clv_bet365ar.py",  "desc": "9. Informe bet365 AR vs Pinnacle (adepor-1uk, no decide)", "critico": False, "interactivo": False},
 ]
 
 

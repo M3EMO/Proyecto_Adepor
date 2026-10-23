@@ -4,6 +4,7 @@ Dashboard Adepor (Streamlit, local). Reemplaza el workbook Excel.
 Lanzar: ./iniciar_dashboard.sh  (solo 127.0.0.1, sin red externa).
 Los loaders son funciones puras: se prueban sin Streamlit corriendo.
 """
+import json
 import math
 import sqlite3
 import time
@@ -398,6 +399,28 @@ def _tab_valor_v2(b):
                 cuotas[(id_p, pick)] = float(c)
         _bloque_ev(tabla_ev(filas, cuotas), b["operativo"])
     _bloque_clv_v2(b["clv_v2"])
+    _bloque_casas_locales()
+
+
+def _bloque_casas_locales():
+    """Informe intermedio de adepor-1uk: bet365 AR contra Pinnacle. Lo escribe la cascada (paso 9)."""
+    st.subheader("bet365 AR contra Pinnacle (experimento adepor-1uk)")
+    ruta = Path(__file__).resolve().parent / "data" / "oddspapi" / "clv_bet365ar.json"
+    if not ruta.exists():
+        st.info("Todavia no hay informe: lo genera el pipeline diario.")
+        return
+    d = json.loads(ruta.read_text())
+    st.caption(f"Informe del {d['fecha']} · {d['decision']} · cruce con la base: {_pct(d['tasa_cruce'])}")
+    filas = []
+    for estrato, nombre in (("primario", "Argentina y Conmebol"), ("primario_p_min_035", "Arg. y Conmebol, p >= 35%"),
+                            ("resto", "Resto")):
+        r, m = d[estrato], d["margen_medio"][estrato.split("_p_min")[0]]
+        filas.append({"Estrato": nombre, "Picks EV >= 2%": r["n_picks"], "Con cierre": r["n_con_cierre"],
+                      "CLV medio": _pct(r.get("clv_medio"), True),
+                      "IC95": " a ".join(_pct(x, True) for x in r["clv_ic95"]) if "clv_ic95" in r else "—",
+                      "Margen bet365 AR": _pct(m["bet365.bet.ar"]), "Margen Pinnacle": _pct(m["pinnacle"])})
+    st.dataframe(pd.DataFrame(filas), hide_index=True)
+    st.caption("La decision se toma una vez, con 300 picks con cierre en el estrato primario o el 2027-06-30.")
 
 
 def _bloque_ev(ev, bankroll):

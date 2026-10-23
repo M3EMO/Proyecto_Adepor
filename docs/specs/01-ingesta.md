@@ -217,3 +217,5 @@ Huecos sin test (no encontré test directo para estos puntos):
 - ESPN no cubre la Primera B de Chile: esa liga entra solo a la captura de OddsPapi.
 - `scripts/db/alta_equipos_espn.py <slug>` da de alta los equipos de una liga nueva con los nombres de ESPN (`gestor_nombres.registrar_equipos`).
 - API-Football (D-010, retirado): de las cuatro claves de `config.json`, una funciona con plan gratis, dos están suspendidas y una es inválida. El plan gratis solo da temporadas 2022 a 2024, así que no sirve para cuotas actuales.
+- Claves de The Odds API por uso (2026-10-23): `api_keys_odds` (claves 0 a 2) para el pipeline y `api_keys_odds_cierre` (claves 3 a 5) para `motor_cuotas --solo-cierre`. Cada proceso rota solo dentro de su rango.
+- OddsPapi vuelve a capturar Uruguay, Colombia y Copa Argentina: sin The Odds API, su cierre es la última captura de Pinnacle antes del inicio. Con 20 torneos siguen siendo 8 pedidos por día.

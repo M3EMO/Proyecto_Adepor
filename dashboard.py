@@ -26,7 +26,7 @@ from src.persistencia.confirmaciones import confirmar_apuesta, ids_confirmados
 from src.persistencia.metricas import _pl_apuesta, metricas_dinero
 from src.persistencia.yield_potencial import apuestas_potenciales, yield_potencial
 
-TABS = ["Valor v2", "Dinero real", "Yield potencial", "Historial"]
+TABS = ["Valor v2", "Simulación", "Dinero real", "Yield potencial", "Historial"]
 CASAS_V2 = ("BetWarrior", "Bet365", "Casa local")
 PIN_PRE = ("pin_1", "pin_x", "pin_2", "pin_o25", "pin_u25")  # Pinnacle pre-partido
 PIN_CIERRE = ("pin_cierre_1", "pin_cierre_x", "pin_cierre_2", "pin_cierre_o25", "pin_cierre_u25")
@@ -433,6 +433,39 @@ def _cusum_txt(c):
     return f"{c['s']:.2f} / {c['h']:.2f}" + (" ALARMA" if c["alarma"] else "")
 
 
+def _tab_simulacion(_b):
+    """Seguir el v2 a ciegas: picks forward de bet365 AR y backtest historico de Bet365 en Europa."""
+    raiz = Path(__file__).resolve().parent
+    st.subheader("Forward: bet365 AR contra Pinnacle")
+    st.caption("Cada pick es un resultado donde bet365 AR paga EV de 2% o más sobre Pinnacle. "
+               "Stake del v2 (Kelly 0,25, tope 0,5%) sobre 100.000. Es simulación: no hay dinero real.")
+    ruta = raiz / "data" / "oddspapi" / "clv_bet365ar.json"
+    sim = json.loads(ruta.read_text()).get("simulacion") if ruta.exists() else None
+    if not sim or not sim["picks"]:
+        st.info("Todavía no hay picks forward: los genera el pipeline diario.")
+    else:
+        k = st.columns(4)
+        k[0].metric("Picks", len(sim["picks"]))
+        k[1].metric("Jugados", sim["n_jugados"])
+        k[2].metric("Acierto", _pct(sim["acierto"]))
+        k[3].metric("Bankroll simulado", _usd(sim["bankroll_final"]),
+                    _usd(sim["bankroll_final"] - sim["bankroll_inicial"], True))
+        st.dataframe(_formatear(pd.DataFrame(sim["picks"]), {
+            "p_pin": _pct, "clv": lambda x: _pct(x, True), "stake": lambda x: _usd(x) if x is not None else "—",
+            "bankroll": _usd}), hide_index=True)
+    st.subheader("Histórico: Bet365 en Europa, 2019-2025")
+    st.caption("Backtest exploratorio de D-037: el edge se apagó en 2023. Sirve como referencia, no como promesa.")
+    ruta = raiz / "analisis" / "bankroll_y_piso_v2.json"
+    if ruta.exists():
+        evo = json.loads(ruta.read_text())["evolucion"]
+        curva = pd.DataFrame(evo["curva"], columns=["fecha", "bankroll"]).reset_index(names="n")
+        k = st.columns(3)
+        k[0].metric("Picks", evo["n"])
+        k[1].metric("Bankroll final", _usd(evo["bankroll_final"]))
+        k[2].metric("Caída máxima", _pct(evo["drawdown_max"]))
+        st.altair_chart(_linea(curva, "n", "bankroll", "Día con apuestas #", "Bankroll ($)"))
+
+
 def _bloque_ev(ev, bankroll):
     st.subheader("Picks con cuota cargada")
     if not ev:
@@ -616,7 +649,7 @@ def render():
         st.error("Salud del pipeline: " + "; ".join(estado[1]))
     st.caption(f"Base: {DB_NAME} · Cargado {datetime.now():%d/%m/%Y %H:%M} · cache 60 s")
     pestañas = st.tabs(TABS)
-    vistas = (_tab_valor_v2, _tab_dinero, _tab_yield, _tab_historial)
+    vistas = (_tab_valor_v2, _tab_simulacion, _tab_dinero, _tab_yield, _tab_historial)
     for pestaña, vista in zip(pestañas, vistas):
         with pestaña:
             vista(b)

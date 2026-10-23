@@ -55,3 +55,12 @@ def test_cierre_aproximado_usa_la_ultima_captura_entre_pick_e_inicio():
              ('2026-10-22T12:00:00Z', [1.8, 3.6, 4.5]), ('2026-10-23T12:00:00Z', [1.7, 3.7, 4.9])]
     assert c.cierre_aproximado(snaps, '2026-10-20T12:00:00Z', '2026-10-22T20:00:00.000Z') == [1.8, 3.6, 4.5]
     assert c.cierre_aproximado(snaps[:1], '2026-10-20T12:00:00Z', '2026-10-22T20:00:00.000Z') is None
+
+
+def test_simulacion_mueve_el_bankroll_solo_con_picks_jugados():
+    base = {'resultado': 0, 'p_pin': 0.5, 'cuota': 2.2, 'clv': 0.05, 'liga': 'Argentina', 'partido': 'A vs B'}
+    picks = [{**base, 'inicio': '2026-10-24T20:00', 'pl': 1.2}, {**base, 'inicio': '2026-10-25T20:00', 'pl': None}]
+    r = c.simulacion(picks, 100_000.0)
+    stake = c.stake_v2(0.5, 2.2, 100_000.0)
+    assert r['bankroll_final'] == round(100_000.0 + stake * 1.2, 2) and r['n_jugados'] == 1
+    assert [f['estado'] for f in r['picks']] == ['ganada', 'pendiente'] and r['picks'][1]['stake'] is None

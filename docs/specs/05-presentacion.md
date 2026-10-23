@@ -59,6 +59,7 @@ Reglas en orden de ejecución:
 19. Historial muestra, para cada partido jugado, el favorito de Pinnacle, si acertó, su Brier y su log-loss (`resultados_pinnacle`).
 20. `resultados_pinnacle` usa el cierre si se capturó; si no, usa la última cuota previa al kickoff.
 21. Valor v2 muestra el informe de `adepor-1uk` (bet365 AR contra Pinnacle) desde `data/oddspapi/clv_bet365ar.json`.
+22. La pestaña Simulación muestra los picks forward de bet365 AR con su resultado y el bankroll de seguir el v2 a ciegas (stake_v2 sobre 100.000), y la curva histórica de `analisis/bankroll_y_piso_v2.json`.
 
 ## Invariantes (lo que nunca debe pasar)
 

@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))  # -I quita el directorio del script del path
 from src.comun import gestor_nombres  # noqa: E402
 from src.comun.config_sistema import DB_NAME  # noqa: E402
-from src.nucleo.valor_v2 import prob_justa  # noqa: E402
+from src.nucleo.valor_v2 import prob_justa, stake_v2  # noqa: E402
 
 CASA = 'bet365.bet.ar'
 UMBRAL_EV, EV_ERROR, DIF_MAX = 0.02, 1.0, 0.25
@@ -109,10 +109,27 @@ def cusum(clvs, k=CUSUM_K, h=CUSUM_H):
 
 
 def cierre_aproximado(snaps, ts_pick, inicio_utc):
-    """adepor-dch: ultima captura de Pinnacle posterior al pick y anterior al inicio. None si no hay."""
+    """Ultima captura de Pinnacle posterior al pick y anterior al inicio (ligas sin The Odds API). None si no hay."""
     inicio = inicio_utc[:19].replace('T', ' ')
     previas = [c for ts, c in snaps if ts > ts_pick and ts[:19].replace('T', ' ') < inicio]
     return previas[-1] if previas else None
+
+
+def simulacion(picks, bankroll=100_000.0):
+    """Seguir el v2 a ciegas: stake_v2 sobre el bankroll del momento, en orden de inicio.
+    Solo los picks ya jugados mueven el bankroll; los pendientes se listan."""
+    banca, filas = bankroll, []
+    for p in sorted(picks, key=lambda x: x['inicio']):
+        stake = stake_v2(p['p_pin'], p['cuota'], banca) if p['pl'] is not None else None
+        if stake is not None:
+            banca += stake * p['pl']
+        filas.append({'inicio': p['inicio'], 'liga': p['liga'], 'partido': p['partido'],
+                      'pick': ('LOCAL', 'EMPATE', 'VISITA')[p['resultado']], 'cuota': p['cuota'], 'p_pin': p['p_pin'],
+                      'clv': p['clv'], 'estado': 'pendiente' if p['pl'] is None else ('ganada' if p['pl'] > 0 else 'perdida'),
+                      'stake': stake, 'bankroll': round(banca, 2)})
+    jugados = [p for p in picks if p['pl'] is not None]
+    return {'picks': filas, 'bankroll_inicial': bankroll, 'bankroll_final': round(banca, 2),
+            'n_jugados': len(jugados), 'acierto': float(np.mean([p['pl'] > 0 for p in jugados])) if jugados else None}
 
 
 def resumen(picks):
@@ -160,7 +177,7 @@ def main():
         if fila:
             aprender({**d, 'pais': pais}, fila, revisar)
         p_cierre = prob_justa([fila['c1'], fila['cx'], fila['c2']]) if fila else None
-        if p_cierre is None and d['torneo'] in SEGUNDAS:
+        if p_cierre is None:  # torneo sin The Odds API: cierre aproximado de OddsPapi (enmienda del bead)
             aprox = cierre_aproximado(snaps_pin.get(fid, []), ts_pick, d['inicio_utc'])
             p_cierre = prob_justa(aprox) if aprox else None
         res = None
@@ -169,7 +186,8 @@ def main():
         for i in ev_picks(d['pinnacle'], d[CASA]):
             cuota = d[CASA][i]
             picks.append({'fixture': fid, 'torneo': d['torneo'], 'resultado': i, 'cuota': cuota,
-                          'p_pin': prob_justa(d['pinnacle'])[i],
+                          'p_pin': prob_justa(d['pinnacle'])[i], 'inicio': d['inicio_utc'][:16],
+                          'partido': f"{d['local']} vs {d['visita']}", 'liga': pais,
                           'clv': cuota * p_cierre[i] - 1 if p_cierre else None,
                           'pl': None if res is None else (cuota - 1 if res == i else -1.0)})
     primario = [p for p in picks if p['torneo'] in PRIMARIO]
@@ -181,6 +199,7 @@ def main():
                         'por_torneo': {TORNEO_PAIS[t]: resumen([p for p in picks if p['torneo'] == t]) for t in SEGUNDAS}},
            'primario_p_min_035': resumen([p for p in primario if p['p_pin'] >= P_MIN_SECUNDARIO]),
            'alias_a_revisar': revisar,
+           'simulacion': simulacion(picks),
            'margen_medio': {e: {c: float(np.mean(v)) if v else None for c, v in m.items()} for e, m in margenes.items()}}
     parada = out['primario']['n_con_cierre'] >= N_PARADA or date.today() >= FECHA_PARADA
     out['decision'] = 'evaluar ahora con la regla del bead' if parada else 'informe intermedio: no decide'

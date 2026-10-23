@@ -36,8 +36,8 @@ def variables(facts):
     return f
 
 
-def cargar_fotmob():
-    """Como ev.cargar_fotmob, con las variables del oddspoll en el indice 8."""
+def cargar_fotmob(crudo=False):
+    """Como ev.cargar_fotmob, con las variables del oddspoll en el indice 8 (o las frases crudas si `crudo`)."""
     out = []
     for fl in glob.glob(str(ROOT / 'data/fotmob/raw/*.json')):
         d = json.load(open(fl, encoding='utf-8'))
@@ -48,7 +48,7 @@ def cargar_fotmob():
         t = d['header']['teams']
         facts = ((d['content'].get('matchFacts') or {}).get('poll') or {}).get('oddspoll', {}).get('Facts')
         fecha = datetime.strptime(g['matchTimeUTCDate'][:10], '%Y-%m-%d').date()
-        out.append((lid, fecha, t[0]['score'], t[1]['score'], t[0]['name'], t[1]['name'], 0.0, 0.0, variables(facts)))
+        out.append((lid, fecha, t[0]['score'], t[1]['score'], t[0]['name'], t[1]['name'], 0.0, 0.0, facts if crudo else variables(facts)))
     return out
 
 

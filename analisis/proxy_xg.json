@@ -1,0 +1,39 @@
+{
+  "n": 9729,
+  "n_train": 7783,
+  "n_test": 1946,
+  "fecha_corte": "2026-02-21",
+  "modelos": {
+    "solo_tiros_totales": {
+      "r2_test": 0.4212596428886004,
+      "rmse_test": 0.6364838305501591,
+      "coeficientes": {
+        "const": 0.04586304736549548,
+        "total_shots": 0.10459532233215492
+      }
+    },
+    "tiros_y_al_arco": {
+      "r2_test": 0.5081505930437572,
+      "rmse_test": 0.5867614420409535,
+      "coeficientes": {
+        "const": -0.0071543943596858815,
+        "total_shots": 0.05826348911180956,
+        "ShotsOnTarget": 0.1489257843416317
+      }
+    },
+    "conjunto_completo": {
+      "r2_test": 0.725531463378604,
+      "rmse_test": 0.4383204916891545,
+      "coeficientes": {
+        "const": -0.004219214049048631,
+        "total_shots": 0.017313707302775278,
+        "ShotsOnTarget": 0.038743686303641396,
+        "shots_inside_box": 0.04286920565791913,
+        "big_chance": 0.25509237308334126,
+        "touches_opp_box": 0.006636094818834797,
+        "corners": -0.017168494456077252
+      }
+    }
+  },
+  "exito": true
+}

@@ -67,11 +67,78 @@ El edge contra el cierre de Pinnacle no apareció con modelos propios (D-026, D-
 - La base recalibrada sin variables da +0.0023 y +0.0055: el candidato no supera ni a la recalibración.
 - Conclusión: el oddspoll no agrega información al cierre de Pinnacle.
 
+## E2b. Oddspoll separado por local y visitante (fijado 2026-10-23, antes de correr)
+
+Pedido del usuario: un 60% de acierto en las rachas es mucho, hay que diferenciar local y visitante.
+
+- **Variables, 8 en lugar de 4 con signo:** `forma_local`, `forma_visita`, `h2h_gana_local`, `h2h_gana_visita`, `h2h_invicto_local`, `h2h_invicto_visita`, `goles_local`, `goles_visita`. Cada una vale 0 si la plantilla falta o si la racha es del otro lado.
+- **Diagnóstico previo:** para rachas h2h de 4 o más victorias, por lado de la racha: porcentaje de victorias real, probabilidad media de victoria que da el cierre de Pinnacle sin margen a ese equipo, y N. Si ambas cifras coinciden, la racha ya está en el precio.
+- **Modelo y criterio:** igual que E2. Es una segunda comparación sobre los mismos datos, así que el resultado se lee con esa corrección: no se promueve por un IC95 que apenas excluya 0.
+- **Código:** `analisis/oddspoll_local_visita.py`.
+
+## E6. Porcentaje de victorias por equipo, separado por local y visitante (fijado 2026-10-23, antes de correr)
+
+Pedido del usuario: buscar quién gana más seguido y definir por quién apostar a partir de ese porcentaje.
+
+- **Datos:** `data/football_data/eu/` de 5 ligas grandes (E0, SP1, D1, I1, F1), siete temporadas en orden cronológico. Resultados y cuotas de cierre de Pinnacle.
+- **Variables por partido:** `wl` = porcentaje de victorias del local en sus últimos 10 partidos como local; `wv` = porcentaje de victorias del visitante en sus últimos 10 como visitante. Se exige 5 partidos previos de cada equipo. Los equipos y partidos son solo los previos al partido.
+- **Regla ingenua:** apostar al local si `wl > wv` y al visitante si `wv > wl`, a la cuota de cierre de Pinnacle. Se informa el rendimiento (yield) con IC95 por bootstrap.
+- **Prueba de información:** regresión logística con los dos logits de Pinnacle más `wl` y `wv`, ajustada con las temporadas anteriores a 2024/25 y probada en 2024/25. Cambio de log-loss contra Pinnacle de cierre, IC95 por bootstrap.
+- **Éxito:** el límite superior del IC95 del cambio de log-loss es menor que 0. La regla ingenua tiene yield esperado negativo igual al margen de Pinnacle; solo importa si su IC95 supera 0.
+- **Código:** `analisis/winrate_local_visita.py`.
+
+### Resultado de E2b y diagnóstico exploratorio (2026-10-23)
+
+| Estrato | Cambio de log-loss con 8 variables | IC95 |
+|---|---|---|
+| Europa | +0.0077 | [+0.0008, +0.0147] |
+| Argentina | +0.0478 | [+0.0154, +0.0837] |
+
+- Separar por lado empeora el modelo: 8 variables sobreajustan. Ninguno cumple el criterio.
+- Rachas h2h de 4 o más victorias en Europa (entrenamiento y prueba juntos), contra la probabilidad de cierre de Pinnacle:
+  - Racha del local: real 76.7%, Pinnacle 68.2%, n=103, z=+1.92.
+  - Racha del visitante: real 61.1%, Pinnacle 52.7%, n=108, z=+1.82.
+- Es una pista exploratoria: se miró en los mismos datos, con seis cortes probados (3, 4 y 5 por lado), y ningún z supera 2. Se confirma en E6b con datos independientes.
+
+## E6b. Rachas h2h calculadas desde resultados (fijado 2026-10-23, antes de correr)
+
+- **Hipótesis:** el equipo con una racha de 4 o más victorias seguidas en los últimos enfrentamientos directos gana más seguido que la probabilidad que da el cierre de Pinnacle.
+- **Datos:** `data/football_data/eu/` de todas las divisiones. Racha = enfrentamientos previos de la misma división, del más reciente hacia atrás, ganados por el mismo equipo (un empate la corta; el local o visitante de cada partido no importa).
+- **Conjunto independiente:** temporadas 2019/20 a 2023/24 (carpetas 0, 1, 2, 6 y 3). La pista salió de 2024/25 y 2025/26 de las 5 ligas grandes, así que no se usan para confirmar.
+- **Métrica:** diferencia entre el porcentaje real de victorias del equipo con racha y la probabilidad media de victoria de Pinnacle de cierre, con z calculado con la varianza de Pinnacle. Se reporta por lado (la racha es del local o del visitante). También el yield de apostar al equipo con racha a la cuota de cierre de Pinnacle, con IC95 por bootstrap.
+- **Éxito:** z mayor que 2 en el conjunto independiente agrupado, con la misma señal en ambos lados y al menos 300 casos.
+- **Código:** `analisis/winrate_local_visita.py`.
+
+### Resultados de E6 y E6b (2026-10-23)
+
+**E6, porcentaje de victorias local y visitante (5 ligas grandes, prueba 2024/25, n=1.712):**
+- Cambio de log-loss contra Pinnacle: −0.00006, IC95 [−0.0019, +0.0018]. No hay información.
+- La regla ingenua (apostar al lado con mayor porcentaje de victorias) acierta 51.4% contra 50.8% que da Pinnacle. Su yield es −1.6%, IC95 [−7.0%, +4.2%].
+
+**E6b, rachas h2h de 4 o más victorias (todas las divisiones):**
+
+| Conjunto | N | Gana real | Pinnacle | z | Yield | IC95 del yield |
+|---|---|---|---|---|---|---|
+| Independiente 2019/20 a 2023/24, local | 444 | 70.5% | 67.5% | +1.44 | +0.5% | [−6.2%, +7.3%] |
+| Independiente, visitante | 523 | 53.0% | 53.0% | −0.03 | −5.4% | [−14.1%, +3.5%] |
+| Independiente, agrupado | 967 | 61.0% | 59.7% | +0.92 | −2.7% | [−8.2%, +3.1%] |
+| 2024/25 y 2025/26, agrupado | 561 | 64.9% | 59.0% | +3.01 | +6.0% | [−1.6%, +13.6%] |
+
+- El criterio de éxito (z mayor que 2 en el conjunto independiente) no se cumple: z=+0.92.
+- La pista de 2024/25 y 2025/26 no estaba en las temporadas anteriores. Un efecto que aparece solo en los dos últimos años puede ser ruido, un cambio de régimen o un efecto real reciente.
+- El yield del período reciente tiene IC95 que incluye 0.
+- Queda como hipótesis para seguir hacia adelante, sin cambiar el motor.
+
 ## E3. Ligas con poca cobertura
 
 - **Primera Nacional y otras `lower`:** FotMob no trae estadísticas ni tiros. No hay base para xG. Quedan fuera.
 - **Ligas `ratings` (Bolivia, Ecuador, Paraguay, Perú):** traen estadísticas agregadas (tiros, tiros al arco, tiros dentro del área, ocasiones claras, toques en el área rival).
 - **Proxy de xG:** una regresión sobre esas estadísticas, entrenada donde FotMob da xG (Liga Profesional, Europa) con el xG de equipo como objetivo. Se mide el R² en partidos reservados.
+- **Variables:** tiros totales, tiros al arco, tiros dentro del área, ocasiones claras, toques en el área rival y córners de cada equipo, desde `content.stats`.
+- **Partición:** el 80% más antiguo de los partidos para ajustar y el 20% más reciente para medir.
+- **Modelos:** solo tiros totales, tiros totales y al arco, y el conjunto completo, con regresión de mínimos cuadrados.
+- **Éxito:** R² del conjunto completo en la prueba de al menos 0.6 y al menos 0.05 mayor que el de solo tiros totales. Con menos, el proxy no justifica usarlo en ligas sin xG.
+- **Código:** `analisis/proxy_xg.py`. Resultado: `analisis/proxy_xg.json`.
 - **Límite duro:** sin cuotas históricas de Pinnacle para esas ligas no hay benchmark de mercado. Solo se puede evaluar contra resultados.
 - **Cuotas:** `cuotas_forward` (OddsPapi) cubre torneos LATAM sin The Odds API. Acumula solo hacia adelante.
 - **Reverse engineering del modelo de Opta:** exige coordenadas de tiros por liga. FotMob las da solo donde hay cobertura `xG`. En las demás ligas no existe una fuente de tiros.
@@ -123,6 +190,20 @@ Pregunta: entre la apertura y el cierre, ¿hay momentos en que una casa paga má
 - **Rezago:** tiempo medio desde que Pinnacle se mueve más de 2% hasta que la casa se mueve en la misma dirección.
 - **Sesgo conocido:** la normalización proporcional distorsiona a los resultados de cuota alta. Se informa el CLV aparte para cuotas mayores que 4.
 - **Prototipo (un partido, anecdótico):** bet365 AR pagaba 7.0 al visitante mientras Pinnacle pagaba 6.12: EV previo de +8%. Al cierre Pinnacle pagaba 7.68 y el CLV de esa cuota fue de −12%. El EV previo se evaporó porque Pinnacle se movió hacia bet365.
+
+### Resultados de E3 (2026-10-23)
+
+| Modelo | R² en prueba | RMSE |
+|---|---|---|
+| Solo tiros totales | 0.421 | 0.636 |
+| Tiros totales y al arco | 0.508 | 0.587 |
+| Conjunto completo (6 variables) | 0.726 | 0.438 |
+
+- Datos: 9.729 filas de equipo y partido con xG; prueba con el 20% más reciente (desde 2026-02-21, n=1.946).
+- El criterio de éxito se cumple: R² de 0.726 (mínimo 0.6) y 0.30 por encima de solo tiros (mínimo 0.05).
+- Las ocasiones claras (`big_chance`) pesan más: 0.255 de xG por ocasión.
+- Lo que el proxy no demuestra: que sirva para apostar. Sin cuotas de Pinnacle en las ligas `ratings` no hay benchmark de mercado.
+- Un proxy de xG exacto no es un edge: el xG real de Opta tampoco superó a Pinnacle (D-029).
 
 ## Orden propuesto
 

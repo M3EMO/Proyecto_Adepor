@@ -1,0 +1,40 @@
+{
+  "estrato": "arg",
+  "train": {
+    "n": 377,
+    "sin_cruce": 203
+  },
+  "test": {
+    "n": 464,
+    "sin_cruce": 1
+  },
+  "diagnostico_rachas_h2h_4mas_en_prueba": {
+    "local": {
+      "n": 11,
+      "gana_real": 0.2727272727272727,
+      "prob_pinnacle": 0.5101223507545292
+    },
+    "visita": {
+      "n": 4,
+      "gana_real": 0.5,
+      "prob_pinnacle": 0.4471134066763459
+    }
+  },
+  "logloss_base": 1.0682030703773904,
+  "candidato_local_visita": {
+    "delta": 0.04775795829774444,
+    "ic95": [
+      0.015389284840069713,
+      0.08367502060429396
+    ],
+    "exito": false
+  },
+  "recalibrada_sin_oddspoll": {
+    "delta": 0.005493625785062436,
+    "ic95": [
+      -0.007433254794810952,
+      0.01870156150631118
+    ],
+    "exito": false
+  }
+}

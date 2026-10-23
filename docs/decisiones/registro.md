@@ -179,3 +179,16 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Condición previa:** las frases no filtran el resultado (el equipo de una racha h2h de 4 o más gana 59%-61%).
 - **Regla:** el oddspoll no entra al modelo.
 - **Protocolo:** `docs/specs/13-estudios-forward.md`, E2. Datos: `analisis/oddspoll_vs_pinnacle_eu.json` y `_arg.json`.
+
+## D-033 · 2026-10-23 · El xG se puede aproximar desde estadísticas agregadas
+- **Evidencia:** una regresión sobre tiros, tiros al arco, tiros dentro del área, ocasiones claras, toques en el área rival y córners da R² de 0.726 y RMSE de 0.438 en prueba (n=1.946), contra 0.421 con solo tiros totales.
+- **Alcance:** sirve para estimar xG en ligas que FotMob cubre como `ratings` (Bolivia, Ecuador, Paraguay, Perú y copas).
+- **Límite:** no es un edge. El xG real de Opta no supera a Pinnacle (D-029) y esas ligas no tienen cuotas históricas de Pinnacle para medirlo.
+- **Protocolo:** `docs/specs/13-estudios-forward.md`, E3. Datos: `analisis/proxy_xg.json`.
+
+## D-034 · 2026-10-23 · El porcentaje de victorias local y visitante no agrega información
+- **Evidencia:** con los porcentajes de victorias de los últimos 10 partidos como local y como visitante, el cambio de log-loss contra Pinnacle es −0.00006, IC95 [−0.0019, +0.0018], n=1.712.
+- **Regla ingenua:** apostar al lado con mayor porcentaje acierta 51.4% contra 50.8% de Pinnacle; yield −1.6%, IC95 [−7.0%, +4.2%].
+- **Rachas h2h de 4 o más victorias:** en 2019/20 a 2023/24 (n=967) ganan 61.0% contra 59.7% de Pinnacle, z=+0.92. No se confirma. En 2024/25 y 2025/26 (n=561) ganan 64.9% contra 59.0%, z=+3.01, yield +6.0% con IC95 [−1.6%, +13.6%].
+- **Regla:** ninguna entra al motor. La racha reciente queda como hipótesis para seguir hacia adelante.
+- **Protocolo:** `docs/specs/13-estudios-forward.md`, E6 y E6b. Datos: `analisis/winrate_local_visita.json`.

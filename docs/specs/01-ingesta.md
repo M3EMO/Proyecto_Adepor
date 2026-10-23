@@ -197,3 +197,13 @@ Huecos sin test (no encontré test directo para estos puntos):
 - Torneos: Liga Profesional, Copa Argentina, Libertadores, Sudamericana, Brasileirão, las 5 ligas top de Europa, Champions, Europa League, Chile, Uruguay y Colombia.
 - No toca `partidos_backtest` ni la decisión.
 - Tests: `tests/test_ingesta_oddspapi.py`.
+
+## Anexo: captura forward de casas locales via FotMob (E1, 2026-10-23)
+
+- `src/ingesta/motor_cuotas_fotmob.py` guarda el 1X2 de las casas que FotMob muestra para Argentina (1xBet, Mostbet) y Reino Unido, junto con el Pinnacle previo de `partidos_backtest`.
+- Usa la tabla `cuotas_forward`. No cambia el esquema. `fixture_id` es `fm:<id FotMob>:<id_partido>` y el Pinnacle va como casa `pinnacle_pb`.
+- Toma los partidos Pendiente con `pin_1` y kickoff en las próximas 60 horas. Los cruza con el calendario de FotMob por nombres y chequea la orientación local y visita.
+- Cada corrida de la cascada agrega una captura con su propio `ts_captura`. Tarda unos 6 minutos.
+- Es un paso no crítico (6.6): si falla, la cascada sigue. No toca la decisión ni `partidos_backtest`.
+- Protocolo y análisis del CLV: `13-estudios-forward.md`, E1.
+- Tests: `tests/test_cuotas_fotmob.py`.

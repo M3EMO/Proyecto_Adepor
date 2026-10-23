@@ -108,6 +108,13 @@ def main():
                         # cuando despues se carga su alias. Se omite hasta mapearlo.
                         desconocidos = [n for n in (loc_oficial, vis_oficial)
                                         if not gestor_nombres.es_conocido(n, liga=pais)]
+                        # En una copa, un equipo de division baja es nuevo, no un alias mal escrito:
+                        # se registra con el nombre de ESPN en su pais o en el grupo de la copa.
+                        for n in desconocidos:
+                            grupo = gestor_nombres.registrar_en_copa(n, pais)
+                            if grupo:
+                                print(f"[APRENDIZAJE] ({grupo}) equipo nuevo de copa: {n}")
+                        desconocidos = [n for n in desconocidos if not gestor_nombres.es_conocido(n, liga=pais)]
                         if desconocidos:
                             print(f"[ALERTA] Equipo sin mapear en {pais}: {desconocidos}. Partido omitido "
                                   f"(correr --audit-names).")

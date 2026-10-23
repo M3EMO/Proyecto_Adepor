@@ -53,3 +53,35 @@ def test_aprender_alias_va_al_pais_del_equipo_y_no_pisa(tmp_path, monkeypatch):
     assert g.cargar_diccionario()['Italia']['interfc'] == 'Inter'
     assert g.aprender_alias('Inter Milano', 'Inter', 'Italia') is None  # el alias ya apunta a otro equipo
     assert g.aprender_alias('Inter', 'Desconocido', 'Italia') is None
+
+
+def test_registrar_en_copa_nacional_e_internacional(tmp_path, monkeypatch):
+    import json
+    from src.comun import gestor_nombres as g
+    archivo = tmp_path / 'dic.json'
+    archivo.write_text(json.dumps({
+        '_meta': {'version': '5.0', 'equipo_a_liga_home': {},
+                  'ligas_por_copa': {'Copa del Rey': ['Espana'], 'Libertadores': ['Argentina', 'Paraguay'],
+                                     'Sudamericana': ['Argentina', 'Paraguay'],
+                                     'Champions League': ['Espana', 'UEFA otros']}},
+        'Espana': {'getafe': 'Getafe'}, 'Argentina': {}, 'UEFA otros': {}}))
+    monkeypatch.setattr(g, 'DICCIONARIO_FILE', str(archivo))
+    assert g.registrar_en_copa('Xerez', 'Copa del Rey') == 'Espana'
+    assert g.es_conocido('Xerez', liga='Copa del Rey') and g.es_conocido('Xerez', liga='Espana')
+    assert g.registrar_en_copa('Olimpia', 'Libertadores') == 'CONMEBOL otros'
+    assert g.es_conocido('Olimpia', liga='Libertadores') and g.es_conocido('Olimpia', liga='Sudamericana')
+    assert g.registrar_en_copa('Slavia Prague', 'Champions League') == 'UEFA otros'
+    assert g.registrar_en_copa('Xerez', 'Liga inventada') is None
+
+
+def test_registrar_equipos_da_de_alta_una_liga_sin_pisar(tmp_path, monkeypatch):
+    import json
+    from src.comun import gestor_nombres as g
+    archivo = tmp_path / 'dic.json'
+    archivo.write_text(json.dumps({'_meta': {'version': '5.0', 'equipo_a_liga_home': {}, 'ligas_por_copa': {}},
+                                   'Inglaterra 2': {'burnley': 'Burnley FC'}}))
+    monkeypatch.setattr(g, 'DICCIONARIO_FILE', str(archivo))
+    assert g.registrar_equipos('Inglaterra 2', ['Burnley', 'Bolton Wanderers', 'sudo rm -rf /']) == 1
+    sub = g.cargar_diccionario()['Inglaterra 2']
+    assert sub['boltonwanderers'] == 'Bolton Wanderers' and sub['burnley'] == 'Burnley FC'
+    assert g.es_conocido('Bolton Wanderers', liga='Inglaterra 2')

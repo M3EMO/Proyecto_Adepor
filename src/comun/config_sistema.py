@@ -40,6 +40,11 @@ LIGAS_ESPN = {
     # Slugs ESPN validados via sports.core.api.espn.com/v2/sports/soccer/leagues.
     # NOMBRE INTERNO debe coincidir con dic._meta.ligas_por_copa[k] para que
     # gestor_nombres resuelva equipos cross-source consistentemente.
+    # Segundas divisiones y America del Norte — 2026-10-23 (D-038: edge en segundas divisiones).
+    "eng.2": "Inglaterra 2",                       # Championship
+    "arg.2": "Argentina 2",                        # Primera Nacional
+    "usa.1": "Estados Unidos",                     # MLS
+    "mex.1": "Mexico",                             # Liga MX
     "uefa.champions": "Champions League",        # UCL
     "uefa.europa": "Europa League",               # UEL
     "uefa.europa.conf": "Conference League",      # UECL
@@ -77,6 +82,10 @@ MAPA_LIGAS_ODDS = {
     "Francia":   "soccer_france_ligue_one",      # Ligue 1 — verified active 2026-04-21
     # COPAS — claves verificadas en /v4/sports el 2026-10-22. Las de temporada cerrada
     # no generan pedidos: motor_cuotas consulta solo ligas con partidos vivos.
+    "Inglaterra 2":          "soccer_efl_champ",
+    "Argentina 2":           None,  # The Odds API no la cubre: el cierre sale de OddsPapi
+    "Estados Unidos":        "soccer_usa_mls",
+    "Mexico":                "soccer_mexico_ligamx",
     "Champions League":      "soccer_uefa_champs_league",
     "Europa League":         "soccer_uefa_europa_league",
     "Conference League":     "soccer_uefa_europa_conference_league",

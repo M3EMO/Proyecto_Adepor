@@ -1,7 +1,7 @@
 """
 Simulacion de apuestas con EV positivo contra Pinnacle. Protocolo: docs/specs/12-producto-deploy.md.
 
-Uso: python -I analisis/simular_apuestas_ev.py
+Uso: python -I analisis/simular_apuestas_ev.py [top5|todas]
 Salida: analisis/simular_apuestas_ev.json
 """
 import json
@@ -22,11 +22,11 @@ GRILLA_N = (50, 100, 250, 500)
 N_SIM, BANKROLL, DD_MAX = 5000, 100_000.0, 0.15
 
 
-def piscina():
-    """Apuestas 1X2 con EV previo > umbral: (cuota, prob previa, prob de cierre)."""
+def piscina(variante='top5'):
+    """Apuestas 1X2 con EV previo > umbral: (cuota, prob previa, prob de cierre) y partidos totales."""
     out = []
     for c in CARPETAS:
-        for d in DIVS:
+        for d in (DIVS if variante == 'top5' else [p.stem for p in sorted((ROOT / f'data/football_data/eu/{c}').glob('*.csv'))]):
             out += apuestas(ROOT / f'data/football_data/eu/{c}', f'{d}.csv')
     sel = [a for a in out if a['ev'] > UMBRAL_EV_V2]
     return [(a['cuota'], (a['ev'] + 1) / a['cuota'], (a['ev_cierre'] + 1) / a['cuota']) for a in sel], len(out) // 3
@@ -70,15 +70,16 @@ def celda(pool, n, p_real, semilla):
 
 
 def main():
-    pool, n_partidos = piscina()
+    variante = sys.argv[1] if len(sys.argv) > 1 else 'top5'
+    pool, n_partidos = piscina(variante)
     sem = 20261023
-    r = {'piscina': len(pool), 'partidos_en_piscina': n_partidos,
+    r = {'variante': variante, 'piscina': len(pool), 'partidos_en_piscina': n_partidos,
          'apuestas_por_partido': len(pool) / n_partidos,
          'ev_previo_medio': float(np.mean([c * q - 1 for c, q, _ in pool])),
          'ev_cierre_medio': float(np.mean([c * qc - 1 for c, _, qc in pool])),
          'escenarios': {nom: [celda(pool, n, f, sem) for n in GRILLA_N] for nom, f in ESCENARIOS.items()}}
     texto = json.dumps(r, indent=2)
-    (ROOT / 'analisis/simular_apuestas_ev.json').write_text(texto)
+    (ROOT / ('analisis/simular_apuestas_ev.json' if variante == 'top5' else f'analisis/simular_apuestas_ev_{variante}.json')).write_text(texto)
     print(texto)
 
 

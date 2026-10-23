@@ -93,6 +93,16 @@ Pregunta: con las reglas actuales, ¿qué chance hay de que el sistema demuestre
 - **Prueba:** una piscina con EV real positivo da P(yield > 0) mayor que 0.5. Una piscina con EV real negativo da menos de 0.5.
 - **Código:** `analisis/simular_apuestas_ev.py`. Resultado: `analisis/simular_apuestas_ev.json`.
 
+### Variante: más ligas (fijada 2026-10-23, antes de correr)
+
+Pregunta: ¿sumar ligas sube el ritmo de apuestas sin bajar el EV contra el cierre?
+
+- **Piscina `todas`:** igual que la piscina base, pero con todos los archivos de `data/football_data/eu/` de las dos temporadas (21 divisiones).
+- **Informe por división:** apuestas por semana, EV medio contra el cierre y N de cada una.
+- **Simulación:** el mismo protocolo, con escenarios A y B y la grilla de N. Se informa también el tiempo hasta N, según el ritmo medido.
+- **Comparaciones:** son dos piscinas (`top5` y `todas`). La lectura de la variante es exploratoria.
+- **Fuera de alcance:** LATAM y Noruega. Sus archivos (`new/`) no traen cuota previa de Pinnacle, así que no permiten calcular el EV previo.
+
 ### Resultados (2026-10-23)
 
 - Piscina: 156 apuestas en 3.504 partidos (0.044 por partido), unas 2 por semana en las 5 ligas grandes.
@@ -111,6 +121,25 @@ Pregunta: con las reglas actuales, ¿qué chance hay de que el sistema demuestre
 - Aun con el escenario optimista, la promoción a 500 apuestas tiene 11% de chance.
 - Con 2 apuestas por semana, 50 apuestas tardan unos 6 meses y 250 más de 2 años.
 - Los datos de la piscina son de Bet365 contra Pinnacle en el mismo momento. Tu casa (BetWarrior) puede dar otro EV.
+
+### Resultados de la variante `todas` (2026-10-23)
+
+- Piscina: 1.080 apuestas en 15.443 partidos (0.070 por partido), unas 13 por semana. Es 6.6 veces el ritmo de las 5 ligas grandes.
+- EV medio de la piscina: +5.6% contra Pinnacle previo y +0.8% contra el cierre.
+
+| Escenario | N | P(yield > 0) | Yield p5 / p50 / p95 | P(DD > 15%) | P(promoción) |
+|---|---|---|---|---|---|
+| A: cierre es verdad | 50 | 0.48 | −49% / −1% / +58% | 0.00 | 0.03 |
+| A: cierre es verdad | 250 | 0.51 | −22% / 0% / +25% | 0.15 | 0.08 |
+| A: cierre es verdad | 500 | 0.52 | −16% / +1% / +18% | 0.43 | 0.14 |
+| B: previo es verdad | 50 | 0.54 | −45% / +4% / +63% | 0.00 | 0.03 |
+| B: previo es verdad | 250 | 0.64 | −18% / +5% / +31% | 0.09 | 0.09 |
+| B: previo es verdad | 500 | 0.70 | −11% / +5% / +24% | 0.29 | 0.18 |
+
+- Con 13 apuestas por semana, 50 apuestas tardan unas 4 semanas y 500 unos 9 meses.
+- La chance de promoción sube, pero sigue baja: 14% a 18% a las 500 apuestas.
+- El drawdown mayor a 15% sube a 29%-43% a las 500 apuestas, porque el stake crece con más apuestas seguidas.
+- Las divisiones menores tienen límites de apuesta más bajos en las casas. La simulación no los modela.
 
 ## Limitaciones conocidas
 

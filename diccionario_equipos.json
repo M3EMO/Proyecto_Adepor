@@ -312,7 +312,89 @@
       "Águilas Doradas": "Colombia",
       "Ñublense": "Chile",
       "Venezia": "Italia",
-      "Coventry City": "Inglaterra"
+      "Coventry City": "Inglaterra",
+      "SC Paderborn 07": "Alemania",
+      "SV Elversberg": "Alemania",
+      "Schalke 04": "Alemania",
+      "Universidad Católica": "Chile",
+      "Deportes Tolima": "Colombia",
+      "Deportivo Pereira": "Colombia",
+      "Independiente Medellín": "Colombia",
+      "Deportivo": "Espana",
+      "Málaga": "Espana",
+      "Racing Santander": "Espana",
+      "Le Mans": "Francia",
+      "Troyes": "Francia",
+      "Hull City": "Inglaterra",
+      "Ipswich Town": "Inglaterra",
+      "Frosinone": "Italia",
+      "Monza": "Italia",
+      "Atlético Grau": "Peru",
+      "Amed SFK": "Turquia",
+      "Erzurum BB": "Turquia",
+      "Çorum FK": "Turquia",
+      "AEK Athens": "UEFA otros",
+      "Club Brugge": "UEFA otros",
+      "FC Porto": "UEFA otros",
+      "Feyenoord Rotterdam": "UEFA otros",
+      "LASK Linz": "UEFA otros",
+      "PSV Eindhoven": "UEFA otros",
+      "Sabah FK": "UEFA otros",
+      "Shakhtar Donetsk": "UEFA otros",
+      "Slavia Prague": "UEFA otros",
+      "Slovan Bratislava": "UEFA otros",
+      "Sporting CP": "UEFA otros",
+      "AGF": "UEFA otros",
+      "Ajax Amsterdam": "UEFA otros",
+      "Borac Banja Luka": "UEFA otros",
+      "Braga": "UEFA otros",
+      "CSKA Sofia": "UEFA otros",
+      "CSU Craiova": "UEFA otros",
+      "Egnatia": "UEFA otros",
+      "F.C. København": "UEFA otros",
+      "FC Lugano": "UEFA otros",
+      "FC Midtjylland": "UEFA otros",
+      "FC Nordsjælland": "UEFA otros",
+      "FC Thun": "UEFA otros",
+      "FC Twente": "UEFA otros",
+      "Hajduk Split": "UEFA otros",
+      "Heart of Midlothian": "UEFA otros",
+      "Iberia 1999": "UEFA otros",
+      "Inter D'Escaldes": "UEFA otros",
+      "Jablonec": "UEFA otros",
+      "KAA Gent": "UEFA otros",
+      "Kairat Almaty": "UEFA otros",
+      "Kauno Zalgiris": "UEFA otros",
+      "KuPS Kuopio": "UEFA otros",
+      "Lincoln Red Imps": "UEFA otros",
+      "Mjällby AIF": "UEFA otros",
+      "Pafos": "UEFA otros",
+      "Panathinaikos": "UEFA otros",
+      "Red Star Belgrade": "UEFA otros",
+      "Riga FC": "UEFA otros",
+      "Sint-Truidense": "UEFA otros",
+      "AZ Alkmaar": "UEFA otros",
+      "Anderlecht": "UEFA otros",
+      "Ararat-Armenia": "UEFA otros",
+      "Benfica": "UEFA otros",
+      "Celtic": "UEFA otros",
+      "Dinamo Zagreb": "UEFA otros",
+      "Ferencvaros": "UEFA otros",
+      "Hapoel Be'er": "UEFA otros",
+      "Jagiellonia Bialystok": "UEFA otros",
+      "Lech Poznan": "UEFA otros",
+      "Levski Sofia": "UEFA otros",
+      "NEC Nijmegen": "UEFA otros",
+      "NK Celje": "UEFA otros",
+      "OFI Crete": "UEFA otros",
+      "Olympiacos": "UEFA otros",
+      "Omonia Nicosia": "UEFA otros",
+      "RB Salzburg": "UEFA otros",
+      "SK Sturm Graz": "UEFA otros",
+      "Sparta Prague": "UEFA otros",
+      "Torreense": "UEFA otros",
+      "Union St.-Gilloise": "UEFA otros",
+      "Viktoria Plzen": "UEFA otros"
     },
     "ligas_por_copa": {
       "Libertadores": [
@@ -346,7 +428,8 @@
         "Alemania",
         "Francia",
         "Turquia",
-        "Noruega"
+        "Noruega",
+        "UEFA otros"
       ],
       "Europa League": [
         "Inglaterra",
@@ -355,7 +438,8 @@
         "Alemania",
         "Francia",
         "Turquia",
-        "Noruega"
+        "Noruega",
+        "UEFA otros"
       ],
       "Conference League": [
         "Inglaterra",
@@ -364,7 +448,8 @@
         "Alemania",
         "Francia",
         "Turquia",
-        "Noruega"
+        "Noruega",
+        "UEFA otros"
       ],
       "FA Cup": [
         "Inglaterra"
@@ -448,7 +533,10 @@
     "unionberlin": "1. FC Union Berlin",
     "vfbstuttgart": "VfB Stuttgart",
     "vflwolfsburg": "VfL Wolfsburg",
-    "werderbremen": "Werder Bremen"
+    "werderbremen": "Werder Bremen",
+    "scpaderborn07": "SC Paderborn 07",
+    "svelversberg": "SV Elversberg",
+    "schalke04": "Schalke 04"
   },
   "Argentina": {
     "aldosivi": "Aldosivi",
@@ -569,7 +657,8 @@
     "unionlacalera": "Unión La Calera",
     "universidaddechile": "Universidad de Chile",
     "universidaddeconcepcion": "Universidad de Concepción",
-    "dlaserena": "La Serena"
+    "dlaserena": "La Serena",
+    "universidadcatolica": "Universidad Católica"
   },
   "Colombia": {
     "aguilasdoradas": "Águilas Doradas",
@@ -595,7 +684,11 @@
     "millonarios": "Millonarios",
     "oncecaldas": "Once Caldas",
     "boyacachicofc": "Boyacá Chicó",
-    "llanerosfc": "Llaneros"
+    "llanerosfc": "Llaneros",
+    "atleticobucaramanga": "Bucaramanga",
+    "deportestolima": "Deportes Tolima",
+    "deportivopereira": "Deportivo Pereira",
+    "independientemedellin": "Independiente Medellín"
   },
   "Ecuador": {
     "aucas": "Aucas",
@@ -643,7 +736,10 @@
     "valencia": "Valencia",
     "villarreal": "Villarreal",
     "atleticodemadrid": "Atlético Madrid",
-    "gironafc": "Girona"
+    "gironafc": "Girona",
+    "deportivo": "Deportivo",
+    "malaga": "Málaga",
+    "racingsantander": "Racing Santander"
   },
   "Francia": {
     "ajauxerre": "AJ Auxerre",
@@ -665,7 +761,9 @@
     "parissaintgermain": "Paris Saint-Germain",
     "staderennais": "Stade Rennais",
     "strasbourg": "Strasbourg",
-    "toulouse": "Toulouse"
+    "toulouse": "Toulouse",
+    "lemans": "Le Mans",
+    "troyes": "Troyes"
   },
   "Inglaterra": {
     "afcbournemouth": "AFC Bournemouth",
@@ -693,7 +791,9 @@
     "wolverhamptonwanderers": "Wolverhampton Wanderers",
     "bournemouthfc": "AFC Bournemouth",
     "liverpoolfc": "Liverpool",
-    "coventrycity": "Coventry City"
+    "coventrycity": "Coventry City",
+    "hullcity": "Hull City",
+    "ipswichtown": "Ipswich Town"
   },
   "Italia": {
     "acmilan": "AC Milan",
@@ -718,7 +818,9 @@
     "torino": "Torino",
     "udinese": "Udinese",
     "atlanta": "Atalanta",
-    "venezia": "Venezia"
+    "venezia": "Venezia",
+    "frosinone": "Frosinone",
+    "monza": "Monza"
   },
   "Noruega": {
     "aalesund": "Aalesund",
@@ -763,7 +865,8 @@
     "sporthuancayo": "Sport Huancayo",
     "sportingcristal": "Sporting Cristal",
     "universitario": "Universitario",
-    "utc": "UTC"
+    "utc": "UTC",
+    "atleticograu": "Atlético Grau"
   },
   "Turquia": {
     "alanyaspor": "Alanyaspor",
@@ -791,7 +894,10 @@
     "rizespor": "Caykur Rizespor",
     "samsunspor": "Samsunspor",
     "torkukonyaspor": "Konyaspor",
-    "trabzonspor": "Trabzonspor"
+    "trabzonspor": "Trabzonspor",
+    "amedsfk": "Amed SFK",
+    "erzurumbb": "Erzurum BB",
+    "corumfk": "Çorum FK"
   },
   "Uruguay": {
     "albionfc": "Albion FC",
@@ -834,9 +940,74 @@
     "zamorafc": "Zamora",
     "deportivotachirafc": "Deportivo Táchira",
     "estudiantesdemeridafc": "Estudiantes de Mérida",
-    "portuguesarj": "Portuguesa"
+    "portuguesarj": "Portuguesa",
+    "metropolitanos": "Metropolitanos FC"
   },
   "_huerfanos": {
     "talleres": "Talleres"
+  },
+  "UEFA otros": {
+    "aekathens": "AEK Athens",
+    "clubbrugge": "Club Brugge",
+    "fcporto": "FC Porto",
+    "feyenoordrotterdam": "Feyenoord Rotterdam",
+    "lasklinz": "LASK Linz",
+    "psveindhoven": "PSV Eindhoven",
+    "sabahfk": "Sabah FK",
+    "shakhtardonetsk": "Shakhtar Donetsk",
+    "slaviaprague": "Slavia Prague",
+    "slovanbratislava": "Slovan Bratislava",
+    "sportingcp": "Sporting CP",
+    "agf": "AGF",
+    "ajaxamsterdam": "Ajax Amsterdam",
+    "boracbanjaluka": "Borac Banja Luka",
+    "braga": "Braga",
+    "cskasofia": "CSKA Sofia",
+    "csucraiova": "CSU Craiova",
+    "egnatia": "Egnatia",
+    "fckbenhavn": "F.C. København",
+    "fclugano": "FC Lugano",
+    "fcmidtjylland": "FC Midtjylland",
+    "fcnordsjlland": "FC Nordsjælland",
+    "fcthun": "FC Thun",
+    "fctwente": "FC Twente",
+    "hajduksplit": "Hajduk Split",
+    "heartofmidlothian": "Heart of Midlothian",
+    "iberia1999": "Iberia 1999",
+    "interdescaldes": "Inter D'Escaldes",
+    "jablonec": "Jablonec",
+    "kaagent": "KAA Gent",
+    "kairatalmaty": "Kairat Almaty",
+    "kaunozalgiris": "Kauno Zalgiris",
+    "kupskuopio": "KuPS Kuopio",
+    "lincolnredimps": "Lincoln Red Imps",
+    "mjallbyaif": "Mjällby AIF",
+    "pafos": "Pafos",
+    "panathinaikos": "Panathinaikos",
+    "redstarbelgrade": "Red Star Belgrade",
+    "rigafc": "Riga FC",
+    "sinttruidense": "Sint-Truidense",
+    "azalkmaar": "AZ Alkmaar",
+    "anderlecht": "Anderlecht",
+    "araratarmenia": "Ararat-Armenia",
+    "benfica": "Benfica",
+    "celtic": "Celtic",
+    "dinamozagreb": "Dinamo Zagreb",
+    "ferencvaros": "Ferencvaros",
+    "hapoelbeer": "Hapoel Be'er",
+    "jagielloniabialystok": "Jagiellonia Bialystok",
+    "lechpoznan": "Lech Poznan",
+    "levskisofia": "Levski Sofia",
+    "necnijmegen": "NEC Nijmegen",
+    "nkcelje": "NK Celje",
+    "oficrete": "OFI Crete",
+    "olympiacos": "Olympiacos",
+    "omonianicosia": "Omonia Nicosia",
+    "rbsalzburg": "RB Salzburg",
+    "sksturmgraz": "SK Sturm Graz",
+    "spartaprague": "Sparta Prague",
+    "torreense": "Torreense",
+    "unionstgilloise": "Union St.-Gilloise",
+    "viktoriaplzen": "Viktoria Plzen"
   }
 }

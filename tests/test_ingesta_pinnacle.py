@@ -61,8 +61,8 @@ def test_main_escribe_pin_respetando_freeze_y_ventana(db, monkeypatch):
                "VALUES ('CERCA', '2026-10-12 18:30', 'Inglaterra', 'Liverpool', 'Everton')")  # +30min: en ventana, sin stake
     db.commit()
 
-    def evento(local, visita):
-        return {'home_team': local, 'away_team': visita, 'bookmakers': [{'key': 'pinnacle', 'markets': [
+    def evento(local, visita, kickoff_utc):
+        return {'home_team': local, 'away_team': visita, 'commence_time': kickoff_utc, 'bookmakers': [{'key': 'pinnacle', 'markets': [
             {'key': 'h2h', 'outcomes': [{'name': local, 'price': 1.9}, {'name': 'Draw', 'price': 3.4},
                                         {'name': visita, 'price': 4.2}]},
             {'key': 'totals', 'outcomes': [{'name': 'Over', 'point': 2.5, 'price': 1.95},
@@ -72,7 +72,8 @@ def test_main_escribe_pin_respetando_freeze_y_ventana(db, monkeypatch):
         status_code = 200
 
         def json(self):
-            return [evento('Arsenal', 'Chelsea'), evento('Liverpool', 'Everton')]
+            return [evento('Arsenal', 'Chelsea', '2026-10-13T00:00:00Z'),
+                    evento('Liverpool', 'Everton', '2026-10-12T21:30:00Z')]
 
     monkeypatch.setattr(mc, 'API_KEYS', ['K'])
     monkeypatch.setattr(mc.requests, 'get', lambda *a, **k: Resp())
@@ -92,3 +93,13 @@ def test_main_escribe_pin_respetando_freeze_y_ventana(db, monkeypatch):
     cerca = db.execute("SELECT pin_1, pin_x, pin_cierre_1, pin_cierre_x, pin_cierre_o25 "
                        "FROM partidos_backtest WHERE id_partido='CERCA'").fetchone()
     assert cerca == (1.9, 3.4, 1.9, 3.4, 1.95)  # cierre en ventana aun sin stake
+
+
+def test_misma_fecha_rechaza_eventos_de_otro_partido():
+    # Casos reales 2026-10-20 (adepor-bh4): el partido de la base ya se habia jugado y el
+    # fuzzy lo emparejo con un evento futuro de otro rival.
+    assert mc._misma_fecha('2026-10-19T23:00:00Z', '2026-10-19 20:00')       # mismo kickoff
+    assert mc._misma_fecha('2026-10-20T08:00:00Z', '2026-10-19 20:00')       # 12 h: limite
+    assert not mc._misma_fecha('2026-10-25T21:30:00Z', '2026-10-19 20:00')   # Corinthians -> Coritiba
+    assert not mc._misma_fecha(None, '2026-10-19 20:00')                     # sin fecha: no se empareja
+    assert not mc._misma_fecha('2026-10-19T23:00:00Z', '19/10/2026 20:00')

@@ -119,3 +119,8 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Fusión:** `crear_config_motor.py` se borra; su tabla, índice y trigger viven en `inicializar_db.py`.
 - **Fuera de alcance:** la base de producción conserva sus tablas v1 (fase B, no aprobada).
 - **Bead:** `adepor-xue`.
+
+## D-025 · 2026-10-22 · motor_cuotas empareja eventos solo dentro de 12 horas del partido
+- **Evidencia:** la corrida del 2026-10-20 emparejó Corinthians con Coritiba y Barracas Central con Rosario Central.
+- **Regla:** un evento de The Odds API compite solo si su kickoff cae a 12 horas o menos de la fecha del partido.
+- **Bead:** `adepor-bh4`.

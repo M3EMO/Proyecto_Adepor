@@ -61,3 +61,6 @@ analisis/_d2_m2_historico.csv
 .beads.gate.lock
 .beads/.auto-import-issues.jsonl
 data/logs/*.log
+
+# Indice local de codegraph
+.codegraph/

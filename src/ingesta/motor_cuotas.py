@@ -26,6 +26,8 @@ from src.comun.config_sistema import MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
 
 # Ventana CLV: capturar cuota_cierre cuando faltan <= 2h al kickoff
 VENTANA_CIERRE = timedelta(hours=2)
+# Un evento de la API se empareja solo si su kickoff cae a esta distancia del partido (adepor-bh4).
+VENTANA_MISMO_PARTIDO = timedelta(hours=12)
 
 
 # adepor-6ph: helper unificado en src/comun/picks.cuota_para_pick
@@ -46,6 +48,17 @@ def _en_ventana_cierre(fecha_str):
         return False
     delta = fp - ahora_art()
     return timedelta(0) <= delta <= VENTANA_CIERRE
+
+
+def _misma_fecha(commence_time, fecha_str):
+    """True si el kickoff de la API (ISO UTC) cae a 12 h o menos de partidos_backtest.fecha (ART).
+    Sin fecha valida no se empareja: un evento de otro dia escribiria cuotas de otro partido."""
+    try:
+        kickoff = datetime.strptime(commence_time, '%Y-%m-%dT%H:%M:%SZ') - timedelta(hours=3)
+        fp = datetime.strptime(fecha_str, '%Y-%m-%d %H:%M')
+    except (ValueError, TypeError):
+        return False
+    return abs(kickoff - fp) <= VENTANA_MISMO_PARTIDO
 
 
 def _puede_actualizar_cuotas(fecha_str, alertado, ahora):
@@ -273,10 +286,12 @@ def main():
             loc_norm = gestor_nombres.limpiar_texto(loc_espn)
             vis_norm = gestor_nombres.limpiar_texto(vis_espn)
             encontrado = False
+            candidatos = [ei for ei in eventos_index
+                          if _misma_fecha(ei['evento'].get('commence_time'), fecha_p)]
 
             # --- Paso 1: match exacto normalizado ---
             match_evento = None
-            for ei in eventos_index:
+            for ei in candidatos:
                 if ei['loc_norm'] == loc_norm and ei['vis_norm'] == vis_norm:
                     match_evento = ei
                     break
@@ -284,7 +299,7 @@ def main():
             # --- Paso 2: fallback fuzzy si el exacto falla ---
             if match_evento is None:
                 mejor_score = 0.0
-                for ei in eventos_index:
+                for ei in candidatos:
                     score_loc = difflib.SequenceMatcher(None, loc_norm, ei['loc_norm']).ratio()
                     score_vis = difflib.SequenceMatcher(None, vis_norm, ei['vis_norm']).ratio()
                     score = (score_loc + score_vis) / 2

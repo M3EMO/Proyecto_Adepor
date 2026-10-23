@@ -65,8 +65,9 @@ Los módulos son estos:
 5. Si la respuesta es 429 o 401, el módulo rota la clave y reintenta (`motor_cuotas.py:99-101`).
 6. Un error de red devuelve vacío y registra solo el tipo de error (`motor_cuotas.py:104-107`).
 7. Cada evento de la API pasa por el mismo gestor de nombres (`motor_cuotas.py:216-228`).
-8. El primer intento de match es exacto sobre nombres normalizados (`motor_cuotas.py:238-242`).
-9. Si no hay match exacto, el módulo usa similitud media de al menos 0,75 (`motor_cuotas.py:244-255`).
+8. Solo compiten eventos cuyo kickoff cae a 12 horas o menos de la fecha del partido (`motor_cuotas.py:53-62`, `:289-290`).
+9. El primer intento de match es exacto sobre nombres normalizados (`motor_cuotas.py:292-297`).
+10. Si no hay match exacto, el módulo usa similitud media de al menos 0,75 (`motor_cuotas.py:299-311`).
 10. El 1X2 sale de Pinnacle. Si Pinnacle no da las tres cuotas, sale de bet365 (`motor_cuotas.py:113-131`).
 11. Un libro vale solo si da local, empate y visita a la vez (`motor_cuotas.py:129-131`).
 12. El O/U 2,5 sale del primer libro del orden Pinnacle, bet365, 1xbet, betfair_ex_eu, draftkings que tenga Over y Under (`motor_cuotas.py:137-159`).
@@ -106,6 +107,7 @@ Los módulos son estos:
 - Ningún par local-visita se inserta dos veces dentro de 3 días (`motor_fixture.py:140-147`).
 - Ninguna cuota de un partido empezado se sobrescribe (`motor_cuotas.py:49-60`, `motor_cuotas.py:266`).
 - Ninguna cuota de un pick confirmado se sobrescribe (`motor_cuotas.py:63-65`, `motor_cuotas.py:266`).
+- Ningún evento de la API se empareja con un partido de otra fecha (`motor_cuotas.py:53-62`).
 - Ningún libro mezcla cuotas de 1X2 de dos casas distintas (`motor_cuotas.py:129-131`).
 - Ningún nombre inválido se guarda como alias (`gestor_nombres.py:290-292`).
 - Ningún match fuzzy cruza países (`gestor_nombres.py:250-259`).

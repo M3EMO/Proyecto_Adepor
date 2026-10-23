@@ -164,6 +164,9 @@ Huecos sin test (no encontré test directo para estos puntos):
 
 ## Anexo v2 (D-021): cuotas Pinnacle
 
+- Desde el 2026-10-22, `MAPA_LIGAS_ODDS` también cubre Libertadores, Sudamericana, EFL Cup, DFB Pokal, Copa del Rey, Coppa Italia y Coupe de France.
+- `motor_cuotas` consulta solo ligas con partidos vivos y clave no nula, así que una copa fuera de temporada no gasta cupo.
+
 - `motor_cuotas` guarda también las cuotas de Pinnacle solas en `pin_1`, `pin_x`, `pin_2`, `pin_o25` y `pin_u25`.
 - Esas columnas se actualizan hasta el kickoff, aunque el partido tenga una apuesta confirmada.
 - Dentro de la ventana de cierre se guardan `pin_cierre_*` para todos los partidos emparejados.

@@ -75,20 +75,19 @@ MAPA_LIGAS_ODDS = {
     "Italia":    "soccer_italy_serie_a",         # Serie A — verified active 2026-04-21
     "Alemania":  "soccer_germany_bundesliga",    # Bundesliga — verified active 2026-04-21
     "Francia":   "soccer_france_ligue_one",      # Ligue 1 — verified active 2026-04-21
-    # COPAS — F2 sub-15 (2026-04-28). The-Odds-API tiene cobertura PARCIAL para
-    # algunas copas EUR top. Por ahora None para copas; cuotas via API-Football
-    # Pro plan (bloqueado adepor-4tb) o scraper alternativo (oddsportal).
+    # COPAS — claves verificadas en /v4/sports el 2026-10-22. Las de temporada cerrada
+    # no generan pedidos: motor_cuotas consulta solo ligas con partidos vivos.
     "Champions League":      "soccer_uefa_champs_league",
     "Europa League":         "soccer_uefa_europa_league",
     "Conference League":     "soccer_uefa_europa_conference_league",
-    "Libertadores":          None,  # Sin cobertura confiable
-    "Sudamericana":          None,
+    "Libertadores":          "soccer_conmebol_copa_libertadores",
+    "Sudamericana":          "soccer_conmebol_copa_sudamericana",
     "FA Cup":                "soccer_fa_cup",
-    "EFL Cup":               None,
-    "Copa del Rey":          None,
-    "Coppa Italia":          None,
-    "Coupe de France":       None,
-    "DFB Pokal":             None,
+    "EFL Cup":               "soccer_england_efl_cup",
+    "Copa del Rey":          "soccer_spain_copa_del_rey",
+    "Coppa Italia":          "soccer_italy_coppa_italia",
+    "Coupe de France":       "soccer_france_coupe_de_france",
+    "DFB Pokal":             "soccer_germany_dfb_pokal",
     "Copa Argentina":        None,
     "Copa do Brasil":        None,
     "Recopa Sudamericana":   None,

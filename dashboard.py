@@ -6,6 +6,7 @@ Los loaders son funciones puras: se prueban sin Streamlit corriendo.
 """
 import math
 import sqlite3
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -13,6 +14,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+from scripts.ops import salud
 from src.comun.config_sistema import DB_NAME
 from src.comun.picks import cuota_para_pick
 from src.comun.resolucion import determinar_resultado_entero
@@ -576,6 +578,9 @@ def render():
     except Exception as e:
         st.error(f"Error cargando DB: {e}")
         st.stop()
+    estado = salud.leer_estado(salud.ESTADO, time.time())
+    if estado and not estado[0]:
+        st.error("Salud del pipeline: " + "; ".join(estado[1]))
     st.caption(f"Base: {DB_NAME} · Cargado {datetime.now():%d/%m/%Y %H:%M} · cache 60 s")
     pestañas = st.tabs(TABS)
     vistas = (_tab_valor_v2, _tab_dinero, _tab_yield, _tab_historial)

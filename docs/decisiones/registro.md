@@ -147,3 +147,12 @@ Formato: fecha · decisión · motivo · evidencia · bead.
 - **Exploratorio:** en Europa, el peso óptimo de Pinnacle sale mayor que 1, pero esa ventaja no se sostiene fuera de muestra.
 - **Regla:** el v2 sigue tomando la probabilidad justa solo de Pinnacle.
 - **Bead:** `adepor-u3x`. Datos: `analisis/mezcla_casas_pinnacle.json`.
+
+## D-029 · 2026-10-23 · El xG de FotMob no mejora al cierre de Pinnacle
+- **Evidencia, Europa:** el candidato con xG sale peor que Pinnacle: log-loss +0.0071, IC95 [+0.0002, +0.0140], n=656.
+- **Evidencia, Argentina:** el candidato con xG no se distingue de Pinnacle: +0.0059, IC95 [−0.0109, +0.0227], n=388.
+- **Control:** el candidato con goles tampoco pasa en ningún estrato.
+- **Límite:** en Europa la prueba cubre media temporada, porque football-data trae el cierre de Pinnacle en unos 900 de 1.752 partidos de 2025/26.
+- **Límite:** el diseño detecta efectos grandes, no chicos.
+- **Regla:** el xG de FotMob no entra al modelo. La probabilidad justa sigue saliendo solo de Pinnacle.
+- **Protocolo:** `analisis/fotmob_xg_vs_pinnacle_prereg.md`, fijado antes de ver resultados. Datos: `analisis/fotmob_xg_vs_pinnacle_eu.json` y `_arg.json`.

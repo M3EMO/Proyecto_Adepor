@@ -67,3 +67,14 @@ def test_app_sin_liquidados_no_falla(db):
     from streamlit.testing.v1 import AppTest
     at = AppTest.from_file("../dashboard.py", default_timeout=60).run()
     assert not at.exception, [e.value for e in at.exception]
+
+
+def test_dashboard_muestra_aviso_de_salud(db, tmp_path, monkeypatch):
+    from scripts.ops import salud
+    _sembrar(db)
+    estado = tmp_path / 'salud_estado.json'
+    estado.write_text('{"ok": false, "fallas": ["pipeline sin correr hace 55 h"]}')
+    monkeypatch.setattr(salud, 'ESTADO', estado)
+    st.cache_data.clear()
+    at = AppTest.from_file(str(RAIZ / "dashboard.py"), default_timeout=120).run()
+    assert any("pipeline sin correr hace 55 h" in e.value for e in at.error)

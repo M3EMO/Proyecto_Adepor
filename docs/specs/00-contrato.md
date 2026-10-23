@@ -36,6 +36,9 @@ La task que aplica el cambio lleva el tag `MANIFESTO-CHANGE-APPROVED:bd-<id>`. E
 | `04-liquidacion.md` | Resultados, liquidación, CLV y métricas |
 | `05-presentacion.md` | Dashboard Streamlit |
 | `06-operacion.md` | Orquestador, base de datos, configuración y runbook |
+| `07-fotmob.md` | Ingesta FotMob: pedido por partido, cobertura xG y límites |
 | `10-modelo-v2.md` | Modelo v2: Pinnacle como verdad, cuota mínima, stake y CLV |
+| `11-evaluacion-xg.md` | Estudio del xG de FotMob contra el cierre de Pinnacle |
+| `12-producto-deploy.md` | Producto terminado: integración, chequeo de salud, informe de medición y deploy |
 
 Las decisiones vigentes están en `docs/decisiones/registro.md`.

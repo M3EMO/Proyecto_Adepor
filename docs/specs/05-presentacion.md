@@ -152,3 +152,10 @@ Arranca el dashboard Streamlit solo en la interfaz local 127.0.0.1. No usa ngrok
 - El script usa bash. En Windows se usa `iniciar_dashboard.bat`, que no se revisó en esta spec.
 - `exec` reemplaza el shell. Cerrar el terminal detiene el dashboard.
 - Requiere el entorno `.venv` ya creado (ver Runbook).
+
+## Aviso de salud (2026-10-23)
+
+- Debajo del título, el dashboard muestra un error rojo si `data/logs/salud_estado.json` indica fallas.
+- El archivo lo escribe `scripts/ops/salud.py` (spec `12-producto-deploy.md`).
+- Un estado ausente, corrupto o con más de 3 h no muestra nada.
+- Prueba: `tests/test_dashboard_smoke.py::test_dashboard_muestra_aviso_de_salud`.

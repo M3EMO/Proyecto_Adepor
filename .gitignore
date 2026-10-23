@@ -67,3 +67,7 @@ data/logs/*.log
 
 # CSV de football-data.co.uk (datos de terceros, se bajan a mano desde el navegador)
 data/football_data/
+
+# Datos crudos de FotMob (1.4 GB), reproducibles con scripts/research/fotmob_pedir.py
+data/fotmob/
+data/logs/salud_estado.json

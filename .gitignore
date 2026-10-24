@@ -74,3 +74,4 @@ data/logs/salud_estado.json
 data/oddspapi_hist/
 # Cache de OddsPapi (datos de terceros)
 data/oddspapi/
+*.key

@@ -1,0 +1,23 @@
+# sdlc.toml — convencion por repo (ticket 11). `files` es el TECHO (patrones) de lo que el pipeline puede
+# escribir; un payload solo lo acota. Sin accept_cmd el repo no entra. approve_accept: un humano aprueba
+# el test de aceptacion que escribe la etapa 1 antes de gastar (ticket 12 D5).
+# Otros lenguajes: `ext`, `compile_cmd` (G3 y test-compile), `lint_cmd` ({files} = archivos del plan),
+# `suite_cmd` (suite total si no es pytest), `seed_globs` (ignorados que el worktree necesita), `accept_test` ({slug}).
+# `constitution`: reglas fijas que leen spec y plan (default GOAL.md; sin el archivo, nada).
+# Umbrales: `cobertura_min` (0.8; fraccion de un .py NUEVO que corre la aceptacion), `mutation_min` (sin: observa).
+# `reviewer_cmd`: agente que revisa y corrige (prompt por stdin, `{modo}` = plan|edit); sin esta clave, `claude -p`.
+# [sprites]: dir, lado, paleta, tope_colores, hitboxes, animaciones, referencias. Lo determinista bloquea;
+# el juez visual de `referencias` solo observa hasta kappa 0.6 sobre 50 sprites etiquetados (ticket 15).
+accept_cmd = "python -m pytest -q"
+suite = ["tests", "-q", "-rfE", "-p", "no:cacheprovider"]
+ext = ["py"]
+approve_accept = true
+usd_max = 3.0
+files = [
+    "*.py",
+    "analisis/**/*.py",
+    "archivo/**/*.py",
+    "auditor/**/*.py",
+    "scripts/**/*.py",
+    "src/**/*.py",
+]

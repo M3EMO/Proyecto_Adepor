@@ -14,7 +14,15 @@ ext = ["py"]
 approve_accept = true
 usd_max = 3.0
 files = [
-    "*.py",
+    "adepor_guard.py",
+    "config_sistema.py",
+    "dashboard.py",
+    "ejecutar_proyecto.py",
+    "gestor_nombres.py",
+    "motor_backtest.py",
+    "motor_cuotas.py",
+    "motor_fixture.py",
+    "motor_liquidador.py",
     "analisis/**/*.py",
     "archivo/**/*.py",
     "auditor/**/*.py",

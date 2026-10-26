@@ -9,7 +9,7 @@ from src.comun.tiempo import ahora_art
 from src.comun.tipos import safe_int
 
 # ==========================================
-# MOTOR BACKTEST V7.3 (resultados ESPN; empareja por liga y fecha +-1)
+# MOTOR BACKTEST V7.4 (resultados ESPN; empareja por liga y fecha +-1)
 # Responsabilidad: Liquidación de resultados con conmutación a API secundaria.
 # V7.2: LIGAS_ESPN, MAPA_LIGAS_ODDS, DB_NAME y API_KEYS_ODDS desde config_sistema.
 # V7.3 (2026-04-17): Escanea SOLO partidos 'Calculado' cuya fecha ya paso (no futuros),
@@ -46,7 +46,7 @@ def _coincide_partido(pendiente, pais_liga, fecha_api, loc_oficial, vis_oficial)
 
 
 def main():
-    print("[SISTEMA] Iniciando Motor Backtest V7.3 (Scope por fecha real)...")
+    print("[SISTEMA] Iniciando Motor Backtest V7.4 (Scope por fecha real)...")
 
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -73,8 +73,12 @@ def main():
     pendientes_restantes = list(pendientes)
 
     # V7.3: solo las fechas unicas donde tenemos pendientes. Antes: rango fijo de 8 dias.
-    # Formato fecha en DB: 'YYYY-MM-DD HH:MM' -> extraer YYYYMMDD.
-    fechas_unicas = sorted({p[3][:10].replace('-', '') for p in pendientes}, reverse=True)
+    # V7.4: tambien el dia siguiente, sin pasar de hoy. Un partido postergado un dia queda con la
+    # fecha vieja en la DB (motor_fixture bloquea el cambio como Time-Shift) y ESPN lo lista en la nueva.
+    hoy = ahora_art().date()
+    fechas_unicas = sorted({d.strftime('%Y%m%d') for p in pendientes
+                            for d in (datetime.strptime(p[3][:10], '%Y-%m-%d').date() + timedelta(days=k) for k in (0, 1))
+                            if d <= hoy}, reverse=True)
 
     for fecha_api in fechas_unicas:
         if not pendientes_restantes:

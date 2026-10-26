@@ -335,6 +335,161 @@ Protocolo fijado el 2026-10-26, antes de capturar estos mercados. Usa `cuotas_fo
 - **Cobertura del 2026-10-26:** en la Liga Profesional, Pinnacle publica goles y pocas líneas de córners, y no publica tarjetas. bet365 AR publica los tres tipos.
 - **Riesgo de definición:** Pinnacle y bet365 pueden contar las tarjetas distinto (roja como 1 o como 2). Un EV alto y sistemático en tarjetas se revisa antes de leerlo como edge.
 
+## E13. Tarjetas por jugador y por árbitro, histórico FotMob (bead `adepor-9q0`, fijado 2026-10-26, antes de correr)
+
+E7 midió la disciplina contra el 1X2. E13 mide otra cosa: el total de tarjetas del partido, el mercado de E12.
+
+- **Pregunta:** el historial de tarjetas del once y del árbitro agrega información por encima del equipo.
+- **Datos:** `data/fotmob/raw/*.json`, partidos de liga terminados con eventos `Card`. Estratos: Europa (5 ligas top) y Argentina (todas las variantes de Liga Profesional).
+- **Objetivo:** el objetivo es el total de eventos `Card` de `matchFacts.events`. Cada evento cuenta 1.
+- **M0 (equipo):** media de tarjetas recibidas por local y visitante en sus últimos 10, con 3 previos como mínimo. Suma la media de la liga y temporada previa al partido.
+- **M1 (árbitro):** M0 más la tasa previa del árbitro, encogida hacia la media de la liga con k = 10.
+- **M2 (jugadores):** M1 más la suma de tasas por 90' de los titulares del partido anterior, por lado. Cada tasa se encoge con un prior de 900'.
+- **Prohibido:** las stats del árbitro del infoBox, porque incluyen partidos futuros.
+- **Modelo:** binomial negativa NB2, enlace log, variables en log. Walk-forward: Europa 2024/25 contra 2025/26, Argentina 2024 contra 2025.
+- **Métrica:** diferencia de NLL media por partido en prueba, M1−M0 y M2−M1, por estrato.
+- **IC:** 98.75 % (Bonferroni por 4 comparaciones), bootstrap 2000 por partido, semilla 42.
+- **Regla:** un paso agrega información si el límite superior de su IC queda bajo 0.
+- **Puerta:** la parte 2, forward contra bet365 AR en `cuotas_forward_totales`, se abre solo si M1 o M2 pasa. Lleva su propio bead.
+
+Código: `analisis/tarjetas_jugadores.py` (con `_autochequeo`). Salida: `analisis/tarjetas_jugadores.json`.
+
+Decisiones de implementación, tomadas antes de ver los resultados:
+
+- La media de la liga usa la temporada en curso si tiene 10 partidos previos. Si no, usa toda la historia previa de la liga.
+- Los minutos salen de `substitutionEvents` de la alineación. Una roja o doble amarilla corta los minutos en su minuto. El partido dura 90'.
+- Una tarjeta de alguien fuera de la alineación (técnico, banco) cuenta en el total y en el equipo, no en los jugadores.
+- Un valor 0 entra al log con piso 0.1.
+- La binomial negativa se ajusta con `scipy.optimize.minimize` (L-BFGS-B); `statsmodels` no está instalado.
+
+### Resultados de E13 (2026-10-26)
+
+| Estrato | n train | n test | Paso | ΔNLL media | IC 98.75 % | Pasa |
+|---|---|---|---|---|---|---|
+| Europa | 1555 | 1671 | M1−M0 | −0.0103 | [−0.0154, −0.0051] | sí |
+| Europa | 1555 | 1671 | M2−M1 | +0.0007 | [−0.0039, +0.0050] | no |
+| Argentina | 331 | 498 | M1−M0 | −0.0271 | [−0.0555, −0.0010] | sí |
+| Argentina | 331 | 498 | M2−M1 | +0.0253 | [+0.0069, +0.0460] | no |
+
+- El árbitro agrega información en los dos estratos. La regla se cumple para M1.
+- Los jugadores no agregan información sobre equipo y árbitro. En Argentina M2 empeora la prueba: con 331 partidos de ajuste, sobreajusta.
+- La ganancia de M1 es chica en Europa: 0.010 nats por partido.
+- El IC de Argentina roza 0 por arriba (−0.0010). Con 498 partidos de prueba, el resultado es frágil.
+- La puerta de la parte 2 queda abierta por M1. El usuario decide si crea el bead.
+
+Calibración descriptiva del mejor modelo (M1 en los dos estratos), en prueba:
+
+| Estrato | Línea | P media | Frecuencia | Brier |
+|---|---|---|---|---|
+| Europa | over 3.5 | 0.604 | 0.614 | 0.234 |
+| Europa | over 4.5 | 0.417 | 0.424 | 0.239 |
+| Europa | over 5.5 | 0.260 | 0.267 | 0.190 |
+| Argentina | over 3.5 | 0.749 | 0.811 | 0.154 |
+| Argentina | over 4.5 | 0.583 | 0.687 | 0.219 |
+| Argentina | over 5.5 | 0.414 | 0.494 | 0.243 |
+
+- Europa está calibrada en media y por quintil.
+- Argentina subestima los overs entre 6 y 10 puntos en media, y en los 15 quintiles. La media de 2025 (5.62) supera la que el modelo arrastra de 2024.
+- En Argentina el coeficiente de la media de liga es negativo, así que el modelo no sigue un cambio de nivel entre temporadas.
+- Para la parte 2, un M1 de Argentina sin recalibrar el nivel daría falsos EV en el lado over.
+- Límite: la tasa de tarjetas es un proxy de conducta. El once probable no ve rotaciones ni lesiones nuevas.
+
+## E14. M1 de tarjetas recalibrado contra bet365 AR, forward (bead `adepor-jjx`, fijado 2026-10-26, antes de correr)
+
+Parte 2 de E13. El protocolo se fijó con `cuotas_forward_totales` vacía: ningún dato forward visto.
+
+- **Pregunta:** el M1 de E13 con el nivel recalibrado le gana a las líneas de tarjetas de bet365 AR en la Liga Profesional.
+- **Paso 0, definición:** el objetivo de FotMob debe contar lo mismo que la liquidación de bet365. Si no se puede alinear, el estudio se cierra.
+- **Paso 1, recalibración (histórico):** M1 de Argentina se ajusta en 2024+2025. Antes de cada partido se reestima solo el intercepto. La media de mu de los últimos 100 partidos terminados debe igualar su media observada. Betas y alpha quedan fijos.
+- **Prueba del paso 1:** los partidos de 2026 de `parentLeagueId` 112. E13 no los evaluó.
+- **Regla del paso 1:** pasa si (a) su NLL media en 2026 no supera la de M1 sin recalibrar y (b) |P media − frecuencia| ≤ 0.03 en over 3.5, 4.5 y 5.5. Si no pasa, el forward no se abre.
+- **Paso 2, datos:** `cuotas_forward_totales`, tipo `tarjetas`, casa `bet365.bet.ar`, Liga Profesional. El árbitro debe estar publicado antes de la primera captura; si no, el partido se descarta.
+- **Línea de referencia:** por partido, la línea de la primera captura cuyo over sin margen (proporcional de dos resultados) queda más cerca de 0.5.
+- **Cierre:** la última captura de bet365 AR de la misma línea, anterior al inicio. Pinnacle no publica tarjetas en Argentina.
+- **Métrica primaria:** la diferencia de log-loss por partido entre M1 recalibrado y el cierre sin margen, en la línea de referencia.
+- **IC:** 95 %, bootstrap 2000 por partido, semilla 42.
+- **Regla del paso 2:** el modelo le gana a bet365 si el límite superior del IC queda bajo 0. Sin esa condición no se apuesta.
+- **Descriptivo, sin decisión:** picks con EV ≥ 5 % del modelo sobre la primera captura. Hay un pick por partido: el lado de mayor EV entre todas las líneas. Se reportan su CLV contra el cierre y su yield plano.
+- **Parada:** una sola decisión con 300 partidos con cierre o el 2027-06-30.
+- **Límites:** el cierre de bet365 es más blando que Pinnacle; ganarle no prueba edge contra el mercado eficiente. bet365 limita rápido en estos mercados. El once probable y el árbitro designado pueden cambiar.
+
+Código: `analisis/tarjetas_forward.py` (con `_autochequeo`, que prueba el paso 2 con datos sintéticos). Salida: `analisis/tarjetas_forward.json`.
+
+Decisiones de implementación, tomadas antes de ver los resultados:
+
+- La ventana de 100 usa partidos con variables de M1, con kickoff estrictamente anterior. Un partido del mismo horario no entra.
+- El cierre debe ser posterior a la primera captura, como en E12. Si no, el cierre sería la apertura y el partido queda sin cierre.
+- Solo entran líneas .5. Una línea entera tiene push y el proporcional de dos resultados no aplica.
+- El empate en la línea de referencia se resuelve por la línea más baja.
+
+### Paso 0 (2026-10-26): abierto en dos puntos
+
+- El catálogo de OddsPapi (`data/oddspapi/markets_10.json`) da `totals-bookings` de partido completo con líneas de 0.5 a 14.5. Es un conteo de tarjetas, no de puntos (30-60).
+- `cuotas_forward_totales` tiene 0 filas de tarjetas. Las primeras líneas reales de bet365 AR todavía no confirman el rango.
+- FotMob registra la doble amarilla como dos eventos, `Yellow` y `YellowRed` (391 de 391 casos en toda la base). La roja directa es un evento `Red`.
+- El objetivo de E13 cuenta amarilla 1, roja directa 1 y doble amarilla 2.
+- Fuente externa, no primaria: guías de terceros dicen que bet365 cuenta tarjetas sin puntos, con esa misma regla. La página de reglas de bet365 AR no se leyó.
+- En Argentina, 79 de 7134 tarjetas (1.1 %) son de técnicos, en 74 de 1325 partidos. Si bet365 no las cuenta, el objetivo sobra 0.06 tarjetas por partido.
+- Las dos diferencias posibles se alinean desde FotMob: roja = 2 o técnicos fuera. Por eso el estudio no se cierra. Si la regla de bet365 difiere, el paso 1 se corre de nuevo con ese objetivo antes del forward.
+
+### Resultados del paso 1 (2026-10-26)
+
+| | n | Tarjetas media | mu media | NLL media |
+|---|---|---|---|---|
+| Ajuste 2024+2025 | 829 | 5.45 | | |
+| Prueba 2026, sin recalibrar | 441 | 5.25 | 5.52 | 2.1807 |
+| Prueba 2026, recalibrado | 441 | 5.25 | 5.35 | 2.1745 |
+
+| Línea | P media sin recalibrar | P media recalibrado | Frecuencia | Desvío recalibrado |
+|---|---|---|---|---|
+| over 3.5 | 0.793 | 0.770 | 0.782 | −0.013 |
+| over 4.5 | 0.640 | 0.610 | 0.610 | +0.000 |
+| over 5.5 | 0.473 | 0.443 | 0.420 | +0.023 |
+
+- (a) se cumple: la NLL recalibrada (2.1745) no supera la sin recalibrar (2.1807).
+- (b) se cumple: el mayor desvío es +0.023 en over 5.5, bajo 0.03.
+- **El paso 1 pasa. El forward queda abierto.**
+- Descriptivo: ΔNLL recalibrado − sin recalibrar = −0.0061, IC 95 % [−0.0213, +0.0085]. La mejora no es significativa; la regla (a) solo pide no empeorar.
+- En 2026 la media bajó a 5.25 desde 5.62 en 2025. Sin recalibrar, el modelo sobreestima los overs entre 1 y 5 puntos.
+- El desplazamiento del intercepto en 2026 va de −0.20 a +0.10. El nivel se mueve dentro de la temporada.
+- La discriminación es débil: en over 5.5 el quintil más alto da P 0.59 y frecuencia 0.51. La recalibración corrige el nivel, no la pendiente.
+- El coeficiente de la media de liga sigue negativo (−0.77). El árbitro tiene +0.89. Alpha es 0.0005: casi Poisson.
+
+### Pendiente para el paso 2
+
+- El forward necesita el cruce de `cuotas_forward_totales` con FotMob. No existe todavía.
+- La base FotMob se baja después del partido. No guarda cuándo se publicó el árbitro.
+- `src/ingesta/motor_arbitros_fotmob.py` captura el árbitro antes del partido. Escribe `data/fotmob/prepartido/arbitros.jsonl`, una línea por partido y corrida.
+- El motor cubre los partidos no empezados de la Liga Profesional en los próximos 8 días. No escribe en la base.
+- El motor todavía no está en la cascada. Conectarlo requiere aprobación del usuario.
+
+Choque con la regla del árbitro, medido el 2026-10-26 antes de ver cuotas de tarjetas:
+
+- FotMob publicó el árbitro de 2 de 17 partidos próximos, los que se juegan dentro de las 48 h.
+- La primera captura de bet365 AR en `cuotas_forward` (torneo 155, 28 partidos) llega entre 19 y 238 h antes del inicio.
+- Solo 7 de 28 partidos tienen la primera captura a 48 h o menos. Esos 7 vienen de los primeros días de captura.
+- Con la captura diaria en régimen, la primera captura llega días antes del árbitro. La regla descartaría casi todos los partidos.
+- Corregir esto cambia el protocolo. La decisión es del usuario, y se toma antes de ver datos forward.
+
+## E15. Bajas del once y movimiento de Pinnacle (bead `adepor-bgr`, fijado 2026-10-26, antes de correr)
+
+Pregunta del usuario: una noticia de lesión, ¿da edge? Una noticia vale solo si llega antes que el mercado. E15 mide si las bajas mueven a Pinnacle entre su línea previa y su cierre.
+
+- **Datos:** `data/fotmob/raw/*.json` para la alineación y el valor del once. Europa, 5 ligas top, temporadas 2024/25 y 2025/26.
+- **Cruce:** el cruce con football-data usa `cruzar()` de `analisis/fotmob_xg_vs_pinnacle.py`.
+- **Cuotas:** `PSH/PSD/PSA` es Pinnacle previo, `PSCH/PSCD/PSCA` es el cierre y `B365H/B365D/B365A` es Bet365 previo.
+- **Variable:** d es la ausencia del local menos la del visitante, con la ausencia de E7. Un d negativo indica un local más debilitado.
+- **Motivo:** la alineación sale una hora antes, y la línea previa se toma días antes. La línea previa no conocía d.
+- **Parte A, descriptiva:** la parte A estima la pendiente del cambio de probabilidad del local sobre d. Se espera una pendiente positiva.
+- **Parte B, decisión:** los umbrales son los percentiles 10 y 90 de d en 2024/25. En 2025/26, d bajo da pick visita y d alto da pick local.
+- **Métrica primaria:** el CLV es la cuota previa de Pinnacle por la probabilidad justa de cierre, menos 1.
+- **Métrica secundaria:** el mismo CLV con la cuota previa de Bet365 es descriptivo.
+- **Regla:** hay edge si el IC95 del CLV primario queda entero sobre 0. El bootstrap usa 2000 remuestreos y semilla 42.
+- **Límite de horario:** la línea previa se toma el viernes para el fin de semana y el martes para la semana.
+- **Límite de potencia:** la prueba tiene cerca de 140 picks.
+- **Límite de alcance:** E15 no mide la forma de un jugador que vuelve de una lesión.
+- **Si pasa:** el edge exige saber la alineación antes que la línea previa. El forward con noticias propias lleva su propio bead.
+
 ## Orden propuesto
 
 1. E1, porque ya hay datos y el CLV es la métrica del contrato.

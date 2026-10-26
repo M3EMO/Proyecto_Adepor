@@ -56,3 +56,37 @@ def test_backtest_incluye_pendientes_pasados(db, monkeypatch):
     db.commit()
     mb.main()
     assert db.execute("SELECT estado, goles_l, goles_v FROM partidos_backtest").fetchone() == ('Finalizado', 2, 1)
+
+
+def test_backtest_liquida_partido_postergado_un_dia(db, monkeypatch):
+    """PSG vs Lyon 2026-10: la DB guarda el 25/10 y ESPN lo lista el 26/10."""
+    import src.persistencia.motor_backtest as mb
+    pedidas = []
+
+    class _Resp:
+        status_code = 200
+
+        def __init__(self, fecha):
+            self.fecha = fecha
+
+        def json(self):
+            if self.fecha != '20261026':
+                return {'events': []}
+            return {'events': [{'status': {'type': {'completed': True, 'name': 'STATUS_FULL_TIME'}},
+                                'competitions': [{'competitors': [
+                                    {'homeAway': 'home', 'score': '3', 'team': {'displayName': 'Paris Saint-Germain'}},
+                                    {'homeAway': 'away', 'score': '0', 'team': {'displayName': 'Lyon'}}]}]}]}
+
+    def get(url, timeout):
+        fecha = url.rsplit('=', 1)[1]
+        pedidas.append(fecha)
+        return _Resp(fecha)
+    monkeypatch.setattr(mb.requests, 'get', get)
+    monkeypatch.setattr(mb.gestor_nombres, 'obtener_nombre_estandar', lambda n, **k: n)
+    monkeypatch.setattr(mb, 'MAPA_LIGAS_ESPN', {'Francia': 'fra.1'})
+    monkeypatch.setattr(mb, 'ahora_art', lambda: __import__('datetime').datetime(2026, 10, 27, 9, 0))
+    db.execute("INSERT INTO partidos_backtest (id_partido, fecha, pais, local, visita, estado) "
+               "VALUES ('p', '2026-10-25 16:45', 'Francia', 'Paris Saint-Germain', 'Lyon', 'Pendiente')")
+    db.commit()
+    mb.main()
+    assert db.execute("SELECT estado, goles_l, goles_v FROM partidos_backtest").fetchone() == ('Finalizado', 3, 0)

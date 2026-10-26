@@ -198,6 +198,10 @@ Huecos sin test (no encontré test directo para estos puntos):
 - Guarda solo partidos no empezados con las tres cuotas activas.
 - Torneos: Liga Profesional, Copa Argentina, Libertadores, Sudamericana, Brasileirão, las 5 ligas top de Europa, Champions, Europa League, Chile, Uruguay y Colombia.
 - No toca `partidos_backtest` ni la decisión.
+- De las mismas respuestas guarda los totales de goles, córners y tarjetas en `cuotas_forward_totales` (adepor-e9u). No hace pedidos extra.
+- Cada fila es una línea de partido completo con over y under activos: `(ts_captura, fixture_id, casa, tipo, linea, cuota_over, cuota_under)`.
+- Cada línea es un mercado propio en OddsPapi. `data/oddspapi/markets_10.json` guarda la caché de `/v4/markets?sportId=10` con el handicap y los outcomes de cada mercado.
+- Sin esa caché, el motor captura solo el 1X2.
 - Tests: `tests/test_ingesta_oddspapi.py`.
 
 ## Anexo: captura forward de casas locales via FotMob (E1, 2026-10-23)

@@ -321,6 +321,20 @@ Protocolo fijado el 2026-10-23, antes de capturar datos de estas ligas. Sigue a 
 - **Parada:** una sola decisión con 300 picks con cierre o el 2027-06-30.
 - **Límite:** el cierre aproximado es más temprano que un cierre real; el Pinnacle previo está casi tan calibrado como el cierre.
 
+## E12. Totales de goles, córners y tarjetas de bet365 AR, forward (bead `adepor-e9u`)
+
+Protocolo fijado el 2026-10-26, antes de capturar estos mercados. Usa `cuotas_forward_totales`.
+
+- **Pick:** la primera captura del partido define el pick. Por tipo y línea presentes en las dos casas, el pick es el lado con EV de 2 % o más de bet365 AR.
+- **Probabilidad:** la probabilidad justa sale de Pinnacle, con el método proporcional de dos resultados. El filtro de calidad es el de E8.
+- **Cierre:** el cierre es la última captura de Pinnacle de la misma línea, posterior al pick y anterior al inicio. The Odds API no tiene estos mercados.
+- **Métrica:** la métrica es el CLV medio por tipo, con IC 98.33 % (Bonferroni por 3 tipos), bootstrap 2000 y semilla 42.
+- **Regla:** un tipo tiene edge si su IC queda entero sobre 0.
+- **Parada:** una sola decisión con 300 picks con cierre por tipo o el 2027-06-30.
+- **Límite:** el cierre aproximado es más temprano que un cierre real. bet365 limita rápido a quien gana en estos mercados.
+- **Cobertura del 2026-10-26:** en la Liga Profesional, Pinnacle publica goles y pocas líneas de córners, y no publica tarjetas. bet365 AR publica los tres tipos.
+- **Riesgo de definición:** Pinnacle y bet365 pueden contar las tarjetas distinto (roja como 1 o como 2). Un EV alto y sistemático en tarjetas se revisa antes de leerlo como edge.
+
 ## Orden propuesto
 
 1. E1, porque ya hay datos y el CLV es la métrica del contrato.

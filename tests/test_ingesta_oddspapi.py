@@ -58,3 +58,33 @@ def test_main_pide_una_casa_y_cinco_torneos_y_captura_una_vez_por_dia(monkeypatc
     mo.main()  # segunda corrida del dia: no pide nada
     assert len(pedidos) == 8
     assert os.path.exists(db)
+
+
+MARKETS = [
+    {'marketId': 1010, 'marketType': 'totals', 'period': 'fulltime', 'playerProp': False, 'handicap': 2.5,
+     'outcomes': [{'outcomeId': 1011, 'outcomeName': 'Under'}, {'outcomeId': 1010, 'outcomeName': 'Over'}]},
+    {'marketId': 10781, 'marketType': 'totals-corners', 'period': 'fulltime', 'playerProp': False, 'handicap': 9.5,
+     'outcomes': [{'outcomeId': 10781, 'outcomeName': 'Over'}, {'outcomeId': 10782, 'outcomeName': 'Under'}]},
+    {'marketId': 2010, 'marketType': 'totals', 'period': 'firsthalf', 'playerProp': False, 'handicap': 0.5,
+     'outcomes': [{'outcomeId': 2010, 'outcomeName': 'Over'}, {'outcomeId': 2011, 'outcomeName': 'Under'}]},
+    {'marketId': 101, 'marketType': '1x2', 'period': 'fulltime', 'playerProp': False, 'handicap': 0.0, 'outcomes': []},
+]
+
+
+def test_mapa_totales_solo_partido_completo():
+    assert mo.mapa_totales(MARKETS) == {'1010': ('goles', 2.5, '1010', '1011'),
+                                       '10781': ('corners', 9.5, '10781', '10782')}
+
+
+def test_filas_totales_una_fila_por_linea_con_over_y_under_activos():
+    def mercado(o_over, o_under, precios, activo=True):
+        return {'outcomes': {o: {'players': {'0': {'price': p, 'active': activo}}}
+                             for o, p in zip((o_over, o_under), precios)}}
+    fx = [{'fixtureId': 'f1', 'startTime': '2026-10-24T20:00:00.000Z',
+           'bookmakerOdds': {'pinnacle': {'markets': {'1010': mercado('1010', '1011', (2.27, 1.684)),
+                                                      '10781': mercado('10781', '10782', (1.9, 1.9), False),
+                                                      '2010': mercado('2010', '2011', (1.5, 2.5))}}}},
+          {'fixtureId': 'f2', 'startTime': '2026-10-23T11:00:00.000Z',  # ya empezo
+           'bookmakerOdds': {'pinnacle': {'markets': {'1010': mercado('1010', '1011', (2.0, 1.8))}}}}]
+    assert mo.filas_totales(fx, 'TS', AHORA, mo.mapa_totales(MARKETS)) == [
+        ('TS', 'f1', 'pinnacle', 'goles', 2.5, 2.27, 1.684)]

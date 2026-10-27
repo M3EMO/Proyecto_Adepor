@@ -29,7 +29,8 @@ def test_cascada_diaria_solo_corre_motores_v2():
     # D-022: el v1 salio del camino diario; el v2 solo necesita fixture, cuotas y liquidacion.
     assert [m['archivo'] for m in ep.MOTORES_DIARIOS] == [
         'motor_backtest.py', 'motor_liquidador.py', 'motor_fixture.py', 'motor_cuotas.py',
-        '-m src.ingesta.motor_oddspapi', '-m src.ingesta.motor_cuotas_fotmob', 'motor_backtest.py', 'motor_liquidador.py',
+        '-m src.ingesta.motor_oddspapi', '-m src.ingesta.motor_cuotas_fotmob', '-m src.ingesta.motor_arbitros_fotmob',
+        'motor_backtest.py', 'motor_liquidador.py',
         'analisis/clv_bet365ar.py']
 
 

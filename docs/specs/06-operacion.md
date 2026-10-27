@@ -6,10 +6,10 @@ Es el punto de entrada único del sistema. Corre la cascada diaria del v2 y los 
 
 ## Entradas
 
-- Argumentos de línea de comandos (`ejecutar_proyecto.py:473-512`).
-- `config.json` en la raíz, solo para el preflight (`ejecutar_proyecto.py:140-150`).
+- Argumentos de línea de comandos (`ejecutar_proyecto.py:474-513`).
+- `config.json` en la raíz, solo para el preflight (`ejecutar_proyecto.py:141-151`).
 - Base `DB_NAME` (`ejecutar_proyecto.py:26`).
-- Scripts de `MOTORES_DIARIOS` (`ejecutar_proyecto.py:39-54`).
+- Scripts de `MOTORES_DIARIOS` (`ejecutar_proyecto.py:39-55`).
 
 ## Salidas (tablas y columnas que escribe)
 
@@ -17,17 +17,17 @@ El orquestador escribe solo por medio de sus hijos y de `--aporte`:
 
 | Comando | Qué hace | Escribe en la base | Línea |
 |---|---|---|---|
-| (sin argumentos) | Corre la cascada completa y el resumen | Sí, vía motores | `ejecutar_proyecto.py:431-467` |
-| `--status` | Muestra apuestas reales, config v2 y bankroll | No | `ejecutar_proyecto.py:158-245` |
-| `--summary` | Partidos con Pinnacle, liquidados en 24 h y cobertura Pinnacle | No | `ejecutar_proyecto.py:249-305` |
-| `--audit-names` | Auditoría interactiva de nombres | Depende del script | `ejecutar_proyecto.py:493-497` |
-| `--aporte MONTO` | Inserta un aporte o retiro | Sí: tabla `aportes_capital` | `ejecutar_proyecto.py:309-383` |
-| `--aportes-list` | Lista aportes y su total | No | `ejecutar_proyecto.py:386-416` |
-| `--help` | Muestra comandos y cascada | No | `ejecutar_proyecto.py:420-427` |
+| (sin argumentos) | Corre la cascada completa y el resumen | Sí, vía motores | `ejecutar_proyecto.py:432-468` |
+| `--status` | Muestra apuestas reales, config v2 y bankroll | No | `ejecutar_proyecto.py:159-246` |
+| `--summary` | Partidos con Pinnacle, liquidados en 24 h y cobertura Pinnacle | No | `ejecutar_proyecto.py:250-306` |
+| `--audit-names` | Auditoría interactiva de nombres | Depende del script | `ejecutar_proyecto.py:494-498` |
+| `--aporte MONTO` | Inserta un aporte o retiro | Sí: tabla `aportes_capital` | `ejecutar_proyecto.py:310-384` |
+| `--aportes-list` | Lista aportes y su total | No | `ejecutar_proyecto.py:387-417` |
+| `--help` | Muestra comandos y cascada | No | `ejecutar_proyecto.py:421-428` |
 
-La tabla `aportes_capital` tiene columnas `id`, `fecha`, `monto`, `descripcion` y `fecha_creacion` (`ejecutar_proyecto.py:355-363`).
+La tabla `aportes_capital` tiene columnas `id`, `fecha`, `monto`, `descripcion` y `fecha_creacion` (`ejecutar_proyecto.py:356-364`).
 
-Cascada diaria (`MOTORES_DIARIOS`, 9 pasos, en este orden). El v1 salió del camino diario (D-022) y se borró (D-023):
+Cascada diaria (`MOTORES_DIARIOS`, 10 pasos, en este orden). El v1 salió del camino diario (D-022) y se borró (D-023):
 
 | # | Archivo | Crítico | Interactivo | Línea |
 |---|---|---|---|---|
@@ -37,9 +37,10 @@ Cascada diaria (`MOTORES_DIARIOS`, 9 pasos, en este orden). El v1 salió del cam
 | 6 | `motor_cuotas.py` | Sí | No | 49 |
 | 6.5 | `-m src.ingesta.motor_oddspapi` | No | No | 50 |
 | 6.6 | `-m src.ingesta.motor_cuotas_fotmob` | No | No | 51 |
-| 8 | `motor_backtest.py` | No | No | 54 |
-| 8.5 | `motor_liquidador.py` | No | No | 55 |
-| 9 | `analisis/clv_bet365ar.py` | No | No | 56 |
+| 6.7 | `-m src.ingesta.motor_arbitros_fotmob` | No | No | 52 |
+| 8 | `motor_backtest.py` | No | No | 55 |
+| 8.5 | `motor_liquidador.py` | No | No | 56 |
+| 9 | `analisis/clv_bet365ar.py` | No | No | 57 |
 
 ## Comportamiento (reglas exactas, en orden, con path:line)
 
@@ -48,31 +49,31 @@ Reglas de arranque:
 1. Cambia el directorio de trabajo a la raíz del repo (`ejecutar_proyecto.py:24`).
 2. Agrega la raíz a `sys.path` (`ejecutar_proyecto.py:25`).
 3. Fuerza UTF-8 en stdout y stderr (`ejecutar_proyecto.py:29-33`).
-4. Limpia la pantalla solo si la salida es una terminal (`ejecutar_proyecto.py:474-475`).
+4. Limpia la pantalla solo si la salida es una terminal (`ejecutar_proyecto.py:475-476`).
 
 Reglas de la cascada diaria:
 
-5. Corre preflight: DB y `config.json` (`ejecutar_proyecto.py:433`, `:132-152`).
-6. Aborta sin DB si el archivo no existe o pesa 0 bytes (`ejecutar_proyecto.py:439-442`).
-7. Ejecuta cada motor en orden, en un subproceso `python -u` (`ejecutar_proyecto.py:448-449`, `:90`).
-8. Fusiona stderr en stdout para que no bloquee el pipe (`ejecutar_proyecto.py:101`).
-9. Imprime cada línea del hijo con prefijo `   | ` (`ejecutar_proyecto.py:107`).
-10. Marca fallo si el código de salida no es 0 (`ejecutar_proyecto.py:109-112`).
-11. Si un motor crítico falla, imprime ABORTO y sale con código 1 (`ejecutar_proyecto.py:452-454`).
-12. Si un motor satélite falla, lo anota y sigue (`ejecutar_proyecto.py:451`, `:455-456`).
-13. Al final imprime los satélites fallidos y el resumen (`ejecutar_proyecto.py:458-467`).
-14. Sale con código 0 aunque haya satélites fallidos (`ejecutar_proyecto.py:458-464`).
+5. Corre preflight: DB y `config.json` (`ejecutar_proyecto.py:434`, `:133-153`).
+6. Aborta sin DB si el archivo no existe o pesa 0 bytes (`ejecutar_proyecto.py:440-443`).
+7. Ejecuta cada motor en orden, en un subproceso `python -u` (`ejecutar_proyecto.py:449-450`, `:90`).
+8. Fusiona stderr en stdout para que no bloquee el pipe (`ejecutar_proyecto.py:102`).
+9. Imprime cada línea del hijo con prefijo `   | ` (`ejecutar_proyecto.py:108`).
+10. Marca fallo si el código de salida no es 0 (`ejecutar_proyecto.py:110-113`).
+11. Si un motor crítico falla, imprime ABORTO y sale con código 1 (`ejecutar_proyecto.py:453-455`).
+12. Si un motor satélite falla, lo anota y sigue (`ejecutar_proyecto.py:452`, `:456-457`).
+13. Al final imprime los satélites fallidos y el resumen (`ejecutar_proyecto.py:459-468`).
+14. Sale con código 0 aunque haya satélites fallidos (`ejecutar_proyecto.py:459-465`).
 
 Reglas de subcomandos:
 
-15. `--summary` avisa y termina si la base todavía no tiene columnas `pin_*` (`ejecutar_proyecto.py:264-268`).
-16. `--aporte` valida monto y fecha antes de insertar (`ejecutar_proyecto.py:323-350`).
-17. Un comando desconocido imprime la ayuda y sale con código 1 (`ejecutar_proyecto.py:506-509`).
+15. `--summary` avisa y termina si la base todavía no tiene columnas `pin_*` (`ejecutar_proyecto.py:265-269`).
+16. `--aporte` valida monto y fecha antes de insertar (`ejecutar_proyecto.py:324-351`).
+17. Un comando desconocido imprime la ayuda y sale con código 1 (`ejecutar_proyecto.py:507-510`).
 
 ## Invariantes (lo que nunca debe pasar)
 
-- Ningún motor posterior corre si un motor crítico falla (`ejecutar_proyecto.py:452-454`).
-- La cascada nunca corre sin una base existente y no vacía (`ejecutar_proyecto.py:439-442`).
+- Ningún motor posterior corre si un motor crítico falla (`ejecutar_proyecto.py:453-455`).
+- La cascada nunca corre sin una base existente y no vacía (`ejecutar_proyecto.py:440-443`).
 - Todo cambio manual de datos o de esquema debe tener respaldo previo (ver Respaldos). El pipeline diario no crea respaldo.
 
 ## Parámetros (clave de config_motor_valores o archivo de config, default, efecto)
@@ -94,15 +95,15 @@ Tests existentes (`tests/test_orquestador.py`):
 
 Huecos sin test:
 
-- No hay test de la regla de motor crítico en `cmd_pipeline_diario` (`ejecutar_proyecto.py:452-454`).
-- No hay test del preflight ni del aborto sin base (`ejecutar_proyecto.py:132`, `:439-442`).
+- No hay test de la regla de motor crítico en `cmd_pipeline_diario` (`ejecutar_proyecto.py:453-455`).
+- No hay test del preflight ni del aborto sin base (`ejecutar_proyecto.py:133`, `:440-443`).
 - No hay test de `--status`, `--summary`, `--aporte` ni `--aportes-list`.
 - No hay test del código de salida final con satélites fallidos.
 
 ## Limitaciones conocidas
 
-- Sale con código 0 aunque fallen motores satélite (`ejecutar_proyecto.py:458-464`). `ejecutar_robot.sh` no detecta esos fallos.
-- `ejecutar_motor` no tiene timeout (`ejecutar_proyecto.py:82-129`). Un motor colgado detiene la cascada.
+- Sale con código 0 aunque fallen motores satélite (`ejecutar_proyecto.py:459-465`). `ejecutar_robot.sh` no detecta esos fallos.
+- `ejecutar_motor` no tiene timeout (`ejecutar_proyecto.py:83-130`). Un motor colgado detiene la cascada.
 - `motor_fixture.py` figura como interactivo (`ejecutar_proyecto.py:48`). El módulo no usa `input()` (`src/ingesta/motor_fixture.py:10-11`).
 
 # Ejecución programada (ejecutar_robot.sh)

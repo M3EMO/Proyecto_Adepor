@@ -403,13 +403,14 @@ Parte 2 de E13. El protocolo se fijó con `cuotas_forward_totales` vacía: ning�
 - **Paso 1, recalibración (histórico):** M1 de Argentina se ajusta en 2024+2025. Antes de cada partido se reestima solo el intercepto. La media de mu de los últimos 100 partidos terminados debe igualar su media observada. Betas y alpha quedan fijos.
 - **Prueba del paso 1:** los partidos de 2026 de `parentLeagueId` 112. E13 no los evaluó.
 - **Regla del paso 1:** pasa si (a) su NLL media en 2026 no supera la de M1 sin recalibrar y (b) |P media − frecuencia| ≤ 0.03 en over 3.5, 4.5 y 5.5. Si no pasa, el forward no se abre.
-- **Paso 2, datos:** `cuotas_forward_totales`, tipo `tarjetas`, casa `bet365.bet.ar`, Liga Profesional. El árbitro debe estar publicado antes de la primera captura; si no, el partido se descarta.
-- **Línea de referencia:** por partido, la línea de la primera captura cuyo over sin margen (proporcional de dos resultados) queda más cerca de 0.5.
+- **Paso 2, datos:** `cuotas_forward_totales`, tipo `tarjetas`, casa `bet365.bet.ar`, Liga Profesional.
+- **Captura de referencia (enmienda del 2026-10-26):** es la primera captura de bet365 AR posterior a la publicación del árbitro. Un partido sin captura posterior se descarta.
+- **Línea de referencia:** por partido, la línea de la captura de referencia cuyo over sin margen (proporcional de dos resultados) queda más cerca de 0.5.
 - **Cierre:** la última captura de bet365 AR de la misma línea, anterior al inicio. Pinnacle no publica tarjetas en Argentina.
 - **Métrica primaria:** la diferencia de log-loss por partido entre M1 recalibrado y el cierre sin margen, en la línea de referencia.
 - **IC:** 95 %, bootstrap 2000 por partido, semilla 42.
 - **Regla del paso 2:** el modelo le gana a bet365 si el límite superior del IC queda bajo 0. Sin esa condición no se apuesta.
-- **Descriptivo, sin decisión:** picks con EV ≥ 5 % del modelo sobre la primera captura. Hay un pick por partido: el lado de mayor EV entre todas las líneas. Se reportan su CLV contra el cierre y su yield plano.
+- **Descriptivo, sin decisión:** picks con EV ≥ 5 % del modelo sobre la captura de referencia. Hay un pick por partido: el lado de mayor EV entre todas las líneas. Se reportan su CLV contra el cierre y su yield plano.
 - **Parada:** una sola decisión con 300 partidos con cierre o el 2027-06-30.
 - **Límites:** el cierre de bet365 es más blando que Pinnacle; ganarle no prueba edge contra el mercado eficiente. bet365 limita rápido en estos mercados. El once probable y el árbitro designado pueden cambiar.
 
@@ -418,7 +419,7 @@ Código: `analisis/tarjetas_forward.py` (con `_autochequeo`, que prueba el paso 
 Decisiones de implementación, tomadas antes de ver los resultados:
 
 - La ventana de 100 usa partidos con variables de M1, con kickoff estrictamente anterior. Un partido del mismo horario no entra.
-- El cierre debe ser posterior a la primera captura, como en E12. Si no, el cierre sería la apertura y el partido queda sin cierre.
+- El cierre debe ser posterior a la captura de referencia, como en E12. Si no, el cierre sería la apertura y el partido queda sin cierre.
 - Solo entran líneas .5. Una línea entera tiene push y el proporcional de dos resultados no aplica.
 - El empate en la línea de referencia se resuelve por la línea más baja.
 
@@ -457,11 +458,22 @@ Decisiones de implementación, tomadas antes de ver los resultados:
 
 ### Pendiente para el paso 2
 
-- El forward necesita el cruce de `cuotas_forward_totales` con FotMob. No existe todavía.
+- El cruce vive en `analisis/tarjetas_forward.py` y lee la base en modo `ro`.
+- El cruce une `cuotas_forward_totales` con `arbitros.jsonl` mediante `cruzar()` de E8 (`analisis/clv_bet365ar.py`).
+- `cruzar()` pide un kickoff a 3 h o menos y nombres parecidos después del banco de nombres.
+- El 2026-10-26, 15 de 15 partidos de la Liga Profesional capturados por bet365 AR cruzaron con FotMob.
+- El resultado y las variables de M1 salen del partido terminado en `data/fotmob/raw/<match_id>.json`.
+- M1 usa el árbitro designado de la captura previa, no el árbitro real del partido.
+- El paso 1 queda fijo en los partidos de 2026 anteriores al 2026-10-21, los bajados al decidirlo. Re-correr el script no lo cambia.
+- El mismo motor baja a `data/fotmob/raw` los partidos terminados de la temporada en curso que faltan. El usuario lo aprobó el 2026-10-26.
+- La descarga cubre toda la liga, no solo los partidos con cuotas: M1 necesita la historia de equipos y árbitros.
+- La descarga guarda solo partidos con `finished`, y escribe cada archivo por reemplazo atómico.
+- `cargar()` de E13 omite partidos sin tarjetas. Con mu cerca de 5, son cerca del 1 %.
 - La base FotMob se baja después del partido. No guarda cuándo se publicó el árbitro.
 - `src/ingesta/motor_arbitros_fotmob.py` captura el árbitro antes del partido. Escribe `data/fotmob/prepartido/arbitros.jsonl`, una línea por partido y corrida.
 - El motor cubre los partidos no empezados de la Liga Profesional en los próximos 8 días. No escribe en la base.
-- El motor todavía no está en la cascada. Conectarlo requiere aprobación del usuario.
+- El motor corre en la cascada como paso 6.7, no crítico. El usuario lo aprobó el 2026-10-26.
+- La publicación del árbitro es la primera `ts_captura` de `arbitros.jsonl` con árbitro no nulo.
 
 Choque con la regla del árbitro, medido el 2026-10-26 antes de ver cuotas de tarjetas:
 
@@ -470,6 +482,8 @@ Choque con la regla del árbitro, medido el 2026-10-26 antes de ver cuotas de ta
 - Solo 7 de 28 partidos tienen la primera captura a 48 h o menos. Esos 7 vienen de los primeros días de captura.
 - Con la captura diaria en régimen, la primera captura llega días antes del árbitro. La regla descartaría casi todos los partidos.
 - Corregir esto cambia el protocolo. La decisión es del usuario, y se toma antes de ver datos forward.
+- Decisión del usuario (2026-10-26, con 0 filas de tarjetas): la referencia pasa a la primera captura posterior al árbitro.
+- El texto original del bead decía "el árbitro debe estar publicado antes de la primera captura".
 
 ## E15. Bajas del once y movimiento de Pinnacle (bead `adepor-bgr`, fijado 2026-10-26, antes de correr)
 

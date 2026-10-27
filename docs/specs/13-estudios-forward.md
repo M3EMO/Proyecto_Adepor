@@ -490,6 +490,25 @@ Pregunta del usuario: una noticia de lesión, ¿da edge? Una noticia vale solo s
 - **Límite de alcance:** E15 no mide la forma de un jugador que vuelve de una lesión.
 - **Si pasa:** el edge exige saber la alineación antes que la línea previa. El forward con noticias propias lleva su propio bead.
 
+### Resultados de E15
+
+Corrida del 2026-10-26 con `analisis/bajas_movimiento_pinnacle.py`. El json reproducible es `analisis/bajas_movimiento_pinnacle.json`.
+
+- **Veredicto:** la regla no se cumple. No hay edge.
+- **CLV primario:** el CLV medio con la cuota previa de Pinnacle es -1,74 %, IC95 [-2,95 %, -0,56 %]. El IC queda entero bajo 0.
+- **Picks:** la prueba tiene 161 picks en 2025/26, con 73 al local y 88 a la visita.
+- **Umbrales:** p10 = -0,216 y p90 = 0,240, sobre 391 partidos de 2024/25.
+- **Parte A:** la pendiente es 0,0303, IC95 [0,0221, 0,0386], con n = 1114. La pendiente es positiva, como se esperaba.
+- **Lectura de A:** una caída de 0,22 en el log del valor del once baja la p local cerca de 0,7 puntos.
+- **CLV secundario:** el CLV medio con la cuota previa de Bet365 es -3,83 %, IC95 [-5,15 %, -2,56 %].
+- **Cruce:** 2024/25 cruza solo 391 partidos, porque FotMob cubre poco esa temporada. 2025/26 cruza 723.
+
+Descriptivo post hoc, fuera del protocolo y sin valor de decisión:
+
+- **Movimiento:** Pinnacle sí se mueve hacia el pick. Sin margen en las dos líneas, el CLV medio es +1,70 %.
+- **Margen:** el margen medio de la línea previa es 3,50 %. El margen supera al movimiento.
+- **Conclusión:** las bajas mueven a Pinnacle, pero el movimiento no paga el margen de la línea previa.
+
 ## Orden propuesto
 
 1. E1, porque ya hay datos y el CLV es la métrica del contrato.

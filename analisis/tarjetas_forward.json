@@ -257,24 +257,34 @@
     }
   },
   "paso2": {
-    "n_fixtures_con_tarjetas": 0,
-    "n_cruzados": 0,
-    "n_con_resultado": 0,
-    "n_con_mu": 0,
-    "n_partidos": 0,
-    "n_evaluables": 0,
-    "n_con_cierre": 0,
+    "n_fixtures_con_tarjetas": 16,
+    "n_cruzados": 16,
+    "n_con_resultado": 8,
+    "n_con_mu": 8,
+    "n_partidos": 8,
+    "n_evaluables": 8,
+    "n_con_cierre": 3,
     "logloss_modelo-cierre": {
-      "n": 0
+      "n": 3,
+      "media": 0.12189156048134002,
+      "ic95": [
+        0.08504411204753803,
+        0.16845641147745227
+      ]
     },
     "gana_a_bet365": false,
     "decision_lista": false,
     "picks": {
-      "n": 0,
+      "n": 3,
       "clv": {
-        "n": 0
+        "n": 2,
+        "media": 0.11853535532904796,
+        "ic95": [
+          -0.07567567567567546,
+          0.3127463863337714
+        ]
       },
-      "yield_plano": null
+      "yield_plano": -0.16666666666666666
     }
   }
 }

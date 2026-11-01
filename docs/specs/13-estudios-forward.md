@@ -472,7 +472,8 @@ Decisiones de implementación, tomadas antes de ver los resultados:
 - La base FotMob se baja después del partido. No guarda cuándo se publicó el árbitro.
 - `src/ingesta/motor_arbitros_fotmob.py` captura el árbitro antes del partido. Escribe `data/fotmob/prepartido/arbitros.jsonl`, una línea por partido y corrida.
 - El motor cubre los partidos no empezados de la Liga Profesional en los próximos 8 días. No escribe en la base.
-- El motor corre en la cascada como paso 6.7, no crítico. El usuario lo aprobó el 2026-10-26.
+- El motor corre en la cascada como paso 6.5, no crítico. El usuario lo aprobó el 2026-10-26.
+- El 2026-11-01 el motor pasó antes de OddsPapi. Antes, la captura de la misma corrida quedaba antes del árbitro.
 - La publicación del árbitro es la primera `ts_captura` de `arbitros.jsonl` con árbitro no nulo.
 
 Choque con la regla del árbitro, medido el 2026-10-26 antes de ver cuotas de tarjetas:

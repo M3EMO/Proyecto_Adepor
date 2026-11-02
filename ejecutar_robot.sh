@@ -9,3 +9,5 @@ mkdir -p data/logs
 LOG="data/logs/pipeline_$(date +%Y%m%d).log"
 "$PY" adepor_guard.py snapshot >> "$LOG" 2>&1
 "$PY" ejecutar_proyecto.py >> "$LOG" 2>&1
+# Aviso de escritorio con los picks por confirmar; nunca frena el pipeline.
+"$PY" -I scripts/ops/avisar_picks.py >> "$LOG" 2>&1 || true

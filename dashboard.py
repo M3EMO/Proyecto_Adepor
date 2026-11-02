@@ -8,7 +8,7 @@ import json
 import math
 import sqlite3
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import altair as alt
@@ -20,9 +20,9 @@ from src.comun.config_sistema import DB_NAME
 from src.comun.picks import cuota_para_pick
 from src.comun.resolucion import determinar_resultado_entero
 from src.comun.tiempo import ahora_art
-from src.nucleo.valor_v2 import clv_v2, prob_justa, stake_v2, tabla_valor
+from src.nucleo.valor_v2 import clv_v2, cuota_minima, prob_justa, stake_v2, tabla_valor
 from src.persistencia.bankroll import obtener_bankroll_operativo
-from src.persistencia.confirmaciones import confirmar_apuesta, ids_confirmados
+from src.persistencia.confirmaciones import confirmar_apuesta, ids_confirmados, picks_por_confirmar
 from src.persistencia.metricas import _pl_apuesta, metricas_dinero
 from src.persistencia.yield_potencial import apuestas_potenciales, yield_potencial
 
@@ -450,9 +450,10 @@ def _tab_simulacion(_b):
         k[2].metric("Acierto", _pct(sim["acierto"]))
         k[3].metric("Bankroll simulado", _usd(sim["bankroll_final"]),
                     _usd(sim["bankroll_final"] - sim["bankroll_inicial"], True))
-        st.dataframe(_formatear(pd.DataFrame(sim["picks"]), {
+        st.dataframe(_formatear(pd.DataFrame(sim["picks"]).drop(columns="id", errors="ignore"), {
             "p_pin": _pct, "clv": lambda x: _pct(x, True), "stake": lambda x: _usd(x) if x is not None else "—",
             "bankroll": _usd}), hide_index=True)
+        _confirmar_forward(sim["picks"])
     st.subheader("Histórico: Bet365 en Europa, 2019-2025")
     st.caption("Backtest exploratorio de D-037: el edge se apagó en 2023. Sirve como referencia, no como promesa.")
     ruta = raiz / "analisis" / "bankroll_y_piso_v2.json"
@@ -464,6 +465,32 @@ def _tab_simulacion(_b):
         k[1].metric("Bankroll final", _usd(evo["bankroll_final"]))
         k[2].metric("Caída máxima", _pct(evo["drawdown_max"]))
         st.altair_chart(_linea(curva, "n", "bankroll", "Día con apuestas #", "Bankroll ($)"))
+
+
+def _confirmar_forward(picks):
+    """Un clic por pick: cuota de bet365 AR y stake del v2 ya cargados; se editan si la casa pago otra cosa."""
+    aviso = st.session_state.pop("aviso_forward", None)
+    if aviso:
+        (st.success if aviso[0] == "ok" else st.error)(aviso[1])
+    ahora = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M")  # inicio del informe esta en UTC
+    con = sqlite3.connect(Path(DB_NAME).resolve().as_uri() + "?mode=ro", uri=True)
+    try:
+        hechos, bankroll = ids_confirmados(con.cursor()), obtener_bankroll_operativo(con.cursor())
+        vivos = picks_por_confirmar(picks, hechos, ahora)
+        # el informe puede venir de otra base (tests, copia): solo se confirma lo que existe en esta
+        en_base = {r[0] for r in con.execute(f"SELECT id_partido FROM partidos_backtest WHERE id_partido IN "
+                                             f"({','.join('?' * len(vivos))})", [p["id"] for p in vivos])}
+    finally:
+        con.close()
+    vivos = [p for p in vivos if p["id"] in en_base]
+    if not vivos:
+        return
+    st.subheader("Confirmar apuestas reales")
+    st.caption("Antes de confirmar, revise que bet365 todavía pague la cuota: el informe es de la captura del día.")
+    for p in vivos:
+        _formulario_v2({"id": p["id"], "pick": p["pick"], "partido": p["partido"], "mercado": "1X2",
+                        "prob_justa": p["p_pin"], "cuota_minima": cuota_minima(p["p_pin"]), "cuota_casa": p["cuota"]},
+                       bankroll, casa="Bet365", clave_aviso="aviso_forward")
 
 
 def _bloque_ev(ev, bankroll):
@@ -481,13 +508,13 @@ def _bloque_ev(ev, bankroll):
             _formulario_v2(f, bankroll)
 
 
-def _formulario_v2(f, bankroll):
+def _formulario_v2(f, bankroll, casa=None, clave_aviso="aviso_v2"):
     """Compara la cuota de mi casa con la minima. Confirma solo si hay valor."""
     clave = f"v2|{f['id']}|{f['pick']}"
     p, minima = f["prob_justa"], f["cuota_minima"]
     with st.expander(f"Confirmar apuesta · {f['partido']} · {f['mercado']} {f['pick']}"):
         c = st.columns(2)
-        casa = c[0].selectbox("Casa", CASAS_V2, key=f"casa|{clave}")
+        casa = c[0].selectbox("Casa", CASAS_V2, index=CASAS_V2.index(casa) if casa else 0, key=f"casa|{clave}")
         cuota = c[1].number_input("Cuota de mi casa", min_value=1.01,
                                   value=f.get("cuota_casa") or math.ceil(minima * 100) / 100, step=0.01,
                                   format="%.2f", key=f"cuota|{clave}")
@@ -502,7 +529,7 @@ def _formulario_v2(f, bankroll):
         if sin_valor:
             st.error("Cuota por debajo de la minima: su casa no paga valor.")
         if st.button("Confirmar apuesta", key=f"btn|{clave}", disabled=sin_valor):
-            _confirmar(f["id"], f["mercado"], cuota, stake, clave_aviso="aviso_v2",
+            _confirmar(f["id"], f["mercado"], cuota, stake, clave_aviso=clave_aviso,
                        pick=f["pick"], casa=casa)
 
 

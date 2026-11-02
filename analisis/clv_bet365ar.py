@@ -123,7 +123,7 @@ def simulacion(picks, bankroll=100_000.0):
         stake = stake_v2(p['p_pin'], p['cuota'], banca) if p['pl'] is not None else None
         if stake is not None:
             banca += stake * p['pl']
-        filas.append({'inicio': p['inicio'], 'liga': p['liga'], 'partido': p['partido'],
+        filas.append({'inicio': p['inicio'], 'liga': p['liga'], 'partido': p['partido'], 'id': p.get('id'),
                       'pick': ('LOCAL', 'EMPATE', 'VISITA')[p['resultado']], 'cuota': p['cuota'], 'p_pin': p['p_pin'],
                       'clv': p['clv'], 'estado': 'pendiente' if p['pl'] is None else ('ganada' if p['pl'] > 0 else 'perdida'),
                       'stake': stake, 'bankroll': round(banca, 2)})
@@ -186,6 +186,7 @@ def main():
         for i in ev_picks(d['pinnacle'], d[CASA]):
             cuota = d[CASA][i]
             picks.append({'fixture': fid, 'torneo': d['torneo'], 'resultado': i, 'cuota': cuota,
+                          'id': fila['id'] if fila else None,  # el dashboard confirma la apuesta real con este id
                           'p_pin': prob_justa(d['pinnacle'])[i], 'inicio': d['inicio_utc'][:16],
                           'partido': f"{d['local']} vs {d['visita']}", 'liga': pais,
                           'clv': cuota * p_cierre[i] - 1 if p_cierre else None,

@@ -483,10 +483,13 @@ def _confirmar_forward(picks):
     finally:
         con.close()
     vivos = [p for p in vivos if p["id"] in en_base]
+    st.subheader("Registrar apuestas hechas")
     if not vivos:
+        st.info("No hay picks para registrar. Un pick aparece acá si está pendiente, no empezó, no está en sombra "
+                "(D-040), no está registrado y su partido ya está en la base.")
         return
-    st.subheader("Confirmar apuestas reales")
-    st.caption("Antes de confirmar, revise que bet365 todavía pague la cuota: el informe es de la captura del día.")
+    st.caption("Esto no apuesta en la casa: registra la apuesta que ya hizo a mano. "
+               "Cargue la cuota y el stake que le aceptó bet365.")
     for p in vivos:
         _formulario_v2({"id": p["id"], "pick": p["pick"], "partido": p["partido"], "mercado": "1X2",
                         "prob_justa": p["p_pin"], "cuota_minima": cuota_minima(p["p_pin"]), "cuota_casa": p["cuota"]},
@@ -512,7 +515,7 @@ def _formulario_v2(f, bankroll, casa=None, clave_aviso="aviso_v2"):
     """Compara la cuota de mi casa con la minima. Confirma solo si hay valor."""
     clave = f"v2|{f['id']}|{f['pick']}"
     p, minima = f["prob_justa"], f["cuota_minima"]
-    with st.expander(f"Confirmar apuesta · {f['partido']} · {f['mercado']} {f['pick']}"):
+    with st.expander(f"Registrar apuesta hecha · {f['partido']} · {f['mercado']} {f['pick']}"):
         c = st.columns(2)
         casa = c[0].selectbox("Casa", CASAS_V2, index=CASAS_V2.index(casa) if casa else 0, key=f"casa|{clave}")
         cuota = c[1].number_input("Cuota de mi casa", min_value=1.01,
@@ -528,7 +531,7 @@ def _formulario_v2(f, bankroll, casa=None, clave_aviso="aviso_v2"):
         sin_valor = cuota < minima or stake <= 0
         if sin_valor:
             st.error("Cuota por debajo de la minima: su casa no paga valor.")
-        if st.button("Confirmar apuesta", key=f"btn|{clave}", disabled=sin_valor):
+        if st.button("Registrar apuesta hecha", key=f"btn|{clave}", disabled=sin_valor):
             _confirmar(f["id"], f["mercado"], cuota, stake, clave_aviso=clave_aviso,
                        pick=f["pick"], casa=casa)
 

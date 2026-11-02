@@ -7,6 +7,8 @@ Los loaders son funciones puras: se prueban sin Streamlit corriendo.
 import json
 import math
 import sqlite3
+import subprocess
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -27,7 +29,7 @@ from src.persistencia.metricas import _pl_apuesta, metricas_dinero
 from src.persistencia.yield_potencial import apuestas_potenciales, yield_potencial
 
 TABS = ["Valor v2", "Simulación", "Dinero real", "Yield potencial", "Historial"]
-CASAS_V2 = ("BetWarrior", "Bet365", "Casa local")
+CASAS_V2 = ("BetWarrior", "Bet365", "Betano", "Casa local")
 PIN_PRE = ("pin_1", "pin_x", "pin_2", "pin_o25", "pin_u25")  # Pinnacle pre-partido
 PIN_CIERRE = ("pin_cierre_1", "pin_cierre_x", "pin_cierre_2", "pin_cierre_o25", "pin_cierre_u25")
 PICKS_V2 = {"1X2": ("LOCAL", "EMPATE", "VISITA"), "OU": ("OVER 2.5", "UNDER 2.5")}
@@ -467,6 +469,18 @@ def _tab_simulacion(_b):
         st.altair_chart(_linea(curva, "n", "bankroll", "Día con apuestas #", "Bankroll ($)"))
 
 
+def _cargar_en_betano(id_partido):
+    """Corre el bot semi-automatico: carga cuota y stake en el cupon de Betano. No apuesta."""
+    try:
+        r = subprocess.run([sys.executable, "-m", "scripts.ops.betano_semiauto", "--ejecutar", "--id", str(id_partido)],
+                           cwd=Path(__file__).resolve().parent, capture_output=True, text=True, timeout=90)
+    except subprocess.TimeoutExpired:
+        return ("error", "El bot tardo mas de 90 s. Revisa la ventana de Betano.")
+    salida = (r.stdout + r.stderr).strip().splitlines()
+    return ("ok" if r.returncode == 0 and any(l.startswith("CARGADO") for l in salida) else "error",
+            "\n".join(salida[-4:]) or "Sin salida del bot.")
+
+
 def _confirmar_forward(picks):
     """Un clic por pick: cuota de bet365 AR y stake del v2 ya cargados; se editan si la casa pago otra cosa."""
     aviso = st.session_state.pop("aviso_forward", None)
@@ -491,6 +505,9 @@ def _confirmar_forward(picks):
     st.caption("Esto no apuesta en la casa: registra la apuesta que ya hizo a mano. "
                "Cargue la cuota y el stake que le aceptó bet365.")
     for p in vivos:
+        if st.button(f"Cargar en Betano · {p['partido']} · {p['pick']}", key=f"bt|{p['id']}|{p['pick']}"):
+            st.session_state["aviso_forward"] = _cargar_en_betano(p["id"])
+            st.rerun()
         _formulario_v2({"id": p["id"], "pick": p["pick"], "partido": p["partido"], "mercado": "1X2",
                         "prob_justa": p["p_pin"], "cuota_minima": cuota_minima(p["p_pin"]), "cuota_casa": p["cuota"]},
                        bankroll, casa="Bet365", clave_aviso="aviso_forward")

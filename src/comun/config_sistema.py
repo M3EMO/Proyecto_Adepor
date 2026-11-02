@@ -149,6 +149,8 @@ try:
     API_KEYS_FOOTBALL = _cfg.get('api_keys_football', [])
     if not API_KEYS_FOOTBALL and API_KEY_FOOTBALL:
         API_KEYS_FOOTBALL = [API_KEY_FOOTBALL]
+    # Sin key legacy en config.json, la primera de la lista cubre a los scripts de analisis.
+    API_KEY_FOOTBALL = API_KEY_FOOTBALL or (API_KEYS_FOOTBALL[0] if API_KEYS_FOOTBALL else '')
     API_KEY_ODDSPAPI = _cfg.get('api_key_oddspapi', '')
 except (FileNotFoundError, json.JSONDecodeError) as _e:
     print(f"[ADVERTENCIA config_sistema] No se pudo leer config.json: {_e}")

@@ -92,6 +92,7 @@ def main():
             if sel and a.ejecutar:
                 proponer_en_cupon(pagina, sel, stake)
                 print(f"CARGADO en el cupon: stake {int(stake)}. Revisalo y pulsa Apostar en Betano.")
+                print(f"DATOS {sel['cuota']} {int(stake)}")  # el dashboard los copia al formulario de registro
 
 
 if __name__ == '__main__':

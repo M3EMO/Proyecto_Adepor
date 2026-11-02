@@ -469,7 +469,7 @@ def _tab_simulacion(_b):
         st.altair_chart(_linea(curva, "n", "bankroll", "Día con apuestas #", "Bankroll ($)"))
 
 
-def _cargar_en_betano(id_partido):
+def _cargar_en_betano(id_partido, pick):
     """Corre el bot semi-automatico: carga cuota y stake en el cupon de Betano. No apuesta."""
     try:
         r = subprocess.run([sys.executable, "-m", "scripts.ops.betano_semiauto", "--ejecutar", "--id", str(id_partido)],
@@ -477,6 +477,12 @@ def _cargar_en_betano(id_partido):
     except subprocess.TimeoutExpired:
         return ("error", "El bot tardo mas de 90 s. Revisa la ventana de Betano.")
     salida = (r.stdout + r.stderr).strip().splitlines()
+    datos = next((l.split()[1:] for l in salida if l.startswith("DATOS ")), None)
+    if datos:  # el formulario de registro propone Betano con la cuota y el stake cargados
+        clave = f"v2|{id_partido}|{pick}"
+        st.session_state[f"casa|{clave}"] = "Betano"
+        st.session_state[f"cuota|{clave}"] = float(datos[0])
+        st.session_state[f"stake|{clave}"] = float(datos[1])
     return ("ok" if r.returncode == 0 and any(l.startswith("CARGADO") for l in salida) else "error",
             "\n".join(salida[-4:]) or "Sin salida del bot.")
 
@@ -506,7 +512,7 @@ def _confirmar_forward(picks):
                "Cargue la cuota y el stake que le aceptó bet365.")
     for p in vivos:
         if st.button(f"Cargar en Betano · {p['partido']} · {p['pick']}", key=f"bt|{p['id']}|{p['pick']}"):
-            st.session_state["aviso_forward"] = _cargar_en_betano(p["id"])
+            st.session_state["aviso_forward"] = _cargar_en_betano(p["id"], p["pick"])
             st.rerun()
         _formulario_v2({"id": p["id"], "pick": p["pick"], "partido": p["partido"], "mercado": "1X2",
                         "prob_justa": p["p_pin"], "cuota_minima": cuota_minima(p["p_pin"]), "cuota_casa": p["cuota"]},

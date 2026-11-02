@@ -21,9 +21,11 @@ KEY_INDEX = 0
 
 
 def reprogramar(cursor, local, visita, fecha_local_obj):
-    """True si el partido ya existe a 3 dias o menos (no se inserta otra fila).
+    """True si el partido ya existe (no se inserta otra fila): a 3 dias o menos, o sin liquidar a 30 o menos.
     V7.1: si la fecha cambio y el partido no se liquido, la actualiza. Antes la fecha vieja quedaba
-    y el liquidador no encontraba un partido postergado dos dias o mas."""
+    y el liquidador no encontraba un partido postergado dos dias o mas.
+    shortcut: una fila sin liquidar a 30 dias se toma como el mismo partido; si el liquidador fallo y la
+    pareja vuelve a jugar en ese plazo, la fila pasa a la fecha nueva. Achicar el plazo si pasa."""
     cursor.execute("SELECT id_partido, fecha, estado FROM partidos_backtest WHERE local = ? AND visita = ?",
                    (local, visita))
     for id_partido, fecha_existente_str, estado in cursor.fetchall():
@@ -34,10 +36,13 @@ def reprogramar(cursor, local, visita, fecha_local_obj):
                 break
             except ValueError:
                 continue
-        if fecha_existente_obj is None or abs((fecha_local_obj - fecha_existente_obj).days) > 3:
+        if fecha_existente_obj is None:
+            continue
+        pendiente = estado in ('Pendiente', 'Calculado')
+        if abs((fecha_local_obj - fecha_existente_obj).days) > (30 if pendiente else 3):
             continue
         fecha_nueva = fecha_local_obj.strftime("%Y-%m-%d %H:%M")
-        if fecha_nueva != fecha_existente_str.strip() and estado in ('Pendiente', 'Calculado'):
+        if fecha_nueva != fecha_existente_str.strip() and pendiente:
             cursor.execute("UPDATE partidos_backtest SET fecha = ? WHERE id_partido = ?", (fecha_nueva, id_partido))
             print(f"[REPROGRAMADO] {local} vs {visita}: {fecha_existente_str} -> {fecha_nueva}.")
         return True

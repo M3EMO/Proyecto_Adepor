@@ -14,9 +14,34 @@ _INTERACTIVO = sys.stdin.isatty()
 # MOTOR FIXTURE V7.0 (ESCUDO DE VALIDACIÓN PRE-INSERCIÓN)
 # Responsabilidad: Prevención de 'Boundary Overlap' y 'Time-Shift Bugs'.
 # V7.0: LIGAS_ESPN, MAPA_LIGAS_ODDS, DB_NAME y API_KEYS_ODDS desde config_sistema.
+# V7.1: un partido ya cargado no se duplica, pero su fecha se actualiza si ESPN la cambia.
 # ==========================================
 
 KEY_INDEX = 0
+
+
+def reprogramar(cursor, local, visita, fecha_local_obj):
+    """True si el partido ya existe a 3 dias o menos (no se inserta otra fila).
+    V7.1: si la fecha cambio y el partido no se liquido, la actualiza. Antes la fecha vieja quedaba
+    y el liquidador no encontraba un partido postergado dos dias o mas."""
+    cursor.execute("SELECT id_partido, fecha, estado FROM partidos_backtest WHERE local = ? AND visita = ?",
+                   (local, visita))
+    for id_partido, fecha_existente_str, estado in cursor.fetchall():
+        fecha_existente_obj = None
+        for fmt in ("%Y-%m-%d %H:%M", "%d/%m/%Y %H:%M", "%Y-%m-%d", "%d/%m/%Y"):
+            try:
+                fecha_existente_obj = datetime.strptime(fecha_existente_str.strip(), fmt)
+                break
+            except ValueError:
+                continue
+        if fecha_existente_obj is None or abs((fecha_local_obj - fecha_existente_obj).days) > 3:
+            continue
+        fecha_nueva = fecha_local_obj.strftime("%Y-%m-%d %H:%M")
+        if fecha_nueva != fecha_existente_str.strip() and estado in ('Pendiente', 'Calculado'):
+            cursor.execute("UPDATE partidos_backtest SET fecha = ? WHERE id_partido = ?", (fecha_nueva, id_partido))
+            print(f"[REPROGRAMADO] {local} vs {visita}: {fecha_existente_str} -> {fecha_nueva}.")
+        return True
+    return False
 
 
 def main():
@@ -128,23 +153,7 @@ def main():
                         # --- Requerimiento 2: Escudo de Validación Pre-Inserción ---
                         # 1. La validación de fecha de ID es inherente al usar fecha_iso_real (UTC) para el ID.
                         # 2. Prevenir Time-Shift Bugs antes de la inserción.
-                        cursor.execute("SELECT fecha FROM partidos_backtest WHERE local = ? AND visita = ?", (loc_oficial, vis_oficial))
-                        partidos_existentes = cursor.fetchall()
-                        es_duplicado_temporal = False
-                        for (fecha_existente_str,) in partidos_existentes:
-                            fecha_existente_obj = None
-                            for fmt in ("%Y-%m-%d %H:%M", "%d/%m/%Y %H:%M", "%Y-%m-%d", "%d/%m/%Y"):
-                                try:
-                                    fecha_existente_obj = datetime.strptime(fecha_existente_str.strip(), fmt)
-                                    break
-                                except ValueError:
-                                    continue
-                            if fecha_existente_obj is None:
-                                continue
-                            if abs((fecha_local_obj - fecha_existente_obj).days) <= 3:
-                                es_duplicado_temporal = True
-                                print(f"[VALIDACION] Insercion bloqueada. Posible 'Time-Shift Bug' para {loc_oficial} vs {vis_oficial}.")
-                                break
+                        es_duplicado_temporal = reprogramar(cursor, loc_oficial, vis_oficial, fecha_local_obj)
 
                         if es_duplicado_temporal:
                             partidos_omitidos += 1

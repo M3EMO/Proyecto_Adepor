@@ -74,7 +74,7 @@ def main():
 
     # V7.3: solo las fechas unicas donde tenemos pendientes. Antes: rango fijo de 8 dias.
     # V7.4: tambien el dia siguiente, sin pasar de hoy. Un partido postergado un dia queda con la
-    # fecha vieja en la DB (motor_fixture bloquea el cambio como Time-Shift) y ESPN lo lista en la nueva.
+    # fecha vieja si ESPN lo mueve despues de la ultima corrida de motor_fixture, y ESPN lo lista en la nueva.
     hoy = ahora_art().date()
     fechas_unicas = sorted({d.strftime('%Y%m%d') for p in pendientes
                             for d in (datetime.strptime(p[3][:10], '%Y-%m-%d').date() + timedelta(days=k) for k in (0, 1))

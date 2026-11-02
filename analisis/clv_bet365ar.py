@@ -35,6 +35,8 @@ N_PARADA, FECHA_PARADA = 300, date(2027, 6, 30)
 N_BOOT, SEMILLA = 2000, 42
 PRIMARIO = {155, 1024, 384, 480}
 SEGUNDAS = {18, 703, 1240}  # adepor-dch: Championship, Primera Nacional, Primera B de Chile
+# adepor-54q (D-040): desde esta fecha de inicio el estrato resto va en sombra, sin stake real ni simulado.
+FECHA_SOMBRA_RESTO = '2026-11-03'
 TORNEO_PAIS = {155: 'Argentina', 1024: 'Copa Argentina', 384: 'Libertadores', 480: 'Sudamericana',
                325: 'Brasil', 17: 'Inglaterra', 8: 'Espana', 23: 'Italia', 35: 'Alemania', 34: 'Francia',
                7: 'Champions League', 679: 'Europa League', 27665: 'Chile', 278: 'Uruguay', 27070: 'Colombia',
@@ -120,10 +122,12 @@ def simulacion(picks, bankroll=100_000.0):
     Solo los picks ya jugados mueven el bankroll; los pendientes se listan."""
     banca, filas = bankroll, []
     for p in sorted(picks, key=lambda x: x['inicio']):
-        stake = stake_v2(p['p_pin'], p['cuota'], banca) if p['pl'] is not None else None
-        if stake is not None:
+        sombra = p.get('estrato') == 'resto' and p['inicio'] >= FECHA_SOMBRA_RESTO
+        stake = 0.0 if sombra else (stake_v2(p['p_pin'], p['cuota'], banca) if p['pl'] is not None else None)
+        if stake and p['pl'] is not None:  # un pick en sombra pendiente tiene stake 0 y pl None
             banca += stake * p['pl']
         filas.append({'inicio': p['inicio'], 'liga': p['liga'], 'partido': p['partido'], 'id': p.get('id'),
+                      'estrato': p.get('estrato'), 'sombra': sombra,
                       'pick': ('LOCAL', 'EMPATE', 'VISITA')[p['resultado']], 'cuota': p['cuota'], 'p_pin': p['p_pin'],
                       'clv': p['clv'], 'estado': 'pendiente' if p['pl'] is None else ('ganada' if p['pl'] > 0 else 'perdida'),
                       'stake': stake, 'bankroll': round(banca, 2)})
@@ -185,7 +189,7 @@ def main():
             res = 0 if fila['gl'] > fila['gv'] else (1 if fila['gl'] == fila['gv'] else 2)
         for i in ev_picks(d['pinnacle'], d[CASA]):
             cuota = d[CASA][i]
-            picks.append({'fixture': fid, 'torneo': d['torneo'], 'resultado': i, 'cuota': cuota,
+            picks.append({'fixture': fid, 'torneo': d['torneo'], 'estrato': estrato, 'resultado': i, 'cuota': cuota,
                           'id': fila['id'] if fila else None,  # el dashboard confirma la apuesta real con este id
                           'p_pin': prob_justa(d['pinnacle'])[i], 'inicio': d['inicio_utc'][:16],
                           'partido': f"{d['local']} vs {d['visita']}", 'liga': pais,

@@ -60,6 +60,7 @@ Reglas en orden de ejecución:
 20. `resultados_pinnacle` usa el cierre si se capturó; si no, usa la última cuota previa al kickoff.
 21. Valor v2 muestra el informe de `adepor-1uk` (bet365 AR contra Pinnacle) desde `data/oddspapi/clv_bet365ar.json`.
 22. La pestaña Simulación muestra los picks forward de bet365 AR con su resultado y el bankroll de seguir el v2 a ciegas (stake_v2 sobre 100.000), y la curva histórica de `analisis/bankroll_y_piso_v2.json`.
+23. La pestaña Simulación ofrece confirmar con un clic cada pick pendiente fuera de la sombra (D-040), con Bet365, la cuota y el stake ya cargados.
 
 ## Invariantes (lo que nunca debe pasar)
 

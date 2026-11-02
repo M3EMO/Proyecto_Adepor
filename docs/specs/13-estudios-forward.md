@@ -283,6 +283,7 @@ Protocolo fijado el 2026-10-23, antes de ver ningún CLV. Complementa a E1 con l
 - **Banco de nombres:** el mismo script guarda como alias los nombres de OddsPapi de un cruce claro (`gestor_nombres.aprender_alias`). Los dudosos quedan en `alias_a_revisar`.
 - **CUSUM, alerta temprana sin decisión:** `S = max(0, S + k − CLV)`, con `k` = 1% y `h` = 2,10. Si `S` supera `h`, el edge probablemente se apagó.
 - **Calibración del CUSUM:** con Bet365 en Europa 2019-2022, 10% de falsas alarmas en 300 picks con edge. En retro, la primera alarma llega el 2024-05-18; sin edge, tarda una mediana de 79 picks.
+- **Sombra (D-040, `adepor-54q`):** desde el 2026-11-03 el estrato resto sigue en el informe con stake 0. Su CLV se mide igual, para la regla de vuelta al stake.
 
 ## E9. Piso de probabilidad (bead `adepor-aua`)
 

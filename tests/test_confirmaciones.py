@@ -75,5 +75,6 @@ def test_picks_por_confirmar_filtra_jugados_confirmados_empezados_y_sin_cruce():
     from src.persistencia.confirmaciones import picks_por_confirmar
     base = {'estado': 'pendiente', 'inicio': '2026-11-08T20:00'}
     picks = [{**base, 'id': 'ok'}, {**base, 'id': 'hecho'}, {**base, 'id': None},
-             {**base, 'id': 'viejo', 'inicio': '2026-11-01T20:00'}, {**base, 'id': 'jugado', 'estado': 'ganada'}]
+             {**base, 'id': 'viejo', 'inicio': '2026-11-01T20:00'}, {**base, 'id': 'jugado', 'estado': 'ganada'},
+             {**base, 'id': 'sombra', 'sombra': True}]
     assert [p['id'] for p in picks_por_confirmar(picks, {'hecho'}, '2026-11-02T21:00')] == ['ok']

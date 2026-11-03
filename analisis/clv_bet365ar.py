@@ -156,8 +156,9 @@ def main():
     filas = con.execute('SELECT fixture_id, torneo_id, inicio_utc, local_id, visita_id, casa, ts_captura, '
                         'cuota_1, cuota_x, cuota_2 FROM cuotas_forward WHERE casa IN (?, ?) '
                         'ORDER BY ts_captura', ('pinnacle', CASA)).fetchall()
-    capturas, snaps_pin = {}, {}
+    capturas, snaps_pin, inicio_ultimo = {}, {}, {}
     for fid, tid, ini, lid, vid, casa, ts, *c in filas:
+        inicio_ultimo[fid] = ini  # OddsPapi publica fechas provisorias y las corrige en capturas posteriores
         if casa == 'pinnacle':
             snaps_pin.setdefault(fid, []).append((ts, c))
         capturas.setdefault((fid, ts), {'torneo': tid, 'inicio_utc': ini, 'local': nombres.get(str(lid), ''),
@@ -171,6 +172,7 @@ def main():
         if fid in vistos or 'pinnacle' not in d or CASA not in d or d['torneo'] not in TORNEO_PAIS:
             continue
         vistos.add(fid)
+        d = {**d, 'inicio_utc': inicio_ultimo[fid]}
         n_partidos += 1
         pais = TORNEO_PAIS[d['torneo']]
         estrato = 'primario' if d['torneo'] in PRIMARIO else ('segundas' if d['torneo'] in SEGUNDAS else 'resto')

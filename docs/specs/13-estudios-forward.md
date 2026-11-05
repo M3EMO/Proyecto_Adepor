@@ -275,6 +275,7 @@ Protocolo fijado el 2026-10-23, antes de ver ningún CLV. Complementa a E1 con l
 - **Cruce:** misma liga, kickoff a 3 horas o menos, y nombres iguales o parecidos (enmienda del 2026-10-23, antes de ver datos).
 - **Pick:** primera captura de cada partido; cada resultado con EV de 2% o más sobre Pinnacle de la misma captura.
 - **Inicio (enmienda del 2026-11-03, con datos vistos):** el cruce, el cierre aproximado y la fecha del pick usan el inicio de la última captura. OddsPapi publica fechas provisorias y las corrige después. La tasa de cruce pasó de 91,1% a 93,5%.
+- **Cierre (enmienda del 2026-11-05, con datos vistos):** un partido sin empezar no tiene cierre ni CLV. Antes, la última captura de un partido futuro contaba como cierre aproximado.
 - **Filtro de calidad:** se descarta una fila con EV de 100% o más, o con probabilidad a más de 25 puntos de Pinnacle.
 - **Estrato primario:** Liga Profesional, Copa Argentina, Libertadores y Sudamericana.
 - **Regla:** hay edge si el CLV medio es mayor que 0 con IC95 entero sobre 0, y el yield plano no es negativo.

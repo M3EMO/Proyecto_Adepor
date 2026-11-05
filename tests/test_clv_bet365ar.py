@@ -78,3 +78,12 @@ def test_simulacion_deja_en_sombra_el_resto_desde_adepor_54q():
     s1 = c.stake_v2(0.5, 2.2, 100_000.0)
     s2 = c.stake_v2(0.5, 2.2, 100_000.0 + s1 * 1.2)
     assert r['bankroll_final'] == round(100_000.0 + s1 * 1.2 + s2 * 1.2, 2)
+
+
+def test_prob_cierre_no_existe_antes_del_inicio_y_prefiere_el_real():
+    fila = {'c1': 2.0, 'cx': 4.0, 'c2': 4.0}
+    snaps = [('2026-11-01T12:00:00Z', [3.0, 3.0, 3.0])]
+    inicio = '2026-11-02T20:00:00.000Z'
+    assert c.prob_cierre(fila, snaps, '2026-11-01T00:00:00Z', inicio, '2026-11-02T19:59') is None
+    assert c.prob_cierre(fila, snaps, '2026-11-01T00:00:00Z', inicio, '2026-11-02T20:00') == [0.5, 0.25, 0.25]
+    assert c.prob_cierre(None, snaps, '2026-11-01T00:00:00Z', inicio, '2026-11-02T20:00') == [1 / 3, 1 / 3, 1 / 3]

@@ -13,7 +13,7 @@ import difflib
 import json
 import sqlite3
 import sys
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import numpy as np
@@ -117,6 +117,18 @@ def cierre_aproximado(snaps, ts_pick, inicio_utc):
     return previas[-1] if previas else None
 
 
+def prob_cierre(fila, snaps, ts_pick, inicio_utc, ahora):
+    """Prob justa del cierre: pin_cierre_* o, sin The Odds API, el cierre aproximado (enmienda del bead).
+    None si el partido no empezo: la ultima captura de un partido futuro todavia no es un cierre."""
+    if inicio_utc[:16] > ahora:
+        return None
+    p = prob_justa([fila['c1'], fila['cx'], fila['c2']]) if fila else None
+    if p is None:
+        aprox = cierre_aproximado(snaps, ts_pick, inicio_utc)
+        p = prob_justa(aprox) if aprox else None
+    return p
+
+
 def simulacion(picks, bankroll=100_000.0):
     """Seguir el v2 a ciegas: stake_v2 sobre el bankroll del momento, en orden de inicio.
     Solo los picks ya jugados mueven el bankroll; los pendientes se listan."""
@@ -167,6 +179,7 @@ def main():
         'SELECT id_partido, fecha, pais, local, visita, goles_l, goles_v, pin_cierre_1, pin_cierre_x, pin_cierre_2 '
         'FROM partidos_backtest')]
     vistos, picks, n_partidos, n_cruzados, revisar = set(), [], 0, 0, []
+    ahora = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M')
     margenes = {e: {'pinnacle': [], CASA: []} for e in ('primario', 'segundas', 'resto')}
     for (fid, ts_pick), d in capturas.items():  # orden por ts: la primera captura de cada partido gana
         if fid in vistos or 'pinnacle' not in d or CASA not in d or d['torneo'] not in TORNEO_PAIS:
@@ -182,10 +195,7 @@ def main():
         n_cruzados += fila is not None
         if fila:
             aprender({**d, 'pais': pais}, fila, revisar)
-        p_cierre = prob_justa([fila['c1'], fila['cx'], fila['c2']]) if fila else None
-        if p_cierre is None:  # torneo sin The Odds API: cierre aproximado de OddsPapi (enmienda del bead)
-            aprox = cierre_aproximado(snaps_pin.get(fid, []), ts_pick, d['inicio_utc'])
-            p_cierre = prob_justa(aprox) if aprox else None
+        p_cierre = prob_cierre(fila, snaps_pin.get(fid, []), ts_pick, d['inicio_utc'], ahora)
         res = None
         if fila and fila['gl'] is not None and fila['gv'] is not None:
             res = 0 if fila['gl'] > fila['gv'] else (1 if fila['gl'] == fila['gv'] else 2)

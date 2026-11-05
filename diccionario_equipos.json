@@ -674,7 +674,21 @@
       "Northampton Town": "Inglaterra",
       "Altrincham": "Inglaterra",
       "Notts County": "Inglaterra",
-      "Reading": "Inglaterra"
+      "Reading": "Inglaterra",
+      "Stafford Rangers": "Inglaterra",
+      "Grimsby Town": "Inglaterra",
+      "Cray Wanderers": "Inglaterra",
+      "Stockport County": "Inglaterra",
+      "Wimborne Town": "Inglaterra",
+      "Crawley Town": "Inglaterra",
+      "Oldham Athletic": "Inglaterra",
+      "Sheffield Wednesday": "Inglaterra",
+      "Sporting Club Baie-Mahault": "Francia",
+      "Siroco Les Abymes": "Francia",
+      "Olympique De Cayenne": "Francia",
+      "AS Etoile Matoury": "Francia",
+      "Plymouth Parkway": "Inglaterra",
+      "Berkhamsted": "Inglaterra"
     },
     "ligas_por_copa": {
       "Libertadores": [
@@ -1038,7 +1052,8 @@
     "cabucaramanga": "Bucaramanga",
     "cucutadeportivofc": "Cúcuta Deportivo",
     "aguilasdoradasrionegro": "Águilas Doradas",
-    "millonariosfc": "Millonarios"
+    "millonariosfc": "Millonarios",
+    "adpasto": "Deportivo Pasto"
   },
   "Ecuador": {
     "aucas": "Aucas",
@@ -1235,7 +1250,11 @@
     "olympiquemarseille": "Marseille",
     "strasbourgalsace": "Strasbourg",
     "olympiquelyon": "Lyon",
-    "estactroyes": "Troyes"
+    "estactroyes": "Troyes",
+    "sportingclubbaiemahault": "Sporting Club Baie-Mahault",
+    "sirocolesabymes": "Siroco Les Abymes",
+    "olympiquedecayenne": "Olympique De Cayenne",
+    "asetoilematoury": "AS Etoile Matoury"
   },
   "Inglaterra": {
     "afcbournemouth": "AFC Bournemouth",
@@ -1361,7 +1380,23 @@
     "yorkcityfc": "York City",
     "sholingfc": "Sholing",
     "altrinchamfc": "Altrincham",
-    "nottscountyfc": "Notts County"
+    "nottscountyfc": "Notts County",
+    "staffordrangers": "Stafford Rangers",
+    "grimsbytown": "Grimsby Town",
+    "craywanderers": "Cray Wanderers",
+    "stockportcounty": "Stockport County",
+    "wimbornetown": "Wimborne Town",
+    "crawleytown": "Crawley Town",
+    "oldhamathletic": "Oldham Athletic",
+    "sheffieldwednesday": "Sheffield Wednesday",
+    "staffordrangersfc": "Stafford Rangers",
+    "craywanderersfc": "Cray Wanderers",
+    "stockportcountyfc": "Stockport County",
+    "wimbornetownfc": "Wimborne Town",
+    "plymouthparkway": "Plymouth Parkway",
+    "berkhamsted": "Berkhamsted",
+    "plymouthparkwayfc": "Plymouth Parkway",
+    "berkhamstedfc": "Berkhamsted"
   },
   "Italia": {
     "acmilan": "AC Milan",
@@ -1511,7 +1546,8 @@
     "clubnacionaldefootball": "Nacional",
     "liverpoolmontevideo": "Liverpool",
     "capenarolmontevideo": "Peñarol",
-    "danubiofc": "Danubio"
+    "danubiofc": "Danubio",
+    "cajuventuddelaspiedras": "Juventud"
   },
   "Venezuela": {
     "academiaanzoategui": "Academia Anzoátegui",

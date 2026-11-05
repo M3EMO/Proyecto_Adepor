@@ -352,6 +352,55 @@ def aprender_alias(nombre_crudo, nombre_oficial, liga):
     return destino
 
 
+def registrar_equipos(liga, nombres):
+    """Alta de una liga nueva: cada nombre (oficial de ESPN) entra al diccionario de la liga.
+    No pisa alias existentes. Devuelve cuantos equipos se agregaron."""
+    dic = cargar_diccionario()
+    if not _es_formato_v5(dic):
+        return 0
+    sub, meta, nuevos = dic.setdefault(liga, {}), dic['_meta']['equipo_a_liga_home'], 0
+    for n in nombres:
+        clave = limpiar_texto(n)
+        if nombre_equipo_valido(n) and clave not in sub:
+            sub[clave] = n
+            meta.setdefault(n, liga)
+            nuevos += 1
+    guardar_diccionario(dic)
+    return nuevos
+
+
+# Copas internacionales por confederacion: sus equipos sin liga propia van al grupo '<confederacion> otros'.
+CONFEDERACION = {'Champions League': 'UEFA', 'Europa League': 'UEFA', 'Conference League': 'UEFA',
+                 'Libertadores': 'CONMEBOL', 'Sudamericana': 'CONMEBOL', 'Recopa Sudamericana': 'CONMEBOL',
+                 'Concacaf Champions Cup': 'CONCACAF'}
+
+
+def registrar_en_copa(nombre, copa):
+    """Registra como equipo nuevo a un desconocido que aparece en una copa (ESPN da el nombre oficial).
+    Copa nacional: va al diccionario de su pais. Copa internacional: va al grupo '<confederacion> otros',
+    compartido por todas las copas de esa confederacion. Devuelve el grupo, o None si no aplica."""
+    if not nombre_equipo_valido(nombre):
+        return None
+    dic = cargar_diccionario()
+    ligas = dic.get('_meta', {}).get('ligas_por_copa', {}).get(copa)
+    if not _es_formato_v5(dic) or not ligas:
+        return None
+    if len(ligas) == 1:
+        grupo = ligas[0]
+    elif copa in CONFEDERACION:
+        grupo = f'{CONFEDERACION[copa]} otros'
+        copas = dic['_meta']['ligas_por_copa']
+        for c, conf in CONFEDERACION.items():
+            if conf == CONFEDERACION[copa] and c in copas and grupo not in copas[c]:
+                copas[c].append(grupo)
+    else:
+        return None  # p. ej. Mundial de Clubes: mezcla confederaciones
+    dic.setdefault(grupo, {})[limpiar_texto(nombre)] = nombre
+    dic['_meta']['equipo_a_liga_home'].setdefault(nombre, grupo)
+    guardar_diccionario(dic)
+    return grupo
+
+
 def obtener_liga_home(nombre_oficial, contexto_liga=None):
     """
     Devuelve la liga domestica de un equipo (donde vive su historial de stats).

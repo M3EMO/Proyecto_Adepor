@@ -40,6 +40,11 @@ LIGAS_ESPN = {
     # Slugs ESPN validados via sports.core.api.espn.com/v2/sports/soccer/leagues.
     # NOMBRE INTERNO debe coincidir con dic._meta.ligas_por_copa[k] para que
     # gestor_nombres resuelva equipos cross-source consistentemente.
+    # Segundas divisiones y America del Norte — 2026-10-23 (D-038: edge en segundas divisiones).
+    "eng.2": "Inglaterra 2",                       # Championship
+    "arg.2": "Argentina 2",                        # Primera Nacional
+    "usa.1": "Estados Unidos",                     # MLS
+    "mex.1": "Mexico",                             # Liga MX
     "uefa.champions": "Champions League",        # UCL
     "uefa.europa": "Europa League",               # UEL
     "uefa.europa.conf": "Conference League",      # UECL
@@ -77,6 +82,10 @@ MAPA_LIGAS_ODDS = {
     "Francia":   "soccer_france_ligue_one",      # Ligue 1 — verified active 2026-04-21
     # COPAS — claves verificadas en /v4/sports el 2026-10-22. Las de temporada cerrada
     # no generan pedidos: motor_cuotas consulta solo ligas con partidos vivos.
+    "Inglaterra 2":          "soccer_efl_champ",
+    "Argentina 2":           None,  # The Odds API no la cubre: el cierre sale de OddsPapi
+    "Estados Unidos":        "soccer_usa_mls",
+    "Mexico":                "soccer_mexico_ligamx",
     "Champions League":      "soccer_uefa_champs_league",
     "Europa League":         "soccer_uefa_europa_league",
     "Conference League":     "soccer_uefa_europa_conference_league",
@@ -132,6 +141,7 @@ try:
     with open(_CONFIG_FILE, 'r', encoding='utf-8') as _f:
         _cfg = json.load(_f)
     API_KEYS_ODDS    = _cfg.get('api_keys_odds', [])
+    API_KEYS_ODDS_CIERRE = _cfg.get('api_keys_odds_cierre', [])  # rango propio del cron de cierre
     API_KEY_FOOTBALL = _cfg.get('api_key_football', '')
     # Soporte multi-key para API-Football (fase 3.3.2): si config.json tiene la
     # lista api_keys_football, se rotan cuando la actual se agota (429 o quota llena).
@@ -139,11 +149,14 @@ try:
     API_KEYS_FOOTBALL = _cfg.get('api_keys_football', [])
     if not API_KEYS_FOOTBALL and API_KEY_FOOTBALL:
         API_KEYS_FOOTBALL = [API_KEY_FOOTBALL]
+    # Sin key legacy en config.json, la primera de la lista cubre a los scripts de analisis.
+    API_KEY_FOOTBALL = API_KEY_FOOTBALL or (API_KEYS_FOOTBALL[0] if API_KEYS_FOOTBALL else '')
     API_KEY_ODDSPAPI = _cfg.get('api_key_oddspapi', '')
 except (FileNotFoundError, json.JSONDecodeError) as _e:
     print(f"[ADVERTENCIA config_sistema] No se pudo leer config.json: {_e}")
     _cfg = {}
     API_KEYS_ODDS     = []
+    API_KEYS_ODDS_CIERRE = []
     API_KEY_FOOTBALL  = ''
     API_KEYS_FOOTBALL = []
     API_KEY_ODDSPAPI  = ''

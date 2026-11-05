@@ -7,8 +7,10 @@ Los loaders son funciones puras: se prueban sin Streamlit corriendo.
 import json
 import math
 import sqlite3
+import subprocess
+import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import altair as alt
@@ -20,14 +22,14 @@ from src.comun.config_sistema import DB_NAME
 from src.comun.picks import cuota_para_pick
 from src.comun.resolucion import determinar_resultado_entero
 from src.comun.tiempo import ahora_art
-from src.nucleo.valor_v2 import clv_v2, prob_justa, stake_v2, tabla_valor
+from src.nucleo.valor_v2 import clv_v2, cuota_minima, prob_justa, stake_v2, tabla_valor
 from src.persistencia.bankroll import obtener_bankroll_operativo
-from src.persistencia.confirmaciones import confirmar_apuesta, ids_confirmados
+from src.persistencia.confirmaciones import confirmar_apuesta, ids_confirmados, picks_por_confirmar
 from src.persistencia.metricas import _pl_apuesta, metricas_dinero
 from src.persistencia.yield_potencial import apuestas_potenciales, yield_potencial
 
-TABS = ["Valor v2", "Dinero real", "Yield potencial", "Historial"]
-CASAS_V2 = ("BetWarrior", "Bet365", "Casa local")
+TABS = ["Valor v2", "Simulación", "Dinero real", "Yield potencial", "Historial"]
+CASAS_V2 = ("BetWarrior", "Bet365", "Betano", "Casa local")
 PIN_PRE = ("pin_1", "pin_x", "pin_2", "pin_o25", "pin_u25")  # Pinnacle pre-partido
 PIN_CIERRE = ("pin_cierre_1", "pin_cierre_x", "pin_cierre_2", "pin_cierre_o25", "pin_cierre_u25")
 PICKS_V2 = {"1X2": ("LOCAL", "EMPATE", "VISITA"), "OU": ("OVER 2.5", "UNDER 2.5")}
@@ -413,14 +415,108 @@ def _bloque_casas_locales():
     st.caption(f"Informe del {d['fecha']} · {d['decision']} · cruce con la base: {_pct(d['tasa_cruce'])}")
     filas = []
     for estrato, nombre in (("primario", "Argentina y Conmebol"), ("primario_p_min_035", "Arg. y Conmebol, p >= 35%"),
-                            ("resto", "Resto")):
-        r, m = d[estrato], d["margen_medio"][estrato.split("_p_min")[0]]
+                            ("segundas", "Segundas (adepor-dch)"), ("resto", "Resto")):
+        if estrato not in d:  # informe anterior al estrato
+            continue
+        r, m = d[estrato], d["margen_medio"].get(estrato.split("_p_min")[0], {})
         filas.append({"Estrato": nombre, "Picks EV >= 2%": r["n_picks"], "Con cierre": r["n_con_cierre"],
                       "CLV medio": _pct(r.get("clv_medio"), True),
                       "IC95": " a ".join(_pct(x, True) for x in r["clv_ic95"]) if "clv_ic95" in r else "—",
-                      "Margen bet365 AR": _pct(m["bet365.bet.ar"]), "Margen Pinnacle": _pct(m["pinnacle"])})
+                      "Margen bet365 AR": _pct(m.get("bet365.bet.ar")), "Margen Pinnacle": _pct(m.get("pinnacle")),
+                      "CUSUM": _cusum_txt(r.get("cusum"))})
     st.dataframe(pd.DataFrame(filas), hide_index=True)
     st.caption("La decision se toma una vez, con 300 picks con cierre en el estrato primario o el 2027-06-30.")
+
+
+def _cusum_txt(c):
+    """S / h del CUSUM, con ALARMA si S supero h. Un informe viejo no trae el campo."""
+    if not c:
+        return "—"
+    return f"{c['s']:.2f} / {c['h']:.2f}" + (" ALARMA" if c["alarma"] else "")
+
+
+def _tab_simulacion(_b):
+    """Seguir el v2 a ciegas: picks forward de bet365 AR y backtest historico de Bet365 en Europa."""
+    raiz = Path(__file__).resolve().parent
+    st.subheader("Forward: bet365 AR contra Pinnacle")
+    st.caption("Cada pick es un resultado donde bet365 AR paga EV de 2% o más sobre Pinnacle. "
+               "Stake del v2 (Kelly 0,25, tope 0,5%) sobre 100.000. Es simulación: no hay dinero real.")
+    ruta = raiz / "data" / "oddspapi" / "clv_bet365ar.json"
+    sim = json.loads(ruta.read_text()).get("simulacion") if ruta.exists() else None
+    if not sim or not sim["picks"]:
+        st.info("Todavía no hay picks forward: los genera el pipeline diario.")
+    else:
+        k = st.columns(4)
+        k[0].metric("Picks", len(sim["picks"]))
+        k[1].metric("Jugados", sim["n_jugados"])
+        k[2].metric("Acierto", _pct(sim["acierto"]))
+        k[3].metric("Bankroll simulado", _usd(sim["bankroll_final"]),
+                    _usd(sim["bankroll_final"] - sim["bankroll_inicial"], True))
+        st.dataframe(_formatear(pd.DataFrame(sim["picks"]).drop(columns="id", errors="ignore"), {
+            "p_pin": _pct, "clv": lambda x: _pct(x, True), "stake": lambda x: _usd(x) if x is not None else "—",
+            "bankroll": _usd}), hide_index=True)
+        _confirmar_forward(sim["picks"])
+    st.subheader("Histórico: Bet365 en Europa, 2019-2025")
+    st.caption("Backtest exploratorio de D-037: el edge se apagó en 2023. Sirve como referencia, no como promesa.")
+    ruta = raiz / "analisis" / "bankroll_y_piso_v2.json"
+    if ruta.exists():
+        evo = json.loads(ruta.read_text())["evolucion"]
+        curva = pd.DataFrame(evo["curva"], columns=["fecha", "bankroll"]).reset_index(names="n")
+        k = st.columns(3)
+        k[0].metric("Picks", evo["n"])
+        k[1].metric("Bankroll final", _usd(evo["bankroll_final"]))
+        k[2].metric("Caída máxima", _pct(evo["drawdown_max"]))
+        st.altair_chart(_linea(curva, "n", "bankroll", "Día con apuestas #", "Bankroll ($)"))
+
+
+def _cargar_en_betano(id_partido, pick):
+    """Corre el bot semi-automatico: carga cuota y stake en el cupon de Betano. No apuesta."""
+    try:
+        r = subprocess.run([sys.executable, "-m", "scripts.ops.betano_semiauto", "--ejecutar", "--id", str(id_partido)],
+                           cwd=Path(__file__).resolve().parent, capture_output=True, text=True, timeout=90)
+    except subprocess.TimeoutExpired:
+        return ("error", "El bot tardo mas de 90 s. Revisa la ventana de Betano.")
+    salida = (r.stdout + r.stderr).strip().splitlines()
+    datos = next((l.split()[1:] for l in salida if l.startswith("DATOS ")), None)
+    if datos:  # el formulario de registro propone Betano con la cuota y el stake cargados
+        clave = f"v2|{id_partido}|{pick}"
+        st.session_state[f"casa|{clave}"] = "Betano"
+        st.session_state[f"cuota|{clave}"] = float(datos[0])
+        st.session_state[f"stake|{clave}"] = float(datos[1])
+    return ("ok" if r.returncode == 0 and any(l.startswith("CARGADO") for l in salida) else "error",
+            "\n".join(salida[-4:]) or "Sin salida del bot.")
+
+
+def _confirmar_forward(picks):
+    """Un clic por pick: cuota de bet365 AR y stake del v2 ya cargados; se editan si la casa pago otra cosa."""
+    aviso = st.session_state.pop("aviso_forward", None)
+    if aviso:
+        (st.success if aviso[0] == "ok" else st.error)(aviso[1])
+    ahora = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M")  # inicio del informe esta en UTC
+    con = sqlite3.connect(Path(DB_NAME).resolve().as_uri() + "?mode=ro", uri=True)
+    try:
+        hechos, bankroll = ids_confirmados(con.cursor()), obtener_bankroll_operativo(con.cursor())
+        vivos = picks_por_confirmar(picks, hechos, ahora)
+        # el informe puede venir de otra base (tests, copia): solo se confirma lo que existe en esta
+        en_base = {r[0] for r in con.execute(f"SELECT id_partido FROM partidos_backtest WHERE id_partido IN "
+                                             f"({','.join('?' * len(vivos))})", [p["id"] for p in vivos])}
+    finally:
+        con.close()
+    vivos = [p for p in vivos if p["id"] in en_base]
+    st.subheader("Registrar apuestas hechas")
+    if not vivos:
+        st.info("No hay picks para registrar. Un pick aparece acá si está pendiente, no empezó, no está en sombra "
+                "(D-040), no está registrado y su partido ya está en la base.")
+        return
+    st.caption("Esto no apuesta en la casa: registra la apuesta que ya hizo a mano. "
+               "Cargue la cuota y el stake que le aceptó bet365.")
+    for p in vivos:
+        if st.button(f"Cargar en Betano · {p['partido']} · {p['pick']}", key=f"bt|{p['id']}|{p['pick']}"):
+            st.session_state["aviso_forward"] = _cargar_en_betano(p["id"], p["pick"])
+            st.rerun()
+        _formulario_v2({"id": p["id"], "pick": p["pick"], "partido": p["partido"], "mercado": "1X2",
+                        "prob_justa": p["p_pin"], "cuota_minima": cuota_minima(p["p_pin"]), "cuota_casa": p["cuota"]},
+                       bankroll, casa="Bet365", clave_aviso="aviso_forward")
 
 
 def _bloque_ev(ev, bankroll):
@@ -438,13 +534,13 @@ def _bloque_ev(ev, bankroll):
             _formulario_v2(f, bankroll)
 
 
-def _formulario_v2(f, bankroll):
+def _formulario_v2(f, bankroll, casa=None, clave_aviso="aviso_v2"):
     """Compara la cuota de mi casa con la minima. Confirma solo si hay valor."""
     clave = f"v2|{f['id']}|{f['pick']}"
     p, minima = f["prob_justa"], f["cuota_minima"]
-    with st.expander(f"Confirmar apuesta · {f['partido']} · {f['mercado']} {f['pick']}"):
+    with st.expander(f"Registrar apuesta hecha · {f['partido']} · {f['mercado']} {f['pick']}"):
         c = st.columns(2)
-        casa = c[0].selectbox("Casa", CASAS_V2, key=f"casa|{clave}")
+        casa = c[0].selectbox("Casa", CASAS_V2, index=CASAS_V2.index(casa) if casa else 0, key=f"casa|{clave}")
         cuota = c[1].number_input("Cuota de mi casa", min_value=1.01,
                                   value=f.get("cuota_casa") or math.ceil(minima * 100) / 100, step=0.01,
                                   format="%.2f", key=f"cuota|{clave}")
@@ -458,8 +554,8 @@ def _formulario_v2(f, bankroll):
         sin_valor = cuota < minima or stake <= 0
         if sin_valor:
             st.error("Cuota por debajo de la minima: su casa no paga valor.")
-        if st.button("Confirmar apuesta", key=f"btn|{clave}", disabled=sin_valor):
-            _confirmar(f["id"], f["mercado"], cuota, stake, clave_aviso="aviso_v2",
+        if st.button("Registrar apuesta hecha", key=f"btn|{clave}", disabled=sin_valor):
+            _confirmar(f["id"], f["mercado"], cuota, stake, clave_aviso=clave_aviso,
                        pick=f["pick"], casa=casa)
 
 
@@ -606,7 +702,7 @@ def render():
         st.error("Salud del pipeline: " + "; ".join(estado[1]))
     st.caption(f"Base: {DB_NAME} · Cargado {datetime.now():%d/%m/%Y %H:%M} · cache 60 s")
     pestañas = st.tabs(TABS)
-    vistas = (_tab_valor_v2, _tab_dinero, _tab_yield, _tab_historial)
+    vistas = (_tab_valor_v2, _tab_simulacion, _tab_dinero, _tab_yield, _tab_historial)
     for pestaña, vista in zip(pestañas, vistas):
         with pestaña:
             vista(b)

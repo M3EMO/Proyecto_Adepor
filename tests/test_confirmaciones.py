@@ -69,3 +69,12 @@ def test_tabla_vieja_sin_casa_se_migra(db):
     _pick(db, 'm1')
     confirmar_apuesta(db, 'm1', '1X2', 2.0, 100.0, casa='Bet365')
     assert db.execute("SELECT casa FROM apuestas_confirmadas").fetchone() == ('Bet365',)
+
+
+def test_picks_por_confirmar_filtra_jugados_confirmados_empezados_y_sin_cruce():
+    from src.persistencia.confirmaciones import picks_por_confirmar
+    base = {'estado': 'pendiente', 'inicio': '2026-11-08T20:00'}
+    picks = [{**base, 'id': 'ok'}, {**base, 'id': 'hecho'}, {**base, 'id': None},
+             {**base, 'id': 'viejo', 'inicio': '2026-11-01T20:00'}, {**base, 'id': 'jugado', 'estado': 'ganada'},
+             {**base, 'id': 'sombra', 'sombra': True}]
+    assert [p['id'] for p in picks_por_confirmar(picks, {'hecho'}, '2026-11-02T21:00')] == ['ok']

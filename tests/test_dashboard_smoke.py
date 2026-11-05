@@ -54,7 +54,7 @@ def _datos(db):
     return dashboard.cargar_partidos(db.cursor())
 
 
-def test_app_renderiza_las_cuatro_pestanas(db):
+def test_app_renderiza_todas_las_pestanas(db):
     _sembrar(db)
     st.cache_data.clear()  # la app cachea 60 s: evitar datos de otra prueba
     at = AppTest.from_file(str(RAIZ / "dashboard.py"), default_timeout=120).run()

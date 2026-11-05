@@ -42,3 +42,48 @@ def test_aprender_guarda_alias_claro_y_deja_dudoso_para_revisar(monkeypatch):
     c.aprender(partido, {'local': 'Málaga', 'visita': 'Athletic Club'}, revisar)
     assert guardados == [('Malaga CF', 'Málaga')]  # 'malaga' esta contenido en 'malagacf'
     assert revisar == [{'pais': 'Espana', 'oddspapi': 'Athletic Bilbao', 'base': 'Athletic Club'}]
+
+
+def test_cusum_alarma_solo_cuando_el_clv_cae():
+    assert not c.cusum([0.02] * 300)['alarma']           # edge de 2 %: S queda en 0
+    r = c.cusum([-0.05] * 40)                            # sin edge: S sube 0.06 por pick
+    assert r['alarma'] and abs(r['s'] - 40 * 0.06) < 1e-9
+
+
+def test_cierre_aproximado_usa_la_ultima_captura_entre_pick_e_inicio():
+    snaps = [('2026-10-20T12:00:00Z', [2.0, 3.4, 4.0]), ('2026-10-21T12:00:00Z', [1.9, 3.5, 4.2]),
+             ('2026-10-22T12:00:00Z', [1.8, 3.6, 4.5]), ('2026-10-23T12:00:00Z', [1.7, 3.7, 4.9])]
+    assert c.cierre_aproximado(snaps, '2026-10-20T12:00:00Z', '2026-10-22T20:00:00.000Z') == [1.8, 3.6, 4.5]
+    assert c.cierre_aproximado(snaps[:1], '2026-10-20T12:00:00Z', '2026-10-22T20:00:00.000Z') is None
+
+
+def test_simulacion_mueve_el_bankroll_solo_con_picks_jugados():
+    base = {'resultado': 0, 'p_pin': 0.5, 'cuota': 2.2, 'clv': 0.05, 'liga': 'Argentina', 'partido': 'A vs B'}
+    picks = [{**base, 'inicio': '2026-10-24T20:00', 'pl': 1.2}, {**base, 'inicio': '2026-10-25T20:00', 'pl': None}]
+    r = c.simulacion(picks, 100_000.0)
+    stake = c.stake_v2(0.5, 2.2, 100_000.0)
+    assert r['bankroll_final'] == round(100_000.0 + stake * 1.2, 2) and r['n_jugados'] == 1
+    assert [f['estado'] for f in r['picks']] == ['ganada', 'pendiente'] and r['picks'][1]['stake'] is None
+
+
+def test_simulacion_deja_en_sombra_el_resto_desde_adepor_54q():
+    base = {'resultado': 0, 'p_pin': 0.5, 'cuota': 2.2, 'clv': 0.05, 'liga': 'Espana', 'partido': 'A vs B', 'pl': 1.2}
+    picks = [{**base, 'estrato': 'resto', 'inicio': '2026-11-01T20:00'},            # antes de la regla: juega
+             {**base, 'estrato': 'resto', 'inicio': '2026-11-05T20:00'},            # sombra jugada
+             {**base, 'estrato': 'resto', 'inicio': '2026-11-06T20:00', 'pl': None},  # sombra pendiente
+             {**base, 'estrato': 'primario', 'inicio': '2026-11-05T20:00'}]
+    r = c.simulacion(picks, 100_000.0)
+    assert [f['sombra'] for f in r['picks']] == [False, True, False, True]  # orden por inicio
+    assert [f['stake'] for f in r['picks'] if f['sombra']] == [0.0, 0.0]
+    s1 = c.stake_v2(0.5, 2.2, 100_000.0)
+    s2 = c.stake_v2(0.5, 2.2, 100_000.0 + s1 * 1.2)
+    assert r['bankroll_final'] == round(100_000.0 + s1 * 1.2 + s2 * 1.2, 2)
+
+
+def test_prob_cierre_no_existe_antes_del_inicio_y_prefiere_el_real():
+    fila = {'c1': 2.0, 'cx': 4.0, 'c2': 4.0}
+    snaps = [('2026-11-01T12:00:00Z', [3.0, 3.0, 3.0])]
+    inicio = '2026-11-02T20:00:00.000Z'
+    assert c.prob_cierre(fila, snaps, '2026-11-01T00:00:00Z', inicio, '2026-11-02T19:59') is None
+    assert c.prob_cierre(fila, snaps, '2026-11-01T00:00:00Z', inicio, '2026-11-02T20:00') == [0.5, 0.25, 0.25]
+    assert c.prob_cierre(None, snaps, '2026-11-01T00:00:00Z', inicio, '2026-11-02T20:00') == [1 / 3, 1 / 3, 1 / 3]

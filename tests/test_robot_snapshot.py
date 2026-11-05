@@ -24,7 +24,7 @@ def correr(tmp_path, falla_snapshot):
 def test_snapshot_va_antes_del_pipeline(tmp_path):
     rc, llamadas = correr(tmp_path, falla_snapshot=False)
     assert rc == 0
-    assert llamadas == ['adepor_guard.py snapshot', 'ejecutar_proyecto.py']
+    assert llamadas == ['adepor_guard.py snapshot', 'ejecutar_proyecto.py', '-I scripts/ops/avisar_picks.py']
 
 
 def test_si_el_snapshot_falla_no_corre_el_pipeline(tmp_path):

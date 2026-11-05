@@ -42,6 +42,14 @@ def ids_confirmados(cursor):
     return ids
 
 
+
+def picks_por_confirmar(picks, hechos, ahora_utc):
+    """Picks forward de bet365 AR (simulacion de clv_bet365ar) que todavia se pueden confirmar:
+    pendientes, cruzados con la base, sin apuesta confirmada, sin empezar y fuera de la sombra (adepor-54q).
+    ahora_utc: 'YYYY-MM-DDTHH:MM'."""
+    return [p for p in picks if p['estado'] == 'pendiente' and p.get('id') and p['id'] not in hechos
+            and p['inicio'] > ahora_utc and not p.get('sombra')]
+
 def confirmar_apuesta(conn, id_partido, mercado, cuota_tomada, stake, pick=None, casa=None):
     """Registra una apuesta real. Devuelve el pick confirmado.
 

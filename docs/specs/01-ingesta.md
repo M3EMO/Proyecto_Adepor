@@ -92,6 +92,7 @@ Los módulos son estos:
 10. La fase 4 devuelve el nombre crudo si no hay modo interactivo (`gestor_nombres.py:269-270`).
 11. En modo interactivo, el módulo sugiere un oficial con similitud 0,55 y pide confirmación S/N (`gestor_nombres.py:272-287`).
 12. Un nombre manual se acepta solo si `nombre_equipo_valido` lo aprueba (`gestor_nombres.py:134-138`, `gestor_nombres.py:290-292`).
+15. En una copa, `motor_fixture` registra un equipo desconocido con `registrar_en_copa`: copa nacional en su país, copa internacional en el grupo `<...> otros`.
 14. `aprender_alias(crudo, oficial, liga)` guarda un alias en el país del equipo; para una copa usa su liga local y no pisa un alias de otro equipo.
 13. Cada alias aprendido se guarda en `diccionario_equipos.json` (`gestor_nombres.py:261-262`, `gestor_nombres.py:301`).
 
@@ -197,6 +198,10 @@ Huecos sin test (no encontré test directo para estos puntos):
 - Guarda solo partidos no empezados con las tres cuotas activas.
 - Torneos: Liga Profesional, Copa Argentina, Libertadores, Sudamericana, Brasileirão, las 5 ligas top de Europa, Champions, Europa League, Chile, Uruguay y Colombia.
 - No toca `partidos_backtest` ni la decisión.
+- De las mismas respuestas guarda los totales de goles, córners y tarjetas en `cuotas_forward_totales` (adepor-e9u). No hace pedidos extra.
+- Cada fila es una línea de partido completo con over y under activos: `(ts_captura, fixture_id, casa, tipo, linea, cuota_over, cuota_under)`.
+- Cada línea es un mercado propio en OddsPapi. `data/oddspapi/markets_10.json` guarda la caché de `/v4/markets?sportId=10` con el handicap y los outcomes de cada mercado.
+- Sin esa caché, el motor captura solo el 1X2.
 - Tests: `tests/test_ingesta_oddspapi.py`.
 
 ## Anexo: captura forward de casas locales via FotMob (E1, 2026-10-23)
@@ -208,3 +213,13 @@ Huecos sin test (no encontré test directo para estos puntos):
 - Es un paso no crítico (6.6): si falla, la cascada sigue. No toca la decisión ni `partidos_backtest`.
 - Protocolo y análisis del CLV: `13-estudios-forward.md`, E1.
 - Tests: `tests/test_cuotas_fotmob.py`.
+
+## Anexo: ligas nuevas del 2026-10-23
+
+- `LIGAS_ESPN` suma Championship (`eng.2`, "Inglaterra 2"), Primera Nacional (`arg.2`, "Argentina 2"), MLS (`usa.1`, "Estados Unidos") y Liga MX (`mex.1`, "Mexico").
+- The Odds API cubre Championship, MLS y Liga MX; no cubre la Primera Nacional.
+- ESPN no cubre la Primera B de Chile: esa liga entra solo a la captura de OddsPapi.
+- `scripts/db/alta_equipos_espn.py <slug>` da de alta los equipos de una liga nueva con los nombres de ESPN (`gestor_nombres.registrar_equipos`).
+- API-Football (D-010, retirado): de las cuatro claves de `config.json`, una funciona con plan gratis, dos están suspendidas y una es inválida. El plan gratis solo da temporadas 2022 a 2024, así que no sirve para cuotas actuales.
+- Claves de The Odds API por uso (2026-10-23): `api_keys_odds` (claves 0 a 2) para el pipeline y `api_keys_odds_cierre` (claves 3 a 5) para `motor_cuotas --solo-cierre`. Cada proceso rota solo dentro de su rango.
+- OddsPapi vuelve a capturar Uruguay, Colombia y Copa Argentina: sin The Odds API, su cierre es la última captura de Pinnacle antes del inicio. Con 20 torneos siguen siendo 8 pedidos por día.

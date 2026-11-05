@@ -42,7 +42,7 @@ def shin(cuotas):
         return (np.sqrt(z * z + 4 * (1 - z) * q * q / s) - z) / (2 * (1 - z))
     if s <= 1:
         return q / s
-    z = brentq(lambda z: probs(z).sum() - 1, 0.0, 0.4)
+    z = brentq(lambda z: probs(z).sum() - 1, 0.0, 0.99)  # margenes altos de ligas menores
     return probs(z)
 
 

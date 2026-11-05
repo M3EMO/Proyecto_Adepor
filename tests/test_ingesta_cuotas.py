@@ -89,3 +89,22 @@ def test_main_sin_keys_falla(monkeypatch):
     with pytest.raises(SystemExit) as e:
         mcu.main()
     assert e.value.code == 1
+
+
+def test_obtener_datos_api_rota_dentro_del_rango_pedido(monkeypatch):
+    usadas = []
+
+    class Resp:
+        def __init__(self, k):
+            self.status_code = 429 if k == 'C1' else 200
+
+        def json(self):
+            return []
+
+    def get(url, params, timeout):
+        usadas.append(params['apiKey'])
+        return Resp(params['apiKey'])
+    monkeypatch.setattr(mc.requests, 'get', get)
+    monkeypatch.setattr(mc, 'API_KEYS', ['P1', 'P2'])
+    datos, idx = mc.obtener_datos_api('soccer_epl', 0, ['C1', 'C2'])
+    assert usadas == ['C1', 'C2'] and idx == 1  # nunca toca las claves del pipeline

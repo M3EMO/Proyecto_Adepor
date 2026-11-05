@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from src.comun.tiempo import ahora_art
 from src.comun import gestor_nombres
 from src.persistencia.confirmaciones import ids_confirmados
-from src.comun.config_sistema import MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS
+from src.comun.config_sistema import MAPA_LIGAS_ODDS, DB_NAME, API_KEYS_ODDS, API_KEYS_ODDS_CIERRE
 
 # ==========================================
 # MOTOR CUOTAS V9.3 (RADAR SHARP + CAPTURA CUOTA_CIERRE PARA CLV)
@@ -94,12 +94,13 @@ def cargar_diccionario():
             return json.load(f)
     return {}
 
-def obtener_datos_api(liga_odds, key_index=0):
-    if key_index >= len(API_KEYS):
+def obtener_datos_api(liga_odds, key_index=0, claves=None):
+    claves = claves or API_KEYS
+    if key_index >= len(claves):
         print("[ERROR] Todas las API Keys se han agotado o estan bloqueadas.")
         return None, key_index
         
-    api_key = API_KEYS[key_index]
+    api_key = claves[key_index]
     url = f"https://api.the-odds-api.com/v4/sports/{liga_odds}/odds/"
     # commenceTimeFrom excluye eventos ya iniciados (in-play): sus cuotas no son las del pick
     params = {
@@ -116,7 +117,7 @@ def obtener_datos_api(liga_odds, key_index=0):
             return resp.json(), key_index
         elif resp.status_code == 429 or resp.status_code == 401:
             print(f"[ALERTA] Key {key_index} agotada. Rotando a la siguiente...")
-            return obtener_datos_api(liga_odds, key_index + 1)
+            return obtener_datos_api(liga_odds, key_index + 1, claves)
         else:
             return None, key_index
     except requests.exceptions.RequestException as e:
@@ -262,12 +263,14 @@ def main(solo_cierre=False):
             partidos_por_liga[liga_odds].append(p)
 
     key_actual = 0
+    # Claves por uso: el cron de cierre tiene su rango propio para no agotar las del pipeline.
+    claves = API_KEYS_ODDS_CIERRE if solo_cierre and API_KEYS_ODDS_CIERRE else API_KEYS
     cuotas_actualizadas = 0
     cierres_capturados = 0
 
     for liga_odds, lista_partidos in partidos_por_liga.items():
         print(f"   [ESCANEO] Buscando mercado para la liga: {liga_odds}...")
-        datos_api, key_actual = obtener_datos_api(liga_odds, key_actual)
+        datos_api, key_actual = obtener_datos_api(liga_odds, key_actual, claves)
 
         if not datos_api: continue
 

@@ -48,7 +48,8 @@ def cargar_fotmob():
 
 
 def cargar_fd(estrato, periodo):
-    """Filas de football-data con cuotas de cierre: (liga, fecha, hg, ag, local, visita, cuotas, resultado)."""
+    """Filas de football-data con cuotas de cierre: (liga, fecha, hg, ag, local, visita, cuotas, resultado,
+    pinnacle_previa, bet365_previa). Las dos ultimas son None si faltan (E15)."""
     filas = []
     for lid, div in LIGAS.items():
         if estrato == 'eu':
@@ -61,10 +62,18 @@ def cargar_fd(estrato, periodo):
             try:
                 cuotas = [float(r[k]) for k in ('PSCH', 'PSCD', 'PSCA')]
                 fecha = datetime.strptime(r['Date'], '%d/%m/%Y').date()
-                filas.append((lid, fecha, int(r[cols[0]]), int(r[cols[1]]), r[cols[2]], r[cols[3]], cuotas, r[cols[4]]))
+                previas = [_cuotas(r, ks) for ks in (('PSH', 'PSD', 'PSA'), ('B365H', 'B365D', 'B365A'))]
+                filas.append((lid, fecha, int(r[cols[0]]), int(r[cols[1]]), r[cols[2]], r[cols[3]], cuotas, r[cols[4]], *previas))
             except (ValueError, KeyError):
                 continue  # sin cuotas de cierre o sin resultado
     return filas
+
+
+def _cuotas(r, ks):
+    try:
+        return [float(r[k]) for k in ks]
+    except (ValueError, KeyError):
+        return None
 
 
 def sim(a, b):

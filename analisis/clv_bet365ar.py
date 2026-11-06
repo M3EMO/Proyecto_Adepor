@@ -143,9 +143,9 @@ def simulacion(picks, bankroll=100_000.0):
                       'pick': ('LOCAL', 'EMPATE', 'VISITA')[p['resultado']], 'cuota': p['cuota'], 'p_pin': p['p_pin'],
                       'clv': p['clv'], 'estado': 'pendiente' if p['pl'] is None else ('ganada' if p['pl'] > 0 else 'perdida'),
                       'stake': stake, 'bankroll': round(banca, 2)})
-    jugados = [p for p in picks if p['pl'] is not None]
+    jugados = [f for f in filas if f['estado'] != 'pendiente' and not f['sombra']]  # como el bankroll: sin la sombra
     return {'picks': filas, 'bankroll_inicial': bankroll, 'bankroll_final': round(banca, 2),
-            'n_jugados': len(jugados), 'acierto': float(np.mean([p['pl'] > 0 for p in jugados])) if jugados else None}
+            'n_jugados': len(jugados), 'acierto': float(np.mean([f['estado'] == 'ganada' for f in jugados])) if jugados else None}
 
 
 def resumen(picks):

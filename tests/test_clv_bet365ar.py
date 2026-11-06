@@ -69,7 +69,7 @@ def test_simulacion_mueve_el_bankroll_solo_con_picks_jugados():
 def test_simulacion_deja_en_sombra_el_resto_desde_adepor_54q():
     base = {'resultado': 0, 'p_pin': 0.5, 'cuota': 2.2, 'clv': 0.05, 'liga': 'Espana', 'partido': 'A vs B', 'pl': 1.2}
     picks = [{**base, 'estrato': 'resto', 'inicio': '2026-11-01T20:00'},            # antes de la regla: juega
-             {**base, 'estrato': 'resto', 'inicio': '2026-11-05T20:00'},            # sombra jugada
+             {**base, 'estrato': 'resto', 'inicio': '2026-11-05T20:00', 'pl': -1.0},  # sombra jugada y perdida
              {**base, 'estrato': 'resto', 'inicio': '2026-11-06T20:00', 'pl': None},  # sombra pendiente
              {**base, 'estrato': 'primario', 'inicio': '2026-11-05T20:00'}]
     r = c.simulacion(picks, 100_000.0)
@@ -78,6 +78,7 @@ def test_simulacion_deja_en_sombra_el_resto_desde_adepor_54q():
     s1 = c.stake_v2(0.5, 2.2, 100_000.0)
     s2 = c.stake_v2(0.5, 2.2, 100_000.0 + s1 * 1.2)
     assert r['bankroll_final'] == round(100_000.0 + s1 * 1.2 + s2 * 1.2, 2)
+    assert (r['n_jugados'], r['acierto']) == (2, 1.0)  # la sombra no cuenta, igual que en el bankroll
 
 
 def test_prob_cierre_no_existe_antes_del_inicio_y_prefiere_el_real():

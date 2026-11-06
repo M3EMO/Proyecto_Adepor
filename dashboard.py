@@ -440,7 +440,8 @@ def _tab_simulacion(_b):
     raiz = Path(__file__).resolve().parent
     st.subheader("Forward: bet365 AR contra Pinnacle")
     st.caption("Cada pick es un resultado donde bet365 AR paga EV de 2% o más sobre Pinnacle. "
-               "Stake del v2 (Kelly 0,25, tope 0,5%) sobre 100.000. Es simulación: no hay dinero real.")
+               "Stake del v2 (Kelly 0,25, tope 0,5%) sobre 100.000. Es simulación: no hay dinero real. "
+               "Jugados y Acierto excluyen los picks en sombra (D-040).")
     ruta = raiz / "data" / "oddspapi" / "clv_bet365ar.json"
     sim = json.loads(ruta.read_text()).get("simulacion") if ruta.exists() else None
     if not sim or not sim["picks"]:

@@ -98,7 +98,7 @@ def elegir(pick, eventos, diccionario):
             continue
         if e['vivo'] or e['suspendido']:
             return None, 'en vivo o suspendido'
-        sel_id, cuota = e['selecciones'][pick['resultado']]
+        sel_id, cuota = e['selecciones'][('LOCAL', 'EMPATE', 'VISITA').index(pick['pick'])]
         if cuota < cuota_minima(pick['p_pin']):
             return None, f'cuota {cuota} bajo la minima {cuota_minima(pick["p_pin"]):.2f}'
         return {'evento_id': e['id'], 'seleccion_id': sel_id, 'cuota': cuota}, 'ok'

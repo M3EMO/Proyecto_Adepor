@@ -48,7 +48,7 @@ def _resp(vivo=False, cuota1=2.2):
 
 
 PICK = {'partido': 'Platense vs Central Córdoba (santiago del Estero)', 'liga': 'Argentina',
-        'inicio': '2026-11-08T20:00', 'resultado': 0, 'p_pin': 0.5}
+        'inicio': '2026-11-08T20:00', 'pick': 'LOCAL', 'p_pin': 0.5}  # misma forma que una fila de simulacion
 
 
 def test_eventos_omite_lo_incompleto_y_elegir_valida_cuota_minima():
@@ -56,6 +56,8 @@ def test_eventos_omite_lo_incompleto_y_elegir_valida_cuota_minima():
     assert [e['id'] for e in ev] == ['1']
     sel, motivo = elegir(PICK, ev, D)
     assert sel == {'evento_id': '1', 'seleccion_id': 's1', 'cuota': 2.2} and motivo == 'ok'
+    sel, _ = elegir({**PICK, 'pick': 'VISITA'}, ev, D)
+    assert sel == {'evento_id': '1', 'seleccion_id': 's3', 'cuota': 4.0}
     sel, motivo = elegir(PICK, eventos_1x2(_resp(cuota1=1.5)), D)
     assert sel is None and 'minima' in motivo and cuota_minima(0.5) > 1.5
 

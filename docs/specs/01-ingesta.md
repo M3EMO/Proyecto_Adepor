@@ -193,10 +193,12 @@ Huecos sin test (no encontré test directo para estos puntos):
 
 - `src/ingesta/motor_oddspapi.py` guarda el 1X2 de Pinnacle y bet365 AR en `cuotas_forward`, una fila por partido, casa y captura.
 - Betano salió el 2026-10-22: su feed en OddsPapi es Betano Rumania, no argentino.
-- El motor hace 6 pedidos: una casa por pedido y lotes de 5 torneos, porque la API no acepta más.
+- El motor hace 8 pedidos: una casa por pedido y lotes de 5 torneos, porque la API no acepta más.
 - Captura una vez por día UTC; la segunda corrida de la cascada no gasta cupo.
 - Guarda solo partidos no empezados con las tres cuotas activas.
-- Torneos: Liga Profesional, Copa Argentina, Libertadores, Sudamericana, Brasileirão, las 5 ligas top de Europa, Champions, Europa League, Chile, Uruguay y Colombia.
+- Torneos: Liga Profesional, Copa Argentina, Libertadores, Sudamericana, Brasileirão, Champions, Europa League, Chile, MLS, Liga MX, Uruguay y Colombia.
+- Segundas de E11: Championship, Primera Nacional y Primera B de Chile.
+- Asia en sombra de E16 (adepor-1pc): J1, J2, A-League, Saudi Pro y Thai League 2. Desde el 2026-11-10 reemplazan a las 5 ligas top de Europa.
 - No toca `partidos_backtest` ni la decisión.
 - De las mismas respuestas guarda los totales de goles, córners y tarjetas en `cuotas_forward_totales` (adepor-e9u). No hace pedidos extra.
 - Cada fila es una línea de partido completo con over y under activos: `(ts_captura, fixture_id, casa, tipo, linea, cuota_over, cuota_under)`.

@@ -21,10 +21,11 @@ from src.comun.config_sistema import API_KEY_ODDSPAPI, DB_NAME, PROJECT_ROOT
 
 URL = 'https://api.oddspapi.io/v4/odds-by-tournaments'
 CASAS = ('pinnacle', 'bet365.bet.ar')  # la API acepta una casa por pedido
-# Argentina, Libertadores, Sudamericana, Brasil, las 5 ligas top de Europa, Champions, Europa League,
+# Argentina, Libertadores, Sudamericana, Brasil, Asia en sombra, Champions, Europa League,
 # Chile, MLS, Liga MX y las segundas de prueba (Championship, Primera Nacional, Primera B de Chile).
 # Uruguay, Colombia y Copa Argentina miden CLV contra la ultima captura de Pinnacle (sin The Odds API).
-TORNEOS = (155, 384, 480, 325, 17, 8, 23, 35, 34, 7, 679, 27665, 242, 27464, 18, 703, 1240, 278, 27070, 1024)
+# adepor-1pc: J1, J2, A-League, Saudi Pro y Thai League 2 reemplazan a las 5 ligas top de Europa (cupo).
+TORNEOS = (155, 384, 480, 325, 196, 402, 136, 955, 19232, 7, 679, 27665, 242, 27464, 18, 703, 1240, 278, 27070, 1024)
 TORNEOS_POR_PEDIDO = 5  # tope de la API
 MERCADO_1X2 = '101'
 OUTCOMES_1X2 = ('101', '102', '103')  # local, empate, visita

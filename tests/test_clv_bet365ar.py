@@ -81,6 +81,14 @@ def test_simulacion_deja_en_sombra_el_resto_desde_adepor_54q():
     assert (r['n_jugados'], r['acierto']) == (2, 1.0)  # la sombra no cuenta, igual que en el bankroll
 
 
+def test_simulacion_deja_asia_siempre_en_sombra_adepor_1pc():
+    base = {'resultado': 0, 'p_pin': 0.5, 'cuota': 2.2, 'clv': 0.05, 'liga': 'Japon 2', 'partido': 'A vs B',
+            'estrato': 'asia', 'inicio': '2026-11-14T05:00'}
+    r = c.simulacion([{**base, 'pl': 1.2}, {**base, 'pl': None}], 100_000.0)
+    assert [f['sombra'] for f in r['picks']] == [True, True] and [f['stake'] for f in r['picks']] == [0.0, 0.0]
+    assert r['bankroll_final'] == 100_000.0 and r['n_jugados'] == 0
+
+
 def test_prob_cierre_no_existe_antes_del_inicio_y_prefiere_el_real():
     fila = {'c1': 2.0, 'cx': 4.0, 'c2': 4.0}
     snaps = [('2026-11-01T12:00:00Z', [3.0, 3.0, 3.0])]

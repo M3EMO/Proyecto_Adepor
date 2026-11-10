@@ -527,6 +527,27 @@ Descriptivo post hoc, fuera del protocolo y sin valor de decisión:
 - **Margen:** el margen medio de la línea previa es 3,50 %. El margen supera al movimiento.
 - **Conclusión:** las bajas mueven a Pinnacle, pero el movimiento no paga el margen de la línea previa.
 
+## E16. bet365 AR en Asia, en sombra, forward (bead `adepor-1pc`)
+
+Protocolo fijado el 2026-11-10, antes de capturar datos de estas ligas. Sigue a E11 y a D-040.
+
+- **Torneos:** J1 (196), J2 (402), A-League (136), Saudi Pro League (955) y Thai League 2 (19232).
+- **Cupo:** reemplazan en la captura a las 5 ligas top de Europa. Los picks de Europa ya capturados siguen en el informe.
+- **Pick:** igual que E8.
+- **Stake:** 0, real y simulado. El estrato `asia` siempre va en sombra.
+- **Cierre:** `pin_cierre_*` si el partido está en la base. Si no, la última captura de Pinnacle posterior al pick y anterior al inicio.
+- **Métrica:** CLV medio de los 5 torneos juntos, con IC95 bootstrap. Se informa por torneo, sin decisión por torneo.
+- **Regla:** hay edge si el IC95 del CLV tiene límite inferior mayor que 0.
+- **Parada:** una sola decisión con 60 picks con cierre o el 2027-03-31.
+- **Después:** el stake real requiere un bead `[PROPOSAL: MANIFESTO CHANGE]` aprobado por el usuario.
+- **Límite:** en J2, la última captura llega unas 17 horas antes del inicio. Con 60 picks solo se detectan efectos grandes.
+
+Verificación previa, del 2026-11-10:
+
+- **Cuotas:** Pinnacle y bet365 AR cotizaban J2 (8 partidos) y la A-League (2). J1, Saudi Pro y Thai League 2 no tenían cuotas.
+- **Referencia:** con cierres de football-data 2025 y bet365 global, J1 tuvo picks en 21,7 % de los partidos. Argentina tuvo 28,0 %.
+- **Reemplazo:** un torneo sin cuotas durante dos semanas se cambia por otro.
+
 ## Orden propuesto
 
 1. E1, porque ya hay datos y el CLV es la métrica del contrato.

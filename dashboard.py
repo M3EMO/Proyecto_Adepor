@@ -415,7 +415,8 @@ def _bloque_casas_locales():
     st.caption(f"Informe del {d['fecha']} · {d['decision']} · cruce con la base: {_pct(d['tasa_cruce'])}")
     filas = []
     for estrato, nombre in (("primario", "Argentina y Conmebol"), ("primario_p_min_035", "Arg. y Conmebol, p >= 35%"),
-                            ("segundas", "Segundas (adepor-dch)"), ("resto", "Resto")):
+                            ("segundas", "Segundas (adepor-dch)"), ("asia", "Asia en sombra (adepor-1pc)"),
+                            ("resto", "Resto")):
         if estrato not in d:  # informe anterior al estrato
             continue
         r, m = d[estrato], d["margen_medio"].get(estrato.split("_p_min")[0], {})

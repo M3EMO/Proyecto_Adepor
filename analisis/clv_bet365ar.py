@@ -35,12 +35,15 @@ N_PARADA, FECHA_PARADA = 300, date(2027, 6, 30)
 N_BOOT, SEMILLA = 2000, 42
 PRIMARIO = {155, 1024, 384, 480}
 SEGUNDAS = {18, 703, 1240}  # adepor-dch: Championship, Primera Nacional, Primera B de Chile
+ASIA = {196, 402, 136, 955, 19232}  # adepor-1pc: J1, J2, A-League, Saudi Pro, Thai League 2; siempre en sombra
 # adepor-54q (D-040): desde esta fecha de inicio el estrato resto va en sombra, sin stake real ni simulado.
 FECHA_SOMBRA_RESTO = '2026-11-03'
+ESTRATOS_SOMBRA = ('resto', 'asia')  # asia empieza despues de FECHA_SOMBRA_RESTO: nunca lleva stake
 TORNEO_PAIS = {155: 'Argentina', 1024: 'Copa Argentina', 384: 'Libertadores', 480: 'Sudamericana',
                325: 'Brasil', 17: 'Inglaterra', 8: 'Espana', 23: 'Italia', 35: 'Alemania', 34: 'Francia',
                7: 'Champions League', 679: 'Europa League', 27665: 'Chile', 278: 'Uruguay', 27070: 'Colombia',
-               242: 'Estados Unidos', 27464: 'Mexico', 18: 'Inglaterra 2', 703: 'Argentina 2', 1240: 'Chile 2'}
+               242: 'Estados Unidos', 27464: 'Mexico', 18: 'Inglaterra 2', 703: 'Argentina 2', 1240: 'Chile 2',
+               196: 'Japon', 402: 'Japon 2', 136: 'Australia', 955: 'Arabia Saudita', 19232: 'Tailandia 2'}
 PARTICIPANTES = ROOT / 'data' / 'oddspapi' / 'participantes_10.json'
 
 
@@ -134,7 +137,7 @@ def simulacion(picks, bankroll=100_000.0):
     Solo los picks ya jugados mueven el bankroll; los pendientes se listan."""
     banca, filas = bankroll, []
     for p in sorted(picks, key=lambda x: x['inicio']):
-        sombra = p.get('estrato') == 'resto' and p['inicio'] >= FECHA_SOMBRA_RESTO
+        sombra = p.get('estrato') in ESTRATOS_SOMBRA and p['inicio'] >= FECHA_SOMBRA_RESTO
         stake = 0.0 if sombra else (stake_v2(p['p_pin'], p['cuota'], banca) if p['pl'] is not None else None)
         if stake and p['pl'] is not None:  # un pick en sombra pendiente tiene stake 0 y pl None
             banca += stake * p['pl']
@@ -180,7 +183,7 @@ def main():
         'FROM partidos_backtest')]
     vistos, picks, n_partidos, n_cruzados, revisar = set(), [], 0, 0, []
     ahora = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M')
-    margenes = {e: {'pinnacle': [], CASA: []} for e in ('primario', 'segundas', 'resto')}
+    margenes = {e: {'pinnacle': [], CASA: []} for e in ('primario', 'segundas', 'asia', 'resto')}
     for (fid, ts_pick), d in capturas.items():  # orden por ts: la primera captura de cada partido gana
         if fid in vistos or 'pinnacle' not in d or CASA not in d or d['torneo'] not in TORNEO_PAIS:
             continue
@@ -188,7 +191,8 @@ def main():
         d = {**d, 'inicio_utc': inicio_ultimo[fid]}
         n_partidos += 1
         pais = TORNEO_PAIS[d['torneo']]
-        estrato = 'primario' if d['torneo'] in PRIMARIO else ('segundas' if d['torneo'] in SEGUNDAS else 'resto')
+        estrato = ('primario' if d['torneo'] in PRIMARIO else 'segundas' if d['torneo'] in SEGUNDAS
+                   else 'asia' if d['torneo'] in ASIA else 'resto')
         for casa in ('pinnacle', CASA):
             margenes[estrato][casa].append(sum(1 / x for x in d[casa]) - 1)
         fila = cruzar({**d, 'pais': pais}, [c for c in pb if c['pais'] == pais])
@@ -211,9 +215,11 @@ def main():
     out = {'bead': 'adepor-1uk', 'fecha': date.today().isoformat(), 'partidos_con_ambas_casas': n_partidos,
            'tasa_cruce': n_cruzados / n_partidos if n_partidos else None,
            'primario': resumen(primario),
-           'resto': resumen([p for p in picks if p['torneo'] not in PRIMARIO | SEGUNDAS]),
+           'resto': resumen([p for p in picks if p['torneo'] not in PRIMARIO | SEGUNDAS | ASIA]),  # poblacion de D-040
            'segundas': {**resumen([p for p in picks if p['torneo'] in SEGUNDAS]),
                         'por_torneo': {TORNEO_PAIS[t]: resumen([p for p in picks if p['torneo'] == t]) for t in SEGUNDAS}},
+           'asia': {**resumen([p for p in picks if p['torneo'] in ASIA]),
+                    'por_torneo': {TORNEO_PAIS[t]: resumen([p for p in picks if p['torneo'] == t]) for t in ASIA}},
            'primario_p_min_035': resumen([p for p in primario if p['p_pin'] >= P_MIN_SECUNDARIO]),
            'alias_a_revisar': revisar,
            'simulacion': simulacion(picks),
